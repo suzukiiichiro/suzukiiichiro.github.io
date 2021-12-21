@@ -1,0 +1,15 @@
+#サイトのベースとなるURLを指定します。
+baseURL = 'https://suzukiiichiro.github.io/'
+#言語を指定します。
+languageCode = 'ja'
+#サイトのタイトルです。
+title = 'NLP'
+#Markdownファイルなどのコンテンツを含むディレクトリを指定します。
+contentDir = 'content'
+#index.xml(RSS)、 sitemap.xml を作成しなくなります。
+disableKinds = ["RSS", "sitemap"]
+#Hugo では taxonomy(タクソノミー) という概念があります。 taxonomy は「分類法」
+#という意味です。 単数形 = "複数形" という形で定義します。デフォルトではカテゴリ
+#とタグの2つがありますが、タグのみ使うように設定しています。
+[taxonomies]
+tag = "tags"
