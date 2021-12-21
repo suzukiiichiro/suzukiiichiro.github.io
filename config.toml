@@ -6,6 +6,7 @@ languageCode = 'ja'
 title = 'NLP'
 #Markdownファイルなどのコンテンツを含むディレクトリを指定します。
 contentDir = 'content'
+theme = 'ananke'  
 #index.xml(RSS)、 sitemap.xml を作成しなくなります。
 disableKinds = ["RSS", "sitemap"]
 #Hugo では taxonomy(タクソノミー) という概念があります。 taxonomy は「分類法」
