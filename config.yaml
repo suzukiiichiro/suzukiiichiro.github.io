@@ -53,7 +53,7 @@ params:
         readingTime: true
         license:
             enabled: true
-            default: Licensed under CC BY-NC-SA 4.0
+            default: NLP
 
     comments:
         enabled: false
@@ -128,17 +128,17 @@ params:
 #             host: 
 #             id: 
 
-#     widgets:
-#         enabled:
-#             # - search
-#             # - archives
-#             - tag-cloud
+    widgets:
+        # enabled:
+        #     - search
+        #     - archives
+        #     - tag-cloud
 
-#         archives:
-#             limit: 5
+        # archives:
+        #     limit: 5
 
-#         tagCloud:
-#             limit: 10
+        # tagCloud:
+        #     limit: 10
 
 #     opengraph:
 #         twitter:
@@ -205,14 +205,14 @@ params:
 #         - name: categories
 #           weight: 200
 
-# markup:
-#     goldmark:
-#         renderer:
-#             ## Set to true if you have HTML content inside Markdown
-#             unsafe: false
-#     tableOfContents:
-#         endLevel: 4
-#         ordered: true
-#         startLevel: 2
-#     highlight:
-#         noClasses: false
+markup:
+    goldmark:
+        renderer:
+            ## Set to true if you have HTML content inside Markdown
+            unsafe: false
+    tableOfContents:
+        endLevel: 4
+        ordered: true
+        startLevel: 2
+    highlight:
+        # noClasses: false

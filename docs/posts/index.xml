@@ -22,7 +22,7 @@
       <pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate>
       
       <guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid>
-      <description>$ hugo new posts/[ファイル名].md $ vim content/posts/2021-12-21.md draft:falses にする事でドラフトを公開にすることができる ビルドする $ hugo</description>
+      <description>$ hugo new posts/[ファイル名].md $ vim content/posts/2021-12-21.md draft: false にする事でドラフトを公開にすることができる ビルドする $ hugo</description>
     </item>
     
     <item>
