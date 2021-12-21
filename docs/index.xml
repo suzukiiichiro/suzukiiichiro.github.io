@@ -12,9 +12,9 @@
         <pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate>
         
         <guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid>
-        <description>&lt;p&gt;テーマが反映されない（画面が真っ白のまま）
-$ git submodule update &amp;ndash;init &amp;ndash;recursive&lt;/p&gt;
-</description>
+        <description>&lt;p&gt;テーマが反映されない（画面が真っ白のまま）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ git submodule update --init --recursive
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>記事の投稿の仕方</title>
@@ -22,10 +22,9 @@ $ git submodule update &amp;ndash;init &amp;ndash;recursive&lt;/p&gt;
         <pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate>
         
         <guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid>
-        <description>&lt;p&gt;記事の投稿の仕方
-$ hugo new posts/[ファイル名].md
-$ vim content/posts/2021-12-21.md&lt;/p&gt;
-&lt;p&gt;draft:false にする事でドラフトを公開にすることができる&lt;/p&gt;
+        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ hugo new posts/&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ファイル名&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;.md
+$ vim content/posts/2021-12-21.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;draft:falses&lt;/code&gt; にする事でドラフトを公開にすることができる&lt;/p&gt;
 &lt;p&gt;ビルドする
 $ hugo&lt;/p&gt;
 </description>
