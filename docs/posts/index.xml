@@ -6,7 +6,25 @@
     <description>Recent content in Posts on NLP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 21 Dec 2021 17:08:19 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Dec 2021 18:08:57 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>テーマが反映されない（画面が真っ白のまま）</title>
+      <link>https://suzukiiichiro.github.io/posts/2021-12-21/</link>
+      <pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate>
+      
+      <guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid>
+      <description>テーマが反映されない（画面が真っ白のまま） $ git submodule update &amp;ndash;init &amp;ndash;recursive</description>
+    </item>
+    
+    <item>
+      <title>記事の投稿の仕方</title>
+      <link>https://suzukiiichiro.github.io/posts/2021-12-21-01/</link>
+      <pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate>
+      
+      <guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid>
+      <description>記事の投稿の仕方 $ hugo new posts/[ファイル名].md $ vim content/posts/2021-12-21.md draft:false にする事でドラフトを公開にすることができる ビルドする $ hugo</description>
+    </item>
+    
     <item>
       <title>Test11</title>
       <link>https://suzukiiichiro.github.io/posts/test11/</link>
