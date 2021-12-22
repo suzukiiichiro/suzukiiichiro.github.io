@@ -12,7 +12,7 @@ vim でファイル名を開くと右下に文字コードが表示されます�
 &lt;pre tabindex="0">&lt;code>nkf -wLu ファイル名 &amp;gt;一時保存ファイル名;
 mv 一時保存ファイル名 ファイル名
 &lt;/code>&lt;/pre>&lt;p>一時保存した後にmvで戻したり面倒ですよね。
-面倒を回避できるコマンドがgithubに上がっていますのでこちらもご利用ください。&lt;br>
+面倒を回避できる素晴らしいコマンドがgithubに上がっていますのでこちらもご利用ください。&lt;br>
 &lt;a class="link" href="https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu" target="_blank" rel="noopener"
 >https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu&lt;/a>&lt;/p>
 &lt;p>hugo new した時に日本語が含まれていたら文字コードutf8になると思われるので設定で回避できないか次回調べてみたいと思います。&lt;/p></description></item><item><title>プライバシーポリシーページを設置する</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-02/</link><pubDate>Wed, 22 Dec 2021 17:40:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-02/</guid><description>&lt;p>github pagesでもgoogle adsenseの審査に通過したい！&lt;/p>
