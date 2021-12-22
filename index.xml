@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 22 Dec 2021 13:07:49 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 22 Dec 2021 17:40:27 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>プライバシーポリシーページを設置する</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-02/</link><pubDate>Wed, 22 Dec 2021 17:40:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-02/</guid><description>&lt;p>github pagesでもgoogle adsenseの審査に通過したい！
+ということで色々先人の方達のサイトをみさせていただいたところ
+google adsenseを通過するためにはプライバシーポリシーが必要ということで準備しました。&lt;/p>
+&lt;h2 id="内容はとりあえずコピペで行こう">内容はとりあえずコピペで行こう&lt;/h2>
+&lt;p>まずはコピペOKの親切な方のサイトを探します。&lt;/p>
+&lt;p>内容については以下のサイトを参考にさせていただきました。
+&lt;a class="link" href="http://liberty-life-blog.com/wordpress/privacy-policy/" target="_blank" rel="noopener"
+>http://liberty-life-blog.com/wordpress/privacy-policy/&lt;/a>&lt;/p>
+&lt;h2 id="設定">設定&lt;/h2>
+&lt;p>以下のコマンドでhugoでページを作成します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>hugo new page/privacy.md
+&lt;/code>&lt;/pre>&lt;p>コンテンツの構成を以下のように管理しているのでpage以下に保存しました。
+content/posts &amp;ndash; 記事
+/page &amp;ndash; about usページなど
+/assetes &amp;ndash; 画像など&lt;/p>
+&lt;pre tabindex="0">&lt;code>vim content/page/privacy.md
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>---
+title: &amp;quot;Privacy&amp;quot;
+date: 2021-12-22T17:16:15+09:00
+draft: false
+---
+&lt;/code>&lt;/pre>&lt;p>ページの内容を２個目の&amp;mdash;以下に貼り付けます
+draft: true に変更します&lt;/p>
+&lt;pre tabindex="0">&lt;code>hugo
+&lt;/code>&lt;/pre>&lt;p>ビルドします&lt;/p>
+&lt;p>プライバシーページのリンクはフッターかなと思うのですがフッターの修正方法がまだわからないので明日やります。&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
 Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
 色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
 無料で、httpsも設定できるので非常に便利です。&lt;/p>
