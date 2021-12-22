@@ -1,1 +1,4 @@
 trash
+.DS_Store
+/public
+/docs

@@ -1,7 +1,7 @@
 baseURL: 'https://suzukiiichiro.github.io/'
 languageCode: 'ja-jp'
 title: 'NLP'
-theme: hugo-theme-stack
+theme: nlp
 
 # publishDir: "docs"
 canonifyurls: true
