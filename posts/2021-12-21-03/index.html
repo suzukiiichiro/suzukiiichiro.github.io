@@ -67,16 +67,16 @@ on-phone--column extended">
 </div>
 </header>
 <section class=article-content>
-<p>##エラーの内容
+<p>##エラーの内容<br>
 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について<br>
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。</p>
 <p>Start building sites …
 Total in 10 ms
 Error: Error building site: &ldquo;/xxxx/xxxx/xxxx.github.io/content/posts/2021-12-21-03.md:2:1&rdquo;: failed to unmarshal YAML: yaml: control characters are not allowed</p>
-<p>##原因
+<p>##原因<br>
 このようなエラーが出る場合原因として考えられるのがファイルの文字コードがUTF-8になってないことです。<br>
 vim でファイル名を開くと右下に文字コードが表示されますが「iso-2022-jp-3」のようになってませんでしょうか？</p>
-<p>#対応
+<p>#対応<br>
 この場合ファイルの文字コードをUTF8に変更してみましょう。</p>
 <pre tabindex=0><code>nkf -wLu ファイル名 &gt;一時保存ファイル名;
 mv 一時保存ファイル名 ファイル名
