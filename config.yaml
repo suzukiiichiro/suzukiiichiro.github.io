@@ -3,7 +3,7 @@ languageCode: 'ja-jp'
 title: 'NLP'
 theme: hugo-theme-stack
 
-publishDir: "docs"
+# publishDir: "docs"
 canonifyurls: true
 paginate: 10
 
