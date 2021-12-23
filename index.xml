@@ -1,4 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 22 Dec 2021 21:22:23 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;p>##エラーの内容&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 10:27:27 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="必要なもの">必要なもの&lt;/h2>
+&lt;p>ネットワーク漢字フィルター nkf
+※macの場合、&lt;a class="link" href="https://brew.sh/index_ja" title="Homebrew"
+target="_blank" rel="noopener"
+>Homebrew&lt;/a> が必要になります。&lt;/p>
+&lt;h2 id="nkf-インストールの手順">nkf インストールの手順&lt;/h2>
+&lt;p>まず、nkfがインストールされているかを確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ which nkf
+/usr/local/bin/nkf
+&lt;/code>&lt;/pre>&lt;p>インストールされていない場合、macの場合はbrewでインストールします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ brew install nkf
+&lt;/code>&lt;/pre>&lt;p>インストールしようとすると以下のエラーが出ることがあります&lt;/p>
+&lt;pre tabindex="0">&lt;code>Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink share/man/ja/man1/nkf.1
+/usr/local/share/man/ja/man1 is not writable.
+&lt;/code>&lt;/pre>&lt;p>権限周りを下記のコマンドを打って変更します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>sudo chmod 775 /usr/local/share/man/ja/man1
+sudo chown &amp;lt;ユーザ名&amp;gt;:admin /usr/local/share/man/ja/man1
+&lt;/code>&lt;/pre>&lt;p>下記のページを参考にさせていただきました&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>コマンドを確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ nkf -v
+Network Kanji Filter Version 2.1.5 (2018-12-15)
+Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
+Copyright (C) 1996-2018, The nkf Project.
+&lt;/code>&lt;/pre>&lt;h2 id="使い方">使い方&lt;/h2>
+&lt;p>nkfコマンドとは？
+「nkf」は「Network Kanji Filter」の略で、LinuxとWindowsなど、異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです。&lt;/p>
+&lt;p>nkfコマンドの書式
+nkf オプション ファイル名&lt;/p>
+&lt;p>UTF-8に変換する場合は、オプションに wLu をつけて変換します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ nkf -wLu isofile.txt &amp;gt; utf8.txt
+&lt;/code>&lt;/pre>&lt;h3 id="変換の流れ手動編">変換の流れ（手動編）&lt;/h3>
+&lt;p>元ファイル moto.txt (UTF-8以外のファイルエンコード、改行コード）
+↓
+変換後のファイル ato.txt(UTF-8に変換したファイル）
+↓
+変換後のファイルをリネームする&lt;/p>
+&lt;pre tabindex="0">&lt;code># UTF-8に変換
+$ nkf -wLu moto.txt &amp;gt; ato.txt
+# 変換後のファイルを元のファイル名にリネームする
+$ mv ato.txt moto.txt
+# vimiでファイルエンコードを確認する
+$ vim moto.txt
+&lt;/code>&lt;/pre>&lt;p>面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。&lt;/p>
+&lt;h3 id="変換の流れ自動編">変換の流れ（自動編）&lt;/h3>
+&lt;pre tabindex="0">&lt;code># UTF-8に変換 wLu コマンドをこれから自作します
+$ wLu moto.txt
+$ vim moto.txt ← UTF-8 に変換されている！
+&lt;/code>&lt;/pre>&lt;h3 id="コマンドの内容">コマンドの内容&lt;/h3>
+&lt;p>まずファイルを作ります。ファイル名は wLu とします&lt;/p>
+&lt;pre tabindex="0">&lt;code># wLu というファイルを作成
+$ :&amp;gt; wLu
+# vim で wLu を開く
+$ vim wLu
+&lt;/code>&lt;/pre>&lt;p>以下の内容をファイルに貼り付ける&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/bin/bash
+#################################################
+# パラメータで渡されたファイル名をutf8に変換する
+#
+# 使い方
+# wLu UTF-8に変換したいファイル名
+#
+#################################################
+#
+filename=&amp;quot;$1&amp;quot; ;
+#
+function wLu(){
+if [ -f &amp;quot;$filename&amp;quot; ]; then
+cat &amp;quot;$filename&amp;quot; | nkf -wLu &amp;gt; &amp;quot;$filename&amp;quot;.u ;
+mv &amp;quot;$filename&amp;quot;.u &amp;quot;$filename&amp;quot; ;
+fi
+}
+#
+if ! which nkf &amp;gt;/dev/null 2&amp;gt;&amp;amp;1; then
+echo &amp;quot;nkf がありません&amp;quot; ;
+echo &amp;quot;nkf をインストールして下さい&amp;quot; ;
+exit ;
+fi
+#
+if [ -z &amp;quot;$filename&amp;quot; ] ; then
+echo &amp;quot;第一引数にファイル名を指定して下さい&amp;quot;
+echo &amp;quot;実行例： ./wLu.sh sample.sh &amp;quot; ;
+exit ;
+fi
+# 実行
+wLu ;
+# 終了
+exit ;
+&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。&lt;/p>
+&lt;pre tabindex="0">&lt;code># wLu ファイルをnkf -wLu でUTF-8に変換
+$ nkf -wLu wLu &amp;gt; wLu.txt
+# wLu.txtをwLuにリネームします
+$ mv wLu.txt wLu
+# 作成したwLuコマンドファイルを/usr/local/bin にコピーします
+$ sudo wLu /usr/local/bin/
+# コマンドが配置されたかを確認
+$ which wLu
+$ /usr/local/bin/wLu
+&lt;/code>&lt;/pre>&lt;h3 id="使い方-1">使い方&lt;/h3>
+&lt;pre tabindex="0">&lt;code># UTF-8以外のファイルエンコードファイル
+$ cat moto.txt
+$ wLu moto.txt
+&lt;/code>&lt;/pre>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。
+便利ですね。&lt;/p></description></item><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;p>##エラーの内容&lt;br>
 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について&lt;br>
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。&lt;/p>
 &lt;p>Start building sites …
