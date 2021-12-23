@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 10:27:27 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="必要なもの">必要なもの&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 13:11:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【unComp】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</link><pubDate>Thu, 23 Dec 2021 13:11:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
+>【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
+>【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="できること">できること&lt;/h2>
+&lt;p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。&lt;/p>
+&lt;h2 id="圧縮ファイルと実行コマンドパラメータ一覧">圧縮ファイルと実行コマンド、パラメータ一覧&lt;/h2>
+&lt;pre tabindex="0">&lt;code> 拡張子 パラメータ
+tgz | tar.gz tar zxvf
+tar.Z gunzip
+tar.bz2 tar xvfj
+tar tar xvfz
+gz gunzip
+Z gunzip
+bz2 bunzip2
+zip unzip
+&lt;/code>&lt;/pre>&lt;p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。&lt;/p>
+&lt;h2 id="実行例">実行例&lt;/h2>
+&lt;pre tabindex="0">&lt;code># 圧縮ファイルを解凍する便利な unCompコマンド
+$ unComp comp.tar.gz2
+&lt;/code>&lt;/pre>&lt;h2 id="作成">作成&lt;/h2>
+&lt;p>まずファイルを作ります。ファイル名は unComp とします&lt;/p>
+&lt;pre tabindex="0">&lt;code># unComp というファイルを作成
+$ :&amp;gt; unComp
+# vim で unComp を開く
+$ vim unComp
+&lt;/code>&lt;/pre>&lt;p>unCompファイルに以下の内容を貼り付ける&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/bin/bash
+#
+#圧縮されているファイルを解凍する
+# unComp を /usr/local/bin/にコピーすると
+# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
+#
+# cp unComp /usr/local/bin/unComp
+#
+# 実行例
+# $ unComp filename(圧縮ファイル)
+#
+if [ $# -ne 1 ]; then
+echo &amp;quot;&amp;quot;
+exit ;
+fi
+#
+case $1 in
+*.tgz | *.tar.gz) tar zxvf $1 ;;
+*.tar.Z) gunzip $1
+tar xvf $( echo &amp;quot;$1&amp;quot; | sed 's/\.Z$//')
+;;
+*.tar.bz2) tar xvfj $1;;
+*.tar) tar xvfz $1;;
+*.gz) gunzip $1;;
+*.Z) gunzip $1;;
+*.bz2) bunzip2 $1;;
+*.zip) unzip $1;;
+*) echo &amp;quot;ファイルの拡張子が対応していません:$1&amp;quot;
+esac
+exit ;
+&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" title="wLu"
+target="_blank" rel="noopener"
+>wLu&lt;/a>をつかってUTF-8に変換するとさらに便利です。&lt;/p>
+&lt;pre tabindex="0">&lt;code># unComp ファイルをnkf -wLu でUTF-8に変換
+$ nkf -wLu unComp &amp;gt; unComp.txt
+# unComp.txtをunCompにリネームします
+$ mv unComp.txt unComp
+# 作成したunCompコマンドファイルを/usr/local/bin にコピーします
+$ sudo unComp /usr/local/bin/
+# コマンドが配置されたかを確認
+$ which unComp
+$ /usr/local/bin/unComp
+&lt;/code>&lt;/pre>&lt;h3 id="使い方">使い方&lt;/h3>
+&lt;pre tabindex="0">&lt;code># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
+# 実行
+$ unComp sample.zip
+&lt;/code>&lt;/pre>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。
+便利ですね。&lt;/p></description></item><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
+>【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
+>【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="必要なもの">必要なもの&lt;/h2>
 &lt;p>ネットワーク漢字フィルター nkf
 ※macの場合、&lt;a class="link" href="https://brew.sh/index_ja" title="Homebrew"
 target="_blank" rel="noopener"
@@ -61,6 +146,8 @@ $ vim wLu
 #
 # 使い方
 # wLu UTF-8に変換したいファイル名
+# wLu を /usr/local/bin/にコピーすると
+# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
 #
 #################################################
 #
