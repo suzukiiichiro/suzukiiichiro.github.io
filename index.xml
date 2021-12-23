@@ -335,8 +335,9 @@ draft: true に変更します&lt;/p>
 &lt;/code>&lt;/pre>&lt;p>ビルドします&lt;/p>
 &lt;h2 id="フッターにリンクを置こう">フッターにリンクを置こう&lt;/h2>
 &lt;p>フッターの内容を修正してプライバシーポリシーのリンクを設置します。
-themes以下にあるファイルを直接書き換えるのではなく layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。&lt;/p>
-&lt;p>layouts/partial/footer/footer.html&amp;lt;&amp;ndash;優先順位高い
+themes以下にあるファイルを直接書き換えるのではなく&lt;br>
+layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。&lt;/p>
+&lt;p>layouts/partial/footer/footer.html&amp;lt;&amp;ndash;優先順位高い&lt;br>
 themes/テーマ名/layouts/partial/footer/footer.html&lt;/p>
 &lt;p>layouts/partial/footer/footer.html を新規に作成して
 以下の内容を入力&lt;/p>
