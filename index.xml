@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 16:10:20 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 16:10:20 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
+>【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
+>【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/" target="_blank" rel="noopener"
+>【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
 &lt;p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
 処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい&lt;/p>
@@ -92,6 +101,8 @@ alt="Progress.sh">
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
 >【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/" target="_blank" rel="noopener"
+>【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="できること">できること&lt;/h2>
 &lt;p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。&lt;/p>
@@ -170,6 +181,8 @@ $ unComp sample.zip
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
 >【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/" target="_blank" rel="noopener"
+>【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="必要なもの">必要なもの&lt;/h2>
 &lt;p>ネットワーク漢字フィルター nkf
