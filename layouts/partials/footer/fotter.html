@@ -1,10 +1,6 @@
-{{- $ThemeVersion := "3.5.0" -}}
+<!--ふったーを記述する -->
 <footer class="site-footer">
-<!-- フッター-->
-<fotter class="site-footer"><a href="{{ .Site.BaseURL }}privacy/">プライバシーポリシー</a></fotter>
-<!-- Google Adsence -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin="anonymous"></script>
-<!-- /Google Adsence -->
+<a href="{{ .Site.BaseURL }}privacy/">プライバシーポリシー</a>
     <section class="copyright">
         &copy; 
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
@@ -12,17 +8,7 @@
         {{ end }}
         {{ now.Format "2006" }} {{ .Site.Title }}
     </section>
-    
-    <section class="powerby">
-        {{ with .Site.Params.footer.customText }}
-            {{ . | safeHTML }} <br/>
-        {{ end }}
-
-        {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>` -}}
-        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
-        {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}}
-
-        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
-        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
-    </section>
 </footer>
+<!-- Google Adsence -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin="anonymous"></script>
+<!-- /Google Adsence -->
