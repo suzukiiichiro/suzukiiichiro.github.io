@@ -81,7 +81,7 @@ fi
 #
 if [ -z &amp;quot;$filename&amp;quot; ] ; then
 echo &amp;quot;第一引数にファイル名を指定して下さい&amp;quot;
-echo &amp;quot;実行例： ./wLu.sh sample.sh &amp;quot; ;
+echo &amp;quot;実行例： wLu filename&amp;quot; ;
 exit ;
 fi
 # 実行
