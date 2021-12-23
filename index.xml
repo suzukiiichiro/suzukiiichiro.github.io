@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 13:11:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【unComp】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</link><pubDate>Thu, 23 Dec 2021 13:11:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 16:10:20 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
+&lt;p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
+処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
+シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい&lt;/p>
+&lt;h2 id="使い方">使い方&lt;/h2>
+&lt;p>処理のループ中に以下の1行を追記します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
+&lt;/code>&lt;/pre>&lt;h2 id="実行手順">実行手順&lt;/h2>
+&lt;p>以下のソースコードを適当なファイル名で保存して下さい。ここではProgress.shとします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ :&amp;gt; Progress.sh
+$ vim Progress.sh
+# vimで以下のソースコードを貼り付けて保存
+# ソースコードのファイルエンコードをUTF-8に変更します。
+$ nkf -wLu Progress.sh &amp;gt; Progress.sh.utf8
+# ファイルエンコードを変更したファイルを元のファイル名にリネームします。
+$ mv Progress.sh.utf8 Progress.sh
+# 実行権限を付与します
+$ chmod +x Progress.sh
+# 実行
+$ ./Progress.sh
+&lt;/code>&lt;/pre>&lt;h2 id="ソースコード">ソースコード&lt;/h2>
+&lt;pre tabindex="0">&lt;code>#! /bin/bash
+#######################################
+# 進捗を表示するプログレスバー
+#
+#######################################
+#
+#
+# percent $1
+# GT $2
+progress(){
+percent=$1;
+GT=$2;
+column=`expr 71 \* &amp;quot;$percent&amp;quot; / $GT`;
+nspace=`expr 71 - &amp;quot;$column&amp;quot;`;
+#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入
+bar='\r[';
+#位置パラメータの数($#)を１にリセット（カウンタとして流用）
+set dummy ;
+while [ $# -le &amp;quot;$column&amp;quot; ];do
+bar=$bar'='; # barに=を追加
+set - &amp;quot;$@&amp;quot; dummy; # $#をインクリメント
+done
+bar=$bar'&amp;gt;'; #barの先端に&amp;gt;を追加
+#位置パラメータの数($#)を１にリセット（カウンタとして流用）
+set dummy ;
+while [ $# -le &amp;quot;$nspace&amp;quot; ]; do
+bar=$bar' ';
+set - &amp;quot;$@&amp;quot; dummy;
+done
+bar=$bar']'$percent/$GT'\c'; # barに]と１行分のプログレスバーを表示
+echo -e &amp;quot;$bar&amp;quot;;
+}
+#######################################
+# メイン処理
+#
+set count ;
+MAX=100 ; #最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。
+#
+for (( i=0; i&amp;lt;$MAX; i++)){
+# ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。
+progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
+}
+echo &amp;quot;&amp;quot;;
+#
+#終了
+exit ;
+&lt;/code>&lt;/pre>&lt;h2 id="使い方-1">使い方&lt;/h2>
+&lt;p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。&lt;/p>
+&lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。
+MAX=100; は、処理の最大値を指定します。
+処理のループ最大数が150階であれば、以下の通りに修正します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>set count;
+MAX=150;
+&lt;/code>&lt;/pre>&lt;p>forやwhileループ処理の中に以下を埋め込みます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
+&lt;/code>&lt;/pre>&lt;p>最後にforまたはwhileループを抜けた後に&lt;/p>
+&lt;pre tabindex="0">&lt;code>echo &amp;quot;&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>を追加します。これだけです。&lt;/p>
+&lt;h2 id="実行結果">実行結果&lt;/h2>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/assets/images/progress.gif" >
+&lt;img src="https://suzukiiichiro.github.io/assets/images/progress.gif"
+loading="lazy"
+alt="Progress.sh">
+&lt;/a>
+&lt;figcaption>Progress.sh&lt;/figcaption>
+&lt;/figure>&lt;/p></description></item><item><title>【unComp】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</link><pubDate>Thu, 23 Dec 2021 13:11:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>

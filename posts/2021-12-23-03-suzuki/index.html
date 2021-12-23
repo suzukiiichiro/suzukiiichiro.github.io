@@ -1,14 +1,14 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です"><title>【unComp】Bashで便利なコマンドを作ってみようって話</title>
-<link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><meta property="og:title" content="【unComp】Bashで便利なコマンドを作ってみようって話">
-<meta property="og:description" content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です">
-<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/">
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><meta property="og:title" content="【プログレスバー】Bashでプログレスバーを作ってみようって話">
+<meta property="og:description" content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T13:11:13+09:00"><meta property="article:modified_time" content="2021-12-23T13:11:13+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg">
-<meta name=twitter:title content="【unComp】Bashで便利なコマンドを作ってみようって話">
-<meta name=twitter:description content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です"><meta name=twitter:card content="summary_large_image">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T16:10:20+09:00"><meta property="article:modified_time" content="2021-12-23T16:10:20+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg">
+<meta name=twitter:title content="【プログレスバー】Bashでプログレスバーを作ってみようって話">
+<meta name=twitter:description content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg"><style>:root{--base-font-family:"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif, var(--base-font-family);--article-font-size:1.5rem;--section-separation:15px}.article-title{font-size:1.2em}.article-subtitle{font-size:.9em}.article-time{margin-top:25px}.article-time svg{width:.7em;height:.7em}.article-time time{font-size:.7em}</style>
 </head>
 <body class="article-page has-toc">
@@ -24,8 +24,8 @@ extended">
 <article class="has-image main-article">
 <header class=article-header>
 <div class=article-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
-<img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話">
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話">
 </a>
 </div>
 <div class=article-details>
@@ -47,10 +47,10 @@ Bash
 </a>
 </header>
 <h2 class=article-title>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>【unComp】Bashで便利なコマンドを作ってみようって話</a>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>【プログレスバー】Bashでプログレスバーを作ってみようって話</a>
 </h2>
 <h3 class=article-subtitle>
-今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です
+今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。
 </h3>
 <footer class=article-time>
 <div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
@@ -65,85 +65,100 @@ Bash
 </div>
 </header>
 <section class=article-content>
-<h2 id=関連記事>関連記事</h2>
-<ul>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ target=_blank rel=noopener>【wLu】Bashで便利なコマンドを作ってみようって話</a></li>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/ target=_blank rel=noopener>【unComp】Bashで便利なコマンドを作ってみようって話</a></li>
-</ul>
-<h2 id=できること>できること</h2>
-<p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。</p>
-<h2 id=圧縮ファイルと実行コマンドパラメータ一覧>圧縮ファイルと実行コマンド、パラメータ一覧</h2>
-<pre tabindex=0><code>  拡張子           パラメータ
-  tgz | tar.gz     tar zxvf  
-  tar.Z            gunzip 
-  tar.bz2          tar xvfj 
-  tar              tar xvfz 
-  gz               gunzip 
-  Z                gunzip 
-  bz2              bunzip2 
-  zip              unzip 
-</code></pre><p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。</p>
-<h2 id=実行例>実行例</h2>
-<pre tabindex=0><code># 圧縮ファイルを解凍する便利な unCompコマンド
-$ unComp comp.tar.gz2
-</code></pre><h2 id=作成>作成</h2>
-<p>まずファイルを作ります。ファイル名は unComp とします</p>
-<pre tabindex=0><code># unComp というファイルを作成
-$ :&gt; unComp 
-
-# vim で unComp を開く
-$ vim unComp
-</code></pre><p>unCompファイルに以下の内容を貼り付ける</p>
-<pre tabindex=0><code>#!/bin/bash
-#
-#圧縮されているファイルを解凍する
-# unComp を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-# cp unComp /usr/local/bin/unComp
-#
-# 実行例
-# $ unComp filename(圧縮ファイル)
-#
-if [ $# -ne 1 ]; then
-  echo &quot;&quot;
-  exit ;
-fi
-#
-case $1 in
-  *.tgz | *.tar.gz)   tar zxvf $1 ;;
-  *.tar.Z)            gunzip $1
-                      tar xvf $( echo &quot;$1&quot; | sed 's/\.Z$//')
-                      ;;
-  *.tar.bz2)          tar xvfj $1;;
-  *.tar)              tar xvfz $1;;
-  *.gz)               gunzip $1;;
-  *.Z)                gunzip $1;;
-  *.bz2)              bunzip2 $1;;
-  *.zip)              unzip $1;;
-  *)                  echo &quot;ファイルの拡張子が対応していません:$1&quot;
-esac
-exit ;
-</code></pre><p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。
-<a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ title=wLu target=_blank rel=noopener>wLu</a>をつかってUTF-8に変換するとさらに便利です。</p>
-<pre tabindex=0><code># unComp ファイルをnkf -wLu でUTF-8に変換
-$ nkf -wLu unComp &gt; unComp.txt
-
-# unComp.txtをunCompにリネームします
-$ mv unComp.txt unComp
-
-# 作成したunCompコマンドファイルを/usr/local/bin にコピーします
-$ sudo unComp /usr/local/bin/
-
-# コマンドが配置されたかを確認
-$ which unComp
-$ /usr/local/bin/unComp
-</code></pre><h3 id=使い方>使い方</h3>
-<pre tabindex=0><code># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
+<h2 id=プログレスバー>プログレスバー</h2>
+<p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
+処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
+シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい</p>
+<h2 id=使い方>使い方</h2>
+<p>処理のループ中に以下の1行を追記します。</p>
+<pre tabindex=0><code>progress &quot;$#&quot; &quot;$MAX&quot;; set - &quot;$@&quot; count ;
+</code></pre><h2 id=実行手順>実行手順</h2>
+<p>以下のソースコードを適当なファイル名で保存して下さい。ここではProgress.shとします。</p>
+<pre tabindex=0><code>$ :&gt; Progress.sh
+$ vim Progress.sh
+# vimで以下のソースコードを貼り付けて保存
+# ソースコードのファイルエンコードをUTF-8に変更します。
+$ nkf -wLu Progress.sh &gt; Progress.sh.utf8
+# ファイルエンコードを変更したファイルを元のファイル名にリネームします。
+$ mv Progress.sh.utf8 Progress.sh
+# 実行権限を付与します
+$ chmod +x Progress.sh
 # 実行
-$ unComp sample.zip
-</code></pre><p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。
-便利ですね。</p>
+$ ./Progress.sh
+</code></pre><h2 id=ソースコード>ソースコード</h2>
+<pre tabindex=0><code>#! /bin/bash
+
+#######################################
+# 進捗を表示するプログレスバー
+#  
+#######################################
+#
+#
+# percent $1 
+# GT      $2
+progress(){
+
+  percent=$1;
+  GT=$2;  
+
+  column=`expr 71 \* &quot;$percent&quot; / $GT`;
+  nspace=`expr 71 - &quot;$column&quot;`;
+
+  #プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入
+  bar='\r['; 
+
+  #位置パラメータの数($#)を１にリセット（カウンタとして流用）
+  set dummy ;
+  while [ $# -le &quot;$column&quot; ];do
+    bar=$bar'=';      # barに=を追加
+    set - &quot;$@&quot; dummy; # $#をインクリメント
+  done
+  bar=$bar'&gt;';        #barの先端に&gt;を追加
+
+  #位置パラメータの数($#)を１にリセット（カウンタとして流用）
+  set dummy ;
+  while [ $# -le &quot;$nspace&quot; ]; do 
+    bar=$bar' ';
+    set - &quot;$@&quot; dummy;
+  done
+  bar=$bar']'$percent/$GT'\c'; # barに]と１行分のプログレスバーを表示
+
+  echo -e &quot;$bar&quot;; 
+}
+
+#######################################
+# メイン処理
+#
+set count ;
+MAX=100 ; #最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。
+#
+for (( i=0; i&lt;$MAX; i++)){
+  # ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。
+  progress &quot;$#&quot; &quot;$MAX&quot;; set - &quot;$@&quot; count ;
+}
+echo &quot;&quot;;
+#
+#終了
+exit ;
+</code></pre><h2 id=使い方-1>使い方</h2>
+<p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。</p>
+<p>自作ソースの中のループ処理の関数の頭に以下を追記します。
+MAX=100; は、処理の最大値を指定します。
+処理のループ最大数が150階であれば、以下の通りに修正します。</p>
+<pre tabindex=0><code>set count;
+MAX=150;
+</code></pre><p>forやwhileループ処理の中に以下を埋め込みます。</p>
+<pre tabindex=0><code>progress &quot;$#&quot; &quot;$MAX&quot;; set - &quot;$@&quot; count ;
+</code></pre><p>最後にforまたはwhileループを抜けた後に</p>
+<pre tabindex=0><code>echo &quot;&quot;;
+</code></pre><p>を追加します。これだけです。</p>
+<h2 id=実行結果>実行結果</h2>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/assets/images/progress.gif>
+<img src=https://suzukiiichiro.github.io/assets/images/progress.gif loading=lazy alt=Progress.sh>
+</a>
+<figcaption>Progress.sh</figcaption>
+</figure></p>
 </section>
 <footer class=article-footer>
 <section class=article-tags>
@@ -163,12 +178,12 @@ $ unComp sample.zip
 <div class=related-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy data-key data-hash=/./assets/images/2021-12-23-bash.jpg>
 </div>
 <div class=article-details>
-<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
 </div>
 </a>
 </article>
@@ -240,15 +255,12 @@ Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#関連記事>関連記事</a></li>
-<li><a href=#できること>できること</a></li>
-<li><a href=#圧縮ファイルと実行コマンドパラメータ一覧>圧縮ファイルと実行コマンド、パラメータ一覧</a></li>
-<li><a href=#実行例>実行例</a></li>
-<li><a href=#作成>作成</a>
-<ol>
+<li><a href=#プログレスバー>プログレスバー</a></li>
 <li><a href=#使い方>使い方</a></li>
-</ol>
-</li>
+<li><a href=#実行手順>実行手順</a></li>
+<li><a href=#ソースコード>ソースコード</a></li>
+<li><a href=#使い方-1>使い方</a></li>
+<li><a href=#実行結果>実行結果</a></li>
 </ol>
 </nav>
 </div>
