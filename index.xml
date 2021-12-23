@@ -334,7 +334,7 @@ draft: true に変更します&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo
 &lt;/code>&lt;/pre>&lt;p>ビルドします&lt;/p>
 &lt;h2 id="フッターにリンクを置こう">フッターにリンクを置こう&lt;/h2>
-&lt;p>フッターの内容を修正してプライバシーポリシーのリンクを設置します。
+&lt;p>フッターの内容を修正してプライバシーポリシーのリンクを設置します。&lt;br>
 themes以下にあるファイルを直接書き換えるのではなく&lt;br>
 layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。&lt;/p>
 &lt;p>layouts/partial/footer/footer.html&amp;lt;&amp;ndash;優先順位高い&lt;br>
