@@ -33,8 +33,7 @@ params:
 
     footer:
 #         since: 2020
-        customText: "<a href="{{ .Site.BaseURL }}privacy/">プライバシーポ
-リシー</a>"
+        customText: ""
 
 #     dateFormat:
 #         published: Jan 02, 2006
