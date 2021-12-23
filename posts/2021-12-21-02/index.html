@@ -46,7 +46,7 @@ google adsense
 </div>
 <div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
 <time class=article-time--reading>
-読了時間: 1分
+読了時間: 2分
 </time>
 </div>
 </footer>
@@ -77,7 +77,24 @@ draft: false
 draft: true に変更します</p>
 <pre tabindex=0><code>hugo
 </code></pre><p>ビルドします</p>
-<p>プライバシーページのリンクはフッターかなと思うのですがフッターの修正方法がまだわからないので明日やります。</p>
+<h2 id=フッターにリンクを置こう>フッターにリンクを置こう</h2>
+<p>フッターの内容を修正してプライバシーポリシーのリンクを設置します。
+themes以下にあるファイルを直接書き換えるのではなく layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。</p>
+<p>layouts/partial/footer/footer.html&lt;&ndash;優先順位高い
+themes/テーマ名/layouts/partial/footer/footer.html</p>
+<p>layouts/partial/footer/footer.html を新規に作成して
+以下の内容を入力</p>
+<pre tabindex=0><code>&lt;footer class=&quot;site-footer&quot;&gt;
+&lt;a href=&quot;{{ .Site.BaseURL }}privacy/&quot;&gt;プライバシーポリシー&lt;/a&gt;
+    &lt;section class=&quot;copyright&quot;&gt;
+        &amp;copy;
+        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format &quot;2006&quot;))) }}
+            {{ .Site.Params.footer.since }} -
+        {{ end }}
+        {{ now.Format &quot;2006&quot; }} {{ .Site.Title }}
+    &lt;/section&gt;
+&lt;/footer&gt;
+</code></pre>
 </section>
 <footer class=article-footer>
 <section class=article-tags>
@@ -98,7 +115,6 @@ draft: true に変更します</p>
 2021 NLP
 </section>
 </footer>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <div class=pswp tabindex=-1 role=dialog aria-hidden=true>
 <div class=pswp__bg></div>
 <div class=pswp__scroll-wrap>
@@ -146,6 +162,7 @@ draft: true に変更します</p>
 <ol>
 <li><a href=#内容はとりあえずコピペで行こう>内容はとりあえずコピペで行こう</a></li>
 <li><a href=#設定>設定</a></li>
+<li><a href=#フッターにリンクを置こう>フッターにリンクを置こう</a></li>
 </ol>
 </nav>
 </div>

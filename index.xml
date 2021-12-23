@@ -333,7 +333,24 @@ draft: false
 draft: true に変更します&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo
 &lt;/code>&lt;/pre>&lt;p>ビルドします&lt;/p>
-&lt;p>プライバシーページのリンクはフッターかなと思うのですがフッターの修正方法がまだわからないので明日やります。&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
+&lt;h2 id="フッターにリンクを置こう">フッターにリンクを置こう&lt;/h2>
+&lt;p>フッターの内容を修正してプライバシーポリシーのリンクを設置します。
+themes以下にあるファイルを直接書き換えるのではなく layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。&lt;/p>
+&lt;p>layouts/partial/footer/footer.html&amp;lt;&amp;ndash;優先順位高い
+themes/テーマ名/layouts/partial/footer/footer.html&lt;/p>
+&lt;p>layouts/partial/footer/footer.html を新規に作成して
+以下の内容を入力&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;lt;footer class=&amp;quot;site-footer&amp;quot;&amp;gt;
+&amp;lt;a href=&amp;quot;{{ .Site.BaseURL }}privacy/&amp;quot;&amp;gt;プライバシーポリシー&amp;lt;/a&amp;gt;
+&amp;lt;section class=&amp;quot;copyright&amp;quot;&amp;gt;
+&amp;amp;copy;
+{{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format &amp;quot;2006&amp;quot;))) }}
+{{ .Site.Params.footer.since }} -
+{{ end }}
+{{ now.Format &amp;quot;2006&amp;quot; }} {{ .Site.Title }}
+&amp;lt;/section&amp;gt;
+&amp;lt;/footer&amp;gt;
+&lt;/code>&lt;/pre></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
 Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
 色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
 無料で、httpsも設定できるので非常に便利です。&lt;/p>
