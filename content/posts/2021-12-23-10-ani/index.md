@@ -1,7 +1,7 @@
 ---
 title: "知識ゼロからのe-Statマイニング"
 date: 2021-12-24T18:12:54+09:00
-draft:false 
+draft: false 
 categories:
   - プログラミング
 tags:
@@ -51,7 +51,7 @@ curl "http://api.e-stat.go.jp/rest/1.0/app/getStatsList?appId=xxxxxxxxx&lang=J&s
             <STAT_NAME code="00100409">国民経済計算</STAT_NAME>
             <GOV_ORG code="00100">内閣府</GOV_ORG>
             <STATISTICS_NAME>四半期別ＧＤＰ速報 過去の値 1次速報値</STATISTICS_NAME>
-            <TITLE>形態別国内家計最終消費支出 年度デフレータ―　前年度比（1981年～）（2000暦年＝100）</TITLE>
+            <TITLE>形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）</TITLE>
             <CYCLE>四半期</CYCLE>
             <SURVEY_DATE>201007-201009</SURVEY_DATE>
             <OPEN_DATE>2020-04-01</OPEN_DATE>
@@ -82,7 +82,7 @@ curl "http://api.e-stat.go.jp/rest/1.0/app/getMetaInfo?appId=xxxxxxxx&lang=J&sta
             <STAT_NAME code="00100409">国民経済計算</STAT_NAME>
             <GOV_ORG code="00100">内閣府</GOV_ORG>
             <STATISTICS_NAME>四半期別ＧＤＰ速報 過去の値 1次速報値</STATISTICS_NAME>
-            <TITLE>形態別国内家計最終消費支出 年度デフレータ―　前年度比（1981年～）（2000暦年＝100）</TITLE>
+            <TITLE>形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）</TITLE>
             <SURVEY_DATE>201007-201009</SURVEY_DATE>
         </TABLE_INF>
         <CLASS_INF>
@@ -138,7 +138,7 @@ curl "http://api.e-stat.go.jp/rest/1.0/app/getStatsData?limit=10000&appId=xxxxxx
             <STAT_NAME code="00100409">国民経済計算</STAT_NAME>
             <GOV_ORG code="00100">内閣府</GOV_ORG>
             <STATISTICS_NAME>四半期別ＧＤＰ速報 過去の値 1次速報値</STATISTICS_NAME>
-            <TITLE>形態別国内家計最終消費支出 年度デフレータ―　前年度比（1981年～）（2000暦年＝100）</TITLE>
+            <TITLE>形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）</TITLE>
             <SURVEY_DATE>201007-201009</SURVEY_DATE>
             <TOTAL_NUMBER>232</TOTAL_NUMBER>
             <FROM_NUMBER>1</FROM_NUMBER>
