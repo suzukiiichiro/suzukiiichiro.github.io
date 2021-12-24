@@ -1,0 +1,90 @@
+/*!
+ * Hamburgers
+* @description Tasty CSS-animated hamburgers
+* @author Jonathan Suh @jonsuh
+* @site https://jonsuh.com/hamburgers
+* @link https://github.com/jonsuh/hamburgers
+*/
+.hamburger {}
+
+.hamburger:hover {}
+
+.hamburger.is-active:hover {}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {}
+
+.hamburger-box {}
+
+.hamburger-inner {}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {}
+
+.hamburger-inner::before,
+.hamburger-inner::after {}
+
+.hamburger-inner::before {}
+
+.hamburger-inner::after {}
+
+.hamburger--spin .hamburger-inner {}
+
+.hamburger--spin .hamburger-inner::before {}
+
+.hamburger--spin .hamburger-inner::after {}
+
+.hamburger--spin.is-active .hamburger-inner {}
+
+.hamburger--spin.is-active .hamburger-inner::before {}
+
+.hamburger--spin.is-active .hamburger-inner::after {}
+
+#toggle-menu {
+  &.is-active {
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {}
+  }
+}
+
+/* Menu style */
+.menu {
+  width: 100%;
+  font-size: 1em;
+  padding: 0 20px;
+  margin: 0;
+  flex-grow: 0;
+  &.show {}
+  li {
+    text-align: right;
+    @include respond(md) {
+      padding-top: 0;
+      padding-bottom: 0;
+    } 
+    &:not(:last-of-type) {
+      margin: 0;
+    }
+    svg {
+      margin-right: 10px;
+    }
+    a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      color: var(--card-text-color-main);
+    }
+
+    span {}
+
+    &.current {
+      a {}
+    }
+  }
+}
+
+.social-menu {
+  svg {}
+}

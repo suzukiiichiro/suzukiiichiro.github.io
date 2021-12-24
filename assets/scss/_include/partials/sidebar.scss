@@ -1,0 +1,44 @@
+.sidebar {
+  &.sticky {
+  }
+}
+.left-sidebar {
+  height: 100vh;
+  &.sticky {
+    align-self: baseline;
+  }
+}
+.right-sidebar {
+  &.sticky {
+  }
+}
+.site-info {
+  .site-avatar {
+    .site-logo {
+    }
+    .emoji {
+    }
+  }
+  .site-name {
+  }
+  .site-description {
+  }
+}
+.sidebar {
+  .widget {
+    &:not(:last-of-type):after {
+    }
+  }
+}
+[data-scheme="dark"] {
+  #dark-mode-toggle {
+    .icon-tabler-toggle-left {
+    }
+    .icon-tabler-toggle-right {
+    }
+  }
+}
+#dark-mode-toggle {
+  .icon-tabler-toggle-right {
+  }
+}

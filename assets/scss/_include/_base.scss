@@ -1,0 +1,47 @@
+html {
+  font-size: 95%;
+  line-height: 1.6;
+  // overflow-y: scroll;
+}
+body {
+  font-size: 100%;
+}
+// * {
+//   // scrollbar-width: none;
+//   scrollbar-color: var(--scrollbar-thumb) transparent;
+// }
+// ::-webkit-scrollbar {
+//   width: 8px;
+//   height: 8px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background-color: var(--scrollbar-thumb);
+//   border-radius: 8px;
+// }
+// ::-webkit-scrollbar-track {
+//   background-color: transparent;
+// }
+.container {
+  width: 100%;
+  &.extended {
+    @include respond(md) {
+      --left-sidebar-max-width: 15%;
+      --right-sidebar-max-width: 25%;
+    }
+    @include respond(lg) {
+      --left-sidebar-max-width: 15%;
+      --right-sidebar-max-width: 25%;
+    }
+    @include respond(xl) {
+      --left-sidebar-max-width: 15%;
+      --right-sidebar-max-width: 20%;
+    }
+  }
+}
+
+.main-container {
+  padding: 0;
+  @include respond("md") {
+    padding: 0;
+  }
+}

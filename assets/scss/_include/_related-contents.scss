@@ -1,0 +1,40 @@
+.related-contents--wrapper {
+  padding: 10px;
+  .related-contents {
+    .flex {
+      float: none;
+    }
+    .section-title {
+      padding: 10px;
+    }
+    article {
+      height: auto;
+      width: 100%;
+      margin: 0;
+      a {
+        padding: 8px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        .article-image {
+          width: 80px;
+          height: calc(80px / 16 * 9);
+          position: static;
+          margin-right: 10px;
+        }
+        .article-details {
+          background: none !important;
+          flex: 1;
+          padding: 0 !important;
+          margin: 0;
+          .article-title {
+            line-height: 1.2;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: var(--card-text-color-main);
+          }
+        }
+      }
+    }
+  }
+}

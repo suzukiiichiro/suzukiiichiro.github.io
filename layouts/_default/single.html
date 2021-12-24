@@ -1,0 +1,29 @@
+{{ define "body-class" }}
+    {{ $TOCEnabled := default (default false .Site.Params.article.toc) .Params.toc }}
+    {{- .Scratch.Set "hasTOC" (and (ge (len .TableOfContents) 100) $TOCEnabled) -}}
+    article-page
+    }
+{{ end }}
+
+{{ define "container-class" }}
+    on-phone--column {{ if .Site.Params.widgets.enabled }}extended{{ else }}compact{{ end }}
+{{ end }}
+
+{{ define "main" }}
+    {{ partial "article/article.html" . }}
+    {{ if not (eq .Params.comments false) }}
+        {{ partial "comments/include" . }}
+    {{ end }}
+
+    {{ partialCached "footer/footer" . }}
+
+    {{ partialCached "article/components/photoswipe" . }}
+{{ end }}
+
+{{ define "left-sidebar" }}
+    {{ partial "sidebar/left.html" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" . }}
+{{ end }}

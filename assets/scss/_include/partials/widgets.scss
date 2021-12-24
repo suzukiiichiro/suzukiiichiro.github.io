@@ -1,0 +1,41 @@
+.widget {
+    .widget-icon {
+        display: none;
+        svg {
+        }
+    }
+}
+
+/* Tag cloud widget */
+.tagCloud {
+    .tagCloud-tags {
+        a {
+            padding: 4px 16px;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+            &:hover {
+            }
+        }
+    }
+}
+
+/* Archives widget */
+.widget.archives {
+    .widget-archive--list {
+    }
+
+    .archives-year {
+        &:not(:last-of-type) {
+        }
+
+        a {
+            font-size: 1em;
+            span.year {
+            }
+
+            span.count {
+            }
+        }
+    }
+}
+
