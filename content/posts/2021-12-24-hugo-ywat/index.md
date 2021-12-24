@@ -17,7 +17,12 @@ hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで�
 
 ```
 Run hugo --minify
-Error: Error building site: TOCSS: failed to transform "scss/style.scss" (text/x-scss). Check your Hugo installation; you need the extended version to build SCSS/SASS.: this feature is not available in your current Hugo version, see https://goo.gl/YMrWcn for more information
+Error: Error building site: TOCSS:
+failed to transform "scss/style.scss" (text/x-scss). 
+Check your Hugo installation;
+you need the extended version to build SCSS/SASS.
+: this feature is not available in your current Hugo version,
+see https://goo.gl/YMrWcn for more information
 ...
 Total in 148 ms
 Error: Process completed with exit code 255.
