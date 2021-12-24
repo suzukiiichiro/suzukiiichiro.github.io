@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Dec 2021 09:43:41 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Dec 2021 11:55:21 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</link><pubDate>Fri, 24 Dec 2021 11:55:21 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
+>【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/" target="_blank" rel="noopener"
+>【unComp】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/" target="_blank" rel="noopener"
+>【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21-01-suzuki/" target="_blank" rel="noopener"
+>【ssh/bash】ssh/Bashでサーバーへログイン・実行・ログアウトの一連自動化処理を作ってみようって話&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="やりたいこと">やりたいこと&lt;/h2>
+&lt;p>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法ってなにかないでしょうか。&lt;/p>
+&lt;h2 id="イメージ">イメージ&lt;/h2>
+&lt;p>従来の方法&lt;/p>
+&lt;pre tabindex="0">&lt;code>ローカルＰＣのターミナル
+↓ Linuxサーバーにログイン
+$df $uptime などを実行
+↓ Linuxサーバーをログアウト
+ローカルＰＣにもどる
+&lt;/code>&lt;/pre>&lt;p>これからつくるBash/ssh&lt;/p>
+&lt;pre tabindex="0">&lt;code>ローカルＰＣのターミナル
+↓
+Linuxサーバーにログイン
+$df $uptime などを実行
+Linuxサーバーをログアウト
+↓
+ローカルＰＣのターミナルにもどる
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですか？
+まず、メリットとしてサーバーでコマンドからログアウトする必要がありません。
+これができれば、一台一台サーバーのヘルスチェックをせずとも、数十台のサーバーを
+順番に訪ね歩きファイルに出力する事も可能です。&lt;/p>
+&lt;p>以下、ソースです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/usr/bin/bash
+##############################################
+# sshでサーバーにログインして、なんらかのコマンドを
+# 実行しターミナルに表示、ミッション終了後、ターミ
+# ナルを自動的にログアウトしてローカルに何事もなか
+# ったかのようにもどってくる最も簡単シェルスクリプト
+##############################################
+#
+# サーバーのＩＰアドレスとか
+SERVER=&amp;quot;centos@xx.xx.xx.xxx&amp;quot;
+# 実行したいコマンドを &amp;amp;&amp;amp; でつなぐ
+COMMAND=&amp;quot;uptime &amp;amp;&amp;amp; df -h&amp;quot;;
+echo &amp;quot;centosサーバーログイン&amp;quot;;
+# ポイントは -t です。
+ssh $SERVER -t $COMMAND;
+echo &amp;quot;centosサーバーログアウト&amp;quot;;
+exit;
+&lt;/code>&lt;/pre>&lt;p>たったこれだけですが、この工夫により多くのサーバーを
+スクリプトで一括回遊することができます。 お試しあれ。&lt;/p></description></item><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
 &lt;pre tabindex="0">&lt;code>Run hugo --minify
 Error: Error building site: TOCSS:
 failed to transform &amp;quot;scss/style.scss&amp;quot; (text/x-scss).
@@ -109,7 +160,7 @@ exit ;
 &lt;p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。&lt;/p>
 &lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。
 MAX=100; は、処理の最大値を指定します。
-処理のループ最大数が150階であれば、以下の通りに修正します。&lt;/p>
+処理のループ最大数が150回であれば、以下の通りに修正します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>set count;
 MAX=150;
 &lt;/code>&lt;/pre>&lt;p>forやwhileループ処理の中に以下を埋め込みます。&lt;/p>
