@@ -99,7 +99,10 @@ footer.site-footer {
   font-size: 0.8em; }
 
 .article-list article {
-  position: relative; }
+  position: relative;
+  padding: 10px 0; }
+  .article-list article ~ article {
+    border-top: 1px solid #EFEFEF; }
   .article-list article .article-header {
     display: flex;
     flex-direction: row;
