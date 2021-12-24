@@ -258,6 +258,7 @@ footer.site-footer {
   padding: 15px; }
 
 .right-sidebar {
+  display: block;
   padding: 15px; }
 
 .sidebar .widget:not(:last-of-type):after {
@@ -266,7 +267,8 @@ footer.site-footer {
 .related-contents--wrapper {
   padding: 10px; }
   .related-contents--wrapper .related-contents .flex {
-    float: none; }
+    float: none;
+    flex-direction: column; }
   .related-contents--wrapper .related-contents .section-title {
     padding: 10px; }
   .related-contents--wrapper .related-contents article {
