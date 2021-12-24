@@ -1,15 +1,11 @@
-{{ $sass := resources.Get "scss/style.scss" }}
-{{ $style := $sass | resources.ToCSS }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+{{ $style := resources.Get "scss/style.scss" | toCSS }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
 
-{{ $norm := resources.Get "css/normalize.css" }}
-{{ $style_norm := $norm }}
-<link rel="stylesheet" href="{{ $style_norm.RelPermalink }}">
+{{ $norm := resources.Get "css/normalize.css" | toCSS }}
+<link rel="stylesheet" href="{{ $norm.Permalink }}">
 
-{{ $over := resources.Get "scss/override.scss" }}
-{{ $style_over := $over | resources.ToCSS }}
-<link rel="stylesheet" href="{{ $style_over.RelPermalink }}">
+{{ $over := resources.Get "scss/override.scss" | toCSS }}
+<link rel="stylesheet" href="{{ $over.Permalink }}">
 
-{{ $custom := resources.Get "scss/custom.scss" }}
-{{ $style_custom := $custom | resources.ToCSS }}
-<link rel="stylesheet" href="{{ $style_custom.RelPermalink }}">
+{{ $custom := resources.Get "scss/custom.scss" | toCSS }}
+<link rel="stylesheet" href="{{ $custom.Permalink }}">
