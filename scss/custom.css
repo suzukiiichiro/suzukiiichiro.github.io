@@ -36,6 +36,25 @@ body {
   @media (min-width: 768px) {
     .main-container {
       padding: 0; } }
+footer.site-footer {
+  background-color: var(--accent-color);
+  color: #FFF;
+  display: block;
+  padding: 10px 20px 20px; }
+  footer.site-footer:before {
+    display: none; }
+  footer.site-footer .copyright {
+    color: #FFF;
+    margin: 0 auto;
+    font-size: 0.7rem;
+    display: block;
+    text-align: center; }
+    footer.site-footer .copyright a {
+      color: #FFF;
+      text-decoration: underline; }
+  footer.site-footer .section {
+    margin: 0; }
+
 .site-info {
   display: flex;
   flex-direction: column;
@@ -86,8 +105,8 @@ body {
     flex-direction: row;
     margin: 10px 20px; }
     .article-list article .article-header .article-image {
-      width: 250px;
-      height: calc(250px / 16 * 9);
+      width: 200px;
+      height: calc(200px / 16 * 9);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -95,7 +114,7 @@ body {
       .article-list article .article-header .article-image a {
         display: block; }
     .article-list article .article-header .article-details {
-      padding: 10px 20px;
+      padding: 0;
       margin-left: 20px;
       flex: 1; }
       .article-list article .article-header .article-details .article-header {
@@ -107,9 +126,9 @@ body {
           color: var(--card-text-color-secondary) !important;
           background-color: var(--body-background) !important; }
       .article-list article .article-header .article-details .article-title {
-        font-size: 1.2rem;
+        font-size: 1rem;
         line-height: 1.4;
-        margin: 0 0 20px; }
+        margin: 0 0 15px; }
       .article-list article .article-header .article-details .article-subtitle {
         font-size: 0.7em; }
       .article-list article .article-header .article-details .article-time {
@@ -152,6 +171,9 @@ body {
       margin: 0; }
       .main-article .article-header .article-info .article-time--item ~ .article-time--item {
         margin-left: 10px; }
+
+.article-content pre code {
+  white-space: normal; }
 
 .widget ~ .widget {
   margin-top: 40px; }
