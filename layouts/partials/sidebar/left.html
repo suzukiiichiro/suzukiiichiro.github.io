@@ -7,8 +7,8 @@
   <header class="site-info">
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
-    <figure class="site-avatar">
-      <h1 class="site-name">
+    <h1 class="site-name site-avatar">
+        <a href="{{ .Site.BaseURL | relLangURL }}">
       {{ if not .local }}
       <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
       {{ else }}
@@ -20,8 +20,8 @@
       {{ errorf "Failed loading avatar from %q" . }}
       {{ end }}
       {{ end }}
-      </h1>
-    </figure>
+      </a>
+    </h1>
     {{ end }}
     {{ end }}
     <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>

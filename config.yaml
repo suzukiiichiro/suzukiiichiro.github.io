@@ -58,7 +58,7 @@ params:
 
     sidebar:
 #         emoji: 🍥
-        subtitle: 最新技術やプログラム、デザインなど様々な情報を提供しております
+        subtitle: 最新技術やプログラム、デザインなど様々な情報を提供してます
         avatar:
             enabled: true
             local: true

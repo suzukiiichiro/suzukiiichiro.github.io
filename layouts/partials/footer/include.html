@@ -8,7 +8,7 @@
           {{ end }}
           {{ now.Format "2006" }}
         {{ end }}
-        <a href="{{ .RelPermalink }}">{{ .Site.Title }}</a> .All Rights Reserved.
+        <a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a> .All Rights Reserved.
     </section>
 </footer>
 
