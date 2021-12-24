@@ -3,6 +3,7 @@
   .related-contents {
     .flex {
       float: none;
+      flex-direction: column;
     }
     .section-title {
       padding: 10px;
