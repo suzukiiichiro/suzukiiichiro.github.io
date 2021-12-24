@@ -1,4 +1,130 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Dec 2021 11:55:21 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</link><pubDate>Fri, 24 Dec 2021 11:55:21 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Dec 2021 18:12:54 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>知識ゼロからのe-Statマイニング</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/</link><pubDate>Fri, 24 Dec 2021 18:12:54 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.jpg" alt="Featured image of post 知識ゼロからのe-Statマイニング" />&lt;p>知識ゼロからのe-Statマイニング&lt;br>
+日頃から大量のデータを使ってデータマイニングしてみたいなと思って暇なときにサイトを巡回していたらe-Statという日本の統計が閲覧できる政府統計ポータルサイトを発見しました。&lt;br>
+アイスの売り上げから子供の平均身長まで大量の統計資料が公開されており、しかもAPIまであるすごいサイトです。 このe-Statをマイニングしてみようと思います。
+まずはAPIを叩くところまでやってみます。&lt;/p>
+&lt;h2 id="まずはアプリケーションidを取得しよう">まずはアプリケーションIDを取得しよう&lt;/h2>
+&lt;p>APIを叩くにはアプリケーションIDが必要です。
+まずはアプリケーションIDを取得しましょう。&lt;br>
+アプリケーションIDを取得するにはユーザー登録が必要です。以下のURLから手順に従ってユーザー登録してください。&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/mypage/user/preregister" target="_blank" rel="noopener"
+>https://www.e-stat.go.jp/mypage/user/preregister&lt;/a>&lt;/p>
+&lt;p>アプリケーションIDはログイン後マイページ内のAPI機能(アプリケーションID発行)で取得できます。&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/mypage/view/api" target="_blank" rel="noopener"
+>https://www.e-stat.go.jp/mypage/view/api&lt;/a>&lt;/p>
+&lt;p>入力項目は名称、URL、概要の３つです。&lt;br>
+名称、概要は適当で大丈夫です。&lt;br>
+URLは、http://localhostだと私はダメだったのでこのサイトのURLを設定しました。&lt;/p>
+&lt;p>発行ボタンを押すとappIdにアプリケーションIDが払い出されます。&lt;/p>
+&lt;h2 id="apiを叩いてみよう">APIを叩いてみよう&lt;/h2>
+&lt;p>APIの仕様は以下のURLに記載されています。&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/api/api-info/e-stat-manual3-0" target="_blank" rel="noopener"
+>https://www.e-stat.go.jp/api/api-info/e-stat-manual3-0&lt;/a>&lt;/p>
+&lt;p>難しいです。&lt;br>
+なんとなく、「統計表情報取得」でリストを取得して、「メタ情報取得」「統計データ取得」で個別のデータを取得する感じでしょうか？&lt;br>
+まずは叩いてみます。&lt;/p>
+&lt;h2 id="統計表情報取得">統計表情報取得&lt;/h2>
+&lt;pre tabindex="0">&lt;code>curl &amp;quot;http://api.e-stat.go.jp/rest/1.0/app/getStatsList?appId=xxxxxxxxx&amp;amp;lang=J&amp;amp;searchKind=&amp;amp;searchWord=&amp;quot;
+&amp;lt;LIST_INF id=&amp;quot;0003384123&amp;quot;&amp;gt;
+&amp;lt;STAT_NAME code=&amp;quot;00100409&amp;quot;&amp;gt;国民経済計算&amp;lt;/STAT_NAME&amp;gt;
+&amp;lt;GOV_ORG code=&amp;quot;00100&amp;quot;&amp;gt;内閣府&amp;lt;/GOV_ORG&amp;gt;
+&amp;lt;STATISTICS_NAME&amp;gt;四半期別ＧＤＰ速報 過去の値 1次速報値&amp;lt;/STATISTICS_NAME&amp;gt;
+&amp;lt;TITLE&amp;gt;形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）&amp;lt;/TITLE&amp;gt;
+&amp;lt;CYCLE&amp;gt;四半期&amp;lt;/CYCLE&amp;gt;
+&amp;lt;SURVEY_DATE&amp;gt;201007-201009&amp;lt;/SURVEY_DATE&amp;gt;
+&amp;lt;OPEN_DATE&amp;gt;2020-04-01&amp;lt;/OPEN_DATE&amp;gt;
+&amp;lt;SMALL_AREA&amp;gt;0&amp;lt;/SMALL_AREA&amp;gt;
+&amp;lt;/LIST_INF&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>LIST_INF idの「0003384123」」が個別データのidみたいです。これを使ってメタ情報取得、統計情報取得を呼び出します。&lt;/p>
+&lt;p>##メタ情報取得&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl &amp;quot;http://api.e-stat.go.jp/rest/1.0/app/getMetaInfo?appId=xxxxxxxx&amp;amp;lang=J&amp;amp;statsDataId=0003384123&amp;quot;
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;yes&amp;quot;?&amp;gt;
+&amp;lt;GET_META_INFO xsi:noNamespaceSchemaLocation=&amp;quot;https://api.e-stat.go.jp/rest/1.0/schema/GetMetaInfo.xsd&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&amp;gt;
+&amp;lt;RESULT&amp;gt;
+&amp;lt;STATUS&amp;gt;0&amp;lt;/STATUS&amp;gt;
+&amp;lt;ERROR_MSG&amp;gt;正常に終了しました。&amp;lt;/ERROR_MSG&amp;gt;
+&amp;lt;DATE&amp;gt;2021-12-24T18:35:07.926+09:00&amp;lt;/DATE&amp;gt;
+&amp;lt;/RESULT&amp;gt;
+&amp;lt;PARAMETER&amp;gt;
+&amp;lt;LANG&amp;gt;J&amp;lt;/LANG&amp;gt;
+&amp;lt;STATS_DATA_ID&amp;gt;0003384123&amp;lt;/STATS_DATA_ID&amp;gt;
+&amp;lt;/PARAMETER&amp;gt;
+&amp;lt;METADATA_INF&amp;gt;
+&amp;lt;TABLE_INF id=&amp;quot;0003384123&amp;quot;&amp;gt;
+&amp;lt;STAT_NAME code=&amp;quot;00100409&amp;quot;&amp;gt;国民経済計算&amp;lt;/STAT_NAME&amp;gt;
+&amp;lt;GOV_ORG code=&amp;quot;00100&amp;quot;&amp;gt;内閣府&amp;lt;/GOV_ORG&amp;gt;
+&amp;lt;STATISTICS_NAME&amp;gt;四半期別ＧＤＰ速報 過去の値 1次速報値&amp;lt;/STATISTICS_NAME&amp;gt;
+&amp;lt;TITLE&amp;gt;形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）&amp;lt;/TITLE&amp;gt;
+&amp;lt;SURVEY_DATE&amp;gt;201007-201009&amp;lt;/SURVEY_DATE&amp;gt;
+&amp;lt;/TABLE_INF&amp;gt;
+&amp;lt;CLASS_INF&amp;gt;
+&amp;lt;CLASS_OBJ id=&amp;quot;tab&amp;quot; name=&amp;quot;表章項目&amp;quot; description=&amp;quot;Excelの書式設定で統計表の数値を&amp;amp;quot;-0.0&amp;amp;quot;としている場合、データベース上&amp;amp;quot;0.0&amp;amp;quot;として収録されているため、Excel統計表の数値とは必ずしも一致しない。&amp;quot;&amp;gt;
+&amp;lt;CLASS code=&amp;quot;17&amp;quot; name=&amp;quot;前年度比&amp;quot; level=&amp;quot;&amp;quot; unit=&amp;quot;％&amp;quot;/&amp;gt;
+&amp;lt;/CLASS_OBJ&amp;gt;
+&amp;lt;CLASS_OBJ id=&amp;quot;cat01&amp;quot; name=&amp;quot;形態別国内家計最終消費支出&amp;quot;&amp;gt;
+&amp;lt;CLASS code=&amp;quot;11&amp;quot; name=&amp;quot;家計最終消費支出（再掲）&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;12&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&amp;quot; level=&amp;quot;2&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;13&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_（控除）非居住者家計の国内での直接購入&amp;quot; level=&amp;quot;2&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;14&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_国内家計最終消費支出&amp;quot; level=&amp;quot;2&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;15&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_国内家計最終消費支出_耐久財&amp;quot; level=&amp;quot;3&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;16&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_国内家計最終消費支出_半耐久財&amp;quot; level=&amp;quot;3&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;17&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_国内家計最終消費支出_非耐久財&amp;quot; level=&amp;quot;3&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;18&amp;quot; name=&amp;quot;家計最終消費支出（再掲）_国内家計最終消費支出_サービス&amp;quot; level=&amp;quot;3&amp;quot;/&amp;gt;
+&amp;lt;/CLASS_OBJ&amp;gt;
+&amp;lt;CLASS_OBJ id=&amp;quot;time&amp;quot; name=&amp;quot;時間軸（年度）&amp;quot;&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1981100000&amp;quot; name=&amp;quot;1981年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1982100000&amp;quot; name=&amp;quot;1982年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1983100000&amp;quot; name=&amp;quot;1983年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1984100000&amp;quot; name=&amp;quot;1984年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1985100000&amp;quot; name=&amp;quot;1985年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1986100000&amp;quot; name=&amp;quot;1986年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1987100000&amp;quot; name=&amp;quot;1987年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1988100000&amp;quot; name=&amp;quot;1988年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;CLASS code=&amp;quot;1989100000&amp;quot; name=&amp;quot;1989年度&amp;quot; level=&amp;quot;1&amp;quot;/&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>上の方がデータ内容の説明なのか？よくわかりません。&lt;/p>
+&lt;h2 id="統計情報取得">統計情報取得&lt;/h2>
+&lt;pre tabindex="0">&lt;code>curl &amp;quot;http://api.e-stat.go.jp/rest/1.0/app/getStatsData?limit=10000&amp;amp;appId=xxxxxxxxxx&amp;amp;lang=J&amp;amp;statsDataId=0003384123&amp;amp;metaGetFlg=N&amp;amp;cntGetFlg=N&amp;quot;
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;yes&amp;quot;?&amp;gt;
+&amp;lt;GET_STATS_DATA xsi:noNamespaceSchemaLocation=&amp;quot;https://api.e-stat.go.jp/rest/1.0/schema/GetStatsData.xsd&amp;quot; xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&amp;gt;
+&amp;lt;RESULT&amp;gt;
+&amp;lt;STATUS&amp;gt;0&amp;lt;/STATUS&amp;gt;
+&amp;lt;ERROR_MSG&amp;gt;正常に終了しました。&amp;lt;/ERROR_MSG&amp;gt;
+&amp;lt;DATE&amp;gt;2021-12-24T18:37:22.156+09:00&amp;lt;/DATE&amp;gt;
+&amp;lt;/RESULT&amp;gt;
+&amp;lt;PARAMETER&amp;gt;
+&amp;lt;LANG&amp;gt;J&amp;lt;/LANG&amp;gt;
+&amp;lt;STATS_DATA_ID&amp;gt;0003384123&amp;lt;/STATS_DATA_ID&amp;gt;
+&amp;lt;DATA_FORMAT&amp;gt;X&amp;lt;/DATA_FORMAT&amp;gt;
+&amp;lt;START_POSITION&amp;gt;1&amp;lt;/START_POSITION&amp;gt;
+&amp;lt;LIMIT&amp;gt;10000&amp;lt;/LIMIT&amp;gt;
+&amp;lt;METAGET_FLG&amp;gt;N&amp;lt;/METAGET_FLG&amp;gt;
+&amp;lt;CNT_GET_FLG&amp;gt;N&amp;lt;/CNT_GET_FLG&amp;gt;
+&amp;lt;/PARAMETER&amp;gt;
+&amp;lt;STATISTICAL_DATA&amp;gt;
+&amp;lt;TABLE_INF id=&amp;quot;0003384123&amp;quot;&amp;gt;
+&amp;lt;STAT_NAME code=&amp;quot;00100409&amp;quot;&amp;gt;国民経済計算&amp;lt;/STAT_NAME&amp;gt;
+&amp;lt;GOV_ORG code=&amp;quot;00100&amp;quot;&amp;gt;内閣府&amp;lt;/GOV_ORG&amp;gt;
+&amp;lt;STATISTICS_NAME&amp;gt;四半期別ＧＤＰ速報 過去の値 1次速報値&amp;lt;/STATISTICS_NAME&amp;gt;
+&amp;lt;TITLE&amp;gt;形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）&amp;lt;/TITLE&amp;gt;
+&amp;lt;SURVEY_DATE&amp;gt;201007-201009&amp;lt;/SURVEY_DATE&amp;gt;
+&amp;lt;TOTAL_NUMBER&amp;gt;232&amp;lt;/TOTAL_NUMBER&amp;gt;
+&amp;lt;FROM_NUMBER&amp;gt;1&amp;lt;/FROM_NUMBER&amp;gt;
+&amp;lt;TO_NUMBER&amp;gt;232&amp;lt;/TO_NUMBER&amp;gt;
+&amp;lt;/TABLE_INF&amp;gt;
+&amp;lt;DATA_INF&amp;gt;
+&amp;lt;NOTE char=&amp;quot;***&amp;quot;&amp;gt;数字が得られないもの&amp;lt;/NOTE&amp;gt;
+&amp;lt;NOTE char=&amp;quot;-&amp;quot;&amp;gt;数字が得られないもの&amp;lt;/NOTE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1981100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;3.8&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1982100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;2.3&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1983100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;2&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1984100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;2.2&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1985100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;1.2&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1986100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;0.1&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1987100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;0.5&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1988100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;0.5&amp;lt;/VALUE&amp;gt;
+&amp;lt;VALUE tab=&amp;quot;17&amp;quot; cat01=&amp;quot;11&amp;quot; time=&amp;quot;1989100000&amp;quot; unit=&amp;quot;％&amp;quot;&amp;gt;2.5&amp;lt;/VALUE&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>VALUEが値みたいですがどういう列情報になっているのでしょうか？&lt;br>
+とりあえずAPIはお手軽に叩けることがわかりました。&lt;br>
+次回以降はデータの内容を理解していこうと思います。&lt;/p></description></item><item><title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</link><pubDate>Fri, 24 Dec 2021 11:55:21 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
