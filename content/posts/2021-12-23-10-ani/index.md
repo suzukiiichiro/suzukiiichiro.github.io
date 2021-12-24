@@ -1,7 +1,7 @@
 ---
 title: "知識ゼロからのe-Statマイニング"
 date: 2021-12-24T18:12:54+09:00
-draft: true
+draft:false 
 categories:
   - プログラミング
 tags:
