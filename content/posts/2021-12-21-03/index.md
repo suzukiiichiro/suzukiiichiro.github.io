@@ -2,9 +2,9 @@
 title: "hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー"
 date: 2021-12-22T21:22:23+09:00
 draft: false
-tags:
-  - プログラミング
 categories:
+  - プログラミング
+tags:
   - error 
   - hugo
   - プログラム

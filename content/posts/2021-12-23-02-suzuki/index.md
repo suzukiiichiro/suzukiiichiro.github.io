@@ -4,13 +4,9 @@ description: "今回は、シェルスクリプトとbashの解凍コマンド�
 date: 2021-12-23T13:11:13+09:00
 draft: false
 image: 2021-12-23-bash.jpg
-tags:
-  - プログラミング
-  - シェルスクリプト
-  - Bash
-  - ユーティリティ
-  - 鈴木維一郎
 categories:
+  - プログラミング
+tags:
   - プログラミング
   - シェルスクリプト
   - Bash

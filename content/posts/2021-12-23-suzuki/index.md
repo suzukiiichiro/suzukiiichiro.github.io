@@ -4,9 +4,9 @@ description: "今回は、シェルスクリプトとnkfコマンドを使って
 date: 2021-12-23T10:27:27+09:00
 image: 2021-12-23-bash.jpg
 draft: false
-tags:
-  - プログラミング
 categories:
+  - プログラミング
+tags:
   - プログラミング
   - シェルスクリプト
   - Bash

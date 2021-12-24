@@ -2,9 +2,9 @@
 title: "プライバシーポリシーページを設置する"
 date: 2021-12-22T17:40:27+09:00
 draft: false
-tags:
-  - Web開発
 categories:
+  - Web開発
+tags:
   - github pages 
   - google adsense
 image: privacy.jpg

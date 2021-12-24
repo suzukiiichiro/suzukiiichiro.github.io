@@ -8,24 +8,22 @@
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
     <figure class="site-avatar">
+      <h1 class="site-name">
       {{ if not .local }}
-      <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+      <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
       {{ else }}
       {{ $avatar := resources.Get (.src) }}
       {{ if $avatar }}
       {{ $avatarResized := $avatar.Resize "300x" }}
-      <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="Avatar">
+      <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
       {{ else }}
       {{ errorf "Failed loading avatar from %q" . }}
       {{ end }}
       {{ end }}
-      {{ with $.Site.Params.sidebar.emoji }}
-      <span class="emoji">{{ . }}</span>
-      {{ end }}
+      </h1>
     </figure>
     {{ end }}
     {{ end }}
-    <h1 class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></h1>
     <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>
     {{- with .Site.Menus.social -}}
     <ol class="social-menu">
