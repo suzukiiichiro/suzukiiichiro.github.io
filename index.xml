@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Dec 2021 09:43:41 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
 &lt;pre tabindex="0">&lt;code>Run hugo --minify
-Error: Error building site: TOCSS: failed to transform &amp;quot;scss/style.scss&amp;quot; (text/x-scss). Check your Hugo installation; you need the extended version to build SCSS/SASS.: this feature is not available in your current Hugo version, see https://goo.gl/YMrWcn for more information
+Error: Error building site: TOCSS:
+failed to transform &amp;quot;scss/style.scss&amp;quot; (text/x-scss).
+Check your Hugo installation;
+you need the extended version to build SCSS/SASS.
+: this feature is not available in your current Hugo version,
+see https://goo.gl/YMrWcn for more information
 ...
 Total in 148 ms
 Error: Process completed with exit code 255.
@@ -53,53 +58,54 @@ $ chmod +x Progress.sh
 # 実行
 $ ./Progress.sh
 &lt;/code>&lt;/pre>&lt;h2 id="ソースコード">ソースコード&lt;/h2>
-&lt;pre tabindex="0">&lt;code>#! /bin/bash
-#######################################
-# 進捗を表示するプログレスバー
-#
-#######################################
-#
-#
-# percent $1
-# GT $2
-progress(){
-percent=$1;
-GT=$2;
-column=`expr 71 \* &amp;quot;$percent&amp;quot; / $GT`;
-nspace=`expr 71 - &amp;quot;$column&amp;quot;`;
-#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入
-bar='\r[';
-#位置パラメータの数($#)を１にリセット（カウンタとして流用）
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#75715e">#! /bin/bash
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>
+&lt;span style="color:#75715e">#######################################&lt;/span>
+&lt;span style="color:#75715e"># 進捗を表示するプログレスバー&lt;/span>
+&lt;span style="color:#75715e"># &lt;/span>
+&lt;span style="color:#75715e">#######################################&lt;/span>
+&lt;span style="color:#75715e">#&lt;/span>
+&lt;span style="color:#75715e">#&lt;/span>
+&lt;span style="color:#75715e"># percent $1 &lt;/span>
+&lt;span style="color:#75715e"># GT $2&lt;/span>
+progress&lt;span style="color:#f92672">(){&lt;/span>
+percent&lt;span style="color:#f92672">=&lt;/span>$1;
+GT&lt;span style="color:#f92672">=&lt;/span>$2;
+column&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>expr &lt;span style="color:#ae81ff">71&lt;/span> &lt;span style="color:#ae81ff">\*&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$percent&lt;span style="color:#e6db74">&amp;#34;&lt;/span> / $GT&lt;span style="color:#e6db74">`&lt;/span>;
+nspace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>expr &lt;span style="color:#ae81ff">71&lt;/span> - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$column&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>;
+&lt;span style="color:#75715e">#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入&lt;/span>
+bar&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;\r[&amp;#39;&lt;/span>;
+&lt;span style="color:#75715e">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
 set dummy ;
-while [ $# -le &amp;quot;$column&amp;quot; ];do
-bar=$bar'='; # barに=を追加
-set - &amp;quot;$@&amp;quot; dummy; # $#をインクリメント
-done
-bar=$bar'&amp;gt;'; #barの先端に&amp;gt;を追加
-#位置パラメータの数($#)を１にリセット（カウンタとして流用）
+&lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#f92672">[&lt;/span> $# -le &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$column&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>;&lt;span style="color:#66d9ef">do&lt;/span>
+bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;=&amp;#39;&lt;/span>; &lt;span style="color:#75715e"># barに=を追加&lt;/span>
+set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> dummy; &lt;span style="color:#75715e"># $#をインクリメント&lt;/span>
+&lt;span style="color:#66d9ef">done&lt;/span>
+bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;&amp;gt;&amp;#39;&lt;/span>; &lt;span style="color:#75715e">#barの先端に&amp;gt;を追加&lt;/span>
+&lt;span style="color:#75715e">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
 set dummy ;
-while [ $# -le &amp;quot;$nspace&amp;quot; ]; do
-bar=$bar' ';
-set - &amp;quot;$@&amp;quot; dummy;
-done
-bar=$bar']'$percent/$GT'\c'; # barに]と１行分のプログレスバーを表示
-echo -e &amp;quot;$bar&amp;quot;;
-}
-#######################################
-# メイン処理
-#
+&lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#f92672">[&lt;/span> $# -le &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$nspace&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>;
+set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> dummy;
+&lt;span style="color:#66d9ef">done&lt;/span>
+bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;]&amp;#39;&lt;/span>$percent/$GT&lt;span style="color:#e6db74">&amp;#39;\c&amp;#39;&lt;/span>; &lt;span style="color:#75715e"># barに]と１行分のプログレスバーを表示&lt;/span>
+echo -e &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#34;&lt;/span>;
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;span style="color:#75715e">#######################################&lt;/span>
+&lt;span style="color:#75715e"># メイン処理&lt;/span>
+&lt;span style="color:#75715e">#&lt;/span>
 set count ;
-MAX=100 ; #最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。
-#
-for (( i=0; i&amp;lt;$MAX; i++)){
-# ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。
-progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
-}
-echo &amp;quot;&amp;quot;;
-#
-#終了
+MAX&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span> ; &lt;span style="color:#75715e">#最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。&lt;/span>
+&lt;span style="color:#75715e">#&lt;/span>
+&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#f92672">((&lt;/span> i&lt;span style="color:#f92672">=&lt;/span>0; i&amp;lt;$MAX; i++&lt;span style="color:#f92672">)){&lt;/span>
+&lt;span style="color:#75715e"># ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。&lt;/span>
+progress &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$#&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$MAX&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> count ;
+&lt;span style="color:#f92672">}&lt;/span>
+echo &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;span style="color:#75715e">#&lt;/span>
+&lt;span style="color:#75715e">#終了&lt;/span>
 exit ;
-&lt;/code>&lt;/pre>&lt;h2 id="使い方-1">使い方&lt;/h2>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使い方-1">使い方&lt;/h2>
 &lt;p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。&lt;/p>
 &lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。
 MAX=100; は、処理の最大値を指定します。

@@ -172,9 +172,6 @@ footer.site-footer {
       .main-article .article-header .article-info .article-time--item ~ .article-time--item {
         margin-left: 10px; }
 
-.article-content pre code {
-  white-space: normal; }
-
 .widget ~ .widget {
   margin-top: 40px; }
 
