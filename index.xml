@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 16:10:20 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://wyoshi.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 23 Dec 2021 16:10:20 +0900</lastBuildDate><atom:link href="https://wyoshi.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://wyoshi.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
@@ -89,13 +89,13 @@ MAX=150;
 &lt;h2 id="実行結果">実行結果&lt;/h2>
 &lt;p>&lt;figure
 >
-&lt;a href="https://suzukiiichiro.github.io/assets/images/progress.gif" >
-&lt;img src="https://suzukiiichiro.github.io/assets/images/progress.gif"
+&lt;a href="https://wyoshi.github.io/assets/images/progress.gif" >
+&lt;img src="https://wyoshi.github.io/assets/images/progress.gif"
 loading="lazy"
 alt="Progress.sh">
 &lt;/a>
 &lt;figcaption>Progress.sh&lt;/figcaption>
-&lt;/figure>&lt;/p></description></item><item><title>【unComp】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</link><pubDate>Thu, 23 Dec 2021 13:11:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;/figure>&lt;/p></description></item><item><title>【unComp】Bashで便利なコマンドを作ってみようって話</title><link>https://wyoshi.github.io/posts/2021-12-23-02-suzuki/</link><pubDate>Thu, 23 Dec 2021 13:11:13 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-23-02-suzuki/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
@@ -175,7 +175,7 @@ $ /usr/local/bin/unComp
 # 実行
 $ unComp sample.zip
 &lt;/code>&lt;/pre>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。
-便利ですね。&lt;/p></description></item><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
+便利ですね。&lt;/p></description></item><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://wyoshi.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
 >【wLu】Bashで便利なコマンドを作ってみようって話&lt;/a>&lt;/li>
@@ -291,7 +291,7 @@ $ /usr/local/bin/wLu
 $ cat moto.txt
 $ wLu moto.txt
 &lt;/code>&lt;/pre>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。
-便利ですね。&lt;/p></description></item><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
+便利ですね。&lt;/p></description></item><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://wyoshi.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
 &lt;p>記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について&lt;br>
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。&lt;/p>
 &lt;p>Start building sites …
@@ -308,7 +308,7 @@ mv 一時保存ファイル名 ファイル名
 面倒を回避できる素晴らしいコマンドがgithubに上がっていますのでこちらもご利用ください。&lt;br>
 &lt;a class="link" href="https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu" target="_blank" rel="noopener"
 >https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu&lt;/a>&lt;/p>
-&lt;p>hugo new した時に日本語が含まれていたら文字コードutf8になると思われるので設定で回避できないか次回調べてみたいと思います。&lt;/p></description></item><item><title>プライバシーポリシーページを設置する</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-02/</link><pubDate>Wed, 22 Dec 2021 17:40:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-02/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/privacy.jpg" alt="Featured image of post プライバシーポリシーページを設置する" />&lt;p>github pagesでもgoogle adsenseの審査に通過したい！&lt;/p>
+&lt;p>hugo new した時に日本語が含まれていたら文字コードutf8になると思われるので設定で回避できないか次回調べてみたいと思います。&lt;/p></description></item><item><title>プライバシーポリシーページを設置する</title><link>https://wyoshi.github.io/posts/2021-12-21-02/</link><pubDate>Wed, 22 Dec 2021 17:40:27 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-21-02/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/privacy.jpg" alt="Featured image of post プライバシーポリシーページを設置する" />&lt;p>github pagesでもgoogle adsenseの審査に通過したい！&lt;/p>
 &lt;p>ということで色々先人の方達のサイトをみさせていただいたところ&lt;/p>
 &lt;p>google adsenseを通過するためにはプライバシーポリシーが必要ということで準備しました。&lt;/p>
 &lt;h2 id="内容はとりあえずコピペで行こう">内容はとりあえずコピペで行こう&lt;/h2>
@@ -353,7 +353,7 @@ themes/テーマ名/layouts/partial/footer/footer.html&lt;/p>
 &amp;lt;/footer&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>リンクの書き方が&lt;br>
 {{ .Site.BaseURL }}privacy/&lt;br>
-のは注意&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
+のは注意&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://wyoshi.github.io/posts/2021-12-22-hugo-01/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-22-hugo-01/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
 Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
 色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
 無料で、httpsも設定できるので非常に便利です。&lt;/p>
@@ -415,9 +415,9 @@ configの&lt;em>publicDir&lt;/em>に任意のディレクトリを設定する�
 &lt;h2 id="終わりに">終わりに&lt;/h2>
 &lt;p>駆け足でしたが、hugoの簡単な使い方になります。
 大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。
-みなさんもぜひ、hugoを試してみて下さい。&lt;/p></description></item><item><title>テーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-21.jpg" alt="Featured image of post テーマが反映されない（画面が真っ白のまま）" />&lt;p>テーマが反映されない（画面が真っ白のまま）&lt;/p>
+みなさんもぜひ、hugoを試してみて下さい。&lt;/p></description></item><item><title>テーマが反映されない（画面が真っ白のまま）</title><link>https://wyoshi.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-21.jpg" alt="Featured image of post テーマが反映されない（画面が真っ白のまま）" />&lt;p>テーマが反映されない（画面が真っ白のまま）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ git submodule update --init --recursive
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>記事の投稿の仕方</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-01/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/assets/images/2021-12-21-1.jpg" alt="Featured image of post 記事の投稿の仕方" />&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ hugo new posts/&lt;span style="color:#f92672">[&lt;/span>ファイル名&lt;span style="color:#f92672">]&lt;/span>.md
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>記事の投稿の仕方</title><link>https://wyoshi.github.io/posts/2021-12-21-01/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://wyoshi.github.io/posts/2021-12-21-01/</guid><description>&lt;img src="https://wyoshi.github.io/assets/images/2021-12-21-1.jpg" alt="Featured image of post 記事の投稿の仕方" />&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ hugo new posts/&lt;span style="color:#f92672">[&lt;/span>ファイル名&lt;span style="color:#f92672">]&lt;/span>.md
 $ vim content/posts/2021-12-21.md
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>draft: false&lt;/code> にする事でドラフトを公開にすることができる&lt;/p>
 &lt;p>ビルドする&lt;/p>

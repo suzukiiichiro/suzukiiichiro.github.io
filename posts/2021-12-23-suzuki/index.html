@@ -1,72 +1,143 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"><title>【wLu】Bashで便利なコマンドを作ってみようって話</title>
-<link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><meta property="og:title" content="【wLu】Bashで便利なコマンドを作ってみようって話">
+<link rel=canonical href=https://wyoshi.github.io/posts/2021-12-23-suzuki/>
+<link rel=stylesheet href=https://wyoshi.github.io/scss/style.css>
+<link rel=stylesheet href=https://wyoshi.github.io/css/normalize.css>
+<link rel=stylesheet href=https://wyoshi.github.io/scss/override.css>
+<link rel=stylesheet href=https://wyoshi.github.io/scss/custom.css><meta property="og:title" content="【wLu】Bashで便利なコマンドを作ってみようって話">
 <meta property="og:description" content="今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です">
-<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/">
+<meta property="og:url" content="https://wyoshi.github.io/posts/2021-12-23-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="nkf"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T10:27:27+09:00"><meta property="article:modified_time" content="2021-12-23T10:27:27+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="nkf"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T10:27:27+09:00"><meta property="article:modified_time" content="2021-12-24T00:42:39+00:00"><meta property="og:image" content="https://wyoshi.github.io/assets/images/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【wLu】Bashで便利なコマンドを作ってみようって話">
 <meta name=twitter:description content="今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/assets/images/2021-12-23-bash.jpg"><style>:root{--base-font-family:"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif, var(--base-font-family);--article-font-size:1.5rem;--section-separation:15px}.article-title{font-size:1.2em}.article-subtitle{font-size:.9em}.article-time{margin-top:25px}.article-time svg{width:.7em;height:.7em}.article-time time{font-size:.7em}</style>
+<meta name=twitter:image content="https://wyoshi.github.io/assets/images/2021-12-23-bash.jpg">
 </head>
-<body class="article-page has-toc">
+<body class="article-page
+}">
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
 <div class="container main-container flex
-extended">
-<div id=article-toolbar>
-<a href=https://suzukiiichiro.github.io/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
-<span>前のページ</span>
-</a>
-</div>
-<main class="main full-width">
-<article class="has-image main-article">
-<header class=article-header>
-<div class=article-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
-<img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話">
-</a>
-</div>
-<div class=article-details>
-<header class=article-category>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
-プログラミング
-</a>
-<a href=https://suzukiiichiro.github.io/categories/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>
-シェルスクリプト
-</a>
-<a href=https://suzukiiichiro.github.io/categories/bash/>
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<figure class=site-avatar>
+<img src=https://wyoshi.github.io/assets/logo/avatar.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</figure>
+<h1 class=site-name><a href=https://wyoshi.github.io/>NLP</a></h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供しております</h2></header>
+<div class="menu menu-section" id=categories-menu>
+<a href=https://wyoshi.github.io/categories/ id=link-category>カテゴリ</a>
+<ol class=menu id=main-cat>
+<li>
+<a href=https://wyoshi.github.io/categories/bash/ class=font_size_3>
 Bash
 </a>
-<a href=https://suzukiiichiro.github.io/categories/nkf/>
-nkf
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_3>
+シェルスクリプト
 </a>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_3>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_3>
 ユーティリティ
 </a>
-<a href=https://suzukiiichiro.github.io/categories/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_3>
 鈴木維一郎
 </a>
-</header>
-<h2 class=article-title>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>【wLu】Bashで便利なコマンドを作ってみようって話</a>
-</h2>
-<h3 class=article-subtitle>
-今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です
-</h3>
-<footer class=article-time>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>Dec 23, 2021</time>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/hugo/ class=font_size_2>
+hugo
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_2>
+プログラム
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/github-pages/ class=font_size_1>
+github pages
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/google-adsense/ class=font_size_1>
+google adsense
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/categories/nkf/ class=font_size_1>
+nkf
+</a>
+</li>
+</ol>
 </div>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>
+<ol class="menu menu-section" id=main-menu>
+<li>
+<a href=https://wyoshi.github.io/about/>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://wyoshi.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://wyoshi.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2021-12-23</time>
+<time class="article-time--item article-time--updatedate">
+2021-12-24
+</time>
+<time class="article-time--item article-time--reading">
 読了時間: 3分
 </time>
 </div>
-</footer>
-</div>
 </header>
+<h2 class=article-title>
+<a href=https://wyoshi.github.io/posts/2021-12-23-suzuki/>
+【wLu】Bashで便利なコマンドを作ってみようって話
+</a>
+</h2>
+</div>
 <section class=article-content>
 <h2 id=関連記事>関連記事</h2>
 <ul>
@@ -190,47 +261,21 @@ $ wLu moto.txt
 </section>
 <footer class=article-footer>
 <section class=article-tags>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
-<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
-<a href=https://suzukiiichiro.github.io/tags/nkf/>nkf</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/>ユーティリティ</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+<a href=https://wyoshi.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
+<a href=https://wyoshi.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://wyoshi.github.io/tags/bash/>Bash</a>
+<a href=https://wyoshi.github.io/tags/nkf/>nkf</a>
+<a href=https://wyoshi.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/>ユーティリティ</a>
+<a href=https://wyoshi.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
 </section>
-<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>NLP</span>
-</section>
-</footer>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最終更新 2021-12-24
+</span>
+</section></footer>
 </article>
-<aside class=related-contents--wrapper>
-<h2 class=section-title>関連するコンテンツ</h2>
-<div class=related-contents>
-<div class="flex article-list--tile">
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy data-key data-hash=/./assets/images/2021-12-23-bash.jpg>
-</div>
-<div class=article-details>
-<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy data-key data-hash=/./assets/images/2021-12-23-bash.jpg>
-</div>
-<div class=article-details>
-<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
-</div>
-</a>
-</article>
-</div>
-</div>
-</aside>
 <footer class=site-footer>
-<a href=https://suzukiiichiro.github.io/privacy/>プライバシーポリシー</a>
+<a href=https://wyoshi.github.io/privacy/>プライバシーポリシー</a>
 <section class=copyright>
 &copy;
 2021 NLP
@@ -274,32 +319,112 @@ $ wLu moto.txt
 </div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
 </main>
 <aside class="sidebar right-sidebar sticky">
-<section class="widget archives">
-<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://wyoshi.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://wyoshi.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy data-key data-hash=/./assets/images/2021-12-23-bash.jpg>
 </div>
-<h2 class="widget-title section-title">目次</h2>
-<div class=widget--toc>
-<nav id=TableOfContents>
-<ol>
-<li><a href=#関連記事>関連記事</a></li>
-<li><a href=#必要なもの>必要なもの</a></li>
-<li><a href=#nkf-インストールの手順>nkf インストールの手順</a></li>
-<li><a href=#使い方>使い方</a>
-<ol>
-<li><a href=#変換の流れ手動編>変換の流れ（手動編）</a></li>
-<li><a href=#変換の流れ自動編>変換の流れ（自動編）</a></li>
-<li><a href=#コマンドの内容>コマンドの内容</a></li>
-<li><a href=#使い方-1>使い方</a></li>
-</ol>
-</li>
-</ol>
-</nav>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://wyoshi.github.io/posts/2021-12-23-02-suzuki/>
+<div class=article-image>
+<img src=https://wyoshi.github.io/./assets/images/2021-12-23-bash.jpg loading=lazy data-key data-hash=/./assets/images/2021-12-23-bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<form action=https://wyoshi.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=入力...>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2021>
+2021（8）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
+</div>
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://wyoshi.github.io/tags/bash/ class=font_size_3>
+Bash
+</a>
+<a href=https://wyoshi.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_3>
+シェルスクリプト
+</a>
+<a href=https://wyoshi.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_3>
+プログラミング
+</a>
+<a href=https://wyoshi.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_3>
+ユーティリティ
+</a>
+<a href=https://wyoshi.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_3>
+鈴木維一郎
+</a>
+<a href=https://wyoshi.github.io/tags/hugo/ class=font_size_2>
+hugo
+</a>
+<a href=https://wyoshi.github.io/tags/brew/ class=font_size_1>
+brew
+</a>
+<a href=https://wyoshi.github.io/tags/error/ class=font_size_1>
+error
+</a>
+<a href=https://wyoshi.github.io/tags/github-pages/ class=font_size_1>
+github pages
+</a>
+<a href=https://wyoshi.github.io/tags/google-adsense/ class=font_size_1>
+google adsense
+</a>
 </div>
 </section>
 </aside>
 </div>
-<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://wyoshi.github.io/ts/main.js defer></script>
 <script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script src=https://wyoshi.github.io/js/Custom.js></script>
 </body>
 </html>
