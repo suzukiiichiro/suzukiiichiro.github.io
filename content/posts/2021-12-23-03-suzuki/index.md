@@ -3,7 +3,7 @@ title: "【プログレスバー】Bashでプログレスバーを作ってみ�
 description: "今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"
 date: 2021-12-23T16:10:20+09:00
 draft: false
-image: ./assets/images/2021-12-23-bash.jpg
+image: 2021-12-23-bash.jpg
 tags:
   - プログラミング
   - シェルスクリプト
@@ -132,7 +132,7 @@ echo "";
 を追加します。これだけです。
 
 ## 実行結果
-![Progress.sh](/assets/images/progress.gif "")
+![](progress.gif "")
 
 
 

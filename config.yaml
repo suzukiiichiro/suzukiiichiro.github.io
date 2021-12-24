@@ -47,9 +47,10 @@ params:
 #     rssFullContent: true
 #     favicon:
 
-#     footer:
-#         since: 2020
-#         customText:
+    footer:
+        # since: 2020
+        # customText:
+        # showYear: true
 
     dateFormat:
         published: 2006-01-02
@@ -60,9 +61,9 @@ params:
         subtitle: 最新技術やプログラム、デザインなど様々な情報を提供しております
         avatar:
             enabled: true
-            local: false
-            src: /assets/logo/avatar.png
-            # src: img/avatar.png
+            local: true
+            # src: /assets/logo/avatar.png
+            src: /images/logo.png
 
 #     article:
 #         math: false

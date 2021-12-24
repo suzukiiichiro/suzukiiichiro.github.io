@@ -1,0 +1,17 @@
+<!--ふったーを記述する -->
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        {{ if (.Site.Params.footer.showYear) }}
+          {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
+            {{ .Site.Params.footer.since }} - 
+          {{ end }}
+          {{ now.Format "2006" }}
+        {{ end }}
+        <a href="{{ .RelPermalink }}">{{ .Site.Title }}</a> .All Rights Reserved.
+    </section>
+</footer>
+
+{{ partialCached "footer/components/script.html" . }}
+{{ partialCached "footer/components/custom-font.html" . }}
+{{ partial "footer/custom.html" . }}

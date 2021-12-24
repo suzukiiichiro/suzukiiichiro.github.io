@@ -3,7 +3,7 @@ title: "記事の投稿の仕方"
 date: 2021-12-21T18:08:57+09:00
 draft: false
 description: "記事の投稿の仕方のdescriptionになります"
-image: "./assets/images/2021-12-21-1.jpg"
+image: 2021-12-21-1.jpg
 # ファイル名を変える場合
 # slug: "example-post"
 ---

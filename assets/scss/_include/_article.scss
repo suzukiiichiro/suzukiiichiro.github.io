@@ -51,8 +51,8 @@
       flex-direction: row;
       margin: 10px 20px;
       .article-image {
-        width: 250px;
-        height: calc(250px / 16 * 9);
+        width: 200px;
+        height: calc(200px / 16 * 9);
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -62,7 +62,7 @@
         }
       }
       .article-details {
-        padding: 10px 20px;
+        padding: 0;
         margin-left: 20px;
         flex: 1;
         .article-header {
@@ -78,9 +78,9 @@
           }
         }
         .article-title {
-          font-size: 1.2rem;
+          font-size: 1rem;
           line-height: 1.4;
-          margin: 0 0 20px;
+          margin: 0 0 15px;
         }
         .article-subtitle {
           font-size: 0.7em;
@@ -138,6 +138,14 @@
           margin-left: 10px;
         }
       }
+    }
+  }
+}
+
+.article-content {
+  pre {
+    code {
+      white-space: normal;
     }
   }
 }

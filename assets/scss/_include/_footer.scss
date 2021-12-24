@@ -1,0 +1,25 @@
+footer {
+  &.site-footer {
+    background-color: var(--accent-color);
+    color: #FFF;
+    display: block;
+    padding: 10px 20px 20px;
+    &:before {
+      display: none;
+    }
+    .copyright {
+      color: #FFF;
+      margin: 0 auto;
+      font-size: 0.7rem;
+      display: block;
+      text-align: center;
+      a {
+        color: #FFF;
+        text-decoration: underline;
+      }
+    }
+    .section {
+      margin: 0;
+    }
+  }
+}

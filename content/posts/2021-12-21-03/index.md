@@ -3,12 +3,12 @@ title: "hugo で failed to unmarshal YAML: yaml: control characters are not allo
 date: 2021-12-22T21:22:23+09:00
 draft: false
 tags:
-  - hugo
-  - error 
+  - プログラミング
 categories:
+  - error 
   - hugo
   - プログラム
-image: ./assets/images/error.jpg
+image: error.jpg
 ---
 ## エラーの内容  
 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について  

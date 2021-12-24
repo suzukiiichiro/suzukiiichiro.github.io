@@ -2,19 +2,16 @@
 title: "デザイナーでもできる初めてのHugo #01"
 date: 2021-12-22T13:07:49+09:00
 draft: false
+categories:
+  - プログラミング
 tags:
   - hugo
-  - mac
+  - Mac
   - brew
   - プログラム
   - デザイナー
   - 開発
-categories:
-  - hugo
-  - プログラム
-subcategory:
-  - 開発
-image: ./assets/images/2021-12-22-hugo-01.jpg
+image: 2021-12-22-hugo-01.jpg
 ---
 CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
 Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。

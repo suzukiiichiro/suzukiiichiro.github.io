@@ -2,15 +2,10 @@
 title: "【wLu】Bashで便利なコマンドを作ってみようって話" 
 description: "今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"
 date: 2021-12-23T10:27:27+09:00
-image: ./assets/images/2021-12-23-bash.jpg
+image: 2021-12-23-bash.jpg
 draft: false
 tags:
   - プログラミング
-  - シェルスクリプト
-  - Bash
-  - nkf
-  - ユーティリティ
-  - 鈴木維一郎
 categories:
   - プログラミング
   - シェルスクリプト

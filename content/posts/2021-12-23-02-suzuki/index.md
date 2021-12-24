@@ -3,7 +3,7 @@ title: "【unComp】Bashで便利なコマンドを作ってみようって話"
 description: "今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です"
 date: 2021-12-23T13:11:13+09:00
 draft: false
-image: ./assets/images/2021-12-23-bash.jpg
+image: 2021-12-23-bash.jpg
 tags:
   - プログラミング
   - シェルスクリプト
