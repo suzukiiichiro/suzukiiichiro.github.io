@@ -1,0 +1,403 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="今回は前回登場したデータの内容を調べてみましょう。 「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（htt"><title>e-Statのデータの見方</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="e-Statのデータの見方">
+<meta property="og:description" content="今回は前回登場したデータの内容を調べてみましょう。 「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（htt">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2021-12-25T21:55:55+09:00"><meta property="article:modified_time" content="2021-12-25T13:05:19+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg">
+<meta name=twitter:title content="e-Statのデータの見方">
+<meta name=twitter:description content="今回は前回登場したデータの内容を調べてみましょう。 「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（htt"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-25-01-ani/anal.jpg'})</script>
+</head>
+<body class="article-page
+}">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供してます</h2></header>
+<div class="menu menu-section" id=categories-menu>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ol class=menu id=main-cat>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_9>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_3>
+Web開発
+</a>
+</li>
+</ol>
+</div>
+<ol class="menu menu-section" id=main-menu>
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2021-12-25</time>
+<time class="article-time--item article-time--updatedate">
+2021-12-25
+</time>
+<time class="article-time--item article-time--reading">
+読了時間: 7分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+e-Statのデータの見方
+</a>
+</h2>
+</div>
+<section class=article-content>
+<p>今回は前回登場したデータの内容を調べてみましょう。<br>
+「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（https://www.e-stat.go.jp/）からデータを見つけてみましょう。</p>
+<pre tabindex=0><code>&lt;LIST_INF id=&quot;0003384123&quot;&gt;
+           &lt;STAT_NAME code=&quot;00100409&quot;&gt;国民経済計算&lt;/STAT_NAME&gt;
+           &lt;GOV_ORG code=&quot;00100&quot;&gt;内閣府&lt;/GOV_ORG&gt;
+           &lt;STATISTICS_NAME&gt;四半期別ＧＤＰ速報 過去の値 1次速報値&lt;/STATISTICS_NAME&gt;
+           &lt;TITLE&gt;形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）&lt;/TITLE&gt;
+           &lt;CYCLE&gt;四半期&lt;/CYCLE&gt;
+           &lt;SURVEY_DATE&gt;201007-201009&lt;/SURVEY_DATE&gt;
+           &lt;OPEN_DATE&gt;2020-04-01&lt;/OPEN_DATE&gt;
+           &lt;SMALL_AREA&gt;0&lt;/SMALL_AREA&gt;
+       &lt;/LIST_INF&gt;
+</code></pre><h2 id=データを検索してみよう>データを検索してみよう</h2>
+<p>IDで検索できるのが一番良いのですが、キーワード検索のテキストフィールドに入力して検索してもダメでした。</p>
+<p>しょうが無いので、TITLE全文「形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）」で検索しましたがでダメでした。</p>
+<p>少し削って、「形態別国内家計最終消費支出 年度デフレータ—　前年度比」 だと４０５件。<br>
+多すぎるので、SURVEY_DATE、OPEN_DATEを使って調査年、調査月、公開年月で絞り込むと２件に絞り込めました。<br>
+あとはSTATISTICS_NAMEで特定できました。</p>
+<h2 id=詳細ページに行ってみましょう>詳細ページに行ってみましょう</h2>
+<p><a class=link href="https://www.e-stat.go.jp/stat-search/database?page=1&query=%E5%BD%A2%E6%85%8B%E5%88%A5%E5%9B%BD%E5%86%85%E5%AE%B6%E8%A8%88%E6%9C%80%E7%B5%82%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA%20%E5%B9%B4%E5%BA%A6%E3%83%87%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BF%E2%80%94%E3%80%80%E5%89%8D%E5%B9%B4%E5%BA%A6%20%20%20%20%20%20%20&layout=dataset&year=20100&month=23070900&open_date=202004&statdisp_id=0003384123&metadata=1&data=1" target=_blank rel=noopener>https://www.e-stat.go.jp/stat-search/database?page=1&query=%E5%BD%A2%E6%85%8B%E5%88%A5%E5%9B%BD%E5%86%85%E5%AE%B6%E8%A8%88%E6%9C%80%E7%B5%82%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA%20%E5%B9%B4%E5%BA%A6%E3%83%87%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BF%E2%80%94%E3%80%80%E5%89%8D%E5%B9%B4%E5%BA%A6%20%20%20%20%20%20%20&layout=dataset&year=20100&month=23070900&open_date=202004&statdisp_id=0003384123&metadata=1&data=1</a></p>
+<p>上段が「統計表情報取得」の内容<br>
+<figure class=gallery-image style=flex-grow:147;flex-basis:355px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list.png data-size=1986x1342>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list.png width=1986 height=1342 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list_hu5d314213e6b3192530f77b816005c824_381643_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list_hu5d314213e6b3192530f77b816005c824_381643_1024x0_resize_box_3.png 1024w" loading=lazy alt=統計表情報>
+</a>
+<figcaption>統計表情報</figcaption>
+</figure>
+下段が「メタ情報取得」の内容見たいです。<br>
+<figure class=gallery-image style=flex-grow:155;flex-basis:373px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta.png data-size=1988x1278>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta.png width=1988 height=1278 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta_hu31ce838285791fd60ddd4f121b3decf8_248311_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta_hu31ce838285791fd60ddd4f121b3decf8_248311_1024x0_resize_box_3.png 1024w" loading=lazy alt=メタ情報取得>
+</a>
+<figcaption>メタ情報取得</figcaption>
+</figure></p>
+<p>DBをクリックするとグラフが表示されました。</p>
+<p><figure class=gallery-image style=flex-grow:196;flex-basis:472px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png data-size=2040x1036>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png width=2040 height=1036 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w" loading=lazy alt=グラフ>
+</a>
+<figcaption>グラフ</figcaption>
+</figure></p>
+<p>行情報が「1981年度、1982年度、1983年度。。。」<br>
+列情報が「家計最終消費支出（再掲）、家計最終消費支出（再掲）_居住者家計の海外での直接購入、。。。」</p>
+<p>なんと、APIクリックすると丁寧にクエリを表示してくれました(API仕様書とか見る必要ないですね)。</p>
+<p><figure class=gallery-image style=flex-grow:164;flex-basis:393px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api.png data-size=1962x1196>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api.png width=1962 height=1196 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api_hu76bd22dd2d5fa36b989bf3e0c65e8f8d_349632_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api_hu76bd22dd2d5fa36b989bf3e0c65e8f8d_349632_1024x0_resize_box_3.png 1024w" loading=lazy alt=API>
+</a>
+<figcaption>API</figcaption>
+</figure>
+フォーマットもXML,JSON,CSVが選べますね。<br>
+私はCSVの方が扱いやすいのでこれからはCSVでダウンロードすることにします。</p>
+<p>appIdがカラに空になっているので追加してcurlで叩くだけでいいですね。至れり尽くりです。</p>
+<pre tabindex=0><code>curl &quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxx&amp;lang=J&amp;statsDataId=0003384123&amp;metaGetFlg=Y&amp;cntGetFlg=N&amp;explanationGetFlg=Y&amp;annotationGetFlg=Y&amp;sectionHeaderFlg=1&amp;replaceSpChars=0&quot;
+    
+&quot;tab_code&quot;,&quot;表章項目&quot;,&quot;cat01_code&quot;,&quot;形態別国内家計最終消費支出&quot;,&quot;time_code&quot;,&quot;時間軸（年度）&quot;,&quot;unit&quot;,&quot;value&quot;,&quot;annotation&quot;
+&quot;17&quot;,&quot;前年度比&quot;,&quot;11&quot;,&quot;家計最終消費支出（再掲）&quot;,&quot;1981100000&quot;,&quot;1981年度&quot;,&quot;％&quot;,&quot;3.8&quot;,&quot;&quot;
+&quot;17&quot;,&quot;前年度比&quot;,&quot;11&quot;,&quot;家計最終消費支出（再掲）&quot;,&quot;1982100000&quot;,&quot;1982年度&quot;,&quot;％&quot;,&quot;2.3&quot;,&quot;&quot;
+&quot;17&quot;,&quot;前年度比&quot;,&quot;11&quot;,&quot;家計最終消費支出（再掲）&quot;,&quot;1983100000&quot;,&quot;1983年度&quot;,&quot;％&quot;,&quot;2&quot;,&quot;&quot;
+.
+.
+.
+&quot;17&quot;,&quot;前年度比&quot;,&quot;12&quot;,&quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&quot;,&quot;1981100000&quot;,&quot;1981年度&quot;,&quot;％&quot;,&quot;17.6&quot;,&quot;&quot;
+&quot;17&quot;,&quot;前年度比&quot;,&quot;12&quot;,&quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&quot;,&quot;1982100000&quot;,&quot;1982年度&quot;,&quot;％&quot;,&quot;15.6&quot;,&quot;&quot;
+&quot;17&quot;,&quot;前年度比&quot;,&quot;12&quot;,&quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&quot;,&quot;1983100000&quot;,&quot;1983年度&quot;,&quot;％&quot;,&quot;-1.8&quot;,&quot;&quot;
+</code></pre><h2 id=データの見方は>データの見方は？</h2>
+<p>DBで表示させた「統計表表示」と見比べてみると</p>
+<p><figure class=gallery-image style=flex-grow:196;flex-basis:472px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png data-size=2040x1036>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png width=2040 height=1036 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w" loading=lazy alt=グラフ>
+</a>
+<figcaption>グラフ</figcaption>
+</figure></p>
+<pre tabindex=0><code>&quot;17&quot;,&quot;前年度比&quot;,&quot;11&quot;,&quot;家計最終消費支出（再掲）&quot;,&quot;1981100000&quot;,&quot;1981年度&quot;,&quot;％&quot;,&quot;3.8&quot;,&quot;&quot; 
+</code></pre><p>が１行目「1981年度」の１列目「家計最終消費支出（再掲）」に該当するみたいですね。<br>
+１セル、１行のデータ構造みたいですね。<br>
+１列目の情報がしばらく続いて、全行終わると次は２列目の情報みたいな構成だということがわかりました。</p>
+<h2 id=国民経済計算って何>国民経済計算って何</h2>
+<p>このデータは国民経済計算を算出したものということですが、国民経済計算ってなんでしょう？</p>
+<p>内閣府のサイトによると<br>
+国民経済計算は「四半期別ＧＤＰ速報」と「国民経済計算年次推計」の２つからなっている。「四半期別ＧＤＰ速報」は速報性を重視し、ＧＤＰをはじめとする支出側系列等を、年に８回四半期別に作成・公表している。「国民経済計算年次推計」は、生産・分配・支出・資本蓄積といったフロー面や、資産・負債といったストック面も含めて、年に１回作成・公表している。</p>
+<p>GDPを算出するための何かみたいですね。</p>
+<p>googleの検索結果を見てみると、国や地方自治体のサイトや経済学の解説サイトがメインで、たまに今年のGDPはどうだったという記事でちょっと書かれてたりしました。</p>
+<p>記事の中でちょっと気になったのは、<br>
+日本では新型コロナウイルスの影響で個人消費が落ち込んでおり、貯蓄が増加傾向にあります。内閣府の国民経済計算によると、2020年に消費されずに貯蓄に回ったお金は、一律10万円の特別定額給付金の影響もあり、35.8兆円に達しました。この額は前年の5倍の水準です。<br>
+所得に対する貯蓄の割合を示す家計貯蓄率は13.1%と19年度（3.7%）から大きく上昇した。</p>
+<p>前年度から比較して急激に大きくなったという部分(5倍も！)。こういうのは是非ピックアップしたいと思いました。</p>
+<h2 id=e-statでのマイニングの目的は>e-Statでのマイニングの目的は</h2>
+<p>とわ言え「国民経済計算」全般的に堅い感じですね。。。。</p>
+<p>私のe-Statマイニングの目的は大量の政府公開データに埋もれている中から人の興味を引きそうな面白そうなコンテンツをピックアップしてわかりやすくサマリーを表示することなのです。</p>
+<p>キーワードランキングを見てみると「アイスクリーム」「身長・体重の平均値」みたいな面白そうな柔らかめのコンテンツもあるんです。</p>
+<p><figure class=gallery-image style=flex-grow:149;flex-basis:358px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking.png data-size=1434x960>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking.png width=1434 height=960 srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_1024x0_resize_box_3.png 1024w" loading=lazy alt=ランキング>
+</a>
+<figcaption>ランキング</figcaption>
+</figure></p>
+<p>次回から、<br>
+・e-Statの森の中から面白いコンテンツを見つけよう<br>
+・うまくサマライズして表示しよう<br>
+　　興味深い列情報に絞りたい<br>
+　　前年度から５倍とか急激に変化した部分をピックアップして伝えたい<br>
+という視点からe-Statを調査していきたいと思います。</p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/>e-Stat</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/>データマイニング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最終更新 2021-12-25
+</span>
+</section></footer>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<aside class=related-contents--wrapper>
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error.621932d674b0b12274fed72e955963aa_hu7e39d96c0286759ff592e45a50a24444_91990_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" data-hash="md5-Yhky1nSwsSJ0/tculVljqg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=入力...>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2021年12月>
+2021年12月（13）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
+</div>
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_5>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_5>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_5>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_5>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_5>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_4>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_4>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_2>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
+Web
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
+Web開発
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  logEvent(analytics, 'page_view', {
+    content_type: 'images',
+    image_url: '\/posts\/2021-12-25-01-ani\/anal.jpg',
+  });
+  
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+</body>
+</html>

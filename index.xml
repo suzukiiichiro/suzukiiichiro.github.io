@@ -1,4 +1,166 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 25 Dec 2021 09:25:50 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>「UNIXという考え方―その設計思想と哲学」　メモ</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</link><pubDate>Sat, 25 Dec 2021 09:25:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" />&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 25 Dec 2021 21:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Statのデータの見方</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</link><pubDate>Sat, 25 Dec 2021 21:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg" alt="Featured image of post e-Statのデータの見方" />&lt;p>今回は前回登場したデータの内容を調べてみましょう。&lt;br>
+「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（https://www.e-stat.go.jp/）からデータを見つけてみましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;lt;LIST_INF id=&amp;quot;0003384123&amp;quot;&amp;gt;
+&amp;lt;STAT_NAME code=&amp;quot;00100409&amp;quot;&amp;gt;国民経済計算&amp;lt;/STAT_NAME&amp;gt;
+&amp;lt;GOV_ORG code=&amp;quot;00100&amp;quot;&amp;gt;内閣府&amp;lt;/GOV_ORG&amp;gt;
+&amp;lt;STATISTICS_NAME&amp;gt;四半期別ＧＤＰ速報 過去の値 1次速報値&amp;lt;/STATISTICS_NAME&amp;gt;
+&amp;lt;TITLE&amp;gt;形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）&amp;lt;/TITLE&amp;gt;
+&amp;lt;CYCLE&amp;gt;四半期&amp;lt;/CYCLE&amp;gt;
+&amp;lt;SURVEY_DATE&amp;gt;201007-201009&amp;lt;/SURVEY_DATE&amp;gt;
+&amp;lt;OPEN_DATE&amp;gt;2020-04-01&amp;lt;/OPEN_DATE&amp;gt;
+&amp;lt;SMALL_AREA&amp;gt;0&amp;lt;/SMALL_AREA&amp;gt;
+&amp;lt;/LIST_INF&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="データを検索してみよう">データを検索してみよう&lt;/h2>
+&lt;p>IDで検索できるのが一番良いのですが、キーワード検索のテキストフィールドに入力して検索してもダメでした。&lt;/p>
+&lt;p>しょうが無いので、TITLE全文「形態別国内家計最終消費支出 年度デフレータ—　前年度比（1981年～）（2000暦年＝100）」で検索しましたがでダメでした。&lt;/p>
+&lt;p>少し削って、「形態別国内家計最終消費支出 年度デフレータ—　前年度比」 だと４０５件。&lt;br>
+多すぎるので、SURVEY_DATE、OPEN_DATEを使って調査年、調査月、公開年月で絞り込むと２件に絞り込めました。&lt;br>
+あとはSTATISTICS_NAMEで特定できました。&lt;/p>
+&lt;h2 id="詳細ページに行ってみましょう">詳細ページに行ってみましょう&lt;/h2>
+&lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/stat-search/database?page=1&amp;amp;query=%E5%BD%A2%E6%85%8B%E5%88%A5%E5%9B%BD%E5%86%85%E5%AE%B6%E8%A8%88%E6%9C%80%E7%B5%82%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA%20%E5%B9%B4%E5%BA%A6%E3%83%87%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BF%E2%80%94%E3%80%80%E5%89%8D%E5%B9%B4%E5%BA%A6%20%20%20%20%20%20%20&amp;amp;layout=dataset&amp;amp;year=20100&amp;amp;month=23070900&amp;amp;open_date=202004&amp;amp;statdisp_id=0003384123&amp;amp;metadata=1&amp;amp;data=1" target="_blank" rel="noopener"
+>https://www.e-stat.go.jp/stat-search/database?page=1&amp;query=%E5%BD%A2%E6%85%8B%E5%88%A5%E5%9B%BD%E5%86%85%E5%AE%B6%E8%A8%88%E6%9C%80%E7%B5%82%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA%20%E5%B9%B4%E5%BA%A6%E3%83%87%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BF%E2%80%94%E3%80%80%E5%89%8D%E5%B9%B4%E5%BA%A6%20%20%20%20%20%20%20&amp;layout=dataset&amp;year=20100&amp;month=23070900&amp;open_date=202004&amp;statdisp_id=0003384123&amp;metadata=1&amp;data=1&lt;/a>&lt;/p>
+&lt;p>上段が「統計表情報取得」の内容&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 147;
+flex-basis: 355px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list.png" data-size="1986x1342">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list.png"
+width="1986"
+height="1342"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list_hu5d314213e6b3192530f77b816005c824_381643_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/list_hu5d314213e6b3192530f77b816005c824_381643_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="統計表情報">
+&lt;/a>
+&lt;figcaption>統計表情報&lt;/figcaption>
+&lt;/figure>
+下段が「メタ情報取得」の内容見たいです。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 155;
+flex-basis: 373px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta.png" data-size="1988x1278">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta.png"
+width="1988"
+height="1278"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta_hu31ce838285791fd60ddd4f121b3decf8_248311_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/meta_hu31ce838285791fd60ddd4f121b3decf8_248311_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="メタ情報取得">
+&lt;/a>
+&lt;figcaption>メタ情報取得&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>DBをクリックするとグラフが表示されました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 196;
+flex-basis: 472px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="2040x1036">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png"
+width="2040"
+height="1036"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="グラフ">
+&lt;/a>
+&lt;figcaption>グラフ&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>行情報が「1981年度、1982年度、1983年度。。。」&lt;br>
+列情報が「家計最終消費支出（再掲）、家計最終消費支出（再掲）_居住者家計の海外での直接購入、。。。」&lt;/p>
+&lt;p>なんと、APIクリックすると丁寧にクエリを表示してくれました(API仕様書とか見る必要ないですね)。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 164;
+flex-basis: 393px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api.png" data-size="1962x1196">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api.png"
+width="1962"
+height="1196"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api_hu76bd22dd2d5fa36b989bf3e0c65e8f8d_349632_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/api_hu76bd22dd2d5fa36b989bf3e0c65e8f8d_349632_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="API">
+&lt;/a>
+&lt;figcaption>API&lt;/figcaption>
+&lt;/figure>
+フォーマットもXML,JSON,CSVが選べますね。&lt;br>
+私はCSVの方が扱いやすいのでこれからはCSVでダウンロードすることにします。&lt;/p>
+&lt;p>appIdがカラに空になっているので追加してcurlで叩くだけでいいですね。至れり尽くりです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl &amp;quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxx&amp;amp;lang=J&amp;amp;statsDataId=0003384123&amp;amp;metaGetFlg=Y&amp;amp;cntGetFlg=N&amp;amp;explanationGetFlg=Y&amp;amp;annotationGetFlg=Y&amp;amp;sectionHeaderFlg=1&amp;amp;replaceSpChars=0&amp;quot;
+&amp;quot;tab_code&amp;quot;,&amp;quot;表章項目&amp;quot;,&amp;quot;cat01_code&amp;quot;,&amp;quot;形態別国内家計最終消費支出&amp;quot;,&amp;quot;time_code&amp;quot;,&amp;quot;時間軸（年度）&amp;quot;,&amp;quot;unit&amp;quot;,&amp;quot;value&amp;quot;,&amp;quot;annotation&amp;quot;
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;家計最終消費支出（再掲）&amp;quot;,&amp;quot;1981100000&amp;quot;,&amp;quot;1981年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;3.8&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;家計最終消費支出（再掲）&amp;quot;,&amp;quot;1982100000&amp;quot;,&amp;quot;1982年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;2.3&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;家計最終消費支出（再掲）&amp;quot;,&amp;quot;1983100000&amp;quot;,&amp;quot;1983年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;&amp;quot;
+.
+.
+.
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;12&amp;quot;,&amp;quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&amp;quot;,&amp;quot;1981100000&amp;quot;,&amp;quot;1981年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;17.6&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;12&amp;quot;,&amp;quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&amp;quot;,&amp;quot;1982100000&amp;quot;,&amp;quot;1982年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;15.6&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;12&amp;quot;,&amp;quot;家計最終消費支出（再掲）_居住者家計の海外での直接購入&amp;quot;,&amp;quot;1983100000&amp;quot;,&amp;quot;1983年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;-1.8&amp;quot;,&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>&lt;h2 id="データの見方は">データの見方は？&lt;/h2>
+&lt;p>DBで表示させた「統計表表示」と見比べてみると&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 196;
+flex-basis: 472px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="2040x1036">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png"
+width="2040"
+height="1036"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="グラフ">
+&lt;/a>
+&lt;figcaption>グラフ&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;quot;17&amp;quot;,&amp;quot;前年度比&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;家計最終消費支出（再掲）&amp;quot;,&amp;quot;1981100000&amp;quot;,&amp;quot;1981年度&amp;quot;,&amp;quot;％&amp;quot;,&amp;quot;3.8&amp;quot;,&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>が１行目「1981年度」の１列目「家計最終消費支出（再掲）」に該当するみたいですね。&lt;br>
+１セル、１行のデータ構造みたいですね。&lt;br>
+１列目の情報がしばらく続いて、全行終わると次は２列目の情報みたいな構成だということがわかりました。&lt;/p>
+&lt;h2 id="国民経済計算って何">国民経済計算って何&lt;/h2>
+&lt;p>このデータは国民経済計算を算出したものということですが、国民経済計算ってなんでしょう？&lt;/p>
+&lt;p>内閣府のサイトによると&lt;br>
+国民経済計算は「四半期別ＧＤＰ速報」と「国民経済計算年次推計」の２つからなっている。「四半期別ＧＤＰ速報」は速報性を重視し、ＧＤＰをはじめとする支出側系列等を、年に８回四半期別に作成・公表している。「国民経済計算年次推計」は、生産・分配・支出・資本蓄積といったフロー面や、資産・負債といったストック面も含めて、年に１回作成・公表している。&lt;/p>
+&lt;p>GDPを算出するための何かみたいですね。&lt;/p>
+&lt;p>googleの検索結果を見てみると、国や地方自治体のサイトや経済学の解説サイトがメインで、たまに今年のGDPはどうだったという記事でちょっと書かれてたりしました。&lt;/p>
+&lt;p>記事の中でちょっと気になったのは、&lt;br>
+日本では新型コロナウイルスの影響で個人消費が落ち込んでおり、貯蓄が増加傾向にあります。内閣府の国民経済計算によると、2020年に消費されずに貯蓄に回ったお金は、一律10万円の特別定額給付金の影響もあり、35.8兆円に達しました。この額は前年の5倍の水準です。&lt;br>
+所得に対する貯蓄の割合を示す家計貯蓄率は13.1%と19年度（3.7%）から大きく上昇した。&lt;/p>
+&lt;p>前年度から比較して急激に大きくなったという部分(5倍も！)。こういうのは是非ピックアップしたいと思いました。&lt;/p>
+&lt;h2 id="e-statでのマイニングの目的は">e-Statでのマイニングの目的は&lt;/h2>
+&lt;p>とわ言え「国民経済計算」全般的に堅い感じですね。。。。&lt;/p>
+&lt;p>私のe-Statマイニングの目的は大量の政府公開データに埋もれている中から人の興味を引きそうな面白そうなコンテンツをピックアップしてわかりやすくサマリーを表示することなのです。&lt;/p>
+&lt;p>キーワードランキングを見てみると「アイスクリーム」「身長・体重の平均値」みたいな面白そうな柔らかめのコンテンツもあるんです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 149;
+flex-basis: 358px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking.png" data-size="1434x960">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking.png"
+width="1434"
+height="960"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ランキング">
+&lt;/a>
+&lt;figcaption>ランキング&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>次回から、&lt;br>
+・e-Statの森の中から面白いコンテンツを見つけよう&lt;br>
+・うまくサマライズして表示しよう&lt;br>
+　　興味深い列情報に絞りたい&lt;br>
+　　前年度から５倍とか急激に変化した部分をピックアップして伝えたい&lt;br>
+という視点からe-Statを調査していきたいと思います。&lt;/p></description></item><item><title>「UNIXという考え方―その設計思想と哲学」　メモ</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</link><pubDate>Sat, 25 Dec 2021 09:25:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" />&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;div class="amazon-box">
 &lt;div class="three columns amazon-image">
 &lt;a href="https://www.amazon.co.jp/gp/product/4274064069/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4274064069&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=d045d50d407b75e179a1c786ee85e152" target="_blank">
