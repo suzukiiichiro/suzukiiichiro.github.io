@@ -57,14 +57,14 @@ alt="メタ情報取得">
 &lt;p>&lt;figure
 class="gallery-image"
 style="
-flex-grow: 196;
-flex-basis: 472px"
+flex-grow: 240;
+flex-basis: 576px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="2040x1036">
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="1892x788">
 &lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png"
-width="2040"
-height="1036"
-srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w"
+width="1892"
+height="788"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hu124fe87f1847cfac0453afe0f1b0ea67_189919_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hu124fe87f1847cfac0453afe0f1b0ea67_189919_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="グラフ">
 &lt;/a>
@@ -108,14 +108,14 @@ alt="API">
 &lt;p>&lt;figure
 class="gallery-image"
 style="
-flex-grow: 196;
-flex-basis: 472px"
+flex-grow: 240;
+flex-basis: 576px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="2040x1036">
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png" data-size="1892x788">
 &lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei.png"
-width="2040"
-height="1036"
-srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hua91cc25ab8dfe932c195e7ee0ea6a5b1_261607_1024x0_resize_box_3.png 1024w"
+width="1892"
+height="788"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hu124fe87f1847cfac0453afe0f1b0ea67_189919_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/tokei_hu124fe87f1847cfac0453afe0f1b0ea67_189919_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="グラフ">
 &lt;/a>
