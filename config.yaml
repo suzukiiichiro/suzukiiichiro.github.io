@@ -36,7 +36,9 @@ frontmatter:
 # Robots.txtを作成
 enableRobotsTXT: false
 
+
 permalinks:
+    # /: /:year/:month/:filename/
     post: /p/:slug/
     page: /:slug/
 
@@ -147,10 +149,11 @@ params:
 #             id: 
 
     widgets:
-#         enabled:
-#             # - search
-#             # - archives
-#             - tag-cloud
+        enabled:
+            - search
+            - archives
+            - tag-cloud
+            # - popular-articles
 
 #         archives:
 #             limit: 5
@@ -159,6 +162,9 @@ params:
 #             limit: 10
         categories:
             limit: 10
+
+        # populer-articles:
+        #     limit: 10
 
 #     opengraph:
 #         twitter:
@@ -219,7 +225,7 @@ related:
     includeNewer: true
     #関連度に対する感度のようなもので0-100の間の値を取る
     #小さい値ほどより多くのページが関連検出とされるが、関連の薄いものまで表示されるようになる
-    threshold: 1
+    threshold: 80
     #関連度チェック時に小文字化してチェックするかどうか
     toLower: false
     indices:

@@ -46,6 +46,12 @@
 .article-list {
   article {
     position: relative;
+    padding: 10px 0;
+    ~ {
+      article {
+        border-top: 1px solid #EFEFEF;
+      }
+    }
     .article-header {
       display: flex;
       flex-direction: row;
