@@ -1,4 +1,184 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 25 Dec 2021 21:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Statのデータの見方</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</link><pubDate>Sat, 25 Dec 2021 21:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg" alt="Featured image of post e-Statのデータの見方" />&lt;p>今回は前回登場したデータの内容を調べてみましょう。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 26 Dec 2021 21:54:39 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</title><link>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</link><pubDate>Sun, 26 Dec 2021 21:54:39 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/anal.jpg" alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" />&lt;p>私のe-Statでのデータマイニングの現在の目的は以下の通りです&lt;br>
+大量の政府公開データの中から&lt;br>
+①面白そうなデータをピックアップする&lt;br>
+②データをわかりやすくサマライズする&lt;br>
+　・列情報などを必要な項目に絞り込む&lt;br>
+　・前年度比５倍とか急激な変化があった場合をピックアップできるようにする&lt;br>
+最終的にはこれらを自動でできるようにしたいです。&lt;/p>
+&lt;p>今回は、まず①面白そうなデータをピックアップすることを目的にe-Statを見てみましょう。&lt;/p>
+&lt;h2 id="ランキングページを見てみよう">ランキングページを見てみよう&lt;/h2>
+&lt;p>e-Statのトップページ（https://www.e-stat.go.jp/）の画面の下の方にランキングという欄があります。&lt;br>
+そのランキングの現在(2021/12/26)３位が「アイスクリーム」なんです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 149;
+flex-basis: 358px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/ranking.png" data-size="1434x960">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/ranking.png"
+width="1434"
+height="960"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/ranking_hu5dadec452d8bd9bb4d7577d888e43b5e_127374_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ランキング">
+&lt;/a>
+&lt;figcaption>ランキング&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h2 id="アイスクリームが含まれるのはどんなデータか">アイスクリームが含まれるのはどんなデータか&lt;/h2>
+&lt;p>「アイスクリーム」は柔らかめのキーワードなので面白いデータの予感がします。&lt;br>
+「アイスクリーム」が含まれるデータはどんなデータなんでしょうか？&lt;br>
+ちょっと見てみましょう。&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/stat-search?page=1&amp;amp;query=%E3%82%A2%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0&amp;amp;layout=dataset" target="_blank" rel="noopener"
+>https://www.e-stat.go.jp/stat-search?page=1&amp;query=%E3%82%A2%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0&amp;layout=dataset&lt;/a>&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 143;
+flex-basis: 343px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/iceweblist.png" data-size="2144x1498">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/iceweblist.png"
+width="2144"
+height="1498"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/iceweblist_hue7cc00b95248977b49d9c465262cbdcd_468131_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/iceweblist_hue7cc00b95248977b49d9c465262cbdcd_468131_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="アイスクリーム">
+&lt;/a>
+&lt;figcaption>アイスクリーム&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>「アイスクリーム」が含まれるデータは7640件あるみたいです。&lt;br>
+ちょっと多いですね。。。&lt;br>
+検索条件なのですが、提供分類、表題を検索　データベース、ファイル内を検索にチェックがついています。&lt;br>
+「検索のしかた」をみてみるとキーワードのOR検索やAND検索もできそうです。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 134;
+flex-basis: 323px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icewebsearchmethod.png" data-size="2110x1566">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icewebsearchmethod.png"
+width="2110"
+height="1566"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icewebsearchmethod_hu93293dc2bfe7d1c29535017dd6b31a46_524310_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icewebsearchmethod_hu93293dc2bfe7d1c29535017dd6b31a46_524310_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="検索のしかた">
+&lt;/a>
+&lt;figcaption>検索のしかた&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>ちなみに検索キーワードでの絞り込みはAPI(統計表情報取得)でももちろんできます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl &amp;quot;https://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsList?appId=xxxxxxxxxx&amp;amp;searchWord=アイスクリーム&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>アイスクリームだと数が多すぎるので試しに「ガリガリ君」で検索してみましたが、0件でした。「ハーゲンダッツ」で検索したところ22件引っかかってきました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 168;
+flex-basis: 405px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/hagenlist.png" data-size="2048x1212">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/hagenlist.png"
+width="2048"
+height="1212"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/hagenlist_hu2fc48b6ec53a6bb1ca177d6aca1d85a9_370194_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/hagenlist_hu2fc48b6ec53a6bb1ca177d6aca1d85a9_370194_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ハーゲンダッツ">
+&lt;/a>
+&lt;figcaption>ハーゲンダッツ&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>「ハーゲンダッツ」どこに出てくるのかなと思ってAPIを一通り叩いてみたのですがAPIの実行結果からは「ハーゲンダッツ」は見つけられませんでした。&lt;br>
+エクセル表示を見てみたところ、「銘柄」という項目に「バニラアイスクリーム，カップ入り（110mL入り），「ハーゲンダッツ バニラ」」とありました。&lt;br>
+どうも全国のアイスクリームの価格を「ハーゲンダッツ　バニラ」を基準に算出しているみたいです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 188;
+flex-basis: 453px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1excel.png" data-size="1360x720">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1excel.png"
+width="1360"
+height="720"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1excel_hue69ec4e6af4f57f83b84afa986f8b0bc_139125_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1excel_hue69ec4e6af4f57f83b84afa986f8b0bc_139125_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="excel">
+&lt;/a>
+&lt;figcaption>excel&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>ちなみに、2020年だと１番安いのが長野市の221円で１番高いのが那覇市の300円でした。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 199;
+flex-basis: 478px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1rst.png" data-size="1990x998">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1rst.png"
+width="1990"
+height="998"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1rst_hue322c7afb8a1654734b465c6222623d4_212046_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1rst_hue322c7afb8a1654734b465c6222623d4_212046_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="統計表">
+&lt;/a>
+&lt;figcaption>統計表&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>単にハーゲンダッツの価格ってだけだと少しパンチ力弱いかもしれませんね。。。&lt;/p>
+&lt;p>個人的には明治のスーパーカップが１位でジャンボモナカが２位でとかアイスクリーム売れ筋ランキングとかの方が楽しいのですが、政府はそこまで調べてくれないですよね。&lt;/p>
+&lt;h2 id="小売統計調査とは">小売統計調査とは&lt;/h2>
+&lt;p>小売物価統計調査はお米の価格から葬儀代まで約８００の小売価格を調査したデータ
+調査結果は、年金等の給付見直しの際の基礎資料や、公共料金の上限値を決める際の資料として、幅広く利用されているそうです。
+アイスクリームは約８００ある中の項目の一つです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 178;
+flex-basis: 429px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1column.png" data-size="2064x1154">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1column.png"
+width="2064"
+height="1154"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1column_hud83e50fd9037a6518d3a30b034ab02f7_1950832_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/icedetail1column_hud83e50fd9037a6518d3a30b034ab02f7_1950832_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="銘柄">
+&lt;/a>
+&lt;figcaption>銘柄&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>小売物価統計調査をピックアップするとしたら、ここ数年で値段が大きく変化しているものや地域間の差が特に大きいものとかですかね。&lt;/p>
+&lt;p>「小売物価統計」でgoogle検索して面白そうな記事を見てみると&lt;br>
+「今年のX’マスケーキは小さくなるか」という記事がありました。&lt;/p>
+&lt;p>ケーキにもよく使われる小麦や油量種子はとりわけ高騰が目立つ&lt;br>
+→&lt;br>
+小売物価統計調査によると、東京都区部の小売価格で、今年11月の1kgあたりの小麦価格は1年前より約20円上昇した。食用油に至っては1kgあたり約60円と大幅な値上がりで、価格が比較的安定している食品の代名詞ともなってきた鶏卵でさえ、1パックあたり約12円上昇した。&lt;br>
+→&lt;br>
+クリスマスイブにケーキを買って帰る人も多いだろうが、今年は例年と比べて値段がほとんど同じなのにサイズが小さくなっていても不思議ではない。&lt;/p>
+&lt;p>こんな感じのものは自動的にピックアップできると理想的なんですけどね。&lt;/p>
+&lt;h2 id="今日のところのまとめ">今日のところのまとめ&lt;/h2>
+&lt;p>自動的にピックアップするとしたら&lt;br>
+・柔らかめのキーワード&lt;br>
+・ここ数年間で値が急激に変化してるもの&lt;br>
+・地域間の格差が大きいもの&lt;br>
+ですかね。データを見ていって判定項目を増やしていきたいと思います。&lt;/p>
+&lt;p>その他、アイスクリームでの検索結果には「家計調査」というのもありました。&lt;br>
+家計の４半期での支出額の平均を出したものなのですが、アイスクリームの支出は当然夏が冬の倍くらい多い感じになってます。&lt;/p>
+&lt;p>アイスクリームは当たり前ですが、その他季節によって大きく支出が違うものって何なのかは少し興味がありますね。&lt;br>
+毎月や四半期ごとに値があるものについては、期間によって差が大きいものはピックアップしても良いかもしれませんね。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 116;
+flex-basis: 279px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/kakei.png" data-size="1586x1360">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/kakei.png"
+width="1586"
+height="1360"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/kakei_hu134f38bd5ad256f8c70391b3da64abab_312038_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/kakei_hu134f38bd5ad256f8c70391b3da64abab_312038_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="家計調査">
+&lt;/a>
+&lt;figcaption>家計調査&lt;/figcaption>
+&lt;/figure>&lt;/p></description></item><item><title>e-Statのデータの見方</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</link><pubDate>Sat, 25 Dec 2021 21:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg" alt="Featured image of post e-Statのデータの見方" />&lt;p>今回は前回登場したデータの内容を調べてみましょう。&lt;br>
 「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（https://www.e-stat.go.jp/）からデータを見つけてみましょう。&lt;/p>
 &lt;pre tabindex="0">&lt;code>&amp;lt;LIST_INF id=&amp;quot;0003384123&amp;quot;&amp;gt;
 &amp;lt;STAT_NAME code=&amp;quot;00100409&amp;quot;&amp;gt;国民経済計算&amp;lt;/STAT_NAME&amp;gt;
