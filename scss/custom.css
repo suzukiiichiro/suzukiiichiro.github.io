@@ -591,8 +591,7 @@ footer.site-footer {
 #toggle-menu {
   left: 0;
   top: 0;
-  display: block;
-  display: none !important; }
+  display: block; }
   #toggle-menu .hamburger-box {
     width: 24px;
     height: 24px;
