@@ -12,11 +12,13 @@
   --pagenation-text: #999;
   --pagenation-border: #999;
   --pagenation-current: #34495e;
-  --pagenation-border-current: #34495e; }
+  --pagenation-border-current: #34495e;
+  --tag-back: rgba(255,255,255,0.7); }
 
 :root[data-scheme="dark"] {
   --side-background: #303030;
   --side-background: #303030;
+  --tag-back: rgba(0,0,0,0.7);
   --pagenation-text: #999;
   --pagenation-border-current: #FFF; }
 
@@ -120,7 +122,7 @@ footer.site-footer {
       margin-right: 10px; }
 
 .article-title {
-  font-size: 1.8em; }
+  font-size: 1.6em; }
   @media screen and (max-width: 780px) {
     .article-title {
       font-size: 1.2em; } }
@@ -240,18 +242,22 @@ footer.site-footer {
         position: absolute;
         right: 0;
         top: 10px;
-        font-size: 0.7em; }
+        font-size: 0.6em; }
         .article-list article .article-link .article-header .article-category .article-category-item, .article-list article .article-link .article-header .article-tags .article-category-item {
-          padding: 5px;
-          color: #FFF !important;
+          padding: 2px 5px;
+          color: var(--card-text-color);
           position: relative;
           overflow: hidden;
-          z-index: 1; }
+          z-index: 1;
+          display: block;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+          font-weight: bold; }
           .article-list article .article-link .article-header .article-category .article-category-item:after, .article-list article .article-link .article-header .article-tags .article-category-item:after {
             z-index: -1;
             display: block;
             position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: var(--tag-back);
             backdrop-filter: blur(5px);
             content: "";
             top: 0;
@@ -482,7 +488,7 @@ footer.site-footer {
   align-items: flex-end;
   background: no-repeat 104% center;
   padding-right: 0.75em;
-  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%230" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>');
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23999" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>');
   background-size: 1em auto; }
   #categories-menu #link-category:after {
     font-size: 0.7em;
@@ -496,13 +502,19 @@ footer.site-footer {
   margin: 10px;
   display: flex;
   justify-content: flex-end; }
+  @media screen and (max-width: 780px) {
+    #btn-mode {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1; } }
   #btn-mode .icon-tabler-toggle-left {
     fill: #999999; }
   #btn-mode #dark-mode-toggle svg {
     width: 0.9rem; }
-  @media screen and (max-width: 780px) {
-    #btn-mode {
-      display: none; } }
+    @media screen and (max-width: 780px) {
+      #btn-mode #dark-mode-toggle svg {
+        width: 1.1rem; } }
 .left-sidebar {
   background: var(--side-background);
   padding: 15px; }
@@ -603,6 +615,9 @@ footer.site-footer {
       display: none; }
       #toggle-menu .hamburger-box .hamburger-inner:before {
         display: none; }
+
+html[data-scheme="dark"] #toggle-menu .hamburger-box {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFFFFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>'); }
 
 .sidearticle-contents--wrapper {
   padding: 0; }
@@ -710,22 +725,38 @@ footer.site-footer {
     max-width: 80vw;
     height: 80vh;
     overflow-y: scroll;
-    background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    padding: 10px; }
-    #popular-articles--month .contents-area .section-title {
-      color: var(--card-text-color-main);
-      text-align: center;
-      background-color: transparent; }
-    #popular-articles--month .contents-area button {
-      margin: 10px auto;
-      display: block;
-      border: none;
-      padding-left: 1.5em;
-      background: no-repeat 0 center;
-      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%230" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>');
-      background-size: auto 100%; }
+    padding: 20px;
+    background-color: var(--body-background); }
+    @media screen and (max-width: 780px) {
+      #popular-articles--month .contents-area {
+        padding: 10px; } }
+    #popular-articles--month .contents-area header {
+      background-color: var(--body-background);
+      position: sticky;
+      top: 0;
+      z-index: 3; }
+      #popular-articles--month .contents-area header .section-title {
+        color: var(--card-text-color-main);
+        text-align: center;
+        background-color: transparent;
+        font-size: 1.2rem;
+        margin: 10px; }
+      #popular-articles--month .contents-area header button {
+        color: var(--card-text-color-main);
+        margin: 10px auto;
+        display: block;
+        border: none;
+        padding-left: 1.5em;
+        background: no-repeat 0 center;
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%230" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>');
+        background-size: auto 100%; }
+    #popular-articles--month .contents-area article a {
+      padding: 10px; }
+
+html[data-scheme="dark"] #popular-articles--month .contents-area button {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFFFFF" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>'); }
 
 .search-list--form {
   margin: 0;
@@ -746,7 +777,8 @@ footer.site-footer {
       font-size: 1rem;
       padding: 15px;
       border: none;
-      box-shadow: none; }
+      box-shadow: none;
+      background: red; }
 
 .search-list .section-title {
   background: none;
