@@ -674,7 +674,8 @@ footer.site-footer {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity ease-in-out 0.5s; }
+  transition: opacity ease-in-out 0.5s;
+  pointer-events: none; }
   #popular-articles--month:before {
     z-index: -1;
     display: block;
