@@ -1,23 +1,10 @@
 <div class="article-details">
-  {{ if .Params.categories }}
-  <header class="article-header">
-    <div class="article-category">
-      {{ range first 1 (.GetTerms "categories") }}
-      <a href="{{ .RelPermalink }}" {{ with .Params.style }} style="background-color: {{ .background }}; color: {{ .color }};" {{ end }}>
-        {{ .LinkTitle }}
-      </a>
-      {{ end }}
-    </div>
-  </header>
-  {{ end }}
   <h2 class="article-title">
-    <a href="{{ .RelPermalink }}">
-      {{ if .Params.slugTitle }}
-        {{- .Params.slugTitle -}}
-      {{ else }}
-        {{- .Title -}}
-      {{ end }}
-    </a>
+    {{ if .Params.slugTitle }}
+      {{- .Params.slugTitle -}}
+    {{ else }}
+      {{- .Title -}}
+    {{ end }}
   </h2>
   {{ if or (not .Date.IsZero) (.Site.Params.article.readingTime) }}
   <div class="article-time">

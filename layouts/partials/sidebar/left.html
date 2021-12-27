@@ -8,18 +8,18 @@
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
     <h1 class="site-name site-avatar">
-        <a href="{{ .Site.BaseURL | relLangURL }}">
-      {{ if not .local }}
-      <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
-      {{ else }}
-      {{ $avatar := resources.Get (.src) }}
-      {{ if $avatar }}
-      {{ $avatarResized := $avatar.Resize "300x" }}
-      <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
-      {{ else }}
-      {{ errorf "Failed loading avatar from %q" . }}
-      {{ end }}
-      {{ end }}
+      <a href="{{ .Site.BaseURL | relLangURL }}">
+        {{ if not .local }}
+        <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        {{ else }}
+        {{ $avatar := resources.Get (.src) }}
+        {{ if $avatar }}
+        {{ $avatarResized := $avatar.Resize "300x" }}
+        <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        {{ else }}
+        {{ errorf "Failed loading avatar from %q" . }}
+        {{ end }}
+        {{ end }}
       </a>
     </h1>
     {{ end }}
@@ -40,47 +40,58 @@
     </ol>
     {{- end -}}
   </header>
-  <div class="menu menu-section" id="categories-menu">
-    {{ with .Site.GetPage "/categories" }}
-    <a href="{{ .URL | relLangURL }}" id="link-category">カテゴリ</a>
-    {{ end }}
-    <ol class="menu" id="main-cat">
-      {{ range first .Site.Params.widgets.categories.limit .Site.Taxonomies.categories.ByCount }}
-      <li>
-        <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
-          {{ .Page.Title }}
-        </a>
+  <div id="main-menu">
+    <div id="main-menu-area">
+      <nav class="menu menu-section" id="categories-menu">
+        <ul class="menu-list" id="main-cat">
+          <li><a href="{{ .Site.BaseURL | relLangURL }}" id="link-top">TOP</a></li>
+          {{ with .Site.GetPage "/categories" }}
+          <li>
+            <a href="{{ .URL | relLangURL }}" id="link-category">カテゴリ</a>
+            <ul class="menu-list">
+              {{ range first .Site.Params.widgets.categories.limit .Site.Taxonomies.categories.ByCount }}
+              <li>
+                <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
+                  {{ .Page.Title }}
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </li>
+          {{ end }}
+        </ul>
+      </nav>
+      <nav>
+        <ol class="menu menu-section">
+          {{ $currentPage := . }}
+          {{ range .Site.Menus.main }}
+          {{ $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}
+          {{ if ne .URL "/categories/" }}
+          <li {{ if $active }} class='current' {{ end }}>
+            <a href='{{ .URL | relLangURL }}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
+              {{ $icon := default .Pre .Params.Icon }}
+              {{ if .Pre }}
+              {{ warnf "Menu item [%s] is using [pre] field to set icon, please use [params.icon] instead.\nMore information: https://docs.stack.jimmycai.com/configuration/custom-menu.html" .URL }}
+              {{ end }}
+              {{ with $icon }}
+              {{ partial "helper/icon" . }}
+              {{ end }}
+              <span>{{- .Name -}}</span>
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ol>
+      </nav>
+      </div>
+    </div>
+    {{ if (default false .Site.Params.colorScheme.toggle) }}
+    <div id="btn-mode">
+      <li id="dark-mode-toggle">
+        {{ partial "helper/icon" "toggle-left" }}
+        {{ partial "helper/icon" "toggle-right" }}
+        <!-- <span>{{ T "darkMode" }}</span> -->
       </li>
-      {{ end }}
-    </ol>
-  </div>
-  <ol class="menu menu-section" id="main-menu">
-    {{ $currentPage := . }}
-    {{ range .Site.Menus.main }}
-    {{ $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}
-    {{ if ne .Page.URL "/categories/" }}
-    <li {{ if $active }} class='current' {{ end }}>
-      <a href='{{ .URL | relLangURL }}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
-        {{ $icon := default .Pre .Params.Icon }}
-        {{ if .Pre }}
-        {{ warnf "Menu item [%s] is using [pre] field to set icon, please use [params.icon] instead.\nMore information: https://docs.stack.jimmycai.com/configuration/custom-menu.html" .URL }}
-        {{ end }}
-        {{ with $icon }}
-        {{ partial "helper/icon" . }}
-        {{ end }}
-        <span>{{- .Name -}}</span>
-      </a>
-    </li>
+    </div>
     {{ end }}
-    {{ end }}
-  </ol>
-{{ if (default false .Site.Params.colorScheme.toggle) }}
-  <div id="btn-mode">
-    <li id="dark-mode-toggle">
-      {{ partial "helper/icon" "toggle-left" }}
-      {{ partial "helper/icon" "toggle-right" }}
-      <!-- <span>{{ T "darkMode" }}</span> -->
-    </li>
-  </div>
-{{ end }}
 </aside>

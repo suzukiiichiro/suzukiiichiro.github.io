@@ -1,0 +1,17 @@
+{{ $json := getJSON "https://script.google.com/macros/s/AKfycbxqc0iU9zVEirfprKqut3Hgb1a-p4g88BWuj2Avk6Vud2XWJRYvdLl8F7ZgnOQUrt2UFA/exec?s=month" }}
+
+<aside class="widget archives sidearticle-contents--wrapper" id="popular-articles--month">
+  <div class="contents-area">
+    <button type="button" onclick="document.body.classList.remove('show-menu');">CLOSE</button>
+    <h2 class="section-title">最近人気の記事</h2>
+      <div class="sidearticle-contents">
+        <div class="flex article-list--tile">
+          {{ $page := .Site.Pages }}
+          {{ range first .Site.Params.widgets.populerArticles.limit $json }}
+            {{ $article := index (where $page ".RelPermalink" "eq" .link ) 0  }}
+            {{ partial "article-list/tile" (dict "context" $article "size" "400x238" "Type" "articleList") }}
+          {{ end }}
+      </div>
+    </div>
+  </div>
+</aside>

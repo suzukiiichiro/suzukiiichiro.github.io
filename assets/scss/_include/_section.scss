@@ -1,0 +1,17 @@
+.section-card {
+  .section-term {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    .section-count {
+      margin-left: 15px;
+      font-size: 0.7em;
+      &:before {
+        content: "-";
+        margin-right: 10px;
+      }
+    }
+  }
+}

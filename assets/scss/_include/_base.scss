@@ -2,6 +2,9 @@ html {
   font-size: 95%;
   line-height: 1.6;
   // overflow-y: scroll;
+  @include mq(smp) {
+    font-size: 16px;
+  }
 }
 body {
   font-size: 100%;

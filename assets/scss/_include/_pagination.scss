@@ -1,3 +1,21 @@
 .pagination {
-  
+  margin: 20px 0 40px;
+  justify-content: center;
+  box-shadow: none;
+  background-color: transparent;
+  .page-link {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid var(--pagenation-border);
+    color: var(--pagenation-text);
+    ~ .page-link {
+      margin-left: 10px;
+    }
+    &.current {
+      color: #FFF;
+      background-color: var(--pagenation-current);
+      border-color: var( --pagenation-border-current);
+    }
+  }
 }

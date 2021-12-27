@@ -55,8 +55,8 @@ params:
         # showYear: true
 
     dateFormat:
-        published: 2006-01-02
-        lastUpdated: 2006-01-02
+        published: 2006.01.02
+        lastUpdated: 2006.01.02
 
     sidebar:
 #         emoji: 🍥
@@ -151,20 +151,20 @@ params:
     widgets:
         enabled:
             - search
+            - popular-articles
             - archives
             - tag-cloud
-            # - popular-articles
 
 #         archives:
 #             limit: 5
 
-#         tagCloud:
-#             limit: 10
+        tagCloud:
+            limit: 20
         categories:
             limit: 10
 
-        # populer-articles:
-        #     limit: 10
+        populerArticles:
+            limit: 10
 
 #     opengraph:
 #         twitter:
