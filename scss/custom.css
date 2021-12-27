@@ -56,7 +56,8 @@ body {
       --left-sidebar-max-width: 15%;
       --right-sidebar-max-width: 20%; } }
 .main-container {
-  padding: 0; }
+  padding: 0;
+  min-height: calc(var(--vh, 1vh) * 100); }
   @media (min-width: 768px) {
     .main-container {
       padding: 0; } }
