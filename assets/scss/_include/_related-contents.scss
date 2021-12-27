@@ -111,6 +111,7 @@
   justify-content: center;
   opacity: 0;
   transition: opacity ease-in-out 0.5s;
+  pointer-events: none;
 
   &:before {
     z-index: -1;
