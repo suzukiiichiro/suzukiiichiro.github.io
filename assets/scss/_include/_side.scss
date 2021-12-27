@@ -72,21 +72,28 @@
     width: 100%;
     height: auto;
     padding: 10px;
-    .site-info {
-      padding: 0;
-      .site-avatar {
+  }
+  .site-info {
+    padding: 0;
+    .site-avatar {
+      width: 60px;
+      height: inherit;
+      @include mq(smp) {
         width: 30px;
-        height: inherit;
         font-size: 1rem;
-        .site-logo {
-          width: 100%;
-          height: auto;
+        .site-description {
+          margin: 0;
+          font-size: 0.6em;
         }
       }
-      .site-description {
-        margin: 0;
-        font-size: 0.6em;
+      .site-logo {
+        border-radius: 8px;
+        width: 100%;
+        height: auto;
       }
+    }
+    .site-description {
+      margin: 0 0 10px;
     }
   }
 }
@@ -169,6 +176,7 @@
 #toggle-menu {
   left: 0;
   top: 0;
+  display: block;
   .hamburger-box {
     width: 24px;
     height: 24px;
