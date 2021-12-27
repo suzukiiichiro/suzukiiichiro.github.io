@@ -27,7 +27,8 @@ html {
     html {
       font-size: 16px; } }
 body {
-  font-size: 100%; }
+  font-size: 100%;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
   body.show-menu {
     position: fixed;
     width: 100%;
