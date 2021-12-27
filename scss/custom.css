@@ -576,7 +576,8 @@ footer.site-footer {
     width: inherit;
     display: flex;
     justify-content: flex-start;
-    align-items: center; } }
+    align-items: center;
+    font-size: 1em !important; } }
 
 #toggle-menu {
   left: 0;
