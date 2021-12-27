@@ -1,6 +1,11 @@
 name: Hugo
 
-on: "push"
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '2,32 * * * *'
 
 jobs:
   gh-pages:
