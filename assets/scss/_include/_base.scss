@@ -55,6 +55,7 @@ body {
 
 .main-container {
   padding: 0;
+  min-height: calc(var(--vh, 1vh) * 100);
   @include respond("md") {
     padding: 0;
   }

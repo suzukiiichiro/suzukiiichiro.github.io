@@ -37,3 +37,13 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin="anonymous"></script>
 <!-- /Google Adsence -->
 <script src="{{ (resources.Get "js/Custom.js").RelPermalink }}"></script>
+
+
+<script>
+let setFillHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+window.addEventListener('resize', setFillHeight);
+setFillHeight();
+</script>
