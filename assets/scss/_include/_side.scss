@@ -36,7 +36,7 @@
     align-items: flex-end;
     background: no-repeat 104% center;
     padding-right: 0.75em;
-    @include icon("M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z");
+    @include icon("M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z", "999");
     background-size: 1em auto;
     &:after {
       font-size: 0.7em;
@@ -52,16 +52,22 @@
   margin: 10px;
   display: flex;
   justify-content: flex-end;
+  @include mq(smp) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
   .icon-tabler-toggle-left {
     fill: #999999;
   }
   #dark-mode-toggle {
     svg {
       width: 0.9rem;
+      @include mq(smp) {
+        width: 1.1rem;
+      }
     }
-  }
-  @include mq(smp) {
-    display: none;
   }
 }
 .left-sidebar {
@@ -188,6 +194,16 @@
       display: none;
       &:before {
         display: none;
+      }
+    }
+  }
+}
+
+html {
+  &[data-scheme="dark"] {
+    #toggle-menu {
+      .hamburger-box {
+        @include icon("M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z", "FFFFFF");
       }
     }
   }

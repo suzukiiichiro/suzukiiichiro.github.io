@@ -157,7 +157,6 @@ params:
 
 #         archives:
 #             limit: 5
-
         tagCloud:
             limit: 20
         categories:

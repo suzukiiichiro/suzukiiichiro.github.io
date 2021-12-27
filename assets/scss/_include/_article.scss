@@ -1,5 +1,5 @@
 .article-title {
-  font-size: 1.8em;
+  font-size: 1.6em;
   @include mq(smp) {
     font-size: 1.2em;
   }
@@ -160,18 +160,22 @@
           position: absolute;
           right: 0;
           top: 10px;
-          font-size: 0.7em;
+          font-size: 0.6em;
           .article-category-item {
-            padding: 5px;
-            color: #FFF !important;
+            padding: 2px 5px;
+            color: var(--card-text-color);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            display: block;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+            font-weight: bold;
             &:after {
               z-index: -1;
               display: block;
               position: absolute;
-              background-color: rgba(0,0,0,0.7);
+              background-color: var(--tag-back);
               backdrop-filter: blur(5px);
               content: "";
               top: 0;
