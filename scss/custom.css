@@ -84,11 +84,14 @@ body {
   .amazon-box a {
     display: flex;
     border-radius: 4px;
-    border: 1px solid #DDD;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px 10px 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow ease 0.3s;
     align-items: center; }
+    @media screen and (max-width: 640px) {
+      .amazon-box a {
+        padding-bottom: 25px; } }
     .amazon-box a .amazon-image {
       width: 30%; }
       .amazon-box a .amazon-image img {
@@ -109,6 +112,8 @@ body {
         line-height: 1.4;
         margin: 0 0 5px; }
       .amazon-box a .amazon-info p {
+        padding: 0;
+        margin: 0;
         font-size: 0.7em;
         line-height: 1.6;
         color: var(--card-text-color-secondary); }
@@ -122,6 +127,9 @@ body {
         font-weight: bold;
         box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
         transition: box-shadow ease 0.3s; }
+        @media screen and (max-width: 640px) {
+          .amazon-box a .amazon-info .link {
+            margin-top: 10px; } }
     .amazon-box a:hover {
       box-shadow: 0 0 0 transparent; }
       .amazon-box a:hover .amazon-info .link {
@@ -131,7 +139,8 @@ body {
     font-size: 0.7em;
     position: absolute;
     bottom: 1px;
-    right: 10px; }
+    right: 10px;
+    opacity: 0.4; }
 
 footer.site-footer {
   background-color: #34495e;
@@ -484,18 +493,17 @@ footer.site-footer {
       border-bottom-left-radius: 2px;
       border-bottom-right-radius: 2px;
       border: 1px solid var(--card-separator-color); }
-      .tableOfContents .widget--toc #TableOfContents ul {
+      .tableOfContents .widget--toc #TableOfContents ul, .tableOfContents .widget--toc #TableOfContents ol {
         margin: 0;
         padding: 20px 20px 15px;
-        list-style: decimal inside;
         font-size: 1rem;
         line-height: 1.3; }
-        .tableOfContents .widget--toc #TableOfContents ul li {
+        .tableOfContents .widget--toc #TableOfContents ul li, .tableOfContents .widget--toc #TableOfContents ol li {
           padding: 5px;
           margin: 0; }
-          .tableOfContents .widget--toc #TableOfContents ul li a {
+          .tableOfContents .widget--toc #TableOfContents ul li a, .tableOfContents .widget--toc #TableOfContents ol li a {
             padding: 2px 8px; }
-          .tableOfContents .widget--toc #TableOfContents ul li ul {
+          .tableOfContents .widget--toc #TableOfContents ul li ul, .tableOfContents .widget--toc #TableOfContents ol li ul {
             padding: 10px 1.5em; }
 
 .archives-date.section-title {
@@ -648,8 +656,18 @@ footer.site-footer {
 .left-sidebar {
   background: var(--side-background);
   padding: 15px; }
+  @media screen and (min-width: 641px) and (max-width: 768px) {
+    .left-sidebar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); } }
   @media screen and (max-width: 640px) {
     .left-sidebar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
       max-width: inherit !important;
       width: 100%;
       height: auto;
@@ -659,6 +677,9 @@ footer.site-footer {
     .left-sidebar .site-info .site-avatar {
       width: 60px;
       height: inherit; }
+      @media screen and (min-width: 641px) and (max-width: 768px) {
+        .left-sidebar .site-info .site-avatar {
+          width: 40px; } }
       @media screen and (max-width: 640px) {
         .left-sidebar .site-info .site-avatar {
           width: 30px;
