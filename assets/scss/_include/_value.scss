@@ -52,13 +52,13 @@ $breakpoint-up: (
   --pagenation-current: #34495e;
   --pagenation-border-current: #34495e;
       
-  --tag-back: rgba(255,255,255,0.7);
+  --tag-back: rgba(255,255,255,0.8);
 }
 
 :root[data-scheme="dark"] {
   --side-background: #303030;
   --side-background: #303030;
-  --tag-back: rgba(0,0,0,0.7);
+  --tag-back: rgba(0,0,0,0.8);
 
   --pagenation-text: #999;
   --pagenation-border-current: #FFF;
