@@ -1,19 +1,15 @@
-<div class="amazon-box">
-  <div class="three columns amazon-image">
-    <a href="{{ .Get "url" }}" target="_blank">
+<aside class="amazon-box">
+  <a href="{{ .Get "url" }}" target="_blank">
+    <div class="columns amazon-image">
       <img border="0" src="{{ .Get "imageUrl" }}">
-    </a>
-  </div>
-  <div class="nine columns amazon-info">
-    <a href="{{ .Get "url" }}" target="_blank">
-      <p class="amazon-name">{{ .Get "title" }}</p>
-    </a>
-    <div>
-    {{ .Get "summary" }}
     </div>
-    <form>
-      <input type="button" value="amazon" onClick="window.open('{{ .Get "url" }}','null')">
-    </form>
-  </div>
-  <br>
-</div>
+    <div class="columns amazon-info">
+      <h2 class="amazon-name">{{ .Get "title" }}</h2>
+      <p>
+        {{ .Get "summary" }}
+      </p>
+      <span class="link">Amazonで詳細を見る</span>
+    </div>
+  </a>
+  <small>Amazon.co.jpアソシエイトを使用</small>
+</aside>

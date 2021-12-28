@@ -41,9 +41,26 @@
 
 <script>
 let setFillHeight = () => {
-  const vh = window.innerHeight * 0.01;
+  let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
 window.addEventListener('resize', setFillHeight);
 setFillHeight();
+
+document.addEventListener('DOMContentLoaded', () => {
+  let code = document.getElementsByTagName('code');
+  Array.from(code).forEach(el => {
+    if (el.className) {
+      let s = el.className.split(':');
+      let highlightLang = s[0];
+      let filename = s[1];
+      if (filename) {
+        el.classList.remove(el.className);
+        el.classList.add(highlightLang);
+        el.parentElement.setAttribute('data-lang', filename);
+        el.parentElement.classList.add('code-block-header');
+      }
+    }
+  });
+});
 </script>

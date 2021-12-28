@@ -235,14 +235,15 @@ related:
         - name: categories
           weight: 200
 
-# markup:
-#     goldmark:
-#         renderer:
-#             ## Set to true if you have HTML content inside Markdown
-#             unsafe: false
-#     tableOfContents:
-#         endLevel: 4
-#         ordered: true
-#         startLevel: 2
-#     highlight:
-#         noClasses: false
+markup:
+    goldmark:
+        renderer:
+            ## Set to true if you have HTML content inside Markdown
+            unsafe: true
+            hardWraps: true
+    tableOfContents:
+        endLevel: 4
+        ordered: true
+        startLevel: 2
+    highlight:
+        noClasses: false
