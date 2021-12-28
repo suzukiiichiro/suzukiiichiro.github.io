@@ -375,10 +375,9 @@
       border-bottom-left-radius: 2px;
       border-bottom-right-radius: 2px;
       border: 1px solid var(--card-separator-color);
-      ul {
+      ul, ol {
         margin: 0;
         padding: 20px 20px 15px;
-        list-style: decimal inside;
         font-size: 1rem;
         line-height: 1.3;
         li {

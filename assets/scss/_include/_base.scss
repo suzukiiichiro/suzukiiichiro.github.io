@@ -88,11 +88,14 @@ body {
   a {
     display: flex;
     border-radius: 4px;
-    border: 1px solid #DDD;
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 10px 10px 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: box-shadow ease 0.3s;
     align-items: center;
+    @include mq(smp) {
+      padding-bottom: 25px;
+    }
     .amazon-image {
       width: 30%;
       img {
@@ -116,6 +119,8 @@ body {
         margin: 0 0 5px;
       }
       p {
+        padding: 0;
+        margin: 0;
         font-size: 0.7em;
         line-height: 1.6;
         color: var(--card-text-color-secondary);
@@ -130,6 +135,9 @@ body {
         font-weight: bold;
         box-shadow: 0 2px 1px rgba(0,0,0,0.1);
         transition: box-shadow ease 0.3s;
+        @include mq(smp) {
+          margin-top: 10px;
+        }
       }
     }
     &:hover {
@@ -147,5 +155,6 @@ body {
     position: absolute;
     bottom: 1px;
     right: 10px;
+    opacity: 0.4;
   }
 }
