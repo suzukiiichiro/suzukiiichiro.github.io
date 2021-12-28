@@ -267,7 +267,8 @@ footer.site-footer {
         position: absolute;
         right: 0;
         top: 10px;
-        font-size: 0.6em; }
+        font-size: 0.6em;
+        margin: 0; }
         .article-list article .article-link .article-header .article-category .article-category-item, .article-list article .article-link .article-header .article-tags .article-category-item {
           padding: 2px 5px;
           color: var(--card-text-color);
@@ -856,8 +857,7 @@ html[data-scheme="dark"] #popular-articles--month .contents-area button {
       font-size: 1rem;
       padding: 15px;
       border: none;
-      box-shadow: none;
-      background: red; }
+      box-shadow: none; }
 
 .search-list .section-title {
   background: none;
