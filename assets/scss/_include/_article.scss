@@ -137,6 +137,9 @@
       display: flex;
       flex-direction: row;
       z-index: 0;
+      @include mq(tab) {
+        flex-direction: column;
+      }
       .article-header {
         margin: 0;
         position: relative;
@@ -148,6 +151,10 @@
           align-items: center;
           justify-content: center;
           border: 1px solid #EFEFEF;
+          @include mq(tab) {
+            width: 100%;
+            height: calc(100% / 1.68);
+          }
           @include mq(smp) {
             width: 35vw;
             height: calc(35vw / 1.68);
@@ -190,6 +197,9 @@
         padding: 0;
         margin-left: 15px;
         flex: 1;
+        @include mq(tab) {
+          margin: 10px 0 0;
+        }
         .article-title {
           font-size: 1rem;
           line-height: 1.4;

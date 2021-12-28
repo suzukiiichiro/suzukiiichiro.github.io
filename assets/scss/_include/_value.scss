@@ -17,8 +17,8 @@ $breakpoints: (
 //メディアクエリ
 $sizes: smp, tab;  //冒頭に使うサイズを明記するとわかりやすい
 $breakpoint-up: ( 
-  'smp': 'screen and (max-width: 780px)',
-  'tab': 'screen and (max-width: 1024px)',
+  'smp': 'screen and (max-width: 640px)',
+  'tab': 'screen and (min-width: 641px) and (max-width: 768px)',
 ) !default;
 //mixinを定義（初期値はmd）
 @mixin mq($breakpoint: md) {
