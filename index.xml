@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 26 Dec 2021 21:54:39 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</title><link>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</link><pubDate>Sun, 26 Dec 2021 21:54:39 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.jpg" alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" />&lt;p>私のe-Statでのデータマイニングの現在の目的は以下の通りです&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 28 Dec 2021 12:07:19 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Pagesを使って無料でSSL付きのサイトを公開</title><link>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</link><pubDate>Tue, 28 Dec 2021 12:07:19 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg" alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" />&lt;p>デザイナーでもできる初めてのHugoの2回目になります。&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21/" >前回（デザイナーでもできる初めてのHugo #01）&lt;/a>はHugoのインストールから公開の方法までを説明しました。&lt;br>
+今回は前回作成したページをGitHub Pagesを使って公開してみたいと思います。&lt;/p>
+&lt;h2 id="github-pages用の設定ファイルを作成">GitHub Pages用の設定ファイルを作成&lt;/h2>
+&lt;p>GitHub PagesはGitHubにあるコンテンツを静的ページを公開する機能です。&lt;br>
+SSLまでついているので、非常に便利です。&lt;/p>
+&lt;p>公開用のファイルは&lt;code>.github/workflows/gh-pages.yml&lt;/code>というYAML形式のファイルになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml:.github/workflows/gh-pages.yml" data-lang="yaml:.github/workflows/gh-pages.yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># schedule:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># - cron: &amp;#39;*/10 * * * *&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">gh-pages&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Checkout&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">persist-credentials&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># https://github.com/marketplace/actions/github-pages-action&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">gh-pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>name&lt;/strong>はGitHubでのActionsに表示される名前になります。&lt;br>
+今回は公開用として&lt;strong>gh-pages&lt;/strong>というブランチにわけています。ここおらへんはお好みで設定して下さい。&lt;br>
+hugoでテーマを使っている場合は&lt;strong>submodules: true&lt;/strong>とする必要があります。&lt;br>
+また、Hugoで更新日をGitの日付と合わせたい場合は&lt;strong>fetch-depth: 0&lt;/strong>として、Gitの履歴を取得するようにしましょう。&lt;/p>
+&lt;h2 id="github-pagesの設定">GitHub Pagesの設定&lt;/h2>
+&lt;p>GitHub PagesのURLは&lt;code>https://ユーザまたは組織名.github.io/リポジトリ名&lt;/code>となります。&lt;br>
+GitHubでリポジトリを作成する際に「ユーザまたは組織名.github.io」とすると「https://ユーザまたは組織名.github.io」とすることができます。&lt;/p>
+&lt;p>まずは先程のファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。&lt;br>
+その後に、setings &amp;gt; Pages にでGitHub Pagesの設定を行います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 162;
+flex-basis: 390px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg" data-size="980x603">
+&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg"
+width="980"
+height="603"
+srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="GitHub Pagesの設定">
+&lt;/a>
+&lt;figcaption>GitHub Pagesの設定&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>Your GitHub Pages site is currently being built from the gh-pages branch&lt;br>
+にあるBranchをgh-pagesに変更します。&lt;br>
+設定は以上です。&lt;/p>
+&lt;p>Hugoの初期設定であれば&lt;code>publishDir: public&lt;/code>となっているので、GitHub Pagesではpublicがルートディレクトリとして公開されます。&lt;br>
+.gitignoreに「public」を除外するようにしておきましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-:.gitignore" data-lang=":.gitignore">/public
+/resources
+&lt;/code>&lt;/pre>&lt;p>最後に設定したURLにアクセスするとサイトが確認できるはずです。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>GitHub Pagesを使えば、難しいサーバの設定などをすることなく、無料でSSL付きのサイトを公開することが可能です。&lt;br>
+いくつかの制限はありますが、すごく便利な機能なのでみなさんもぜひ使ってみてはいかがでしょうか。&lt;/p>
+&lt;p>公開する際はパスワードなどの情報も一緒にアップしないようにしてください。&lt;/p>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B07LBSWJNP&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=fd3f2918d16f32f53feccf492263133a" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B07LBSWJNP&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">いちばんやさしいGit&amp;amp;GitHubの教本 人気講師が教えるバージョン管理＆共有入門 「いちばんやさしい教本」シリーズ&lt;/h2>
+&lt;p>
+実際のワークフローをイメージしながら
+実践的なGit/GitHubの使い方が身につく「いちばんやさしい」入門書です。
+前半は、手元のパソコンでファイルを実際にバージョン管理しながら、
+Gitの基本的な使い方を解説。
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/Web%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEGitHub%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E5%8A%B9%E7%8E%87%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96%E3%81%99%E3%82%8B%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BA%E3%83%84%E3%83%BC%E3%83%AB-%E5%A1%A9%E8%B0%B7-%E5%95%93/dp/4844337009?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;amp;crid=3C1ZNYZB4N0C3&amp;amp;keywords=github&amp;amp;qid=1640665205&amp;amp;sprefix=github%2Caps%2C284&amp;amp;sr=8-8&amp;amp;linkCode=ll1&amp;amp;tag=nlpqueens-22&amp;amp;linkId=65876fc9d77e695d11f02ec867bc8c4a&amp;amp;language=ja_JP&amp;amp;ref_=as_li_ss_tl" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;ASIN=4844337009&amp;amp;Format=_SL250_&amp;amp;ID=AsinImage&amp;amp;MarketPlace=JP&amp;amp;ServiceVersion=20070822&amp;amp;WS=1&amp;amp;tag=nlpqueens-22&amp;amp;language=ja_JP">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">Web制作者のためのGitHubの教科書 チームの効率を最大化する共同開発ツール&lt;/h2>
+&lt;p>
+そろそろ「プルリ」しませんか?しくみを理解して使えば怖くない。リポジトリの作成から複数デザインの提示、「Pull Request」を使った分担作業まで、Webサイト制作を例に実践的なワークフローを身に付ける。
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</title><link>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</link><pubDate>Sun, 26 Dec 2021 21:54:39 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.jpg" alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" />&lt;p>私のe-Statでのデータマイニングの現在の目的は以下の通りです&lt;br>
 大量の政府公開データの中から&lt;br>
 ①面白そうなデータをピックアップする&lt;br>
 ②データをわかりやすくサマライズする&lt;br>
@@ -125,8 +235,8 @@ alt="統計表">
 &lt;p>単にハーゲンダッツの価格ってだけだと少しパンチ力弱いかもしれませんね。。。&lt;/p>
 &lt;p>個人的には明治のスーパーカップが１位でジャンボモナカが２位でとかアイスクリーム売れ筋ランキングとかの方が楽しいのですが、政府はそこまで調べてくれないですよね。&lt;/p>
 &lt;h2 id="小売統計調査とは">小売統計調査とは&lt;/h2>
-&lt;p>小売物価統計調査はお米の価格から葬儀代まで約８００の小売価格を調査したデータ
-調査結果は、年金等の給付見直しの際の基礎資料や、公共料金の上限値を決める際の資料として、幅広く利用されているそうです。
+&lt;p>小売物価統計調査はお米の価格から葬儀代まで約８００の小売価格を調査したデータ&lt;br>
+調査結果は、年金等の給付見直しの際の基礎資料や、公共料金の上限値を決める際の資料として、幅広く利用されているそうです。&lt;br>
 アイスクリームは約８００ある中の項目の一つです。&lt;/p>
 &lt;p>&lt;figure
 class="gallery-image"
@@ -215,7 +325,7 @@ loading="lazy"
 alt="統計表情報">
 &lt;/a>
 &lt;figcaption>統計表情報&lt;/figcaption>
-&lt;/figure>
+&lt;/figure>&lt;br>
 下段が「メタ情報取得」の内容見たいです。&lt;br>
 &lt;figure
 class="gallery-image"
@@ -268,7 +378,7 @@ loading="lazy"
 alt="API">
 &lt;/a>
 &lt;figcaption>API&lt;/figcaption>
-&lt;/figure>
+&lt;/figure>&lt;br>
 フォーマットもXML,JSON,CSVが選べますね。&lt;br>
 私はCSVの方が扱いやすいのでこれからはCSVでダウンロードすることにします。&lt;/p>
 &lt;p>appIdがカラに空になっているので追加してcurlで叩くだけでいいですね。至れり尽くりです。&lt;/p>
@@ -341,25 +451,21 @@ alt="ランキング">
 　　興味深い列情報に絞りたい&lt;br>
 　　前年度から５倍とか急激に変化した部分をピックアップして伝えたい&lt;br>
 という視点からe-Statを調査していきたいと思います。&lt;/p></description></item><item><title>「UNIXという考え方―その設計思想と哲学」　メモ</title><link>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</link><pubDate>Sat, 25 Dec 2021 09:25:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" />&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
-&lt;div class="amazon-box">
-&lt;div class="three columns amazon-image">
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4274064069/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4274064069&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=d045d50d407b75e179a1c786ee85e152" target="_blank">
+&lt;div class="columns amazon-image">
 &lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4274064069&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
-&lt;/a>
 &lt;/div>
-&lt;div class="nine columns amazon-info">
-&lt;a href="https://www.amazon.co.jp/gp/product/4274064069/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4274064069&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=d045d50d407b75e179a1c786ee85e152" target="_blank">
-&lt;p class="amazon-name">UNIXという考え方―その設計思想と哲学&lt;/p>
-&lt;/a>
-&lt;div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXという考え方―その設計思想と哲学&lt;/h2>
+&lt;p>
 UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
-&lt;form>
-&lt;input type="button" value="amazon" onClick="window.open('https:\/\/www.amazon.co.jp\/gp\/product\/4274064069\/ref=as_li_tl?ie=UTF8\u0026camp=247\u0026creative=1211\u0026creativeASIN=4274064069\u0026linkCode=as2\u0026tag=nlpqueens-22\u0026linkId=d045d50d407b75e179a1c786ee85e152','null')">
-&lt;/form>
-&lt;/div>
-&lt;br>
-&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
 &lt;h2 id="あらすじ">あらすじ&lt;/h2>
 &lt;p>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。&lt;/p>
 &lt;p>そもそもUNIXはMulticsという巨大なOSの開発から生まれたものだ。あまりに巨大なMulticsはその複雑さゆえに開発は遅々として進まず、その反省からケン・トンプソンが作ったのがUNIXの初めとされる。その後デニス・リッチーら多数の開発者が携わり、UNIXは発展した。本書はこのUNIXに込められた「思想と哲学」を抽出し、数々のエピソードとともにUNIXの特徴を浮き彫りにしていく。&lt;/p>
@@ -371,7 +477,7 @@ UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Sola
 &lt;p>　解決方法は皆さんにお任せする。&lt;/p>
 &lt;h2 id="１小さいものは美しい">■１．小さいものは美しい&lt;/h2>
 &lt;h3 id="抜粋">抜粋&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　　小さなプログラムはわかりやすい
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　　小さなプログラムはわかりやすい
 　　小さなプログラムは保守しやすい
 　　小さなプログラムはシステムリソースに易しい
 　　小さなプログラムは他のツールと組み合わせやすい
@@ -470,7 +576,7 @@ a) 新しい機能をいくつか付け加えようとする
 　　　フォルクスワーゲンのビートルに２０人ほど詰め込むようなものだった。
 　　　そして保守担当者にとっては究極の悪夢でもあった。
 &lt;/code>&lt;/pre>&lt;h3 id="エッセンス-3">エッセンス&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　bashとawkとsed
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　bashとawkとsed
 　　「最も効率の良い方法は、
 　　　　ほとんどの場合「移植性」に欠ける。」
 　　「移植か死か。優れたソフトウェアは移植され成長し、
@@ -520,19 +626,19 @@ a) 新しい機能をいくつか付け加えようとする
 　　　　 9.353
 　　処理をパイプでつなぎ処理全体を一行で完結させる。
 　　「ひとつのことをうまくやる」の良い事例だ。
-&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　　&lt;span style="color:#66d9ef">function&lt;/span> sh_func_getTitle&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
-　　 TITLE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>echo &lt;span style="color:#e6db74">${&lt;/span>URLGETOPT&lt;span style="color:#e6db74">}&lt;/span> | &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 &lt;span style="color:#66d9ef">while&lt;/span> read line ;&lt;span style="color:#66d9ef">do&lt;/span>
-　　 &lt;span style="color:#66d9ef">if&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | grep -i &lt;span style="color:#e6db74">&amp;#34;title=&amp;#34;&lt;/span> &amp;gt; /dev/null; &lt;span style="color:#66d9ef">then&lt;/span>
-　　 echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 sed -e &lt;span style="color:#e6db74">&amp;#34;s/^.*title=\x27//g&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 -e &lt;span style="color:#e6db74">&amp;#34;s/\x27.*&lt;/span>$&lt;span style="color:#e6db74">//g&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 -e &lt;span style="color:#e6db74">&amp;#34;s/\r//g&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 -e &lt;span style="color:#e6db74">&amp;#34;s/&amp;lt;[^&amp;gt;]*&amp;gt;//g&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;span style="color:#ae81ff">&lt;/span>　　 -e &lt;span style="color:#e6db74">&amp;#34;s/^[●○■□△▽]//g&amp;#34;&lt;/span>;
-　　 &lt;span style="color:#66d9ef">fi&lt;/span>
-　　 &lt;span style="color:#66d9ef">done)&lt;/span>;
-　　&lt;span style="color:#f92672">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　　&lt;span class="k">function&lt;/span> sh_func_getTitle&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+　　 &lt;span class="nv">TITLE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">URLGETOPT&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="p">|&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 &lt;span class="k">while&lt;/span> &lt;span class="nb">read&lt;/span> line &lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+　　 &lt;span class="k">if&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$line&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> grep -i &lt;span class="s2">&amp;#34;title=&amp;#34;&lt;/span> &amp;gt; /dev/null&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+　　 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$line&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 sed -e &lt;span class="s2">&amp;#34;s/^.*title=\x27//g&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 -e &lt;span class="s2">&amp;#34;s/\x27.*&lt;/span>$&lt;span class="s2">//g&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 -e &lt;span class="s2">&amp;#34;s/\r//g&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 -e &lt;span class="s2">&amp;#34;s/&amp;lt;[^&amp;gt;]*&amp;gt;//g&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;span class="se">&lt;/span>　　 -e &lt;span class="s2">&amp;#34;s/^[●○■□△▽]//g&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+　　 &lt;span class="k">fi&lt;/span>
+　　 &lt;span class="k">done)&lt;/span>&lt;span class="p">;&lt;/span>
+　　&lt;span class="o">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="エッセンス-6">エッセンス&lt;/h3>
 &lt;pre tabindex="0">&lt;code>　　「私は人生で二度しか奇跡を見た事がない。
 　　　　一つは核融合、もう一つは複利だ
@@ -540,40 +646,40 @@ a) 新しい機能をいくつか付け加えようとする
 　　　　　　やがて奇跡的な規模に達する。」
 &lt;/code>&lt;/pre>&lt;h2 id="８全てのプログラムをフィルタとして設計する">■８．全てのプログラムをフィルタとして設計する&lt;/h2>
 &lt;h3 id="抜粋-7">抜粋&lt;/h3>
-&lt;p>　　メソッド間の入力をstdin、出力はstdoutを使用する
+&lt;p>　　メソッド間の入力をstdin、出力はstdoutを使用する&lt;br>
 　　オンメモリでコマンドフィルタとして稼働する。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　&lt;span style="color:#66d9ef">function&lt;/span> trim&lt;span style="color:#f92672">(){&lt;/span>
-　　&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -p /dev/stdin &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
-　 cat - ;
-　　&lt;span style="color:#66d9ef">else&lt;/span>
-echo -n ;
-　　&lt;span style="color:#66d9ef">fi&lt;/span> | sed -e &lt;span style="color:#e6db74">&amp;#39;s/^ *//g&amp;#39;&lt;/span> -e &lt;span style="color:#e6db74">&amp;#39;s/ *$//g&amp;#39;&lt;/span>
-　&lt;span style="color:#f92672">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　&lt;span class="k">function&lt;/span> trim&lt;span class="o">(){&lt;/span>
+　　&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -p /dev/stdin &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+　 cat - &lt;span class="p">;&lt;/span>
+　　&lt;span class="k">else&lt;/span>
+&lt;span class="nb">echo&lt;/span> -n &lt;span class="p">;&lt;/span>
+　　&lt;span class="k">fi&lt;/span> &lt;span class="p">|&lt;/span> sed -e &lt;span class="s1">&amp;#39;s/^ *//g&amp;#39;&lt;/span> -e &lt;span class="s1">&amp;#39;s/ *$//g&amp;#39;&lt;/span>
+　&lt;span class="o">}&lt;/span>
 　　実行結果
-echo &lt;span style="color:#e6db74">&amp;#34; ほげ &amp;#34;&lt;/span> | trim ;
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34; ほげ &amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> trim &lt;span class="p">;&lt;/span>
 ほげ
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>　　以下でも良い。　　&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　&lt;span style="color:#66d9ef">function&lt;/span> trim&lt;span style="color:#f92672">(){&lt;/span>
-　　awk &lt;span style="color:#e6db74">&amp;#39;{ print $1; }&amp;#39;&lt;/span> | sed -e &lt;span style="color:#e6db74">&amp;#39;s/^ *//g&amp;#39;&lt;/span> -e &lt;span style="color:#e6db74">&amp;#39;s/ *$//g&amp;#39;&lt;/span> &amp;lt;/dev/stdin
-　&lt;span style="color:#f92672">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　&lt;span class="k">function&lt;/span> trim&lt;span class="o">(){&lt;/span>
+　　awk &lt;span class="s1">&amp;#39;{ print $1; }&amp;#39;&lt;/span> &lt;span class="p">|&lt;/span> sed -e &lt;span class="s1">&amp;#39;s/^ *//g&amp;#39;&lt;/span> -e &lt;span class="s1">&amp;#39;s/ *$//g&amp;#39;&lt;/span> &amp;lt;/dev/stdin
+　&lt;span class="o">}&lt;/span>
 　　実行結果
-echo &lt;span style="color:#e6db74">&amp;#34; ほげ &amp;#34;&lt;/span> | trim ;
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34; ほげ &amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> trim &lt;span class="p">;&lt;/span>
 ほげ
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="エッセンス-7">エッセンス&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">　　　メソッド間の入力をstdin、出力はstdoutを使用する
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">　　　メソッド間の入力をstdin、出力はstdoutを使用する
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="９並行して考える">■９．並行して考える&lt;/h2>
 &lt;h3 id="抜粋-8">抜粋&lt;/h3>
 &lt;p>　　並列処理が可能なメソッドを積極的に書く&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash"> 　　 メソッドの並列処理
-　　 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#!/bin/bash&lt;/span>
-　　 &lt;span style="color:#ae81ff">2&lt;/span> cmd&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
-　　 &lt;span style="color:#ae81ff">3&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;Hello, &lt;/span>$1&lt;span style="color:#e6db74">!&amp;#34;&lt;/span>;
-　　 &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#f92672">}&lt;/span>
-　　 &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span> sh_xargs&lt;span style="color:#f92672">(){&lt;/span>
-　　 &lt;span style="color:#ae81ff">6&lt;/span> 　export -f cmd
-　　 &lt;span style="color:#ae81ff">7&lt;/span> 　yes | head -1000 | xargs -n1 -P4 -I % bash -c &lt;span style="color:#e6db74">&amp;#34;cmd %&amp;#34;&lt;/span>
-　　 &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#f92672">}&lt;/span>
-　　 &lt;span style="color:#ae81ff">9&lt;/span> sh_xargs ;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash"> 　　 メソッドの並列処理
+　　 &lt;span class="m">1&lt;/span> &lt;span class="c1">#!/bin/bash&lt;/span>
+　　 &lt;span class="m">2&lt;/span> cmd&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+　　 &lt;span class="m">3&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello, &lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+　　 &lt;span class="m">4&lt;/span> &lt;span class="o">}&lt;/span>
+　　 &lt;span class="m">5&lt;/span> &lt;span class="k">function&lt;/span> sh_xargs&lt;span class="o">(){&lt;/span>
+　　 &lt;span class="m">6&lt;/span> 　&lt;span class="nb">export&lt;/span> -f cmd
+　　 &lt;span class="m">7&lt;/span> 　yes &lt;span class="p">|&lt;/span> head -1000 &lt;span class="p">|&lt;/span> xargs -n1 -P4 -I % bash -c &lt;span class="s2">&amp;#34;cmd %&amp;#34;&lt;/span>
+　　 &lt;span class="m">8&lt;/span> &lt;span class="o">}&lt;/span>
+　　 &lt;span class="m">9&lt;/span> sh_xargs &lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="エッセンス-8">エッセンス&lt;/h3>
 &lt;pre tabindex="0">&lt;code>　　　並列処理が可能なメソッドを積極的に書く
 &lt;/code>&lt;/pre>&lt;h2 id="１０木を守る">■１０．木を守る&lt;/h2>
@@ -584,10 +690,10 @@ echo &lt;span style="color:#e6db74">&amp;#34; ほげ &amp;#34;&lt;/span> | trim 
 &lt;pre tabindex="0">&lt;code>　　　UNIXはドキュメントを忌み嫌う
 &lt;/code>&lt;/pre></description></item><item><title>知識ゼロからのe-Statマイニング</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/</link><pubDate>Fri, 24 Dec 2021 18:12:54 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.jpg" alt="Featured image of post 知識ゼロからのe-Statマイニング" />&lt;p>知識ゼロからのe-Statマイニング&lt;br>
 日頃から大量のデータを使ってデータマイニングしてみたいなと思って暇なときにサイトを巡回していたらe-Statという日本の統計が閲覧できる政府統計ポータルサイトを発見しました。&lt;br>
-アイスの売り上げから子供の平均身長まで大量の統計資料が公開されており、しかもAPIまであるすごいサイトです。 このe-Statをマイニングしてみようと思います。
+アイスの売り上げから子供の平均身長まで大量の統計資料が公開されており、しかもAPIまであるすごいサイトです。 このe-Statをマイニングしてみようと思います。&lt;br>
 まずはAPIを叩くところまでやってみます。&lt;/p>
 &lt;h2 id="まずはアプリケーションidを取得しよう">まずはアプリケーションIDを取得しよう&lt;/h2>
-&lt;p>APIを叩くにはアプリケーションIDが必要です。
+&lt;p>APIを叩くにはアプリケーションIDが必要です。&lt;br>
 まずはアプリケーションIDを取得しましょう。&lt;br>
 アプリケーションIDを取得するにはユーザー登録が必要です。以下のURLから手順に従ってユーザー登録してください。&lt;/p>
 &lt;p>&lt;a class="link" href="https://www.e-stat.go.jp/mypage/user/preregister" target="_blank" rel="noopener"
@@ -736,9 +842,9 @@ $df $uptime などを実行
 Linuxサーバーをログアウト
 ↓
 ローカルＰＣのターミナルにもどる
-&lt;/code>&lt;/pre>&lt;p>わかりにくいですか？
-まず、メリットとしてサーバーでコマンドからログアウトする必要がありません。
-これができれば、一台一台サーバーのヘルスチェックをせずとも、数十台のサーバーを
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですか？&lt;br>
+まず、メリットとしてサーバーでコマンドからログアウトする必要がありません。&lt;br>
+これができれば、一台一台サーバーのヘルスチェックをせずとも、数十台のサーバーを&lt;br>
 順番に訪ね歩きファイルに出力する事も可能です。&lt;/p>
 &lt;p>以下、ソースです。&lt;/p>
 &lt;pre tabindex="0">&lt;code>#!/usr/bin/bash
@@ -758,7 +864,7 @@ echo &amp;quot;centosサーバーログイン&amp;quot;;
 ssh $SERVER -t $COMMAND;
 echo &amp;quot;centosサーバーログアウト&amp;quot;;
 exit;
-&lt;/code>&lt;/pre>&lt;p>たったこれだけですが、この工夫により多くのサーバーを
+&lt;/code>&lt;/pre>&lt;p>たったこれだけですが、この工夫により多くのサーバーを&lt;br>
 スクリプトで一括回遊することができます。 お試しあれ。&lt;/p></description></item><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
 &lt;pre tabindex="0">&lt;code>Run hugo --minify
 Error: Error building site: TOCSS:
@@ -770,23 +876,23 @@ see https://goo.gl/YMrWcn for more information
 ...
 Total in 148 ms
 Error: Process completed with exit code 255.
-&lt;/code>&lt;/pre>&lt;p>はて？なにか悪いことでもしたのだろうか。
+&lt;/code>&lt;/pre>&lt;p>はて？なにか悪いことでもしたのだろうか。&lt;br>
 それとも変な記述をしてしまったのだろうか。&lt;/p>
 &lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
-&lt;p>こういうときは、落ち着いてエラーを見てみよう。
+&lt;p>こういうときは、落ち着いてエラーを見てみよう。&lt;br>
 大抵のことはちゃんと教えてくれているはずだ。&lt;/p>
 &lt;pre tabindex="0">&lt;code>Check your Hugo installation; you need the extended version
-&lt;/code>&lt;/pre>&lt;p>なるほど、extended を使えと行っている。
+&lt;/code>&lt;/pre>&lt;p>なるほど、extended を使えと行っている。&lt;br>
 extended とはなんだろう。&lt;/p>
 &lt;h2 id="エラーの対応">エラーの対応&lt;/h2>
-&lt;p>さらに落ち着いて設定ファイルを確認することをおすすめする。
+&lt;p>さらに落ち着いて設定ファイルを確認することをおすすめする。&lt;br>
 .github/workflow/gh-pages.yml&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Setup&lt;/span>
-&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-hugo@v2&lt;/span>
-&lt;span style="color:#f92672">with&lt;/span>:
-&lt;span style="color:#f92672">hugo-version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;0.87.0&amp;#39;&lt;/span>
-&lt;span style="color:#75715e">#extended: true&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定の extended が思いっきりコメントアウトされていました&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.87.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c">#extended: true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定の extended が思いっきりコメントアウトされていました&lt;/p>
 &lt;p>コメントを外して、再度Gitにpushしたところ、正常にビルドされて公開できました。&lt;/p>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>scssやsassを含んだファイルをhugoをgitに公開しようとした際に、ビルドできない場合は設定を確認することをおすすめする。&lt;/p></description></item><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
@@ -799,8 +905,8 @@ extended とはなんだろう。&lt;/p>
 >【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
-&lt;p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
-処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
+&lt;p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。&lt;br>
+処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。&lt;br>
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい&lt;/p>
 &lt;h2 id="使い方">使い方&lt;/h2>
 &lt;p>処理のループ中に以下の1行を追記します。&lt;/p>
@@ -819,57 +925,57 @@ $ chmod +x Progress.sh
 # 実行
 $ ./Progress.sh
 &lt;/code>&lt;/pre>&lt;h2 id="ソースコード">ソースコード&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#75715e">#! /bin/bash
-&lt;/span>&lt;span style="color:#75715e">&lt;/span>
-&lt;span style="color:#75715e">#######################################&lt;/span>
-&lt;span style="color:#75715e"># 進捗を表示するプログレスバー&lt;/span>
-&lt;span style="color:#75715e"># &lt;/span>
-&lt;span style="color:#75715e">#######################################&lt;/span>
-&lt;span style="color:#75715e">#&lt;/span>
-&lt;span style="color:#75715e">#&lt;/span>
-&lt;span style="color:#75715e"># percent $1 &lt;/span>
-&lt;span style="color:#75715e"># GT $2&lt;/span>
-progress&lt;span style="color:#f92672">(){&lt;/span>
-percent&lt;span style="color:#f92672">=&lt;/span>$1;
-GT&lt;span style="color:#f92672">=&lt;/span>$2;
-column&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>expr &lt;span style="color:#ae81ff">71&lt;/span> &lt;span style="color:#ae81ff">\*&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$percent&lt;span style="color:#e6db74">&amp;#34;&lt;/span> / $GT&lt;span style="color:#e6db74">`&lt;/span>;
-nspace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>expr &lt;span style="color:#ae81ff">71&lt;/span> - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$column&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>;
-&lt;span style="color:#75715e">#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入&lt;/span>
-bar&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;\r[&amp;#39;&lt;/span>;
-&lt;span style="color:#75715e">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
-set dummy ;
-&lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#f92672">[&lt;/span> $# -le &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$column&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>;&lt;span style="color:#66d9ef">do&lt;/span>
-bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;=&amp;#39;&lt;/span>; &lt;span style="color:#75715e"># barに=を追加&lt;/span>
-set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> dummy; &lt;span style="color:#75715e"># $#をインクリメント&lt;/span>
-&lt;span style="color:#66d9ef">done&lt;/span>
-bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;&amp;gt;&amp;#39;&lt;/span>; &lt;span style="color:#75715e">#barの先端に&amp;gt;を追加&lt;/span>
-&lt;span style="color:#75715e">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
-set dummy ;
-&lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#f92672">[&lt;/span> $# -le &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$nspace&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
-bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>;
-set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> dummy;
-&lt;span style="color:#66d9ef">done&lt;/span>
-bar&lt;span style="color:#f92672">=&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#39;]&amp;#39;&lt;/span>$percent/$GT&lt;span style="color:#e6db74">&amp;#39;\c&amp;#39;&lt;/span>; &lt;span style="color:#75715e"># barに]と１行分のプログレスバーを表示&lt;/span>
-echo -e &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$bar&lt;span style="color:#e6db74">&amp;#34;&lt;/span>;
-&lt;span style="color:#f92672">}&lt;/span>
-&lt;span style="color:#75715e">#######################################&lt;/span>
-&lt;span style="color:#75715e"># メイン処理&lt;/span>
-&lt;span style="color:#75715e">#&lt;/span>
-set count ;
-MAX&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span> ; &lt;span style="color:#75715e">#最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。&lt;/span>
-&lt;span style="color:#75715e">#&lt;/span>
-&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#f92672">((&lt;/span> i&lt;span style="color:#f92672">=&lt;/span>0; i&amp;lt;$MAX; i++&lt;span style="color:#f92672">)){&lt;/span>
-&lt;span style="color:#75715e"># ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。&lt;/span>
-progress &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$#&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$MAX&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; set - &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span> count ;
-&lt;span style="color:#f92672">}&lt;/span>
-echo &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
-&lt;span style="color:#75715e">#&lt;/span>
-&lt;span style="color:#75715e">#終了&lt;/span>
-exit ;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#! /bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1">#######################################&lt;/span>
+&lt;span class="c1"># 進捗を表示するプログレスバー&lt;/span>
+&lt;span class="c1"># &lt;/span>
+&lt;span class="c1">#######################################&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># percent $1 &lt;/span>
+&lt;span class="c1"># GT $2&lt;/span>
+progress&lt;span class="o">(){&lt;/span>
+&lt;span class="nv">percent&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nv">GT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nv">column&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>expr &lt;span class="m">71&lt;/span> &lt;span class="se">\*&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$percent&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> / &lt;span class="nv">$GT&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nv">nspace&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>expr &lt;span class="m">71&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$column&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入&lt;/span>
+&lt;span class="nv">bar&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;\r[&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
+&lt;span class="nb">set&lt;/span> dummy &lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$#&lt;/span> -le &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$column&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+&lt;span class="nv">bar&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$bar&lt;/span>&lt;span class="s1">&amp;#39;=&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1"># barに=を追加&lt;/span>
+&lt;span class="nb">set&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> dummy&lt;span class="p">;&lt;/span> &lt;span class="c1"># $#をインクリメント&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="nv">bar&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$bar&lt;/span>&lt;span class="s1">&amp;#39;&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">#barの先端に&amp;gt;を追加&lt;/span>
+&lt;span class="c1">#位置パラメータの数($#)を１にリセット（カウンタとして流用）&lt;/span>
+&lt;span class="nb">set&lt;/span> dummy &lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$#&lt;/span> -le &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$nspace&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;span class="nv">bar&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$bar&lt;/span>&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">set&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> dummy&lt;span class="p">;&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="nv">bar&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$bar&lt;/span>&lt;span class="s1">&amp;#39;]&amp;#39;&lt;/span>&lt;span class="nv">$percent&lt;/span>/&lt;span class="nv">$GT&lt;/span>&lt;span class="s1">&amp;#39;\c&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1"># barに]と１行分のプログレスバーを表示&lt;/span>
+&lt;span class="nb">echo&lt;/span> -e &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$bar&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#######################################&lt;/span>
+&lt;span class="c1"># メイン処理&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="nb">set&lt;/span> count &lt;span class="p">;&lt;/span>
+&lt;span class="nv">MAX&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">100&lt;/span> &lt;span class="p">;&lt;/span> &lt;span class="c1">#最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;&lt;span class="nv">$MAX&lt;/span>&lt;span class="p">;&lt;/span> i++&lt;span class="o">)){&lt;/span>
+&lt;span class="c1"># ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。&lt;/span>
+progress &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$#&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$MAX&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nb">set&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> count &lt;span class="p">;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1">#終了&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使い方-1">使い方&lt;/h2>
 &lt;p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。&lt;/p>
-&lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。
-MAX=100; は、処理の最大値を指定します。
+&lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。&lt;br>
+MAX=100; は、処理の最大値を指定します。&lt;br>
 処理のループ最大数が150回であれば、以下の通りに修正します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>set count;
 MAX=150;
@@ -955,7 +1061,7 @@ tar xvf $( echo &amp;quot;$1&amp;quot; | sed 's/\.Z$//')
 *) echo &amp;quot;ファイルの拡張子が対応していません:$1&amp;quot;
 esac
 exit ;
-&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。
+&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" title="wLu"
 target="_blank" rel="noopener"
 >wLu&lt;/a>をつかってUTF-8に変換するとさらに便利です。&lt;/p>
@@ -972,7 +1078,7 @@ $ /usr/local/bin/unComp
 &lt;pre tabindex="0">&lt;code># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
 # 実行
 $ unComp sample.zip
-&lt;/code>&lt;/pre>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。
+&lt;/code>&lt;/pre>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。&lt;br>
 便利ですね。&lt;/p></description></item><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
@@ -983,7 +1089,7 @@ $ unComp sample.zip
 >【プログレスバー】Bashでプログレスバーを作ってみようって話&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="必要なもの">必要なもの&lt;/h2>
-&lt;p>ネットワーク漢字フィルター nkf
+&lt;p>ネットワーク漢字フィルター nkf&lt;br>
 ※macの場合、&lt;a class="link" href="https://brew.sh/index_ja" title="Homebrew"
 target="_blank" rel="noopener"
 >Homebrew&lt;/a> が必要になります。&lt;/p>
@@ -1002,24 +1108,24 @@ Could not symlink share/man/ja/man1/nkf.1
 &lt;pre tabindex="0">&lt;code>sudo chmod 775 /usr/local/share/man/ja/man1
 sudo chown &amp;lt;ユーザ名&amp;gt;:admin /usr/local/share/man/ja/man1
 &lt;/code>&lt;/pre>&lt;p>下記のページを参考にさせていただきました&lt;/p>
-&lt;!-- raw HTML omitted -->
+&lt;p>&lt;iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fblog.kozakana.net%2F2018%2F09%2Fhomebrew_link_error%2F" title="Homebrewでインストール時にlinkが出来ないエラー | Simple is Beautiful." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;">&lt;/iframe>&lt;/p>
 &lt;p>コマンドを確認します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ nkf -v
 Network Kanji Filter Version 2.1.5 (2018-12-15)
 Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
 Copyright (C) 1996-2018, The nkf Project.
 &lt;/code>&lt;/pre>&lt;h2 id="使い方">使い方&lt;/h2>
-&lt;p>nkfコマンドとは？
+&lt;p>nkfコマンドとは？&lt;br>
 「nkf」は「Network Kanji Filter」の略で、LinuxとWindowsなど、異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです。&lt;/p>
-&lt;p>nkfコマンドの書式
+&lt;p>nkfコマンドの書式&lt;br>
 nkf オプション ファイル名&lt;/p>
 &lt;p>UTF-8に変換する場合は、オプションに wLu をつけて変換します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ nkf -wLu isofile.txt &amp;gt; utf8.txt
 &lt;/code>&lt;/pre>&lt;h3 id="変換の流れ手動編">変換の流れ（手動編）&lt;/h3>
-&lt;p>元ファイル moto.txt (UTF-8以外のファイルエンコード、改行コード）
-↓
-変換後のファイル ato.txt(UTF-8に変換したファイル）
-↓
+&lt;p>元ファイル moto.txt (UTF-8以外のファイルエンコード、改行コード）&lt;br>
+↓&lt;br>
+変換後のファイル ato.txt(UTF-8に変換したファイル）&lt;br>
+↓&lt;br>
 変換後のファイルをリネームする&lt;/p>
 &lt;pre tabindex="0">&lt;code># UTF-8に変換
 $ nkf -wLu moto.txt &amp;gt; ato.txt
@@ -1088,12 +1194,12 @@ $ /usr/local/bin/wLu
 &lt;pre tabindex="0">&lt;code># UTF-8以外のファイルエンコードファイル
 $ cat moto.txt
 $ wLu moto.txt
-&lt;/code>&lt;/pre>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。
+&lt;/code>&lt;/pre>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。&lt;br>
 便利ですね。&lt;/p></description></item><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21-03/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
 &lt;p>記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について&lt;br>
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。&lt;/p>
-&lt;p>Start building sites …
-Total in 10 ms
+&lt;p>Start building sites …&lt;br>
+Total in 10 ms&lt;br>
 Error: Error building site: &amp;ldquo;/xxxx/xxxx/xxxx.github.io/content/posts/2021-12-21-03.md:2:1&amp;rdquo;: failed to unmarshal YAML: yaml: control characters are not allowed&lt;/p>
 &lt;h2 id="原因">原因&lt;/h2>
 &lt;p>このようなエラーが出る場合原因として考えられるのがファイルの文字コードがUTF-8になってないことです。&lt;br>
@@ -1102,7 +1208,7 @@ vim でファイル名を開くと右下に文字コードが表示されます�
 &lt;p>この場合ファイルの文字コードをUTF8に変更してみましょう。&lt;/p>
 &lt;pre tabindex="0">&lt;code>nkf -wLu ファイル名 &amp;gt;一時保存ファイル名;
 mv 一時保存ファイル名 ファイル名
-&lt;/code>&lt;/pre>&lt;p>一時保存した後にmvで戻したり面倒ですよね。
+&lt;/code>&lt;/pre>&lt;p>一時保存した後にmvで戻したり面倒ですよね。&lt;br>
 面倒を回避できる素晴らしいコマンドがgithubに上がっていますのでこちらもご利用ください。&lt;br>
 &lt;a class="link" href="https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu" target="_blank" rel="noopener"
 >https://github.com/suzukiiichiro/linuxConfig/blob/master/wLu&lt;/a>&lt;/p>
@@ -1117,9 +1223,9 @@ mv 一時保存ファイル名 ファイル名
 &lt;h2 id="設定">設定&lt;/h2>
 &lt;p>以下のコマンドでhugoでページを作成します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo new page/privacy.md
-&lt;/code>&lt;/pre>&lt;p>コンテンツの構成を以下のように管理しているのでpage以下に保存しました。
-content/posts &amp;ndash; 記事
-/page &amp;ndash; about usページなど
+&lt;/code>&lt;/pre>&lt;p>コンテンツの構成を以下のように管理しているのでpage以下に保存しました。&lt;br>
+content/posts &amp;ndash; 記事&lt;br>
+/page &amp;ndash; about usページなど&lt;br>
 /assetes &amp;ndash; 画像など&lt;/p>
 &lt;pre tabindex="0">&lt;code>vim content/page/privacy.md
 &lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>---
@@ -1127,7 +1233,7 @@ title: &amp;quot;Privacy&amp;quot;
 date: 2021-12-22T17:16:15+09:00
 draft: false
 ---
-&lt;/code>&lt;/pre>&lt;p>ページの内容を２個目の&amp;mdash;以下に貼り付けます
+&lt;/code>&lt;/pre>&lt;p>ページの内容を２個目の&amp;mdash;以下に貼り付けます&lt;br>
 draft: true に変更します&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo
 &lt;/code>&lt;/pre>&lt;p>ビルドします&lt;/p>
@@ -1137,7 +1243,7 @@ themes以下にあるファイルを直接書き換えるのではなく&lt;br>
 layoutsフォルダ以下に同名のファイルを作成することで上書きすることができるみたいです。&lt;/p>
 &lt;p>layouts/partial/footer/footer.html&amp;lt;&amp;ndash;優先順位高い&lt;br>
 themes/テーマ名/layouts/partial/footer/footer.html&lt;/p>
-&lt;p>layouts/partial/footer/footer.html を新規に作成して
+&lt;p>layouts/partial/footer/footer.html を新規に作成して&lt;br>
 以下の内容を入力&lt;/p>
 &lt;pre tabindex="0">&lt;code>&amp;lt;footer class=&amp;quot;site-footer&amp;quot;&amp;gt;
 &amp;lt;a href=&amp;quot;{{ .Site.BaseURL }}privacy/&amp;quot;&amp;gt;プライバシーポリシー&amp;lt;/a&amp;gt;
@@ -1151,14 +1257,14 @@ themes/テーマ名/layouts/partial/footer/footer.html&lt;/p>
 &amp;lt;/footer&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>リンクの書き方が&lt;br>
 {{ .Site.BaseURL }}privacy/&lt;br>
-のは注意&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
-Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
-色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
+のは注意&lt;/p></description></item><item><title>デザイナーでもできる初めてのHugo #01</title><link>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/</link><pubDate>Wed, 22 Dec 2021 13:07:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg" alt="Featured image of post デザイナーでもできる初めてのHugo #01" />&lt;p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。&lt;br>
+Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。&lt;br>
+色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。&lt;br>
 無料で、httpsも設定できるので非常に便利です。&lt;/p>
 &lt;h2 id="hugoのインストール">Hugoのインストール&lt;/h2>
-&lt;p>Hugoを使うためにはhugoをインストールする必要があります。
+&lt;p>Hugoを使うためにはhugoをインストールする必要があります。&lt;br>
 インストールは簡単です。&lt;/p>
-&lt;p>&lt;!-- raw HTML omitted -->※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;p>&lt;small>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。&lt;/small>&lt;/p>
 &lt;p>&lt;a class="link" href="https://brew.sh/index_ja" title="Homebrew"
 target="_blank" rel="noopener"
 >Homebrew&lt;/a> が必要になります。&lt;/p>
@@ -1168,8 +1274,8 @@ target="_blank" rel="noopener"
 &lt;pre tabindex="0">&lt;code>hugo new site ＜作成するディレクトリ＞
 &lt;/code>&lt;/pre>&lt;p>色々表示されているかと思いますが、気にしないで大丈夫です。&lt;/p>
 &lt;h3 id="設定ファイル">設定ファイル&lt;/h3>
-&lt;p>hugoの設定はTOMLという形式で記述します。
-TOMLに慣れていない人はJSONやYAMLといった形式でも記述できます。
+&lt;p>hugoの設定はTOMLという形式で記述します。&lt;br>
+TOMLに慣れていない人はJSONやYAMLといった形式でも記述できます。&lt;br>
 その場合はconfig.tomlを削除して下さい。&lt;/p>
 &lt;pre tabindex="0">&lt;code>baseURL = &amp;quot;http://example.org/&amp;quot;
 languageCode = &amp;quot;en-us&amp;quot;
@@ -1182,7 +1288,7 @@ title = &amp;quot;My New Hugo Site&amp;quot;
 &lt;h2 id="記事の投稿">記事の投稿&lt;/h2>
 &lt;p>記事を作成するにはコマンドを打つ必要があります&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo new posts/helloworld.md
-&lt;/code>&lt;/pre>&lt;p>このコマンドで、postsディレクトリ以下にhelloworld.mdといったファイルが生成されます
+&lt;/code>&lt;/pre>&lt;p>このコマンドで、postsディレクトリ以下にhelloworld.mdといったファイルが生成されます&lt;br>
 テーマによってはpostsディレクトリではなく、postであったりするので、テーマの詳細を確認して下さい。&lt;/p>
 &lt;h2 id="下書きから公開へ">下書きから公開へ&lt;/h2>
 &lt;p>作成されたファイルはmarkdown形式で記述されています。&lt;/p>
@@ -1191,33 +1297,33 @@ title: &amp;quot;helloworld&amp;quot;
 date: 2021-12-22T11:23:09Z
 draft: true
 ---
-&lt;/code>&lt;/pre>&lt;p>draft の部分が下書き状態を表しています。
+&lt;/code>&lt;/pre>&lt;p>draft の部分が下書き状態を表しています。&lt;br>
 trueにすることで公開となり表示されます。&lt;/p>
 &lt;h2 id="確認">確認&lt;/h2>
-&lt;p>サイトの確認を行うには
+&lt;p>サイトの確認を行うには&lt;br>
 hugoをインストールしたディレクトリで&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo server
-&lt;/code>&lt;/pre>&lt;p>を実行します。
-この場合は公開されている記事のみを表示した状態のサーバが立ち上がります。
+&lt;/code>&lt;/pre>&lt;p>を実行します。&lt;br>
+この場合は公開されている記事のみを表示した状態のサーバが立ち上がります。&lt;br>
 未公開も含めたい場合は&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo server -D
 &lt;/code>&lt;/pre>&lt;p>とすることで表示できます。&lt;/p>
 &lt;h2 id="公開">公開&lt;/h2>
 &lt;p>公開をするにはサイト全体を構築し直す必要があります。&lt;/p>
 &lt;pre tabindex="0">&lt;code>hugo
-&lt;/code>&lt;/pre>&lt;p>このコマンドでサイト全体が自動的に生成されます。
-作成されたサイトは初期状態ではpublicディレクトリに展開されます。
+&lt;/code>&lt;/pre>&lt;p>このコマンドでサイト全体が自動的に生成されます。&lt;br>
+作成されたサイトは初期状態ではpublicディレクトリに展開されます。&lt;br>
 configの&lt;em>publicDir&lt;/em>に任意のディレクトリを設定することも可能です&lt;/p>
 &lt;pre tabindex="0">&lt;code>publicDir = 'docs'
 &lt;/code>&lt;/pre>&lt;p>この場合はdocsディレクトリに公開ファイルが展開されます。&lt;/p>
 &lt;h2 id="終わりに">終わりに&lt;/h2>
-&lt;p>駆け足でしたが、hugoの簡単な使い方になります。
-大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。
+&lt;p>駆け足でしたが、hugoの簡単な使い方になります。&lt;br>
+大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。&lt;br>
 みなさんもぜひ、hugoを試してみて下さい。&lt;/p></description></item><item><title>Hugoでテーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.jpg" alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）" />&lt;p>Hugoでテーマが反映されない（画面が真っ白のまま）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ git submodule update --init --recursive
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Hugoで記事の投稿の仕方</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-01/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg" alt="Featured image of post Hugoで記事の投稿の仕方" />&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ hugo new posts/&lt;span style="color:#f92672">[&lt;/span>ファイル名&lt;span style="color:#f92672">]&lt;/span>.md
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git submodule update --init --recursive
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Hugoで記事の投稿の仕方</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-01/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-01/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg" alt="Featured image of post Hugoで記事の投稿の仕方" />&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo new posts/&lt;span class="o">[&lt;/span>ファイル名&lt;span class="o">]&lt;/span>.md
 $ vim content/posts/2021-12-21.md
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>draft: false&lt;/code> にする事でドラフトを公開にすることができる&lt;/p>
 &lt;p>ビルドする&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ hugo
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo
 &lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

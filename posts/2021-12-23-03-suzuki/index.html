@@ -9,7 +9,7 @@
 <meta property="og:description" content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T16:10:20+09:00"><meta property="article:modified_time" content="2021-12-28T04:33:27+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T16:10:20+09:00"><meta property="article:modified_time" content="2021-12-28T04:44:07+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【プログレスバー】Bashでプログレスバーを作ってみようって話">
 <meta name=twitter:description content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -48,7 +48,7 @@ on-phone--column extended">
 </a>
 </li>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_3>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_4>
 Web開発
 </a>
 </li>
@@ -111,7 +111,7 @@ Web開発
 <h2 class="widget-title section-title">目次</h2>
 <div class=widget--toc>
 <nav id=TableOfContents>
-<ul>
+<ol>
 <li><a href=#関連記事>関連記事</a></li>
 <li><a href=#プログレスバー>プログレスバー</a></li>
 <li><a href=#使い方>使い方</a></li>
@@ -119,7 +119,7 @@ Web開発
 <li><a href=#ソースコード>ソースコード</a></li>
 <li><a href=#使い方-1>使い方</a></li>
 <li><a href=#実行結果>実行結果</a></li>
-</ul>
+</ol>
 </nav>
 </div>
 </section>
@@ -131,8 +131,8 @@ Web開発
 <li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/ target=_blank rel=noopener>【プログレスバー】Bashでプログレスバーを作ってみようって話</a></li>
 </ul>
 <h2 id=プログレスバー>プログレスバー</h2>
-<p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
-処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
+<p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。<br>
+処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。<br>
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい</p>
 <h2 id=使い方>使い方</h2>
 <p>処理のループ中に以下の1行を追記します。</p>
@@ -151,64 +151,64 @@ $ chmod +x Progress.sh
 # 実行
 $ ./Progress.sh
 </code></pre><h2 id=ソースコード>ソースコード</h2>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e>#! /bin/bash
-</span><span style=color:#75715e></span>
-<span style=color:#75715e>#######################################</span>
-<span style=color:#75715e># 進捗を表示するプログレスバー</span>
-<span style=color:#75715e>#  </span>
-<span style=color:#75715e>#######################################</span>
-<span style=color:#75715e>#</span>
-<span style=color:#75715e>#</span>
-<span style=color:#75715e># percent $1 </span>
-<span style=color:#75715e># GT      $2</span>
-progress<span style=color:#f92672>(){</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=c1>#######################################</span>
+<span class=c1># 進捗を表示するプログレスバー</span>
+<span class=c1>#  </span>
+<span class=c1>#######################################</span>
+<span class=c1>#</span>
+<span class=c1>#</span>
+<span class=c1># percent $1 </span>
+<span class=c1># GT      $2</span>
+progress<span class=o>(){</span>
 
-  percent<span style=color:#f92672>=</span>$1;
-  GT<span style=color:#f92672>=</span>$2;  
+  <span class=nv>percent</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>
+  <span class=nv>GT</span><span class=o>=</span><span class=nv>$2</span><span class=p>;</span>  
 
-  column<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>expr <span style=color:#ae81ff>71</span> <span style=color:#ae81ff>\*</span> <span style=color:#e6db74>&#34;</span>$percent<span style=color:#e6db74>&#34;</span> / $GT<span style=color:#e6db74>`</span>;
-  nspace<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>expr <span style=color:#ae81ff>71</span> - <span style=color:#e6db74>&#34;</span>$column<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>;
+  <span class=nv>column</span><span class=o>=</span><span class=sb>`</span>expr <span class=m>71</span> <span class=se>\*</span> <span class=s2>&#34;</span><span class=nv>$percent</span><span class=s2>&#34;</span> / <span class=nv>$GT</span><span class=sb>`</span><span class=p>;</span>
+  <span class=nv>nspace</span><span class=o>=</span><span class=sb>`</span>expr <span class=m>71</span> - <span class=s2>&#34;</span><span class=nv>$column</span><span class=s2>&#34;</span><span class=sb>`</span><span class=p>;</span>
 
-  <span style=color:#75715e>#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入</span>
-  bar<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;\r[&#39;</span>; 
+  <span class=c1>#プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入</span>
+  <span class=nv>bar</span><span class=o>=</span><span class=s1>&#39;\r[&#39;</span><span class=p>;</span> 
 
-  <span style=color:#75715e>#位置パラメータの数($#)を１にリセット（カウンタとして流用）</span>
-  set dummy ;
-  <span style=color:#66d9ef>while</span> <span style=color:#f92672>[</span> $# -le <span style=color:#e6db74>&#34;</span>$column<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>;<span style=color:#66d9ef>do</span>
-    bar<span style=color:#f92672>=</span>$bar<span style=color:#e6db74>&#39;=&#39;</span>;      <span style=color:#75715e># barに=を追加</span>
-    set - <span style=color:#e6db74>&#34;</span>$@<span style=color:#e6db74>&#34;</span> dummy; <span style=color:#75715e># $#をインクリメント</span>
-  <span style=color:#66d9ef>done</span>
-  bar<span style=color:#f92672>=</span>$bar<span style=color:#e6db74>&#39;&gt;&#39;</span>;        <span style=color:#75715e>#barの先端に&gt;を追加</span>
+  <span class=c1>#位置パラメータの数($#)を１にリセット（カウンタとして流用）</span>
+  <span class=nb>set</span> dummy <span class=p>;</span>
+  <span class=k>while</span> <span class=o>[</span> <span class=nv>$#</span> -le <span class=s2>&#34;</span><span class=nv>$column</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>do</span>
+    <span class=nv>bar</span><span class=o>=</span><span class=nv>$bar</span><span class=s1>&#39;=&#39;</span><span class=p>;</span>      <span class=c1># barに=を追加</span>
+    <span class=nb>set</span> - <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span> dummy<span class=p>;</span> <span class=c1># $#をインクリメント</span>
+  <span class=k>done</span>
+  <span class=nv>bar</span><span class=o>=</span><span class=nv>$bar</span><span class=s1>&#39;&gt;&#39;</span><span class=p>;</span>        <span class=c1>#barの先端に&gt;を追加</span>
 
-  <span style=color:#75715e>#位置パラメータの数($#)を１にリセット（カウンタとして流用）</span>
-  set dummy ;
-  <span style=color:#66d9ef>while</span> <span style=color:#f92672>[</span> $# -le <span style=color:#e6db74>&#34;</span>$nspace<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>do</span> 
-    bar<span style=color:#f92672>=</span>$bar<span style=color:#e6db74>&#39; &#39;</span>;
-    set - <span style=color:#e6db74>&#34;</span>$@<span style=color:#e6db74>&#34;</span> dummy;
-  <span style=color:#66d9ef>done</span>
-  bar<span style=color:#f92672>=</span>$bar<span style=color:#e6db74>&#39;]&#39;</span>$percent/$GT<span style=color:#e6db74>&#39;\c&#39;</span>; <span style=color:#75715e># barに]と１行分のプログレスバーを表示</span>
+  <span class=c1>#位置パラメータの数($#)を１にリセット（カウンタとして流用）</span>
+  <span class=nb>set</span> dummy <span class=p>;</span>
+  <span class=k>while</span> <span class=o>[</span> <span class=nv>$#</span> -le <span class=s2>&#34;</span><span class=nv>$nspace</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>do</span> 
+    <span class=nv>bar</span><span class=o>=</span><span class=nv>$bar</span><span class=s1>&#39; &#39;</span><span class=p>;</span>
+    <span class=nb>set</span> - <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span> dummy<span class=p>;</span>
+  <span class=k>done</span>
+  <span class=nv>bar</span><span class=o>=</span><span class=nv>$bar</span><span class=s1>&#39;]&#39;</span><span class=nv>$percent</span>/<span class=nv>$GT</span><span class=s1>&#39;\c&#39;</span><span class=p>;</span> <span class=c1># barに]と１行分のプログレスバーを表示</span>
 
-  echo -e <span style=color:#e6db74>&#34;</span>$bar<span style=color:#e6db74>&#34;</span>; 
-<span style=color:#f92672>}</span>
+  <span class=nb>echo</span> -e <span class=s2>&#34;</span><span class=nv>$bar</span><span class=s2>&#34;</span><span class=p>;</span> 
+<span class=o>}</span>
 
-<span style=color:#75715e>#######################################</span>
-<span style=color:#75715e># メイン処理</span>
-<span style=color:#75715e>#</span>
-set count ;
-MAX<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> ; <span style=color:#75715e>#最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。</span>
-<span style=color:#75715e>#</span>
-<span style=color:#66d9ef>for</span> <span style=color:#f92672>((</span> i<span style=color:#f92672>=</span>0; i&lt;$MAX; i++<span style=color:#f92672>)){</span>
-  <span style=color:#75715e># ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。</span>
-  progress <span style=color:#e6db74>&#34;</span>$#<span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span>$MAX<span style=color:#e6db74>&#34;</span>; set - <span style=color:#e6db74>&#34;</span>$@<span style=color:#e6db74>&#34;</span> count ;
-<span style=color:#f92672>}</span>
-echo <span style=color:#e6db74>&#34;&#34;</span>;
-<span style=color:#75715e>#</span>
-<span style=color:#75715e>#終了</span>
-exit ;
+<span class=c1>#######################################</span>
+<span class=c1># メイン処理</span>
+<span class=c1>#</span>
+<span class=nb>set</span> count <span class=p>;</span>
+<span class=nv>MAX</span><span class=o>=</span><span class=m>100</span> <span class=p>;</span> <span class=c1>#最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。</span>
+<span class=c1>#</span>
+<span class=k>for</span> <span class=o>((</span> <span class=nv>i</span><span class=o>=</span>0<span class=p>;</span> i&lt;<span class=nv>$MAX</span><span class=p>;</span> i++<span class=o>)){</span>
+  <span class=c1># ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。</span>
+  progress <span class=s2>&#34;</span><span class=nv>$#</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$MAX</span><span class=s2>&#34;</span><span class=p>;</span> <span class=nb>set</span> - <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span> count <span class=p>;</span>
+<span class=o>}</span>
+<span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+<span class=c1>#</span>
+<span class=c1>#終了</span>
+<span class=nb>exit</span> <span class=p>;</span>
 </code></pre></div><h2 id=使い方-1>使い方</h2>
 <p>シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。</p>
-<p>自作ソースの中のループ処理の関数の頭に以下を追記します。
-MAX=100; は、処理の最大値を指定します。
+<p>自作ソースの中のループ処理の関数の頭に以下を追記します。<br>
+MAX=100; は、処理の最大値を指定します。<br>
 処理のループ最大数が150回であれば、以下の通りに修正します。</p>
 <pre tabindex=0><code>set count;
 MAX=150;
@@ -536,26 +536,26 @@ e-Statで面白いデータを探そう。ランキング上位「アイスク�
 <section class="widget archives">
 <h2 class="widget-title section-title">アーカイブ</h2>
 <select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2021年12月>
-2021年12月（14）
+2021年12月（15）
 </option></select>
 </section>
 <section class="widget tagCloud">
 <h2 class="widget-title section-title">タグ</h2>
 <div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_6>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_6>
+プログラム
+</a>
 <a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_5>
 Bash
-</a>
-<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_5>
-Hugo
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_5>
 シェルスクリプト
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_5>
 プログラミング
-</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_5>
-プログラム
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_5>
 鈴木維一郎
@@ -569,11 +569,23 @@ e-Stat
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_3>
 データマイニング
 </a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_2>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_2>
+github pages
+</a>
 <a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
 Web
 </a>
 <a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
 Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_2>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_2>
+開発
 </a>
 <a href=https://suzukiiichiro.github.io/tags/brew/ class=font_size_1>
 brew
@@ -584,23 +596,11 @@ css
 <a href=https://suzukiiichiro.github.io/tags/error/ class=font_size_1>
 error
 </a>
-<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_1>
-GitHub
-</a>
 <a href=https://suzukiiichiro.github.io/tags/github-actions/ class=font_size_1>
 GitHub Actions
 </a>
-<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_1>
-github pages
-</a>
 <a href=https://suzukiiichiro.github.io/tags/google-adsense/ class=font_size_1>
 google adsense
-</a>
-<a href=https://suzukiiichiro.github.io/tags/linux/ class=font_size_1>
-Linux
-</a>
-<a href=https://suzukiiichiro.github.io/tags/mac/ class=font_size_1>
-Mac
 </a>
 </div>
 </section>
@@ -752,6 +752,6 @@ Mac
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <script src=https://suzukiiichiro.github.io/js/Custom.js></script>
-<script>let setFillHeight=()=>{const a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight()</script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
 </body>
 </html>

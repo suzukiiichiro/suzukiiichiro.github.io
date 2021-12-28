@@ -78,6 +78,61 @@ body {
   @media (min-width: 768px) {
     .main-container {
       padding: 0; } }
+.amazon-box {
+  position: relative;
+  margin: 15px 0; }
+  .amazon-box a {
+    display: flex;
+    border-radius: 4px;
+    border: 1px solid #DDD;
+    padding: 10px 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow ease 0.3s;
+    align-items: center; }
+    .amazon-box a .amazon-image {
+      width: 30%; }
+      .amazon-box a .amazon-image img {
+        width: 100%; }
+    .amazon-box a .amazon-info {
+      flex: 1;
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      justify-content: flex-start;
+      align-items: flex-start; }
+      .amazon-box a .amazon-info .amazon-name {
+        font-weight: bold;
+        background: none !important;
+        padding: 5px 0;
+        font-size: 1em;
+        line-height: 1.4;
+        margin: 0 0 5px; }
+      .amazon-box a .amazon-info p {
+        font-size: 0.7em;
+        line-height: 1.6;
+        color: var(--card-text-color-secondary); }
+      .amazon-box a .amazon-info .link {
+        margin-top: 15px;
+        background-color: #f1c40f;
+        color: #333;
+        padding: 5px 15px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        font-weight: bold;
+        box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+        transition: box-shadow ease 0.3s; }
+    .amazon-box a:hover {
+      box-shadow: 0 0 0 transparent; }
+      .amazon-box a:hover .amazon-info .link {
+        box-shadow: 0 0 0 transparent; }
+  .amazon-box small {
+    color: var(--card-text-color-secondary);
+    font-size: 0.7em;
+    position: absolute;
+    bottom: 1px;
+    right: 10px; }
+
 footer.site-footer {
   background-color: #34495e;
   color: #FFF;
@@ -372,6 +427,12 @@ footer.site-footer {
 .article-content h2 + p, .article-content h3 + p, .article-content h4 + p, .article-content h5 + p, .article-content h6 + p {
   margin-top: 0; }
 
+.article-content p > code {
+  background-color: #333;
+  border-radius: 2px;
+  color: #FFF;
+  margin: 0 5px; }
+
 .gallery a[href*="gif"] {
   display: flex;
   align-items: center;
@@ -386,6 +447,22 @@ footer.site-footer {
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFFFFF" d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z" /></svg>');
     background-size: 68px;
     position: absolute; }
+
+.code-block-header {
+  position: relative;
+  padding-top: 32px; }
+  .code-block-header::before {
+    content: attr(data-lang);
+    background: #dce4eb;
+    color: #56799b;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 1px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10; }
 
 .tableOfContents {
   padding: 0 25px 0; }

@@ -1,0 +1,744 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の"><title>GitHub Pagesを使って無料でSSL付きのサイトを公開</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="GitHub Pagesを使って無料でSSL付きのサイトを公開">
+<meta property="og:description" content="デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="GitHub Pages"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="SSL"><meta property="article:published_time" content="2021-12-28T12:07:19+09:00"><meta property="article:modified_time" content="2021-12-28T04:44:07+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg">
+<meta name=twitter:title content="GitHub Pagesを使って無料でSSL付きのサイトを公開">
+<meta name=twitter:description content="デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-28-hugo-02-ywat/settings.jpg'})</script>
+</head>
+<body class="article-page
+}">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供してます</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_11>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_4>
+Web開発
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section">
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2021.12.28</time>
+<time class="article-time--item article-time--reading">
+読了時間: 3分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+GitHub Pagesを使って無料でSSL付きのサイトを公開
+</a>
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#github-pages用の設定ファイルを作成>GitHub Pages用の設定ファイルを作成</a></li>
+<li><a href=#github-pagesの設定>GitHub Pagesの設定</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#書籍の紹介>書籍の紹介</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<section class=article-content>
+<p>デザイナーでもできる初めてのHugoの2回目になります。<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2021-12-21/>前回（デザイナーでもできる初めてのHugo #01）</a>はHugoのインストールから公開の方法までを説明しました。<br>
+今回は前回作成したページをGitHub Pagesを使って公開してみたいと思います。</p>
+<h2 id=github-pages用の設定ファイルを作成>GitHub Pages用の設定ファイルを作成</h2>
+<p>GitHub PagesはGitHubにあるコンテンツを静的ページを公開する機能です。<br>
+SSLまでついているので、非常に便利です。</p>
+<p>公開用のファイルは<code>.github/workflows/gh-pages.yml</code>というYAML形式のファイルになります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml:.github/workflows/gh-pages.yml data-lang=yaml:.github/workflows/gh-pages.yml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hugo</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># schedule:</span><span class=w>
+</span><span class=w>    </span><span class=c># - cron: &#39;*/10 * * * *&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>gh-pages</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>persist-credentials</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
+</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># https://github.com/marketplace/actions/github-pages-action</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>gh-pages</span><span class=w>
+</span></code></pre></div><p><strong>name</strong>はGitHubでのActionsに表示される名前になります。<br>
+今回は公開用として<strong>gh-pages</strong>というブランチにわけています。ここおらへんはお好みで設定して下さい。<br>
+hugoでテーマを使っている場合は<strong>submodules: true</strong>とする必要があります。<br>
+また、Hugoで更新日をGitの日付と合わせたい場合は<strong>fetch-depth: 0</strong>として、Gitの履歴を取得するようにしましょう。</p>
+<h2 id=github-pagesの設定>GitHub Pagesの設定</h2>
+<p>GitHub PagesのURLは<code>https://ユーザまたは組織名.github.io/リポジトリ名</code>となります。<br>
+GitHubでリポジトリを作成する際に「ユーザまたは組織名.github.io」とすると「https://ユーザまたは組織名.github.io」とすることができます。</p>
+<p>まずは先程のファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。<br>
+その後に、setings > Pages にでGitHub Pagesの設定を行います。</p>
+<p><figure class=gallery-image style=flex-grow:162;flex-basis:390px>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg data-size=980x603>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg width=980 height=603 srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_1024x0_resize_q75_box.jpg 1024w" loading=lazy alt="GitHub Pagesの設定">
+</a>
+<figcaption>GitHub Pagesの設定</figcaption>
+</figure></p>
+<p>Your GitHub Pages site is currently being built from the gh-pages branch<br>
+にあるBranchをgh-pagesに変更します。<br>
+設定は以上です。</p>
+<p>Hugoの初期設定であれば<code>publishDir: public</code>となっているので、GitHub Pagesではpublicがルートディレクトリとして公開されます。<br>
+.gitignoreに「public」を除外するようにしておきましょう。</p>
+<pre tabindex=0><code class=language-:.gitignore data-lang=:.gitignore>/public
+/resources
+</code></pre><p>最後に設定したURLにアクセスするとサイトが確認できるはずです。</p>
+<h2 id=まとめ>まとめ</h2>
+<p>GitHub Pagesを使えば、難しいサーバの設定などをすることなく、無料でSSL付きのサイトを公開することが可能です。<br>
+いくつかの制限はありますが、すごく便利な機能なのでみなさんもぜひ使ってみてはいかがでしょうか。</p>
+<p>公開する際はパスワードなどの情報も一緒にアップしないようにしてください。</p>
+<h2 id=書籍の紹介>書籍の紹介</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07LBSWJNP&linkCode=as2&tag=nlpqueens-22&linkId=fd3f2918d16f32f53feccf492263133a" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07LBSWJNP&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>いちばんやさしいGit&GitHubの教本 人気講師が教えるバージョン管理＆共有入門 「いちばんやさしい教本」シリーズ</h2>
+<p>
+実際のワークフローをイメージしながら
+実践的なGit/GitHubの使い方が身につく「いちばんやさしい」入門書です。
+前半は、手元のパソコンでファイルを実際にバージョン管理しながら、
+Gitの基本的な使い方を解説。
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/Web%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEGitHub%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E5%8A%B9%E7%8E%87%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96%E3%81%99%E3%82%8B%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BA%E3%83%84%E3%83%BC%E3%83%AB-%E5%A1%A9%E8%B0%B7-%E5%95%93/dp/4844337009?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=3C1ZNYZB4N0C3&keywords=github&qid=1640665205&sprefix=github%2Caps%2C284&sr=8-8&linkCode=ll1&tag=nlpqueens-22&linkId=65876fc9d77e695d11f02ec867bc8c4a&language=ja_JP&ref_=as_li_ss_tl" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4844337009&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>Web制作者のためのGitHubの教科書 チームの効率を最大化する共同開発ツール</h2>
+<p>
+そろそろ「プルリ」しませんか?しくみを理解して使えば怖くない。リポジトリの作成から複数デザインの提示、「Pull Request」を使った分担作業まで、Webサイト制作を例に実践的なワークフローを身に付ける。
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_1600x0_resize_q75_box.jpg 1600w" width=800 height=558 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+デザイナーでもできる初めてのHugo #01
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div>
+<p class=article-subtitle>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoで記事の投稿の仕方
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>Hugoで記事を投稿する方法を説明しています</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoでテーマが反映されない（画面が真っ白のまま）
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>テーマが反映されない（画面が真っ白のまま）の対処法</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_1600x0_resize_q75_box.jpg 1600w" width=800 height=538 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div>
+<p class=article-subtitle>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示さ ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-02/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-02/privacy_hu6d356af4ff9900abfdb99df6dc97252e_302641_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-02/privacy_hu6d356af4ff9900abfdb99df6dc97252e_302641_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21-02/privacy_hu6d356af4ff9900abfdb99df6dc97252e_302641_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post プライバシーポリシーページを設置する">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+プライバシーポリシーページを設置する
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div>
+<p class=article-subtitle>github pagesでもgoogle adsenseの審査に通過したい！ ということで色々先人の方達のサイトをみさせていただいたところ google adsenseを ...</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/github/>GitHub</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/>github pages</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/ssl/>SSL</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.d1d57dc622aaa1ce95d69363a3f3a096_hubb580b3412968a99eba9faea3f838cef_148014_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方" data-hash="md5-0dV9xiKqoc6V1pNjo/Oglg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoで記事の投稿の仕方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error.621932d674b0b12274fed72e955963aa_hu7e39d96c0286759ff592e45a50a24444_91990_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" data-hash="md5-Yhky1nSwsSJ0/tculVljqg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-02/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-02/privacy.ce779a06febcbbf509a49e98b0fd80f0_hu6d356af4ff9900abfdb99df6dc97252e_302641_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post プライバシーポリシーページを設置する" data-hash="md5-zneaBv68u/UJpJ6YsP2A8A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>プライバシーポリシーページを設置する</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_6>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_6>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_5>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_5>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_5>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_5>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_4>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_3>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_3>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_2>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_2>
+github pages
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
+Web
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_2>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_2>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/brew/ class=font_size_1>
+brew
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_1>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/error/ class=font_size_1>
+error
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-actions/ class=font_size_1>
+GitHub Actions
+</a>
+<a href=https://suzukiiichiro.github.io/tags/google-adsense/ class=font_size_1>
+google adsense
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error.621932d674b0b12274fed72e955963aa_hu7e39d96c0286759ff592e45a50a24444_91990_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" data-hash="md5-Yhky1nSwsSJ0/tculVljqg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.d1d57dc622aaa1ce95d69363a3f3a096_hubb580b3412968a99eba9faea3f838cef_148014_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方" data-hash="md5-0dV9xiKqoc6V1pNjo/Oglg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoで記事の投稿の仕方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-02/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-02/privacy.ce779a06febcbbf509a49e98b0fd80f0_hu6d356af4ff9900abfdb99df6dc97252e_302641_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post プライバシーポリシーページを設置する" data-hash="md5-zneaBv68u/UJpJ6YsP2A8A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>プライバシーポリシーページを設置する</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</aside>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>

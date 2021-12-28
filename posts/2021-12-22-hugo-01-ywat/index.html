@@ -9,7 +9,7 @@
 <meta property="og:description" content="CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2021-12-28T04:33:27+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2021-12-28T04:44:07+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
 <meta name=twitter:title content="デザイナーでもできる初めてのHugo #01">
 <meta name=twitter:description content="CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -48,7 +48,7 @@ on-phone--column extended">
 </a>
 </li>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_3>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_4>
 Web開発
 </a>
 </li>
@@ -111,31 +111,31 @@ Web開発
 <h2 class="widget-title section-title">目次</h2>
 <div class=widget--toc>
 <nav id=TableOfContents>
-<ul>
+<ol>
 <li><a href=#hugoのインストール>Hugoのインストール</a></li>
 <li><a href=#設定>設定</a>
-<ul>
+<ol>
 <li><a href=#設定ファイル>設定ファイル</a></li>
-</ul>
+</ol>
 </li>
 <li><a href=#記事の投稿>記事の投稿</a></li>
 <li><a href=#下書きから公開へ>下書きから公開へ</a></li>
 <li><a href=#確認>確認</a></li>
 <li><a href=#公開>公開</a></li>
 <li><a href=#終わりに>終わりに</a></li>
-</ul>
+</ol>
 </nav>
 </div>
 </section>
 <section class=article-content>
-<p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。
-Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
-色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
+<p>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。<br>
+Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。<br>
+色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。<br>
 無料で、httpsも設定できるので非常に便利です。</p>
 <h2 id=hugoのインストール>Hugoのインストール</h2>
-<p>Hugoを使うためにはhugoをインストールする必要があります。
+<p>Hugoを使うためにはhugoをインストールする必要があります。<br>
 インストールは簡単です。</p>
-<p>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。</p>
+<p><small>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。</small></p>
 <p><a class=link href=https://brew.sh/index_ja title=Homebrew target=_blank rel=noopener>Homebrew</a> が必要になります。</p>
 <pre tabindex=0><code>brew install hugo
 </code></pre><h2 id=設定>設定</h2>
@@ -143,8 +143,8 @@ Wordpressのインストールのためにはサーバも必要ですし、ド�
 <pre tabindex=0><code>hugo new site ＜作成するディレクトリ＞
 </code></pre><p>色々表示されているかと思いますが、気にしないで大丈夫です。</p>
 <h3 id=設定ファイル>設定ファイル</h3>
-<p>hugoの設定はTOMLという形式で記述します。
-TOMLに慣れていない人はJSONやYAMLといった形式でも記述できます。
+<p>hugoの設定はTOMLという形式で記述します。<br>
+TOMLに慣れていない人はJSONやYAMLといった形式でも記述できます。<br>
 その場合はconfig.tomlを削除して下さい。</p>
 <pre tabindex=0><code>baseURL = &quot;http://example.org/&quot;
 languageCode = &quot;en-us&quot;
@@ -157,7 +157,7 @@ title = &quot;My New Hugo Site&quot;
 <h2 id=記事の投稿>記事の投稿</h2>
 <p>記事を作成するにはコマンドを打つ必要があります</p>
 <pre tabindex=0><code>hugo new posts/helloworld.md
-</code></pre><p>このコマンドで、postsディレクトリ以下にhelloworld.mdといったファイルが生成されます
+</code></pre><p>このコマンドで、postsディレクトリ以下にhelloworld.mdといったファイルが生成されます<br>
 テーマによってはpostsディレクトリではなく、postであったりするので、テーマの詳細を確認して下さい。</p>
 <h2 id=下書きから公開へ>下書きから公開へ</h2>
 <p>作成されたファイルはmarkdown形式で記述されています。</p>
@@ -166,28 +166,28 @@ title: &quot;helloworld&quot;
 date: 2021-12-22T11:23:09Z
 draft: true
 ---
-</code></pre><p>draft の部分が下書き状態を表しています。
+</code></pre><p>draft の部分が下書き状態を表しています。<br>
 trueにすることで公開となり表示されます。</p>
 <h2 id=確認>確認</h2>
-<p>サイトの確認を行うには
+<p>サイトの確認を行うには<br>
 hugoをインストールしたディレクトリで</p>
 <pre tabindex=0><code>hugo server
-</code></pre><p>を実行します。
-この場合は公開されている記事のみを表示した状態のサーバが立ち上がります。
+</code></pre><p>を実行します。<br>
+この場合は公開されている記事のみを表示した状態のサーバが立ち上がります。<br>
 未公開も含めたい場合は</p>
 <pre tabindex=0><code>hugo server -D
 </code></pre><p>とすることで表示できます。</p>
 <h2 id=公開>公開</h2>
 <p>公開をするにはサイト全体を構築し直す必要があります。</p>
 <pre tabindex=0><code>hugo
-</code></pre><p>このコマンドでサイト全体が自動的に生成されます。
-作成されたサイトは初期状態ではpublicディレクトリに展開されます。
+</code></pre><p>このコマンドでサイト全体が自動的に生成されます。<br>
+作成されたサイトは初期状態ではpublicディレクトリに展開されます。<br>
 configの<em>publicDir</em>に任意のディレクトリを設定することも可能です</p>
 <pre tabindex=0><code>publicDir = 'docs'
 </code></pre><p>この場合はdocsディレクトリに公開ファイルが展開されます。</p>
 <h2 id=終わりに>終わりに</h2>
-<p>駆け足でしたが、hugoの簡単な使い方になります。
-大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。
+<p>駆け足でしたが、hugoの簡単な使い方になります。<br>
+大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。<br>
 みなさんもぜひ、hugoを試してみて下さい。</p>
 </section>
 <section class="section related-contents--wrapper">
@@ -213,6 +213,29 @@ hugo で failed to unmarshal YAML: yaml: control characters are not allowed エ�
 <time class="article-time--item article-time--published">2021.12.22</time>
 </div>
 <p class=article-subtitle>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_126055_1600x0_resize_q75_box.jpg 1600w" width=800 height=492 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+GitHub Pagesを使って無料でSSL付きのサイトを公開
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.28</time>
+</div>
+<p class=article-subtitle>デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の ...</p>
 </div>
 </a>
 </article>
@@ -282,29 +305,6 @@ e-Statのデータの見方
 <time class="article-time--item article-time--published">2021.12.24</time>
 </div>
 <p class=article-subtitle>知識ゼロからのe-Statマイニング 日頃から大量のデータを使ってデータマイニングしてみたいなと思って暇なときにサイトを巡回していたらe-St ...</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>
-「UNIXという考え方―その設計思想と哲学」　メモ
-</h2>
-<div class=article-time>
-<time class="article-time--item article-time--published">2021.12.25</time>
-</div>
-<p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
 </div>
 </a>
 </article>
@@ -503,26 +503,26 @@ e-Statのデータの見方
 <section class="widget archives">
 <h2 class="widget-title section-title">アーカイブ</h2>
 <select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2021年12月>
-2021年12月（14）
+2021年12月（15）
 </option></select>
 </section>
 <section class="widget tagCloud">
 <h2 class="widget-title section-title">タグ</h2>
 <div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_6>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_6>
+プログラム
+</a>
 <a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_5>
 Bash
-</a>
-<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_5>
-Hugo
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_5>
 シェルスクリプト
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_5>
 プログラミング
-</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_5>
-プログラム
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_5>
 鈴木維一郎
@@ -536,11 +536,23 @@ e-Stat
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_3>
 データマイニング
 </a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_2>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_2>
+github pages
+</a>
 <a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
 Web
 </a>
 <a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
 Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_2>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_2>
+開発
 </a>
 <a href=https://suzukiiichiro.github.io/tags/brew/ class=font_size_1>
 brew
@@ -551,23 +563,11 @@ css
 <a href=https://suzukiiichiro.github.io/tags/error/ class=font_size_1>
 error
 </a>
-<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_1>
-GitHub
-</a>
 <a href=https://suzukiiichiro.github.io/tags/github-actions/ class=font_size_1>
 GitHub Actions
 </a>
-<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_1>
-github pages
-</a>
 <a href=https://suzukiiichiro.github.io/tags/google-adsense/ class=font_size_1>
 google adsense
-</a>
-<a href=https://suzukiiichiro.github.io/tags/linux/ class=font_size_1>
-Linux
-</a>
-<a href=https://suzukiiichiro.github.io/tags/mac/ class=font_size_1>
-Mac
 </a>
 </div>
 </section>
@@ -719,6 +719,6 @@ Mac
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <script src=https://suzukiiichiro.github.io/js/Custom.js></script>
-<script>let setFillHeight=()=>{const a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight()</script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
 </body>
 </html>
