@@ -8,9 +8,7 @@
         {{ range first .Site.Params.widgets.populerArticles.limit $json }}
           {{ $article := index (where $page ".RelPermalink" "eq" .link ) 0  }}
           {{ if $article }}
-            {{ if eq $article.Title .title }}
-              {{ partial "article-list/tile" (dict "context" $article "size" "400x238" "Type" "articleList") }}
-            {{ end }}
+            {{ partial "article-list/tile" (dict "context" $article "size" "400x238" "Type" "articleList") }}
           {{ end }}
         {{ end }}
     </div>
