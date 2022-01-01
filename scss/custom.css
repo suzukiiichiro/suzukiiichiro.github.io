@@ -67,11 +67,11 @@ body {
   @media (min-width: 1024px) {
     .container.extended {
       --left-sidebar-max-width: 15%;
-      --right-sidebar-max-width: 25%; } }
+      --right-sidebar-max-width: 300px; } }
   @media (min-width: 1280px) {
     .container.extended {
       --left-sidebar-max-width: 15%;
-      --right-sidebar-max-width: 20%; } }
+      --right-sidebar-max-width: 300px; } }
 .main-container {
   padding: 0;
   min-height: calc(var(--vh, 1vh) * 100); }
