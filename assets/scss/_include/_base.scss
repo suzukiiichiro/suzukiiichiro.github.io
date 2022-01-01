@@ -64,11 +64,11 @@ body {
     }
     @include respond(lg) {
       --left-sidebar-max-width: 15%;
-      --right-sidebar-max-width: 25%;
+      --right-sidebar-max-width: 300px;
     }
     @include respond(xl) {
       --left-sidebar-max-width: 15%;
-      --right-sidebar-max-width: 20%;
+      --right-sidebar-max-width: 300px;
     }
   }
 }
