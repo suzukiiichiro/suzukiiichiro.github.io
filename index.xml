@@ -436,6 +436,27 @@ exit&lt;span class="p">;&lt;/span>
 &lt;p>日頃、手間を掛けてコマンドを入力している場合は、シェルスクリプトを使って簡便にできる事に加え、さらにカスタマイズを加え、便利に記事投稿ができるとブログも気分もがぜん盛り上がりますね。&lt;/p>
 &lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>
+定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B07LBSWJNP&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=fd3f2918d16f32f53feccf492263133a" target="_blank">
 &lt;div class="columns amazon-image">
 &lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B07LBSWJNP&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
@@ -447,21 +468,6 @@ exit&lt;span class="p">;&lt;/span>
 実践的なGit/GitHubの使い方が身につく「いちばんやさしい」入門書です。
 前半は、手元のパソコンでファイルを実際にバージョン管理しながら、
 Gitの基本的な使い方を解説。
-&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/Web%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEGitHub%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E5%8A%B9%E7%8E%87%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96%E3%81%99%E3%82%8B%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BA%E3%83%84%E3%83%BC%E3%83%AB-%E5%A1%A9%E8%B0%B7-%E5%95%93/dp/4844337009?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;amp;crid=3C1ZNYZB4N0C3&amp;amp;keywords=github&amp;amp;qid=1640665205&amp;amp;sprefix=github%2Caps%2C284&amp;amp;sr=8-8&amp;amp;linkCode=ll1&amp;amp;tag=nlpqueens-22&amp;amp;linkId=65876fc9d77e695d11f02ec867bc8c4a&amp;amp;language=ja_JP&amp;amp;ref_=as_li_ss_tl" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;ASIN=4844337009&amp;amp;Format=_SL250_&amp;amp;ID=AsinImage&amp;amp;MarketPlace=JP&amp;amp;ServiceVersion=20070822&amp;amp;WS=1&amp;amp;tag=nlpqueens-22&amp;amp;language=ja_JP">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">Web制作者のためのGitHubの教科書 チームの効率を最大化する共同開発ツール&lt;/h2>
-&lt;p>
-そろそろ「プルリ」しませんか?しくみを理解して使えば怖くない。リポジトリの作成から複数デザインの提示、「Pull Request」を使った分担作業まで、Webサイト制作を例に実践的なワークフローを身に付ける。
 &lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
