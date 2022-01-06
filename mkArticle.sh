@@ -43,7 +43,7 @@ function execHugo(){
   echo "";
   echo "hugoコマンドを実行します";
   echo "hugo new posts/$today-$number-$author/index.md"
-  #hugo new posts/$today-$number-$author/index.md
+  hugo new posts/$today-$number-$author/index.md
 
 }
 #
