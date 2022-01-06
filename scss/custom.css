@@ -380,7 +380,8 @@ footer.site-footer {
         margin: 0 0 5px; }
 
 .main-article .article-content {
-  margin-top: 0; }
+  margin-top: 0;
+  line-height: 2; }
   @media screen and (max-width: 640px) {
     .main-article .article-content {
       padding-left: 15px;
@@ -483,7 +484,19 @@ footer.site-footer {
     padding: 10px 25px;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    margin: 0; }
+    margin: 0;
+    display: flex;
+    align-items: center; }
+  .tableOfContents #btn-closeTOC {
+    margin-left: auto;
+    padding: 10px;
+    border: none;
+    background: no-repeat center center;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%230" d="M19,13H5V11H19V13Z" /></svg>');
+    width: 1em;
+    height: 1em; }
+    .tableOfContents #btn-closeTOC:hover {
+      cursor: pointer; }
   .tableOfContents .widget--toc {
     box-shadow: none; }
     .tableOfContents .widget--toc #TableOfContents {
@@ -503,8 +516,18 @@ footer.site-footer {
           margin: 0; }
           .tableOfContents .widget--toc #TableOfContents ul li a, .tableOfContents .widget--toc #TableOfContents ol li a {
             padding: 2px 8px; }
-          .tableOfContents .widget--toc #TableOfContents ul li ul, .tableOfContents .widget--toc #TableOfContents ol li ul {
-            padding: 10px 1.5em; }
+          .tableOfContents .widget--toc #TableOfContents ul li ul, .tableOfContents .widget--toc #TableOfContents ul li ol, .tableOfContents .widget--toc #TableOfContents ol li ul, .tableOfContents .widget--toc #TableOfContents ol li ol {
+            padding: 10px 1.5em 5px; }
+  .tableOfContents.closeTOC .widget--toc {
+    display: none; }
+  .tableOfContents.closeTOC #btn-closeTOC {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%230" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>'); }
+
+[data-scheme="dark"] .tableOfContents.closeTOC #btn-closeTOC {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>'); }
+
+[data-scheme="dark"] .tableOfContents #btn-closeTOC {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFF" d="M19,13H5V11H19V13Z" /></svg>'); }
 
 .archives-date.section-title {
   margin: 20px 15px;
