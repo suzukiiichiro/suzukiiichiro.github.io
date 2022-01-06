@@ -2,8 +2,9 @@
   {{ partialCached "article/components/details_article" . .RelPermalink }}
 
   {{ partial "article/components/tableOfContents" . }}
-
+  {{ partial "ads/detail" . }}
   {{ partial "article/components/content" . }}
+  {{ partial "ads/detailUpperRelated" . }}
   {{ partial "article/components/related-contents" . }}
   {{ partial "article/components/footer" . }}
   {{ if or .Params.math .Site.Params.article.math }}
