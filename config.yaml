@@ -150,7 +150,7 @@ params:
 
     widgets:
         enabled:
-            # - 300x250
+            - 300x250
             - search
             - popular-articles
             - archives
