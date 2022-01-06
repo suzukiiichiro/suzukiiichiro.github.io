@@ -45,6 +45,7 @@ function execHugo(){
   echo "hugo new posts/$today-$number-$author/index.md"
   hugo new posts/$today-$number-$author/index.md
 
+  # 処理終了
   echo "ファイルの編集は以下の通りです。"
   echo "vim content/posts/2022-01-06-01-suzuki/index.md;"
 }
