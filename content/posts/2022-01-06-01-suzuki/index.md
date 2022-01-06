@@ -165,7 +165,7 @@ function execHugo(){
 
   # 処理終了
   echo "ファイルの編集は以下の通りです。"
-  echo "vim content/posts/2022-01-06-01-suzuki/index.md;"
+  echo "vim content/posts/$today-$number-$author/index.md;"
 }
 #
 # パラメータの取得
