@@ -53,7 +53,64 @@ break&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">前述のとおり作成者、ナンバリングは省略可能です。
 $ bash mkArticle.sh
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ソース全文">ソース全文&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkArticle.sh" data-lang="bash:mkArticle.sh">&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="おわりに">おわりに&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkArticle.sh" data-lang="bash:mkArticle.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+: &lt;span class="s1">&amp;#39;使い方
+&lt;/span>&lt;span class="s1">一つ目のパラメーターに作成者を指定します
+&lt;/span>&lt;span class="s1">二つ目のパラメータにナンバリングを指定します
+&lt;/span>&lt;span class="s1">一つ目 01(未指定の場合は01）
+&lt;/span>&lt;span class="s1">二つ目 02
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">（例)
+&lt;/span>&lt;span class="s1">$ bash mkArticle.sh suzuki 01;
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1">#作成者 無指定であれば入力を促す&lt;/span>
+&lt;span class="nv">author&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#今日の日付&lt;/span>
+&lt;span class="nv">today&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>date &lt;span class="s2">&amp;#34;+%Y-%m-%d%n&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#今日のインデクス 一つ目の投稿であれば01 二つ目の投稿であれば02&lt;/span>
+&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">function&lt;/span> getParam&lt;span class="o">(){&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -z &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;01&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -z &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$author&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ユーザー名を半角で入力&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> author&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nb">true&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;content/posts/&lt;/span>&lt;span class="nv">$today&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$author&lt;/span>&lt;span class="s2">/index.md&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2"> ファイルが既に存在します。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;別のナンバリングを指定して下さい 02とか03とか&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> number&lt;span class="p">;&lt;/span>
+&lt;span class="k">else&lt;/span>
+break&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">function&lt;/span> execHugo&lt;span class="o">(){&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;hugoコマンドを実行します&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;hugo new posts/&lt;/span>&lt;span class="nv">$today&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$author&lt;/span>&lt;span class="s2">/index.md&amp;#34;&lt;/span>
+hugo new posts/&lt;span class="nv">$today&lt;/span>-&lt;span class="nv">$number&lt;/span>-&lt;span class="nv">$author&lt;/span>/index.md
+&lt;span class="c1"># 処理終了&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ファイルの編集は以下の通りです。&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;vim content/posts/2022-01-06-01-suzuki/index.md;&amp;#34;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># パラメータの取得&lt;/span>
+getParam&lt;span class="p">;&lt;/span>
+&lt;span class="c1"># hugoコマンドの実行&lt;/span>
+execHugo&lt;span class="p">;&lt;/span>
+exit&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="おわりに">おわりに&lt;/h2>
 &lt;p>日頃、手間を掛けてコマンドを入力している場合は、シェルスクリプトを使って簡便にできる事に加え、さらにカスタマイズを加え、便利に記事投稿ができるとブログも気分もがぜん盛り上がりますね。&lt;/p></description></item><item><title>GitHub Pagesを使って無料でSSL付きのサイトを公開</title><link>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</link><pubDate>Tue, 28 Dec 2021 12:07:19 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg" alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" />&lt;p>デザイナーでもできる初めてのHugoの2回目になります。&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21/" >前回（デザイナーでもできる初めてのHugo #01）&lt;/a>はHugoのインストールから公開の方法までを説明しました。&lt;br>
 今回は前回作成したページをGitHub Pagesを使って公開してみたいと思います。&lt;/p>
