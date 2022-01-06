@@ -3,7 +3,7 @@ title: "SCSS/CSSを含んだファイルがGitHub Actionsでビルドできな�
 date: 2021-12-24T09:43:41+09:00
 draft: false
 
-catrgories:
+categories:
   - プログラミング
 tags:
   - Hugo

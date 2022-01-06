@@ -1,13 +1,16 @@
+{{ $last := time (.Lastmod.Format "2006-01-02") }}
+{{ $date := time (.Date.Format "2006-01-02") }}
 <div class="article-details arcile-single">
-  {{ if .Params.categories }}
   <header class="article-header">
+    {{ if .Params.categories }}
     <div class="article-category">
-      {{ range first 1 (.GetTerms "categories") }}
+      {{ range (.GetTerms "categories") }}
       <a href="{{ .RelPermalink }}" {{ with .Params.style }} style="background-color: {{ .background }}; color: {{ .color }};" {{ end }}>
         {{ .LinkTitle }}
       </a>
       {{ end }}
     </div>
+    {{ end }}
     <div class="article-info">
       {{ if or (not .Date.IsZero) (.Site.Params.article.readingTime) }}
         {{ if not .Date.IsZero }}
@@ -15,10 +18,12 @@
             {{- .Date.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
         </time>
         {{ end }}
+        {{ if ne $last $date }}
         {{ if .Site.Params.dateFormat.lastUpdated }}
         <time class="article-time--item article-time--updatedate">
           {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
         </time>
+        {{ end }}
         {{ end }}
         {{ if .Site.Params.article.readingTime }}
           <time class="article-time--item article-time--reading">
@@ -28,7 +33,6 @@
       {{ end }}
     </div>
   </header>
-  {{ end }}
   <h2 class="article-title">
     <a href="{{ .RelPermalink }}">
       {{ if .Params.slugTitle }}

@@ -1,0 +1,8 @@
+{{ if (.Scratch.Get "hasTOC") }}
+<section class="widget archives tableOfContents">
+  <h2 class="widget-title section-title">{{ T "article.tableOfContents" }}<button type="buton" id="btn-closeTOC" onClick="custom.toggleTOC(event)"></button></h2>
+  <div class="widget--toc">
+    {{ .TableOfContents }}
+  </div>
+</section>
+{{ end }}

@@ -13,16 +13,19 @@
 }
 .menu-section {
   border-top: 2px solid var(--accent-color);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0;
   ~ .menu-section {
   }
   .menu {
     font-size: 0.9em;
+    a {
+      text-align: right;
+    }
   }
 }
 #categories-menu {
   #link-category {
+    margin-top: 20px;
     color: var(--card-text-color-main);
     text-align: right;
     font-weight: bold;
@@ -30,6 +33,11 @@
     flex-direction: column;
     line-height: 1.2;
     margin-bottom: 10px;
+    align-items: flex-end;
+    background: no-repeat 103% center;
+    padding-right: 0.75em;
+    @include icon("M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z", "999");
+    background-size: 1em auto;
     &:after {
       font-size: 0.7em;
       font-weight: normal;
@@ -41,16 +49,81 @@
   }
 }
 #btn-mode {
-  margin: 10px 20px;
+  margin: 10px;
   display: flex;
   justify-content: flex-end;
+  @include mq(smp) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+  @include mq(tab) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
   .icon-tabler-toggle-left {
     fill: #999999;
+  }
+  #dark-mode-toggle {
+    svg {
+      width: 0.9rem;
+      @include mq(smp) {
+        width: 1.1rem;
+      }
+      @include mq(tab) {
+        width: 1.1rem;
+      }
+    }
   }
 }
 .left-sidebar {
   background: var(--side-background);
   padding: 15px;
+  @include mq(tab) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+  @include mq(smp) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    max-width: inherit !important;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+  .site-info {
+    padding: 0;
+    .site-avatar {
+      width: 60px;
+      height: inherit;
+      @include mq(tab) {
+        width: 40px;
+      }
+      @include mq(smp) {
+        width: 30px;
+        font-size: 1rem;
+        .site-description {
+          margin: 0;
+          font-size: 0.6em;
+        }
+      }
+      .site-logo {
+        border-radius: 8px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .site-description {
+      margin: 0 0 10px;
+    }
+  }
 }
 .right-sidebar {
   display: block;
@@ -62,6 +135,105 @@
      &:after {
        display: none;
      }
+    }
+  }
+}
+
+
+.menu-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: bold;
+  .menu-list {
+    font-weight: normal;
+    font-size: 0.9em;
+  }
+}
+
+@mixin menu() {
+  .menu {
+    display: flex !important;
+    flex-direction: row;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    width: inherit;
+    li {
+      padding: 0;
+      display: flex;
+      a {
+        padding: 5px 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  #main-menu {
+    overflow-x: scroll;
+    margin-top: 10px;
+    -ms-overflow-style: none; 
+    font-size: 0.8rem;
+    &::-webkit-scrollbar {
+      display:none;
+    }
+    #main-menu-area {
+      display: flex;
+      white-space: nowrap;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      #link-category {
+        margin: 0;
+        padding: 0;
+        display: none;
+      }
+    }
+  }
+  .menu-list {
+    width: inherit;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1em !important;
+  }
+}
+
+@include mq(tab) {
+  @include menu();
+}
+@include mq(smp) {
+  @include menu();
+}
+
+#toggle-menu {
+  left: 0;
+  top: 0;
+  display: inherit;
+  .hamburger-box {
+    width: 24px;
+    height: 24px;
+    background: no-repeat center center;
+    @include icon("M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z");
+    background-size: 100% auto;
+    .hamburger-inner {
+      display: none;
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+html {
+  &[data-scheme="dark"] {
+    #toggle-menu {
+      .hamburger-box {
+        @include icon("M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z", "FFFFFF");
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-<!--ふったーを記述する -->
+<!--フッター -->
 <footer class="site-footer">
     <section class="copyright">
         &copy; 
@@ -11,7 +11,11 @@
         <a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a> .All Rights Reserved.
     </section>
 </footer>
+<!--/フッター -->
+
+{{ partialCached "widget/popular-articles--month.html" . }}
+
 
 {{ partialCached "footer/components/script.html" . }}
 {{ partialCached "footer/components/custom-font.html" . }}
-{{ partial "footer/custom.html" . }}
+{{ partialCached "footer/custom.html" . }}

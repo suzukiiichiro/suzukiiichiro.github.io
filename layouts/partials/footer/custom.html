@@ -2,7 +2,7 @@
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,10 +21,46 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  {{ if .Params.image }}
+  {{- $image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
+  logEvent(analytics, 'page_view', {
+    content_type: 'images',
+    image_url: '{{ $image.permalink}}',
+  });
+  {{ end }}
 </script>
 <!-- /Analytics -->
+
+
 
 <!-- Google Adsence -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin="anonymous"></script>
 <!-- /Google Adsence -->
 <script src="{{ (resources.Get "js/Custom.js").RelPermalink }}"></script>
+
+
+<script>
+let setFillHeight = () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+window.addEventListener('resize', setFillHeight);
+setFillHeight();
+
+document.addEventListener('DOMContentLoaded', () => {
+  let code = document.getElementsByTagName('code');
+  Array.from(code).forEach(el => {
+    if (el.className) {
+      let s = el.className.split(':');
+      let highlightLang = s[0];
+      let filename = s[1];
+      if (filename) {
+        el.classList.remove(el.className);
+        el.classList.add(highlightLang);
+        el.parentElement.setAttribute('data-lang', filename);
+        el.parentElement.classList.add('code-block-header');
+      }
+    }
+  });
+});
+</script>

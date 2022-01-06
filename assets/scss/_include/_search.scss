@@ -1,0 +1,35 @@
+.search-list--form {
+  margin: 0;
+  padding: 20px 15px 20px;
+  background: none;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--body-background);
+  .form-area {
+    display: flex;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    label {
+      position: relative;
+      display: flex;
+    }
+    input {
+      font-size: 1rem;
+      padding: 15px;
+      border :none;
+      box-shadow: none;
+    }
+  }
+}
+.search-list {
+  .section-title {
+    background: none;
+    font-weight: normal;
+    color: var(--card-text-color-secondary);
+    margin-bottom: 20px;
+  }
+}
+.search-result--list {
+  margin: 0 15px 80px;
+}

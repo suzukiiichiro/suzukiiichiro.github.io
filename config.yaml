@@ -55,8 +55,8 @@ params:
         # showYear: true
 
     dateFormat:
-        published: 2006-01-02
-        lastUpdated: 2006-01-02
+        published: 2006.01.02
+        lastUpdated: 2006.01.02
 
     sidebar:
 #         emoji: 🍥
@@ -150,21 +150,21 @@ params:
 
     widgets:
         enabled:
+            - 300x250
             - search
+            - popular-articles
             - archives
             - tag-cloud
-            # - popular-articles
 
 #         archives:
 #             limit: 5
-
-#         tagCloud:
-#             limit: 10
+        tagCloud:
+            limit: 20
         categories:
             limit: 10
 
-        # populer-articles:
-        #     limit: 10
+        populerArticles:
+            limit: 10
 
 #     opengraph:
 #         twitter:
@@ -236,14 +236,15 @@ related:
         - name: categories
           weight: 200
 
-# markup:
-#     goldmark:
-#         renderer:
-#             ## Set to true if you have HTML content inside Markdown
-#             unsafe: false
-#     tableOfContents:
-#         endLevel: 4
-#         ordered: true
-#         startLevel: 2
-#     highlight:
-#         noClasses: false
+markup:
+    goldmark:
+        renderer:
+            ## Set to true if you have HTML content inside Markdown
+            unsafe: true
+            hardWraps: true
+    tableOfContents:
+        endLevel: 4
+        ordered: true
+        startLevel: 2
+    highlight:
+        noClasses: false

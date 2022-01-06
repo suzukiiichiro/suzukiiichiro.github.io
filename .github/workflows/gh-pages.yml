@@ -1,6 +1,9 @@
 name: Hugo
 
-on: "push"
+on:
+  push:
+  schedule:
+    - cron: '*/10 * * * *'
 
 jobs:
   gh-pages:
@@ -9,6 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          persist-credentials: false
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
