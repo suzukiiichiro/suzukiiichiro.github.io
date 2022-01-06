@@ -15,6 +15,9 @@ class Custom {
     };
     evChangeArchives();
   }
+  toggleTOC(e) {
+    document.querySelector('.tableOfContents').classList.toggle('closeTOC');
+  }
   //実行
   init(){
     this.addEvents();
