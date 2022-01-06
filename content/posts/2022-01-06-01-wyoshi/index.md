@@ -1,0 +1,263 @@
+---
+title: "簡単にできるHugoで人気の記事を表示する方法 #1"
+date: 2022-01-06T16:50:50+09:00
+draft: false
+image: analytics.jpg
+categories:
+  - Web開発
+tags:
+  - Hugo
+  - GitHub
+  - GitHub Pages
+  - プログラム
+  - デザイナー
+  - 開発
+  - wyoshi
+  - Google アナリティクス
+  - Google Analytics
+---
+Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。
+関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。
+
+しかし、1点だけどうしても重要な機能がありません。
+それは人気記事の表示です。
+人気記事を表示させるとなると、データベースを用意したりサーバのアクセスカウントを行う必要があります。
+そんな面倒なことはしたくありませんよね？
+
+今回はHugoでも簡単に人気の記事を表示する方法を紹介いたします。
+
+## 必要なもの
+Hugoで人気記事を出すために必要なものは、
+- Googleスプレッドシート
+- Googleアナリティクス
+
+以上です。
+それでは実際の設定やプログラムを行っていきましょう。
+
+## Googleアナリティクスの設定
+Googleアナリティクスをサイトに設定します。
+設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在)
+v4を設定している場合は、同時にv2も設定する必要があります。
+
+「アカウントを作成」「アカウントの設定」をした後に、「 **プロパティの設定** 」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定することができます。
+![ユニバーサル アナリティクス プロパティの作成](setting.png "")
+
+あとはv4とv2のコードをサイトに貼り付けるだけです。
+貼り付け方法はGoogleに書いてある通りです。
+
+## スプレッドシートの設定
+次にスプレッドシートを設定します。
+Googleドライブで「新規」「Googleスプレッドシート」でシートを作成します。
+作成したシートに適当な名前をつけます。
+
+その後に、「拡張機能」の「App Script」を押して、GoogleAppScript（GAS）に移動します。
+![ユニバーサル アナリティクス プロパティの作成](spreads-gas.png "")
+
+## GASのプログラム
+
+### 日付の取得
+日付を計算するために、「daysjs」というライブラリを追加します。
+ライブラリの＋をクリックして、以下を検索します。
+```
+1ShsRhHc8tgPy5wGOzUvgEhOedJUQD53m-gd8lG2MOgs-dXC_aCZn9lFB
+```
+検索して、days.jsが表示されたら追加をします。
+
+![day.jsライブラリの追加](dayjs.png "")
+
+これで日付の検索が可能になります。
+以下が日付のプログラムです。
+
+今日から1日、1月、1年前なのかという切り替えが可能です。
+- year: 今日から1年間の範囲
+- month: 今日から1ヶ月の範囲
+- day: 今日から1日の範囲
+
+
+```javascript
+function getDate(type) {
+  let calc = 'd';
+  switch(type) {
+    case "month": calc = 'M'; break;
+    case "year": calc = 'y'; break;
+    default: calc = 'd'; break;
+  }
+  const d1 = dayjs.dayjs().locale('ja');
+  return {start: d1.subtract(1, calc).format('YYYY-MM-DD'), end: d1.format('YYYY-MM-DD')};
+}
+
+function test() {
+  let d = getDate('day');
+  console.log(d);
+}
+```
+
+ここまでをテスト実行してみましょう。
+デバッグの隣りにあるセレクトを「test」にして、「実行」を押してみます。
+![](gas1.png "")
+正常に終了されれば実行ログに結果と実行完了が表示されるはずです。
+
+
+
+### GASとGoogleアナリティクスの連携
+GASとアナリティクスの連携にはビューIDが必要です。
+ビューIDはv2で取得できるので、v4とv2を設定したのはこのビューIDを取得するためになります。
+
+GASのプログラムにGoogleアナリティクスの「アカウント」「プロパティ」「ビュー」「ビューの設定」にあるビューIDを設定します。
+設定する際は「ga:ビューID」と ```ga:``` を付ける必要があります。
+
+先程のプログラムの下に、下記のプログラムを記述します。
+
+```javascript
+function getGoogleAnalytics(name) {
+  const id = "ga:[GAビューID]";
+  const date = getDate(name);
+  const response = AnalyticsReporting.Reports.batchGet({
+    reportRequests: [{
+      viewId: id,
+      dateRanges: [{startDate:date.start,endDate: date.end}],
+      samplingLevel: 'LARGE',
+      metrics: [
+        {expression: 'ga:pageviews'},
+        {expression: 'ga:sessions'},
+        {expression: 'ga:users'},
+      ],
+      dimensions: [
+        {name: 'ga:pagePath'}
+      ], 
+      orderBys: [{
+        fieldName: 'ga:pageviews',
+        sortOrder: "DESCENDING",
+      }],
+    }]
+  });
+  let rows = JSON.parse(response).reports[0].data.rows;
+  rows = rows.filter(f => /posts/.test(f.dimensions[0])).map(f => {
+      return f.dimensions.concat(f.metrics[0].values);
+  });
+  let sheet = SpreadsheetApp.getActive().getSheetByName(name);
+  sheet.clear();
+  rows.unshift(["link", "pv", 'session', 'users']);
+  sheet.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
+}
+
+function setMonth() {
+  getGoogleAnalytics('month');
+} 
+```
+
+ここでは、ページのパスをキーとしてページビューとセッション、ユーザー数を集計するようにしています。
+並び順はpageviewsの数の降順です。
+
+必要なデータがあれば各自で編集することをおすすめいたします。
+
+そして、各項目のラベルを出力するために、
+```javascript
+rows.unshift(["link", "pv", 'session', 'users']);
+```
+として、先頭行のデータにラベル行を追加しています。
+この部分も各自のデータに合うようにしてください。
+
+アナリティクスから取得したデータはスプレッドシートのシート名に紐付けるので、
+```javascript
+getGoogleAnalytics('month');
+```
+の場合は、「month」というシートにデータを反映するということになります。
+
+#### サービスの読み込み
+GASとアナリティクスを連携させるために、サービスを読み込みます。
+サービスのプラスマークをクリックして、「Analytics Reporting API」を選択、追加します。
+以上でサービスの読み込みは終わりです。
+![](service.png "")
+
+それでは、実行してみましょう。
+
+#### 実行
+まずははスプレッドシートに「month」という名前のシートを作ります。
+![](sheet.png "")
+シートができたら、再度コードエディターに戻ります。
+
+先程のデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。
+承認を求められるので、「権限を確認」を押します。
+![](perm1.png "")
+使用するアカウントをクリクで選んで、「詳細」をクリックして、「〜（安全ではないページ）に移動」をクリックします。
+すると、アクセスの許可を求められるので、「許可」を押します。
+![](perm2.png "")
+
+実行ログに結果と実行完了が表示されるはずです。
+スプレッドシートを確認すると、アナリティクスのデータが反映されているはずです
+![](sheet2.png "")
+
+これで月間の人気記事の取得ができました。
+同じように日、年も設定しておきましょう。
+```javascript
+function setDay() {
+  getGoogleAnalytics('day');
+} 
+function setYear() {
+  getGoogleAnalytics('year');
+}
+```
+
+## まとめ
+まずがGASとアナリティクスの連携ができました。
+次回はこのデータを使ってHugoとアナリティクスを連携して、人気記事を表示できるようにしたいと思います。
+
+ここまでの全プログラムは下記になります。
+
+```javascript
+function getDate(type) {
+  let calc = 'd';
+  switch(type) {
+    case "month": calc = 'M'; break;
+    case "year": calc = 'y'; break;
+    default: calc = 'd'; break;
+  }
+  const d1 = dayjs.dayjs().locale('ja');
+  return {start: d1.subtract(1, calc).format('YYYY-MM-DD'), end: d1.format('YYYY-MM-DD')};
+}
+
+function getGoogleAnalytics(name) {
+  const id = "ga:[GAビューID]";
+  const date = getDate(name);
+  const response = AnalyticsReporting.Reports.batchGet({
+    reportRequests: [{
+      viewId: id,
+      dateRanges: [{startDate:date.start,endDate: date.end}], 
+      samplingLevel: 'LARGE',
+      metrics: [
+        {expression: 'ga:pageviews'},
+        {expression: 'ga:sessions'},
+        {expression: 'ga:users'},
+      ],
+      dimensions: [
+        {name: 'ga:pagePath'}
+      ], 
+      orderBys: [{
+        fieldName: 'ga:pageviews',
+        sortOrder: "DESCENDING",
+      }],
+    }]
+  });
+  let rows = JSON.parse(response).reports[0].data.rows;
+  rows = rows.filter(f => /posts/.test(f.dimensions[0])).map(f => {
+      return f.dimensions.concat(f.metrics[0].values);
+  });
+  let sheet = SpreadsheetApp.getActive().getSheetByName(name);
+  sheet.clear();
+  rows.unshift(["link", "pv", 'session', 'users']);
+  sheet.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
+}
+
+function setMonth() {
+  getGoogleAnalytics('month');
+}
+
+function setDay() {
+  getGoogleAnalytics('day');
+}
+
+function setYear() {
+  getGoogleAnalytics('year');
+}
+```
