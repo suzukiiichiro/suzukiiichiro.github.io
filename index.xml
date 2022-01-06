@@ -1,4 +1,326 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 06 Jan 2022 14:21:51 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/</link><pubDate>Thu, 06 Jan 2022 14:21:51 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 06 Jan 2022 16:50:50 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>簡単にできるHugoで人気の記事を表示する方法 #1</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
+関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。&lt;/p>
+&lt;p>しかし、1点だけどうしても重要な機能がありません。&lt;br>
+それは人気記事の表示です。&lt;br>
+人気記事を表示させるとなると、データベースを用意したりサーバのアクセスカウントを行う必要があります。&lt;br>
+そんな面倒なことはしたくありませんよね？&lt;/p>
+&lt;p>今回はHugoでも簡単に人気の記事を表示する方法を紹介いたします。&lt;/p>
+&lt;h2 id="必要なもの">必要なもの&lt;/h2>
+&lt;p>Hugoで人気記事を出すために必要なものは、&lt;/p>
+&lt;ul>
+&lt;li>Googleスプレッドシート&lt;/li>
+&lt;li>Googleアナリティクス&lt;/li>
+&lt;/ul>
+&lt;p>以上です。&lt;br>
+それでは実際の設定やプログラムを行っていきましょう。&lt;/p>
+&lt;h2 id="googleアナリティクスの設定">Googleアナリティクスの設定&lt;/h2>
+&lt;p>Googleアナリティクスをサイトに設定します。&lt;br>
+設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在)&lt;br>
+v4を設定している場合は、同時にv2も設定する必要があります。&lt;/p>
+&lt;p>「アカウントを作成」「アカウントの設定」をした後に、「 &lt;strong>プロパティの設定&lt;/strong> 」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定することができます。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 163;
+flex-basis: 391px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting.png" data-size="980x601">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting.png"
+width="980"
+height="601"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting_hu1de37cbb321319f7b20f9e0b0bc31b91_205070_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting_hu1de37cbb321319f7b20f9e0b0bc31b91_205070_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ユニバーサル アナリティクス プロパティの作成">
+&lt;/a>
+&lt;figcaption>ユニバーサル アナリティクス プロパティの作成&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>あとはv4とv2のコードをサイトに貼り付けるだけです。&lt;br>
+貼り付け方法はGoogleに書いてある通りです。&lt;/p>
+&lt;h2 id="スプレッドシートの設定">スプレッドシートの設定&lt;/h2>
+&lt;p>次にスプレッドシートを設定します。&lt;br>
+Googleドライブで「新規」「Googleスプレッドシート」でシートを作成します。&lt;br>
+作成したシートに適当な名前をつけます。&lt;/p>
+&lt;p>その後に、「拡張機能」の「App Script」を押して、GoogleAppScript（GAS）に移動します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 180;
+flex-basis: 433px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas.png" data-size="980x542">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas.png"
+width="980"
+height="542"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas_hua5e979262c3621ae25b1ecd1b3f95ba4_106503_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas_hua5e979262c3621ae25b1ecd1b3f95ba4_106503_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ユニバーサル アナリティクス プロパティの作成">
+&lt;/a>
+&lt;figcaption>ユニバーサル アナリティクス プロパティの作成&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h2 id="gasのプログラム">GASのプログラム&lt;/h2>
+&lt;h3 id="日付の取得">日付の取得&lt;/h3>
+&lt;p>日付を計算するために、「daysjs」というライブラリを追加します。&lt;br>
+ライブラリの＋をクリックして、以下を検索します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1ShsRhHc8tgPy5wGOzUvgEhOedJUQD53m-gd8lG2MOgs-dXC_aCZn9lFB
+&lt;/code>&lt;/pre>&lt;p>検索して、days.jsが表示されたら追加をします。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 133;
+flex-basis: 321px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs.png" data-size="980x732">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs.png"
+width="980"
+height="732"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs_huc72d901922502ee5755367cabcfc143d_172673_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs_huc72d901922502ee5755367cabcfc143d_172673_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="day.jsライブラリの追加">
+&lt;/a>
+&lt;figcaption>day.jsライブラリの追加&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>これで日付の検索が可能になります。&lt;br>
+以下が日付のプログラムです。&lt;/p>
+&lt;p>今日から1日、1月、1年前なのかという切り替えが可能です。&lt;/p>
+&lt;ul>
+&lt;li>year: 今日から1年間の範囲&lt;/li>
+&lt;li>month: 今日から1ヶ月の範囲&lt;/li>
+&lt;li>day: 今日から1日の範囲&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">type&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">switch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">type&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;month&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;M&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;year&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;y&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">d1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">dayjs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dayjs&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">locale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ja&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">d1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subtract&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">calc&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;YYYY-MM-DD&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nx">end&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">d1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;YYYY-MM-DD&amp;#39;&lt;/span>&lt;span class="p">)};&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">test&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;day&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">d&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここまでをテスト実行してみましょう。&lt;br>
+デバッグの隣りにあるセレクトを「test」にして、「実行」を押してみます。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 138;
+flex-basis: 333px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1.png" data-size="980x706">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1.png"
+width="980"
+height="706"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1_hu88d49d2022eb88c51862fef2af5ceb89_155241_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1_hu88d49d2022eb88c51862fef2af5ceb89_155241_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;br>
+正常に終了されれば実行ログに結果と実行完了が表示されるはずです。&lt;/p>
+&lt;h3 id="gasとgoogleアナリティクスの連携">GASとGoogleアナリティクスの連携&lt;/h3>
+&lt;p>GASとアナリティクスの連携にはビューIDが必要です。&lt;br>
+ビューIDはv2で取得できるので、v4とv2を設定したのはこのビューIDを取得するためになります。&lt;/p>
+&lt;p>GASのプログラムにGoogleアナリティクスの「アカウント」「プロパティ」「ビュー」「ビューの設定」にあるビューIDを設定します。&lt;br>
+設定する際は「ga:ビューID」と &lt;code>ga:&lt;/code> を付ける必要があります。&lt;/p>
+&lt;p>先程のプログラムの下に、下記のプログラムを記述します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ga:[GAビューID]&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">AnalyticsReporting&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Reports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">batchGet&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;span class="nx">reportRequests&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;span class="nx">viewId&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">dateRanges&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>&lt;span class="nx">startDate&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="nx">date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">endDate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">end&lt;/span>&lt;span class="p">}],&lt;/span>
+&lt;span class="nx">samplingLevel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;LARGE&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">metrics&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pageviews&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:sessions&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:users&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="nx">dimensions&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pagePath&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="nx">orderBys&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;span class="nx">fieldName&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pageviews&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">sortOrder&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;DESCENDING&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="p">}],&lt;/span>
+&lt;span class="p">}]&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">rows&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">reports&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rows&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">rows&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="nx">posts&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dimensions&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">])).&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dimensions&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">concat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">metrics&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">values&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">sheet&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">SpreadsheetApp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getActive&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">getSheetByName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">sheet&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">clear&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">unshift&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;link&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;pv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;session&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;users&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="nx">sheet&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">setValues&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rows&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">setMonth&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;month&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここでは、ページのパスをキーとしてページビューとセッション、ユーザー数を集計するようにしています。&lt;br>
+並び順はpageviewsの数の降順です。&lt;/p>
+&lt;p>必要なデータがあれば各自で編集することをおすすめいたします。&lt;/p>
+&lt;p>そして、各項目のラベルを出力するために、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">unshift&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;link&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;pv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;session&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;users&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>として、先頭行のデータにラベル行を追加しています。&lt;br>
+この部分も各自のデータに合うようにしてください。&lt;/p>
+&lt;p>アナリティクスから取得したデータはスプレッドシートのシート名に紐付けるので、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;month&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>の場合は、「month」というシートにデータを反映するということになります。&lt;/p>
+&lt;h4 id="サービスの読み込み">サービスの読み込み&lt;/h4>
+&lt;p>GASとアナリティクスを連携させるために、サービスを読み込みます。&lt;br>
+サービスのプラスマークをクリックして、「Analytics Reporting API」を選択、追加します。&lt;br>
+以上でサービスの読み込みは終わりです。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 91;
+flex-basis: 218px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service.png" data-size="980x1074">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service.png"
+width="980"
+height="1074"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service_hu7ab2f10bac6fb2f3280c3db360bbe4e5_248749_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service_hu7ab2f10bac6fb2f3280c3db360bbe4e5_248749_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>それでは、実行してみましょう。&lt;/p>
+&lt;h4 id="実行">実行&lt;/h4>
+&lt;p>まずははスプレッドシートに「month」という名前のシートを作ります。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 628;
+flex-basis: 1507px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet.png" data-size="980x156">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet.png"
+width="980"
+height="156"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet_hu098d5f6469a907b1d8d02d13736689c1_32063_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet_hu098d5f6469a907b1d8d02d13736689c1_32063_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;br>
+シートができたら、再度コードエディターに戻ります。&lt;/p>
+&lt;p>先程のデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。&lt;br>
+承認を求められるので、「権限を確認」を押します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 159;
+flex-basis: 382px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1.png" data-size="980x615">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1.png"
+width="980"
+height="615"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1_hu351b98adf0dfa0bfaa7f9f567f66552b_121313_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1_hu351b98adf0dfa0bfaa7f9f567f66552b_121313_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;br>
+使用するアカウントをクリクで選んで、「詳細」をクリックして、「〜（安全ではないページ）に移動」をクリックします。&lt;br>
+すると、アクセスの許可を求められるので、「許可」を押します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 140;
+flex-basis: 336px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2.png" data-size="980x699">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2.png"
+width="980"
+height="699"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2_hub35238c03fb887b06d8047fbcaec43b4_246816_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2_hub35238c03fb887b06d8047fbcaec43b4_246816_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>実行ログに結果と実行完了が表示されるはずです。&lt;br>
+スプレッドシートを確認すると、アナリティクスのデータが反映されているはずです&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 70;
+flex-basis: 170px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2.png" data-size="980x1382">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2.png"
+width="980"
+height="1382"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2_hu76389b174b068c261adeed39fea2a17c_292266_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2_hu76389b174b068c261adeed39fea2a17c_292266_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これで月間の人気記事の取得ができました。&lt;br>
+同じように日、年も設定しておきましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">setDay&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;day&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">setYear&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;year&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>まずがGASとアナリティクスの連携ができました。&lt;br>
+次回はこのデータを使ってHugoとアナリティクスを連携して、人気記事を表示できるようにしたいと思います。&lt;/p>
+&lt;p>ここまでの全プログラムは下記になります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">type&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">switch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">type&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;month&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;M&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;year&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;y&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">d1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">dayjs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dayjs&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">locale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ja&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">d1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subtract&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">calc&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;YYYY-MM-DD&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nx">end&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">d1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;YYYY-MM-DD&amp;#39;&lt;/span>&lt;span class="p">)};&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ga:[GAビューID]&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">AnalyticsReporting&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Reports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">batchGet&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;span class="nx">reportRequests&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;span class="nx">viewId&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">dateRanges&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>&lt;span class="nx">startDate&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="nx">date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">endDate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">end&lt;/span>&lt;span class="p">}],&lt;/span>
+&lt;span class="nx">samplingLevel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;LARGE&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">metrics&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pageviews&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:sessions&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">expression&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:users&amp;#39;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="nx">dimensions&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="p">{&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pagePath&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="nx">orderBys&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;span class="nx">fieldName&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;ga:pageviews&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">sortOrder&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;DESCENDING&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="p">}],&lt;/span>
+&lt;span class="p">}]&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">rows&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">reports&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rows&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">rows&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">filter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="nx">posts&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dimensions&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">])).&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dimensions&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">concat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">f&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">metrics&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">values&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">sheet&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">SpreadsheetApp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getActive&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">getSheetByName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">sheet&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">clear&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">unshift&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;link&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;pv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;session&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;users&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="nx">sheet&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">rows&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">setValues&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rows&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">setMonth&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;month&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">setDay&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;day&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">setYear&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;year&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/</link><pubDate>Thu, 06 Jan 2022 14:21:51 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" />&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。&lt;/p>
 &lt;p>hugo コマンドでgithub.ioディレクトリに記事を投稿する場合、以下のコマンドをたたくと思います。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ hugo new posts/＜ディレクトリ＞/index.md

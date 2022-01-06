@@ -1,0 +1,895 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。 関連記事も取得できて、検索機能もある「至れり尽くせり」"><title>簡単にできるHugoで人気の記事を表示する方法 #1</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="簡単にできるHugoで人気の記事を表示する方法 #1">
+<meta property="og:description" content="Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。 関連記事も取得できて、検索機能もある「至れり尽くせり」">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="GitHub Pages"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="Google アナリティクス"><meta property="article:tag" content="Google Analytics"><meta property="article:published_time" content="2022-01-06T16:50:50+09:00"><meta property="article:modified_time" content="2022-01-06T07:52:54+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg">
+<meta name=twitter:title content="簡単にできるHugoで人気の記事を表示する方法 #1">
+<meta name=twitter:description content="Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。 関連記事も取得できて、検索機能もある「至れり尽くせり」"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-06-01-wyoshi/analytics.jpg'})</script>
+</head>
+<body class="article-page
+}">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供してます</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_12>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_5>
+Web開発
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section">
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2022.01.06</time>
+<time class="article-time--item article-time--reading">
+読了時間: 5分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+簡単にできるHugoで人気の記事を表示する方法 #1
+</a>
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#必要なもの>必要なもの</a></li>
+<li><a href=#googleアナリティクスの設定>Googleアナリティクスの設定</a></li>
+<li><a href=#スプレッドシートの設定>スプレッドシートの設定</a></li>
+<li><a href=#gasのプログラム>GASのプログラム</a>
+<ol>
+<li><a href=#日付の取得>日付の取得</a></li>
+<li><a href=#gasとgoogleアナリティクスの連携>GASとGoogleアナリティクスの連携</a>
+<ol>
+<li><a href=#サービスの読み込み>サービスの読み込み</a></li>
+<li><a href=#実行>実行</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#まとめ>まとめ</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。<br>
+関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。</p>
+<p>しかし、1点だけどうしても重要な機能がありません。<br>
+それは人気記事の表示です。<br>
+人気記事を表示させるとなると、データベースを用意したりサーバのアクセスカウントを行う必要があります。<br>
+そんな面倒なことはしたくありませんよね？</p>
+<p>今回はHugoでも簡単に人気の記事を表示する方法を紹介いたします。</p>
+<h2 id=必要なもの>必要なもの</h2>
+<p>Hugoで人気記事を出すために必要なものは、</p>
+<ul>
+<li>Googleスプレッドシート</li>
+<li>Googleアナリティクス</li>
+</ul>
+<p>以上です。<br>
+それでは実際の設定やプログラムを行っていきましょう。</p>
+<h2 id=googleアナリティクスの設定>Googleアナリティクスの設定</h2>
+<p>Googleアナリティクスをサイトに設定します。<br>
+設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在)<br>
+v4を設定している場合は、同時にv2も設定する必要があります。</p>
+<p>「アカウントを作成」「アカウントの設定」をした後に、「 <strong>プロパティの設定</strong> 」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定することができます。<br>
+<figure class=gallery-image style=flex-grow:163;flex-basis:391px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting.png data-size=980x601>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting.png width=980 height=601 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting_hu1de37cbb321319f7b20f9e0b0bc31b91_205070_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/setting_hu1de37cbb321319f7b20f9e0b0bc31b91_205070_1024x0_resize_box_3.png 1024w" loading=lazy alt="ユニバーサル アナリティクス プロパティの作成">
+</a>
+<figcaption>ユニバーサル アナリティクス プロパティの作成</figcaption>
+</figure></p>
+<p>あとはv4とv2のコードをサイトに貼り付けるだけです。<br>
+貼り付け方法はGoogleに書いてある通りです。</p>
+<h2 id=スプレッドシートの設定>スプレッドシートの設定</h2>
+<p>次にスプレッドシートを設定します。<br>
+Googleドライブで「新規」「Googleスプレッドシート」でシートを作成します。<br>
+作成したシートに適当な名前をつけます。</p>
+<p>その後に、「拡張機能」の「App Script」を押して、GoogleAppScript（GAS）に移動します。<br>
+<figure class=gallery-image style=flex-grow:180;flex-basis:433px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas.png data-size=980x542>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas.png width=980 height=542 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas_hua5e979262c3621ae25b1ecd1b3f95ba4_106503_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/spreads-gas_hua5e979262c3621ae25b1ecd1b3f95ba4_106503_1024x0_resize_box_3.png 1024w" loading=lazy alt="ユニバーサル アナリティクス プロパティの作成">
+</a>
+<figcaption>ユニバーサル アナリティクス プロパティの作成</figcaption>
+</figure></p>
+<h2 id=gasのプログラム>GASのプログラム</h2>
+<h3 id=日付の取得>日付の取得</h3>
+<p>日付を計算するために、「daysjs」というライブラリを追加します。<br>
+ライブラリの＋をクリックして、以下を検索します。</p>
+<pre tabindex=0><code>1ShsRhHc8tgPy5wGOzUvgEhOedJUQD53m-gd8lG2MOgs-dXC_aCZn9lFB
+</code></pre><p>検索して、days.jsが表示されたら追加をします。</p>
+<p><figure class=gallery-image style=flex-grow:133;flex-basis:321px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs.png data-size=980x732>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs.png width=980 height=732 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs_huc72d901922502ee5755367cabcfc143d_172673_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/dayjs_huc72d901922502ee5755367cabcfc143d_172673_1024x0_resize_box_3.png 1024w" loading=lazy alt=day.jsライブラリの追加>
+</a>
+<figcaption>day.jsライブラリの追加</figcaption>
+</figure></p>
+<p>これで日付の検索が可能になります。<br>
+以下が日付のプログラムです。</p>
+<p>今日から1日、1月、1年前なのかという切り替えが可能です。</p>
+<ul>
+<li>year: 今日から1年間の範囲</li>
+<li>month: 今日から1ヶ月の範囲</li>
+<li>day: 今日から1日の範囲</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span>
+  <span class=k>switch</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=s2>&#34;month&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;M&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>case</span> <span class=s2>&#34;year&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;y&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>default</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=kr>const</span> <span class=nx>d1</span> <span class=o>=</span> <span class=nx>dayjs</span><span class=p>.</span><span class=nx>dayjs</span><span class=p>().</span><span class=nx>locale</span><span class=p>(</span><span class=s1>&#39;ja&#39;</span><span class=p>);</span>
+  <span class=k>return</span> <span class=p>{</span><span class=nx>start</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>subtract</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>calc</span><span class=p>).</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>),</span> <span class=nx>end</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>)};</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>test</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>d</span> <span class=o>=</span> <span class=nx>getDate</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
+  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>d</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><p>ここまでをテスト実行してみましょう。<br>
+デバッグの隣りにあるセレクトを「test」にして、「実行」を押してみます。<br>
+<figure class=gallery-image style=flex-grow:138;flex-basis:333px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1.png data-size=980x706>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1.png width=980 height=706 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1_hu88d49d2022eb88c51862fef2af5ceb89_155241_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/gas1_hu88d49d2022eb88c51862fef2af5ceb89_155241_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure><br>
+正常に終了されれば実行ログに結果と実行完了が表示されるはずです。</p>
+<h3 id=gasとgoogleアナリティクスの連携>GASとGoogleアナリティクスの連携</h3>
+<p>GASとアナリティクスの連携にはビューIDが必要です。<br>
+ビューIDはv2で取得できるので、v4とv2を設定したのはこのビューIDを取得するためになります。</p>
+<p>GASのプログラムにGoogleアナリティクスの「アカウント」「プロパティ」「ビュー」「ビューの設定」にあるビューIDを設定します。<br>
+設定する際は「ga:ビューID」と <code>ga:</code> を付ける必要があります。</p>
+<p>先程のプログラムの下に、下記のプログラムを記述します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=nx>name</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>id</span> <span class=o>=</span> <span class=s2>&#34;ga:[GAビューID]&#34;</span><span class=p>;</span>
+  <span class=kr>const</span> <span class=nx>date</span> <span class=o>=</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>response</span> <span class=o>=</span> <span class=nx>AnalyticsReporting</span><span class=p>.</span><span class=nx>Reports</span><span class=p>.</span><span class=nx>batchGet</span><span class=p>({</span>
+    <span class=nx>reportRequests</span><span class=o>:</span> <span class=p>[{</span>
+      <span class=nx>viewId</span><span class=o>:</span> <span class=nx>id</span><span class=p>,</span>
+      <span class=nx>dateRanges</span><span class=o>:</span> <span class=p>[{</span><span class=nx>startDate</span><span class=o>:</span><span class=nx>date</span><span class=p>.</span><span class=nx>start</span><span class=p>,</span><span class=nx>endDate</span><span class=o>:</span> <span class=nx>date</span><span class=p>.</span><span class=nx>end</span><span class=p>}],</span>
+      <span class=nx>samplingLevel</span><span class=o>:</span> <span class=s1>&#39;LARGE&#39;</span><span class=p>,</span>
+      <span class=nx>metrics</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:sessions&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:users&#39;</span><span class=p>},</span>
+      <span class=p>],</span>
+      <span class=nx>dimensions</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;ga:pagePath&#39;</span><span class=p>}</span>
+      <span class=p>],</span> 
+      <span class=nx>orderBys</span><span class=o>:</span> <span class=p>[{</span>
+        <span class=nx>fieldName</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>,</span>
+        <span class=nx>sortOrder</span><span class=o>:</span> <span class=s2>&#34;DESCENDING&#34;</span><span class=p>,</span>
+      <span class=p>}],</span>
+    <span class=p>}]</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>response</span><span class=p>).</span><span class=nx>reports</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>data</span><span class=p>.</span><span class=nx>rows</span><span class=p>;</span>
+  <span class=nx>rows</span> <span class=o>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=o>/</span><span class=nx>posts</span><span class=o>/</span><span class=p>.</span><span class=nx>test</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>[</span><span class=mi>0</span><span class=p>])).</span><span class=nx>map</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>metrics</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>values</span><span class=p>);</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>sheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActive</span><span class=p>().</span><span class=nx>getSheetByName</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>clear</span><span class=p>();</span>
+  <span class=nx>rows</span><span class=p>.</span><span class=nx>unshift</span><span class=p>([</span><span class=s2>&#34;link&#34;</span><span class=p>,</span> <span class=s2>&#34;pv&#34;</span><span class=p>,</span> <span class=s1>&#39;session&#39;</span><span class=p>,</span> <span class=s1>&#39;users&#39;</span><span class=p>]);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>length</span><span class=p>,</span> <span class=nx>rows</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>length</span><span class=p>).</span><span class=nx>setValues</span><span class=p>(</span><span class=nx>rows</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+</code></pre></div><p>ここでは、ページのパスをキーとしてページビューとセッション、ユーザー数を集計するようにしています。<br>
+並び順はpageviewsの数の降順です。</p>
+<p>必要なデータがあれば各自で編集することをおすすめいたします。</p>
+<p>そして、各項目のラベルを出力するために、</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>rows</span><span class=p>.</span><span class=nx>unshift</span><span class=p>([</span><span class=s2>&#34;link&#34;</span><span class=p>,</span> <span class=s2>&#34;pv&#34;</span><span class=p>,</span> <span class=s1>&#39;session&#39;</span><span class=p>,</span> <span class=s1>&#39;users&#39;</span><span class=p>]);</span>
+</code></pre></div><p>として、先頭行のデータにラベル行を追加しています。<br>
+この部分も各自のデータに合うようにしてください。</p>
+<p>アナリティクスから取得したデータはスプレッドシートのシート名に紐付けるので、</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
+</code></pre></div><p>の場合は、「month」というシートにデータを反映するということになります。</p>
+<h4 id=サービスの読み込み>サービスの読み込み</h4>
+<p>GASとアナリティクスを連携させるために、サービスを読み込みます。<br>
+サービスのプラスマークをクリックして、「Analytics Reporting API」を選択、追加します。<br>
+以上でサービスの読み込みは終わりです。<br>
+<figure class=gallery-image style=flex-grow:91;flex-basis:218px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service.png data-size=980x1074>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service.png width=980 height=1074 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service_hu7ab2f10bac6fb2f3280c3db360bbe4e5_248749_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/service_hu7ab2f10bac6fb2f3280c3db360bbe4e5_248749_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>それでは、実行してみましょう。</p>
+<h4 id=実行>実行</h4>
+<p>まずははスプレッドシートに「month」という名前のシートを作ります。<br>
+<figure class=gallery-image style=flex-grow:628;flex-basis:1507px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet.png data-size=980x156>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet.png width=980 height=156 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet_hu098d5f6469a907b1d8d02d13736689c1_32063_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet_hu098d5f6469a907b1d8d02d13736689c1_32063_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure><br>
+シートができたら、再度コードエディターに戻ります。</p>
+<p>先程のデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。<br>
+承認を求められるので、「権限を確認」を押します。<br>
+<figure class=gallery-image style=flex-grow:159;flex-basis:382px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1.png data-size=980x615>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1.png width=980 height=615 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1_hu351b98adf0dfa0bfaa7f9f567f66552b_121313_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm1_hu351b98adf0dfa0bfaa7f9f567f66552b_121313_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure><br>
+使用するアカウントをクリクで選んで、「詳細」をクリックして、「〜（安全ではないページ）に移動」をクリックします。<br>
+すると、アクセスの許可を求められるので、「許可」を押します。<br>
+<figure class=gallery-image style=flex-grow:140;flex-basis:336px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2.png data-size=980x699>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2.png width=980 height=699 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2_hub35238c03fb887b06d8047fbcaec43b4_246816_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/perm2_hub35238c03fb887b06d8047fbcaec43b4_246816_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>実行ログに結果と実行完了が表示されるはずです。<br>
+スプレッドシートを確認すると、アナリティクスのデータが反映されているはずです<br>
+<figure class=gallery-image style=flex-grow:70;flex-basis:170px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2.png data-size=980x1382>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2.png width=980 height=1382 srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2_hu76389b174b068c261adeed39fea2a17c_292266_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/sheet2_hu76389b174b068c261adeed39fea2a17c_292266_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>これで月間の人気記事の取得ができました。<br>
+同じように日、年も設定しておきましょう。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+<span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=まとめ>まとめ</h2>
+<p>まずがGASとアナリティクスの連携ができました。<br>
+次回はこのデータを使ってHugoとアナリティクスを連携して、人気記事を表示できるようにしたいと思います。</p>
+<p>ここまでの全プログラムは下記になります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span>
+  <span class=k>switch</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=s2>&#34;month&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;M&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>case</span> <span class=s2>&#34;year&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;y&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>default</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=kr>const</span> <span class=nx>d1</span> <span class=o>=</span> <span class=nx>dayjs</span><span class=p>.</span><span class=nx>dayjs</span><span class=p>().</span><span class=nx>locale</span><span class=p>(</span><span class=s1>&#39;ja&#39;</span><span class=p>);</span>
+  <span class=k>return</span> <span class=p>{</span><span class=nx>start</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>subtract</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>calc</span><span class=p>).</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>),</span> <span class=nx>end</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>)};</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=nx>name</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>id</span> <span class=o>=</span> <span class=s2>&#34;ga:[GAビューID]&#34;</span><span class=p>;</span>
+  <span class=kr>const</span> <span class=nx>date</span> <span class=o>=</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>response</span> <span class=o>=</span> <span class=nx>AnalyticsReporting</span><span class=p>.</span><span class=nx>Reports</span><span class=p>.</span><span class=nx>batchGet</span><span class=p>({</span>
+    <span class=nx>reportRequests</span><span class=o>:</span> <span class=p>[{</span>
+      <span class=nx>viewId</span><span class=o>:</span> <span class=nx>id</span><span class=p>,</span>
+      <span class=nx>dateRanges</span><span class=o>:</span> <span class=p>[{</span><span class=nx>startDate</span><span class=o>:</span><span class=nx>date</span><span class=p>.</span><span class=nx>start</span><span class=p>,</span><span class=nx>endDate</span><span class=o>:</span> <span class=nx>date</span><span class=p>.</span><span class=nx>end</span><span class=p>}],</span> 
+      <span class=nx>samplingLevel</span><span class=o>:</span> <span class=s1>&#39;LARGE&#39;</span><span class=p>,</span>
+      <span class=nx>metrics</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:sessions&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:users&#39;</span><span class=p>},</span>
+      <span class=p>],</span>
+      <span class=nx>dimensions</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;ga:pagePath&#39;</span><span class=p>}</span>
+      <span class=p>],</span> 
+      <span class=nx>orderBys</span><span class=o>:</span> <span class=p>[{</span>
+        <span class=nx>fieldName</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>,</span>
+        <span class=nx>sortOrder</span><span class=o>:</span> <span class=s2>&#34;DESCENDING&#34;</span><span class=p>,</span>
+      <span class=p>}],</span>
+    <span class=p>}]</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>response</span><span class=p>).</span><span class=nx>reports</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>data</span><span class=p>.</span><span class=nx>rows</span><span class=p>;</span>
+  <span class=nx>rows</span> <span class=o>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=o>/</span><span class=nx>posts</span><span class=o>/</span><span class=p>.</span><span class=nx>test</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>[</span><span class=mi>0</span><span class=p>])).</span><span class=nx>map</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>metrics</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>values</span><span class=p>);</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>sheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActive</span><span class=p>().</span><span class=nx>getSheetByName</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>clear</span><span class=p>();</span>
+  <span class=nx>rows</span><span class=p>.</span><span class=nx>unshift</span><span class=p>([</span><span class=s2>&#34;link&#34;</span><span class=p>,</span> <span class=s2>&#34;pv&#34;</span><span class=p>,</span> <span class=s1>&#39;session&#39;</span><span class=p>,</span> <span class=s1>&#39;users&#39;</span><span class=p>]);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>length</span><span class=p>,</span> <span class=nx>rows</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>length</span><span class=p>).</span><span class=nx>setValues</span><span class=p>(</span><span class=nx>rows</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_1600x0_resize_q75_box.jpg 1600w" width=800 height=492 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+GitHub Pagesを使って無料でSSL付きのサイトを公開
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.28</time>
+</div>
+<p class=article-subtitle>デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_1600x0_resize_q75_box.jpg 1600w" width=800 height=558 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+デザイナーでもできる初めてのHugo #01
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div>
+<p class=article-subtitle>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoでテーマが反映されない（画面が真っ白のまま）
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>テーマが反映されない（画面が真っ白のまま）の対処法</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoで記事の投稿の仕方
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>Hugoで記事を投稿する方法を説明しています</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_1600x0_resize_q75_box.jpg 1600w" width=800 height=538 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div>
+<p class=article-subtitle>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示さ ...</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/github/>GitHub</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/>github pages</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/google-%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9/>Google アナリティクス</a>
+<a href=https://suzukiiichiro.github.io/tags/google-analytics/>Google Analytics</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.d1d57dc622aaa1ce95d69363a3f3a096_hubb580b3412968a99eba9faea3f838cef_148014_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方" data-hash="md5-0dV9xiKqoc6V1pNjo/Oglg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoで記事の投稿の仕方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年01月>
+2022年01月（2）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_8>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_7>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_6>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_6>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_6>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_6>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_3>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_3>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_3>
+github pages
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_3>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_3>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_3>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
+Web
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_2>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/brew/ class=font_size_1>
+brew
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_1>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/error/ class=font_size_1>
+error
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-actions/ class=font_size_1>
+GitHub Actions
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</aside>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
