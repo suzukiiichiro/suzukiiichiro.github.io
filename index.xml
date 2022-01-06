@@ -101,7 +101,7 @@ break&lt;span class="p">;&lt;/span>
 hugo new posts/&lt;span class="nv">$today&lt;/span>-&lt;span class="nv">$number&lt;/span>-&lt;span class="nv">$author&lt;/span>/index.md
 &lt;span class="c1"># 処理終了&lt;/span>
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ファイルの編集は以下の通りです。&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;vim content/posts/2022-01-06-01-suzuki/index.md;&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;vim content/posts/&lt;/span>&lt;span class="nv">$today&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">-&lt;/span>&lt;span class="nv">$author&lt;/span>&lt;span class="s2">/index.md;&amp;#34;&lt;/span>
 &lt;span class="o">}&lt;/span>
 &lt;span class="c1">#&lt;/span>
 &lt;span class="c1"># パラメータの取得&lt;/span>
