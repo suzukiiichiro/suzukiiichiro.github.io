@@ -1,0 +1,57 @@
+[data-scheme="light"] {
+  @import "partials/highlight/light.scss";
+}
+
+[data-scheme="dark"] {
+  @import "partials/highlight/dark.scss";
+}
+
+/*
+*   Global style
+*/
+:root {
+  @include respond(md) {}
+
+  @include respond(xl) {}
+
+  &[data-scheme="dark"] {}
+}
+
+/**
+*   Global font family
+*/
+:root {}
+
+/*
+*   Card style
+*/
+:root {
+  @include respond(md) {}
+
+  @include respond(xl) {}
+
+  @include respond(md) {}
+
+  &[data-scheme="dark"] {}
+}
+
+/**
+*   Article content font settings
+*/
+:root {
+  @include respond(md) {}
+}
+
+/*
+*   Article content style
+*/
+:root {
+  &[data-scheme="dark"] {}
+}
+
+/*
+*   Shadow style
+*   Thanks to https://www.figma.com/community/plugin/744987207861965946/Shadow-picker
+*/
+:root {
+}
