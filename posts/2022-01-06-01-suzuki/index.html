@@ -1,23 +1,27 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="最新技術やプログラム、デザインなど様々な情報を提供してます"><title>Tag: Bash - NLP</title>
-<link rel=canonical href=https://suzukiiichiro.github.io/tags/bash/>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。"><title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="Tag: Bash - NLP">
-<meta property="og:description" content="最新技術やプログラム、デザインなど様々な情報を提供してます">
-<meta property="og:url" content="https://suzukiiichiro.github.io/tags/bash/">
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
+<meta property="og:description" content="ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2022-01-06T06:47:26+00:00 ">
-<meta name=twitter:title content="Tag: Bash - NLP">
-<meta name=twitter:description content="最新技術やプログラム、デザインなど様々な情報を提供してます"><link rel=alternate type=application/rss+xml href=https://suzukiiichiro.github.io/tags/bash/index.xml><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="hugo"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-06T14:21:51+09:00"><meta property="article:modified_time" content="2022-01-06T06:47:26+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg">
+<meta name=twitter:title content="シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
+<meta name=twitter:description content="ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80")</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg'})</script>
 </head>
-<body>
+<body class="article-page
+}">
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
 <button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box>
 <span class=hamburger-inner></span>
@@ -77,59 +81,180 @@ Web開発
 <li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
 </li>
 </div>
-</aside><main class="main full-width">
-<div class=section-card>
-<div class=section-details>
-<h1 class=section-term>Bash<span class=section-count>6 pages</span></h1>
-</div>
-</div>
-<section class=article-list>
-<article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
 <header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
-</div>
 <div class=article-category>
-<span class=article-category-item>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
 プログラミング
-</span>
+</a>
 </div>
-</header>
-<div class=article-details>
-<h2 class=article-title>
-シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし
-</h2>
-<div class=article-time>
+<div class=article-info>
 <time class="article-time--item article-time--published">2022.01.06</time>
-</div>
-<p class=article-subtitle>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
+<time class="article-time--item article-time--reading">
+読了時間: 4分
+</time>
 </div>
 </header>
-<div class=article-details>
 <h2 class=article-title>
-「UNIXという考え方―その設計思想と哲学」　メモ
-</h2>
-<div class=article-time>
-<time class="article-time--item article-time--published">2021.12.25</time>
-</div>
-<p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
-</div>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし
 </a>
-</article>
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#はじめに>はじめに</a></li>
+<li><a href=#ディレクトリの指定>ディレクトリの指定</a></li>
+<li><a href=#ナンバリングの効用>ナンバリングの効用</a></li>
+<li><a href=#複数メンバーの投稿を区別する>複数メンバーの投稿を区別する</a></li>
+<li><a href=#起動パラメータ>起動パラメータ</a></li>
+<li><a href=#実行イメージ>実行イメージ</a></li>
+<li><a href=#気をつけるところは>気をつけるところは</a>
+<ol>
+<li><a href=#１パラメータを省略したときの挙動>１．パラメータを省略したときの挙動</a></li>
+<li><a href=#同日ファイルの存在を確認>同日ファイルの存在を確認</a></li>
+</ol>
+</li>
+<li><a href=#実行方法>実行方法</a></li>
+<li><a href=#ソース全文>ソース全文</a></li>
+<li><a href=#おわりに>おわりに</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<h2 id=はじめに>はじめに</h2>
+<p>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
+<p>hugo コマンドでgithub.ioディレクトリに記事を投稿する場合、以下のコマンドをたたくと思います。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/＜ディレクトリ＞/index.md
+</code></pre></div><p>または</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/＜今日の日付＞.md
+</code></pre></div><p>面倒なんですよね。。。</p>
+<h2 id=ディレクトリの指定>ディレクトリの指定</h2>
+<p>通常、記事毎にディレクトリを分けて、アクセスされるファイルをindex.mdにした場合は、以下の通りになりますよね。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/＜今日の日付のディレクトリ＞/index.md
+</code></pre></div><h2 id=ナンバリングの効用>ナンバリングの効用</h2>
+<p>ただ、同日に気分が乗ってきて、もう一つ記事を投稿しようとする場合は、日付の後ろに「-02」とか工夫する必要も出てきたりします。たとえば以下のように</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/＜今日の日付のディレクトリ＞-＜ナンバリング02＞/index.md
+</code></pre></div><h2 id=複数メンバーの投稿を区別する>複数メンバーの投稿を区別する</h2>
+<p>複数のコラボレーターで投稿するgithub.ioの場合は、投稿者も区別したくなります。例えば</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/＜今日の日付のディレクトリ＞-＜作成者＞-＜ナンバリング02＞/index.md
+</code></pre></div><p>ようするに、シェルスクリプトを使って、以下のコマンドを実行したい訳です。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hugo new posts/2022-01-06-01-suzuki/index.md
+</code></pre></div><h2 id=起動パラメータ>起動パラメータ</h2>
+<p>と、なると、パラメータは以下の三つとなりますね。<br>
+$today 今日の日付<br>
+$number 記事のナンバリング<br>
+$author 作成者</p>
+<h2 id=実行イメージ>実行イメージ</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 作成者 suzuki の 01 番目の投稿記事</span>
+$ bash mkArticle.sh suzuki <span class=m>01</span>
+$ hugo new posts/<span class=nv>$today</span>-<span class=nv>$number</span>-<span class=nv>$author</span>/index.md
+</code></pre></div><h2 id=気をつけるところは>気をつけるところは</h2>
+<h3 id=１パラメータを省略したときの挙動>１．パラメータを省略したときの挙動</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ bash mkArticle.sh 
+</code></pre></div><p>で、実行した場合に、「作成者が指定されていないからやりなおしてね」というのもちょっと寂しいものがあります。指定していなければ、都度、聞いてきて欲しいものです。そこで readコマンドで作成者を尋ねてくる感じにします。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  <span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$author</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;ユーザー名を半角で入力&#34;</span><span class=p>;</span>
+    <span class=nb>read</span> author<span class=p>;</span> 
+  <span class=k>fi</span>
+</code></pre></div><h3 id=同日ファイルの存在を確認>同日ファイルの存在を確認</h3>
+<p>２．すでに同日に一つ目の記事を投稿してある。要するに生成しようとしているファイルがすでに存在する場合の挙動です。こちらは、ファイルが存在していれば、１を応用して、別のナンバリングを指定するように尋ねてくれると良さそうです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  <span class=k>while</span> <span class=o>[</span> <span class=nb>true</span> <span class=o>]</span> <span class=p>;</span><span class=k>do</span>
+    <span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;content/posts/</span><span class=nv>$today</span><span class=s2>-</span><span class=nv>$number</span><span class=s2>-</span><span class=nv>$author</span><span class=s2>/index.md&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+      <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2> ファイルが既に存在します。&#34;</span><span class=p>;</span>
+      <span class=nb>echo</span> <span class=s2>&#34;別のナンバリングを指定して下さい 02とか03とか&#34;</span><span class=p>;</span>
+      <span class=nb>read</span> number<span class=p>;</span>
+    <span class=k>else</span>
+      break<span class=p>;</span>
+    <span class=k>fi</span>
+  <span class=k>done</span>
+
+</code></pre></div><p>ですので、ナンバリングの初期値は「01」としておいて、そのファイルが既に存在する場合は、あらためてユーザーにナンバリングを尋ねてくるという手法としました。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>  <span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nv>number</span><span class=o>=</span><span class=s2>&#34;01&#34;</span><span class=p>;</span>
+  <span class=k>fi</span>
+</code></pre></div><h2 id=実行方法>実行方法</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ bash mkArticle.sh suzuki 01<span class=p>;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>前述のとおり作成者、ナンバリングは省略可能です。
+$ bash mkArticle.sh 
+</code></pre></div><h2 id=ソース全文>ソース全文</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+: <span class=s1>&#39;使い方
+</span><span class=s1>一つ目のパラメーターに作成者を指定します
+</span><span class=s1>二つ目のパラメータにナンバリングを指定します
+</span><span class=s1>一つ目 01(未指定の場合は01）
+</span><span class=s1>二つ目 02
+</span><span class=s1>
+</span><span class=s1>（例)
+</span><span class=s1>$ bash mkArticle.sh suzuki 01;
+</span><span class=s1>
+</span><span class=s1>&#39;</span>
+<span class=c1>#</span>
+<span class=c1>#作成者 無指定であれば入力を促す</span>
+<span class=nv>author</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>  
+<span class=c1>#今日の日付</span>
+<span class=nv>today</span><span class=o>=</span><span class=k>$(</span>date <span class=s2>&#34;+%Y-%m-%d%n&#34;</span><span class=k>)</span><span class=p>;</span>
+<span class=c1>#今日のインデクス 一つ目の投稿であれば01 二つ目の投稿であれば02</span>
+<span class=nv>number</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=c1>#</span>
+<span class=k>function</span> getParam<span class=o>(){</span>
+  <span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nv>number</span><span class=o>=</span><span class=s2>&#34;01&#34;</span><span class=p>;</span>
+  <span class=k>fi</span>
+  <span class=c1>#</span>
+  <span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$author</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;ユーザー名を半角で入力&#34;</span><span class=p>;</span>
+    <span class=nb>read</span> author<span class=p>;</span> 
+  <span class=k>fi</span>
+  <span class=c1>#</span>
+  <span class=k>while</span> <span class=o>[</span> <span class=nb>true</span> <span class=o>]</span> <span class=p>;</span><span class=k>do</span>
+    <span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;content/posts/</span><span class=nv>$today</span><span class=s2>-</span><span class=nv>$number</span><span class=s2>-</span><span class=nv>$author</span><span class=s2>/index.md&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+      <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2> ファイルが既に存在します。&#34;</span><span class=p>;</span>
+      <span class=nb>echo</span> <span class=s2>&#34;別のナンバリングを指定して下さい 02とか03とか&#34;</span><span class=p>;</span>
+      <span class=nb>read</span> number<span class=p>;</span>
+    <span class=k>else</span>
+      break<span class=p>;</span>
+    <span class=k>fi</span>
+  <span class=k>done</span>
+<span class=o>}</span>
+<span class=c1>#</span>
+<span class=k>function</span> execHugo<span class=o>(){</span>
+  <span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;hugoコマンドを実行します&#34;</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;hugo new posts/</span><span class=nv>$today</span><span class=s2>-</span><span class=nv>$number</span><span class=s2>-</span><span class=nv>$author</span><span class=s2>/index.md&#34;</span>
+  hugo new posts/<span class=nv>$today</span>-<span class=nv>$number</span>-<span class=nv>$author</span>/index.md
+
+  <span class=nb>echo</span> <span class=s2>&#34;ファイルの編集は以下の通りです。&#34;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;vim content/posts/2022-01-06-01-suzuki/index.md;&#34;</span>
+<span class=o>}</span>
+<span class=c1>#</span>
+<span class=c1># パラメータの取得</span>
+getParam<span class=p>;</span>
+<span class=c1># hugoコマンドの実行</span>
+execHugo<span class=p>;</span>
+exit<span class=p>;</span>
+<span class=c1>#</span>
+
+</code></pre></div><h2 id=おわりに>おわりに</h2>
+<p>色々とカスタマイズして、便利に記事投稿ができるとブログも盛り上がりますね。</p>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
 <article class="has-image article-item">
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
 <header class=article-header>
@@ -222,7 +347,92 @@ Web開発
 </div>
 </a>
 </article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+「UNIXという考え方―その設計思想と哲学」　メモ
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.25</time>
+</div>
+<p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
+</div>
+</a>
+</article>
+</div>
 </section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/>ユーティリティ</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
 </main>
 <aside class="sidebar right-sidebar sticky">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
