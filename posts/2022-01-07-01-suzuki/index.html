@@ -1,16 +1,16 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>ざっくりわかる「シェルスクリプト【１】」</title>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>ざっくりわかる「シェルスクリプト」</title>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="ざっくりわかる「シェルスクリプト【１】」">
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="ざっくりわかる「シェルスクリプト」">
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:32:33+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
-<meta name=twitter:title content="ざっくりわかる「シェルスクリプト【１】」">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:32:41+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
+<meta name=twitter:title content="ざっくりわかる「シェルスクリプト」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
@@ -95,13 +95,13 @@ Web開発
 <div class=article-info>
 <time class="article-time--item article-time--published">2022.01.07</time>
 <time class="article-time--item article-time--reading">
-読了時間: 5分
+読了時間: 9分
 </time>
 </div>
 </header>
 <h2 class=article-title>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
-ざっくりわかる「シェルスクリプト【１】」
+ざっくりわかる「シェルスクリプト」
 </a>
 </h2>
 </div>
@@ -119,6 +119,41 @@ Web開発
 <li><a href=#パーミッションの読み方>パーミッションの読み方</a></li>
 <li><a href=#アクセス権限の変更>アクセス権限の変更</a></li>
 <li><a href=#モードの数字について>モードの数字について</a></li>
+</ol>
+</li>
+<li><a href=#２echo-コマンド>２．echo コマンド</a>
+<ol>
+<li><a href=#echoコマンドの使用>echoコマンドの使用：</a></li>
+</ol>
+</li>
+<li><a href=#３コメント>３．コメント</a>
+<ol>
+<li><a href=#コメントの使用>コメントの使用</a></li>
+</ol>
+</li>
+<li><a href=#４マルチラインコメント>４．マルチラインコメント</a>
+<ol>
+<li><a href=#複数行コメントの使用>複数行コメントの使用</a></li>
+</ol>
+</li>
+<li><a href=#５while-ループ>５．While ループ</a>
+<ol>
+<li><a href=#whileループの使用>whileループの使用</a></li>
+</ol>
+</li>
+<li><a href=#６for-ループ>６．for ループ</a>
+<ol>
+<li><a href=#forループの使用>forループの使用</a></li>
+</ol>
+</li>
+<li><a href=#７対話型入力>７．対話型入力</a>
+<ol>
+<li><a href=#ユーザー入力の取得>ユーザー入力の取得</a></li>
+</ol>
+</li>
+<li><a href=#８if-文>８．If 文</a>
+<ol>
+<li><a href=#if文を使う>if文を使う</a></li>
 </ol>
 </li>
 <li><a href=#書籍の紹介>書籍の紹介</a></li>
@@ -143,8 +178,8 @@ $
 ＜空のvim HelloWorld.sh が開きます＞
 </code></pre><p>vimで開いたHelloWorld.shを編集します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:HelloWorld.sh data-lang=bash:HelloWorld.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span><span class=nb>echo</span> <span class=s2>&#34;Hello World&#34;</span><span class=p>;</span>
-exit<span class=p>;</span>
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello World&#34;</span><span class=p>;</span>
 </code></pre></div><h3 id=はじめての実行権限chmod>はじめての実行権限「chmod」</h3>
 <p>bashファイルは2つの方法で実行できます。<br>
 １．bashコマンドを使用する方法、<br>
@@ -216,6 +251,142 @@ $ ls -l
 「その他」に「読み取り」を付与しています。
 <p>詳しくはこちら<br>
 <a class=link href=https://qiita.com/shisama/items/5f4c4fa768642aad9e06 target=_blank rel=noopener>https://qiita.com/shisama/items/5f4c4fa768642aad9e06</a></p>
+<h2 id=２echo-コマンド>２．echo コマンド</h2>
+<h3 id=echoコマンドの使用>echoコマンドの使用：</h3>
+<p>さまざまなオプションでechoコマンドを使用できます。<br>
+次の例では、いくつかの便利なオプションについて説明します。<br>
+オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。<br>
+&lsquo;-n&rsquo;オプションは、改行なしでテキストを印刷するために使用され、'-e&rsquo;オプションは、出力からバックスラッシュ文字を削除するために使用されます。<br>
+&lsquo;echo_example.sh&rsquo;という名前の新しいbashファイルを作成し、次のスクリプトを追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:echo_example.sh data-lang=bash:echo_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;改行付きのテキストの印刷&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> -n <span class=s2>&#34;改行なしのテキストの印刷&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> -e <span class=s2>&#34;\n削除\tバックスラッシュ\t文字\n&#34;</span><span class=p>;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash echo_example.sh
+改行付きのテキストの印刷
+改行なしのテキストの印刷
+削除	バックスラッシュ	文字
+$
+</code></pre><h2 id=３コメント>３．コメント</h2>
+<h3 id=コメントの使用>コメントの使用</h3>
+<p>「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。<br>
+&lsquo;comment_example.sh&rsquo;という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:comment_example.sh data-lang=bash:comment_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1>#2つの数値をsumに追加します</span>
+<span class=o>((</span><span class=nv>sum</span><span class=o>=</span>25+35<span class=o>))</span><span class=p>;</span>
+
+<span class=c1>#結果を出力します</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$sum</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash comment_example.sh
+60
+$
+</code></pre><h2 id=４マルチラインコメント>４．マルチラインコメント</h2>
+<h3 id=複数行コメントの使用>複数行コメントの使用</h3>
+<p>bashではさまざまな方法で複数行コメントを使用できます。<br>
+次の例に簡単な方法を示します。<br>
+&lsquo;multiline-comment.sh&rsquo;という名前の新しいbashを作成し、次のスクリプトを追加します。<br>
+ここでは、「:」と「'」でbashで複数行コメントを実現しています。<br>
+次のスクリプトは、5の2乗を計算します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiline-comment.sh data-lang=bash:multiline-comment.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+: <span class=s1>&#39;
+</span><span class=s1>次のスクリプトは、
+</span><span class=s1>数値の2乗値5を計算します。
+</span><span class=s1>&#39;</span>
+<span class=o>((</span><span class=nv>area</span><span class=o>=</span>5*5<span class=o>))</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$area</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash multiline-comment.sh
+25
+$
+</code></pre><h2 id=５while-ループ>５．While ループ</h2>
+<h3 id=whileループの使用>whileループの使用</h3>
+<p>whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。<br>
+この例では、whileループが5回繰り返されます。<br>
+count変数の値は、各ステップで1ずつ増加します。<br>
+count変数の値が5になると、whileループは終了します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:while_exapmle.sh data-lang=bash:while_exapmle.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>valid</span><span class=o>=</span>true<span class=p>;</span>
+<span class=nv>count</span><span class=o>=</span><span class=m>1</span>
+<span class=k>while</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$valid</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>do</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span> -eq <span class=m>5</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+    break<span class=p>;</span>
+  <span class=k>fi</span>
+  <span class=o>((</span>count++<span class=o>))</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash while_example.sh
+1
+2
+3
+4
+5
+$
+</code></pre><h2 id=６for-ループ>６．for ループ</h2>
+<h3 id=forループの使用>forループの使用</h3>
+<p>基本的なforループ宣言を示します。<br>
+&lsquo;for_example.sh&rsquo;という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。<br>
+ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:for_example.sh data-lang=bash:for_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span><span class=o>((</span><span class=nv>counter</span><span class=o>=</span>10<span class=p>;</span>counter&gt;0<span class=p>;</span>counter--<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+  <span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$counter</span><span class=s2> &#34;</span><span class=p>;</span>
+<span class=k>done</span>
+<span class=nb>printf</span> <span class=s2>&#34;\n&#34;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash for_example.sh
+10 9 8 7 6 5 4 3 2 1
+$
+</code></pre><h2 id=７対話型入力>７．対話型入力</h2>
+<h3 id=ユーザー入力の取得>ユーザー入力の取得</h3>
+<p>&lsquo;read&rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。<br>
+&lsquo;user_input.sh&rsquo;という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。<br>
+ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:user_input.sh data-lang=bash:user_input.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;あなたの名前を入力して下さい&#34;</span>
+<span class=nb>read</span> name
+<span class=nb>echo</span> <span class=s2>&#34;ようこそ </span><span class=nv>$name</span><span class=s2>. ＮＬＰへ&#34;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash user_input.sh
+あなたの名前を入力して下さい
+suzuki
+ようこそ suzuki。 ＮＬＰへ
+$
+</code></pre><h2 id=８if-文>８．If 文</h2>
+<h3 id=if文を使う>if文を使う</h3>
+<p>単数、または複数の条件でif条件を使用できます。<br>
+このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。<br>
+「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。<br>
+ここでは、変数nに10が割り当てられています。<br>
+$nの値が10未満の場合、出力は「1桁の数値です」になります。<br>
+それ以外の場合、出力は「2桁の数値です」になります。<br>
+比較のために、ここでは「-lt」を使用しています。</p>
+<table>
+<tr><th>オプション</th><th>意味</th></tr>
+<tr><td>-eq</td><td>同　じ（==）</td></tr>
+<tr><td>-lt</td><td>小さい（＜）</td></tr>
+<tr><td>-gt</td><td>大きい（＞）</td></tr>
+</table>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:simple_if.sh data-lang=bash:simple_if.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>n</span><span class=o>=</span>10<span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> <span class=nv>$n</span> -lt <span class=m>10</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;1桁の数値です&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;2桁の数値です&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash simple_if.sh
+2桁の数値です
+$
+</code></pre>
 <h2 id=書籍の紹介>書籍の紹介</h2>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
@@ -466,10 +637,10 @@ $ ls -l
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト【１】」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
 </div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかる「シェルスクリプト【１】」</h2>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
@@ -648,10 +819,10 @@ Web開発
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト【１】」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
 </div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかる「シェルスクリプト【１】」</h2>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
