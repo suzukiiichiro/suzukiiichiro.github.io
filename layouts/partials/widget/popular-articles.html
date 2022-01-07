@@ -1,4 +1,4 @@
-{{ $json := getJSON "https://script.google.com/macros/s/AKfycbxqc0iU9zVEirfprKqut3Hgb1a-p4g88BWuj2Avk6Vud2XWJRYvdLl8F7ZgnOQUrt2UFA/exec?s=day" }}
+{{ $json := getJSON "https://script.google.com/macros/s/AKfycbw3wm1sNh16M4DACO_PUR29YeNFnbOECyv73_zyWw-oVy4uwRGYrDcZRP_9a7fzJVN70w/exec?s=day" }}
 
 {{ if eq (len $json) 0}}
 {{ $json = getJSON "https://script.google.com/macros/s/AKfycbxqc0iU9zVEirfprKqut3Hgb1a-p4g88BWuj2Avk6Vud2XWJRYvdLl8F7ZgnOQUrt2UFA/exec?s=month" }}
