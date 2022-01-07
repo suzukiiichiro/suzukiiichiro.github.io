@@ -1,19 +1,20 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="広告の配信について 当サイトは第三者配信の広告サービス「Google Adsense グーグルアドセンス」を利用しています。 広告配信事業者は、ユーザーの興味に"><title>Privacy</title>
-<link rel=canonical href=https://suzukiiichiro.github.io/privacy/>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>ざっくりわかる「シェルスクリプト【１】」</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="Privacy">
-<meta property="og:description" content="広告の配信について 当サイトは第三者配信の広告サービス「Google Adsense グーグルアドセンス」を利用しています。 広告配信事業者は、ユーザーの興味に">
-<meta property="og:url" content="https://suzukiiichiro.github.io/privacy/">
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="ざっくりわかる「シェルスクリプト【１】」">
+<meta property="og:description" content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Page"><meta property="article:published_time" content="2021-12-22T17:16:15+09:00"><meta property="article:modified_time" content="2022-01-07T02:52:55+00:00">
-<meta name=twitter:title content="Privacy">
-<meta name=twitter:description content="広告の配信について 当サイトは第三者配信の広告サービス「Google Adsense グーグルアドセンス」を利用しています。 広告配信事業者は、ユーザーの興味に"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T02:52:55+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
+<meta name=twitter:title content="ざっくりわかる「シェルスクリプト【１】」">
+<meta name=twitter:description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80")</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg'})</script>
 </head>
 <body class="article-page
 }">
@@ -57,7 +58,7 @@ Web開発
 </nav>
 <nav>
 <ol class="menu menu-section">
-<li class=current>
+<li>
 <a href=https://suzukiiichiro.github.io/privacy/>
 <span>Privacy</span>
 </a>
@@ -82,22 +83,24 @@ Web開発
 </div>
 </aside>
 <main class="main full-width">
-<article class=main-article>
+<article class="has-image main-article">
 <div class="article-details arcile-single">
 <header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
 <div class=article-info>
-<time class="article-time--item article-time--published">2021.12.22</time>
-<time class="article-time--item article-time--updatedate">
-2022.01.07
-</time>
+<time class="article-time--item article-time--published">2022.01.07</time>
 <time class="article-time--item article-time--reading">
-読了時間: 3分
+読了時間: 4分
 </time>
 </div>
 </header>
 <h2 class=article-title>
-<a href=https://suzukiiichiro.github.io/privacy/>
-プライバシーポリシー
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+ざっくりわかる「シェルスクリプト【１】」
 </a>
 </h2>
 </div>
@@ -106,10 +109,17 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#広告の配信について>広告の配信について</a></li>
-<li><a href=#アクセス解析ツールについて>アクセス解析ツールについて</a></li>
-<li><a href=#当サイトへのコメントについて>当サイトへのコメントについて</a></li>
-<li><a href=#免責事項>免責事項</a></li>
+<li><a href=#１hello-world>１．Hello World</a>
+<ol>
+<li><a href=#はじめてのbashコマンドecho>はじめてのbashコマンド「echo」</a></li>
+<li><a href=#はじめてのbashスクリプトvim>はじめてのbashスクリプト「vim」</a></li>
+<li><a href=#はじめての実行権限chmod>はじめての実行権限「chmod」</a></li>
+<li><a href=#パーミッションの確認>パーミッションの確認</a></li>
+<li><a href=#パーミッションの読み方>パーミッションの読み方</a></li>
+<li><a href=#アクセス権限の変更>アクセス権限の変更</a></li>
+<li><a href=#モードの数字について>モードの数字について</a></li>
+</ol>
+</li>
 </ol>
 </nav>
 </div>
@@ -118,41 +128,234 @@ Web開発
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h2 id=広告の配信について>広告の配信について</h2>
-<p>当サイトは第三者配信の広告サービス「Google Adsense グーグルアドセンス」を利用しています。</p>
-<p>広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。</p>
-<p>Cookie（クッキー）を無効にする設定およびGoogleアドセンスに関する詳細は「広告 ポリシーと規約 Google」をご覧ください。</p>
-<p>また、suzukiiichiro.github.ioは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィ<br>
-第三者がコンテンツおよび宣伝を提供し、訪問者から直接情報を収集し、訪問者のブラウザにCookie（クッキー）を設定したりこれを認識したりする場合があります。</p>
-<h2 id=アクセス解析ツールについて>アクセス解析ツールについて</h2>
-<p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。</p>
-<p>このGoogleアナリティクスはトラフィックデータの収集のためにCookieを使用しています。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関して、詳しくはここをクリックしてください。</p>
-<h2 id=当サイトへのコメントについて>当サイトへのコメントについて</h2>
-<p>当サイトでは、スパム・荒らしへの対応として、コメントの際に使用されたIPアドレスを記録しています。</p>
-<p>これはブログの標準機能としてサポートされている機能で、スパム・荒らしへの対応以外にこのIPアドレスを使用することはありません。また、メールアドレスとURLの入力に関しては、任意となっております。全てのコメントは管理人が事前にその内容を確認し、承認した上での掲載となりますことをあらかじめご了承下さい。加えて、次の各号に掲げる内容を含むコメントは管理人の裁量によって承認せず、削除する事があります。</p>
-<ul>
-<li>特定の自然人または法人を誹謗し、中傷するもの。</li>
-<li>極度にわいせつな内容を含むもの。</li>
-<li>禁制品の取引に関するものや、他者を害する行為の依頼など、法律によって禁止されている物品、行為の依頼や斡旋などに関するもの。</li>
-<li>その他、公序良俗に反し、または管理人によって承認すべきでないと認められるもの。</li>
-</ul>
-<h2 id=免責事項>免責事項</h2>
-<p>当サイトで掲載している画像の著作権・肖像権等は各権利所有者に帰属致します。権利を侵害する目的ではございません。記事の内容や掲載画像等に問題がございましたら、各権利所有者様本人が直接メールでご連絡下さい。確認後、対応させて頂きます。</p>
-<p>当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任を負いません。</p>
-<p>当サイトのコンテンツ・情報につきまして、可能な限り正確な情報を掲載するよう努めておりますが、誤情報が入り込んだり、情報が古くなっていることもございます。</p>
-<p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
+<h1 id=はじめに>はじめに</h1>
+<p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
+<p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
+<h2 id=１hello-world>１．Hello World</h2>
+<h3 id=はじめてのbashコマンドecho>はじめてのbashコマンド「echo」</h3>
+<p>ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。</p>
+<pre tabindex=0><code class=language-:はじめてのecho data-lang=:はじめてのecho>$ echo &quot;Hello, World&quot;
+Hello, World
+$
+</code></pre><h3 id=はじめてのbashスクリプトvim>はじめてのbashスクリプト「vim」</h3>
+<pre tabindex=0><code class=language-bash:はじめてのbashスクリプト data-lang=bash:はじめてのbashスクリプト>$ vim HelloWorld.sh
+＜空のvim HelloWorld.sh が開きます＞
+</code></pre><p>vimで開いたHelloWorld.shを編集します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:HelloWorld.sh data-lang=bash:HelloWorld.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=nb>echo</span> <span class=s2>&#34;Hello World&#34;</span><span class=p>;</span>
+exit<span class=p>;</span>
+</code></pre></div><h3 id=はじめての実行権限chmod>はじめての実行権限「chmod」</h3>
+<p>bashファイルは2つの方法で実行できます。<br>
+１．bashコマンドを使用する方法、<br>
+２．bashファイルに実行権限を設定し、ファイルを実行する方法</p>
+<p>一つ目の方法「bashコマンドを使用する」</p>
+<pre tabindex=0><code>$ bash HelloWorld.sh
+</code></pre><p>もう一つの方法「chmodで実行権限を付与する」</p>
+<pre tabindex=0><code># +x で実行権限を付与
+$ chmod +x HelloWorld.sh
+# ドット　スラッシュをつけて実行
+$ ./HelloWorld.sh
+</code></pre><p>考え方ですが、bashコマンドで実行する場合のメリットは、ファイルに闇雲に実行権限を与える必要がないことです。実行権限を与える方法は、一般的ではありますが注意も必要です。</p>
+<p>chmod の実行権限には +x で実行権限を付与する方法の他、0755 などの数字で付与する場合もあります。<br>
+これらを<font color=red>パーミッション</font>と言います。</p>
+<h3 id=パーミッションの確認>パーミッションの確認</h3>
+<p>ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。</p>
+<pre tabindex=0><code>$ls -l
+</code></pre><p>上記のコマンドを実行すると、以下のような一覧が表示されるかと思います。</p>
+<pre tabindex=0><code>-rw-r--r--  1 user group      9  1月 1 00:00 hoge.txt
+drwxr-xr-x  6 user group  20480  1月 1 00:00 ダウンロード
+</code></pre><h3 id=パーミッションの読み方>パーミッションの読み方</h3>
+<p>「-rw-r&ndash;r&ndash;」や「drwxr-xr-x」の先頭の謎の10文字についてですが、<br>
+最初の１文字目はファイル種別を表しています。<br>
+-rw-r&ndash;r&ndash;</p>
+<table>
+<tr><th>種別</th><th>意味</th></tr>
+<tr><td>-</td><td>ファイル</td></tr>
+<tr><td>d</td><td>ディレクトリ</td></tr>
+<tr><td>l</td><td>シンボリックリンク</td></tr>
+</table>
+<p>2文字目から4文字目はファイルの所有者に対する権限を表し、<br>
+5文字目から7文字目はファイルの所有グループに対する権限を表し、<br>
+8文字目から10文字目はその他に対する権限を表しています</p>
+<p>上記から-rw-r&ndash;r&ndash;は、<br>
+「ファイル種別」が「ファイル」であり、<br>
+「所有者」に「読み取り」と「書き込み」の権限があり、<br>
+「所有グループ」に「読み取り」の権限があり、<br>
+「その他」に「読み取り」の権限があることを示しています。</p>
+<p>drwxr-xr-xは、<br>
+「ファイル種別」が「ディレクトリ」であり、<br>
+「所有者」に「読み取り」と「書き込み」と「実行」の権限があり、<br>
+「所有グループ」に「読み取り」と「実行」の権限があり、<br>
+「その他」に「読み取り」と「実行」の権限があることを示しています。</p>
+<h3 id=アクセス権限の変更>アクセス権限の変更</h3>
+<p>アクセス権限を変更する方法について記載します。</p>
+<p>パーミッションの変更には<font color=red><b> chmodコマンド</b></font>を使用します。</p>
+<p>数値で指定する</p>
+<pre tabindex=0><code>$ ls -l　
+-rw-r--r--  1 user group      9  1月 1 00:00 hoge.txt
+$ chmod 764 hoge.txt
+$ ls -l
+-rwxrw-r--  1 user group      9  1月 1 00:00 hoge.txt
+</code></pre><p>上記のコマンドはhoge.txtに対してパーミッションの確認→変更→確認を行っています。</p>
+<pre tabindex=0><code>$ chmod 764 hoge.txt
+</code></pre><p>に関して説明していきます。<br>
+ファイルのパーミッションの変更は以下の通りコマンドを実行すれば可能です。</p>
+<pre tabindex=0><code>chmod モード 対象ファイル名
+</code></pre><h3 id=モードの数字について>モードの数字について</h3>
+<table>
+<tr><th>モード(数字)</th><th>モード(アルファベット)</th><th>権限</th></tr>
+<tr><td>4</td><td>r</td><td>読み取り</td></tr>
+<tr><td>2</td><td>w</td><td>書き込み</td></tr>
+<tr><td>1</td><td>x</td><td>実行</td></tr>
+</table>
+上記の合計値を「所有者」「所有グループ」「その他」の順で入力することでパーミッションを変更することができます。
+要するに上記の「764」は
+「所有者」に対して「読み取り」「書き込み」「実行」を、
+「所有グループ」に対して「読み取り」「書き込み」を、
+「その他」に「読み取り」を付与しています。
+<p>詳しくはこちら<br>
+<a class=link href=https://qiita.com/shisama/items/5f4c4fa768642aad9e06 target=_blank rel=noopener>https://qiita.com/shisama/items/5f4c4fa768642aad9e06</a></p>
 </section>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2022.01.06</time>
+</div>
+<p class=article-subtitle>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+「UNIXという考え方―その設計思想と哲学」　メモ
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.25</time>
+</div>
+<p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div>
+<p class=article-subtitle>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+【プログレスバー】Bashでプログレスバーを作ってみようって話
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div>
+<p class=article-subtitle>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+【unComp】Bashで便利なコマンドを作ってみようって話
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div>
+<p class=article-subtitle>今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です</p>
+</div>
+</a>
+</article>
+</div>
+</section>
 <footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+</section>
 </footer>
 <div class=article-pager>
 <div class=article-pager--prev>
-<article>
-<a href=https://suzukiiichiro.github.io/archives/>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
 <div class=article-details>
-<h2 class=article-title>Archives</h2>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
 </div>
 </a>
 </article>

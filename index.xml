@@ -1,4 +1,150 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 06 Jan 2022 16:50:50 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>簡単にできるHugoで人気の記事を表示する方法 #1</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 07 Jan 2022 10:03:12 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>ざっくりわかる「シェルスクリプト【１】」</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</link><pubDate>Fri, 07 Jan 2022 10:03:12 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト【１】」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
+&lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
+&lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
+&lt;h2 id="１hello-world">１．Hello World&lt;/h2>
+&lt;h3 id="はじめてのbashコマンドecho">はじめてのbashコマンド「echo」&lt;/h3>
+&lt;p>ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-:はじめてのecho" data-lang=":はじめてのecho">$ echo &amp;quot;Hello, World&amp;quot;
+Hello, World
+$
+&lt;/code>&lt;/pre>&lt;h3 id="はじめてのbashスクリプトvim">はじめてのbashスクリプト「vim」&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-bash:はじめてのbashスクリプト" data-lang="bash:はじめてのbashスクリプト">$ vim HelloWorld.sh
+＜空のvim HelloWorld.sh が開きます＞
+&lt;/code>&lt;/pre>&lt;p>vimで開いたHelloWorld.shを編集します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:HelloWorld.sh" data-lang="bash:HelloWorld.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello World&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+exit&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="はじめての実行権限chmod">はじめての実行権限「chmod」&lt;/h3>
+&lt;p>bashファイルは2つの方法で実行できます。&lt;br>
+１．bashコマンドを使用する方法、&lt;br>
+２．bashファイルに実行権限を設定し、ファイルを実行する方法&lt;/p>
+&lt;p>一つ目の方法「bashコマンドを使用する」&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash HelloWorld.sh
+&lt;/code>&lt;/pre>&lt;p>もう一つの方法「chmodで実行権限を付与する」&lt;/p>
+&lt;pre tabindex="0">&lt;code># +x で実行権限を付与
+$ chmod +x HelloWorld.sh
+# ドット　スラッシュをつけて実行
+$ ./HelloWorld.sh
+&lt;/code>&lt;/pre>&lt;p>考え方ですが、bashコマンドで実行する場合のメリットは、ファイルに闇雲に実行権限を与える必要がないことです。実行権限を与える方法は、一般的ではありますが注意も必要です。&lt;/p>
+&lt;p>chmod の実行権限には +x で実行権限を付与する方法の他、0755 などの数字で付与する場合もあります。&lt;br>
+これらを&lt;font color=red>パーミッション&lt;/font>と言います。&lt;/p>
+&lt;h3 id="パーミッションの確認">パーミッションの確認&lt;/h3>
+&lt;p>ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ls -l
+&lt;/code>&lt;/pre>&lt;p>上記のコマンドを実行すると、以下のような一覧が表示されるかと思います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>-rw-r--r-- 1 user group 9 1月 1 00:00 hoge.txt
+drwxr-xr-x 6 user group 20480 1月 1 00:00 ダウンロード
+&lt;/code>&lt;/pre>&lt;h3 id="パーミッションの読み方">パーミッションの読み方&lt;/h3>
+&lt;p>「-rw-r&amp;ndash;r&amp;ndash;」や「drwxr-xr-x」の先頭の謎の10文字についてですが、&lt;br>
+最初の１文字目はファイル種別を表しています。&lt;br>
+-rw-r&amp;ndash;r&amp;ndash;&lt;/p>
+&lt;table>
+&lt;tr>&lt;th>種別&lt;/th>&lt;th>意味&lt;/th>&lt;/tr>
+&lt;tr>&lt;td>-&lt;/td>&lt;td>ファイル&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>d&lt;/td>&lt;td>ディレクトリ&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>l&lt;/td>&lt;td>シンボリックリンク&lt;/td>&lt;/tr>
+&lt;/table>
+&lt;p>2文字目から4文字目はファイルの所有者に対する権限を表し、&lt;br>
+5文字目から7文字目はファイルの所有グループに対する権限を表し、&lt;br>
+8文字目から10文字目はその他に対する権限を表しています&lt;/p>
+&lt;p>上記から-rw-r&amp;ndash;r&amp;ndash;は、&lt;br>
+「ファイル種別」が「ファイル」であり、&lt;br>
+「所有者」に「読み取り」と「書き込み」の権限があり、&lt;br>
+「所有グループ」に「読み取り」の権限があり、&lt;br>
+「その他」に「読み取り」の権限があることを示しています。&lt;/p>
+&lt;p>drwxr-xr-xは、&lt;br>
+「ファイル種別」が「ディレクトリ」であり、&lt;br>
+「所有者」に「読み取り」と「書き込み」と「実行」の権限があり、&lt;br>
+「所有グループ」に「読み取り」と「実行」の権限があり、&lt;br>
+「その他」に「読み取り」と「実行」の権限があることを示しています。&lt;/p>
+&lt;h3 id="アクセス権限の変更">アクセス権限の変更&lt;/h3>
+&lt;p>アクセス権限を変更する方法について記載します。&lt;/p>
+&lt;p>パーミッションの変更には&lt;font color=red>&lt;b> chmodコマンド&lt;/b>&lt;/font>を使用します。&lt;/p>
+&lt;p>数値で指定する&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ ls -l　
+-rw-r--r-- 1 user group 9 1月 1 00:00 hoge.txt
+$ chmod 764 hoge.txt
+$ ls -l
+-rwxrw-r-- 1 user group 9 1月 1 00:00 hoge.txt
+&lt;/code>&lt;/pre>&lt;p>上記のコマンドはhoge.txtに対してパーミッションの確認→変更→確認を行っています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ chmod 764 hoge.txt
+&lt;/code>&lt;/pre>&lt;p>に関して説明していきます。&lt;br>
+ファイルのパーミッションの変更は以下の通りコマンドを実行すれば可能です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>chmod モード 対象ファイル名
+&lt;/code>&lt;/pre>&lt;h3 id="モードの数字について">モードの数字について&lt;/h3>
+&lt;table>
+&lt;tr>&lt;th>モード(数字)&lt;/th>&lt;th>モード(アルファベット)&lt;/th>&lt;th>権限&lt;/th>&lt;/tr>
+&lt;tr>&lt;td>4&lt;/td>&lt;td>r&lt;/td>&lt;td>読み取り&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>2&lt;/td>&lt;td>w&lt;/td>&lt;td>書き込み&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>1&lt;/td>&lt;td>x&lt;/td>&lt;td>実行&lt;/td>&lt;/tr>
+&lt;/table>
+上記の合計値を「所有者」「所有グループ」「その他」の順で入力することでパーミッションを変更することができます。
+要するに上記の「764」は
+「所有者」に対して「読み取り」「書き込み」「実行」を、
+「所有グループ」に対して「読み取り」「書き込み」を、
+「その他」に「読み取り」を付与しています。
+&lt;p>詳しくはこちら&lt;br>
+&lt;a class="link" href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06" target="_blank" rel="noopener"
+>https://qiita.com/shisama/items/5f4c4fa768642aad9e06&lt;/a>&lt;/p>
+&lt;!--
+## ２．Echo コマンド
+###
+## ３．コメント
+###
+## ４．マルチラインコメント
+###
+## ５．While ループ
+###
+## ６．For ループ
+###
+## ７．Get User Input
+###
+## ８．If 文
+###
+## ９．And 条件を if 文で使う
+###
+## １０．Or 条件を if文で使う
+###
+## １１．Else if と else
+###
+## １２．Case 文
+###
+## １３．コマンドラインから引数を取得
+###
+## １４．名前を使用してコマンドラインから引数を取得する
+###
+## １５．変数に2つの文字列を組み合わせる
+###
+## １６．文字列の部分文字列を取得する
+###
+## １７．変数に2つの数値を追加します
+###
+## １８．関数を作成する
+###
+## １９．関数パラメーターを使用する
+###
+## ２０．スクリプトからの戻り値を渡す
+###
+## ２１．ディレクトリを作成する
+###
+## ２２．存在を確認してディレクトリを作成する
+###
+## ２３．ファイルを読む
+###
+## ２４．ファイルを削除する
+###
+## ２５．ファイルに追加
+###
+## ２６．ファイルが存在するかどうかを確認
+###
+## ２７．mailコマンド
+###
+## ２８．dateコマンド
+###
+## ２９．waitコマンド
+###
+## ３０．sleepコマンド
+--></description></item><item><title>簡単にできるHugoで人気の記事を表示する方法 #1</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
 関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。&lt;/p>
 &lt;p>しかし、1点だけどうしても重要な機能がありません。&lt;br>
 それは人気記事の表示です。&lt;br>
