@@ -2,7 +2,7 @@ name: update-sitemap
 
 on:
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: '0 15 * * *'
 
 jobs:
   update-sitemap:
