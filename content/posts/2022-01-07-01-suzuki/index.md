@@ -1,5 +1,5 @@
 ---
-title: "ざっくりわかる「シェルスクリプト【１】」"
+title: "ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"
 draft: false
@@ -40,8 +40,8 @@ vimで開いたHelloWorld.shを編集します。
 
 ```bash:HelloWorld.sh
 #!/bin/bash
+
 echo "Hello World";
-exit;
 ```
 ### はじめての実行権限「chmod」
 bashファイルは2つの方法で実行できます。
@@ -145,53 +145,179 @@ chmod モード 対象ファイル名
 詳しくはこちら
 https://qiita.com/shisama/items/5f4c4fa768642aad9e06
 
-## 書籍の紹介
-{{% amazon
 
-title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20"
+## ２．echo コマンド
+### echoコマンドの使用：
+さまざまなオプションでechoコマンドを使用できます。
+次の例では、いくつかの便利なオプションについて説明します。
+オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。
+'-n'オプションは、改行なしでテキストを印刷するために使用され、'-e'オプションは、出力からバックスラッシュ文字を削除するために使用されます。
+'echo_example.sh'という名前の新しいbashファイルを作成し、次のスクリプトを追加します。
 
-url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
+``` bash:echo_example.sh
+#!/bin/bash
 
-summary=`定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。`
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4774186945&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
-%}}
+echo "改行付きのテキストの印刷";
+echo -n "改行なしのテキストの印刷";
+echo -e "\n削除\tバックスラッシュ\t文字\n";
+```
+bashコマンドでファイルを実行します。
+```
+$ bash echo_example.sh
+改行付きのテキストの印刷
+改行なしのテキストの印刷
+削除	バックスラッシュ	文字
+$
+```
 
-{{% amazon
+## ３．コメント
+### コメントの使用
+「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。
+'comment_example.sh'という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。
 
-title="UNIXシェルスクリプト マスターピース132"
+``` bash:comment_example.sh
+#!/bin/bash
 
-url="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00QJINS1A&linkCode=as2&tag=nlpqueens-22&linkId=36dff1cf8fa7d4852b5a4a3cf874304b"
+#2つの数値をsumに追加します
+((sum=25+35));
 
-summary=`すべてのUNIXエンジニア必携!!
+#結果を出力します
+echo "$sum";
+```
+bashコマンドでファイルを実行します。
+```
+$ bash comment_example.sh
+60
+$
+```
+## ４．マルチラインコメント
+### 複数行コメントの使用
+bashではさまざまな方法で複数行コメントを使用できます。
+次の例に簡単な方法を示します。
+'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。
+ここでは、「:」と「'」でbashで複数行コメントを実現しています。
+次のスクリプトは、5の2乗を計算します。
 
-サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。
-知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。
-`
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00QJINS1A&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
-%}}
+``` bash:multiline-comment.sh
+#!/bin/bash
 
+: '
+次のスクリプトは、
+数値の2乗値5を計算します。
+'
+((area=5*5));
+echo "$area";
+```
+bashコマンドでファイルを実行します。
+
+```
+$ bash multiline-comment.sh
+25
+$
+```
+## ５．While ループ
+### whileループの使用
+whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。
+この例では、whileループが5回繰り返されます。
+count変数の値は、各ステップで1ずつ増加します。
+count変数の値が5になると、whileループは終了します。
+``` bash:while_exapmle.sh
+#!/bin/bash
+
+valid=true;
+count=1
+while [ "$valid" ];do
+  echo "$count";
+  if [ "$count" -eq 5 ];then
+    break;
+  fi
+  ((count++));
+done
+```
+bashコマンドでファイルを実行します。
+```
+$ bash while_example.sh
+1
+2
+3
+4
+5
+$
+```
+## ６．for ループ
+### forループの使用
+基本的なforループ宣言を示します。
+'for_example.sh'という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。
+ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。
+``` bash:for_example.sh
+#!/bin/bash
+
+for((counter=10;counter>0;counter--));do
+  echo -n "$counter ";
+done
+printf "\n"
+```
+bashコマンドでファイルを実行します。
+```
+$ bash for_example.sh
+10 9 8 7 6 5 4 3 2 1
+$
+```
+## ７．対話型入力
+### ユーザー入力の取得
+'read'コマンドは、bashでユーザーから入力を受け取るために使用されます。
+'user_input.sh'という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。
+ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。
+``` bash:user_input.sh
+#!/bin/bash
+
+echo "あなたの名前を入力して下さい"
+read name
+echo "ようこそ $name. ＮＬＰへ"
+```
+bashコマンドでファイルを実行します。
+```
+$ bash user_input.sh
+あなたの名前を入力して下さい
+suzuki
+ようこそ suzuki。 ＮＬＰへ
+$
+```
+## ８．If 文
+### if文を使う
+単数、または複数の条件でif条件を使用できます。
+このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。
+「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。
+ここでは、変数nに10が割り当てられています。
+$nの値が10未満の場合、出力は「1桁の数値です」になります。
+それ以外の場合、出力は「2桁の数値です」になります。
+比較のために、ここでは「-lt」を使用しています。
+
+<table>
+<tr><th>オプション</th><th>意味</th></tr>
+<tr><td>-eq</td><td>同　じ（==）</td></tr>
+<tr><td>-lt</td><td>小さい（＜）</td></tr>
+<tr><td>-gt</td><td>大きい（＞）</td></tr>
+</table>
+
+``` bash:simple_if.sh
+#!/bin/bash
+
+n=10;
+if [ $n -lt 10 ];then
+  echo "1桁の数値です";
+else
+  echo "2桁の数値です";
+fi
+```
+bashコマンドでファイルを実行します。
+```
+$ bash simple_if.sh
+2桁の数値です
+$
+```
 
 <!--
-## ２．Echo コマンド
-### 
-## ３．コメント
-### 
-## ４．マルチラインコメント
-### 
-## ５．While ループ
-### 
-## ６．For ループ
-### 
-## ７．Get User Input
-### 
-## ８．If 文
-### 
 ## ９．And 条件を if 文で使う
 ### 
 ## １０．Or 条件を if文で使う
@@ -236,3 +362,34 @@ imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&AS
 ### 
 ## ３０．sleepコマンド
 -->
+## 書籍の紹介
+{{% amazon
+
+title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20"
+
+url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
+
+summary=`定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。`
+imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4774186945&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
+%}}
+
+{{% amazon
+
+title="UNIXシェルスクリプト マスターピース132"
+
+url="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00QJINS1A&linkCode=as2&tag=nlpqueens-22&linkId=36dff1cf8fa7d4852b5a4a3cf874304b"
+
+summary=`すべてのUNIXエンジニア必携!!
+
+サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。
+`
+imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00QJINS1A&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
+%}}
+
