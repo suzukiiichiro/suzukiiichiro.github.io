@@ -9,7 +9,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:32:41+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:37:01+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -110,53 +110,14 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#１hello-world>１．Hello World</a>
-<ol>
-<li><a href=#はじめてのbashコマンドecho>はじめてのbashコマンド「echo」</a></li>
-<li><a href=#はじめてのbashスクリプトvim>はじめてのbashスクリプト「vim」</a></li>
-<li><a href=#はじめての実行権限chmod>はじめての実行権限「chmod」</a></li>
-<li><a href=#パーミッションの確認>パーミッションの確認</a></li>
-<li><a href=#パーミッションの読み方>パーミッションの読み方</a></li>
-<li><a href=#アクセス権限の変更>アクセス権限の変更</a></li>
-<li><a href=#モードの数字について>モードの数字について</a></li>
-</ol>
-</li>
-<li><a href=#２echo-コマンド>２．echo コマンド</a>
-<ol>
-<li><a href=#echoコマンドの使用>echoコマンドの使用：</a></li>
-</ol>
-</li>
-<li><a href=#３コメント>３．コメント</a>
-<ol>
-<li><a href=#コメントの使用>コメントの使用</a></li>
-</ol>
-</li>
-<li><a href=#４マルチラインコメント>４．マルチラインコメント</a>
-<ol>
-<li><a href=#複数行コメントの使用>複数行コメントの使用</a></li>
-</ol>
-</li>
-<li><a href=#５while-ループ>５．While ループ</a>
-<ol>
-<li><a href=#whileループの使用>whileループの使用</a></li>
-</ol>
-</li>
-<li><a href=#６for-ループ>６．for ループ</a>
-<ol>
-<li><a href=#forループの使用>forループの使用</a></li>
-</ol>
-</li>
-<li><a href=#７対話型入力>７．対話型入力</a>
-<ol>
-<li><a href=#ユーザー入力の取得>ユーザー入力の取得</a></li>
-</ol>
-</li>
-<li><a href=#８if-文>８．If 文</a>
-<ol>
-<li><a href=#if文を使う>if文を使う</a></li>
-</ol>
-</li>
-<li><a href=#書籍の紹介>書籍の紹介</a></li>
+<li><a href=#hello-world>Hello World</a></li>
+<li><a href=#echo-コマンド>echo コマンド</a></li>
+<li><a href=#コメント>コメント</a></li>
+<li><a href=#マルチラインコメント>マルチラインコメント</a></li>
+<li><a href=#while-ループ>While ループ</a></li>
+<li><a href=#for-ループ>for ループ</a></li>
+<li><a href=#対話型入力>対話型入力</a></li>
+<li><a href=#if-文>If 文</a></li>
 </ol>
 </nav>
 </div>
@@ -167,21 +128,21 @@ Web開発
 <h1 id=はじめに>はじめに</h1>
 <p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
 <p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
-<h2 id=１hello-world>１．Hello World</h2>
-<h3 id=はじめてのbashコマンドecho>はじめてのbashコマンド「echo」</h3>
-<p>ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。</p>
+<h2 id=hello-world>Hello World</h2>
+<p>はじめてのbashコマンド「echo」<br>
+ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。</p>
 <pre tabindex=0><code class=language-:はじめてのecho data-lang=:はじめてのecho>$ echo &quot;Hello, World&quot;
 Hello, World
 $
-</code></pre><h3 id=はじめてのbashスクリプトvim>はじめてのbashスクリプト「vim」</h3>
+</code></pre><p>はじめてのbashスクリプト「vim」</p>
 <pre tabindex=0><code class=language-bash:はじめてのbashスクリプト data-lang=bash:はじめてのbashスクリプト>$ vim HelloWorld.sh
 ＜空のvim HelloWorld.sh が開きます＞
 </code></pre><p>vimで開いたHelloWorld.shを編集します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:HelloWorld.sh data-lang=bash:HelloWorld.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nb>echo</span> <span class=s2>&#34;Hello World&#34;</span><span class=p>;</span>
-</code></pre></div><h3 id=はじめての実行権限chmod>はじめての実行権限「chmod」</h3>
-<p>bashファイルは2つの方法で実行できます。<br>
+</code></pre></div><p>はじめての実行権限「chmod」<br>
+bashファイルは2つの方法で実行できます。<br>
 １．bashコマンドを使用する方法、<br>
 ２．bashファイルに実行権限を設定し、ファイルを実行する方法</p>
 <p>一つ目の方法「bashコマンドを使用する」</p>
@@ -194,14 +155,14 @@ $ ./HelloWorld.sh
 </code></pre><p>考え方ですが、bashコマンドで実行する場合のメリットは、ファイルに闇雲に実行権限を与える必要がないことです。実行権限を与える方法は、一般的ではありますが注意も必要です。</p>
 <p>chmod の実行権限には +x で実行権限を付与する方法の他、0755 などの数字で付与する場合もあります。<br>
 これらを<font color=red>パーミッション</font>と言います。</p>
-<h3 id=パーミッションの確認>パーミッションの確認</h3>
-<p>ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。</p>
+<p>パーミッションの確認<br>
+ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。</p>
 <pre tabindex=0><code>$ls -l
 </code></pre><p>上記のコマンドを実行すると、以下のような一覧が表示されるかと思います。</p>
 <pre tabindex=0><code>-rw-r--r--  1 user group      9  1月 1 00:00 hoge.txt
 drwxr-xr-x  6 user group  20480  1月 1 00:00 ダウンロード
-</code></pre><h3 id=パーミッションの読み方>パーミッションの読み方</h3>
-<p>「-rw-r&ndash;r&ndash;」や「drwxr-xr-x」の先頭の謎の10文字についてですが、<br>
+</code></pre><p>パーミッションの読み方<br>
+「-rw-r&ndash;r&ndash;」や「drwxr-xr-x」の先頭の謎の10文字についてですが、<br>
 最初の１文字目はファイル種別を表しています。<br>
 -rw-r&ndash;r&ndash;</p>
 <table>
@@ -223,8 +184,8 @@ drwxr-xr-x  6 user group  20480  1月 1 00:00 ダウンロード
 「所有者」に「読み取り」と「書き込み」と「実行」の権限があり、<br>
 「所有グループ」に「読み取り」と「実行」の権限があり、<br>
 「その他」に「読み取り」と「実行」の権限があることを示しています。</p>
-<h3 id=アクセス権限の変更>アクセス権限の変更</h3>
-<p>アクセス権限を変更する方法について記載します。</p>
+<p>アクセス権限の変更<br>
+アクセス権限を変更する方法について記載します。</p>
 <p>パーミッションの変更には<font color=red><b> chmodコマンド</b></font>を使用します。</p>
 <p>数値で指定する</p>
 <pre tabindex=0><code>$ ls -l　
@@ -237,7 +198,7 @@ $ ls -l
 </code></pre><p>に関して説明していきます。<br>
 ファイルのパーミッションの変更は以下の通りコマンドを実行すれば可能です。</p>
 <pre tabindex=0><code>chmod モード 対象ファイル名
-</code></pre><h3 id=モードの数字について>モードの数字について</h3>
+</code></pre><p>モードの数字について</p>
 <table>
 <tr><th>モード(数字)</th><th>モード(アルファベット)</th><th>権限</th></tr>
 <tr><td>4</td><td>r</td><td>読み取り</td></tr>
@@ -251,9 +212,9 @@ $ ls -l
 「その他」に「読み取り」を付与しています。
 <p>詳しくはこちら<br>
 <a class=link href=https://qiita.com/shisama/items/5f4c4fa768642aad9e06 target=_blank rel=noopener>https://qiita.com/shisama/items/5f4c4fa768642aad9e06</a></p>
-<h2 id=２echo-コマンド>２．echo コマンド</h2>
-<h3 id=echoコマンドの使用>echoコマンドの使用：</h3>
-<p>さまざまなオプションでechoコマンドを使用できます。<br>
+<h2 id=echo-コマンド>echo コマンド</h2>
+<p>echoコマンドの使用：<br>
+さまざまなオプションでechoコマンドを使用できます。<br>
 次の例では、いくつかの便利なオプションについて説明します。<br>
 オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。<br>
 &lsquo;-n&rsquo;オプションは、改行なしでテキストを印刷するために使用され、'-e&rsquo;オプションは、出力からバックスラッシュ文字を削除するために使用されます。<br>
@@ -269,9 +230,9 @@ $ ls -l
 改行なしのテキストの印刷
 削除	バックスラッシュ	文字
 $
-</code></pre><h2 id=３コメント>３．コメント</h2>
-<h3 id=コメントの使用>コメントの使用</h3>
-<p>「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。<br>
+</code></pre><h2 id=コメント>コメント</h2>
+<p>コメントの使用<br>
+「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。<br>
 &lsquo;comment_example.sh&rsquo;という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:comment_example.sh data-lang=bash:comment_example.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
@@ -284,9 +245,9 @@ $
 <pre tabindex=0><code>$ bash comment_example.sh
 60
 $
-</code></pre><h2 id=４マルチラインコメント>４．マルチラインコメント</h2>
-<h3 id=複数行コメントの使用>複数行コメントの使用</h3>
-<p>bashではさまざまな方法で複数行コメントを使用できます。<br>
+</code></pre><h2 id=マルチラインコメント>マルチラインコメント</h2>
+<p>複数行コメントの使用<br>
+bashではさまざまな方法で複数行コメントを使用できます。<br>
 次の例に簡単な方法を示します。<br>
 &lsquo;multiline-comment.sh&rsquo;という名前の新しいbashを作成し、次のスクリプトを追加します。<br>
 ここでは、「:」と「'」でbashで複数行コメントを実現しています。<br>
@@ -303,9 +264,9 @@ $
 <pre tabindex=0><code>$ bash multiline-comment.sh
 25
 $
-</code></pre><h2 id=５while-ループ>５．While ループ</h2>
-<h3 id=whileループの使用>whileループの使用</h3>
-<p>whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。<br>
+</code></pre><h2 id=while-ループ>While ループ</h2>
+<p>whileループの使用<br>
+whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。<br>
 この例では、whileループが5回繰り返されます。<br>
 count変数の値は、各ステップで1ずつ増加します。<br>
 count変数の値が5になると、whileループは終了します。</p>
@@ -328,9 +289,9 @@ count変数の値が5になると、whileループは終了します。</p>
 4
 5
 $
-</code></pre><h2 id=６for-ループ>６．for ループ</h2>
-<h3 id=forループの使用>forループの使用</h3>
-<p>基本的なforループ宣言を示します。<br>
+</code></pre><h2 id=for-ループ>for ループ</h2>
+<p>forループの使用<br>
+基本的なforループ宣言を示します。<br>
 &lsquo;for_example.sh&rsquo;という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。<br>
 ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:for_example.sh data-lang=bash:for_example.sh><span class=cp>#!/bin/bash
@@ -343,9 +304,9 @@ $
 <pre tabindex=0><code>$ bash for_example.sh
 10 9 8 7 6 5 4 3 2 1
 $
-</code></pre><h2 id=７対話型入力>７．対話型入力</h2>
-<h3 id=ユーザー入力の取得>ユーザー入力の取得</h3>
-<p>&lsquo;read&rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。<br>
+</code></pre><h2 id=対話型入力>対話型入力</h2>
+<p>ユーザー入力の取得<br>
+&lsquo;read&rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。<br>
 &lsquo;user_input.sh&rsquo;という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。<br>
 ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:user_input.sh data-lang=bash:user_input.sh><span class=cp>#!/bin/bash
@@ -359,9 +320,9 @@ $
 suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
-</code></pre><h2 id=８if-文>８．If 文</h2>
-<h3 id=if文を使う>if文を使う</h3>
-<p>単数、または複数の条件でif条件を使用できます。<br>
+</code></pre><h2 id=if-文>If 文</h2>
+<p>if文を使う<br>
+単数、または複数の条件でif条件を使用できます。<br>
 このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。<br>
 「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。<br>
 ここでは、変数nに10が割り当てられています。<br>
@@ -387,7 +348,7 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 2桁の数値です
 $
 </code></pre>
-<h2 id=書籍の紹介>書籍の紹介</h2>
+<h1 id=書籍の紹介>書籍の紹介</h1>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
 <div class="columns amazon-image">
