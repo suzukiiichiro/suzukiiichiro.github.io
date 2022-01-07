@@ -9,7 +9,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:48:06+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-07T06:50:12+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -95,7 +95,7 @@ Web開発
 <div class=article-info>
 <time class="article-time--item article-time--published">2022.01.07</time>
 <time class="article-time--item article-time--reading">
-読了時間: 9分
+読了時間: 10分
 </time>
 </div>
 </header>
@@ -114,10 +114,11 @@ Web開発
 <li><a href=#echo-コマンド>echo コマンド</a></li>
 <li><a href=#コメント>コメント</a></li>
 <li><a href=#マルチラインコメント>マルチラインコメント</a></li>
-<li><a href=#while-ループ>While ループ</a></li>
+<li><a href=#while-ループ>while ループ</a></li>
 <li><a href=#for-ループ>for ループ</a></li>
 <li><a href=#対話型入力>対話型入力</a></li>
 <li><a href=#if-文>If 文</a></li>
+<li><a href=#９and-条件を-if-文で使う>９．and 条件を if 文で使う</a></li>
 </ol>
 </nav>
 </div>
@@ -264,7 +265,7 @@ bashではさまざまな方法で複数行コメントを使用できます。<
 <pre tabindex=0><code>$ bash multiline-comment.sh
 25
 $
-</code></pre><h2 id=while-ループ>While ループ</h2>
+</code></pre><h2 id=while-ループ>while ループ</h2>
 <p>whileループの使用<br>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。<br>
 この例では、whileループが5回繰り返されます。<br>
@@ -335,6 +336,9 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 <tr><td>-lt</td><td>小さい（＜）</td></tr>
 <tr><td>-gt</td><td>大きい（＞）</td></tr>
 </table>
+<p>数値を比較する場合は、「&lt;」「>」「=」ではなく、<br>
+-eq -lt -gt を使う必要があります。</p>
+<p>文字列を比較する場合は 「==」または 「!=」を使います。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:simple_if.sh data-lang=bash:simple_if.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>n</span><span class=o>=</span>10<span class=p>;</span>
@@ -346,6 +350,38 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 </code></pre></div><p>bashコマンドでファイルを実行します。</p>
 <pre tabindex=0><code>$ bash simple_if.sh
 2桁の数値です
+$
+</code></pre><h2 id=９and-条件を-if-文で使う>９．and 条件を if 文で使う</h2>
+<p>2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。<br>
+andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。<br>
+&lsquo;&&&lsquo;は、ifステートメントのandロジックを適用するために使用されます。<br>
+&lsquo;if_with_and.sh&rsquo;という名前のファイルを作成して、次のコードを確認します。<br>
+ここで、ユーザー名とパスワードの変数の値はユーザーから取得され、「admin」および「secret」と比較されます。<br>
+両方の値が一致する場合、出力は「有効なユーザー」になります。一致しない場合、出力は「無効なユーザー」になります。</p>
+<font color=red>
+数値を比較する場合は、「<」「>」「=」ではなく、
+-eq -lt -gt を使う必要があります。
+文字列を比較する場合は 「==」または 「!=」を使います。
+</font>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if_with_and.sh data-lang=bash:if_with_and.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;名前を入力して下さい&#34;</span>
+<span class=nb>read</span> username
+<span class=nb>echo</span> <span class=s2>&#34;パスワードを入力して下さい&#34;</span>
+<span class=nb>read</span> password
+
+<span class=k>if</span> <span class=o>[[</span> <span class=o>(</span><span class=s2>&#34;</span><span class=nv>$username</span><span class=s2>&#34;</span><span class=o>==</span><span class=s2>&#34;admin&#34;</span> <span class=o>&amp;&amp;</span> <span class=s2>&#34;</span><span class=nv>$password</span><span class=s2>&#34;</span><span class=o>==</span><span class=s2>&#34;secret&#34;</span><span class=o>)</span> <span class=o>]]</span><span class=p>;</span><span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;無効なユーザーです&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;有効なユーザーです&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash if_with_and.sh
+名前を入力して下さい
+suzuki
+パスワードを入力して下さい
+password
+無効なユーザーです
 $
 </code></pre>
 <h1 id=書籍の紹介>書籍の紹介</h1>

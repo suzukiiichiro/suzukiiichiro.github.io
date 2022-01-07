@@ -514,7 +514,7 @@ bashではさまざまな方法で複数行コメントを使用できます。&
 &lt;pre tabindex="0">&lt;code>$ bash multiline-comment.sh
 25
 $
-&lt;/code>&lt;/pre>&lt;h2 id="while-ループ">While ループ&lt;/h2>
+&lt;/code>&lt;/pre>&lt;h2 id="while-ループ">while ループ&lt;/h2>
 &lt;p>whileループの使用&lt;br>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。&lt;br>
 この例では、whileループが5回繰り返されます。&lt;br>
@@ -585,6 +585,9 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 &lt;tr>&lt;td>-lt&lt;/td>&lt;td>小さい（＜）&lt;/td>&lt;/tr>
 &lt;tr>&lt;td>-gt&lt;/td>&lt;td>大きい（＞）&lt;/td>&lt;/tr>
 &lt;/table>
+&lt;p>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;br>
+-eq -lt -gt を使う必要があります。&lt;/p>
+&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:simple_if.sh" data-lang="bash:simple_if.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
 &lt;span class="nv">n&lt;/span>&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span>
@@ -597,11 +600,41 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 &lt;pre tabindex="0">&lt;code>$ bash simple_if.sh
 2桁の数値です
 $
+&lt;/code>&lt;/pre>&lt;h2 id="９and-条件を-if-文で使う">９．and 条件を if 文で使う&lt;/h2>
+&lt;p>2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。&lt;br>
+andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。&lt;br>
+&amp;lsquo;&amp;amp;&amp;amp;&amp;lsquo;は、ifステートメントのandロジックを適用するために使用されます。&lt;br>
+&amp;lsquo;if_with_and.sh&amp;rsquo;という名前のファイルを作成して、次のコードを確認します。&lt;br>
+ここで、ユーザー名とパスワードの変数の値はユーザーから取得され、「admin」および「secret」と比較されます。&lt;br>
+両方の値が一致する場合、出力は「有効なユーザー」になります。一致しない場合、出力は「無効なユーザー」になります。&lt;/p>
+&lt;font color=red>
+数値を比較する場合は、「&lt;」「>」「=」ではなく、
+-eq -lt -gt を使う必要があります。
+文字列を比較する場合は 「==」または 「!=」を使います。
+&lt;/font>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:if_with_and.sh" data-lang="bash:if_with_and.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;名前を入力して下さい&amp;#34;&lt;/span>
+&lt;span class="nb">read&lt;/span> username
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;パスワードを入力して下さい&amp;#34;&lt;/span>
+&lt;span class="nb">read&lt;/span> password
+&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$username&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="s2">&amp;#34;admin&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$password&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="s2">&amp;#34;secret&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;無効なユーザーです&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">else&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;有効なユーザーです&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash if_with_and.sh
+名前を入力して下さい
+suzuki
+パスワードを入力して下さい
+password
+無効なユーザーです
+$
 &lt;/code>&lt;/pre>&lt;!--
-## ９．And 条件を if 文で使う
-## １０．Or 条件を if文で使う
-## １１．Else if と else
-## １２．Case 文
+## １０．or 条件を if文で使う
+## １１．else if と else
+## １２．case 文
 ## １３．コマンドラインから引数を取得
 ## １４．名前を使用してコマンドラインから引数を取得する
 ## １５．変数に2つの文字列を組み合わせる
