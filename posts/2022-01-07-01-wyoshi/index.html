@@ -1,0 +1,1006 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="簡単にできるHugoで人気の記事を表示する方法の2回目になります。 前回（簡単にできるHugoで人気の記事を表示する方法 #01）ではGAS（G"><title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2">
+<meta property="og:description" content="簡単にできるHugoで人気の記事を表示する方法の2回目になります。 前回（簡単にできるHugoで人気の記事を表示する方法 #01）ではGAS（G">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="GitHub Pages"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="Google アナリティクス"><meta property="article:tag" content="Google Analytics"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google App Script"><meta property="article:published_time" content="2022-01-07T11:54:15+09:00"><meta property="article:modified_time" content="2022-01-07T02:55:26+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg">
+<meta name=twitter:title content="GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2">
+<meta name=twitter:description content="簡単にできるHugoで人気の記事を表示する方法の2回目になります。 前回（簡単にできるHugoで人気の記事を表示する方法 #01）ではGAS（G"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-07-01-wyoshi/analytics.jpg'})</script>
+</head>
+<body class="article-page
+}">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供してます</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_13>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_6>
+Web開発
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section">
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2022.01.07</time>
+<time class="article-time--item article-time--reading">
+読了時間: 10分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2
+</a>
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#スプレッドシートのデータをjsonで取得>スプレッドシートのデータをJSONで取得</a>
+<ol>
+<li><a href=#プログラムの説明>プログラムの説明</a>
+<ol>
+<li><a href=#dogetってなに>doGetってなに？</a></li>
+<li><a href=#getdataでやってること>getDataでやってること</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#gasのプログラムをデプロイして公開>GASのプログラムをデプロイして公開</a>
+<ol>
+<li><a href=#エラーが出た場合>エラーが出た場合</a>
+<ol>
+<li><a href=#デプロイには注意>デプロイには注意</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#hugoと連携して人気の記事を表示する>Hugoと連携して人気の記事を表示する</a>
+<ol>
+<li><a href=#人気の記事を表示するプログラムの解説>人気の記事を表示するプログラムの解説</a></li>
+</ol>
+</li>
+<li><a href=#自動更新の設定>自動更新の設定</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#ソース>ソース</a>
+<ol>
+<li>
+<ol>
+<li><a href=#gasとスプレッドシートを使ってhugoに人気の記事を表示する>GASとスプレッドシートを使ってHugoに人気の記事を表示する</a></li>
+<li><a href=#hugoで人気の記事を表示する>Hugoで人気の記事を表示する</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#書籍の紹介>書籍の紹介</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>簡単にできるHugoで人気の記事を表示する方法の2回目になります。<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-06-wyoshi/>前回（簡単にできるHugoで人気の記事を表示する方法 #01）</a>ではGAS（Google App Scripts）を使ってアナリティクスのデータをスプレッドシートに反映するところまで説明しました。<br>
+今回は前回作成したスプレッドシートからデータを取得して、Hugoと連携するところまでやっていきましょう。</p>
+<h2 id=スプレッドシートのデータをjsonで取得>スプレッドシートのデータをJSONで取得</h2>
+<p>Hugoやjsなどとの連携を簡単にするために、スプレッドシートのデータをjsonで取得できるようにします。</p>
+<p>前回作成したプログラムを開きます。<br>
+開き方は前回の「<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-06-wyoshi/>簡単にできるHugoで人気の記事を表示する方法 #01</a>」にある「スプレッドシートの設定」を確認してください。</p>
+<p>スプレッドシートのデータをjsonで取得するためには、APIを使用するケースもありますが、今回はAPIを使用しないで取得します。</p>
+<p>プログラムの内容は下記になります。</p>
+<p>スプレッドシートのIDはスプレッドシートのURL部分の<br>
+docs.google.com/spreadsheets/d/ <code>スプレッドシートのID</code> /edit#gid=0<br>
+といったように docs.google.com/spreadsheets/d/ と edit に囲まれた部分になります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getData</span><span class=p>(</span><span class=nx>sheetName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>sheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>openById</span><span class=p>(</span><span class=s2>&#34;スプレッドシートのID&#34;</span><span class=p>).</span><span class=nx>getSheetByName</span><span class=p>(</span><span class=nx>sheetName</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>sheet</span><span class=p>.</span><span class=nx>getDataRange</span><span class=p>().</span><span class=nx>getValues</span><span class=p>();</span>
+  <span class=kr>const</span> <span class=nx>keys</span> <span class=o>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>splice</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>)[</span><span class=mi>0</span><span class=p>];</span>
+  <span class=k>return</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>row</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>obj</span> <span class=o>=</span> <span class=p>{};</span>
+    <span class=nx>row</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>item</span><span class=p>,</span> <span class=nx>index</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>obj</span><span class=p>[</span><span class=nx>keys</span><span class=p>[</span><span class=nx>index</span><span class=p>]]</span> <span class=o>=</span> <span class=nx>item</span><span class=p>);</span>
+    <span class=k>return</span> <span class=nx>obj</span><span class=p>;</span>
+  <span class=p>});</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>doGet</span><span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>data</span> <span class=o>=</span> <span class=nx>getData</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>parameter</span><span class=p>.</span><span class=nx>sheetname</span><span class=p>);</span>
+  <span class=k>return</span> <span class=nx>ContentService</span><span class=p>.</span><span class=nx>createTextOutput</span><span class=p>(</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>data</span><span class=p>,</span> <span class=kc>null</span><span class=p>,</span> <span class=mi>2</span><span class=p>)).</span><span class=nx>setMimeType</span><span class=p>(</span><span class=nx>ContentService</span><span class=p>.</span><span class=nx>MimeType</span><span class=p>.</span><span class=nx>JSON</span><span class=p>);</span>
+<span class=p>}</span>
+
+</code></pre></div><h3 id=プログラムの説明>プログラムの説明</h3>
+<h4 id=dogetってなに>doGetってなに？</h4>
+<p><code>doGet(e)</code> はこのプログラムをURLから実行できるようにした際にパラメータの値を取得して処理を行う関数です。<br>
+ここでは <code>getData()</code>という関数に、クエリパラメータ<code>sheetname</code>を渡しております。<br>
+URLにすると、https://〜/exec?sheetname=パラメータ<br>
+となります。</p>
+<p>このパラメータ部分にスプレッドシートのシート名を渡すことで、該当するスプレッドシートのデータを表示できるようになるというわけです。</p>
+<h4 id=getdataでやってること>getDataでやってること</h4>
+<p><code>getData(sheetName)</code> では先程のクエリパラメータ<code>sheetname</code>の値を使って、シートから情報を取得してjsonに格納している部分です。</p>
+<p>指定したシートIDの値がある範囲からから値を取得するのが下記のプログラムです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kr>const</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>sheet</span><span class=p>.</span><span class=nx>getDataRange</span><span class=p>().</span><span class=nx>getValues</span><span class=p>();</span>
+</code></pre></div><p>その取得した値からタイトル、jsonのキーとなる部分を keys として格納します。<br>
+そしたら先程取得した rows の値をループで取得しながらjson形式のデータに加工します。</p>
+<p>すると、</p>
+<pre tabindex=0><code>[
+  [リンク, pv数, session数, users数],
+  [リンク, pv数, session数, users数]
+]
+</code></pre><p>というデータが</p>
+<pre tabindex=0><code>[
+  {link: リンク, pv: pv数, session: session数, users: users数},
+  {link: リンク, pv: pv数, session: session数, users: users数}
+]
+</code></pre><p>というjson形式に加工することができました。<br>
+ここまでを保存しておきます。</p>
+<p>このプログラムを公開してURLでアクセスできるようにしましょう。</p>
+<h2 id=gasのプログラムをデプロイして公開>GASのプログラムをデプロイして公開</h2>
+<p>それではここまでのファイルをデプロイして、Webでアクセスできるようにしましょう。<br>
+右上にある「デプロイ」を押して、新しいデプロイをクリックします。</p>
+<p>すると、「新しいデプロイ」となるので、歯車のマーク「デプロイを有効にする」をおして、「ウェブアプリ」を選択します。<br>
+<figure class=gallery-image style=flex-grow:139;flex-basis:335px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img01.png data-size=980x701>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img01.png width=980 height=701 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img01_huf487cfc84c7ed2df1e406ad2c4a31349_126397_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img01_huf487cfc84c7ed2df1e406ad2c4a31349_126397_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>設定の画面になるので、説明などを入力します。<br>
+「次のユーザーとして実行」は自身のアドレスでかまいません。<br>
+「アクセスできるよユーザー」部分は「 <strong>全員</strong> 」とします。<br>
+これによって、Hugoから呼び出した際に実行できるようになります。<br>
+<figure class=gallery-image style=flex-grow:139;flex-basis:333px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img02.png data-size=980x705>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img02.png width=980 height=705 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img02_hu414af87a6b14ddf9b13521c5e57550de_158141_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img02_hu414af87a6b14ddf9b13521c5e57550de_158141_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>ここまで設定できたら「デプロイ」を押して、プログラムを公開します。<br>
+表示されたウェブアプリのURLが表示されるので、コピーしておきます。</p>
+<p>先程コピーしたURLの末尾に<code>?sheetname=month</code>を追加してアクセスしてみましょう。<br>
+<a class=link href=https://script.google.com/macros/s/ target=_blank rel=noopener>https://script.google.com/macros/s/</a>〜/exec?sheetname=month<br>
+URLはこのような形になります。</p>
+<p>正常にアクセスできていれば<br>
+<figure class=gallery-image style=flex-grow:196;flex-basis:470px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img03.png data-size=980x500>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img03.png width=980 height=500 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img03_hu7ef5c4f1b961fa096d8c5e7c75bf7c67_49092_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img03_hu7ef5c4f1b961fa096d8c5e7c75bf7c67_49092_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure><br>
+とjson形式のデータが表示されるはずです。</p>
+<h3 id=エラーが出た場合>エラーが出た場合</h3>
+<pre tabindex=0><code>TypeError: Cannot read property 'getDataRange' of null（行 3、ファイル「コード」）
+</code></pre><p>というエラーが出た場合はパラメータが記述されていないだけなので、パラメータを記述することで正常に取得できます。<br>
+それ以外の場合は、「デバッグ」を使ってエラーを特定していく必要があります。<br>
+デバッグでは<code>doGet</code>はクエリ取得できないので、<code>e.parameter.sheetname</code>部分を<code>"month"</code>と直書きしてデバッグを実行します。</p>
+<h4 id=デプロイには注意>デプロイには注意</h4>
+<p>デプロイで「新しいデプロイ」を選択するとURLが変わる点に注意です。<br>
+GASでウェブアプリのURLを固定するための方法は、「デプロイを管理」から更新をするようにします。</p>
+<ul>
+<li>「デプロイ」の「デプロイを管理」を押します。</li>
+<li>そして、右にある鉛筆マークの「編集」を押します。<br>
+すると、編集画面になり、バージョンや説明を修正することができます。</li>
+<li>バージョン部分を「新しいバージョン」として、説明に「最新版」とでも打っておきましょう。</li>
+<li>この状態で「デプロイ」をクリックします。</li>
+</ul>
+<p>上記の作業で、URLを固定したままウェブアプリを公開することができます。<br>
+<figure class=gallery-image style=flex-grow:138;flex-basis:333px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img04.png data-size=980x706>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img04.png width=980 height=706 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img04_hu88d49d2022eb88c51862fef2af5ceb89_152311_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img04_hu88d49d2022eb88c51862fef2af5ceb89_152311_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<h2 id=hugoと連携して人気の記事を表示する>Hugoと連携して人気の記事を表示する</h2>
+<p>アナリティクスとスプレッドシートを使って人気の記事をjsonで取得する事ができるようになったので、Hugoと連携します。<br>
+Hugoにはjsonを取得する機能がついているので、その機能を使ってデータを取得します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html:popularArticlesMonth.html data-lang=html:popularArticlesMonth.html>{{ $json := getJSON &#34;https://script.google.com/macros/s/〜/exec?sheetname=month&#34; }}
+
+<span class=p>&lt;</span><span class=nt>aside</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;widget archives sidearticle-contents--wrapper&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;popular-articles--month&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;contents-area&#34;</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>header</span><span class=p>&gt;&lt;</span><span class=nt>h2</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section-title&#34;</span><span class=p>&gt;</span>人気の記事（1ヶ月以内）<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;&lt;/</span><span class=nt>header</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;sidearticle-contents&#34;</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;flex article-list--tile&#34;</span><span class=p>&gt;</span>
+        {{ $page := .Site.Pages }}
+        {{ range first .Site.Params.widgets.populerArticles.limit $json }}
+          {{ $article := index (where $page &#34;.RelPermalink&#34; &#34;eq&#34; .link ) 0  }}
+          {{ if $article }}
+            <span class=p>&lt;</span><span class=nt>article</span><span class=p>&gt;</span>
+              <span class=p>&lt;</span><span class=nt>h3</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-title&#34;</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ $article.RelPermalink }}&#34;</span><span class=p>&gt;</span>{{- $article.Title -}}<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>h3</span><span class=p>&gt;</span>
+            <span class=p>&lt;/</span><span class=nt>article</span><span class=p>&gt;</span>
+          {{ end }}
+        {{ end }}
+      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>aside</span><span class=p>&gt;</span>
+</code></pre></div><p><code>getJSON</code> のURLは先ほど作成したGASのウェブアプリURLになります。<br>
+今回は月間の人気記事を取得したいので、<code>?sheetname=month</code>としてあります。<br>
+年の場合は<code>year</code>日の場合は<code>day</code>などとすることで必要な情報を取得できます。</p>
+<p>使用しているテンプレートにも夜と思いますが、layouts/partials/widget/popularArticlesMonth.html として保存しておきましょう。</p>
+<p>このファイルをHugoで読み込むことで人気の記事を表示する事ができるようになります。</p>
+<p>取得する人気の記事件数は<code>config.yaml</code>などのhugoの設定ファイル内のwidhetsに<code>populerArticles</code>を追加して記述しておきます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml:config.yaml data-lang=yaml:config.yaml><span class=w>    </span><span class=nt>widgets</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span>- <span class=l>popular-articles</span><span class=w>
+</span><span class=w>        </span><span class=nt>populerArticles</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>limit</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></code></pre></div><h3 id=人気の記事を表示するプログラムの解説>人気の記事を表示するプログラムの解説</h3>
+<p>まずはサイト全体の記事を取得しておきます。</p>
+<pre tabindex=0><code>{{ $page := .Site.Pages }}
+</code></pre><p>次に、取得したjsonのデータを設定で指定した範囲で取得します。</p>
+<pre tabindex=0><code>{{ range first .Site.Params.widgets.populerArticles.limit $json }}
+...
+{{ end }}
+</code></pre><p>取得したデータからリンクに一致する記事を探します。<br>
+配列のデータで検索されているので、<code>index</code>を使って0番目の記事を取得しています。<br>
+あとは通常の記事と同じように扱えます。</p>
+<pre tabindex=0><code>{{ $article := index (where $page &quot;.RelPermalink&quot; &quot;eq&quot; .link ) 0  }}
+</code></pre><p>今回は画像無しでタイトルのみの表示となりますが、データ自体は他の記事と同じなので画像やカテゴリ、本文などにもアクセス可能です。</p>
+<h2 id=自動更新の設定>自動更新の設定</h2>
+<p>サイトに人気の記事を表示させることができました。<br>
+今の設定だと人気の記事が更新されないので、GASの「トリガー」を使って定期的にアナリティクスのデータをjsonに反映するようにしておきます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+<span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+<span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+
+<span class=kd>function</span> <span class=nx>all</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>setDay</span><span class=p>();</span>
+  <span class=nx>setMonth</span><span class=p>();</span>
+  <span class=nx>setYear</span><span class=p>();</span>
+<span class=p>}</span>
+</code></pre></div><p>月だけでなく、日、年のデータも取得する夜にしておきます。<br>
+そして、それらをすべて実行する関数「all」も追加しておきましょう。ここで保存しておきます。<br>
+これで準備ができました。</p>
+<p>左袖にあるストップウォッチアイコンを押して、「トリガー」を追加します。<br>
+<figure class=gallery-image style=flex-grow:145;flex-basis:348px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img05.png data-size=980x674>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img05.png width=980 height=674 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img05_hu43858237469efa145840e90a2658042d_100055_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img05_hu43858237469efa145840e90a2658042d_100055_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<ul>
+<li>「トリガーを追加」を押して、「実行する関数」で実行したい関数を選びます。今回は月間のデータを取得したいので「setMonth」を選択します。</li>
+<li>「実行するデプロイを選択」は「Head」のままで構いません。</li>
+<li>「イベントのソースを選択」は「時間主導型」に変更して、時間で実行するようにしておきます。</li>
+<li>「時間ベースのトリガーのタイプを選択」を更新したい頻度で選択します。月間のデータなので1日おきくらいに更新でもいいかもしれません。「日付ベースのタイマー」を選択します。<br>
+一日おきではなく、毎時で更新したい場合は「時間ベースのタイマー」など各自にあったタイマーを選択してください。</li>
+<li>「時刻を選択」で更新したい時間を選びます。とりあえず「午前4時〜5時」くらいに更新するようにしておきます。</li>
+<li>「エラー通知設定」は各自で好きなタイミングで受信するようにしてください。私はいっぱい来ると嫌なので、「1週間おきに通知を受け取る」にしてあります。<br>
+以上で設定が終わりました。下にある「保存」を押して保存します。<br>
+<figure class=gallery-image style=flex-grow:139;flex-basis:334px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img06.png data-size=980x703>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img06.png width=980 height=703 srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img06_hu4dbb253495b0c0987384377169fcf501_125784_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/img06_hu4dbb253495b0c0987384377169fcf501_125784_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></li>
+</ul>
+<p>これで定期的にアナリティクスのデータがスプレッドシートに反映されるようになりました。</p>
+<h2 id=まとめ>まとめ</h2>
+<p>Hugoで人気の記事を表示するには</p>
+<ul>
+<li>Googleアナリティクスの連携</li>
+<li>スプレッドシートを使ってjsonを作成</li>
+</ul>
+<p>上記の2つを使うことで簡単に導入可能です。</p>
+<p>Hugoを使って人気の記事を作成するにはサイトや投稿を公開した際になりますが、GitHub Actionsなどを使えばcron処理で定期的に再構築をかけることが可能なので、数十分おきに人気の記事を更新したり、スプレッドシートとgasのレン系の際にjsonを作成したので、javascriptでjsonを読み取って表示するといったことも可能です。</p>
+<h2 id=ソース>ソース</h2>
+<p>前回と今回で作成したソースになります。</p>
+<h4 id=gasとスプレッドシートを使ってhugoに人気の記事を表示する>GASとスプレッドシートを使ってHugoに人気の記事を表示する</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getData</span><span class=p>(</span><span class=nx>sheetName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>sheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>openById</span><span class=p>(</span><span class=s2>&#34;シートID&#34;</span><span class=p>).</span><span class=nx>getSheetByName</span><span class=p>(</span><span class=nx>sheetName</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>sheet</span><span class=p>.</span><span class=nx>getDataRange</span><span class=p>().</span><span class=nx>getValues</span><span class=p>();</span>
+  <span class=kr>const</span> <span class=nx>keys</span> <span class=o>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>splice</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>)[</span><span class=mi>0</span><span class=p>];</span>
+  <span class=k>return</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>row</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>obj</span> <span class=o>=</span> <span class=p>{};</span>
+    <span class=nx>row</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>item</span><span class=p>,</span> <span class=nx>index</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>obj</span><span class=p>[</span><span class=nx>keys</span><span class=p>[</span><span class=nx>index</span><span class=p>]]</span> <span class=o>=</span> <span class=nx>item</span><span class=p>);</span>
+    <span class=k>return</span> <span class=nx>obj</span><span class=p>;</span>
+  <span class=p>});</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>doGet</span><span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>data</span> <span class=o>=</span> <span class=nx>getData</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>parameter</span><span class=p>.</span><span class=nx>sheetname</span><span class=p>);</span>
+  <span class=k>return</span> <span class=nx>ContentService</span><span class=p>.</span><span class=nx>createTextOutput</span><span class=p>(</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>data</span><span class=p>,</span> <span class=kc>null</span><span class=p>,</span> <span class=mi>2</span><span class=p>)).</span><span class=nx>setMimeType</span><span class=p>(</span><span class=nx>ContentService</span><span class=p>.</span><span class=nx>MimeType</span><span class=p>.</span><span class=nx>JSON</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span>
+  <span class=k>switch</span><span class=p>(</span><span class=nx>type</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=s2>&#34;month&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;M&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>case</span> <span class=s2>&#34;year&#34;</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;y&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+    <span class=k>default</span><span class=o>:</span> <span class=nx>calc</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=kr>const</span> <span class=nx>d1</span> <span class=o>=</span> <span class=nx>dayjs</span><span class=p>.</span><span class=nx>dayjs</span><span class=p>().</span><span class=nx>locale</span><span class=p>(</span><span class=s1>&#39;ja&#39;</span><span class=p>);</span>
+  <span class=k>return</span> <span class=p>{</span><span class=nx>start</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>subtract</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>calc</span><span class=p>).</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>),</span> <span class=nx>end</span><span class=o>:</span> <span class=nx>d1</span><span class=p>.</span><span class=nx>format</span><span class=p>(</span><span class=s1>&#39;YYYY-MM-DD&#39;</span><span class=p>)};</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=nx>name</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>id</span> <span class=o>=</span> <span class=s2>&#34;ga:ビューID&#34;</span><span class=p>;</span>
+  <span class=kr>const</span> <span class=nx>date</span> <span class=o>=</span> <span class=nx>getDate</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>response</span> <span class=o>=</span> <span class=nx>AnalyticsReporting</span><span class=p>.</span><span class=nx>Reports</span><span class=p>.</span><span class=nx>batchGet</span><span class=p>({</span>
+    <span class=nx>reportRequests</span><span class=o>:</span> <span class=p>[{</span>
+      <span class=nx>viewId</span><span class=o>:</span> <span class=nx>id</span><span class=p>,</span>
+      <span class=nx>dateRanges</span><span class=o>:</span> <span class=p>[{</span><span class=nx>startDate</span><span class=o>:</span><span class=nx>date</span><span class=p>.</span><span class=nx>start</span><span class=p>,</span><span class=nx>endDate</span><span class=o>:</span> <span class=nx>date</span><span class=p>.</span><span class=nx>end</span><span class=p>}],</span>
+      <span class=nx>samplingLevel</span><span class=o>:</span> <span class=s1>&#39;LARGE&#39;</span><span class=p>,</span>
+      <span class=nx>metrics</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:sessions&#39;</span><span class=p>},</span>
+        <span class=p>{</span><span class=nx>expression</span><span class=o>:</span> <span class=s1>&#39;ga:users&#39;</span><span class=p>},</span>
+      <span class=p>],</span>
+      <span class=nx>dimensions</span><span class=o>:</span> <span class=p>[</span>
+        <span class=p>{</span><span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;ga:pagePath&#39;</span><span class=p>}</span>
+      <span class=p>],</span> 
+      <span class=nx>orderBys</span><span class=o>:</span> <span class=p>[{</span>
+        <span class=nx>fieldName</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>,</span>
+        <span class=nx>sortOrder</span><span class=o>:</span> <span class=s2>&#34;DESCENDING&#34;</span><span class=p>,</span>
+      <span class=p>}],</span>
+    <span class=p>}]</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>rows</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>response</span><span class=p>).</span><span class=nx>reports</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>data</span><span class=p>.</span><span class=nx>rows</span><span class=p>;</span>
+  <span class=nx>rows</span> <span class=o>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=o>/</span><span class=nx>posts</span><span class=o>/</span><span class=p>.</span><span class=nx>test</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>[</span><span class=mi>0</span><span class=p>])).</span><span class=nx>map</span><span class=p>(</span><span class=nx>f</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>f</span><span class=p>.</span><span class=nx>dimensions</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nx>metrics</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>values</span><span class=p>);</span>
+  <span class=p>});</span>
+  <span class=kd>let</span> <span class=nx>sheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActive</span><span class=p>().</span><span class=nx>getSheetByName</span><span class=p>(</span><span class=nx>name</span><span class=p>);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>clear</span><span class=p>();</span>
+  <span class=nx>rows</span><span class=p>.</span><span class=nx>unshift</span><span class=p>([</span><span class=s2>&#34;link&#34;</span><span class=p>,</span> <span class=s2>&#34;pv&#34;</span><span class=p>,</span> <span class=s1>&#39;session&#39;</span><span class=p>,</span> <span class=s1>&#39;users&#39;</span><span class=p>]);</span>
+  <span class=nx>sheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=nx>rows</span><span class=p>.</span><span class=nx>length</span><span class=p>,</span> <span class=nx>rows</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>length</span><span class=p>).</span><span class=nx>setValues</span><span class=p>(</span><span class=nx>rows</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+<span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+<span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
+<span class=p>}</span> 
+
+<span class=kd>function</span> <span class=nx>all</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>setDay</span><span class=p>();</span>
+  <span class=nx>setMonth</span><span class=p>();</span>
+  <span class=nx>setYear</span><span class=p>();</span>
+<span class=p>}</span>
+</code></pre></div><h4 id=hugoで人気の記事を表示する>Hugoで人気の記事を表示する</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>aside</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;widget archives sidearticle-contents--wrapper&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;popular-articles--month&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;contents-area&#34;</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>header</span><span class=p>&gt;&lt;</span><span class=nt>h2</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section-title&#34;</span><span class=p>&gt;</span>人気の記事（1ヶ月以内）<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;&lt;/</span><span class=nt>header</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;sidearticle-contents&#34;</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;flex article-list--tile&#34;</span><span class=p>&gt;</span>
+        {{ $page := .Site.Pages }}
+        {{ range first .Site.Params.widgets.populerArticles.limit $json }}
+          {{ $article := index (where $page &#34;.RelPermalink&#34; &#34;eq&#34; .link ) 0  }}
+          {{ if $article }}
+            <span class=p>&lt;</span><span class=nt>article</span><span class=p>&gt;</span>
+              <span class=p>&lt;</span><span class=nt>h3</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-title&#34;</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ .context.RelPermalink }}&#34;</span><span class=p>&gt;</span>{{- .context.Title -}}<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>h3</span><span class=p>&gt;</span>
+            <span class=p>&lt;/</span><span class=nt>article</span><span class=p>&gt;</span>
+          {{ end }}
+        {{ end }}
+      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>aside</span><span class=p>&gt;</span>
+</code></pre></div><h2 id=書籍の紹介>書籍の紹介</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/Google%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%EF%BD%9E%E5%88%86%E6%9E%90%E3%83%BB%E6%96%BD%E7%AD%96%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%82%92%E7%94%9F%E3%82%80%E6%9C%80%E5%BC%B7%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E5%B1%B1%E6%B5%A6-%E7%9B%B4%E5%AE%8F/dp/4297112612?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=JWVEKDNY44QV&keywords=google+%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9&qid=1641514280&s=books&sprefix=google+%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9%2Cstripbooks%2C197&sr=1-17-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFEVkxWVEZDSTdSQzQmZW5jcnlwdGVkSWQ9QTA1MDMwNDYyUTRGU1dQUEFQOTdTJmVuY3J5cHRlZEFkSWQ9QTNDR0ZTNUlLTUJHNUsmd2lkZ2V0TmFtZT1zcF9idGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl&linkCode=ll1&tag=nlpqueens-22&linkId=5dfbf1278031207773d96916ecce46dd&language=ja_JP&ref_=as_li_ss_tl" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4297112612&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>Googleアナリティクス プロフェッショナル　～分析・施策のアイデアを生む最強リファレンス </h2>
+<p>ウェブ制作者から、マーケター、ウェブアナリストまで必携の1冊
+「Googleアナリティクスはどこへ向かうのか?進化し続けるツールのポテンシャルを最大限に引き出したときに、新しい分析や施策のアイディアが生まれる」</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/Google-Apps-Script%E7%9B%AE%E7%9A%84%E5%88%A5%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E5%AE%9F%E8%B7%B5%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89%E4%BB%98%E3%81%8D-%E6%B8%85%E6%B0%B4/dp/4798062405?pd_rd_w=BsqYY&pf_rd_p=d8f6e0ab-48ef-4eca-99d5-60d97e927468&pf_rd_r=ADPJ0069C04W5M44N6YQ&pd_rd_r=16303d6e-b3f9-4aa6-9f06-d3e66775e8f4&pd_rd_wg=joLm1&pd_rd_i=4798062405&psc=1&linkCode=ll1&tag=nlpqueens-22&linkId=f78c47c375494f0b51c423506367a868&language=ja_JP&ref_=as_li_ss_tl" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4798062405&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>Google Apps Script目的別リファレンス 実践サンプルコード付き</h2>
+<p>Excelのマクロに似た「スクリプト」を書けば、Gmailや「スプレッドシート」などのGoogleサービスを更に効率的に、思うように使えます。そのスクリプトを書いて実行するプログラミング環境が、Google Apps Script(GAS)。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_1600x0_resize_q75_box.jpg 1600w" width=800 height=488 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+簡単にできるHugoで人気の記事を表示する方法 #1
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2022.01.06</time>
+</div>
+<p class=article-subtitle>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。 関連記事も取得できて、検索機能もある「至れり尽くせり」 ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_1600x0_resize_q75_box.jpg 1600w" width=800 height=492 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+GitHub Pagesを使って無料でSSL付きのサイトを公開
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.28</time>
+</div>
+<p class=article-subtitle>デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公開の ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_1600x0_resize_q75_box.jpg 1600w" width=800 height=558 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+デザイナーでもできる初めてのHugo #01
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div>
+<p class=article-subtitle>CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word ...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1_hubb580b3412968a99eba9faea3f838cef_148014_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoで記事の投稿の仕方
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>Hugoで記事を投稿する方法を説明しています</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21_hud06831bf5e2aede9b7d29f34463c4a46_63839_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+Hugoでテーマが反映されない（画面が真っ白のまま）
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2021.12.21</time>
+</div>
+<p class=article-subtitle>テーマが反映されない（画面が真っ白のまま）の対処法</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/github/>GitHub</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/>github pages</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/google-%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9/>Google アナリティクス</a>
+<a href=https://suzukiiichiro.github.io/tags/google-analytics/>Google Analytics</a>
+<a href=https://suzukiiichiro.github.io/tags/gas/>GAS</a>
+<a href=https://suzukiiichiro.github.io/tags/google-app-script/>Google App Script</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト【１】」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト【１】」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.d1d57dc622aaa1ce95d69363a3f3a096_hubb580b3412968a99eba9faea3f838cef_148014_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post Hugoで記事の投稿の仕方" data-hash="md5-0dV9xiKqoc6V1pNjo/Oglg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoで記事の投稿の仕方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年01月>
+2022年01月（4）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_9>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_8>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_7>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_7>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_7>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_7>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_4>
+github pages
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_4>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_4>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_3>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_3>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_3>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/gas/ class=font_size_2>
+GAS
+</a>
+<a href=https://suzukiiichiro.github.io/tags/google-analytics/ class=font_size_2>
+Google Analytics
+</a>
+<a href=https://suzukiiichiro.github.io/tags/google-app-script/ class=font_size_2>
+Google App Script
+</a>
+<a href=https://suzukiiichiro.github.io/tags/google-%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9/ class=font_size_2>
+Google アナリティクス
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_2>
+Web
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_2>
+Web開発
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</aside>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
