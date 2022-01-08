@@ -1,4 +1,7 @@
 User-agent: Googlebot-Image
 Disallow: /
 
+User-agent: *
+Allow: /
+
 Sitemap: https://suzukiiichiro.github.io/sitemap.xml
