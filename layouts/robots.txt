@@ -6,3 +6,4 @@ Allow: /
 
 Sitemap: {{ .Site.BaseURL }}sitemap_index.xml
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
+Sitemap: {{ .Site.BaseURL }}index.xml
