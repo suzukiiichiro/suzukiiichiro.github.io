@@ -711,7 +711,7 @@ loading="lazy"
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
 &lt;h2 id="hello-world">Hello World&lt;/h2>
-&lt;p>はじめてのbashコマンド「echo」&lt;br>
+&lt;p>&lt;font color=orange>&lt;b>はじめてのbashコマンド「echo」&lt;/b>&lt;/font>&lt;br>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-:はじめてのecho" data-lang=":はじめてのecho">$ echo &amp;quot;Hello, World&amp;quot;
 Hello, World
@@ -796,7 +796,7 @@ $ ls -l
 &lt;a class="link" href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06" target="_blank" rel="noopener"
 >https://qiita.com/shisama/items/5f4c4fa768642aad9e06&lt;/a>&lt;/p>
 &lt;h2 id="echo-コマンド">echo コマンド&lt;/h2>
-&lt;p>echoコマンドの使用：&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> echoコマンドの使用：&lt;/b>&lt;/font>&lt;br>
 さまざまなオプションでechoコマンドを使用できます。&lt;br>
 次の例では、いくつかの便利なオプションについて説明します。&lt;br>
 オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。&lt;br>
@@ -814,7 +814,7 @@ $ ls -l
 削除 バックスラッシュ 文字
 $
 &lt;/code>&lt;/pre>&lt;h2 id="コメント">コメント&lt;/h2>
-&lt;p>コメントの使用&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> コメントの使用&lt;/b>&lt;/font>&lt;br>
 「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。&lt;br>
 &amp;lsquo;comment_example.sh&amp;rsquo;という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:comment_example.sh" data-lang="bash:comment_example.sh">&lt;span class="cp">#!/bin/bash
@@ -828,7 +828,7 @@ $
 60
 $
 &lt;/code>&lt;/pre>&lt;h2 id="マルチラインコメント">マルチラインコメント&lt;/h2>
-&lt;p>複数行コメントの使用&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> 複数行コメントの使用&lt;/b>&lt;/font>&lt;br>
 bashではさまざまな方法で複数行コメントを使用できます。&lt;br>
 次の例に簡単な方法を示します。&lt;br>
 &amp;lsquo;multiline-comment.sh&amp;rsquo;という名前の新しいbashを作成し、次のスクリプトを追加します。&lt;br>
@@ -847,7 +847,7 @@ bashではさまざまな方法で複数行コメントを使用できます。&
 25
 $
 &lt;/code>&lt;/pre>&lt;h2 id="while-ループ">while ループ&lt;/h2>
-&lt;p>whileループの使用&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> whileループの使用&lt;/b>&lt;/font>&lt;br>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。&lt;br>
 この例では、whileループが5回繰り返されます。&lt;br>
 count変数の値は、各ステップで1ずつ増加します。&lt;br>
@@ -872,7 +872,7 @@ break&lt;span class="p">;&lt;/span>
 5
 $
 &lt;/code>&lt;/pre>&lt;h2 id="for-ループ">for ループ&lt;/h2>
-&lt;p>forループの使用&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> forループの使用&lt;/b>&lt;/font>&lt;br>
 基本的なforループ宣言を示します。&lt;br>
 &amp;lsquo;for_example.sh&amp;rsquo;という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。&lt;br>
 ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。&lt;/p>
@@ -887,7 +887,7 @@ $
 10 9 8 7 6 5 4 3 2 1
 $
 &lt;/code>&lt;/pre>&lt;h2 id="対話型入力">対話型入力&lt;/h2>
-&lt;p>ユーザー入力の取得&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> ユーザー入力の取得&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;read&amp;rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。&lt;br>
 &amp;lsquo;user_input.sh&amp;rsquo;という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。&lt;br>
 ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。&lt;/p>
@@ -903,7 +903,7 @@ suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
 &lt;/code>&lt;/pre>&lt;h2 id="if-文">If 文&lt;/h2>
-&lt;p>if文を使う&lt;br>
+&lt;p>&lt;font color=orange>&lt;b> if文を使う&lt;/b>&lt;/font>&lt;br>
 単数、または複数の条件でif条件を使用できます。&lt;br>
 このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。&lt;br>
 「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。&lt;br>
@@ -933,7 +933,8 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 2桁の数値です
 $
 &lt;/code>&lt;/pre>&lt;h2 id="９and-条件を-if-文で使う">９．and 条件を if 文で使う&lt;/h2>
-&lt;p>2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。&lt;br>
+&lt;p>&lt;font color=orange>&lt;b>ANDロジックでifステートメントを使用する：&lt;/b>&lt;/font>&lt;br>
+2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。&lt;br>
 andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。&lt;br>
 &amp;lsquo;&amp;amp;&amp;amp;&amp;lsquo;は、ifステートメントのandロジックを適用するために使用されます。&lt;br>
 &amp;lsquo;if_with_and.sh&amp;rsquo;という名前のファイルを作成して、次のコードを確認します。&lt;br>

@@ -9,7 +9,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-12T05:29:08+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-12T05:31:51+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト１」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -133,7 +133,7 @@ Web開発
 <p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
 <p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
 <h2 id=hello-world>Hello World</h2>
-<p>はじめてのbashコマンド「echo」<br>
+<p><font color=orange><b>はじめてのbashコマンド「echo」</b></font><br>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。</p>
 <pre tabindex=0><code class=language-:はじめてのecho data-lang=:はじめてのecho>$ echo &quot;Hello, World&quot;
 Hello, World
@@ -217,7 +217,7 @@ $ ls -l
 <p>詳しくはこちら<br>
 <a class=link href=https://qiita.com/shisama/items/5f4c4fa768642aad9e06 target=_blank rel=noopener>https://qiita.com/shisama/items/5f4c4fa768642aad9e06</a></p>
 <h2 id=echo-コマンド>echo コマンド</h2>
-<p>echoコマンドの使用：<br>
+<p><font color=orange><b> echoコマンドの使用：</b></font><br>
 さまざまなオプションでechoコマンドを使用できます。<br>
 次の例では、いくつかの便利なオプションについて説明します。<br>
 オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。<br>
@@ -235,7 +235,7 @@ $ ls -l
 削除	バックスラッシュ	文字
 $
 </code></pre><h2 id=コメント>コメント</h2>
-<p>コメントの使用<br>
+<p><font color=orange><b> コメントの使用</b></font><br>
 「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。<br>
 &lsquo;comment_example.sh&rsquo;という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:comment_example.sh data-lang=bash:comment_example.sh><span class=cp>#!/bin/bash
@@ -250,7 +250,7 @@ $
 60
 $
 </code></pre><h2 id=マルチラインコメント>マルチラインコメント</h2>
-<p>複数行コメントの使用<br>
+<p><font color=orange><b> 複数行コメントの使用</b></font><br>
 bashではさまざまな方法で複数行コメントを使用できます。<br>
 次の例に簡単な方法を示します。<br>
 &lsquo;multiline-comment.sh&rsquo;という名前の新しいbashを作成し、次のスクリプトを追加します。<br>
@@ -269,7 +269,7 @@ bashではさまざまな方法で複数行コメントを使用できます。<
 25
 $
 </code></pre><h2 id=while-ループ>while ループ</h2>
-<p>whileループの使用<br>
+<p><font color=orange><b> whileループの使用</b></font><br>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。<br>
 この例では、whileループが5回繰り返されます。<br>
 count変数の値は、各ステップで1ずつ増加します。<br>
@@ -294,7 +294,7 @@ count変数の値が5になると、whileループは終了します。</p>
 5
 $
 </code></pre><h2 id=for-ループ>for ループ</h2>
-<p>forループの使用<br>
+<p><font color=orange><b> forループの使用</b></font><br>
 基本的なforループ宣言を示します。<br>
 &lsquo;for_example.sh&rsquo;という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。<br>
 ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。</p>
@@ -309,7 +309,7 @@ $
 10 9 8 7 6 5 4 3 2 1
 $
 </code></pre><h2 id=対話型入力>対話型入力</h2>
-<p>ユーザー入力の取得<br>
+<p><font color=orange><b> ユーザー入力の取得</b></font><br>
 &lsquo;read&rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。<br>
 &lsquo;user_input.sh&rsquo;という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。<br>
 ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。</p>
@@ -325,7 +325,7 @@ suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
 </code></pre><h2 id=if-文>If 文</h2>
-<p>if文を使う<br>
+<p><font color=orange><b> if文を使う</b></font><br>
 単数、または複数の条件でif条件を使用できます。<br>
 このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。<br>
 「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。<br>
@@ -355,7 +355,8 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 2桁の数値です
 $
 </code></pre><h2 id=９and-条件を-if-文で使う>９．and 条件を if 文で使う</h2>
-<p>2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。<br>
+<p><font color=orange><b>ANDロジックでifステートメントを使用する：</b></font><br>
+2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。<br>
 andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。<br>
 &lsquo;&&&lsquo;は、ifステートメントのandロジックを適用するために使用されます。<br>
 &lsquo;if_with_and.sh&rsquo;という名前のファイルを作成して、次のコードを確認します。<br>
