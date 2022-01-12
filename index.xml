@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 07 Jan 2022 11:54:15 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</link><pubDate>Fri, 07 Jan 2022 11:54:15 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg" alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" />&lt;p>簡単にできるHugoで人気の記事を表示する方法の2回目になります。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 12 Jan 2022 13:40:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Statで新着一覧を取得しよ</title><link>https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/</link><pubDate>Wed, 12 Jan 2022 13:40:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.jpg" alt="Featured image of post e-Statで新着一覧を取得しよ" />&lt;p>毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。&lt;br>
+新着一覧は、リスト取得用のAPIでupdateDateに日付を指定してその日の更新分を取得してくるようにしました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>wget &amp;quot;https://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsList?updatedDate=20220111&amp;amp;appId=xxxxxxxxxxxx&amp;amp;lang=J&amp;quot; -O new.csv
+&lt;/code>&lt;/pre>&lt;p>STAT_CODEが政府統計コード、TABLE_INFがデータセットIDになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;quot;0003254482&amp;quot;,&amp;quot;00552010&amp;quot;,&amp;quot;知的財産活動調査&amp;quot;,&amp;quot;00552&amp;quot;,&amp;quot;特許庁&amp;quot;,&amp;quot;知的財産活動調査&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;1-1&amp;quot;,&amp;quot;業種別出願件数階級別 売上高、営業利益高、経常
+利益高、従業者数、研究関係従業者数及び研究費&amp;quot;,&amp;quot;（注1）各設問項目によって標本数が異なるため、例えば研究関係従業者数の集計結果が従業者数の集計結果を上回るなど、大小関係の逆転が生じ得る点に留意する必要がある。（注2）業種
+「個人」において売上高等の記載される場合があるが、これは事業を営む個人事業主が調査票の業種を「個人」として回答したことによる。&amp;quot;,&amp;quot;業種別出願件数階級別&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;年
+度次&amp;quot;,&amp;quot;0&amp;quot;,&amp;quot;2022-01-11&amp;quot;,&amp;quot;0&amp;quot;,&amp;quot;該当なし&amp;quot;,&amp;quot;0&amp;quot;,&amp;quot;2022-01-11&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;情報通信・科学技術&amp;quot;,&amp;quot;03&amp;quot;,&amp;quot;知的財産&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>データセットID（TABLE_INF）を使って個別データを取得しましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>wget &amp;quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxxxxxxxxxx&amp;amp;lang=J&amp;amp;statsDataId=0003254482&amp;amp;metaGetFlg=Y&amp;amp;cntGetFlg=N&amp;amp;explanationGetFlg=Y&amp;amp;annotationGetFlg=Y&amp;amp;sectionHeaderFlg=1&amp;amp;replaceSpChars=0&amp;quot; -O 0003254482.csv
+&lt;/code>&lt;/pre>&lt;h2 id="知的財産活動調査とは">知的財産活動調査とは&lt;/h2>
+&lt;p>今日の課題は新着一覧に出てきた「知的財産活動調査」をどう処理するか検討してみましょう。&lt;/p>
+&lt;p>知的財産活動調査は、我が国における知的財産活動の現状を定量的に把握することを目的とした一般統計調査とのことです。&lt;br>
+特許権などの利用状況を調査したものみたいです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 290px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/dataset.jpg" data-size="1001x827">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/dataset.jpg"
+width="1001"
+height="827"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/dataset_hu9475e40123017607cf3e014e405fbc8c_190732_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/dataset_hu9475e40123017607cf3e014e405fbc8c_190732_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="データセット">
+&lt;/a>
+&lt;figcaption>データセット&lt;/figcaption>
+&lt;/figure>&lt;br>
+知的財産活動調査のデータセット数ですが１４０件もあります。&lt;br>
+統計のデータセット数は１つの時もあればこのように１００を超える時もあるみたいです。&lt;br>
+これだけデータセット数が多いとこの中から主要なデータセットを選択してサマリーを作成するのは大変ですね。&lt;/p>
+&lt;p>google検索で「知的財産活動調査」の分析記事を調べてみると&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.semiconportal.com/archive/editorial/industry/17.html" target="_blank" rel="noopener"
+>https://www.semiconportal.com/archive/editorial/industry/17.html&lt;/a>&lt;br>
+知的財産担当者数は増加傾向にあり、2004年度は、約45,500人で前年度に比べ16.6 ％増加。&lt;br>
+企業等の知的財産活動費は約9,200 億円で前年度に比べ17.1 ％増加。&lt;br>
+特許権の活用状況 国内における2004年度の特許権の利用率は48.2 ％であり、依然として所有する権利の約半数が利用されていないことがわかる。&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.jstage.jst.go.jp/article/jasmin/2018s/0/2018s_246/_article/-char/ja/" target="_blank" rel="noopener"
+>https://www.jstage.jst.go.jp/article/jasmin/2018s/0/2018s_246/_article/-char/ja/&lt;/a>&lt;br>
+　研究開発活動が利益率に対して最も顕著なプラスの効果を持っていたのは「医薬品製造業」であった．また，研究費投資から利益率向上には25年程度のラグがあることも示された&lt;/p>
+&lt;p>「知的財産担当者数」「知的財産活動費」「特許権の利用率」あたりがよく出るキーワードみたいです。&lt;/p>
+&lt;p>主要なキーワードの抽出方法なのですが、「知的財産活動調査」のように統計名でgoogle検索した結果に対して、「知的財産担当者数」「知的財産活動費」などのデータセット名で検索して件数が多いものを主要なキーワードとして取り扱うことができるか検討してみたいと思います。&lt;/p>
+&lt;p>「利益率」という面白いキーワードがあったのですが、統計の中にはそのままのデータはありませんでした。「経常利益高」という項目があるのでこれを「知的財産活動費」で割り算する必要がありそうです。&lt;br>
+「利益率」が出せそうなら出してみるというのも検討してみると面白いかもしれません。&lt;/p>
+&lt;p>主要なキーワードとしては、「知的財産担当者数」「知的財産活動費」「特許権の利用率」のようにその統計に固有のものもありますが、「利益率」「担当者数」「費用」「利用率」など汎用的に重要な項目もあるのかなと思いました。&lt;/p>
+&lt;p>データセットの先頭にある「売上高、営業利益高、経常利益高、従業者数、研究関係従業者数及び研究費」は「特許権の利用率」は含まないものの「経常利益高」「知的財産担当者数」「知的財産活動費」を含むものでした。&lt;br>
+データセットが大量にある統計の場合先頭のデータセットはまとめ的なデータになるのでしょうか。他の統計も見てみようと思います。&lt;/p>
+&lt;p>データセットの中に「標本数」というものがありました。「標本数」は、アンケート結果の回収数です。データの信用性を図る上では大切な項目ですが、サマリーを作成する際は除外しても良い項目かもしれません。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 128;
+flex-basis: 308px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/member.jpg" data-size="724x563">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/member.jpg"
+width="724"
+height="563"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/member_hu9475e40123017607cf3e014e405fbc8c_35297_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/member_hu9475e40123017607cf3e014e405fbc8c_35297_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="知的財産担当者数">
+&lt;/a>
+&lt;figcaption>知的財産担当者数&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 134;
+flex-basis: 322px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/cost.jpg" data-size="796x592">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/cost.jpg"
+width="796"
+height="592"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/cost_hu9475e40123017607cf3e014e405fbc8c_38784_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/cost_hu9475e40123017607cf3e014e405fbc8c_38784_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="知的財産活動費">
+&lt;/a>
+&lt;figcaption>知的財産活動費&lt;/figcaption>
+&lt;/figure>&lt;/p></description></item><item><title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</link><pubDate>Fri, 07 Jan 2022 11:54:15 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg" alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" />&lt;p>簡単にできるHugoで人気の記事を表示する方法の2回目になります。&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-06-wyoshi/" >前回（簡単にできるHugoで人気の記事を表示する方法 #01）&lt;/a>ではGAS（Google App Scripts）を使ってアナリティクスのデータをスプレッドシートに反映するところまで説明しました。&lt;br>
 今回は前回作成したスプレッドシートからデータを取得して、Hugoと連携するところまでやっていきましょう。&lt;/p>
 &lt;h2 id="スプレッドシートのデータをjsonで取得">スプレッドシートのデータをJSONで取得&lt;/h2>
