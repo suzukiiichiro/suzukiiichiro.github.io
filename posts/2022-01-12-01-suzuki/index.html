@@ -9,7 +9,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-12T12:30:57+09:00"><meta property="article:modified_time" content="2022-01-12T05:27:24+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-12T12:30:57+09:00"><meta property="article:modified_time" content="2022-01-12T05:29:08+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト２」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -110,16 +110,16 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#１０or-条件を-if文で使う>１０．or 条件を if文で使う</a></li>
-<li><a href=#１１else-if-と-else>１１．else if と else</a></li>
-<li><a href=#１２case-文>１２．case 文</a></li>
-<li><a href=#１３コマンドラインから引数を取得>１３．コマンドラインから引数を取得</a></li>
-<li><a href=#１４名前を使用してコマンドラインから引数を取得する>１４．名前を使用してコマンドラインから引数を取得する</a></li>
-<li><a href=#１５変数に2つの文字列を組み合わせる>１５．変数に2つの文字列を組み合わせる</a></li>
-<li><a href=#１６文字列の部分文字列を取得する>１６．文字列の部分文字列を取得する</a></li>
-<li><a href=#１７変数に2つの数値を追加します>１７．変数に2つの数値を追加します</a></li>
-<li><a href=#１８関数を作成する>１８．関数を作成する</a></li>
-<li><a href=#１９関数パラメーターを使用する>１９．関数パラメーターを使用する</a></li>
+<li><a href=#or-条件を-if文で使う>or 条件を if文で使う</a></li>
+<li><a href=#else-if-と-else>else if と else</a></li>
+<li><a href=#case-文>case 文</a></li>
+<li><a href=#コマンドラインから引数を取得>コマンドラインから引数を取得</a></li>
+<li><a href=#名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</a></li>
+<li><a href=#変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</a></li>
+<li><a href=#文字列の部分文字列を取得する>文字列の部分文字列を取得する</a></li>
+<li><a href=#変数に2つの数値を追加します>変数に2つの数値を追加します</a></li>
+<li><a href=#関数を作成する>関数を作成する</a></li>
+<li><a href=#関数パラメーターを使用する>関数パラメーターを使用する</a></li>
 </ol>
 </nav>
 </div>
@@ -132,7 +132,7 @@ Web開発
 <p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
 <p>関連記事<br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト１」</a></p>
-<h2 id=１０or-条件を-if文で使う>１０．or 条件を if文で使う</h2>
+<h2 id=or-条件を-if文で使う>or 条件を if文で使う</h2>
 <p><font color=orange><b>orロジックでifステートメントを使用する：</b></font><br>
 &lsquo;||&lsquo;は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if_with_or.sh data-lang=bash:if_with_or.sh><span class=cp>#!/bin/bash
@@ -155,7 +155,7 @@ $ bash if_with_or.sh
 45
 ゲームに勝ちました
 bash-5.1$
-</code></pre><h2 id=１１else-if-と-else>１１．else if と else</h2>
+</code></pre><h2 id=else-if-と-else>else if と else</h2>
 <p><font color=orange><b>else ifステートメントの使用：</b></font><br>
 else if条件の使用は、bashでは「elif」を定義します。&lsquo;elseif_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:elseif_example.sh data-lang=bash:elseif_example.sh><span class=cp>#!/bin/bash
@@ -187,7 +187,7 @@ bash$ bash elseif_example.sh
 すみません、またチャレンジして下さい
 bash$ bash elseif_example.sh
 $
-</code></pre><h2 id=１２case-文>１２．case 文</h2>
+</code></pre><h2 id=case-文>case 文</h2>
 <p><font color=orange><b>caseステートメントの使用：</b></font><br>
 caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。&lsquo;case_example.sh&rsquo;という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:case_example.sh data-lang=bash:case_example.sh><span class=cp>#!/bin/bash
@@ -222,7 +222,7 @@ bash$ bash case_example.sh
 あなたのラッキーナンバーを入力して下さい。
 777
 すみません、またチャレンジして下さい
-</code></pre><h2 id=１３コマンドラインから引数を取得>１３．コマンドラインから引数を取得</h2>
+</code></pre><h2 id=コマンドラインから引数を取得>コマンドラインから引数を取得</h2>
 <p><font color=orange><b>コマンドラインから引数を取得：</b></font><br>
 Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line.sh data-lang=bash:command_line.sh><span class=cp>#!/bin/bash
@@ -237,7 +237,7 @@ Bashスクリプトは、他のプログラミング言語と同様に、コマ�
 一つ目の引数 = apple
 二つ目の引数 = windows
 $
-</code></pre><h2 id=１４名前を使用してコマンドラインから引数を取得する>１４．名前を使用してコマンドラインから引数を取得する</h2>
+</code></pre><h2 id=名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</h2>
 <p><font color=orange><b>コマンドラインから名前付きの引数を取得：</b></font><br>
 名前付きのコマンドライン引数を読み取る方法を示します。&lsquo;command_line_names.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line_names.sh data-lang=bash:command_line_names.sh><span class=cp>#!/bin/bash
@@ -258,7 +258,7 @@ $
 <pre tabindex=0><code>$ bash command_line_names.sh X=45 Y=30
 X+Y=75
 $
-</code></pre><h2 id=１５変数に2つの文字列を組み合わせる>１５．変数に2つの文字列を組み合わせる</h2>
+</code></pre><h2 id=変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</h2>
 <p><font color=orange><b>文字列変数を組み合わせる：</b></font><br>
 文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:string_combine.sh data-lang=bash:string_combine.sh><span class=cp>#!/bin/bash
@@ -278,7 +278,7 @@ Apple Mac OS
 Apple Mac OS は、とても優れたＯＳです。
 $
 </code></pre><p><font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font></p>
-<h2 id=１６文字列の部分文字列を取得する>１６．文字列の部分文字列を取得する</h2>
+<h2 id=文字列の部分文字列を取得する>文字列の部分文字列を取得する</h2>
 <p><font color=orange><b>文字列の部分文字列を取得します。</b></font><br>
 他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:substring_example.sh data-lang=bash:substring_example.sh><span class=cp>#!/bin/bash
@@ -291,7 +291,7 @@ $
 <pre tabindex=0><code>$ bash substring_example.sh
 Bash
 $
-</code></pre><h2 id=１７変数に2つの数値を追加します>１７．変数に2つの数値を追加します</h2>
+</code></pre><h2 id=変数に2つの数値を追加します>変数に2つの数値を追加します</h2>
 <p><font color=orange><b>2つの数字を追加します。</b></font><br>
 さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:add_numbers.sh data-lang=bash:add_numbers.sh><span class=cp>#!/bin/bash
@@ -312,7 +312,7 @@ $
 56
 加算の結果=81
 $
-</code></pre><h2 id=１８関数を作成する>１８．関数を作成する</h2>
+</code></pre><h2 id=関数を作成する>関数を作成する</h2>
 <p><font color=orange><b>関数の作成：</b></font><br>
 簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。&lsquo;function_example.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_example.sh data-lang=bash:function_example.sh><span class=cp>#!/bin/bash
@@ -326,7 +326,7 @@ F1<span class=p>;</span>
 <pre tabindex=0><code>$ bash function_example.sh
 わたしはbashプログラミングが大好きです。
 $
-</code></pre><h2 id=１９関数パラメーターを使用する>１９．関数パラメーターを使用する</h2>
+</code></pre><h2 id=関数パラメーターを使用する>関数パラメーターを使用する</h2>
 <p><font color=orange><b>パラメータを使用して関数を作成します。</b></font><br>
 Bashは、関数宣言時に関数パラメーターまたは引数を宣言できません。ただし、他の変数を使用して、関数内でパラメーターを使用できます。関数の呼び出し時に2つの値が渡された場合、値の読み取りには$1と$2の変数が使用されます。&lsquo;function_parameter.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、関数 &lsquo;Rectangle_Area&rsquo;は、パラメーター値に基づいて長方形の面積を計算します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_parameter.sh data-lang=bash:function_parameter.sh><span class=cp>#!/bin/bash
