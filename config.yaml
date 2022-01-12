@@ -34,8 +34,11 @@ frontmatter:
     - lastmod
 
 # Robots.txtを作成
-enableRobotsTXT: false
+enableRobotsTXT: true
 
+sitemap:
+  filename: sitemap.xml
+  priority: 0.5
 
 permalinks:
     # /: /:year/:month/:filename/
