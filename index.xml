@@ -297,6 +297,11 @@ bash-5.1$
 ## ２９．waitコマンド
 ## ３０．sleepコマンド
 -->
+&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
@@ -332,12 +337,7 @@ bash-5.1$
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;p>関連記事&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p></description></item><item><title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</link><pubDate>Fri, 07 Jan 2022 11:54:15 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg" alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" />&lt;p>簡単にできるHugoで人気の記事を表示する方法の2回目になります。&lt;br>
+&lt;/aside></description></item><item><title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</link><pubDate>Fri, 07 Jan 2022 11:54:15 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg" alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" />&lt;p>簡単にできるHugoで人気の記事を表示する方法の2回目になります。&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-06-wyoshi/" >前回（簡単にできるHugoで人気の記事を表示する方法 #01）&lt;/a>ではGAS（Google App Scripts）を使ってアナリティクスのデータをスプレッドシートに反映するところまで説明しました。&lt;br>
 今回は前回作成したスプレッドシートからデータを取得して、Hugoと連携するところまでやっていきましょう。&lt;/p>
 &lt;h2 id="スプレッドシートのデータをjsonで取得">スプレッドシートのデータをJSONで取得&lt;/h2>
@@ -999,6 +999,11 @@ $
 ## ２９．waitコマンド
 ## ３０．sleepコマンド
 -->
+&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
@@ -1034,12 +1039,7 @@ $
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;p>関連記事&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p></description></item><item><title>簡単にできるHugoで人気の記事を表示する方法 #1</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
+&lt;/aside></description></item><item><title>簡単にできるHugoで人気の記事を表示する方法 #1</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
 関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。&lt;/p>
 &lt;p>しかし、1点だけどうしても重要な機能がありません。&lt;br>
 それは人気記事の表示です。&lt;br>
