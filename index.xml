@@ -85,7 +85,9 @@ alt="知的財産活動費">
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
 &lt;p>関連記事&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;/p>
+>ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p>
 &lt;h2 id="or-条件を-if文で使う">or 条件を if文で使う&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>orロジックでifステートメントを使用する：&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;||&amp;lsquo;は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。&lt;/p>
@@ -710,6 +712,11 @@ loading="lazy"
 &lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト１」</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</link><pubDate>Fri, 07 Jan 2022 10:03:12 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト１」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
+&lt;p>関連記事&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
+>ざっくりわかるシェルスクリプト２」&lt;/a>&lt;/p>
 &lt;h2 id="hello-world">Hello World&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>はじめてのbashコマンド「echo」&lt;/b>&lt;/font>&lt;br>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。&lt;/p>
