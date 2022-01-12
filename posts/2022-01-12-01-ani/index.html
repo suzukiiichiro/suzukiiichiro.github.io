@@ -1,17 +1,17 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIでupdateDateに日付を指定し"><title>e-Statで新着一覧を取得しよ</title>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="e-Statで新着一覧を取得しよう 毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIで"><title>e-Statで新着一覧を取得しよう</title>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="e-Statで新着一覧を取得しよ">
-<meta property="og:description" content="毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIでupdateDateに日付を指定し">
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="e-Statで新着一覧を取得しよう">
+<meta property="og:description" content="e-Statで新着一覧を取得しよう 毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIで">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-12T13:40:13+09:00"><meta property="article:modified_time" content="2022-01-12T04:58:50+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.jpg">
-<meta name=twitter:title content="e-Statで新着一覧を取得しよ">
-<meta name=twitter:description content="毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIでupdateDateに日付を指定し"><meta name=twitter:card content="summary_large_image">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-12T13:40:13+09:00"><meta property="article:modified_time" content="2022-01-12T05:00:23+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.jpg">
+<meta name=twitter:title content="e-Statで新着一覧を取得しよう">
+<meta name=twitter:description content="e-Statで新着一覧を取得しよう 毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。 新着一覧は、リスト取得用のAPIで"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-12-01-ani/anal.jpg'})</script>
@@ -101,7 +101,7 @@ Web開発
 </header>
 <h2 class=article-title>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/>
-e-Statで新着一覧を取得しよ
+e-Statで新着一覧を取得しよう
 </a>
 </h2>
 </div>
@@ -110,6 +110,7 @@ e-Statで新着一覧を取得しよ
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
+<li><a href=#e-statで新着一覧を取得しよう>e-Statで新着一覧を取得しよう</a></li>
 <li><a href=#知的財産活動調査とは>知的財産活動調査とは</a></li>
 </ol>
 </nav>
@@ -118,6 +119,7 @@ e-Statで新着一覧を取得しよ
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
+<h2 id=e-statで新着一覧を取得しよう>e-Statで新着一覧を取得しよう</h2>
 <p>毎日自動的に処理できるようにしたいので新着一覧を取得する必要があります。<br>
 新着一覧は、リスト取得用のAPIでupdateDateに日付を指定してその日の更新分を取得してくるようにしました。</p>
 <pre tabindex=0><code>wget &quot;https://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsList?updatedDate=20220111&amp;appId=xxxxxxxxxxxx&amp;lang=J&quot; -O new.csv
