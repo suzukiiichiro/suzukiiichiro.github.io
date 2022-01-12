@@ -18,8 +18,11 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 
 この記事では、bashプログラミングの次のトピックについて説明します。
 
+
 関連記事
 [ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+
 
 ## or 条件を if文で使う
 <font color=orange><b>orロジックでifステートメントを使用する：</b></font>
