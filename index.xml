@@ -375,7 +375,7 @@ loading="lazy"
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</link><pubDate>Fri, 07 Jan 2022 10:03:12 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
+&lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト１」</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</link><pubDate>Fri, 07 Jan 2022 10:03:12 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト１」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
 &lt;h2 id="hello-world">Hello World&lt;/h2>
