@@ -1,20 +1,20 @@
 <!doctype html><html lang=ja-jp>
 <head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>ざっくりわかる「シェルスクリプト２」</title>
-<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>ざっくりわかる「シェルスクリプト３」</title>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="ざっくりわかる「シェルスクリプト２」">
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="ざっくりわかる「シェルスクリプト３」">
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
-<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-12T12:30:57+09:00"><meta property="article:modified_time" content="2022-01-13T03:39:19+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg">
-<meta name=twitter:title content="ざっくりわかる「シェルスクリプト２」">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-13T03:39:19+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg">
+<meta name=twitter:title content="ざっくりわかる「シェルスクリプト３」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 </head>
 <body class="article-page
@@ -93,18 +93,15 @@ Web開発
 </a>
 </div>
 <div class=article-info>
-<time class="article-time--item article-time--published">2022.01.12</time>
-<time class="article-time--item article-time--updatedate">
-2022.01.13
-</time>
+<time class="article-time--item article-time--published">2022.01.13</time>
 <time class="article-time--item article-time--reading">
-読了時間: 9分
+読了時間: 10分
 </time>
 </div>
 </header>
 <h2 class=article-title>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
-ざっくりわかる「シェルスクリプト２」
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+ざっくりわかる「シェルスクリプト３」
 </a>
 </h2>
 </div>
@@ -113,16 +110,17 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#or-条件を-if文で使う>or 条件を if文で使う</a></li>
-<li><a href=#else-if-と-else>else if と else</a></li>
-<li><a href=#case-文>case 文</a></li>
-<li><a href=#コマンドラインから引数を取得>コマンドラインから引数を取得</a></li>
-<li><a href=#名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</a></li>
-<li><a href=#変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</a></li>
-<li><a href=#文字列の部分文字列を取得する>文字列の部分文字列を取得する</a></li>
-<li><a href=#変数に2つの数値を追加します>変数に2つの数値を追加します</a></li>
-<li><a href=#関数を作成する>関数を作成する</a></li>
-<li><a href=#関数パラメーターを使用する>関数パラメーターを使用する</a></li>
+<li><a href=#関数からの戻り値の受け渡し>関数からの戻り値の受け渡し</a></li>
+<li><a href=#ディレクトリを作成する>ディレクトリを作成する</a></li>
+<li><a href=#存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</a></li>
+<li><a href=#ファイルを読む>ファイルを読む</a></li>
+<li><a href=#ファイルを削除する>ファイルを削除する</a></li>
+<li><a href=#ファイルに追加>ファイルに追加</a></li>
+<li><a href=#ファイルが存在するかどうかを確認>ファイルが存在するかどうかを確認</a></li>
+<li><a href=#mailコマンド>mailコマンド</a></li>
+<li><a href=#dateコマンド>dateコマンド</a></li>
+<li><a href=#waitコマンド>waitコマンド</a></li>
+<li><a href=#sleepコマンド>sleepコマンド</a></li>
 </ol>
 </nav>
 </div>
@@ -137,217 +135,220 @@ Web開発
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト２」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト３」</a></p>
-<h2 id=or-条件を-if文で使う>or 条件を if文で使う</h2>
-<p><font color=orange><b>orロジックでifステートメントを使用する：</b></font><br>
-&lsquo;||&lsquo;は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if_with_or.sh data-lang=bash:if_with_or.sh><span class=cp>#!/bin/bash
+<h2 id=関数からの戻り値の受け渡し>関数からの戻り値の受け渡し</h2>
+<p><font color=orange><b>関数からの戻り値の受け渡し：</b></font><br>
+Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。&lsquo;function_return.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_return.sh data-lang=bash:function_return.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;数値を入力して下さい。&#34;</span><span class=p>;</span>
-<span class=nb>read</span> n<span class=p>;</span>
-
-<span class=k>if</span> <span class=o>[[</span> <span class=o>(</span><span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> -eq <span class=m>15</span> <span class=o>||</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> -eq 45<span class=o>)</span> <span class=o>]]</span><span class=p>;</span><span class=k>then</span>
-  <span class=nb>echo</span> <span class=s2>&#34;ゲームに勝ちました&#34;</span><span class=p>;</span>
-<span class=k>else</span>
-  <span class=nb>echo</span> <span class=s2>&#34;ゲームに負けました&#34;</span><span class=p>;</span>
-<span class=k>fi</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash if_with_or.sh
-数値を入力して下さい。
-5
-ゲームに負けました
-$ bash if_with_or.sh
-数値を入力して下さい。
-45
-ゲームに勝ちました
-bash-5.1$
-</code></pre><h2 id=else-if-と-else>else if と else</h2>
-<p><font color=orange><b>else ifステートメントの使用：</b></font><br>
-else if条件の使用は、bashでは「elif」を定義します。&lsquo;elseif_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:elseif_example.sh data-lang=bash:elseif_example.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;あなたのラッキーナンバーを入力して下さい。&#34;</span><span class=p>;</span>
-<span class=nb>read</span> n<span class=p>;</span>
-
-<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> -eq <span class=m>101</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
-  <span class=nb>echo</span> <span class=s2>&#34;あなたは一等賞を獲得しました&#34;</span><span class=p>;</span>
-<span class=k>elif</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> -eq <span class=m>510</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
-  <span class=nb>echo</span> <span class=s2>&#34;あなたは二等賞を獲得しました&#34;</span><span class=p>;</span>
-<span class=k>elif</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> -eq <span class=m>999</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
-  <span class=nb>echo</span> <span class=s2>&#34;あなたは三等賞を獲得しました&#34;</span><span class=p>;</span>
-<span class=k>else</span>
-  <span class=nb>echo</span> <span class=s2>&#34;すみません、またチャレンジして下さい&#34;</span><span class=p>;</span>
-<span class=k>fi</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>bash$ bash elseif_example.sh
-あなたのラッキーナンバーを入力して下さい。
-101
-あなたは一等賞を獲得しました
-bash$ bash elseif_example.sh
-あなたのラッキーナンバーを入力して下さい。
-999
-あなたは三等賞を獲得しました
-bash$ bash elseif_example.sh
-あなたのラッキーナンバーを入力して下さい。
-100
-すみません、またチャレンジして下さい
-bash$ bash elseif_example.sh
-$
-</code></pre><h2 id=case-文>case 文</h2>
-<p><font color=orange><b>caseステートメントの使用：</b></font><br>
-caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。&lsquo;case_example.sh&rsquo;という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:case_example.sh data-lang=bash:case_example.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;あなたのラッキーナンバーを入力して下さい。&#34;</span><span class=p>;</span>
-<span class=nb>read</span> n<span class=p>;</span>
-
-<span class=k>case</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> in
-  101<span class=o>)</span>
-    <span class=nb>echo</span> <span class=s2>&#34;あなたは一等賞を獲得しました&#34;</span> <span class=p>;;</span>
-  510<span class=o>)</span>
-    <span class=nb>echo</span> <span class=s2>&#34;あなたは二等賞を獲得しました&#34;</span> <span class=p>;;</span>
-  999<span class=o>)</span>
-    <span class=nb>echo</span> <span class=s2>&#34;あなたは三等賞を獲得しました&#34;</span> <span class=p>;;</span>
-  *<span class=o>)</span>
-    <span class=nb>echo</span> <span class=s2>&#34;すみません、またチャレンジして下さい&#34;</span>
-<span class=k>esac</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>bash$ bash case_example.sh
-あなたのラッキーナンバーを入力して下さい。
-101
-あなたは一等賞を獲得しました
-bash$ bash case_example.sh
-あなたのラッキーナンバーを入力して下さい。
-510
-あなたは二等賞を獲得しました
-bash$ bash case_example.sh
-あなたのラッキーナンバーを入力して下さい。
-999
-あなたは三等賞を獲得しました
-bash$ bash case_example.sh
-あなたのラッキーナンバーを入力して下さい。
-777
-すみません、またチャレンジして下さい
-</code></pre><h2 id=コマンドラインから引数を取得>コマンドラインから引数を取得</h2>
-<p><font color=orange><b>コマンドラインから引数を取得：</b></font><br>
-Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line.sh data-lang=bash:command_line.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;引数の数 : </span><span class=nv>$#</span><span class=s2>&#34;</span><span class=p>;</span>
-<span class=nb>echo</span> <span class=s2>&#34;一つ目の引数 = </span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
-<span class=nb>echo</span> <span class=s2>&#34;二つ目の引数 = </span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
-
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash command_line.sh apple windows
-引数の数 : 2
-一つ目の引数 = apple
-二つ目の引数 = windows
-$
-</code></pre><h2 id=名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</h2>
-<p><font color=orange><b>コマンドラインから名前付きの引数を取得：</b></font><br>
-名前付きのコマンドライン引数を読み取る方法を示します。&lsquo;command_line_names.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line_names.sh data-lang=bash:command_line_names.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=k>for</span> arg in <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span><span class=p>;</span><span class=k>do</span>
-  <span class=nv>index</span><span class=o>=</span><span class=k>$(</span><span class=nb>echo</span> <span class=nv>$arg</span> <span class=p>|</span> cut -f1 -d<span class=o>=</span><span class=k>)</span><span class=p>;</span>
-  <span class=nv>val</span><span class=o>=</span><span class=k>$(</span><span class=nb>echo</span> <span class=nv>$arg</span> <span class=p>|</span> cut -f2 -d<span class=o>=</span><span class=k>)</span><span class=p>;</span>
-  <span class=k>case</span> <span class=nv>$index</span> in
-    X<span class=o>)</span> <span class=nv>x</span><span class=o>=</span><span class=nv>$val</span><span class=p>;;</span>
-    Y<span class=o>)</span> <span class=nv>y</span><span class=o>=</span><span class=nv>$val</span><span class=p>;;</span>
-    *<span class=o>)</span>
-  <span class=k>esac</span>
-<span class=k>done</span>
-
-<span class=o>((</span><span class=nv>result</span><span class=o>=</span>x+y<span class=o>))</span><span class=p>;</span>
-<span class=nb>echo</span> <span class=s2>&#34;X+Y=</span><span class=nv>$result</span><span class=s2>&#34;</span><span class=p>;</span>
-</code></pre></div><p>bashコマンドで二つのコマンドライン引数を使用して、ファイルを実行します。</p>
-<pre tabindex=0><code>$ bash command_line_names.sh X=45 Y=30
-X+Y=75
-$
-</code></pre><h2 id=変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</h2>
-<p><font color=orange><b>文字列変数を組み合わせる：</b></font><br>
-文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:string_combine.sh data-lang=bash:string_combine.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nv>string1</span><span class=o>=</span><span class=s2>&#34;Apple&#34;</span><span class=p>;</span>
-<span class=nv>string2</span><span class=o>=</span><span class=s2>&#34;Mac OS&#34;</span><span class=p>;</span>
-
-<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$string1</span><span class=s2> </span><span class=nv>$string2</span><span class=s2>&#34;</span><span class=p>;</span>
-
-<span class=nv>string3</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$string1</span><span class=s2> </span><span class=nv>$string2</span><span class=s2>&#34;</span><span class=p>;</span>
-<span class=nv>string3</span><span class=o>+=</span><span class=s2>&#34; は、とても優れたＯＳです。&#34;</span> <span class=p>;</span>
-
-<span class=nb>echo</span> <span class=nv>$string3</span><span class=p>;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash string_combine.sh
-Apple Mac OS
-Apple Mac OS は、とても優れたＯＳです。
-$
-</code></pre><p><font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font></p>
-<h2 id=文字列の部分文字列を取得する>文字列の部分文字列を取得する</h2>
-<p><font color=orange><b>文字列の部分文字列を取得します。</b></font><br>
-他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:substring_example.sh data-lang=bash:substring_example.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nv>Str</span><span class=o>=</span><span class=s2>&#34;Learn Bash from NLP&#34;</span><span class=p>;</span>
-<span class=nv>subStr</span><span class=o>=</span><span class=si>${</span><span class=nv>Str</span><span class=p>:</span><span class=nv>6</span><span class=p>:</span><span class=nv>4</span><span class=si>}</span><span class=p>;</span>
-
-<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$subStr</span><span class=s2>&#34;</span><span class=p>;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash substring_example.sh
-Bash
-$
-</code></pre><h2 id=変数に2つの数値を追加します>変数に2つの数値を追加します</h2>
-<p><font color=orange><b>2つの数字を追加します。</b></font><br>
-さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:add_numbers.sh data-lang=bash:add_numbers.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;最初の数値を入力&#34;</span><span class=p>;</span>
-<span class=nb>read</span> x<span class=p>;</span>
-<span class=nb>echo</span> <span class=s2>&#34;2番目の数値を入力&#34;</span><span class=p>;</span>
-<span class=nb>read</span> y<span class=p>;</span>
-
-<span class=o>((</span><span class=nv>sum</span><span class=o>=</span>x+y<span class=o>))</span><span class=p>;</span>
-
-<span class=nb>echo</span> <span class=s2>&#34;加算の結果=</span><span class=nv>$sum</span><span class=s2>&#34;</span><span class=p>;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash add_numbers.sh
-最初の数値を入力
-25
-2番目の数値を入力
-56
-加算の結果=81
-$
-</code></pre><h2 id=関数を作成する>関数を作成する</h2>
-<p><font color=orange><b>関数の作成：</b></font><br>
-簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。&lsquo;function_example.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_example.sh data-lang=bash:function_example.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=k>function</span> F1<span class=o>(){</span>
-  <span class=nb>echo</span> <span class=s1>&#39;わたしはbashプログラミングが大好きです。&#39;</span><span class=p>;</span>
+<span class=k>function</span> greeting<span class=o>(){</span>
+  <span class=nv>str</span><span class=o>=</span><span class=s2>&#34;こんにちは、</span><span class=nv>$name</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$str</span><span class=s2>&#34;</span><span class=p>;</span>
 <span class=o>}</span>
 
-F1<span class=p>;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash function_example.sh
-わたしはbashプログラミングが大好きです。
-$
-</code></pre><h2 id=関数パラメーターを使用する>関数パラメーターを使用する</h2>
-<p><font color=orange><b>パラメータを使用して関数を作成します。</b></font><br>
-Bashは、関数宣言時に関数パラメーターまたは引数を宣言できません。ただし、他の変数を使用して、関数内でパラメーターを使用できます。関数の呼び出し時に2つの値が渡された場合、値の読み取りには$1と$2の変数が使用されます。&lsquo;function_parameter.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、関数 &lsquo;Rectangle_Area&rsquo;は、パラメーター値に基づいて長方形の面積を計算します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_parameter.sh data-lang=bash:function_parameter.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-Rectangle_Area<span class=o>(){</span>
-  <span class=nv>area</span><span class=o>=</span><span class=k>$((</span><span class=nv>$1</span><span class=o>*</span><span class=nv>$2</span><span class=k>))</span><span class=p>;</span>
-  <span class=nb>echo</span> <span class=s2>&#34;面積は : </span><span class=nv>$area</span><span class=s2>&#34;</span><span class=p>;</span>
-<span class=o>}</span>
+<span class=nb>echo</span> <span class=s2>&#34;あなたの名前を入力して下さい&#34;</span><span class=p>;</span>
+<span class=nb>read</span> name<span class=p>;</span>
 
-Rectangle_Area <span class=m>10</span> 20<span class=p>;</span>
+<span class=nv>val</span><span class=o>=</span><span class=k>$(</span>greeting<span class=k>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;関数からの戻り値は「</span><span class=si>${</span><span class=nv>val</span><span class=si>}</span><span class=s2>」です。&#34;</span><span class=p>;</span>
 </code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>bash-5.1$ bash tmp
-面積は : 200
-bash-5.1$
-</code></pre>
-<h1 id=関連記事>関連記事</h1>
+<pre tabindex=0><code>$ bash function_return.sh
+あなたの名前を入力して下さい
+suzuki
+関数からの戻り値は「こんにちは、suzuki」です。
+$
+</code></pre><h2 id=ディレクトリを作成する>ディレクトリを作成する</h2>
+<p><font color=orange><b>ディレクトリを作成する：</b></font><br>
+Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。&lsquo;make_directory.sh&rsquo;という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:make_directory.sh data-lang=bash:make_directory.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;ディレクトリ名を入力して下さい。&#34;</span>
+<span class=nb>read</span> newdir
+
+<span class=sb>`</span>mkdir <span class=s2>&#34;</span><span class=nv>$newdir</span><span class=s2>&#34;</span><span class=sb>`</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash make_directory.sh
+ディレクトリ名を入力して下さい。
+suzuki
+$ ls
+suzuki/
+</code></pre><h2 id=存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</h2>
+<p><font color=orange><b>存在を確認してディレクトリを作成します。</b></font><br>
+&lsquo;mkdir&rsquo;コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの&rsquo; -d &lsquo;オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。&lsquo;directory_exist.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:directory_exist.sh data-lang=bash:directory_exist.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;ディレクトリ名を入力して下さい。&#34;</span><span class=p>;</span>
+<span class=nb>read</span> ndir<span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> -d <span class=s2>&#34;</span><span class=nv>$ndir</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリが存在します。&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=sb>`</span>mkdir <span class=nv>$ndir</span><span class=sb>`</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリを作成しました。&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash directory_exist.sh
+ディレクトリ名を入力して下さい。
+suzuki
+ディレクトリを作成しました。
+$ ls
+suzuki/
+$ bash directory_exist.sh
+ディレクトリ名を入力して下さい。
+suzuki
+ディレクトリが存在します。
+$
+</code></pre><h2 id=ファイルを読む>ファイルを読む</h2>
+<p><font color=orange><b>ファイルを読む：</b></font><br>
+whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。&lsquo;read_file.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。 別途作成する&rsquo;book.txt&rsquo;の内容を読み取ります。</p>
+<p>「book.txt」ファイルを作成します。</p>
+<pre tabindex=0><code>$ vim book.txt
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-:book.txt data-lang=:book.txt>ファイルを読む：
+ループを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。
+&#39;read_file.sh&#39;という名前のファイルを作成し、次のコードを追加して、&#39;book.txt&#39;という名前の既存のファイルを読み取ります。
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:read_file.sh data-lang=bash:read_file.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>file</span><span class=o>=</span><span class=s1>&#39;book.txt&#39;</span><span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$file</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  <span class=k>while</span> <span class=nb>read</span> line<span class=p>;</span><span class=k>do</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$line</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=k>done</span>&lt;<span class=nv>$file</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$file</span><span class=s2> ファイルがありません&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash read_file.sh
+ファイルを読む：
+ループを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。
+'read_file.sh'という名前のファイルを作成し、次のコードを追加して、'book.txt'という名前の既存のファイルを読み取ります。
+</code></pre><h2 id=ファイルを削除する>ファイルを削除する</h2>
+<p><font color=orange><b>ファイルを削除します：</b></font><br>
+&lsquo;rm&rsquo;コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:delete_file.sh data-lang=bash:delete_file.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;削除するファイルまたはディレクトリ名を入力して下さい。&#34;</span>
+<span class=nb>read</span> fn
+rm -i <span class=nv>$fn</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ ls
+suzuki/  book.txt
+bash delete_file.sh
+削除するファイルまたはディレクトリ名を入力して下さい。
+suzuki
+rm: suzuki: is a directory
+bash delete_file.sh
+削除するファイルまたはディレクトリ名を入力して下さい。
+book.txt
+$ ls
+suzuki/
+$
+</code></pre><h2 id=ファイルに追加>ファイルに追加</h2>
+<p><font color=orange><b>ファイルに追加：</b></font><br>
+bashで「&#187;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&lsquo;append_file.sh &lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-:level.txt data-lang=:level.txt>1. Pro AngularJS
+2. Learning JQuery
+3. PHP Programming
+4. Code Igniter
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash_append_file.sh data-lang=bash_append_file.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;追加する前のファイル&#34;</span><span class=p>;</span>
+cat book.txt<span class=p>;</span>
+
+<span class=nb>echo</span> <span class=s2>&#34;5. Bash Programming&#34;</span> &gt;&gt; level.txt
+<span class=nb>echo</span> <span class=s2>&#34;追加した後のファイル&#34;</span>
+cat book.txt<span class=p>;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash append_file.sh
+追加する前のファイル
+1. Pro AngularJS
+2. Learning JQuery
+3. PHP Programming
+4. Code Igniter
+追加した後のファイル
+1. Pro AngularJS
+2. Learning JQuery
+3. PHP Programming
+4. Code Igniter
+5. Bash Programming
+$
+</code></pre><p><font color=red>「>」はファイルを新しく作成して追記します。<br>
+「&#187;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&#187;」を行うと、ついするファイルがないため、エラーとなります。ファイルの存在を確認するための方法を次の章で説明します。</font></p>
+<h2 id=ファイルが存在するかどうかを確認>ファイルが存在するかどうかを確認</h2>
+<p><font color=orange><b>ファイルが存在するかどうかをテストします。</b></bont><br>
+&lsquo;-e&rsquo;または&rsquo;-f&rsquo;オプションを使用して、ファイルの存在を確認できます。次のコードの &lsquo;if [ ]&lsquo;では、ファイルの存在をテストするために「-f」オプションが使用されています。&rsquo; file_exist.sh &lsquo;という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:file_exist.sh data-lang=bash:file_exist.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>filename</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ファイルが存在します。&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ファイルは存在しません。&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ ls
+book.txt    level.txt
+bash file_exist.sh level2.txt
+ファイルは存在しません。
+bash file_exist.sh level.txt
+ファイルが存在します。
+</code></pre><h2 id=mailコマンド>mailコマンド</h2>
+<p><font color=orange><b>メールを送る：</b></font><br>
+' mail &lsquo;または ' sendmail &lsquo;コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。&rsquo; mail_example.sh &lsquo;という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
+<p><a class=link href=mailto:admin@sample.com>admin@sample.com</a> の部分を自分のメールアドレスに置き換えて実行して下さい。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mail_example.sh data-lang=bash:mail_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>Recipient</span><span class=o>=</span>”admin@sample.com”
+<span class=nv>Subject</span><span class=o>=</span>”Greeting”
+<span class=nv>Message</span><span class=o>=</span>”Welcome to our site”
+<span class=sb>`</span>mail -s <span class=nv>$Subject</span> <span class=nv>$Recipient</span> <span class=o>&lt;&lt;&lt;</span> <span class=nv>$Message</span><span class=sb>`</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash mail_example.sh
+</code></pre><h2 id=dateコマンド>dateコマンド</h2>
+<p><font color=orange><b>現在の日付を解析する：</b></font><br>
+dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。&lsquo;date_parse.sh&rsquo;という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:date_parse.sh data-lang=bash:date_parse.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>Year</span><span class=o>=</span><span class=sb>`</span>date +%Y<span class=sb>`</span><span class=p>;</span>
+<span class=nv>Month</span><span class=o>=</span><span class=sb>`</span>date +%m<span class=sb>`</span><span class=p>;</span>
+<span class=nv>Day</span><span class=o>=</span><span class=sb>`</span>date +%d<span class=sb>`</span><span class=p>;</span>
+<span class=nv>Hour</span><span class=o>=</span><span class=sb>`</span>date +%H<span class=sb>`</span><span class=p>;</span>
+<span class=nv>Minute</span><span class=o>=</span><span class=sb>`</span>date +%M<span class=sb>`</span><span class=p>;</span>
+<span class=nv>Second</span><span class=o>=</span><span class=sb>`</span>date +%S<span class=sb>`</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=sb>`</span>date<span class=sb>`</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Current Date is: </span><span class=nv>$Day</span><span class=s2>-</span><span class=nv>$Month</span><span class=s2>-</span><span class=nv>$Year</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Current Time is: </span><span class=nv>$Hour</span><span class=s2>:</span><span class=nv>$Minute</span><span class=s2>:</span><span class=nv>$Second</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash date_parse.sh
+2022年 1月13日 木曜日 12時19分06秒 JST
+Current Date is: 13-01-2022
+Current Time is: 12:19:06
+$
+</code></pre><h2 id=waitコマンド>waitコマンド</h2>
+<p><font color=orange><b>waitコマンド：</b></font><br>
+waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。&rsquo; wait_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:wait_example.sh data-lang=bash:wait_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Wait command&#34;</span> <span class=p>&amp;</span>
+<span class=nv>process_id</span><span class=o>=</span><span class=nv>$!</span>
+<span class=nb>wait</span> <span class=nv>$process_id</span>
+<span class=nb>echo</span> <span class=s2>&#34;Exited with status </span><span class=nv>$?</span><span class=s2>&#34;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash wait_example.sh
+Wait command
+Exited with status 0
+$
+</code></pre><h2 id=sleepコマンド>sleepコマンド</h2>
+<p><font color=orange><b>sleepコマンド：</b></font><br>
+コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。&lsquo;sleep_example.sh&rsquo; という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:sleep_example.sh data-lang=bash:sleep_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> “Wait <span class=k>for</span> <span class=m>5</span> seconds”
+sleep <span class=m>5</span>
+<span class=nb>echo</span> “Completed”
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash sleep_example.sh
+“Wait for 5 seconds”
+“Completed”
+$
+</code></pre><h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト２」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>ざっくりわかるシェルスクリプト３」</a></p>
@@ -394,10 +395,10 @@ bash-5.1$
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト３」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト２」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -407,10 +408,10 @@ bash-5.1$
 </header>
 <div class=article-details>
 <h2 class=article-title>
-ざっくりわかる「シェルスクリプト３」
+ざっくりわかる「シェルスクリプト２」
 </h2>
 <div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
+<time class="article-time--item article-time--published">2022.01.12</time>
 </div>
 <p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
 </div>
@@ -519,26 +520,14 @@ bash-5.1$
 </section>
 </footer>
 <div class=article-pager>
-<div class=article-pager--next>
+<div class=article-pager--prev>
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x250_fill_q75_box_smart1.jpg width=400 height=250 loading=lazy alt="Featured image of post e-Statで新着一覧を取得しよう" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで新着一覧を取得しよう" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
 </div>
 <div class=article-details>
 <h2 class=article-title>e-Statで新着一覧を取得しよう</h2>
-</div>
-</a>
-</article>
-</div>
-<div class=article-pager--prev>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
-</div>
-<div class=article-details>
-<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
 </div>
 </a>
 </article>
