@@ -24,7 +24,8 @@ tags:
 
 ## 圧縮ファイルと実行コマンド、パラメータ一覧
 
-```
+```bash
+
   拡張子           パラメータ
   tgz | tar.gz     tar zxvf  
   tar.Z            gunzip 
@@ -39,14 +40,14 @@ tags:
 
 
 ## 実行例
-```
+```bash
 # 圧縮ファイルを解凍する便利な unCompコマンド
 $ unComp comp.tar.gz2
 ```
 
 ## 作成
 まずファイルを作ります。ファイル名は unComp とします
-```
+```bash
 # unComp というファイルを作成
 $ :> unComp 
 
@@ -56,7 +57,7 @@ $ vim unComp
 
 unCompファイルに以下の内容を貼り付ける
 
-```
+```bash
 #!/bin/bash
 #
 #圧縮されているファイルを解凍する
@@ -92,7 +93,7 @@ exit ;
 作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。
 [wLu](https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ "wLu")をつかってUTF-8に変換するとさらに便利です。
 
-```
+```bash
 # unComp ファイルをnkf -wLu でUTF-8に変換
 $ nkf -wLu unComp > unComp.txt
 
@@ -109,7 +110,7 @@ $ /usr/local/bin/unComp
 
 ### 使い方
 
-```
+```bash
 # 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
 # 実行
 $ unComp sample.zip

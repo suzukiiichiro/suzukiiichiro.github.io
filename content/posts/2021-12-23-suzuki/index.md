@@ -27,18 +27,18 @@ tags:
 
 ## nkf インストールの手順
 まず、nkfがインストールされているかを確認します。
-```
+```bash
 $ which nkf 
 /usr/local/bin/nkf
 ```
 
 インストールされていない場合、macの場合はbrewでインストールします。
-```
+```bash
 $ brew install nkf 
 ```
 
 インストールしようとすると以下のエラーが出ることがあります
-```
+```bash
 Error: The `brew link` step did not complete successfully
 The formula built, but is not symlinked into /usr/local
 Could not symlink share/man/ja/man1/nkf.1
@@ -47,7 +47,7 @@ Could not symlink share/man/ja/man1/nkf.1
 ```
 
 権限周りを下記のコマンドを打って変更します。
-```
+```bash
 sudo chmod 775 /usr/local/share/man/ja/man1
 sudo chown <ユーザ名>:admin /usr/local/share/man/ja/man1
 ```
@@ -55,7 +55,7 @@ sudo chown <ユーザ名>:admin /usr/local/share/man/ja/man1
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fblog.kozakana.net%2F2018%2F09%2Fhomebrew_link_error%2F" title="Homebrewでインストール時にlinkが出来ないエラー | Simple is Beautiful." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe></p>
 
 コマンドを確認します。
-```
+```bash
 $ nkf -v
 Network Kanji Filter Version 2.1.5 (2018-12-15)
 Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
@@ -70,7 +70,7 @@ nkfコマンドの書式
 nkf オプション ファイル名
 
 UTF-8に変換する場合は、オプションに wLu をつけて変換します。
-```
+```bash
 $ nkf -wLu isofile.txt > utf8.txt
 ```
 
@@ -81,7 +81,7 @@ $ nkf -wLu isofile.txt > utf8.txt
 変換後のファイル ato.txt(UTF-8に変換したファイル）
   ↓
 変換後のファイルをリネームする
-```
+```bash
 # UTF-8に変換
 $ nkf -wLu moto.txt > ato.txt
 
@@ -96,7 +96,7 @@ $ vim moto.txt
 
 
 ###  変換の流れ（自動編）
-```
+```bash
 # UTF-8に変換 wLu コマンドをこれから自作します
 $ wLu moto.txt
 $ vim moto.txt ← UTF-8 に変換されている！
@@ -105,7 +105,7 @@ $ vim moto.txt ← UTF-8 に変換されている！
 ### コマンドの内容
 
 まずファイルを作ります。ファイル名は wLu とします
-```
+```bash
 # wLu というファイルを作成
 $ :> wLu
 
@@ -115,7 +115,7 @@ $ vim wLu
 
 以下の内容をファイルに貼り付ける
 
-```
+```bash
 #!/bin/bash
 
 #################################################
@@ -155,7 +155,7 @@ exit ;
 ```
 
 作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。
-```
+```bash
 # wLu ファイルをnkf -wLu でUTF-8に変換
 $ nkf -wLu wLu > wLu.txt
 
@@ -172,7 +172,7 @@ $ /usr/local/bin/wLu
 
 ### 使い方
 
-```
+```bash
 # UTF-8以外のファイルエンコードファイル
 $ cat moto.txt
 $ wLu moto.txt
