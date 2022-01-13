@@ -1,4 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 13 Jan 2022 11:26:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>ざっくりわかる「シェルスクリプト３」</title><link>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト３」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 13 Jan 2022 14:14:30 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>現役Webデザイナーが教えるHTML初心者講座 - 初めてのHTML</title><link>https://suzukiiichiro.github.io/posts/2022-01-13-01-wyoshi/</link><pubDate>Thu, 13 Jan 2022 14:14:30 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-13-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-13-01-wyoshi/image.jpg" alt="Featured image of post 現役Webデザイナーが教えるHTML初心者講座 - 初めてのHTML" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>HTMLをこれから始める人、HTMLってプログラムみたいで難しそうと思っている人、HTMLで挫折してしまった人。そういった人たちでもHTMLがわかるようになってほしいと思って「現役Webデザイナーが教えるHTML初心者講座」を始めてみました。&lt;/p>
+&lt;p>まずは簡単にタグを覚える方法を紹介します。&lt;/p>
+&lt;h2 id="htmlってなに">HTMLってなに？&lt;/h2>
+&lt;p>HTMLとは（Hypertext Markup Language、ハイパーテキスト・マークアップ・ランゲージ）と呼ばれる言語のことで、書き方でタイトルや文章、箇条書き、画像の挿入ができたりします。&lt;/p>
+&lt;p>例えば&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>タイトル&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>文章&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リンク&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>という内容であればヘッドラインと文章とリンクになります。&lt;/p>
+&lt;p>他のプログラムのようにHTML自体で何かを動かすということはできませんが、Web上でなにか公開するとなると、HTMLを使う必要が出てきます。&lt;/p>
+&lt;h2 id="タグを覚えよう">タグを覚えよう&lt;/h2>
+&lt;p>HTMLにはタグと呼ばれるものがあり、それぞれ意味を持っています。&lt;br>
+「たくさんあって覚えられないよ」という人もいるかと思います。HTMLは覚えたらそれが全てというわけではなく、年々更新されて、知らないようなタグが出てきたりします。&lt;br>
+とはいっても、基本的なタグは変わりません。&lt;br>
+ここでは基本的なタグを覚えてみましょう。&lt;/p>
+&lt;p>覚え方はすごく簡単です。英語にしたときの頭文字だと思っておけば9割は覚えられました。&lt;br>
+残りの1割程度は頭文字ではなく、単語の確率が高いです。&lt;br>
+これでHTMLのタグはほぼほぼ覚えられました。&lt;br>
+他の言語と違って、すごく簡単だと思いませんか？&lt;/p>
+&lt;p>それでは主要なタグを見てみましょう。&lt;/p>
+&lt;h3 id="ヘッドライン-h1-h2-h3-h4-h5-h6">ヘッドライン &lt;code>&amp;lt;h1&amp;gt; &amp;lt;h2&amp;gt; &amp;lt;h3&amp;gt; &amp;lt;h4&amp;gt; &amp;lt;h5&amp;gt; &amp;lt;h6&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>Headline（見出し）の頭文字&lt;code>h&lt;/code>を使ったタグです。&lt;/p>
+&lt;p>文章を書く上で大事なのが&lt;code>h&lt;/code>タグです。&lt;code>h1&lt;/code>から&lt;code>h6&lt;/code>まであります。&lt;br>
+&lt;code>h1&lt;/code>は最上位の見出しタグで、基本的にはサイト内に1つしか存在してはならないとされてます。&lt;br>
+そのページのいちばん大事なタイトル部分に&lt;code>h1&lt;/code>を設定する事が多いです。&lt;br>
+&lt;code>h2&lt;/code>は大見出し的な扱いです。h1よりも重要度は下がってきます。&lt;br>
+&lt;code>h3&lt;/code>は小見出し的な扱いです。&lt;br>
+そして、&lt;code>h4&lt;/code>、 &lt;code>h5&lt;/code>、&lt;code>h6&lt;/code>となっていきます。&lt;/p>
+&lt;h3 id="文章-p">文章 &lt;code>&amp;lt;p&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>Paragraph（文章）の頭文字で、文章を表すタグが&lt;code>&amp;lt;p&amp;gt;&lt;/code>です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日はいい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすることで、一つの文章になります。&lt;br>
+段落を構成したい場合は、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日はいい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>洗濯物もよく乾く。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>と&lt;code>&amp;lt;p&amp;gt;&lt;/code>を続けて書いてやれば大丈夫です。&lt;/p>
+&lt;h3 id="改行-br">改行 &lt;code>&amp;lt;br&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>先程の文章内で改行したいとなったときは Break（壊す）の&lt;code>&amp;lt;br&amp;gt;&lt;/code>を使ってみましょう。&lt;br>
+「いい天気だ」の「いい」という部分で改行したい場合は&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日は&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">br&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>いい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>洗濯物もよく乾く。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすることで改行がされます。&lt;/p>
+&lt;h3 id="リンク-a">リンク &lt;code>&amp;lt;a&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>次に、リンクを張りたい場合は、Anchor（いかり）のリンクの出発点や到達点を指定するタグ&lt;code>&amp;lt;a&amp;gt;&lt;/code>を使いましょう。&lt;/p>
+&lt;p>&lt;code>&amp;lt;a&amp;gt;&lt;/code>タグは今までのタグと少し違い、属性と呼ばれる文字を追記する必要があります。&lt;br>
+たとえば、googleにリンクを張りたいと思ったときは&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リンクだよ&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>とするのではなく、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://google.com/&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リンクだよ&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>とする必要があります。&lt;br>
+この&lt;code>href&lt;/code>は「hypertext reference」の略です。日本語訳すると「参照」とかになるのでしょうか。&lt;br>
+&lt;code>href&lt;/code>部分にはリンクしたいサイトのURLを貼り付けて、囲んだタグの中には表示したい文字列を入力します。&lt;/p>
+&lt;h3 id="画像-img">画像 &lt;code>&amp;lt;img&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>Image（画像）はHTMLでも&lt;code>&amp;lt;img&amp;gt;&lt;/code>となってます。&lt;br>
+このタグも前回のリンクと同じように属性が必要です。&lt;br>
+画像に必要な属性は&lt;code>src&lt;/code>と&lt;code>alt&lt;/code>になります。&lt;br>
+&lt;code>src&lt;/code>は「source（元）」の略で、画像のURLを入力します。&lt;br>
+&lt;code>alt&lt;/code>は「alternate」の略です。日本語では「代替」となります。つまり、画像が何らかの原因で表示できなかったり、目の不自由な方に対して、その画像がどういったものなのかを記述することで、画像を表現することができます。&lt;/p>
+&lt;h3 id="箱的なもの-div">箱的なもの &lt;code>&amp;lt;div&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>&lt;code>div&lt;/code>はちょっと厄介で、今まで出てきたタグのように意味を持っていません。&lt;br>
+しかし、このタグで囲ったものをグループとして機能させるようにできます。&lt;br>
+divideやdivisionの略で、分割するという意味になります。&lt;/p>
+&lt;p>例えば、サイトを3つの構成に分けたいとしましょう。&lt;br>
+その場合は、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>コンテンツ1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>コンテンツ2&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>コンテンツ3&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>などとすることが可能です。&lt;/p>
+&lt;h3 id="リスト-ul-ol">リスト &lt;code>&amp;lt;ul&amp;gt; &amp;lt;ol&amp;gt;&lt;/code>&lt;/h3>
+&lt;p>リスト形式の文章を作りたいときには&lt;code>&amp;lt;ul&amp;gt;&lt;/code>や&lt;code>&amp;lt;ol&amp;gt;&lt;/code>を使用します。&lt;br>
+ulは「unordered list」の略で、順序がないリストと言う意味です。&lt;br>
+olは「order list」の略で、順序があるリストと言う意味ですね。&lt;/p>
+&lt;p>ulやolの中には&lt;code>&amp;lt;li&amp;gt;&lt;/code>というタグを記述します。&lt;br>
+これは「list」を意味するタグです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">ul&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト2&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト3&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ul&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">ol&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト2&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リスト3&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ol&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ulとolの違いは、ulの場合はliの頭に「・」が付き、olの場合は「数字」が付きます。&lt;/p>
+&lt;p>以上が比較的よく使うHTMLタグになります。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>すごく簡単でしたが、HTMLのタグの説明になります。&lt;br>
+タグが多くて難しいと感じている方は、やりたいことを英語にしたときになんていうのかということを考えれば、HTMLタグに置き換えることができるのではないかと思います。&lt;br>
+例えば、文章を強調したいなと思ったとしたら、強調は強くしたいってことだから「strong」だよな。となります。&lt;br>
+そして、HTMLには&lt;code>&amp;lt;strong&amp;gt;&lt;/code>という強調のためのタグが存在しています。&lt;/p>
+&lt;p>また、ここは関係ないところだなというのは、脇に追いやっておきたいので、&lt;code>&amp;lt;aside&amp;gt;&lt;/code>というタグを使うことが可能です。&lt;/p>
+&lt;p>このように、HTMLタグは自分がやりたいとを英語にしたときになんて言うのかさえわかってしまえば簡単に記述することが可能です。&lt;/p>
+&lt;h2 id="おすすめ書籍">おすすめ書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%80%90Amazon-co-jp-%e9%99%90%e5%ae%9a%e3%80%911%e5%86%8a%e3%81%a7%e3%81%99%e3%81%b9%e3%81%a6%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8fHTML-CSS%e3%81%a8Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e5%85%a5%e9%96%80%e8%ac%9b%e5%ba%a7-DL%e7%89%b9%e5%85%b8-Flexbox/dp/4797398892/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51xAu2jeqrL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 【Amazon.co.jp 限定】1冊ですべて身につくHTML &amp;amp; CSSとWebデザイン入門講座 (DL特典: CSS Flexbox チートシート) &lt;/h2>
+&lt;p>Web界隈やデザイナーに大人気!
+Web関連の情報やデザインについて記事が学べる『Webクリエイターボックス』の管理人、
+Manaによる渾身のHTML &amp;amp; CSSとWebデザインが学べる本&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%81%93%e3%82%8c%e3%81%a0%e3%81%91%e3%81%a7%e5%9f%ba%e6%9c%ac%e3%81%8c%e3%81%97%e3%81%a3%e3%81%8b%e3%82%8a%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8f-HTML-Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b31%e5%86%8a%e7%9b%ae%e3%81%ae%e6%9c%ac-Capybara-Design/dp/4798170119/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-na.ssl-images-amazon.com/images/I/51iJCT7O&amp;#43;YL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> これだけで基本がしっかり身につく HTML/CSS&amp;amp;Webデザイン1冊目の本 &lt;/h2>
+&lt;p> Webサイト制作をこれから学ぶ人へ送る
+“1冊目&amp;#34;に最適の入門書! 【学びをサポートする4大特典つき】
+&lt;p>本書は手を動かしてWebサイトを作りながら&lt;br>
+HTML/CSSとWebデザインの基本を楽しく学べる入門書です。&lt;/p>
+&lt;p>初学者が1冊目に読む本としてふさわしい内容を盛り込んでいるため、&lt;br>
+これを読めば必要な基礎知識がひととおり身につきます。&lt;/p>&lt;br>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>&lt;br>
+&lt;/div>&lt;br>
+&lt;/a>&lt;br>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>&lt;/p>
+&lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト３」</title><link>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト３」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
 &lt;p>関連記事&lt;br>
