@@ -9,7 +9,7 @@
 <meta property="og:description" content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T13:11:13+09:00"><meta property="article:modified_time" content="2022-01-13T04:18:10+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T13:11:13+09:00"><meta property="article:modified_time" content="2022-01-13T04:20:00+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【unComp】Bashで便利なコマンドを作ってみようって話">
 <meta name=twitter:description content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -138,8 +138,9 @@ Web開発
 <h2 id=できること>できること</h2>
 <p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。</p>
 <h2 id=圧縮ファイルと実行コマンドパラメータ一覧>圧縮ファイルと実行コマンド、パラメータ一覧</h2>
-<pre tabindex=0><code>  拡張子           パラメータ
-  tgz | tar.gz     tar zxvf  
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>
+  拡張子           パラメータ
+  tgz <span class=p>|</span> tar.gz     tar zxvf  
   tar.Z            gunzip 
   tar.bz2          tar xvfj 
   tar              tar xvfz 
@@ -147,67 +148,67 @@ Web開発
   Z                gunzip 
   bz2              bunzip2 
   zip              unzip 
-</code></pre><p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。</p>
+</code></pre></div><p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。</p>
 <h2 id=実行例>実行例</h2>
-<pre tabindex=0><code># 圧縮ファイルを解凍する便利な unCompコマンド
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 圧縮ファイルを解凍する便利な unCompコマンド</span>
 $ unComp comp.tar.gz2
-</code></pre><h2 id=作成>作成</h2>
+</code></pre></div><h2 id=作成>作成</h2>
 <p>まずファイルを作ります。ファイル名は unComp とします</p>
-<pre tabindex=0><code># unComp というファイルを作成
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># unComp というファイルを作成</span>
 $ :&gt; unComp 
 
-# vim で unComp を開く
+<span class=c1># vim で unComp を開く</span>
 $ vim unComp
-</code></pre><p>unCompファイルに以下の内容を貼り付ける</p>
-<pre tabindex=0><code>#!/bin/bash
-#
-#圧縮されているファイルを解凍する
-# unComp を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-# cp unComp /usr/local/bin/unComp
-#
-# 実行例
-# $ unComp filename(圧縮ファイル)
-#
-if [ $# -ne 1 ]; then
-  echo &quot;&quot;
-  exit ;
-fi
-#
-case $1 in
-  *.tgz | *.tar.gz)   tar zxvf $1 ;;
-  *.tar.Z)            gunzip $1
-                      tar xvf $( echo &quot;$1&quot; | sed 's/\.Z$//')
-                      ;;
-  *.tar.bz2)          tar xvfj $1;;
-  *.tar)              tar xvfz $1;;
-  *.gz)               gunzip $1;;
-  *.Z)                gunzip $1;;
-  *.bz2)              bunzip2 $1;;
-  *.zip)              unzip $1;;
-  *)                  echo &quot;ファイルの拡張子が対応していません:$1&quot;
-esac
-exit ;
-</code></pre><p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。<br>
+</code></pre></div><p>unCompファイルに以下の内容を貼り付ける</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=c1>#</span>
+<span class=c1>#圧縮されているファイルを解凍する</span>
+<span class=c1># unComp を /usr/local/bin/にコピーすると</span>
+<span class=c1># 通常のコマンドとして本実行ファイルを利用する事が出来ます。</span>
+<span class=c1>#</span>
+<span class=c1># cp unComp /usr/local/bin/unComp</span>
+<span class=c1>#</span>
+<span class=c1># 実行例</span>
+<span class=c1># $ unComp filename(圧縮ファイル)</span>
+<span class=c1>#</span>
+<span class=k>if</span> <span class=o>[</span> <span class=nv>$#</span> -ne <span class=m>1</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;&#34;</span>
+  <span class=nb>exit</span> <span class=p>;</span>
+<span class=k>fi</span>
+<span class=c1>#</span>
+<span class=k>case</span> <span class=nv>$1</span> in
+  *.tgz <span class=p>|</span> *.tar.gz<span class=o>)</span>   tar zxvf <span class=nv>$1</span> <span class=p>;;</span>
+  *.tar.Z<span class=o>)</span>            gunzip <span class=nv>$1</span>
+                      tar xvf <span class=k>$(</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> <span class=p>|</span> sed <span class=s1>&#39;s/\.Z$//&#39;</span><span class=k>)</span>
+                      <span class=p>;;</span>
+  *.tar.bz2<span class=o>)</span>          tar xvfj <span class=nv>$1</span><span class=p>;;</span>
+  *.tar<span class=o>)</span>              tar xvfz <span class=nv>$1</span><span class=p>;;</span>
+  *.gz<span class=o>)</span>               gunzip <span class=nv>$1</span><span class=p>;;</span>
+  *.Z<span class=o>)</span>                gunzip <span class=nv>$1</span><span class=p>;;</span>
+  *.bz2<span class=o>)</span>              bunzip2 <span class=nv>$1</span><span class=p>;;</span>
+  *.zip<span class=o>)</span>              unzip <span class=nv>$1</span><span class=p>;;</span>
+  *<span class=o>)</span>                  <span class=nb>echo</span> <span class=s2>&#34;ファイルの拡張子が対応していません:</span><span class=nv>$1</span><span class=s2>&#34;</span>
+<span class=k>esac</span>
+<span class=nb>exit</span> <span class=p>;</span>
+</code></pre></div><p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。<br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ title=wLu target=_blank rel=noopener>wLu</a>をつかってUTF-8に変換するとさらに便利です。</p>
-<pre tabindex=0><code># unComp ファイルをnkf -wLu でUTF-8に変換
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># unComp ファイルをnkf -wLu でUTF-8に変換</span>
 $ nkf -wLu unComp &gt; unComp.txt
 
-# unComp.txtをunCompにリネームします
+<span class=c1># unComp.txtをunCompにリネームします</span>
 $ mv unComp.txt unComp
 
-# 作成したunCompコマンドファイルを/usr/local/bin にコピーします
+<span class=c1># 作成したunCompコマンドファイルを/usr/local/bin にコピーします</span>
 $ sudo unComp /usr/local/bin/
 
-# コマンドが配置されたかを確認
+<span class=c1># コマンドが配置されたかを確認</span>
 $ which unComp
 $ /usr/local/bin/unComp
-</code></pre><h3 id=使い方>使い方</h3>
-<pre tabindex=0><code># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
-# 実行
+</code></pre></div><h3 id=使い方>使い方</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する</span>
+<span class=c1># 実行</span>
 $ unComp sample.zip
-</code></pre><p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。<br>
+</code></pre></div><p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。<br>
 便利ですね。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>

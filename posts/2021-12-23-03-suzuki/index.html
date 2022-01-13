@@ -9,7 +9,7 @@
 <meta property="og:description" content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T16:10:20+09:00"><meta property="article:modified_time" content="2022-01-13T04:18:10+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T16:10:20+09:00"><meta property="article:modified_time" content="2022-01-13T04:20:00+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【プログレスバー】Bashでプログレスバーを作ってみようって話">
 <meta name=twitter:description content="今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -139,21 +139,21 @@ Web開発
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい</p>
 <h2 id=使い方>使い方</h2>
 <p>処理のループ中に以下の1行を追記します。</p>
-<pre tabindex=0><code>progress &quot;$#&quot; &quot;$MAX&quot;; set - &quot;$@&quot; count ;
-</code></pre><h2 id=実行手順>実行手順</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>progress <span class=s2>&#34;</span><span class=nv>$#</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$MAX</span><span class=s2>&#34;</span><span class=p>;</span> <span class=nb>set</span> - <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span> count <span class=p>;</span>
+</code></pre></div><h2 id=実行手順>実行手順</h2>
 <p>以下のソースコードを適当なファイル名で保存して下さい。ここではProgress.shとします。</p>
-<pre tabindex=0><code>$ :&gt; Progress.sh
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ :&gt; Progress.sh
 $ vim Progress.sh
-# vimで以下のソースコードを貼り付けて保存
-# ソースコードのファイルエンコードをUTF-8に変更します。
+<span class=c1># vimで以下のソースコードを貼り付けて保存</span>
+<span class=c1># ソースコードのファイルエンコードをUTF-8に変更します。</span>
 $ nkf -wLu Progress.sh &gt; Progress.sh.utf8
-# ファイルエンコードを変更したファイルを元のファイル名にリネームします。
+<span class=c1># ファイルエンコードを変更したファイルを元のファイル名にリネームします。</span>
 $ mv Progress.sh.utf8 Progress.sh
-# 実行権限を付与します
+<span class=c1># 実行権限を付与します</span>
 $ chmod +x Progress.sh
-# 実行
+<span class=c1># 実行</span>
 $ ./Progress.sh
-</code></pre><h2 id=ソースコード>ソースコード</h2>
+</code></pre></div><h2 id=ソースコード>ソースコード</h2>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#! /bin/bash
 </span><span class=cp></span>
 <span class=c1>#######################################</span>
@@ -213,13 +213,13 @@ progress<span class=o>(){</span>
 <p>自作ソースの中のループ処理の関数の頭に以下を追記します。<br>
 MAX=100; は、処理の最大値を指定します。<br>
 処理のループ最大数が150回であれば、以下の通りに修正します。</p>
-<pre tabindex=0><code>set count;
-MAX=150;
-</code></pre><p>forやwhileループ処理の中に以下を埋め込みます。</p>
-<pre tabindex=0><code>progress &quot;$#&quot; &quot;$MAX&quot;; set - &quot;$@&quot; count ;
-</code></pre><p>最後にforまたはwhileループを抜けた後に</p>
-<pre tabindex=0><code>echo &quot;&quot;;
-</code></pre><p>を追加します。これだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>set</span> count<span class=p>;</span>
+<span class=nv>MAX</span><span class=o>=</span>150<span class=p>;</span>
+</code></pre></div><p>forやwhileループ処理の中に以下を埋め込みます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>progress <span class=s2>&#34;</span><span class=nv>$#</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$MAX</span><span class=s2>&#34;</span><span class=p>;</span> <span class=nb>set</span> - <span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span> count <span class=p>;</span>
+</code></pre></div><p>最後にforまたはwhileループを抜けた後に</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+</code></pre></div><p>を追加します。これだけです。</p>
 <h2 id=実行結果>実行結果</h2>
 <p><figure class=gallery-image style=flex-grow:160;flex-basis:384px>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/progress.gif data-size=640x400>

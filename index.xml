@@ -2631,42 +2631,43 @@ URLは、http://localhostだと私はダメだったのでこのサイトのURL�
 &lt;p>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法ってなにかないでしょうか。&lt;/p>
 &lt;h2 id="イメージ">イメージ&lt;/h2>
 &lt;p>従来の方法&lt;/p>
-&lt;pre tabindex="0">&lt;code>ローカルＰＣのターミナル
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">ローカルＰＣのターミナル
 ↓ Linuxサーバーにログイン
-$df $uptime などを実行
+&lt;span class="nv">$df&lt;/span> &lt;span class="nv">$uptime&lt;/span> などを実行
 ↓ Linuxサーバーをログアウト
 ローカルＰＣにもどる
-&lt;/code>&lt;/pre>&lt;p>これからつくるBash/ssh&lt;/p>
-&lt;pre tabindex="0">&lt;code>ローカルＰＣのターミナル
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これからつくるBash/ssh&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">ローカルＰＣのターミナル
 ↓
 Linuxサーバーにログイン
-$df $uptime などを実行
+&lt;span class="nv">$df&lt;/span> &lt;span class="nv">$uptime&lt;/span> などを実行
 Linuxサーバーをログアウト
 ↓
 ローカルＰＣのターミナルにもどる
-&lt;/code>&lt;/pre>&lt;p>わかりにくいですか？&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>わかりにくいですか？&lt;br>
 まず、メリットとしてサーバーでコマンドからログアウトする必要がありません。&lt;br>
 これができれば、一台一台サーバーのヘルスチェックをせずとも、数十台のサーバーを&lt;br>
 順番に訪ね歩きファイルに出力する事も可能です。&lt;/p>
 &lt;p>以下、ソースです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/usr/bin/bash
-##############################################
-# sshでサーバーにログインして、なんらかのコマンドを
-# 実行しターミナルに表示、ミッション終了後、ターミ
-# ナルを自動的にログアウトしてローカルに何事もなか
-# ったかのようにもどってくる最も簡単シェルスクリプト
-##############################################
-#
-# サーバーのＩＰアドレスとか
-SERVER=&amp;quot;centos@xx.xx.xx.xxx&amp;quot;
-# 実行したいコマンドを &amp;amp;&amp;amp; でつなぐ
-COMMAND=&amp;quot;uptime &amp;amp;&amp;amp; df -h&amp;quot;;
-echo &amp;quot;centosサーバーログイン&amp;quot;;
-# ポイントは -t です。
-ssh $SERVER -t $COMMAND;
-echo &amp;quot;centosサーバーログアウト&amp;quot;;
-exit;
-&lt;/code>&lt;/pre>&lt;p>たったこれだけですが、この工夫により多くのサーバーを&lt;br>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/usr/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1">##############################################&lt;/span>
+&lt;span class="c1"># sshでサーバーにログインして、なんらかのコマンドを&lt;/span>
+&lt;span class="c1"># 実行しターミナルに表示、ミッション終了後、ターミ&lt;/span>
+&lt;span class="c1"># ナルを自動的にログアウトしてローカルに何事もなか&lt;/span>
+&lt;span class="c1"># ったかのようにもどってくる最も簡単シェルスクリプト&lt;/span>
+&lt;span class="c1">##############################################&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># サーバーのＩＰアドレスとか&lt;/span>
+&lt;span class="nv">SERVER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;centos@xx.xx.xx.xxx&amp;#34;&lt;/span>
+&lt;span class="c1"># 実行したいコマンドを &amp;amp;&amp;amp; でつなぐ&lt;/span>
+&lt;span class="nv">COMMAND&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;uptime &amp;amp;&amp;amp; df -h&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;centosサーバーログイン&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1"># ポイントは -t です。&lt;/span>
+ssh &lt;span class="nv">$SERVER&lt;/span> -t &lt;span class="nv">$COMMAND&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;centosサーバーログアウト&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+exit&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>たったこれだけですが、この工夫により多くのサーバーを&lt;br>
 スクリプトで一括回遊することができます。 お試しあれ。&lt;/p></description></item><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
 &lt;pre tabindex="0">&lt;code>Run hugo --minify
 Error: Error building site: TOCSS:
@@ -2712,21 +2713,21 @@ extended とはなんだろう。&lt;/p>
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい&lt;/p>
 &lt;h2 id="使い方">使い方&lt;/h2>
 &lt;p>処理のループ中に以下の1行を追記します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
-&lt;/code>&lt;/pre>&lt;h2 id="実行手順">実行手順&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">progress &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$#&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$MAX&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nb">set&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> count &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="実行手順">実行手順&lt;/h2>
 &lt;p>以下のソースコードを適当なファイル名で保存して下さい。ここではProgress.shとします。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ :&amp;gt; Progress.sh
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ :&amp;gt; Progress.sh
 $ vim Progress.sh
-# vimで以下のソースコードを貼り付けて保存
-# ソースコードのファイルエンコードをUTF-8に変更します。
+&lt;span class="c1"># vimで以下のソースコードを貼り付けて保存&lt;/span>
+&lt;span class="c1"># ソースコードのファイルエンコードをUTF-8に変更します。&lt;/span>
 $ nkf -wLu Progress.sh &amp;gt; Progress.sh.utf8
-# ファイルエンコードを変更したファイルを元のファイル名にリネームします。
+&lt;span class="c1"># ファイルエンコードを変更したファイルを元のファイル名にリネームします。&lt;/span>
 $ mv Progress.sh.utf8 Progress.sh
-# 実行権限を付与します
+&lt;span class="c1"># 実行権限を付与します&lt;/span>
 $ chmod +x Progress.sh
-# 実行
+&lt;span class="c1"># 実行&lt;/span>
 $ ./Progress.sh
-&lt;/code>&lt;/pre>&lt;h2 id="ソースコード">ソースコード&lt;/h2>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ソースコード">ソースコード&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#! /bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
 &lt;span class="c1">#######################################&lt;/span>
@@ -2779,13 +2780,13 @@ progress &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$#&lt;/span>
 &lt;p>自作ソースの中のループ処理の関数の頭に以下を追記します。&lt;br>
 MAX=100; は、処理の最大値を指定します。&lt;br>
 処理のループ最大数が150回であれば、以下の通りに修正します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>set count;
-MAX=150;
-&lt;/code>&lt;/pre>&lt;p>forやwhileループ処理の中に以下を埋め込みます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>progress &amp;quot;$#&amp;quot; &amp;quot;$MAX&amp;quot;; set - &amp;quot;$@&amp;quot; count ;
-&lt;/code>&lt;/pre>&lt;p>最後にforまたはwhileループを抜けた後に&lt;/p>
-&lt;pre tabindex="0">&lt;code>echo &amp;quot;&amp;quot;;
-&lt;/code>&lt;/pre>&lt;p>を追加します。これだけです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">set&lt;/span> count&lt;span class="p">;&lt;/span>
+&lt;span class="nv">MAX&lt;/span>&lt;span class="o">=&lt;/span>150&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>forやwhileループ処理の中に以下を埋め込みます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">progress &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$#&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$MAX&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nb">set&lt;/span> - &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> count &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最後にforまたはwhileループを抜けた後に&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>を追加します。これだけです。&lt;/p>
 &lt;h2 id="実行結果">実行結果&lt;/h2>
 &lt;p>&lt;figure
 class="gallery-image"
@@ -2813,8 +2814,9 @@ loading="lazy"
 &lt;h2 id="できること">できること&lt;/h2>
 &lt;p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。&lt;/p>
 &lt;h2 id="圧縮ファイルと実行コマンドパラメータ一覧">圧縮ファイルと実行コマンド、パラメータ一覧&lt;/h2>
-&lt;pre tabindex="0">&lt;code> 拡張子 パラメータ
-tgz | tar.gz tar zxvf
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">
+拡張子 パラメータ
+tgz &lt;span class="p">|&lt;/span> tar.gz tar zxvf
 tar.Z gunzip
 tar.bz2 tar xvfj
 tar tar xvfz
@@ -2822,65 +2824,65 @@ gz gunzip
 Z gunzip
 bz2 bunzip2
 zip unzip
-&lt;/code>&lt;/pre>&lt;p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。&lt;/p>
 &lt;h2 id="実行例">実行例&lt;/h2>
-&lt;pre tabindex="0">&lt;code># 圧縮ファイルを解凍する便利な unCompコマンド
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 圧縮ファイルを解凍する便利な unCompコマンド&lt;/span>
 $ unComp comp.tar.gz2
-&lt;/code>&lt;/pre>&lt;h2 id="作成">作成&lt;/h2>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="作成">作成&lt;/h2>
 &lt;p>まずファイルを作ります。ファイル名は unComp とします&lt;/p>
-&lt;pre tabindex="0">&lt;code># unComp というファイルを作成
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># unComp というファイルを作成&lt;/span>
 $ :&amp;gt; unComp
-# vim で unComp を開く
+&lt;span class="c1"># vim で unComp を開く&lt;/span>
 $ vim unComp
-&lt;/code>&lt;/pre>&lt;p>unCompファイルに以下の内容を貼り付ける&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-#
-#圧縮されているファイルを解凍する
-# unComp を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-# cp unComp /usr/local/bin/unComp
-#
-# 実行例
-# $ unComp filename(圧縮ファイル)
-#
-if [ $# -ne 1 ]; then
-echo &amp;quot;&amp;quot;
-exit ;
-fi
-#
-case $1 in
-*.tgz | *.tar.gz) tar zxvf $1 ;;
-*.tar.Z) gunzip $1
-tar xvf $( echo &amp;quot;$1&amp;quot; | sed 's/\.Z$//')
-;;
-*.tar.bz2) tar xvfj $1;;
-*.tar) tar xvfz $1;;
-*.gz) gunzip $1;;
-*.Z) gunzip $1;;
-*.bz2) bunzip2 $1;;
-*.zip) unzip $1;;
-*) echo &amp;quot;ファイルの拡張子が対応していません:$1&amp;quot;
-esac
-exit ;
-&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>unCompファイルに以下の内容を貼り付ける&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">#&lt;/span>
+&lt;span class="c1">#圧縮されているファイルを解凍する&lt;/span>
+&lt;span class="c1"># unComp を /usr/local/bin/にコピーすると&lt;/span>
+&lt;span class="c1"># 通常のコマンドとして本実行ファイルを利用する事が出来ます。&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># cp unComp /usr/local/bin/unComp&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># 実行例&lt;/span>
+&lt;span class="c1"># $ unComp filename(圧縮ファイル)&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$#&lt;/span> -ne &lt;span class="m">1&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="nv">$1&lt;/span> in
+*.tgz &lt;span class="p">|&lt;/span> *.tar.gz&lt;span class="o">)&lt;/span> tar zxvf &lt;span class="nv">$1&lt;/span> &lt;span class="p">;;&lt;/span>
+*.tar.Z&lt;span class="o">)&lt;/span> gunzip &lt;span class="nv">$1&lt;/span>
+tar xvf &lt;span class="k">$(&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> sed &lt;span class="s1">&amp;#39;s/\.Z$//&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;span class="p">;;&lt;/span>
+*.tar.bz2&lt;span class="o">)&lt;/span> tar xvfj &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*.tar&lt;span class="o">)&lt;/span> tar xvfz &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*.gz&lt;span class="o">)&lt;/span> gunzip &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*.Z&lt;span class="o">)&lt;/span> gunzip &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*.bz2&lt;span class="o">)&lt;/span> bunzip2 &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*.zip&lt;span class="o">)&lt;/span> unzip &lt;span class="nv">$1&lt;/span>&lt;span class="p">;;&lt;/span>
+*&lt;span class="o">)&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ファイルの拡張子が対応していません:&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;span class="k">esac&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" title="wLu"
 target="_blank" rel="noopener"
 >wLu&lt;/a>をつかってUTF-8に変換するとさらに便利です。&lt;/p>
-&lt;pre tabindex="0">&lt;code># unComp ファイルをnkf -wLu でUTF-8に変換
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># unComp ファイルをnkf -wLu でUTF-8に変換&lt;/span>
 $ nkf -wLu unComp &amp;gt; unComp.txt
-# unComp.txtをunCompにリネームします
+&lt;span class="c1"># unComp.txtをunCompにリネームします&lt;/span>
 $ mv unComp.txt unComp
-# 作成したunCompコマンドファイルを/usr/local/bin にコピーします
+&lt;span class="c1"># 作成したunCompコマンドファイルを/usr/local/bin にコピーします&lt;/span>
 $ sudo unComp /usr/local/bin/
-# コマンドが配置されたかを確認
+&lt;span class="c1"># コマンドが配置されたかを確認&lt;/span>
 $ which unComp
 $ /usr/local/bin/unComp
-&lt;/code>&lt;/pre>&lt;h3 id="使い方">使い方&lt;/h3>
-&lt;pre tabindex="0">&lt;code># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する
-# 実行
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使い方">使い方&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する&lt;/span>
+&lt;span class="c1"># 実行&lt;/span>
 $ unComp sample.zip
-&lt;/code>&lt;/pre>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。&lt;br>
 便利ですね。&lt;/p></description></item><item><title>【wLu】Bashで便利なコマンドを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</link><pubDate>Thu, 23 Dec 2021 10:27:27 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" />&lt;h2 id="関連記事">関連記事&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/" target="_blank" rel="noopener"
@@ -2897,106 +2899,107 @@ target="_blank" rel="noopener"
 >Homebrew&lt;/a> が必要になります。&lt;/p>
 &lt;h2 id="nkf-インストールの手順">nkf インストールの手順&lt;/h2>
 &lt;p>まず、nkfがインストールされているかを確認します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ which nkf
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ which nkf
 /usr/local/bin/nkf
-&lt;/code>&lt;/pre>&lt;p>インストールされていない場合、macの場合はbrewでインストールします。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ brew install nkf
-&lt;/code>&lt;/pre>&lt;p>インストールしようとすると以下のエラーが出ることがあります&lt;/p>
-&lt;pre tabindex="0">&lt;code>Error: The `brew link` step did not complete successfully
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>インストールされていない場合、macの場合はbrewでインストールします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ brew install nkf
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>インストールしようとすると以下のエラーが出ることがあります&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">Error: The &lt;span class="sb">`&lt;/span>brew link&lt;span class="sb">`&lt;/span> step did not &lt;span class="nb">complete&lt;/span> successfully
 The formula built, but is not symlinked into /usr/local
 Could not symlink share/man/ja/man1/nkf.1
 /usr/local/share/man/ja/man1 is not writable.
-&lt;/code>&lt;/pre>&lt;p>権限周りを下記のコマンドを打って変更します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo chmod 775 /usr/local/share/man/ja/man1
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>権限周りを下記のコマンドを打って変更します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">sudo chmod &lt;span class="m">775&lt;/span> /usr/local/share/man/ja/man1
 sudo chown &amp;lt;ユーザ名&amp;gt;:admin /usr/local/share/man/ja/man1
-&lt;/code>&lt;/pre>&lt;p>下記のページを参考にさせていただきました&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>下記のページを参考にさせていただきました&lt;/p>
 &lt;p>&lt;iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fblog.kozakana.net%2F2018%2F09%2Fhomebrew_link_error%2F" title="Homebrewでインストール時にlinkが出来ないエラー | Simple is Beautiful." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;">&lt;/iframe>&lt;/p>
 &lt;p>コマンドを確認します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ nkf -v
-Network Kanji Filter Version 2.1.5 (2018-12-15)
-Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
-Copyright (C) 1996-2018, The nkf Project.
-&lt;/code>&lt;/pre>&lt;h2 id="使い方">使い方&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ nkf -v
+Network Kanji Filter Version 2.1.5 &lt;span class="o">(&lt;/span>2018-12-15&lt;span class="o">)&lt;/span>
+Copyright &lt;span class="o">(&lt;/span>C&lt;span class="o">)&lt;/span> 1987, FUJITSU LTD. &lt;span class="o">(&lt;/span>I.Ichikawa&lt;span class="o">)&lt;/span>.
+Copyright &lt;span class="o">(&lt;/span>C&lt;span class="o">)&lt;/span> 1996-2018, The nkf Project.
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使い方">使い方&lt;/h2>
 &lt;p>nkfコマンドとは？&lt;br>
 「nkf」は「Network Kanji Filter」の略で、LinuxとWindowsなど、異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです。&lt;/p>
 &lt;p>nkfコマンドの書式&lt;br>
 nkf オプション ファイル名&lt;/p>
 &lt;p>UTF-8に変換する場合は、オプションに wLu をつけて変換します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ nkf -wLu isofile.txt &amp;gt; utf8.txt
-&lt;/code>&lt;/pre>&lt;h3 id="変換の流れ手動編">変換の流れ（手動編）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ nkf -wLu isofile.txt &amp;gt; utf8.txt
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="変換の流れ手動編">変換の流れ（手動編）&lt;/h3>
 &lt;p>元ファイル moto.txt (UTF-8以外のファイルエンコード、改行コード）&lt;br>
 ↓&lt;br>
 変換後のファイル ato.txt(UTF-8に変換したファイル）&lt;br>
 ↓&lt;br>
 変換後のファイルをリネームする&lt;/p>
-&lt;pre tabindex="0">&lt;code># UTF-8に変換
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># UTF-8に変換&lt;/span>
 $ nkf -wLu moto.txt &amp;gt; ato.txt
-# 変換後のファイルを元のファイル名にリネームする
+&lt;span class="c1"># 変換後のファイルを元のファイル名にリネームする&lt;/span>
 $ mv ato.txt moto.txt
-# vimiでファイルエンコードを確認する
+&lt;span class="c1"># vimiでファイルエンコードを確認する&lt;/span>
 $ vim moto.txt
-&lt;/code>&lt;/pre>&lt;p>面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。&lt;/p>
 &lt;h3 id="変換の流れ自動編">変換の流れ（自動編）&lt;/h3>
-&lt;pre tabindex="0">&lt;code># UTF-8に変換 wLu コマンドをこれから自作します
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># UTF-8に変換 wLu コマンドをこれから自作します&lt;/span>
 $ wLu moto.txt
 $ vim moto.txt ← UTF-8 に変換されている！
-&lt;/code>&lt;/pre>&lt;h3 id="コマンドの内容">コマンドの内容&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="コマンドの内容">コマンドの内容&lt;/h3>
 &lt;p>まずファイルを作ります。ファイル名は wLu とします&lt;/p>
-&lt;pre tabindex="0">&lt;code># wLu というファイルを作成
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># wLu というファイルを作成&lt;/span>
 $ :&amp;gt; wLu
-# vim で wLu を開く
+&lt;span class="c1"># vim で wLu を開く&lt;/span>
 $ vim wLu
-&lt;/code>&lt;/pre>&lt;p>以下の内容をファイルに貼り付ける&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-#################################################
-# パラメータで渡されたファイル名をutf8に変換する
-#
-# 使い方
-# wLu UTF-8に変換したいファイル名
-# wLu を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-#################################################
-#
-filename=&amp;quot;$1&amp;quot; ;
-#
-function wLu(){
-if [ -f &amp;quot;$filename&amp;quot; ]; then
-cat &amp;quot;$filename&amp;quot; | nkf -wLu &amp;gt; &amp;quot;$filename&amp;quot;.u ;
-mv &amp;quot;$filename&amp;quot;.u &amp;quot;$filename&amp;quot; ;
-fi
-}
-#
-if ! which nkf &amp;gt;/dev/null 2&amp;gt;&amp;amp;1; then
-echo &amp;quot;nkf がありません&amp;quot; ;
-echo &amp;quot;nkf をインストールして下さい&amp;quot; ;
-exit ;
-fi
-#
-if [ -z &amp;quot;$filename&amp;quot; ] ; then
-echo &amp;quot;第一引数にファイル名を指定して下さい&amp;quot;
-echo &amp;quot;実行例： wLu filename&amp;quot; ;
-exit ;
-fi
-# 実行
-wLu ;
-# 終了
-exit ;
-&lt;/code>&lt;/pre>&lt;p>作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。&lt;/p>
-&lt;pre tabindex="0">&lt;code># wLu ファイルをnkf -wLu でUTF-8に変換
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以下の内容をファイルに貼り付ける&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1">#################################################&lt;/span>
+&lt;span class="c1"># パラメータで渡されたファイル名をutf8に変換する&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># 使い方&lt;/span>
+&lt;span class="c1"># wLu UTF-8に変換したいファイル名&lt;/span>
+&lt;span class="c1"># wLu を /usr/local/bin/にコピーすると&lt;/span>
+&lt;span class="c1"># 通常のコマンドとして本実行ファイルを利用する事が出来ます。&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1">#################################################&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="nv">filename&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">function&lt;/span> wLu&lt;span class="o">(){&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+cat &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> nkf -wLu &amp;gt; &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>.u &lt;span class="p">;&lt;/span>
+mv &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>.u &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">if&lt;/span> ! which nkf &amp;gt;/dev/null 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>1&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;nkf がありません&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;nkf をインストールして下さい&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -z &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;第一引数にファイル名を指定して下さい&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;実行例： wLu filename&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1"># 実行&lt;/span>
+wLu &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 終了&lt;/span>
+&lt;span class="nb">exit&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># wLu ファイルをnkf -wLu でUTF-8に変換&lt;/span>
 $ nkf -wLu wLu &amp;gt; wLu.txt
-# wLu.txtをwLuにリネームします
+&lt;span class="c1"># wLu.txtをwLuにリネームします&lt;/span>
 $ mv wLu.txt wLu
-# 作成したwLuコマンドファイルを/usr/local/bin にコピーします
+&lt;span class="c1"># 作成したwLuコマンドファイルを/usr/local/bin にコピーします&lt;/span>
 $ sudo wLu /usr/local/bin/
-# コマンドが配置されたかを確認
+&lt;span class="c1"># コマンドが配置されたかを確認&lt;/span>
 $ which wLu
 $ /usr/local/bin/wLu
-&lt;/code>&lt;/pre>&lt;h3 id="使い方-1">使い方&lt;/h3>
-&lt;pre tabindex="0">&lt;code># UTF-8以外のファイルエンコードファイル
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使い方-1">使い方&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># UTF-8以外のファイルエンコードファイル&lt;/span>
 $ cat moto.txt
 $ wLu moto.txt
-&lt;/code>&lt;/pre>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。&lt;br>
 便利ですね。&lt;/p></description></item><item><title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</title><link>https://suzukiiichiro.github.io/posts/2021-12-21-03/</link><pubDate>Wed, 22 Dec 2021 21:22:23 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21-03/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21-03/error.jpg" alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー" />&lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
 &lt;p>記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について&lt;br>
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。&lt;/p>

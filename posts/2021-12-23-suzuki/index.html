@@ -9,7 +9,7 @@
 <meta property="og:description" content="今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="nkf"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T10:27:27+09:00"><meta property="article:modified_time" content="2022-01-13T04:18:10+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="nkf"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T10:27:27+09:00"><meta property="article:modified_time" content="2022-01-13T04:20:00+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【wLu】Bashで便利なコマンドを作ってみようって話">
 <meta name=twitter:description content="今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -142,114 +142,114 @@ Web開発
 ※macの場合、<a class=link href=https://brew.sh/index_ja title=Homebrew target=_blank rel=noopener>Homebrew</a> が必要になります。</p>
 <h2 id=nkf-インストールの手順>nkf インストールの手順</h2>
 <p>まず、nkfがインストールされているかを確認します。</p>
-<pre tabindex=0><code>$ which nkf 
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ which nkf 
 /usr/local/bin/nkf
-</code></pre><p>インストールされていない場合、macの場合はbrewでインストールします。</p>
-<pre tabindex=0><code>$ brew install nkf 
-</code></pre><p>インストールしようとすると以下のエラーが出ることがあります</p>
-<pre tabindex=0><code>Error: The `brew link` step did not complete successfully
+</code></pre></div><p>インストールされていない場合、macの場合はbrewでインストールします。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ brew install nkf 
+</code></pre></div><p>インストールしようとすると以下のエラーが出ることがあります</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Error: The <span class=sb>`</span>brew link<span class=sb>`</span> step did not <span class=nb>complete</span> successfully
 The formula built, but is not symlinked into /usr/local
 Could not symlink share/man/ja/man1/nkf.1
 /usr/local/share/man/ja/man1 is not writable.
 
-</code></pre><p>権限周りを下記のコマンドを打って変更します。</p>
-<pre tabindex=0><code>sudo chmod 775 /usr/local/share/man/ja/man1
+</code></pre></div><p>権限周りを下記のコマンドを打って変更します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo chmod <span class=m>775</span> /usr/local/share/man/ja/man1
 sudo chown &lt;ユーザ名&gt;:admin /usr/local/share/man/ja/man1
-</code></pre><p>下記のページを参考にさせていただきました</p>
+</code></pre></div><p>下記のページを参考にさせていただきました</p>
 <p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fblog.kozakana.net%2F2018%2F09%2Fhomebrew_link_error%2F" title="Homebrewでインストール時にlinkが出来ないエラー | Simple is Beautiful." class="embed-card embed-webcard" scrolling=no frameborder=0 style="display:block;width:100%;height:155px;max-width:500px;margin:10px 0"></iframe></p>
 <p>コマンドを確認します。</p>
-<pre tabindex=0><code>$ nkf -v
-Network Kanji Filter Version 2.1.5 (2018-12-15)
-Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
-Copyright (C) 1996-2018, The nkf Project.
-</code></pre><h2 id=使い方>使い方</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ nkf -v
+Network Kanji Filter Version 2.1.5 <span class=o>(</span>2018-12-15<span class=o>)</span>
+Copyright <span class=o>(</span>C<span class=o>)</span> 1987, FUJITSU LTD. <span class=o>(</span>I.Ichikawa<span class=o>)</span>.
+Copyright <span class=o>(</span>C<span class=o>)</span> 1996-2018, The nkf Project.
+</code></pre></div><h2 id=使い方>使い方</h2>
 <p>nkfコマンドとは？<br>
 「nkf」は「Network Kanji Filter」の略で、LinuxとWindowsなど、異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです。</p>
 <p>nkfコマンドの書式<br>
 nkf オプション ファイル名</p>
 <p>UTF-8に変換する場合は、オプションに wLu をつけて変換します。</p>
-<pre tabindex=0><code>$ nkf -wLu isofile.txt &gt; utf8.txt
-</code></pre><h3 id=変換の流れ手動編>変換の流れ（手動編）</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ nkf -wLu isofile.txt &gt; utf8.txt
+</code></pre></div><h3 id=変換の流れ手動編>変換の流れ（手動編）</h3>
 <p>元ファイル moto.txt (UTF-8以外のファイルエンコード、改行コード）<br>
 ↓<br>
 変換後のファイル ato.txt(UTF-8に変換したファイル）<br>
 ↓<br>
 変換後のファイルをリネームする</p>
-<pre tabindex=0><code># UTF-8に変換
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># UTF-8に変換</span>
 $ nkf -wLu moto.txt &gt; ato.txt
 
-# 変換後のファイルを元のファイル名にリネームする
+<span class=c1># 変換後のファイルを元のファイル名にリネームする</span>
 $ mv ato.txt moto.txt
 
-# vimiでファイルエンコードを確認する
+<span class=c1># vimiでファイルエンコードを確認する</span>
 $ vim moto.txt
-</code></pre><p>面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。</p>
+</code></pre></div><p>面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。</p>
 <h3 id=変換の流れ自動編>変換の流れ（自動編）</h3>
-<pre tabindex=0><code># UTF-8に変換 wLu コマンドをこれから自作します
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># UTF-8に変換 wLu コマンドをこれから自作します</span>
 $ wLu moto.txt
 $ vim moto.txt ← UTF-8 に変換されている！
-</code></pre><h3 id=コマンドの内容>コマンドの内容</h3>
+</code></pre></div><h3 id=コマンドの内容>コマンドの内容</h3>
 <p>まずファイルを作ります。ファイル名は wLu とします</p>
-<pre tabindex=0><code># wLu というファイルを作成
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># wLu というファイルを作成</span>
 $ :&gt; wLu
 
-# vim で wLu を開く
+<span class=c1># vim で wLu を開く</span>
 $ vim wLu 
-</code></pre><p>以下の内容をファイルに貼り付ける</p>
-<pre tabindex=0><code>#!/bin/bash
-
-#################################################
-# パラメータで渡されたファイル名をutf8に変換する
-#
-# 使い方
-# wLu UTF-8に変換したいファイル名
-# wLu を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-#################################################
-#
-filename=&quot;$1&quot; ;
-#
-function wLu(){
-  if [ -f &quot;$filename&quot; ]; then
-    cat &quot;$filename&quot; | nkf -wLu &gt; &quot;$filename&quot;.u ;
-    mv &quot;$filename&quot;.u &quot;$filename&quot; ;
-  fi
-}
-#
-if ! which nkf &gt;/dev/null 2&gt;&amp;1; then
-  echo &quot;nkf がありません&quot; ;
-  echo &quot;nkf をインストールして下さい&quot; ; 
-  exit ;
-fi
-#
-if [ -z &quot;$filename&quot; ] ; then
-  echo &quot;第一引数にファイル名を指定して下さい&quot;
-  echo &quot;実行例： wLu filename&quot; ;  
-  exit ;
-fi
-# 実行
-wLu ;
-# 終了
-exit ;
-</code></pre><p>作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。</p>
-<pre tabindex=0><code># wLu ファイルをnkf -wLu でUTF-8に変換
+</code></pre></div><p>以下の内容をファイルに貼り付ける</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1>#################################################</span>
+<span class=c1># パラメータで渡されたファイル名をutf8に変換する</span>
+<span class=c1>#</span>
+<span class=c1># 使い方</span>
+<span class=c1># wLu UTF-8に変換したいファイル名</span>
+<span class=c1># wLu を /usr/local/bin/にコピーすると</span>
+<span class=c1># 通常のコマンドとして本実行ファイルを利用する事が出来ます。</span>
+<span class=c1>#</span>
+<span class=c1>#################################################</span>
+<span class=c1>#</span>
+<span class=nv>filename</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> <span class=p>;</span>
+<span class=c1>#</span>
+<span class=k>function</span> wLu<span class=o>(){</span>
+  <span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    cat <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span> <span class=p>|</span> nkf -wLu &gt; <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span>.u <span class=p>;</span>
+    mv <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span>.u <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span> <span class=p>;</span>
+  <span class=k>fi</span>
+<span class=o>}</span>
+<span class=c1>#</span>
+<span class=k>if</span> ! which nkf &gt;/dev/null 2&gt;<span class=p>&amp;</span>1<span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;nkf がありません&#34;</span> <span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;nkf をインストールして下さい&#34;</span> <span class=p>;</span> 
+  <span class=nb>exit</span> <span class=p>;</span>
+<span class=k>fi</span>
+<span class=c1>#</span>
+<span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$filename</span><span class=s2>&#34;</span> <span class=o>]</span> <span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;第一引数にファイル名を指定して下さい&#34;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;実行例： wLu filename&#34;</span> <span class=p>;</span>  
+  <span class=nb>exit</span> <span class=p>;</span>
+<span class=k>fi</span>
+<span class=c1># 実行</span>
+wLu <span class=p>;</span>
+<span class=c1># 終了</span>
+<span class=nb>exit</span> <span class=p>;</span>
+</code></pre></div><p>作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># wLu ファイルをnkf -wLu でUTF-8に変換</span>
 $ nkf -wLu wLu &gt; wLu.txt
 
-# wLu.txtをwLuにリネームします
+<span class=c1># wLu.txtをwLuにリネームします</span>
 $ mv wLu.txt wLu
 
-# 作成したwLuコマンドファイルを/usr/local/bin にコピーします
+<span class=c1># 作成したwLuコマンドファイルを/usr/local/bin にコピーします</span>
 $ sudo wLu /usr/local/bin/
 
-# コマンドが配置されたかを確認
+<span class=c1># コマンドが配置されたかを確認</span>
 $ which wLu
 $ /usr/local/bin/wLu
-</code></pre><h3 id=使い方-1>使い方</h3>
-<pre tabindex=0><code># UTF-8以外のファイルエンコードファイル
+</code></pre></div><h3 id=使い方-1>使い方</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># UTF-8以外のファイルエンコードファイル</span>
 $ cat moto.txt
 $ wLu moto.txt
-</code></pre><p>変換結果を一時ファイルにし、リネームする手間が省けます。<br>
+</code></pre></div><p>変換結果を一時ファイルにし、リネームする手間が省けます。<br>
 便利ですね。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
