@@ -255,6 +255,12 @@
       border: none;
       padding: 0;
     }
+    .copyCodeButton {
+      top: 0;
+      padding: 5px 10px;
+      border-radius: 2px;
+      font-size: 0.8em;
+    }
   }
   .article-header {
     display: flex;
@@ -351,7 +357,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1;
   }
 }
 
