@@ -79,6 +79,9 @@ body {
   @include respond("md") {
     padding: 0;
   }
+  .main {
+    overflow-x: hidden;
+  }
 }
 
 
