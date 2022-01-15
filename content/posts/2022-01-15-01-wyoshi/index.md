@@ -3,7 +3,7 @@ title: "overflow: scroll で後ろまでスクロールするのを防ぐ方法 
 date: 2022-01-15T12:16:02+09:00
 draft: false
 image: intro.jpg
-description: "overflow: scroll で後ろの要素がスクロールすることがありますが、ここの記事では、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。"
+description: "overflow: scroll で後ろの要素がスクロールすることがありますが、この記事では、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。"
 categories:
   - Web開発
 tags:
