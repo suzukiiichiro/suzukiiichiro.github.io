@@ -1,4 +1,322 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 14 Jan 2022 13:40:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>s-Stat 時系列データで異常値を検知しよう（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/</link><pubDate>Fri, 14 Jan 2022 13:40:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（１）" />&lt;h2 id="s-stat-時系列データで異常値を検知しよう">s-Stat 時系列データで異常値を検知しよう&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 15 Jan 2022 12:16:02 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止</title><link>https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/</link><pubDate>Sat, 15 Jan 2022 12:16:02 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg" alt="Featured image of post overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/prevent-scroll-chaining-overscroll-behavior/" target="_blank" rel="noopener"
+> Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed &lt;/a>&lt;/p>
+&lt;p>&lt;code>position: fixed&lt;/code>の要素があるとしましょう。スクロールがある場合は、要素の下部の境界に到達すると、ブラウザはbody要素をスクロールし続けることに気付くでしょう。これは望ましくない混乱を招く効果です。ありがたいことに、CSSで修正できます。 この記事では、&lt;code>overscroll-behavior&lt;/code> CSSプロパティ、それが解決する問題、その仕組み、および使用場所について説明します。&lt;/p>
+&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>非常に一般的な問題を取り上げましょう。ビューポートの中央に配置されたモーダルダイアログがあります。そのモーダルの下に、実際のWebページのコンテンツがあります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 173;
+flex-basis: 416px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg" data-size="1600x922">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg"
+width="1600"
+height="922"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hube3343b77de99cb499300b8d9b324547_119554_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hube3343b77de99cb499300b8d9b324547_119554_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>モーダルコンテンツの最後に到達すると、ブラウザは代わりにメインページのコンテンツをスクロールし続けます。これはスクロールチェーンと呼ばれます。これはデフォルトの動作であり、&lt;code>overscroll-behavior&lt;/code>という新しいCSSプロパティでオーバーライドできるようになりました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 208;
+flex-basis: 501px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2.jpg" data-size="2420x1158">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2.jpg"
+width="2420"
+height="1158"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2_huf816c80194280c5ebe9e4724a8d669ff_219439_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2_huf816c80194280c5ebe9e4724a8d669ff_219439_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>多くの場合、この動作は不要であり、ユーザーがモーダルコンテンツに集中できなくなる可能性があります。上の図では、モーダルの最後に到達したときに、ページがスクロールし続けていることに注目してください。&lt;/p>
+&lt;h2 id="無理やり対応する">無理やり対応する&lt;/h2>
+&lt;p>以前は、Javascriptを介してbody要素に&lt;code>overflow: hidden&lt;/code>を適用することでこれを修正していました。モーダルが開かれると、オーバーフローの適用を担当するクラスが本体に追加されます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="nt">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">modal-open&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">overflow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">hidden&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">modal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">is-open&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">block&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このやり方は、以前はデスクトップブラウザ間で完全に機能していましたが、iOS上のSafariでは動作しませんでした。これを機能させるには、body要素に&lt;code>position: fixed&lt;/code>を追加する必要もあります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="nt">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">modal-open&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">fixed&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">hidden&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">modal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">is-open&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">block&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これは機能しますが、ブラウザが一番上までスクロールし、ユーザーが手元のタスクから気をそらしてしまいます。これは、他の問題を引き起こす修正です。&lt;/p>
+&lt;p>ベン・フレインによる &lt;a class="link" href="https://benfrain.com/preventing-body-scroll-for-modals-in-ios/" target="_blank" rel="noopener"
+>記事&lt;/a> に固定されたものを除いて、私はその解決策を知りません。 ベンの記事のスニペットによると、モーダルがアクティブになったら、&lt;code>&amp;lt;body&amp;gt;&lt;/code>要素に以下を追加する必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">bg-scrolling-element-when-modal-active&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="c">/* when modal active */&lt;/span>
+&lt;span class="n">touch-action&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">overflow-scrolling&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">hidden&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c">/* Other browsers */&lt;/span>
+&lt;span class="n">overscroll-behavior&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>2018年にクライアントプロジェクトに取り組んだことを覚えています。そこでは、iOSのモバイルメニューの本文のスクロールを防ぐことはできないと彼に話しました。&lt;/p>
+&lt;p>彼は：&lt;/p>
+&lt;blockquote>
+&lt;p>プログラミングで不可能なことは何もありません。解決策があると確信している。&lt;/p>
+&lt;/blockquote>
+&lt;p>といっていました。&lt;/p>
+&lt;p>「プログラミング？」と思うかもしれませんが、それはCSSを指します。多くのことを試して、研究し続けましたが、完璧な解決策はありませんでした。&lt;/p>
+&lt;p>それでは時間を遡って、&lt;code>overscroll-behavior&lt;/code>をソリューションに紹介したいと思います。&lt;/p>
+&lt;h2 id="overscroll-behaviorについて">overscroll-behaviorについて&lt;/h2>
+&lt;p>&lt;code>overscroll-behavior&lt;/code>プロパティは、スクロール領域の境界に到達したときにブラウザが実行する処理を設定します。 Safariを除くすべての主要なブラウザで[サポートされています。プロパティは、&lt;code>overscroll-behavior-x&lt;/code>および&lt;code>overscroll-behavior-y&lt;/code>の省略形です。 &lt;code>overscroll-behavior&lt;/code>を設定すると、両方の軸が設定されることに注意してください。&lt;/p>
+&lt;p>設定可能な値を見てみましょう。&lt;/p>
+&lt;h3 id="overscroll-behavior-auto">overscroll-behavior: auto&lt;/h3>
+&lt;p>デフォルト値は &lt;code>auto&lt;/code> で、これによりスクロールチェーンが可能になります。スクロール要素があり、その境界に達すると、ブラウザは&lt;code>&amp;lt;body&amp;gt;&lt;/code>コンテンツをスクロールし続けます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 189;
+flex-basis: 453px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto.jpg" data-size="1600x846">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto.jpg"
+width="1600"
+height="846"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto_hube3343b77de99cb499300b8d9b324547_161138_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto_hube3343b77de99cb499300b8d9b324547_161138_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 190;
+flex-basis: 456px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-auto.gif" data-size="980x515">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-auto.gif"
+width="980"
+height="515"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-auto_hue0f26d7a2c2afc29a03869c15f066d54_295429_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-auto_hue0f26d7a2c2afc29a03869c15f066d54_295429_1024x0_resize_box.gif 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h3 id="overscroll-behavior-contain">overscroll-behavior: contain&lt;/h3>
+&lt;p>その名前から、値&lt;code>contain&lt;/code>には、要素の境界内にスクロールが含まれます。次の図では、スクロールは青い輪郭のラッパー内に含まれています。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 189;
+flex-basis: 453px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain.jpg" data-size="1600x846">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain.jpg"
+width="1600"
+height="846"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain_hube3343b77de99cb499300b8d9b324547_165034_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain_hube3343b77de99cb499300b8d9b324547_165034_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 190;
+flex-basis: 456px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-contain.gif" data-size="980x515">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-contain.gif"
+width="980"
+height="515"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-contain_hu4e3919bb36943663571bada61b4d32de_152519_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-contain_hu4e3919bb36943663571bada61b4d32de_152519_1024x0_resize_box.gif 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h3 id="overscroll-behavior-none">overscroll-behavior: none&lt;/h3>
+&lt;p>&lt;code>none&lt;/code> を設定すると、 &lt;code>contains&lt;/code> と同様の効果があり、 &lt;strong>さらに&lt;/strong> ページの上部または下部に達したときのバウンス効果を防ぎます。&lt;/p>
+&lt;h2 id="ユースケースと例">ユースケースと例&lt;/h2>
+&lt;p>&lt;code>overscroll-behavior&lt;/code> がどのように機能するかがわかったところで、いくつかの便利なユースケースを見てみましょう。&lt;/p>
+&lt;h3 id="モバイルナビゲーション">モバイルナビゲーション&lt;/h3>
+&lt;p>モバイルナビゲーションが長すぎる場合、スクロールが速すぎると、本文のコンテンツでスクロールチェーンの問題が発生する可能性があります。&lt;/p>
+&lt;p>次の図には、スクロール可能な長いナビゲーションリストがあります。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 189;
+flex-basis: 453px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1.jpg" data-size="1600x846">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1.jpg"
+width="1600"
+height="846"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1_hube3343b77de99cb499300b8d9b324547_91913_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1_hube3343b77de99cb499300b8d9b324547_91913_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>スクロールが含まれていない場合は、本文のコンテンツもスクロールします。それを避けることができます&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">nav&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">overscroll-behavior-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>動画で見てみましょう。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 167;
+flex-basis: 402px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav.gif" data-size="980x585">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav.gif"
+width="980"
+height="585"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav_hu799c4d3ed32999886d762d06f8bae11c_3510276_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav_hu799c4d3ed32999886d762d06f8bae11c_3510276_1024x0_resize_box.gif 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>ナビゲーションの下に表示される半透明の背景を追加しました。 &lt;code>overscroll-behavior-y&lt;/code>プロパティをオフに切り替えたときの動作に注意してください。&lt;/p>
+&lt;p>オフに切り替えると、ボディスクロールが発生します。&lt;/p>
+&lt;p>ただし、ナビゲーションが短く（つまり、スクロールできない）、ユーザーが理由もなくスクロールしようとすると、&lt;code>overscroll-behavior-y: contain&lt;/code>であっても、本文がスクロールすることに注意してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 167;
+flex-basis: 402px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav-2.gif" data-size="980x585">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav-2.gif"
+width="980"
+height="585"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav-2_hu01dbb63ba0c2bb81dd1a2bdfdba5eac2_2331682_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/mobile-nav-2_hu01dbb63ba0c2bb81dd1a2bdfdba5eac2_2331682_1024x0_resize_box.gif 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>残念ながら、記事の冒頭で紹介した「無理やり対応」以外の修正方法はわかりません。&lt;/p>
+&lt;h3 id="サイドナビゲーション">サイドナビゲーション&lt;/h3>
+&lt;p>&lt;code>overscroll-behavior&lt;/code> のもう1つの便利な使用法は、サイドバーとメインがある場合です。その場合、サイドバーは固定されており、コンテンツが長すぎるとスクロール可能になる可能性があります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 166;
+flex-basis: 399px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2.jpg" data-size="1600x962">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2.jpg"
+width="1600"
+height="962"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2_hu661773514dbc23ff95e0db0bb8800964_168043_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2_hu661773514dbc23ff95e0db0bb8800964_168043_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>サイドバーの端の境界に達したときにメインセクションがスクロールしないようにするには、次を追加する必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">aside&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">overscroll-behavior-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="チャットコンポーネント">チャットコンポーネント&lt;/h3>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 166;
+flex-basis: 399px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3.jpg" data-size="1600x962">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3.jpg"
+width="1600"
+height="962"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3_hu43a2c5de96654d567716bd11c829abad_163571_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3_hu43a2c5de96654d567716bd11c829abad_163571_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>Facebookに触発されたチャットコンポーネントは、 &lt;code>overscroll-behavior&lt;/code> の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにすることができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">aside&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">overscroll-behavior-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="モーダルコンテンツ">モーダルコンテンツ&lt;/h3>
+&lt;p>記事内で最初に行った例はモーダルなので、繰り返しません。ただし、モーダル内にリストが必要な場合があり、そのリストがスクロール可能である場合は、スクロールチェーンを発生させたくありません。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 166;
+flex-basis: 399px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4.jpg" data-size="1600x962">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4.jpg"
+width="1600"
+height="962"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4_hu0554b2fe7bffe6f507f97e3011cec573_159665_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4_hu0554b2fe7bffe6f507f97e3011cec573_159665_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>モーダルのオプションのリストに注意してください。これはスクロール可能なリストです。その境界に達すると、モーダルコンテンツがスクロールします。これを回避するには、 &lt;code>overscroll-behavior&lt;/code> を使用します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list-wrapper&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">overscroll-behavior-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">max-height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">130&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="水平リスト">水平リスト&lt;/h3>
+&lt;p>Facebookのホームページでこのユースケースを見つけました。ユーザーのリストがあるセクションがあり、次の図に示すように水平方向にスクロールします。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 269;
+flex-basis: 646px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5.jpg" data-size="1400x520">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5.jpg"
+width="1400"
+height="520"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5_hube3343b77de99cb499300b8d9b324547_43936_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5_hube3343b77de99cb499300b8d9b324547_43936_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これは&lt;code>overscroll-behavior-x&lt;/code>のベストな使い方です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">overscroll-behavior-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>CSS &lt;code>overscroll-behavior&lt;/code> は、何年も前に無理やり対応していた問題を解決する便利なプロパティです。&lt;/p>
+&lt;h2 id="おすすめ書籍">おすすめ書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%81%96%e3%81%a3%e3%81%8f%e3%82%8a%e3%81%a4%e3%81%8b%e3%82%80-CSS%e8%a8%ad%e8%a8%88-%e3%83%aa%e3%83%95%e3%83%ad%e3%83%bc%e7%89%88-%e9%ab%98%e6%b4%a5%e6%88%b8-%e5%a3%ae-ebook/dp/B09NKTJL73/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51up1uqI8bL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> ざっくりつかむ　CSS設計[リフロー版] &lt;/h2>
+&lt;p>
+Web制作の現場でこれだけは知っておきたい、CSSの扱い方、管理、運用の基本！
+&lt;p>Web開発が複雑化した現在、CSSについても仕様や知識を知っているだけでは対応できない問題が増えています。&lt;/p>&lt;br>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>&lt;br>
+&lt;/div>&lt;br>
+&lt;/a>&lt;br>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>&lt;/p>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%83%97%e3%83%ad%e3%81%ae%e3%80%8c%e5%bc%95%e3%81%8d%e5%87%ba%e3%81%97%e3%80%8d%e3%82%92%e5%a2%97%e3%82%84%e3%81%99-HTML-CSS%e3%82%b3%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%ae%e5%bc%b7%e5%8c%96%e6%9b%b8-%e8%8d%89%e9%87%8e%e3%81%82%e3%81%91%e3%81%bf-ebook/dp/B09MH4Z3WH/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51JMU4RenyL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> プロの「引き出し」を増やす　HTML&amp;#43;CSSコーディングの強化書 &lt;/h2>
+&lt;p>HTML・CSSの基本は覚えたけれど、デザインカンプから情報を読み取って、イチからコーディングするのはまだ無理……。
+初心者を脱して、コーダー／マークアップエンジニアとして制作現場でバリバリ活躍する力をつけたい。
+&lt;p>本書はそんな方に向けたものです。&lt;/p>&lt;br>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>&lt;br>
+&lt;/div>&lt;br>
+&lt;/a>&lt;br>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>&lt;/p>
+&lt;/aside></description></item><item><title>s-Stat 時系列データで異常値を検知しよう（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/</link><pubDate>Fri, 14 Jan 2022 13:40:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（１）" />&lt;h2 id="s-stat-時系列データで異常値を検知しよう">s-Stat 時系列データで異常値を検知しよう&lt;/h2>
 &lt;p>たくさんあるデータの中から関心の高そうな項目を抽出して表示しようというテーマでe-Statデータを取り扱っています。&lt;br>
 関心の高そうな項目としては、キーワードが重要というのもあります。これは前回で取り扱ったテーマでgoogle検索などを利用してピックアップしてこうかなと考えております。&lt;br>
 そのほか、値が急上昇、急下降したような場合も関心が高い項目と言えそうです。&lt;br>
