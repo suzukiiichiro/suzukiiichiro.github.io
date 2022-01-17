@@ -37,7 +37,7 @@ read_csvするとデフォルトだと１行目を列名とみなすみたいで
 
 ## Pandas Seriesオブジェクト
 
-hampelの第１引数はPandasのSeriesオブジェクトです  
+hampelの第１引数はPandasのSeriesオブジェクトです。  
 Seriesオブジェクトは１次元の配列みたいです。  
 DataFrameオブジェクトからSeriesオブジェクトに変換する方法ですが  
 以下の方法でできます。  
