@@ -5,8 +5,8 @@ e-Statの統計データですが年次や月次だったりするのでデー�
 標準偏差などを利用して異常値を検出するアルゴリズムとしてHampelフィルターというものがありました。&lt;br>
 pythonでhampelというライブラリーで簡単に利用できそうなのでまずこれを試してみます。&lt;/p>
 &lt;h2 id="python-hampel-ライブラリを利用">python hampel ライブラリを利用&lt;/h2>
-&lt;p>hampelはbrew で簡単にインストールできます&lt;/p>
-&lt;pre tabindex="0">&lt;code>brew install hampel
+&lt;p>hampelはpip で簡単にインストールできます&lt;/p>
+&lt;pre tabindex="0">&lt;code>pip install hampel
 &lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>import matplotlib.pyplot as plt
 import pandas as pd
 from hampel import hampel

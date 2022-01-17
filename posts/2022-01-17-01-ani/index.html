@@ -9,7 +9,7 @@
 <meta property="og:description" content="hampel フィルタとは 時系列データの異常値検知で良いのないかなあと探しました。 最近は機械学習で時系列データの異常値検知をやっているものが結構ある感じ">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-17T10:51:13+09:00"><meta property="article:modified_time" content="2022-01-17T06:33:02+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-17T10:51:13+09:00"><meta property="article:modified_time" content="2022-01-17T06:35:55+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal.jpg">
 <meta name=twitter:title content="s-Stat 時系列データで異常値を検知しよう（２）">
 <meta name=twitter:description content="hampel フィルタとは 時系列データの異常値検知で良いのないかなあと探しました。 最近は機械学習で時系列データの異常値検知をやっているものが結構ある感じ"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -94,7 +94,7 @@ Web開発
 <div class=article-info>
 <time class="article-time--item article-time--published">2022.01.17</time>
 <time class="article-time--item article-time--reading">
-読了時間: 2分
+読了時間: 1分
 </time>
 </div>
 </header>
@@ -125,8 +125,8 @@ e-Statの統計データですが年次や月次だったりするのでデー�
 標準偏差などを利用して異常値を検出するアルゴリズムとしてHampelフィルターというものがありました。<br>
 pythonでhampelというライブラリーで簡単に利用できそうなのでまずこれを試してみます。</p>
 <h2 id=python-hampel-ライブラリを利用>python hampel ライブラリを利用</h2>
-<p>hampelはbrew で簡単にインストールできます</p>
-<pre tabindex=0><code>brew install hampel
+<p>hampelはpip で簡単にインストールできます</p>
+<pre tabindex=0><code>pip install hampel
 </code></pre><pre tabindex=0><code>import matplotlib.pyplot as plt
 import pandas as pd
 from hampel import hampel
