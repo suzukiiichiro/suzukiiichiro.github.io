@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 17 Jan 2022 10:51:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>s-Stat 時系列データで異常値を検知しよう（２）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/</link><pubDate>Mon, 17 Jan 2022 10:51:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（２）" />&lt;h2 id="hampel-フィルタとは">hampel フィルタとは&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 17 Jan 2022 17:46:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>s-Stat 時系列データで異常値を検知しよう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</link><pubDate>Mon, 17 Jan 2022 17:46:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）" />&lt;h2 id="pandas-dataframeオブジェクト">Pandas DataFrameオブジェクト&lt;/h2>
+&lt;p>Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。&lt;br>
+DataFramオブジェクトは２次元配列な感じです。&lt;br>
+１次元目が列、２次元目が行のイメージみたいです。&lt;/p>
+&lt;p>例えば以下のcsvだと&lt;/p>
+&lt;pre tabindex="0">&lt;code>date,value
+2019,2845
+2020,3246
+2021,3633
+&lt;/code>&lt;/pre>&lt;p>read_csvしたDataFrameオブジェクトの変数名をdfとすると&lt;br>
+それぞれのデータには以下の方法でアクセスします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>df['date'][0]-&amp;gt;2019
+df['date'][1]-&amp;gt;2020
+df['date'][2]-&amp;gt;2021
+df['value'][0]-&amp;gt;2845
+df['value][1]-&amp;gt;3246
+df['value'][2]-&amp;gt;3633
+&lt;/code>&lt;/pre>&lt;p>read_csvするとデフォルトだと１行目を列名とみなすみたいです。&lt;br>
+アクセスの方法も列名が反映され連想配列っぽくなります。&lt;/p>
+&lt;h2 id="pandas-seriesオブジェクト">Pandas Seriesオブジェクト&lt;/h2>
+&lt;p>hampelの第１引数はPandasのSeriesオブジェクトです&lt;br>
+Seriesオブジェクトは１次元の配列みたいです。&lt;br>
+DataFrameオブジェクトからSeriesオブジェクトに変換する方法ですが&lt;br>
+以下の方法でできます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>input=pd.Series(df['value'])
+&lt;/code>&lt;/pre>&lt;h2 id="csvを読み込んでhampelメソッドを使い異常値を検出する-">csvを読み込んでhampelメソッドを使い異常値を検出する 。&lt;/h2>
+&lt;p>プログラムは以下の流れになります。&lt;br>
+csvをread_csvでDataFrameオブジェクトとして読み込む。&lt;br>
+DataFrameオブジェクトからSeriesオブジェクトを生成する。&lt;br>
+Seriesオブジェクトを使ってhampelメソッドを呼び出して異常値を検出する。&lt;/p>
+&lt;p>ソースコードは以下の通り&lt;/p>
+&lt;pre tabindex="0">&lt;code>import matplotlib.pyplot as plt
+import pandas as pd
+from hampel import hampel
+# データ取得
+df = pd.read_csv('./kome.csv')
+print(df.columns)
+print(df['value'])
+input = pd.Series(df['value'])
+rsts = hampel(input, window_size=5, n=3)
+for rst in rsts:
+print('%d:date:%s value:%d' % (rst,df['date'][rst],df['value'][rst]))
+&lt;/code>&lt;/pre></description></item><item><title>s-Stat 時系列データで異常値を検知しよう（２）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/</link><pubDate>Mon, 17 Jan 2022 10:51:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（２）" />&lt;h2 id="hampel-フィルタとは">hampel フィルタとは&lt;/h2>
 &lt;p>時系列データの異常値検知で良いのないかなあと探しました。&lt;br>
 最近は機械学習で時系列データの異常値検知をやっているものが結構ある感じでしたが、&lt;br>
 e-Statの統計データですが年次や月次だったりするのでデータ数がそんなに多くないので機械学習はどうだろうと思い今回は機械学習以外の方法を探しました。&lt;br>
