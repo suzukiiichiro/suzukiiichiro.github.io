@@ -1,26 +1,26 @@
 <div class="article-details">
   <h2 class="article-title">
-    {{ if .Params.slugTitle }}
+    {{- if .Params.slugTitle -}}
       {{- .Params.slugTitle -}}
-    {{ else }}
+    {{- else -}}
       {{- .Title -}}
-    {{ end }}
+    {{- end -}}
   </h2>
-  {{ if or (not .Date.IsZero) (.Site.Params.article.readingTime) }}
+  {{- if or (not .Date.IsZero) (.Site.Params.article.readingTime) -}}
   <div class="article-time">
-    {{ if not .Date.IsZero }}
+    {{- if not .Date.IsZero }}
     <time class="article-time--item article-time--published">
-        {{- .Date.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
-      </time>
-    {{ end }}
+      {{- .Date.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
+    </time>
+    {{ end -}}
   </div>
-  {{ end }}
-  {{ if .Params.description }}
-    {{ with .Params.description }}
-      <p class="article-subtitle">{{ . }}</p>
-    {{ end }}
-  {{ else }}
-    <p class="article-subtitle">{{ .Summary }} ...</p>
-  {{ end }}
+  {{- end -}}
+  {{- if .Params.description -}}
+    {{- with .Params.description -}}
+      <p class="article-subtitle">{{- . -}}</p>
+    {{- end -}}
+  {{- else -}}
+    <p class="article-subtitle">{{- .Summary -}} ...</p>
+  {{- end }}
 
 </div>

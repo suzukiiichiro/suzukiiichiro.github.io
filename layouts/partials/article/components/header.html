@@ -1,5 +1,12 @@
 {{- $image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
-<article class="{{ if $image.exists }}has-image{{ end }} article-item">
+
+
+{{ $pdate :="" }}
+{{ if not .Date.IsZero }}
+  {{$pdate = .Date.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") }}
+{{ end }}
+
+<article class="{{ if $image.exists }}has-image{{ end }} article-item" data-date="{{ $pdate }}">
   <a class="article-link" href="{{ .RelPermalink }}">
     <header class="article-header">
       {{ if $image.exists }}
