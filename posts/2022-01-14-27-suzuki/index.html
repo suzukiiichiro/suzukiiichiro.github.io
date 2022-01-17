@@ -9,7 +9,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-17T07:53:48+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-17T08:05:48+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="ubfVHBKLOZAy4_yp8MHVUF8ubCuaX6rC8lRaZsbzTEE">
@@ -199,10 +199,10 @@ Web開発
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -212,30 +212,7 @@ Web開発
 </header>
 <div class=article-details>
 <h2 class=article-title>
-【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」
-</h2>
-<div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div>
-<p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>
-【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」
+【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」
 </h2>
 <div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
@@ -268,10 +245,10 @@ Web開発
 </a>
 </article>
 <article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -281,7 +258,7 @@ Web開発
 </header>
 <div class=article-details>
 <h2 class=article-title>
-【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」
+【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」
 </h2>
 <div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
@@ -291,10 +268,10 @@ Web開発
 </a>
 </article>
 <article class="has-image article-item">
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -304,7 +281,30 @@ Web開発
 </header>
 <div class=article-details>
 <h2 class=article-title>
-【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」
+【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」
+</h2>
+<div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div>
+<p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item">
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>
+【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」
 </h2>
 <div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
@@ -404,22 +404,22 @@ Web開発
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
-</div>
-<div class=article-details>
-<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
 </div>
 <div class=article-details>
 <h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
