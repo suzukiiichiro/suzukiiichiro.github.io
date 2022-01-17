@@ -1,4 +1,316 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 17 Jan 2022 17:46:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>s-Stat 時系列データで異常値を検知しよう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</link><pubDate>Mon, 17 Jan 2022 17:46:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）" />&lt;h2 id="pandas-dataframeオブジェクト">Pandas DataFrameオブジェクト&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 17 Jan 2022 18:11:53 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2022年に流行るモバイルアプリ開発トレンド 15選</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</link><pubDate>Mon, 17 Jan 2022 18:11:53 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</guid><description>&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://www.netsolutions.com/insights/12-mobile-app-development-trends-to-watch-out-for-in-2019/" target="_blank" rel="noopener"
+>Top 15 Mobile App Development Trends to Watch for in 2022&lt;/a>&lt;/p>
+&lt;p>モバイルアプリ開発業界は、驚異的なスピードで進化しています。このデジタルダーウィン時代に生き残り、繁栄するには、変化するモバイルアプリ開発のトレンドに精通する必要があります。 今日、スマートフォンはデジタルメディアの成功の鍵です。これは、ビジネスモデル、運用モデル、および市場を驚くべき速度で根本的に変革します。 2022年までに、モバイルアプリ市場の収益は6,930億ドルに達すると予想されています。&lt;/p>
+&lt;p>ただし、ほとんどのアプリは失敗してしまっているであるということです。&lt;/p>
+&lt;p>この失敗の主な理由は、最新のモバイルアプリテクノロジーのトレンドを追跡および実装できないことです。または、より技術的に適応力のある競合他社に負ける結果になります。&lt;/p>
+&lt;p>モバイルアプリを成功させるための最初のステップは、2022年のモバイルアプリ開発のトレンドを常に把握することです。これらの最新のトレンドのいくつかについて詳しく説明しましょう。&lt;/p>
+&lt;p>モバイルアプリ開発の新しいトレンドが数多く出現していますが、ここでは、詳細な事実に基づいた調査の結果、モバイルアプリ開発のトレンドのTOP15を取り上げました。&lt;/p>
+&lt;h2 id="5gの台頭">5Gの台頭&lt;/h2>
+&lt;p>5Gテクノロジーは数年前から存在していますが、近年より注目されるうようになりました。テクノロジー企業は5Gを本格的に取り入れ始めており、5G対応デバイスが市場に出回っています。来年までに、6億6000万台のスマートフォンが5G接続になると予想されており、これは全デバイスの約47.5％を占めています。 世界中の5G接続が今後数年間でどのように成長すると予測されているかを見てみましょう。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 127;
+flex-basis: 305px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g.jpg" data-size="980x769">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g.jpg"
+width="980"
+height="769"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g_hue80732cdca74a248c2494f1dd89ccd1b_79657_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g_hue80732cdca74a248c2494f1dd89ccd1b_79657_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="rise of 5g">
+&lt;/a>
+&lt;figcaption>rise of 5g&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h3 id="5gの出現でアプリ開発はどうなる">5Gの出現でアプリ開発はどうなる？&lt;/h3>
+&lt;p>5Gは、アプリの構築と使用の方法を変え、速度と効率が大幅に向上します。&lt;br>
+それにより期待できることがいくつかあります。&lt;/p>
+&lt;ul>
+&lt;li>5Gは4Gよりも最大100倍高速になります。&lt;/li>
+&lt;li>レイテンシーは50ミリ秒（4G）から1ミリ秒に短縮されます。&lt;/li>
+&lt;li>高解像度、低遅延、高速性能により、ビデオストリーミングアプリケーションは大幅に改善されるだろう。&lt;/li>
+&lt;li>5Gでは、これらの技術をアプリに統合することが容易になるため、ARやVRの機会が増えるだろう。&lt;/li>
+&lt;li>デバイスとスマートフォン間でのデータ転送がより高速かつスムーズになります。&lt;/li>
+&lt;li>5Gを使用すると、開発者はアプリのパフォーマンスに悪影響を与えることなく新しい機能を構築できます&lt;/li>
+&lt;li>識別のための生体認証データの処理が高速化されているため、モバイル決済はより迅速かつ安全になります。&lt;/li>
+&lt;/ul>
+&lt;p>全体として、5Gテクノロジーはアプリをより速く、よりスムーズに、より効率的にすることができます。また、イノベーションの余地も広がります。アプリに関するワクワクするようなアイデアは、もはやアイデアにとどまることはありません。5Gを使えば、それらを実現することができます。5Gが何をもたらすのか、今から楽しみです。&lt;/p>
+&lt;h2 id="折りたたみ式デバイス用アプリ">折りたたみ式デバイス用アプリ&lt;/h2>
+&lt;p>折りたたみ式端末はスマートフォン市場全体のシェアの先端ですが、今後数年で状況が変わってきます。&lt;a class="link" href="https://www.statista.com/statistics/983531/global-foldable-phone-shipments/" target="_blank" rel="noopener"
+>統計局&lt;/a> によると、2022年には5,000万台が出荷されるとのことです。つまりモバイルアプリの開発戦略を練る際には、折りたたみ式デバイスも念頭に置くべきでしょう。2022年のモバイルアプリ開発のトレンドである折りたたみ式デバイスで、あなたのアプリがシームレスに動作することを確認してください。&lt;/p>
+&lt;p>端末を折りたたんで大きな画面を提供することは、ユーザーにいい影響を与えます。&lt;/p>
+&lt;ul>
+&lt;li>大きな画面は、詳細で没入感のある体験を提供するためのスペースを意味します。&lt;/li>
+&lt;li>マルチウィンドウにより、ユーザーは複数のタスクを同時に実行することができます。&lt;/li>
+&lt;/ul>
+&lt;p>ビデオストリーミングやゲームアプリは、画面サイズを大きくするだけで、折りたたみ式デバイスから最大限の利益を得ることができ、余分なスペースを使って追加の情報やコントロールを提供することもできます。このように、画面を意識したアプリの開発は、2022年のモバイルアプリ開発における最大のトレンドの1つとなるでしょう。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 165;
+flex-basis: 397px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming.jpg" data-size="980x591">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming.jpg"
+width="980"
+height="591"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming_hue7a398bc97fb73f506b3faada19f4333_149917_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming_hue7a398bc97fb73f506b3faada19f4333_149917_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="ストリーミング">
+&lt;/a>
+&lt;figcaption>ストリーミング&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h2 id="arvr">AR＆VR&lt;/h2>
+&lt;p>ポケモンGOの成功は一時的なものだったかもしれませんが、モバイルアプリ開発におけるARの道を切り開いたと言えるでしょう。それは、VRを使ってユーザーに没入型の体験を提供することが現実的に可能であることを世界に示したのです。&lt;/p>
+&lt;p>今日、周りを見渡せば、ブランドがユーザー体験を高めるためにAR＆VRを活用しているシーンは数多く見受けられます。&lt;/p>
+&lt;ul>
+&lt;li>IKEAはARを使用して、ユーザーが購入する前に自宅で家具がどのように見えるかを確認できるようにします。&lt;/li>
+&lt;li>L&amp;rsquo;Orealは、ユーザーが自分の顔に化粧をしたときの見え方を確認できるバーチャルメイクアップアプリを提供しています。&lt;/li>
+&lt;li>Lenskartは、ユーザーがメガネを買う前にバーチャルで試せるようにしています。&lt;/li>
+&lt;/ul>
+&lt;p>Apple、Google、Metaでさえも、AR &amp;amp; VRにイノベーションをもたらしています。グーグルはグーグルマップに「ライブビュー」という機能を導入し、ユーザーは現実の画像上でリアルタイムに方角を確認することができるようになりました。&lt;br>
+LiDARもまた、最近ARの分野で見られた重要な技術的進歩です。Appleによって光の速度のARと呼ばれる - 私たちは、この技術がiPad Pro、iPhone 12 Pro、iPhone Pro 12 Pro maxでデビューするのを目にしました。それは、ARをまったく新しいレベルに引き上げました。LiDARにより、低照度下でも優れた品質の写真を撮影することが可能になりました。&lt;/p>
+&lt;p>AppleはIkeaと提携し、LiDAR技術を利用した新しいスタジオモード機能を開始し、家具の買い方にまで革命を起こしています。この機能を使うと、ユーザーは家具を置きたい場所にデバイスを向けると、LiDARテクノロジーが部屋をスキャンして、実物大の家具モデルをバーチャルに配置することができます。&lt;/p>
+&lt;p>今年は、ARとVRが、私たちの想像を絶する方法でモバイルアプリ開発業界を形成することが予想されます。モバイルアプリのトレンドは、より主流になるでしょう。統計局によると、ARとVR技術の世界市場は、2018年の270億ドルから2022年には約2,090億ドルに上昇すると言われています。&lt;/p>
+&lt;p>また、今年はAR＆VRのユーザー数が急増することが予想されます。このようなモバイルアプリの開発トレンドを活用して、モバイルでユーザーにゲームを変えるような体験を提供する絶好のチャンスがあるということです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 291px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr.jpg" data-size="980x808">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr.jpg"
+width="980"
+height="808"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr_hu100f74bdfa7c376cdb228ff8274af8ee_106783_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr_hu100f74bdfa7c376cdb228ff8274af8ee_106783_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="ar and vr">
+&lt;/a>
+&lt;figcaption>ar and vr&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h2 id="ウェアラブルアプリの統合">ウェアラブルアプリの統合&lt;/h2>
+&lt;p>ウェアラブルデバイスがすでに世界を席巻しています。&lt;br>
+&lt;a class="link" href="https://www.statista.com/statistics/487291/global-connected-wearable-devices/" target="_blank" rel="noopener"
+>統計局&lt;/a> によると、接続されたウェアラブルデバイスは2017年に4億5300万に達し、2022年までに9億2900万に達するでしょう。&lt;br>
+今年は、ウェアラブルデバイス業界で多くの重要なことが起こっているのを見ました。&lt;br>
+アップルはWatchOS 8アップデートを発表しました。これは、アップルウォッチユーザーに新機能、新鮮なウォッチフェイス、ウォレットへのアクセスの増加、インターフェイスの再設計をもたらしました。&lt;br>
+Googleも、同社のウェアOSとSamsungのTizenソフトウェア・プラットフォームを融合した統一ウェアラブル・プラットフォームを発表し、アプリの起動時間を30％向上させました。&lt;br>
+これは、2022年のモバイルアプリ開発の必須トレンドの1つであるウェアラブルテクノロジーの台頭を意味するものです。&lt;br>
+つまり、アプリ開発者や企業は、スマートウォッチやウェアラブルでユーザーに優れたデジタル体験を提供するアプリを準備し、そうでない企業に対して明確な優位性を獲得する必要があるのです。&lt;br>
+このモバイルアプリ開発のトレンドを取り入れ、シームレスなデジタル体験を提供することで、ターゲットとなる顧客との距離を縮めましょう。&lt;/p>
+&lt;h2 id="食品食料品の配達アプリ">食品・食料品の配達アプリ&lt;/h2>
+&lt;p>人々はロックダウン後、在宅時間が多くなるため、食料品の即日配達サービスやミールキットなどのアプリに大きく依存するようになり、この2つは2020年から21年にかけて最も成長したアプリのカテゴリーとなりました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 292px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps.jpg" data-size="980x804">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps.jpg"
+width="980"
+height="804"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps_hu997ac2a62fcb07598056034478919167_89580_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps_hu997ac2a62fcb07598056034478919167_89580_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="food grocery delivery apps">
+&lt;/a>
+&lt;figcaption>food grocery delivery apps&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>ご覧の通り、2020年には食料品アプリの利用者が40.9％増加しました。ほとんどの人が、食料品の買い物は実店舗に行かず、オンラインで行うことを選んだのです。&lt;/p>
+&lt;p>同様のことは、フードデリバリーアプリでも起こりました。安全性が高く、オンラインで食品を注文することを好む人が多いため、32.9％の上昇となりました。&lt;/p>
+&lt;p>しかし、2021年にはどちらのアプリも人気が低下しています。食料品アプリが5.8％上昇したのに対し、フードデリバリーアプリの利用者は2.6％減少しました。&lt;/p>
+&lt;p>通常の生活に戻れば、その成長も少し低下するかもしれません。食品・食料品アプリは、依然として私たちの生活の重要な一部となるでしょう。人々はオンラインで食べ物を注文することをやめることはないでしょうし、食料品アプリはスマートフォンユーザーの15.5%を占めることに変わりはないでしょう。&lt;/p>
+&lt;p>いずれにせよ、時間が経てばわかることですが、2022年に食品・食料品配達アプリがどのような道を歩むのか、興味深いところです。&lt;/p>
+&lt;h2 id="モバイルエンターテインメントゲーム">モバイルエンターテインメント＆ゲーム&lt;/h2>
+&lt;p>エンターテイメントやゲームアプリは、今やライフスタイルの一部となりました。それ無しでは一日たりとも過ごせないという人もいるほどです。&lt;/p>
+&lt;p>Netflixの米国とカナダでのアクティブな加入者が約74％であることから、モバイルエンターテイメントアプリの人気は推し量ることができます。それだけでなく、1億5910万人以上の携帯電話ユーザーがおり、モバイルデバイスはゲーマーに人気があり、米国のデジタルゲーマーの89%以上に相当します。&lt;/p>
+&lt;p>この数字は、2022年にはさらに上昇することが予想されます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 127;
+flex-basis: 305px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment.jpg" data-size="980x770">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment.jpg"
+width="980"
+height="770"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment_huec2571597ac644229607b50aeb869701_100439_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment_huec2571597ac644229607b50aeb869701_100439_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="mobile entertainment">
+&lt;/a>
+&lt;figcaption>mobile entertainment&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h3 id="なぜモバイルエンターテインメントとゲームアプリが人気があるのか">なぜモバイルエンターテインメントとゲームアプリが人気があるのか？&lt;/h3>
+&lt;ul>
+&lt;li>エンターテインメントを手軽に楽しめるようになった。&lt;br>
+高価なガジェットや高価なノートパソコンを買う必要はなく、モバイルで楽しむことができる。&lt;/li>
+&lt;li>映画を見たり、ゲームをしたりするために、1つの場所に閉じこもる必要がない。外出先でも楽しむことができる。&lt;/li>
+&lt;li>AR、VR、人工知能などの技術の進歩により、ゲームやエンターテインメントアプリは、より没入感のあるもの。&lt;/li>
+&lt;li>モバイルエンターテインメント＆ゲームアプリは非日常を提供する。&lt;/li>
+&lt;/ul>
+&lt;p>特にパンデミック時には、人々はゲームやエンターテインメントアプリに時間を費やし、気を紛らわせました。&lt;/p>
+&lt;h2 id="aiと機械学習">AIと機械学習&lt;/h2>
+&lt;p>FaceApp（自撮り写真を加工するアプリ）の画期的な成功の後、ほとんどの人が疑問に思っていました。次は何をするのだろう？そんな時、AIは期待をさらに大きく前進させるものをもたらしてくれました。MyHeritageAppは、写真をリアルなアニメーションに変換するすごい機能をもたらしたのです。このアニメーションはとても印象的で、愛する人があなたに微笑んでいるように感じられます。その結果、多くのリアクションが生まれました。&lt;/p>
+&lt;p>昨年、AIで起こった興味深いことはこれだけではありません。Googleがマップアプリに、AIを使ってユーザー体験を向上させる新機能を投入したのも記憶に新しいです。そのひとつが、広い屋内空間でARナビゲーションを提供するライブビューです。&lt;br>
+GoogleはAIを利用して、燃料消費量が少なくなるように道順を最適化し、二酸化炭素排出量の少ないルートを提案することも行っています。&lt;/p>
+&lt;p>AIとMLは、ここ数年連続してモバイルアプリ開発のトップトレンドの1つとなっています。しかし、これらの技術の進歩は、2022年のモバイルアプリ開発のハードルを非常に高くしており、今年はそれが何をもたらすのか興味深いところです。&lt;/p>
+&lt;p>機械学習もまた、革命的なことが起こるのが待ち望まれるエキサイティングな分野です。ディープラーニングが機械学習と手を組めば、貴重なデータとリアルタイムの分析を提供し、モバイルアプリ開発プロジェクトに素晴らしい効果をもたらすことができます。&lt;/p>
+&lt;p>CAGR42％で成長する世界のML産業は、2019年の機械学習から2022年後半には約90億ドル規模になる見込みです。&lt;/p>
+&lt;p>Appleは、機械学習における重要なプレイヤーの1つで、その優秀なMLモデルにより、開発者は没入感のある新しい体験を生み出すことができるようになりました。既存の機能を簡単に追加できるだけでなく、新しい機能を作ることもできます。その上、ML APIで新しい機能を追加することもできます。&lt;/p>
+&lt;p>今年は、これらの技術に深く入り込み、その機能をきちんと理解し、多くの構成要素に触れることをお勧めします。&lt;/p>
+&lt;h2 id="モバイルアプリのセキュリティがより重視">モバイルアプリのセキュリティがより重視&lt;/h2>
+&lt;p>チェック・ポイントの「&lt;a class="link" href="https://www.checkpoint.com/press/2021/check-point-softwares-mobile-security-report-2021-shows-almost-every-organization-globally-experienced-a-mobile-malware-attack-during-the-past-year/" target="_blank" rel="noopener"
+>State of Mobile Security 2021&lt;/a>」レポートによると、約46％の組織が、悪意のあるモバイル・アプリケーションをダウンロードした従業員を少なくとも1人抱えているとのことです。従業員のモバイル端末への依存度が高いことを考えると、企業にとって懸念すべき問題であると言えます。&lt;/p>
+&lt;p>ほとんどの企業は、サイバーセキュリティがデータ保護や情報プライバシーに関する法律に直結していることを考慮して、サイバーセキュリティへの投資を増やそうとしています。&lt;/p>
+&lt;p>このように、デジタルセキュリティは、2022年のモバイルアプリ開発のトップトレンドの1つとして浮上しています。業界の優れた頭脳は、モバイルアプリにまつわる不確実性を引き出すためにレベルアップしています。WWDC 2021で、Appleは &amp;ldquo;iCloud キーチェーン&amp;rdquo; という新機能を導入し、パスワードレスの未来への第一歩を踏み出しました。これによって、アップルはパスワードに代わって、より安全なログインプロセスを提供することになりました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 150;
+flex-basis: 360px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security.jpg" data-size="980x652">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security.jpg"
+width="980"
+height="652"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security_hu21d870dc8d40c80d78817338d88503a0_98657_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security_hu21d870dc8d40c80d78817338d88503a0_98657_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="nobile app security">
+&lt;/a>
+&lt;figcaption>nobile app security&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>2022年、モバイルアプリ開発業界は、セキュリティファーストのアプローチにシフトし、強固なDevOps戦略のロードマップを構築すると予想されます。&lt;/p>
+&lt;h2 id="スーパーアプリ">スーパーアプリ&lt;/h2>
+&lt;p>1つのアプリに1つの目的 - これが、モバイルアプリ開発会社の長年のアプローチです。しかし今、そのアプローチは変わりつつあります。企業は、単一目的のアプリから、複数の目的を解決するワンストップ・ソリューションにシフトしているのです。&lt;/p>
+&lt;p>このようなアプリはスーパーアプリと呼ばれ、アジアで絶大な人気を誇っています。しかし、このトレンドは欧米にも浸透しつつある。米国では、カリフォルニアに本社を置くブレインテクノロジーズ社が開発したNatural AIが面白い例として挙げられます。このアプリは、人々の携帯電話との付き合い方を変え、1つのアプリから複数の目的を解決できるようにすることを目指しています。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 156;
+flex-basis: 375px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps.jpg" data-size="980x627">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps.jpg"
+width="980"
+height="627"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps_hu39cca474066afe5131caf9129734ffca_127404_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps_hu39cca474066afe5131caf9129734ffca_127404_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="super apps">
+&lt;/a>
+&lt;figcaption>super apps&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>さらに、Facebookが単なるソーシャルメディアのプラットフォームからどのように拡張されたかをご覧になったことがあるかと思います。現在では、人々が製品を売買できるマーケットプレイスも提供されています。同様に、オンラインショッピングとは別に、請求書の支払いやAmazonからの支払いもできるようになりました。&lt;/p>
+&lt;p>欧米では、スーパーアプリの流行はそれほど高くはなく、人々は1つに決める前にさまざまなソリューションを試すことを好むからです。それでも、最終的には誰もが利便性を求めるものです。スーパーアプリは、2022年に期待すべきモバイルアプリ開発のトレンドと言えるでしょう。&lt;/p>
+&lt;h2 id="モバイルコマース">モバイルコマース&lt;/h2>
+&lt;p>EEコマース分野は3兆5,600億ドル相当の売上を誇り、その72.9%はモバイルで発生しています。&lt;br>
+つまり、モバイルコマースはアプリ開発のトレンドとして高まっているのです。&lt;/p>
+&lt;p>COVIDの大流行後、ライフスタイルの大きな変化が見られました。大規模な小売業者から中小企業、個人消費者に至るまで、誰もがモバイルアプリに依存するようになったのです。&lt;/p>
+&lt;p>そのため、適応できないEコマース企業は不利な状況に置かれています。彼らは多くの顧客を失い、彼らは変換することができるものを見逃しているもです。&lt;br>
+つまり、企業は、このトレンドに適応し、電子商取引のビジネスアプリを持っている必要があります。それは、彼らがカットスロート競争を生き残ることができる唯一の方法です。&lt;/p>
+&lt;h2 id="p2pモバイルアプリ">P2Pモバイルアプリ&lt;/h2>
+&lt;p>P2Pモバイルアプリは、モバイルアプリ開発分野を特徴付けるもう一つの重要なトレンドです。eMarketerによると、P2Pモバイルトランザクションの予測価値は2023年までに6,122億3,000万ドルに達するでしょう。これは、現在、P2Pモバイルアプリに大きな可能性があることを意味します。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 108;
+flex-basis: 260px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps.jpg" data-size="980x903">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps.jpg"
+width="980"
+height="903"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps_huf7acd6071ea2324b3fd5a42286cdb584_133439_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps_huf7acd6071ea2324b3fd5a42286cdb584_133439_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="p2p mobile apps">
+&lt;/a>
+&lt;figcaption>p2p mobile apps&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>P2Pモバイルアプリが企業やユーザーの間で人気を集めている理由は、その利便性にある。ユーザーは素早く支払いができ、売り手は自分のアカウントに直接支払いを受けることができます。そのため、余計な手間がかかりません。&lt;br>
+今年、私たちの周りで見られるP2Pモバイル・アプリの種類をいくつか紹介ましょう。&lt;/p>
+&lt;ul>
+&lt;li>決済機能を内蔵したソーシャルメディアプラットフォーム&lt;/li>
+&lt;li>決済のためのシステムを組み込んだモバイルOSシステム。例：Apple Pay、Samsung Pay、Android Payなど。&lt;/li>
+&lt;li>独自の決済システムを提供している独立系プロバイダー。&lt;/li>
+&lt;li>銀行を決済の当事者とするP2Pアプリ。&lt;/li>
+&lt;li>暗号通貨のウォレット。&lt;/li>
+&lt;/ul>
+&lt;p>P2Pモバイルアプリのアイデアがあるなら、それを実現する絶好の機会です。&lt;/p>
+&lt;h2 id="ブロックチェーン">ブロックチェーン&lt;/h2>
+&lt;p>私たちがブロックチェーンについて初めて耳にしたのは、暗号通貨ブームの時でした。しかし、今ではこの技術は大きく進歩し、さまざまな分野で応用できるようになりました。かなりの勢いで成長しており、2024年までに200億ドルの収益が蓄積されると予想されています。ブロックチェーンは、モバイルアプリ開発においても極めて重要な役割を担っています。&lt;/p>
+&lt;p>分散型アプリは最近の流行りです。ブロックチェーンウォレットは7000万個以上あり、そのうちモバイルウォレットは最も好まれるブロックチェーンウォレットの形態です。これらの統計は、ブロックチェーンウォレットのユーザー数が大幅に増加していることも示しています。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 123;
+flex-basis: 295px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain.jpg" data-size="980x796">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain.jpg"
+width="980"
+height="796"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain_hu58866e21a0e9b57e054a2d57fc2bf4c7_100051_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain_hu58866e21a0e9b57e054a2d57fc2bf4c7_100051_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="blockchain">
+&lt;/a>
+&lt;figcaption>blockchain&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>そのほかに、デジタル資産の追跡、デジタルIDの保護、ロイヤルティプログラムの追跡にブロックチェーンを使用する通貨換算器も見られます。&lt;br>
+2022年以降には、インテリジェント・コントラクト、著作権侵害防止ソフトウェア、選挙を穏健化するツール、Blockchain as a service（BaaS）プラットフォームなど、このトレンドがより主流になると見ています。特にモバイルコマースやモバイル決済アプリでは、ブロックチェーンを利用して不正を未然に防ぐことができるのです。&lt;/p>
+&lt;h2 id="予測分析">予測分析&lt;/h2>
+&lt;p>企業は以前からモバイルアプリで予測分析を利用しています。Netflixは、ユーザーの視聴習慣に基づいて映画やテレビ番組を推薦するためにこれを使用しています。また、Amazonは、予測分析を活用して、商品の推薦をパーソナライズしています。&lt;/p>
+&lt;p>今年は、予測分析がより主流になると思われます。ここでは、2022年のモバイルアプリ開発において、このトレンドが重要な役割を果たすと考えられる2つの分野を紹介します。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>開発プロセスの最適化へ&lt;/strong>&lt;br>
+企業は、開発者から収集したデータを処理することで、問題を事前に発見し、より良い代替案を提案することができます。&lt;/li>
+&lt;li>&lt;strong>ユーザーエクスペリエンスを向上させるために&lt;/strong>&lt;br>
+企業はユーザーデータを利用して、ユーザーの行動を予測し、その旅をパーソナライズすることができます。&lt;/li>
+&lt;/ul>
+&lt;p>その結果、優れた品質を維持しながら開発期間を大幅に短縮し、イノベーションの実現により注力することが可能になったのです。&lt;/p>
+&lt;h2 id="モバイル学習">モバイル学習&lt;/h2>
+&lt;p>統計局によると、&lt;a class="link" href="https://www.statista.com/statistics/886092/use-of-mobile-learning-by-employees-worldwide/" target="_blank" rel="noopener"
+>従業員の35％&lt;/a> がモバイルデバイスを頻繁に使って学習しているとのことです。また、モバイルラーニング市場は、2025年までに585億ドルに達し、2020年から2025年にかけて21.45%のCAGRが約束されると予想されています。つまり、モバイルラーニングは、モバイルアプリ開発のあり方を変える、有望なトレンドといえます。&lt;/p>
+&lt;p>モバイルラーニングは多くの理由で有名です。まず、学習が簡単にアクセスできるようになります。学習者はどこでも、誰でも学習できるため、力を得たと感じられます。さらに、継続的なフィードバックや360度学習などの体験により、学習がインタラクティブで楽しいものになりました。&lt;/p>
+&lt;p>コースの修了率の向上、学習の迅速化、エンゲージメントの向上、知識の定着率の向上につながるため、現在では企業でもモバイル学習が支持されています。&lt;br>
+そのため、モバイル学習アプリの需要は高いといえます。画期的なアイデアや、社員教育のためにモバイル学習ソリューションを立ち上げる計画があるのなら、今こそ教育アプリ開発を専門とするチームにコンタクトを取るべきでしょう。&lt;/p>
+&lt;h2 id="iot対応のモバイルアプリ">IoT対応のモバイルアプリ&lt;/h2>
+&lt;p>インターネットは私たちの生活の中に深く入り込んでいます。スマートフォン、ノートパソコン、タブレットから、音声で操作できるスマートホームデバイスまで、私たちはインターネットに接続された機器に囲まれています。モノのインターネット（IoT）は、単なるトレンドにとどまらず、2022年の市場規模は5940億ドルと推定され、私たちの日常生活の一部となりました。&lt;/p>
+&lt;p>ここ数年、アマゾンやグーグルのようなブランドがこの技術をフルに活用しているのを目にしました。彼らはそれぞれ「Echo」シリーズのデバイスとGoogle Home Voice Controllerを発表して、IoTの競争を強化しました。&lt;/p>
+&lt;p>しかし現在では、Samsung、Xiaomi、Bosch、Honeywellなどのブランドも、モノのインターネット技術に急速に移行しています。小売業における継続的なサプライチェーン、スマートホーム、精通した健康保険プランなどは、もはやSF的なものではなく、現実に生きてきているのです。&lt;/p>
+&lt;p>IoTガジェットやシステムの需要増加に伴い、IoT対応アプリの需要も同時に増加するため、2022年のモバイルアプリ開発のトップトレンドのリストに含まれています。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>GoogleとAppleのApp Storeを合わせると663万個のアプリが存在します。あなたのアプリを目立たせるには、どうしたらいいでしょうか？&lt;/p>
+&lt;p>実は、モバイルアプリ開発の最新トレンドを常に把握し、それを活用して堅牢で機能豊富なアプリを提供する方法を知らなければ、できないことなのです。&lt;/p>
+&lt;p>モバイルアプリ業界は今後も急速に拡大し、モバイルアプリ開発の領域も進化していくでしょう。新興のモバイルアプリプラットフォーム開発技術、上昇するバックエンドプラットフォーム、マイクロサービス、そして新しいハードウェアの性能と相まって、モバイルアプリソリューションの舵取りを続けていくでしょう。継続的に学習し、常に意識することが、熾烈な競争を勝ち抜く唯一の方法なのです。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/NO-RULES-%e3%83%8e%e3%83%bc%e3%83%bb%e3%83%ab%e3%83%bc%e3%83%ab%e3%82%ba-%e4%b8%96%e7%95%8c%e4%b8%80%e3%80%8c%e8%87%aa%e7%94%b1%e3%80%8d%e3%81%aa%e4%bc%9a%e7%a4%be%e3%80%81NETFLIX-%e3%83%aa%e3%83%bc%e3%83%89%e3%83%bb%e3%83%98%e3%82%a4%e3%82%b9%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%82%b9/dp/4532323673/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/41dVKw11QRL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> NO RULES(ノー・ルールズ) 世界一「自由」な会社、NETFLIX &lt;/h2>
+&lt;p>5万部突破!! 日経朝刊で「経営者が読むべき1冊」と激賞! (2020年12月26日付) 「日本でこんなマネのできる企業はまずないだろうが、海外の競争相手はネットフリックス流の人材厳選主義を採用しているかもしれない。その迫力と怖さを知るためにも、経営者が手に取るべき本である」 ●Netflixはどうやって190カ国で2億人を獲得できたのか？。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%82%aa%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%bb%e3%82%bf%e3%83%b3-%e3%83%87%e3%82%b8%e3%82%bf%e3%83%ab%e3%81%a8AI%e3%81%ae%e6%9c%aa%e6%9d%a5%e3%82%92%e8%aa%9e%e3%82%8b-ebook/dp/B08MF877HP/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51wkGUWGEIL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> オードリー・タン デジタルとAIの未来を語る &lt;/h2>
+&lt;p>オードリー・タン氏自身が、自らの考え、行動、夢を語る。 世界のメディアがいま、最も注目するテクノロジー界の叡智が、描くデジタルとAI（人工知能）の未来！ 台湾は、2020年に全世界を襲った新型コロナウイルス（COVID－19）の封じ込めに唯一成功しました。 本書は、その中心的な役割を担った若きデジタル担当政務委員（閣僚）が、コロナ対策成功の秘密、デジタルと民主主義、デジタルと教育、AIと社会・イノベーション、そして日本へのメッセージを、自身の言葉で語りつくします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>s-Stat 時系列データで異常値を検知しよう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</link><pubDate>Mon, 17 Jan 2022 17:46:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）" />&lt;h2 id="pandas-dataframeオブジェクト">Pandas DataFrameオブジェクト&lt;/h2>
 &lt;p>Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。&lt;br>
 DataFramオブジェクトは２次元配列な感じです。&lt;br>
 １次元目が列、２次元目が行のイメージみたいです。&lt;/p>
