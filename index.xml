@@ -18,7 +18,7 @@ df['value'][2]-&amp;gt;3633
 &lt;/code>&lt;/pre>&lt;p>read_csvするとデフォルトだと１行目を列名とみなすみたいです。&lt;br>
 アクセスの方法も列名が反映され連想配列っぽくなります。&lt;/p>
 &lt;h2 id="pandas-seriesオブジェクト">Pandas Seriesオブジェクト&lt;/h2>
-&lt;p>hampelの第１引数はPandasのSeriesオブジェクトです&lt;br>
+&lt;p>hampelの第１引数はPandasのSeriesオブジェクトです。&lt;br>
 Seriesオブジェクトは１次元の配列みたいです。&lt;br>
 DataFrameオブジェクトからSeriesオブジェクトに変換する方法ですが&lt;br>
 以下の方法でできます。&lt;/p>
