@@ -2,7 +2,7 @@
 title: "2022年に流行るモバイルアプリ開発トレンド 15選"
 date: 2022-01-17T18:11:53+09:00
 draft: false
-
+image: "catch.jpg"
 categories:
   - Web開発
 tags:
