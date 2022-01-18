@@ -121,6 +121,21 @@
     transition: all ease-in-out 0.3s;
     position: relative;
     z-index: 0;
+    &.item-new {
+      .article-title {
+        display: flex;
+        align-items: flex-start;
+        &:before {
+          content: "NEW";
+          background-color: #e74c3c;
+          color: #FFF;
+          padding: 3px 5px;
+          margin-right: 5px;
+          font-size: 0.7rem;
+          border-radius: 4px;
+        }
+      }
+    }
     ~ {
       article {
         border-top: 1px solid rgba(255,255,255,0.1);

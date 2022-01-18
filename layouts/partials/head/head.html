@@ -5,7 +5,14 @@
 <meta name='description' content='{{ $description }}'>
 
 {{- $title := partialCached "data/title" . .RelPermalink -}}
-<title>{{ $title }}</title>
+
+{{- if eq .RelPermalink "/" -}}
+{{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
+{{- else -}}
+{{ $title = printf "%s - %s" $title .Site.Title }}
+{{- end -}}
+
+<title>{{- $title -}}</title>
 
 <link rel='canonical' href='{{ .Permalink }}'>
 

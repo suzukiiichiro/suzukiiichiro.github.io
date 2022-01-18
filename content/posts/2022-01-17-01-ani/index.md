@@ -18,10 +18,10 @@ e-Statの統計データですが年次や月次だったりするのでデー�
 pythonでhampelというライブラリーで簡単に利用できそうなのでまずこれを試してみます。  
 
 ## python hampel ライブラリを利用   
-hampelはbrew で簡単にインストールできます  
+hampelはpip で簡単にインストールできます  
 
 ```
-brew install hampel
+pip install hampel
 ```
 
 ```
