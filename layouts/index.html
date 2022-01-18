@@ -1,4 +1,4 @@
-{{- define "main" -}}
+{{ define "main" }}
   {{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
   {{- $notHidden := where .Site.RegularPages "Params.hidden" "!=" true -}}
   {{- $filtered := ($pages | intersect $notHidden) -}}
@@ -9,12 +9,12 @@
       {{- if eq $index 3 -}}
         {{- partial "ads/infeed" -}}
       {{- end -}}
-      {{- partial "article-list/default" . -}}
+      {{ partial "article-list/default" . }}
     {{- end -}}
   </section>
-  {{- partial "pagination.html" . -}}
-  {{- partial "footer/footer" . -}}
-{{- end -}}
+  {{ partial "pagination.html" . }}
+  {{ partial "footer/footer" . }}
+{{ end }}
 {{- define "right-sidebar" -}}
   {{- partial "sidebar/right.html" . -}}
-{{- end -}}
+{{ end }}
