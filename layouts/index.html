@@ -7,7 +7,7 @@
   <section class="article-list" data-new="{{- $newest -}}">
     {{- range $index, $element := $pag.Pages -}}
       {{- if eq $index 3 -}}
-        {{- partial "ads/infeed" -}}
+        {{- partial "ads/list-infeed" -}}
       {{- end -}}
       {{ partial "article-list/default" . }}
     {{- end -}}
