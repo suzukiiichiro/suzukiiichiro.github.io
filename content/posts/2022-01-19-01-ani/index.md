@@ -17,7 +17,7 @@ google検索を自動でするためにGoogle Custom Search APIを使います�
 Google Custom Search API は１日１００回までは無料で、それ以上だと１０００回につき５ドル課金されるみたいです。  
 https://developers.google.com/custom-search/v1/overview#pricing  
 １日に発表される統計は10個いかないくらいなので無料の範囲で使えそうです。  
-Google Custom Search APIを使ってみましょう  
+Google Custom Search APIを使ってみましょう。  
 
 ## Google Custom Search API を使えるように設定する（2022年1月時点)
 以下の手順で設定します。  
