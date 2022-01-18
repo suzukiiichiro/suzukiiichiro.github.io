@@ -2,6 +2,9 @@ User-agent: Googlebot-Image
 Disallow: /
 
 User-agent: *
+Disallow: /categories/
+Disallow: /tags/
+Disallow: /search/
 Allow: /
 
 Sitemap: {{ .Site.BaseURL }}sitemap_index.xml
