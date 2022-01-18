@@ -1,6 +1,6 @@
 ---
 title: "e-Stat でGoogle Custom Search APIを使おう（１）"
-date: 2022-01-19T00:51:13+09:00
+date: 2022-01-19T00:31:13+09:00
 draft: false
 image: anal.jpg
 categories:
