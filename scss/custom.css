@@ -145,6 +145,9 @@ body {
     right: 10px;
     opacity: 0.4; }
 
+.google-auto-placed {
+  height: auto !important; }
+
 footer.site-footer {
   background-color: #34495e;
   color: #FFF;
