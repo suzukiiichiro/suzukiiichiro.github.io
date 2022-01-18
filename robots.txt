@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://suzukiiichiro.github.io/sitemap_index.xml
-Sitemap: https://suzukiiichiro.github.io/sitemap.xml
-Sitemap: https://suzukiiichiro.github.io/index.xml
