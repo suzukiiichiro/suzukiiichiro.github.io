@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 17 Jan 2022 18:11:53 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2022年に注目すべきモバイルアプリ開発トレンド 15選</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</link><pubDate>Mon, 17 Jan 2022 18:11:53 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch.jpg" alt="Featured image of post 2022年に注目すべきモバイルアプリ開発トレンド 15選" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://www.netsolutions.com/insights/12-mobile-app-development-trends-to-watch-out-for-in-2019/" target="_blank" rel="noopener"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 18 Jan 2022 17:17:37 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</title><link>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</link><pubDate>Tue, 18 Jan 2022 17:17:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch.jpg" alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる" />&lt;p>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりました。&lt;/p>
+&lt;p>今回はWebサイトの中でファビコンを1サイズで用意して、さらにそのファビコンをダークモードに対応させてみたいと思います。&lt;/p>
+&lt;h2 id="ダークモードって何">ダークモードって何？&lt;/h2>
+&lt;p>ダークモードとは画面の色を反転して表示するスマホやタブレットに追加された機能になります。&lt;br>
+iPhoneやiPadなどが先行iOS13のリリースの際に実装しました。&lt;br>
+例えば、一般的なアプリの背景は白だったかと思いますが、ダークモードをオンにしているときは背景の色が暗めの配色となり、文字色が反対に明るめの配色になったりします。&lt;br>
+この機能は光が抑えられるため、目に優しかったりすると言われてます。さらに、画面の発光を抑えられるため、バッテリーの持ちも良くなるとのことでした。&lt;/p>
+&lt;p>このダークモード機能がMacやWindowsなどのパソコンでも使用可能となり、それに伴ってブラウザでも使えるようになりました。&lt;/p>
+&lt;h3 id="webサイトをダークモードに対応">WEBサイトをダークモードに対応&lt;/h3>
+&lt;p>Webサイトを構築する際に、今までのCSSは下記のような記述になっていたかと思います。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css"> &lt;span class="nt">body&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#FFF&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#000&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>背景を白にして、文字色を黒にするといったような記述です。&lt;br>
+この場合、ダークモードに対応した端末で見た場合に、ダークモードがONであるにもかかわらず、背景が白のサイトが表示されてしまいます。&lt;/p>
+&lt;p>これをダークモードに対応させると、&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nt">body&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#000&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#fff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>上記のCSSのように &lt;code>@media (prefers-color-scheme: dark)&lt;/code> を追記して、ダークモードの場合は別のCSSで上書きをしてやる必要があります。&lt;/p>
+&lt;p>実はこの機能を使うことで、ファビコンも色を変えて、ダークモードに対応させることができてしまうのです。&lt;/p>
+&lt;h2 id="ファビコンは1つ">ファビコンは1つ&lt;/h2>
+&lt;p>今まで、ファビコンは大量に設置する必要がありました。&lt;br>
+全部設置仕様となると、50個近くのファイルを読み込んで、metaに記述する必要がありました。&lt;br>
+そんな手間をしたくないと思います。&lt;br>
+そもそも、そんなに大量のファビコンは必要でしょうか？&lt;/p>
+&lt;p>モダンブラウザと呼ばれる最新のブラウザのみに対応であればファビコンは1つで十分です。&lt;br>
+「サイズごとに用意する必要があるのに、そんなことないだろ」と思われるかもしれませんが、近年のブラウザはSVGと呼ばれる形式の画像に対応しております。&lt;br>
+この画像は従来のピクセルデータではなく、ベクターデータと呼ばれる座標で画像を構築してます。&lt;br>
+座標データなので、縮小、拡大しても画質は綺麗なままです。&lt;/p>
+&lt;p>それではSVGでファビコンを作ったらどうでしょうか？&lt;br>
+そうです。大量のサイズを用意しないで、1ファイルでファビコンを用意できてしまうのです。&lt;/p>
+&lt;h3 id="ファビコンを設置">ファビコンを設置&lt;/h3>
+&lt;p>ファビコンをIllustratorやXDで作成して、SVG形式で保存します。&lt;br>
+作成したファビコンをWebサイトに反映します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;icon&amp;#34;&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;favicon.svg&amp;#34;&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;image/svg+xml&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>head部分に上記の&lt;code>link&lt;/code>タグを記述します。hrefの部分は適宜変更してください。&lt;br>
+これでファビコンをSVG化することができました。&lt;/p>
+&lt;h3 id="ファビコンをダークモードに対応させる">ファビコンをダークモードに対応させる&lt;/h3>
+&lt;p>ダークモードに対応させるためにはもうひと工夫必要です。先程作成したファイルを開いて、CSSのスタイルを追加します。&lt;br>
+Illustratorで色を塗っていた場合、styleタグに色情報が記述されているかと思います。&lt;br>
+そこに、&lt;code>@media (prefers-color-scheme: dark)&lt;/code> でダークモードの際の色を指定します。&lt;br>
+&lt;code>fill&lt;/code>はSVGの塗りつぶしを意味してます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="nt">style&lt;/span> &lt;span class="nt">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;text/css&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">st0&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">fill&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#34495E&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">st0&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="n">fill&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="err">#&lt;/span> &lt;span class="n">FFF&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これでfaviconもダークモード対応できました。&lt;br>
+実際にブウラウザでアクセスして、ダークモードを切り替えると確認できるかと思います。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>今まで大量のfaviconを用意して、metaタグに記述していましたが、モダンブラウザになると、SVGファイル1つで様々なサイズに対応可能です。しかも画質がきれいなので、高画素端末で見ても安心です。&lt;br>
+さらに、SVGファイルのファビコンであればファイル自体にcssのスタイルを記述できるので、&lt;code>@media (prefers-color-scheme: dark)&lt;/code> を使ってダークモードに対応することもできます。&lt;br>
+こうした小さなUI、UXの改善がウェブサイトの大きな改善につながるのではないかと思います。&lt;br>
+みなさんも、ぜひダークモードに対応したおしゃれなファビコンを設置してみませんか？&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%83%96%e3%83%a9%e3%83%b3%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8-%e8%a5%bf%e6%be%a4-%e6%98%8e%e6%b4%8b/dp/4756252524/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/41EKomzrUQL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> ブランディングデザインの教科書 &lt;/h2>
+&lt;p> 企業経営に役立つ「ブランディング」と「デザイン」がこの1冊で一気にわかる!
+ブランディング成功の秘訣とは──。
+これからブランディングをはじめたい経営者やプランナー、ブランド全体をデザインしてみたいというデザイナーや学生の方に向け、100以上のブランド開発実績を持つブランディングデザイナー西澤明洋が「ブランディング」と「デザイン」の方法を徹底解説。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/ICONISM-%e4%b8%96%e7%95%8c%e3%81%ae%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3%e3%83%bb%e3%83%94%e3%82%af%e3%83%88%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3-Sandu-Publishing/dp/4756254853/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/419GLprboML.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> ICONISM 世界のアイコン・ピクトグラムのデザイン &lt;/h2>
+&lt;p> 情報をわかりやすく効果的に伝えるデザインと活用例が満載! アイコンやピクトグラムは、ガイドサインだけでなく、ブランディングやウェブサイト・アプリなど現代生活のあらゆる場面で、コミュニケーションを円滑にするためますます重要な役割を担っています。世界各国の優れたデザインと展開実例を用途別に集めた1冊です。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>2022年に注目すべきモバイルアプリ開発トレンド 15選</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</link><pubDate>Mon, 17 Jan 2022 18:11:53 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch.jpg" alt="Featured image of post 2022年に注目すべきモバイルアプリ開発トレンド 15選" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://www.netsolutions.com/insights/12-mobile-app-development-trends-to-watch-out-for-in-2019/" target="_blank" rel="noopener"
 >Top 15 Mobile App Development Trends to Watch for in 2022&lt;/a>&lt;/p>
 &lt;p>モバイルアプリ開発業界は、驚異的なスピードで進化しています。このデジタルダーウィン時代に生き残り、繁栄するには、変化するモバイルアプリ開発のトレンドに精通する必要があります。 今日、スマートフォンはデジタルメディアの成功の鍵です。これは、ビジネスモデル、運用モデル、および市場を驚くべき速度で根本的に変革します。 2022年までに、モバイルアプリ市場の収益は6,930億ドルに達すると予想されています。&lt;/p>
 &lt;p>ただし、ほとんどのアプリは失敗してしまっているであるということです。&lt;/p>
