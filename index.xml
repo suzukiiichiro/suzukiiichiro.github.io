@@ -1,4 +1,105 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 18 Jan 2022 17:17:37 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</title><link>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</link><pubDate>Tue, 18 Jan 2022 17:17:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch.jpg" alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる" />&lt;p>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりました。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 19 Jan 2022 00:31:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/</link><pubDate>Wed, 19 Jan 2022 00:31:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（１）" />&lt;h2 id="統計名でgoogle検索して関心度の高いキーワードを抽出しよう">統計名でgoogle検索して関心度の高いキーワードを抽出しよう&lt;/h2>
+&lt;p>e-Statの解析の目標として、膨大な統計データの中から一般の人に関心度の高いものを抽出してデータを要約したいと考えています。&lt;br>
+google検索で上位にくるものは関心度が高いと言えるでしょうから統計名でgoogle検索して関心度の高いキーワードを抽出したいと思います。&lt;br>
+google検索を自動でするためにGoogle Custom Search APIを使います。&lt;br>
+Google Custom Search API は１日１００回までは無料で、それ以上だと１０００回につき５ドル課金されるみたいです。&lt;br>
+&lt;a class="link" href="https://developers.google.com/custom-search/v1/overview#pricing" target="_blank" rel="noopener"
+>https://developers.google.com/custom-search/v1/overview#pricing&lt;/a>&lt;br>
+１日に発表される統計は10個いかないくらいなので無料の範囲で使えそうです。&lt;br>
+Google Custom Search APIを使ってみましょう。&lt;/p>
+&lt;h2 id="google-custom-search-api-を使えるように設定する2022年1月時点">Google Custom Search API を使えるように設定する（2022年1月時点)&lt;/h2>
+&lt;p>以下の手順で設定します。&lt;br>
+・googleアカウントを取得する&lt;br>
+gmailのメールアドレスです。&lt;br>
+・Google Cloud Platformでクレジットカード情報を登録する&lt;br>
+&lt;a class="link" href="https://console.cloud.google.com/billing/create?hl=ja" target="_blank" rel="noopener"
+>https://console.cloud.google.com/billing/create?hl=ja&lt;/a>&lt;br>
+・プロジェクトを作成する&lt;br>
+&lt;a class="link" href="https://console.cloud.google.com/projectcreate" target="_blank" rel="noopener"
+>https://console.cloud.google.com/projectcreate&lt;/a>&lt;br>
+・認証情報を作成する&lt;br>
+&lt;a class="link" href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener"
+>https://console.cloud.google.com/apis/credentials&lt;/a>&lt;br>
+「+認証情報を作成」をクリックして「APIキー」を選択すると&lt;br>
+APIキーが作成されますのでコピーしておきましょう&lt;br>
+・APIキーの利用制限&lt;br>
+キーの制限をクリックしてAPIキーの利用を制限しておきましょう&lt;br>
+接続元が固定のIPアドレスを持っているなら「アプリケーションの制限」でIPアドレスを設定しましょう。&lt;br>
+APIの制限もとりあえすCustom Search API １個にしときます。&lt;br>
+保存ボタンをクリックします&lt;br>
+・Custom Search API を有効にする&lt;br>
+&lt;a class="link" href="https://console.cloud.google.com/apis/library/customsearch.googleapis.com" target="_blank" rel="noopener"
+>https://console.cloud.google.com/apis/library/customsearch.googleapis.com&lt;/a>&lt;br>
+「有効にする」ボタンをクリックします。&lt;br>
+・検索エンジンIDの取得&lt;br>
+&lt;a class="link" href="https://cse.google.com/create/new" target="_blank" rel="noopener"
+>https://cse.google.com/create/new&lt;/a>&lt;br>
+検索するサイトは「www.google.co.jp（後で削除するので適当で良いです）」&lt;br>
+言語は「日本語」&lt;br>
+検索エンジンの名前は適当で良いです。&lt;br>
+左側の設定ボタンを押すと画面中央中段に「検索エンジンID」があるのでコピーします。&lt;br>
+検索するサイトをで「www.google.co.jp」を「削除」します&lt;br>
+「ウェブ全体を検索」を「オン」にします&lt;/p>
+&lt;h2 id="curlでgoogle-custom-search-api検索する">CurlでGoogle Custom Search API検索する&lt;/h2>
+&lt;p>試しに検索してみましょう。&lt;br>
+curlを利用します。&lt;br>
+curlでAPIキー、検索エンジンID、キーワードを指定して検索します。&lt;br>
+curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
+>https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジン ID&amp;amp;q=検索キーワード&amp;rsquo;&lt;/p>
+&lt;p>「木材流通統計調査」で検索してみました。&lt;/p>
+&lt;p>curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
+>https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジンID&amp;amp;q=木材流通統計調査&amp;rsquo;&lt;/p>
+&lt;p>結果はjsonで返ってきます。&lt;br>
+見た感じ、ブラウザのgoogle検索の結果と同じ感じなので良さそうですね。&lt;/p>
+&lt;pre tabindex="0">&lt;code> &amp;quot;items&amp;quot;: [
+{
+&amp;quot;kind&amp;quot;: &amp;quot;customsearch#result&amp;quot;,
+&amp;quot;title&amp;quot;: &amp;quot;木材流通統計調査：農林水産省&amp;quot;,
+&amp;quot;htmlTitle&amp;quot;: &amp;quot;\u003cb\u003e木材流通統計調査\u003c/b\u003e：農林水産省&amp;quot;,
+&amp;quot;link&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
+&amp;quot;displayLink&amp;quot;: &amp;quot;www.maff.go.jp&amp;quot;,
+&amp;quot;snippet&amp;quot;: &amp;quot;木材流通構造調査, 木材の販売金額、素材及び材料の入荷先別入荷量、製材品、合板及び集成材の出荷先別出荷量、製材用、合単板及び木材チップ製造用機械の所有状況、 ...&amp;quot;,
+&amp;quot;htmlSnippet&amp;quot;: &amp;quot;\u003cb\u003e木材流通\u003c/b\u003e構造\u003cb\u003e調査\u003c/b\u003e, \u003cb\u003e木材\u003c/b\u003eの販売金額、素材及び材料の入荷先別入荷量、製材品、合板及び集成材の出荷先別出荷量、製材用、合単板及び\u003cb\u003e木材\u003c/b\u003eチップ製造用機械の所有状況、&amp;amp;nbsp;...&amp;quot;,
+&amp;quot;cacheId&amp;quot;: &amp;quot;cMExMff56bgJ&amp;quot;,
+&amp;quot;formattedUrl&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
+&amp;quot;htmlFormattedUrl&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
+&amp;quot;pagemap&amp;quot;: {
+&amp;quot;cse_thumbnail&amp;quot;: [
+{
+&amp;quot;src&amp;quot;: &amp;quot;https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSmlCF9ltcQbjL9DAnpZfJIotIT2ej4cd_YfBfs5ew-v2FR_NxjLAGdFTTI&amp;quot;,
+&amp;quot;width&amp;quot;: &amp;quot;200&amp;quot;,
+&amp;quot;height&amp;quot;: &amp;quot;200&amp;quot;
+}
+],
+&amp;quot;metatags&amp;quot;: [
+{
+&amp;quot;viewport&amp;quot;: &amp;quot;width=device-width, initial-scale=1&amp;quot;,
+&amp;quot;format-detection&amp;quot;: &amp;quot;telephone=no&amp;quot;
+}
+],
+&amp;quot;cse_image&amp;quot;: [
+{
+&amp;quot;src&amp;quot;: &amp;quot;https://www.maff.go.jp/j/shared_new/shared/images/icon_pnavi@2x.png&amp;quot;
+}
+]
+}
+},
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 128;
+flex-basis: 307px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search.png" data-size="880x686">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search.png"
+width="880"
+height="686"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search_hu8dd0c2c2a9412bdad55a43227a1eee02_223997_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search_hu8dd0c2c2a9412bdad55a43227a1eee02_223997_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="検索結果">
+&lt;/a>
+&lt;figcaption>検索結果&lt;/figcaption>
+&lt;/figure>&lt;/p></description></item><item><title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</title><link>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</link><pubDate>Tue, 18 Jan 2022 17:17:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch.jpg" alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる" />&lt;p>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりました。&lt;/p>
 &lt;p>今回はWebサイトの中でファビコンを1サイズで用意して、さらにそのファビコンをダークモードに対応させてみたいと思います。&lt;/p>
 &lt;h2 id="ダークモードって何">ダークモードって何？&lt;/h2>
 &lt;p>ダークモードとは画面の色を反転して表示するスマホやタブレットに追加された機能になります。&lt;br>
