@@ -3,18 +3,18 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
-<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」 - NLP</title>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。"><title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」 - NLP</title>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-<meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
+<meta property="og:description" content="'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T06:06:13+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T06:08:40+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-<meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-14-22-suzuki/2021-12-23-bash.jpg'})</script>
@@ -100,7 +100,7 @@ Web開発
 2022.01.19
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 5分
+読了時間: 4分
 </time>
 </div>
 </header>
@@ -113,10 +113,32 @@ Web開発
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h1 id=はじめに>はじめに</h1>
-<p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
-<p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
-<h1 id=関連記事>関連記事</h1>
+<h1 id=存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</h1>
+<p><font color=orange><b>存在を確認してディレクトリを作成します。</b></font><br>
+&lsquo;mkdir&rsquo;コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの&rsquo; -d &lsquo;オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。&lsquo;directory_exist.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:directory_exist.sh data-lang=bash:directory_exist.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;ディレクトリ名を入力して下さい。&#34;</span><span class=p>;</span>
+<span class=nb>read</span> ndir<span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> -d <span class=s2>&#34;</span><span class=nv>$ndir</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリが存在します。&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=sb>`</span>mkdir <span class=nv>$ndir</span><span class=sb>`</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリを作成しました。&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash directory_exist.sh
+ディレクトリ名を入力して下さい。
+suzuki
+ディレクトリを作成しました。
+$ ls
+suzuki/
+$ bash directory_exist.sh
+ディレクトリ名を入力して下さい。
+suzuki
+ディレクトリが存在します。
+$
+</code></pre><h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０１．Hello World】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０２．echo コマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-03-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０３．コメント】</a><br>
@@ -147,32 +169,10 @@ Web開発
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２８．dateコマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２９．waitコマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【３０．sleepコマンド】</a></p>
-<h1 id=存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</h1>
-<p><font color=orange><b>存在を確認してディレクトリを作成します。</b></font><br>
-&lsquo;mkdir&rsquo;コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの&rsquo; -d &lsquo;オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。&lsquo;directory_exist.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:directory_exist.sh data-lang=bash:directory_exist.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;ディレクトリ名を入力して下さい。&#34;</span><span class=p>;</span>
-<span class=nb>read</span> ndir<span class=p>;</span>
-<span class=k>if</span> <span class=o>[</span> -d <span class=s2>&#34;</span><span class=nv>$ndir</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
-  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリが存在します。&#34;</span><span class=p>;</span>
-<span class=k>else</span>
-  <span class=sb>`</span>mkdir <span class=nv>$ndir</span><span class=sb>`</span><span class=p>;</span>
-  <span class=nb>echo</span> <span class=s2>&#34;ディレクトリを作成しました。&#34;</span><span class=p>;</span>
-<span class=k>fi</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash directory_exist.sh
-ディレクトリ名を入力して下さい。
-suzuki
-ディレクトリを作成しました。
-$ ls
-suzuki/
-$ bash directory_exist.sh
-ディレクトリ名を入力して下さい。
-suzuki
-ディレクトリが存在します。
-$
-</code></pre><h1 id=書籍の紹介>書籍の紹介</h1>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト３」</a></p>
+<h1 id=書籍の紹介>書籍の紹介</h1>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
 <div class="columns amazon-image">
@@ -215,6 +215,44 @@ $
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>bashで「>>」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 </p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
 <header class=article-header>
 <div class=article-image>
@@ -229,15 +267,15 @@ $
 <div class=article-details>
 <h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト３」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -246,7 +284,7 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト３」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
 </div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
 </div>
@@ -267,45 +305,7 @@ $
 <div class=article-details>
 <h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
 </div>
 </a>
 </article>
