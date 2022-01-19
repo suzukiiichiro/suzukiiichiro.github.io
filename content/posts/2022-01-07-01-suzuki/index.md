@@ -19,12 +19,6 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 この記事では、bashプログラミングの次のトピックについて説明します。
 
 
-関連記事
-[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
-
-
 ## Hello World
 <font color=orange><b>はじめてのbashコマンド「echo」</b></font>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。
@@ -390,10 +384,13 @@ $
 ## ２９．waitコマンド
 ## ３０．sleepコマンド
 -->
+
 # 関連記事
-[ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+
+
 
 # 書籍の紹介
 {{% amazon
