@@ -1,21 +1,84 @@
-.pagination {
-  margin: 20px 0 40px;
-  justify-content: center;
-  box-shadow: none;
-  background-color: transparent;
-  .page-link {
-    padding: 5px 10px;
-    border-radius: 4px;
+// .pagination {
+//   margin: 20px 0 40px;
+//   justify-content: center;
+//   box-shadow: none;
+//   background-color: transparent;
+//   .page-link {
+//     padding: 5px 10px;
+//     border-radius: 4px;
+//     background-color: transparent;
+//     border: 1px solid var(--pagenation-border);
+//     color: var(--pagenation-text);
+//     ~ .page-link {
+//       margin-left: 10px;
+//     }
+//     &.current {
+//       color: #FFF;
+//       background-color: var(--pagenation-current);
+//       border-color: var( --pagenation-border-current);
+//     }
+//   }
+// }
+
+.pagination-area {
+  margin: 20px auto 40px;
+  .pagination {
+    justify-content: center;
+    box-shadow: none;
     background-color: transparent;
-    border: 1px solid var(--pagenation-border);
-    color: var(--pagenation-text);
-    ~ .page-link {
-      margin-left: 10px;
-    }
-    &.current {
-      color: #FFF;
-      background-color: var(--pagenation-current);
-      border-color: var( --pagenation-border-current);
+    list-style: none;
+    display: flex;
+    margin: 0;
+    // background-color: var(--card-background);
+    // box-shadow: var(--shadow-l1);
+    // border-radius: var(--card-border-radius);
+    overflow: hidden;
+    padding: 0;
+    // flex-wrap: wrap;
+    // margin: var(--section-separation) auto;
+    li {
+      ~ li {
+        margin-left: 6px;
+      }
+      &.disabled {
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      &.page-item {
+        &.active {
+          font-weight: bold;
+          // background-color: var(--card-background-selected);
+          // color: var(--card-text-color-main);
+          a {
+            color: #FFF;
+            background-color: var(--pagenation-current);
+            border-color: var(--pagenation-border-current);
+          }
+        }
+        a {
+          padding: 5px 12px;
+          border-radius: 4px;
+          display: inline-flex;
+          color: var(--card-text-color-secondary);
+          &:hover {
+            cursor: pointer
+          }
+        }
+      }
+      @include mq(smp) {
+        // display: none;
+        ~ li {
+          margin-left: 4px;
+        }
+        // &.smp-nav--show {
+          // display: inherit !important;
+          a {
+            padding: 4px 18px;
+            font-size: 1em;
+            // border: 1px solid #DDD;
+          }
+        // }
+      }
     }
   }
 }
