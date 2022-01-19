@@ -178,24 +178,41 @@ footer.site-footer {
     line-height: 1.2;
     color: var(--card-text-color-main); }
 
-.pagination {
-  margin: 20px 0 40px;
-  justify-content: center;
-  box-shadow: none;
-  background-color: transparent; }
-  .pagination .page-link {
-    padding: 5px 10px;
-    border-radius: 4px;
+.pagination-area {
+  margin: 20px auto 40px; }
+  .pagination-area .pagination {
+    justify-content: center;
+    box-shadow: none;
     background-color: transparent;
-    border: 1px solid var(--pagenation-border);
-    color: var(--pagenation-text); }
-    .pagination .page-link ~ .page-link {
-      margin-left: 10px; }
-    .pagination .page-link.current {
-      color: #FFF;
-      background-color: var(--pagenation-current);
-      border-color: var(--pagenation-border-current); }
-
+    list-style: none;
+    display: flex;
+    margin: 0;
+    overflow: hidden;
+    padding: 0; }
+    .pagination-area .pagination li ~ li {
+      margin-left: 6px; }
+    .pagination-area .pagination li.disabled {
+      opacity: 0.2;
+      pointer-events: none; }
+    .pagination-area .pagination li.page-item.active {
+      font-weight: bold; }
+      .pagination-area .pagination li.page-item.active a {
+        color: #FFF;
+        background-color: var(--pagenation-current);
+        border-color: var(--pagenation-border-current); }
+    .pagination-area .pagination li.page-item a {
+      padding: 5px 12px;
+      border-radius: 4px;
+      display: inline-flex;
+      color: var(--card-text-color-secondary); }
+      .pagination-area .pagination li.page-item a:hover {
+        cursor: pointer; }
+    @media screen and (max-width: 640px) {
+      .pagination-area .pagination li ~ li {
+        margin-left: 4px; }
+      .pagination-area .pagination li a {
+        padding: 4px 18px;
+        font-size: 1em; } }
 .section-card .section-term {
   font-size: 1.2rem;
   display: flex;
