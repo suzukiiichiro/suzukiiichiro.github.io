@@ -4867,12 +4867,44 @@ $ ./HelloWorld.sh
 &lt;/code>&lt;/pre>&lt;div class="tips-area tips">
 &lt;dl>
 &lt;dt>ヒント&lt;/dt>
-&lt;dd>考え方ですが、bashコマンドでファイルを実行する場合のメリットは、ファイルに実行権限をやみくもに与える必要がないことです。同時に、第三者が簡単にファイルを実行できる、操作をあやまって実行してしまう事を防ぐことができます。&lt;/dd>
-&lt;dd>実行権限を与える方法は、一般的ではありますが、注意も必要です。&lt;/dd>
+&lt;dd>$ ./ でファイルを実行する場合、ソースファイルの先頭行に記載されている&lt;/dd>
+&lt;dd>
+&lt;p>#!/bin/bash&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>という記述をつかって実行されます。&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>$ ./&amp;lt;ファイル名&amp;gt;&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>で実行した場合は、bashコマンド（/bin/bash )を使って実行することを、ソースファイルの先頭で宣言している。という事になります。&lt;/p>
+&lt;/dd>
+&lt;dd>このソースファイルの1行目の記述を「シェバン」と言います。&lt;/dd>
+&lt;dd>
+&lt;p>/usr/local/bin/awk&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>にあるコマンドを使ってソースファイルを実行( ./&amp;lt;ファイル名&amp;gt;）したい場合は、ソースファイルの先頭行に&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>#!/usr/local/bin/awk&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>と、記述します。&lt;/p>
+&lt;/dd>
 &lt;/dl>
 &lt;/div>
 &lt;p>chmod の実行権限には +x で実行権限を付与する方法の他、0755 などの数字で付与する場合もあります。&lt;br>
 これらを&lt;font color=red>パーミッション&lt;/font>と言います。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>考え方ですが、bashコマンドでファイルを実行する場合のメリットは、ファイルに実行権限をやみくもに与える必要がないことです。&lt;/dd>
+&lt;dd>同時に、第三者が簡単にファイルを実行できる事を防ぐ、自分自身が誤ってファイルを実行してしまうというケアレスミスを防ぐことができます。&lt;/dd>
+&lt;dd>実行権限を与える方法は、一般的ではありますが、注意も必要です。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;p>パーミッションの確認&lt;br>
 ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ls -l
