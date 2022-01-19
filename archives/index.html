@@ -12,7 +12,7 @@
 <meta property="og:description" content>
 <meta property="og:url" content="https://suzukiiichiro.github.io/archives/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Page"><meta property="article:published_time" content="2021-12-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-01-19T05:53:47+00:00">
+<meta property="og:type" content="article"><meta property="article:section" content="Page"><meta property="article:published_time" content="2021-12-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-01-19T06:05:36+00:00">
 <meta name=twitter:title content="Archives">
 <meta name=twitter:description content><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
@@ -293,7 +293,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
 </div>
 </a>
 </article>
@@ -312,7 +312,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
 </div>
 </a>
 </article>
@@ -331,7 +331,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
 </div>
 </a>
 </article>
@@ -350,7 +350,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
 </div>
 </a>
 </article>
@@ -369,7 +369,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
 </div>
 </a>
 </article>
@@ -388,7 +388,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>bashで「>>」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 </p>
 </div>
 </a>
 </article>
@@ -407,7 +407,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
 </div>
 </a>
 </article>
@@ -426,7 +426,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
 </div>
 </a>
 </article>
@@ -445,7 +445,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
 </div>
 </a>
 </article>
@@ -464,7 +464,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
 </div>
 </a>
 </article>
@@ -483,7 +483,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
 </div>
 </a>
 </article>
@@ -540,7 +540,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１９．関数パラメーターを使用する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bashは、関数宣言時に関数パラメーターまたは引数を宣言できません。ただし、他の変数を使用して、関数内でパラメーターを使用できます。関数の呼び出し時に2つの値が渡された場合、値の読み取りには$1と$2の変数が使用されます。'function_parameter.sh'という名前のファイルを作成し、次のコードを追加します。ここで、関数 'Rectangle_Area'は、パラメーター値に基づいて長方形の面積を計算します。</p>
 </div>
 </a>
 </article>
@@ -559,7 +559,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１８．関数を作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。'function_example.sh'という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。</p>
 </div>
 </a>
 </article>
@@ -578,7 +578,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１７．変数に2つの数値を追加します】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。</p>
 </div>
 </a>
 </article>
@@ -597,7 +597,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１６．文字列の部分文字列を取得する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。</p>
 </div>
 </a>
 </article>
@@ -616,7 +616,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。</p>
 </div>
 </a>
 </article>
@@ -635,7 +635,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>名前付きのコマンドライン引数を読み取る方法を示します。'command_line_names.sh'という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。</p>
 </div>
 </a>
 </article>
@@ -654,7 +654,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。</p>
 </div>
 </a>
 </article>
@@ -673,7 +673,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１２．case 文】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。'case_example.sh'という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。</p>
 </div>
 </a>
 </article>
@@ -692,7 +692,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１１．else if と else】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>else if条件の使用は、bashでは「elif」を定義します。'elseif_example.sh'という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。</p>
 </div>
 </a>
 </article>
@@ -711,7 +711,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。</p>
 </div>
 </a>
 </article>
@@ -768,7 +768,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【９．and 条件を if 文で使う】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。</p>
 </div>
 </a>
 </article>
@@ -787,7 +787,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>単数、または複数の条件でif条件を使用できます。このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。ここでは、変数nに10が割り当てられています。$nの値が10未満の場合、出力は「1桁の数値です」になります。それ以外の場合、出力は「2桁の数値です」になります。比較のために、ここでは「-lt」を使用しています。</p>
 </div>
 </a>
 </article>
@@ -806,7 +806,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【７．対話型入力】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'read'コマンドは、bashでユーザーから入力を受け取るために使用されます。'user_input.sh'という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。</p>
 </div>
 </a>
 </article>
@@ -825,7 +825,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【６．for ループ】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>基本的なforループ宣言を示します。'for_example.sh'という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。</p>
 </div>
 </a>
 </article>
@@ -844,7 +844,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【５．while ループ】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。この例では、whileループが5回繰り返されます。count変数の値は、各ステップで1ずつ増加します。count変数の値が5になると、whileループは終了します。</p>
 </div>
 </a>
 </article>
@@ -863,7 +863,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【４．マルチラインコメント】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>bashではさまざまな方法で複数行コメントを使用できます。次の例に簡単な方法を示します。'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。ここでは、「:」と「'」でbashで複数行コメントを実現しています。</p>
 </div>
 </a>
 </article>
@@ -882,7 +882,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【３．コメント】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。'comment_example.sh'という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。</p>
 </div>
 </a>
 </article>
@@ -901,7 +901,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【２．echo コマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>さまざまなオプションでechoコマンドを使用できます。次の例では、いくつかの便利なオプションについて説明します。オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。'-n'オプションは、改行なしでテキストを印刷するために使用され、'-e'オプションは、出力からバックスラッシュ文字を削除するために使用されます。'echo_example.sh'という名前の新しいbashファイルを作成し、次のスクリプトを追加します。</p>
 </div>
 </a>
 </article>
@@ -920,7 +920,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.07</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。</p>
 </div>
 </a>
 </article>

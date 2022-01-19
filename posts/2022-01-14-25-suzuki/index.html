@@ -3,18 +3,18 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
-<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」 - NLP</title>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="bashで「」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 "><title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」 - NLP</title>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
-<meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
+<meta property="og:description" content="bashで「」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 ">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T05:53:48+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T06:05:36+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
-<meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="bashで「」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 "><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-14-25-suzuki/2021-12-23-bash.jpg'})</script>
@@ -100,7 +100,7 @@ Web開発
 2022.01.19
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 5分
+読了時間: 4分
 </time>
 </div>
 </header>
@@ -113,40 +113,6 @@ Web開発
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h1 id=はじめに>はじめに</h1>
-<p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
-<p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
-<h1 id=関連記事>関連記事</h1>
-<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０１．Hello World】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０２．echo コマンド】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-03-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０３．コメント】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-04-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０４．マルチラインコメント】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０５．while ループ】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-06-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０６．for ループ】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-07-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０７．対話型入力】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０８．If 文】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０９and 条件を if 文で使う】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１０．or 条件を if文で使う】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-11-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１１．else if と else】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-12-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１２．case 文】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１３．コマンドラインから引数を取得】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１４．名前を使用してコマンドラインから引数を取得する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１５．変数に2つの文字列を組み合わせる】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-16-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１６．文字列の部分文字列を取得する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-17-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１７．変数に2つの数値を追加します】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-18-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１８．関数を作成する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-19-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１９．関数パラメーターを使用する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２０．スクリプトからの戻り値を渡す】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２１．ディレクトリを作成する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２２．存在を確認してディレクトリを作成する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２３．ファイルを読む】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２４．ファイルを削除する】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２５．ファイルに追加】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２６．ファイルが存在するかどうかを確認】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２７．mailコマンド】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２８．dateコマンド】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２９．waitコマンド】</a><br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【３０．sleepコマンド】</a></p>
 <h1 id=ファイルに追加>ファイルに追加</h1>
 <p><font color=orange><b>ファイルに追加：</b></font><br>
 bashで「&#187;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&lsquo;append_file.sh &lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。</p>
@@ -178,6 +144,40 @@ cat book.txt<span class=p>;</span>
 $
 </code></pre><p><font color=red>「>」はファイルを新しく作成して追記します。<br>
 「&#187;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&#187;」を行うと、ついするファイルがないため、エラーとなります。ファイルの存在を確認するための方法を次の章で説明します。</font></p>
+<h1 id=関連記事>関連記事</h1>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０１．Hello World】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０２．echo コマンド】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-03-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０３．コメント】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-04-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０４．マルチラインコメント】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０５．while ループ】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-06-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０６．for ループ】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-07-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０７．対話型入力】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０８．If 文】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０９and 条件を if 文で使う】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１０．or 条件を if文で使う】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-11-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１１．else if と else】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-12-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１２．case 文】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１３．コマンドラインから引数を取得】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１４．名前を使用してコマンドラインから引数を取得する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１５．変数に2つの文字列を組み合わせる】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-16-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１６．文字列の部分文字列を取得する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-17-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１７．変数に2つの数値を追加します】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-18-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１８．関数を作成する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-19-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【１９．関数パラメーターを使用する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２０．スクリプトからの戻り値を渡す】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２１．ディレクトリを作成する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２２．存在を確認してディレクトリを作成する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２３．ファイルを読む】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２４．ファイルを削除する】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２５．ファイルに追加】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２６．ファイルが存在するかどうかを確認】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２７．mailコマンド】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２８．dateコマンド】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２９．waitコマンド】</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【３０．sleepコマンド】</a></p>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト３」</a></p>
 <h1 id=書籍の紹介>書籍の紹介</h1>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
@@ -221,10 +221,10 @@ $
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -233,17 +233,17 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -252,9 +252,9 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
 </div>
 </a>
 </article>
@@ -273,15 +273,15 @@ $
 <div class=article-details>
 <h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -290,17 +290,17 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト３」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -309,7 +309,7 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト３」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
 </div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
 </div>

@@ -12,7 +12,7 @@
 <meta property="og:description" content="最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta property="og:url" content="https://suzukiiichiro.github.io/tags/bash/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2022-01-19T05:53:48+00:00 ">
+<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2022-01-19T06:05:36+00:00 ">
 <meta name=twitter:title content="Tag: Bash - NLP">
 <meta name=twitter:description content="最新技術やプログラム、デザインなど様々な情報を提供するサイト"><link rel=alternate type=application/rss+xml href=https://suzukiiichiro.github.io/tags/bash/index.xml><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
@@ -103,7 +103,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
 </div>
 </a>
 </article>
@@ -141,7 +141,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。</p>
 </div>
 </a>
 </article>
@@ -160,7 +160,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１１．else if と else】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>else if条件の使用は、bashでは「elif」を定義します。'elseif_example.sh'という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。</p>
 </div>
 </a>
 </article>
@@ -179,7 +179,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１２．case 文】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。'case_example.sh'という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。</p>
 </div>
 </a>
 </article>
@@ -198,7 +198,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。</p>
 </div>
 </a>
 </article>
@@ -217,7 +217,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>名前付きのコマンドライン引数を読み取る方法を示します。'command_line_names.sh'という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。</p>
 </div>
 </a>
 </article>
@@ -236,7 +236,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。</p>
 </div>
 </a>
 </article>
@@ -255,7 +255,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１６．文字列の部分文字列を取得する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。</p>
 </div>
 </a>
 </article>
@@ -274,7 +274,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>【１７．変数に2つの数値を追加します】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.12</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。</p>
 </div>
 </a>
 </article>

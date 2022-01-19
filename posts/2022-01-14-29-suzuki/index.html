@@ -3,18 +3,18 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
-<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」 - NLP</title>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。"><title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」 - NLP</title>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css><meta property="og:title" content="【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
-<meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
+<meta property="og:description" content="waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T05:53:48+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-19T06:05:36+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
-<meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-14-29-suzuki/2021-12-23-bash.jpg'})</script>
@@ -113,10 +113,21 @@ Web開発
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h1 id=はじめに>はじめに</h1>
-<p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。</p>
-<p>この記事では、bashプログラミングの次のトピックについて説明します。</p>
-<h1 id=関連記事>関連記事</h1>
+<h1 id=waitコマンド>waitコマンド</h1>
+<p><font color=orange><b>waitコマンド：</b></font><br>
+waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:wait_example.sh data-lang=bash:wait_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Wait command&#34;</span> <span class=p>&amp;</span>
+<span class=nv>process_id</span><span class=o>=</span><span class=nv>$!</span>
+<span class=nb>wait</span> <span class=nv>$process_id</span>
+<span class=nb>echo</span> <span class=s2>&#34;Exited with status </span><span class=nv>$?</span><span class=s2>&#34;</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash wait_example.sh
+Wait command
+Exited with status 0
+$
+</code></pre><h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０１．Hello World】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０２．echo コマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-03-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【０３．コメント】</a><br>
@@ -147,21 +158,10 @@ Web開発
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２８．dateコマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【２９．waitコマンド】</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/ target=_blank rel=noopener>ざっくりわかる シェルスクリプト【３０．sleepコマンド】</a></p>
-<h1 id=waitコマンド>waitコマンド</h1>
-<p><font color=orange><b>waitコマンド：</b></font><br>
-waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:wait_example.sh data-lang=bash:wait_example.sh><span class=cp>#!/bin/bash
-</span><span class=cp></span>
-<span class=nb>echo</span> <span class=s2>&#34;Wait command&#34;</span> <span class=p>&amp;</span>
-<span class=nv>process_id</span><span class=o>=</span><span class=nv>$!</span>
-<span class=nb>wait</span> <span class=nv>$process_id</span>
-<span class=nb>echo</span> <span class=s2>&#34;Exited with status </span><span class=nv>$?</span><span class=s2>&#34;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash wait_example.sh
-Wait command
-Exited with status 0
-$
-</code></pre><h1 id=書籍の紹介>書籍の紹介</h1>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト３」</a></p>
+<h1 id=書籍の紹介>書籍の紹介</h1>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
 <div class="columns amazon-image">
@@ -204,6 +204,44 @@ $
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
 <header class=article-header>
 <div class=article-image>
@@ -218,7 +256,7 @@ $
 <div class=article-details>
 <h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
 </div>
 </a>
 </article>
@@ -237,26 +275,7 @@ $
 <div class=article-details>
 <h2 class=article-title>【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
 </div>
 </a>
 </article>
@@ -275,26 +294,7 @@ $
 <div class=article-details>
 <h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
 </div>
 </a>
 </article>
