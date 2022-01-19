@@ -1,5 +1,6 @@
 ---
 title: "e-Stat でGoogle Custom Search APIを使おう（１）"
+description: "2022年1月時点でのGoogle Custom Search APIの設定方法を説明します。APIキーの作成、検索エンジンIDの取得が中心です。"
 date: 2022-01-19T00:31:13+09:00
 draft: false
 image: anal.jpg

@@ -1,5 +1,6 @@
 ---
 title: "s-Stat 時系列データで異常値を検知しよう（１）"
+description: "ここではe-Statデータで時系列データの異常値検知の必要性を説明し、前提条件としてpythonを利用してcsvの読み込み方を説明します。Pandasを利用します。"
 date: 2022-01-14T13:40:13+09:00
 draft: false
 image: anal.jpg

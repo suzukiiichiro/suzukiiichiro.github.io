@@ -1,5 +1,6 @@
 ---
 title: "e-Statで新着一覧を取得しよう"
+description: "ここではs-StatのAPIを利用して、新着一覧を取得する方法を説明します。wgetを利用してAPIにアクセスします。STAT_CODE、TABLE_INFを利用します。"
 date: 2022-01-12T13:40:13+09:00
 draft: false
 image: anal.jpg

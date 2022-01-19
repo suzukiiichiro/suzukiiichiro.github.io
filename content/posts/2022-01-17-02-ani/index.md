@@ -1,5 +1,6 @@
 ---
 title: "s-Stat 時系列データで異常値を検知しよう（３）"
+description: "ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。"
 date: 2022-01-17T17:46:13+09:00
 draft: false
 image: anal.jpg
