@@ -2653,13 +2653,6 @@ $
 &lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト３」</title><link>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト３」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
-&lt;p>関連記事&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h2 id="関数からの戻り値の受け渡し">関数からの戻り値の受け渡し&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>関数からの戻り値の受け渡し：&lt;/b>&lt;/font>&lt;br>
 Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。&amp;lsquo;function_return.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。&lt;/p>
@@ -2869,13 +2862,13 @@ sleep &lt;span class="m">5&lt;/span>
 “Wait for 5 seconds”
 “Completed”
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+&lt;/code>&lt;/pre>&lt;p>#関連記事&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
+>【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
+>【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
+>【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
@@ -4219,13 +4212,6 @@ bash-5.1$
 &lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト２」</title><link>https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/</link><pubDate>Wed, 12 Jan 2022 12:30:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト２」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
-&lt;p>関連記事&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h2 id="or-条件を-if文で使う">or 条件を if文で使う&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>orロジックでifステートメントを使用する：&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;||&amp;lsquo;は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。&lt;/p>
@@ -4437,11 +4423,11 @@ bash-5.1$
 -->
 &lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+>【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
+>【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
+>【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
@@ -6029,13 +6015,6 @@ $
 &lt;/aside></description></item><item><title>ざっくりわかる「シェルスクリプト１」</title><link>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</link><pubDate>Fri, 07 Jan 2022 10:03:12 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.jpg" alt="Featured image of post ざっくりわかる「シェルスクリプト１」" />&lt;h1 id="はじめに">はじめに&lt;/h1>
 &lt;p>Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。&lt;/p>
 &lt;p>この記事では、bashプログラミングの次のトピックについて説明します。&lt;/p>
-&lt;p>関連記事&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h2 id="hello-world">Hello World&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>はじめてのbashコマンド「echo」&lt;/b>&lt;/font>&lt;br>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。&lt;/p>
@@ -6315,11 +6294,11 @@ $
 -->
 &lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
+>【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
+>【まとめ版】ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
+>【まとめ版】ざっくりわかるシェルスクリプト３」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
