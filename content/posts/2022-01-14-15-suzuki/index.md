@@ -1,6 +1,6 @@
 ---
 title: "【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。"
 date: 2022-01-12T12:30:57+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -12,10 +12,35 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
+
+# 変数に2つの文字列を組み合わせる
+<font color=orange><b>文字列変数を組み合わせる：</b></font>
+文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。
+
+``` bash:string_combine.sh
+#!/bin/bash
+
+string1="Apple";
+string2="Mac OS";
+
+echo "$string1 $string2";
+
+string3="$string1 $string2";
+string3+=" は、とても優れたＯＳです。" ;
+
+echo $string3;
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash string_combine.sh
+Apple Mac OS
+Apple Mac OS は、とても優れたＯＳです。
+$
+```
+<font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font>
 
 
 
@@ -52,34 +77,9 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
-# 変数に2つの文字列を組み合わせる
-<font color=orange><b>文字列変数を組み合わせる：</b></font>
-文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。
-
-``` bash:string_combine.sh
-#!/bin/bash
-
-string1="Apple";
-string2="Mac OS";
-
-echo "$string1 $string2";
-
-string3="$string1 $string2";
-string3+=" は、とても優れたＯＳです。" ;
-
-echo $string3;
-```
-
-bashコマンドでファイルを実行します。
-
-```
-$ bash string_combine.sh
-Apple Mac OS
-Apple Mac OS は、とても優れたＯＳです。
-$
-```
-<font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font>
-
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 # 書籍の紹介

@@ -1,6 +1,6 @@
 ---
 title: "【２９．waitコマンド】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -12,10 +12,30 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
+
+
+# waitコマンド
+<font color=orange><b>waitコマンド：</b></font>
+waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。
+
+``` bash:wait_example.sh
+#!/bin/bash
+
+echo "Wait command" &
+process_id=$!
+wait $process_id
+echo "Exited with status $?"
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash wait_example.sh
+Wait command
+Exited with status 0
+$
+```
 
 
 # 関連記事
@@ -51,27 +71,9 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
-# waitコマンド
-<font color=orange><b>waitコマンド：</b></font>
-waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。
-
-``` bash:wait_example.sh
-#!/bin/bash
-
-echo "Wait command" &
-process_id=$!
-wait $process_id
-echo "Exited with status $?"
-```
-
-bashコマンドでファイルを実行します。
-
-```
-$ bash wait_example.sh
-Wait command
-Exited with status 0
-$
-```
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 

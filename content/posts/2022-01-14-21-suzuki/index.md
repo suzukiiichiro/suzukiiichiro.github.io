@@ -1,6 +1,6 @@
 ---
 title: "【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -12,11 +12,30 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
 
+# ディレクトリを作成する
+<font color=orange><b>ディレクトリを作成する：</b></font>
+Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。
+
+``` bash:make_directory.sh
+#!/bin/bash
+
+echo "ディレクトリ名を入力して下さい。"
+read newdir
+
+`mkdir "$newdir"`
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash make_directory.sh
+ディレクトリ名を入力して下さい。
+suzuki
+$ ls
+suzuki/
+```
 
 
 # 関連記事
@@ -51,33 +70,10 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【２９．waitコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/)
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
-関連記事
-[ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
-# ディレクトリを作成する
-<font color=orange><b>ディレクトリを作成する：</b></font>
-Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。
-
-``` bash:make_directory.sh
-#!/bin/bash
-
-echo "ディレクトリ名を入力して下さい。"
-read newdir
-
-`mkdir "$newdir"`
-```
-
-bashコマンドでファイルを実行します。
-
-```
-$ bash make_directory.sh
-ディレクトリ名を入力して下さい。
-suzuki
-$ ls
-suzuki/
-```
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 

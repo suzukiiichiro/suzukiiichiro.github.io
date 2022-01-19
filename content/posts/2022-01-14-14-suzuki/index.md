@@ -1,6 +1,6 @@
 ---
 title: "【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "名前付きのコマンドライン引数を読み取る方法を示します。'command_line_names.sh'という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。"
 date: 2022-01-12T12:30:57+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -13,10 +13,35 @@ tags:
   - 鈴木維一郎
 ---
 
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
+# 名前を使用してコマンドラインから引数を取得する
+<font color=orange><b>コマンドラインから名前付きの引数を取得：</b></font>
+名前付きのコマンドライン引数を読み取る方法を示します。'command_line_names.sh'という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。
+
+``` bash:command_line_names.sh
+#!/bin/bash
+
+for arg in "$@";do
+  index=$(echo $arg | cut -f1 -d=);
+  val=$(echo $arg | cut -f2 -d=);
+  case $index in
+    X) x=$val;;
+    Y) y=$val;;
+    *)
+  esac
+done
+
+((result=x+y));
+echo "X+Y=$result";
+```
+
+bashコマンドで二つのコマンドライン引数を使用して、ファイルを実行します。
+
+```
+$ bash command_line_names.sh X=45 Y=30
+X+Y=75
+$
+```
 
 
 # 関連記事
@@ -52,35 +77,10 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
-# 名前を使用してコマンドラインから引数を取得する
-<font color=orange><b>コマンドラインから名前付きの引数を取得：</b></font>
-名前付きのコマンドライン引数を読み取る方法を示します。'command_line_names.sh'という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。
-
-``` bash:command_line_names.sh
-#!/bin/bash
-
-for arg in "$@";do
-  index=$(echo $arg | cut -f1 -d=);
-  val=$(echo $arg | cut -f2 -d=);
-  case $index in
-    X) x=$val;;
-    Y) y=$val;;
-    *)
-  esac
-done
-
-((result=x+y));
-echo "X+Y=$result";
-```
-
-bashコマンドで二つのコマンドライン引数を使用して、ファイルを実行します。
-
-```
-$ bash command_line_names.sh X=45 Y=30
-X+Y=75
-$
-```
 
 
 # 書籍の紹介

@@ -1,6 +1,6 @@
 ---
 title: "【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -13,11 +13,36 @@ tags:
   - 鈴木維一郎
 ---
 
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
 
+# 関数からの戻り値の受け渡し
+<font color=orange><b>関数からの戻り値の受け渡し：</b></font>
+Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。
+
+``` bash:function_return.sh
+#!/bin/bash
+
+function greeting(){
+  str="こんにちは、$name";
+  echo "$str";
+}
+
+echo "あなたの名前を入力して下さい";
+read name;
+
+val=$(greeting);
+echo "関数からの戻り値は「${val}」です。";
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash function_return.sh
+あなたの名前を入力して下さい
+suzuki
+関数からの戻り値は「こんにちは、suzuki」です。
+$
+```
 
 
 # 関連記事
@@ -53,34 +78,9 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
-# 関数からの戻り値の受け渡し
-<font color=orange><b>関数からの戻り値の受け渡し：</b></font>
-Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。
-
-``` bash:function_return.sh
-#!/bin/bash
-
-function greeting(){
-  str="こんにちは、$name";
-  echo "$str";
-}
-
-echo "あなたの名前を入力して下さい";
-read name;
-
-val=$(greeting);
-echo "関数からの戻り値は「${val}」です。";
-```
-
-bashコマンドでファイルを実行します。
-
-```
-$ bash function_return.sh
-あなたの名前を入力して下さい
-suzuki
-関数からの戻り値は「こんにちは、suzuki」です。
-$
-```
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 

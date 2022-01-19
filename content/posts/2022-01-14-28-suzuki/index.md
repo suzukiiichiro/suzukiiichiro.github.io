@@ -1,6 +1,6 @@
 ---
 title: "【２８．dateコマンド】ざっくりわかる「シェルスクリプト」"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
 image: 2021-12-23-bash.jpg
@@ -12,10 +12,35 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
+
+# dateコマンド
+<font color=orange><b>現在の日付を解析する：</b></font>
+dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。
+
+``` bash:date_parse.sh
+#!/bin/bash
+
+Year=`date +%Y`;
+Month=`date +%m`;
+Day=`date +%d`;
+Hour=`date +%H`;
+Minute=`date +%M`;
+Second=`date +%S`;
+echo `date`;
+echo "Current Date is: $Day-$Month-$Year";
+echo "Current Time is: $Hour:$Minute:$Second";
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash date_parse.sh
+2022年 1月13日 木曜日 12時19分06秒 JST
+Current Date is: 13-01-2022
+Current Time is: 12:19:06
+$
+```
 
 
 # 関連記事
@@ -51,34 +76,10 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
-# dateコマンド
-<font color=orange><b>現在の日付を解析する：</b></font>
-dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。
-
-``` bash:date_parse.sh
-#!/bin/bash
-
-Year=`date +%Y`;
-Month=`date +%m`;
-Day=`date +%d`;
-Hour=`date +%H`;
-Minute=`date +%M`;
-Second=`date +%S`;
-echo `date`;
-echo "Current Date is: $Day-$Month-$Year";
-echo "Current Time is: $Hour:$Minute:$Second";
-```
-
-bashコマンドでファイルを実行します。
-
-```
-$ bash date_parse.sh
-2022年 1月13日 木曜日 12時19分06秒 JST
-Current Date is: 13-01-2022
-Current Time is: 12:19:06
-$
-```
 
 
 

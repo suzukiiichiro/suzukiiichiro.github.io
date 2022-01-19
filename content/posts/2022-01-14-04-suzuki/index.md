@@ -1,7 +1,7 @@
 ---
 title: "【４．マルチラインコメント】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
-description: "ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "bashではさまざまな方法で複数行コメントを使用できます。次の例に簡単な方法を示します。'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。ここでは、「:」と「'」でbashで複数行コメントを実現しています。"
 draft: false
 image: 2021-12-23-bash.jpg
 categories:
@@ -12,11 +12,33 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
 
+# マルチラインコメント
+<font color=orange><b> 複数行コメントの使用</b></font>
+bashではさまざまな方法で複数行コメントを使用できます。
+次の例に簡単な方法を示します。
+'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。
+ここでは、「:」と「'」でbashで複数行コメントを実現しています。
+次のスクリプトは、5の2乗を計算します。
+
+``` bash:multiline-comment.sh
+#!/bin/bash
+
+: '
+次のスクリプトは、
+数値の2乗値5を計算します。
+'
+((area=5*5));
+echo "$area";
+```
+bashコマンドでファイルを実行します。
+
+```
+$ bash multiline-comment.sh
+25
+$
+```
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
@@ -51,31 +73,9 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
-# マルチラインコメント
-<font color=orange><b> 複数行コメントの使用</b></font>
-bashではさまざまな方法で複数行コメントを使用できます。
-次の例に簡単な方法を示します。
-'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。
-ここでは、「:」と「'」でbashで複数行コメントを実現しています。
-次のスクリプトは、5の2乗を計算します。
-
-``` bash:multiline-comment.sh
-#!/bin/bash
-
-: '
-次のスクリプトは、
-数値の2乗値5を計算します。
-'
-((area=5*5));
-echo "$area";
-```
-bashコマンドでファイルを実行します。
-
-```
-$ bash multiline-comment.sh
-25
-$
-```
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 # 書籍の紹介

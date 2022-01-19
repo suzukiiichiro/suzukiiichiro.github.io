@@ -1,7 +1,7 @@
 ---
 title: "【５．while ループ】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
-description: "ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。この例では、whileループが5回繰り返されます。count変数の値は、各ステップで1ずつ増加します。count変数の値が5になると、whileループは終了します。"
 draft: false
 image: 2021-12-23-bash.jpg
 categories:
@@ -12,10 +12,38 @@ tags:
   - Bash
   - 鈴木維一郎
 ---
-# はじめに
-Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな目的に使用できます。したがって、bashプログラミングの基本に関する知識はすべてのLinuxユーザーにとって重要です。この記事は、bashプログラミングの基本的な考え方を理解するのに役立ちます。ここでは、bashスクリプトの一般的な操作のほとんどを、非常に簡単な例で説明します。
 
-この記事では、bashプログラミングの次のトピックについて説明します。
+
+# while ループ
+<font color=orange><b> whileループの使用</b></font>
+whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。
+この例では、whileループが5回繰り返されます。
+count変数の値は、各ステップで1ずつ増加します。
+count変数の値が5になると、whileループは終了します。
+
+``` bash:while_exapmle.sh
+#!/bin/bash
+
+valid=true;
+count=1
+while [ "$valid" ];do
+  echo "$count";
+  if [ "$count" -eq 5 ];then
+    break;
+  fi
+  ((count++));
+done
+```
+bashコマンドでファイルを実行します。
+```
+$ bash while_example.sh
+1
+2
+3
+4
+5
+$
+```
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
@@ -50,35 +78,9 @@ Bashスクリプトは、シェルコマンドの実行、複数のコマンド�
 [ざっくりわかる シェルスクリプト【３０．sleepコマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/)
 
 
-# while ループ
-<font color=orange><b> whileループの使用</b></font>
-whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。
-この例では、whileループが5回繰り返されます。
-count変数の値は、各ステップで1ずつ増加します。
-count変数の値が5になると、whileループは終了します。
-``` bash:while_exapmle.sh
-#!/bin/bash
-
-valid=true;
-count=1
-while [ "$valid" ];do
-  echo "$count";
-  if [ "$count" -eq 5 ];then
-    break;
-  fi
-  ((count++));
-done
-```
-bashコマンドでファイルを実行します。
-```
-$ bash while_example.sh
-1
-2
-3
-4
-5
-$
-```
+[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 
 
 # 書籍の紹介
