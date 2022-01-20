@@ -25,9 +25,12 @@ tags:
 
 echo "あなたの名前を入力して下さい"
 read name
+
 echo "ようこそ $name. ＮＬＰへ"
 ```
+
 bashコマンドでファイルを実行します。
+
 ```
 $ bash user_input.sh
 あなたの名前を入力して下さい
@@ -35,6 +38,17 @@ suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 以下のソースは read コマンドの手前でechoすらしない
+: -p オプションだ。
+
+: read -p "INPUT:" str 
+: echo $str1
+
+{{% /tips-list %}}
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)

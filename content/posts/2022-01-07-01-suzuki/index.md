@@ -418,7 +418,9 @@ echo "あなたの名前を入力して下さい"
 read name
 echo "ようこそ $name. ＮＬＰへ"
 ```
+
 bashコマンドでファイルを実行します。
+
 ```
 $ bash user_input.sh
 あなたの名前を入力して下さい
@@ -426,6 +428,18 @@ suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 以下のソースは read コマンドの手前でechoすらしない
+: -p オプションだ。
+
+: read -p "INPUT:" str 
+: echo $str1
+
+{{% /tips-list %}}
+
+
 ## If 文
 <font color=orange><b> if文を使う</b></font>
 単数、または複数の条件でif条件を使用できます。

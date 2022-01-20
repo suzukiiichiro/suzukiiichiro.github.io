@@ -28,12 +28,37 @@ for((counter=10;counter>0;counter--));do
 done
 printf "\n"
 ```
+
 bashコマンドでファイルを実行します。
+
 ```
 $ bash for_example.sh
 10 9 8 7 6 5 4 3 2 1
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 以下、どの記法も同じ。書きやすいものを選べばいい。
+:
+: 冗長
+: for i in `seq 10`
+: do
+:   echo "test"
+: done
+:
+: 簡素
+: for i in `seq 10`;do
+:   echo "test"
+: done
+:
+: C/Javaライク
+: for((i=0;i<10;i++));do
+:   echo "test"
+: done
+
+{{% /tips-list %}}
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
