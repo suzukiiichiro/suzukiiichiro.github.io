@@ -5442,7 +5442,6 @@ $
 &lt;dd>上記 if 文の中の : は　何もしないことを示す。&lt;/dd>
 &lt;dd>マルチラインコメントも同じ「:」から始まり、何もしないことを示している。&lt;/dd>
 &lt;/dl>
-&lt;p>マルチラインコメントは「:&amp;gt;ファイル名」と&lt;/p>
 &lt;/div>
 &lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
@@ -6493,7 +6492,6 @@ $
 &lt;dd>上記 if 文の中の : は　何もしないことを示す。&lt;/dd>
 &lt;dd>マルチラインコメントも同じ「:」から始まり、何もしないことを示している。&lt;/dd>
 &lt;/dl>
-&lt;p>マルチラインコメントは「:&amp;gt;ファイル名」と&lt;/p>
 &lt;/div>
 &lt;h2 id="while-ループ">while ループ&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> whileループの使用&lt;/b>&lt;/font>&lt;br>
