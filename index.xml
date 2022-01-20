@@ -5151,7 +5151,33 @@ $ ls -l
 改行なしのテキストの印刷
 削除 バックスラッシュ 文字
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>echo の利用例は果てしない。ここで説明してもだれも読みはしないだろう。なので、概要の抜粋を説明する&lt;/dd>
+&lt;dd>
+&lt;p>echo でよく使われるオプションは以下の通り&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>オプション 意味&lt;/p>
+&lt;/dd>
+&lt;dd>-n 最後の改行を出力しない&lt;/dd>
+&lt;dd>-e エスケープシーケンスを解釈する&lt;/dd>
+&lt;dd>-E エスケープシーケンスを解釈しない（デフォルト）&lt;/dd>
+&lt;dd>
+&lt;p>エスケープシーケンスとは、上記のバックスラッシュのことだ。&lt;/p>
+&lt;/dd>
+&lt;dd>以下の4つを覚えておくだけでおおよそは事足りる。&lt;/dd>
+&lt;dd>
+&lt;p>オプション 意味&lt;/p>
+&lt;/dd>
+&lt;dd>\r キャリッジリターン&lt;/dd>
+&lt;dd>\n 改行（フォームフィード＋キャリッジリターン）&lt;/dd>
+&lt;dd>\t 水平タブ&lt;/dd>
+&lt;dd>\ バックスラッシュ&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -6145,9 +6171,48 @@ bashファイルは2つの方法で実行できます。&lt;br>
 $ chmod +x HelloWorld.sh
 # ドット　スラッシュをつけて実行
 $ ./HelloWorld.sh
-&lt;/code>&lt;/pre>&lt;p>考え方ですが、bashコマンドで実行する場合のメリットは、ファイルに闇雲に実行権限を与える必要がないことです。実行権限を与える方法は、一般的ではありますが注意も必要です。&lt;/p>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>$ ./ でファイルを実行する場合、ソースファイルの先頭行に記載されている&lt;/dd>
+&lt;dd>
+&lt;p>#!/bin/bash&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>という記述をつかって実行されます。&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>$ ./&amp;lt;ファイル名&amp;gt;&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>で実行した場合は、bashコマンド（/bin/bash )を使って実行することを、ソースファイルの先頭で宣言している。という事になります。&lt;/p>
+&lt;/dd>
+&lt;dd>このソースファイルの1行目の記述を「シェバン」と言います。&lt;/dd>
+&lt;dd>
+&lt;p>/usr/local/bin/awk&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>にあるコマンドを使ってソースファイルを実行( ./&amp;lt;ファイル名&amp;gt;）したい場合は、ソースファイルの先頭行に&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>#!/usr/local/bin/awk&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>と、記述します。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>考え方ですが、bashコマンドで実行する場合のメリットは、ファイルに闇雲に実行権限を与える必要がないことです。実行権限を与える方法は、一般的ではありますが注意も必要です。&lt;/p>
 &lt;p>chmod の実行権限には +x で実行権限を付与する方法の他、0755 などの数字で付与する場合もあります。&lt;br>
 これらを&lt;font color=red>パーミッション&lt;/font>と言います。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>考え方ですが、bashコマンドでファイルを実行する場合のメリットは、ファイルに実行権限をやみくもに与える必要がないことです。&lt;/dd>
+&lt;dd>同時に、第三者が簡単にファイルを実行できる事を防ぐ、自分自身が誤ってファイルを実行してしまうというケアレスミスを防ぐことができます。&lt;/dd>
+&lt;dd>実行権限を与える方法は、一般的ではありますが、注意も必要です。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;p>パーミッションの確認&lt;br>
 ターミナルのコマンドでカレントディレクトリ内のファイルやディレクトリの情報を確認します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ls -l
@@ -6203,6 +6268,17 @@ $ ls -l
 「所有者」に対して「読み取り」「書き込み」「実行」を、
 「所有グループ」に対して「読み取り」「書き込み」を、
 「その他」に「読み取り」を付与しています。
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>実行したい場合は $ chmod 755 &amp;lt;ファイル名&amp;gt;&lt;/dd>
+&lt;dd>読み取りのみを許可し、実行しない場合は $ chmod 644 &amp;lt;ファイル名&amp;gt;&lt;/dd>
+&lt;dd>自分だけの読み取りを許可する場合は $ chmod 600 &amp;lt;ファイル名&amp;gt;&lt;/dd>
+&lt;dd>通常は上記３種類しか使いません。&lt;/dd>
+&lt;dd>CGI などを使う場合は $ chown や $chgrp を組み合わせて使うことが多いです。&lt;/dd>
+&lt;dd>$ chmod 777 &amp;lt;ファイル名&amp;gt; というパーミッションを軽率に与えず、上手にコマンドを使いこなすことがセキュリティにつながります。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;p>詳しくはこちら&lt;br>
 &lt;a class="link" href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06" target="_blank" rel="noopener"
 >https://qiita.com/shisama/items/5f4c4fa768642aad9e06&lt;/a>&lt;/p>
@@ -6224,7 +6300,33 @@ $ ls -l
 改行なしのテキストの印刷
 削除 バックスラッシュ 文字
 $
-&lt;/code>&lt;/pre>&lt;h2 id="コメント">コメント&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>echo の利用例は果てしない。ここで説明してもだれも読みはしないだろう。なので、概要の抜粋を説明する&lt;/dd>
+&lt;dd>
+&lt;p>echo でよく使われるオプションは以下の通り&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>オプション 意味&lt;/p>
+&lt;/dd>
+&lt;dd>-n 最後の改行を出力しない&lt;/dd>
+&lt;dd>-e エスケープシーケンスを解釈する&lt;/dd>
+&lt;dd>-E エスケープシーケンスを解釈しない（デフォルト）&lt;/dd>
+&lt;dd>
+&lt;p>エスケープシーケンスとは、上記のバックスラッシュのことだ。&lt;/p>
+&lt;/dd>
+&lt;dd>以下の4つを覚えておくだけでおおよそは事足りる。&lt;/dd>
+&lt;dd>
+&lt;p>オプション 意味&lt;/p>
+&lt;/dd>
+&lt;dd>\r キャリッジリターン&lt;/dd>
+&lt;dd>\n 改行（フォームフィード＋キャリッジリターン）&lt;/dd>
+&lt;dd>\t 水平タブ&lt;/dd>
+&lt;dd>\ バックスラッシュ&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="コメント">コメント&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> コメントの使用&lt;/b>&lt;/font>&lt;br>
 「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。&lt;br>
 &amp;lsquo;comment_example.sh&amp;rsquo;という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。&lt;/p>
