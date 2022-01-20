@@ -10,11 +10,23 @@
 
 {{- $title := partial "data/title" . .RelPermalink}}
 <title>{{- $title -}}</title>
-<link rel='canonical' href='{{ .Permalink }}'>
+
 {{- partial "head/style.html" . -}}
 {{- partial "head/script.html" . -}}
 
-{{- partial "head/opengraph/include.html" . }}
+{{- if .Paginator }}
+{{- if .Paginator.HasPrev }}
+<link rel="prev" href="{{ .Paginator.Prev.URL }}" />
+{{- end }}
+{{- if .Paginator.HasNext }}
+<link rel="next" href="{{ .Paginator.Next.URL }}" />
+{{- end }}
+<link rel='canonical' href='{{ .Paginator.First.URL }}'>
+{{- else }}
+<link rel='canonical' href='{{ .Permalink }}'>
+{{- end }}
+
+{{ partial "head/opengraph/include.html" . }}
 
 {{- range .AlternativeOutputFormats -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
