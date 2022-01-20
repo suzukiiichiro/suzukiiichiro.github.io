@@ -45,7 +45,9 @@ else
   echo "有効なユーザーです";
 fi
 ```
+
 bashコマンドでファイルを実行します。
+
 ```
 $ bash if_with_and.sh
 名前を入力して下さい
@@ -55,6 +57,16 @@ password
 無効なユーザーです
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 数値を比較する場合は、「<」「>」「=」ではなく、
+: -eq -lt -gt を使う必要があります。
+ 
+: 文字列を比較する場合は 「==」または 「!=」を使います。
+{{% /tips-list %}}
+
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
