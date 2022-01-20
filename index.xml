@@ -44,8 +44,8 @@ alt="ニュース">
 >https://developers.google.com/custom-search/v1/reference/rest/v1/cse/list&lt;/a>&lt;/p>
 &lt;h2 id="schemaorg-で絞り込む">schema.org で絞り込む&lt;/h2>
 &lt;p>現在は、検索エンジンの設定画面にある「schema.org」を使用して絞り込むみたいです。&lt;/p>
-&lt;p>&lt;a class="link" href="https://cse.google.com/cse/setup/basic" target="_blank" rel="noopener"
->https://cse.google.com/cse/setup/basic&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://cse.google.com/cse/" target="_blank" rel="noopener"
+>https://cse.google.com/cse/&lt;/a>&lt;/p>
 &lt;p>schema.orgで設定できる項目は非常に沢山あって何を設定するか迷います。&lt;/p>
 &lt;p>&lt;a class="link" href="https://schema.org/docs/full.html" target="_blank" rel="noopener"
 >https://schema.org/docs/full.html&lt;/a>&lt;/p>
