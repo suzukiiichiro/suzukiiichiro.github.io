@@ -5714,7 +5714,29 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash for_example.sh
 10 9 8 7 6 5 4 3 2 1
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>以下、どの記法も同じ。書きやすいものを選べばいい。&lt;br>
+:&lt;/dd>
+&lt;dd>冗長&lt;/dd>
+&lt;dd>for i in &lt;code>seq 10&lt;/code>&lt;/dd>
+&lt;dd>do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;br>
+:&lt;/dd>
+&lt;dd>簡素&lt;/dd>
+&lt;dd>for i in &lt;code>seq 10&lt;/code>;do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;br>
+:&lt;/dd>
+&lt;dd>C/Javaライク&lt;/dd>
+&lt;dd>for((i=0;i&amp;lt;10;i++));do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -5832,7 +5854,18 @@ $
 suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>以下のソースは read コマンドの手前でechoすらしない&lt;/dd>
+&lt;dd>-p オプションだ。&lt;/dd>
+&lt;dd>
+&lt;p>read -p &amp;ldquo;INPUT:&amp;rdquo; str&lt;/p>
+&lt;/dd>
+&lt;dd>echo $str1&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -6552,7 +6585,18 @@ $
 suzuki
 ようこそ suzuki。 ＮＬＰへ
 $
-&lt;/code>&lt;/pre>&lt;h2 id="if-文">If 文&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>以下のソースは read コマンドの手前でechoすらしない&lt;/dd>
+&lt;dd>-p オプションだ。&lt;/dd>
+&lt;dd>
+&lt;p>read -p &amp;ldquo;INPUT:&amp;rdquo; str&lt;/p>
+&lt;/dd>
+&lt;dd>echo $str1&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="if-文">If 文&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> if文を使う&lt;/b>&lt;/font>&lt;br>
 単数、または複数の条件でif条件を使用できます。&lt;br>
 このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。&lt;br>
