@@ -11,7 +11,7 @@
 
   {{ if .Paginator.HasPrev }}
     <!-- Paginated. Append page number to title -->
-    {{ $title = printf "%s / %dページ目" $siteTitle .Paginator.PageNumber }}
+    {{ $title = printf "%s / %dページ目 - %s" $siteTitle .Paginator.PageNumber .Site.Params.sidebar.subtitle }}
   {{ else }}
     {{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
   {{ end }}
