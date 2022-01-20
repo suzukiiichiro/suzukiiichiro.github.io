@@ -1,7 +1,7 @@
 ---
 title: "e-Stat でGoogle Custom Search APIを使おう（３）"
 description: "Google Custom Search APIの検索結果をjqでパースする方法を説明します。"
-date: 2022-01-19T18:31:13+09:00
+date: 2022-01-20T17:50:13+09:00
 draft: false
 image: anal.jpg
 categories:
