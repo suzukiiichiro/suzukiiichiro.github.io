@@ -36,6 +36,11 @@ $ bash comment_example.sh
 $
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 複数行コメントに関しては次の章で説明します。
+{{% /tips-list %}}
+
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
 [ざっくりわかる シェルスクリプト【０２．echo コマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/)

@@ -45,6 +45,29 @@ $ bash while_example.sh
 $
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 上記ソースでトリッキーなのはwhileよりもむしろ
+
+: ((COUNT++))
+
+: だろう。
+: COUNT = COUNT + 1;
+
+: count=1
+: count=$(expr $count + 1) # => 2
+: let ++count    # => 2
+: let count++    # => 3
+: count=$((++count))    # => 2
+: count=$((count++))    # => 2
+: count=$((count += 1)) # => 3
+
+: 変数に代入する必要がないから $(( )) ではなく、
+: (( )) でよい。(( )) の中の変数を表す「$」は記述の必要はない
+
+
+{{% /tips-list %}}
+
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
 [ざっくりわかる シェルスクリプト【０２．echo コマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/)

@@ -253,6 +253,13 @@ $ bash comment_example.sh
 60
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 複数行コメントに関しては次の章で説明します。
+{{% /tips-list %}}
+
+
 ## マルチラインコメント
 <font color=orange><b> 複数行コメントの使用</b></font>
 bashではさまざまな方法で複数行コメントを使用できます。
@@ -278,6 +285,29 @@ $ bash multiline-comment.sh
 25
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 多くの場合、マルチラインコメントの存在は知られていない。
+: ほとんどの人は、行頭に「#」をならべて複数行コメントを行う。
+: それは、過去のメジャーソースコードの冒頭にそうあるからだ。
+: そう、UNIX/Linuxの開発者のほとんどは、マルチラインコメントを知らないのだ。
+
+: 今後出てくるであろうファイルの生成に「touch」というコマンドがある。これ実は 「:>ファイル名」で、空のファイルを生成する事ができる。「:」は、”なにもしないことを示す。if文の中で何もしない場合は、以下のように記述する。
+
+: if [ "$v" -eq 5 ];then
+:   : # 何もしない
+: fi
+
+: touchは既にファイルがあれば、そのファイルにはさわらない。
+: :> は既にファイルがあれば、そのファイルさえも空にする。
+: 上記 if 文の中の : は　何もしないことを示す。
+: マルチラインコメントも同じ「:」から始まり、何もしないことを示している。
+
+マルチラインコメントは「:>ファイル名」と
+ 
+{{% /tips-list %}}
+
 ## while ループ
 <font color=orange><b> whileループの使用</b></font>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。
@@ -307,6 +337,32 @@ $ bash while_example.sh
 5
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 上記ソースでトリッキーなのはwhileよりもむしろ
+
+: ((COUNT++))
+
+: だろう。
+: COUNT = COUNT + 1;
+
+: count=1
+: count=$(expr $count + 1) # => 2
+: let ++count    # => 2
+: let count++    # => 3
+: count=$((++count))    # => 2
+: count=$((count++))    # => 2
+: count=$((count += 1)) # => 3
+
+: 変数に代入する必要がないから $(( )) ではなく、
+: (( )) でよい。(( )) の中の変数を表す「$」は記述の必要はない
+
+
+{{% /tips-list %}}
+
+
+
 ## for ループ
 <font color=orange><b> forループの使用</b></font>
 基本的なforループ宣言を示します。
@@ -326,6 +382,30 @@ $ bash for_example.sh
 10 9 8 7 6 5 4 3 2 1
 $
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 以下、どの記法も同じ。書きやすいものを選べばいい。
+
+: # 冗長
+: for i in `seq 10`
+: do
+:   echo "test"
+: done
+
+: # 簡素
+: for i in `seq 10`;do
+:   echo "test"
+: done
+
+: #C/Javaライク
+: for((i=0;i<10;i++));do
+:   echo "test"
+: done
+
+{{% /tips-list %}}
+
+
 ## 対話型入力
 <font color=orange><b> ユーザー入力の取得</b></font>
 'read'コマンドは、bashでユーザーから入力を受け取るために使用されます。
