@@ -1,0 +1,35 @@
+{{- $title := .Title -}}
+{{- $siteTitle := .Site.Title -}}
+
+{{- if .IsHome -}}
+  <!-- Homepage, and it's pagination -->
+  <!-- Build paginator -->
+  {{ $pages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections }}
+  {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+  {{ $filtered := ($pages | intersect $notHidden) }}
+  {{ $pag := .Paginate ($filtered) }}
+
+  {{ if .Paginator.HasPrev }}
+    <!-- Paginated. Append page number to title -->
+    {{ $title = printf "%dページ目 - %s" .Paginator.PageNumber $siteTitle }}
+  {{ else }}
+    {{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
+  {{ end }}
+
+{{- else if eq .Kind "term" -}}
+  <!-- Taxonomy page -->
+  <!-- Build paginator -->
+  {{ $notHidden := where .Pages "Params.hidden" "!=" true }}
+  {{ $pag := .Paginate ($notHidden) }}
+  <!-- {TAXONOMY_TYPE}: {TAXONOMY_TERM} -->
+  {{ if .Paginator.HasPrev }}
+    <!-- Add page number-->
+    {{ $title = printf "%dページ目 - %s" .Paginator.PageNumber $title }}
+  {{ end }} 
+
+  {{ $title = printf "%s - %s" $title $siteTitle }}
+{{- else -}}
+  {{ $title = printf "%s - %s"  $title $siteTitle }}
+{{- end -}}
+
+{{ return $title }}

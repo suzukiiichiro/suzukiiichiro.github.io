@@ -5,24 +5,16 @@
 <link rel="apple-touch-icon" type="image/png" href="/assets/images/favicon/apple-touch-icon-180x180.png">
 <link rel="icon" type="image/png" href="/assets/images/favicon/icon-192x192.png">
 
-{{- $description := partialCached "data/description" . .RelPermalink -}}
+{{- $description := partialCached "data/description" . .RelPermalink }}
 <meta name='description' content='{{ $description }}'>
 
-{{- $title := partialCached "data/title" . .RelPermalink -}}
-
-{{- if eq .RelPermalink "/" -}}
-{{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
-{{- else -}}
-{{ $title = printf "%s - %s" $title .Site.Title }}
-{{- end -}}
-
+{{- $title := partial "data/title" . .RelPermalink}}
 <title>{{- $title -}}</title>
-
 <link rel='canonical' href='{{ .Permalink }}'>
-
 {{- partial "head/style.html" . -}}
 {{- partial "head/script.html" . -}}
-{{- partial "head/opengraph/include.html" . -}}
+
+{{- partial "head/opengraph/include.html" . }}
 
 {{- range .AlternativeOutputFormats -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
