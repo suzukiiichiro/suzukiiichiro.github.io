@@ -5982,9 +5982,6 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 &lt;tr>&lt;td>-lt&lt;/td>&lt;td>小さい（＜）&lt;/td>&lt;/tr>
 &lt;tr>&lt;td>-gt&lt;/td>&lt;td>大きい（＞）&lt;/td>&lt;/tr>
 &lt;/table>
-&lt;p>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;br>
--eq -lt -gt を使う必要があります。&lt;/p>
-&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:simple_if.sh" data-lang="bash:simple_if.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
 &lt;span class="nv">n&lt;/span>&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span>
@@ -5997,7 +5994,17 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 &lt;pre tabindex="0">&lt;code>$ bash simple_if.sh
 2桁の数値です
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;/dd>
+&lt;dd>-eq -lt -gt を使う必要があります。&lt;/dd>
+&lt;dd>
+&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -6131,7 +6138,17 @@ suzuki
 password
 無効なユーザーです
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;/dd>
+&lt;dd>-eq -lt -gt を使う必要があります。&lt;/dd>
+&lt;dd>
+&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
