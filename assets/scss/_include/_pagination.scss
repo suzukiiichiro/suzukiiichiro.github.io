@@ -44,6 +44,14 @@
         opacity: 0.2;
         pointer-events: none;
       }
+      &.dots-item {
+        margin: 0;
+        .dots {
+          margin: 0;
+          margin-right: -5px;
+          padding: 10px;
+        }
+      }
       &.page-item {
         &.active {
           font-weight: bold;
@@ -56,28 +64,34 @@
           }
         }
         a {
-          padding: 5px 12px;
+          padding: 5px 8px;
           border-radius: 4px;
           display: inline-flex;
           color: var(--card-text-color-secondary);
+          border: 1px solid var(--pagenation-border);
           &:hover {
             cursor: pointer
           }
         }
       }
-      @include mq(smp) {
-        // display: none;
-        ~ li {
-          margin-left: 4px;
+      &.smp-nav--show {
+        a {
+          border: none;
         }
-        // &.smp-nav--show {
-          // display: inherit !important;
+      }
+      @include mq(smp) {
+        display: none;
+        ~ li {
+          margin-left: 15px;
+        }
+        &.smp-nav--show {
+          display: inherit !important;
           a {
             padding: 4px 18px;
             font-size: 1em;
-            // border: 1px solid #DDD;
+            border: 1px solid #DDD;
           }
-        // }
+        }
       }
     }
   }

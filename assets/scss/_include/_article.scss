@@ -481,11 +481,12 @@
       }
     }
     dd {
-      line-height: 1.4;
+      line-height: 1.6;
       font-size: 0.9em;
       margin: 0;
-      margin-left: calc(1.2em + 6px);
+      margin-left: calc(1.2em + 8px);
       padding: 0;
+      color: #333;
     }
   }
   &.tips {

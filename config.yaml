@@ -46,6 +46,8 @@ permalinks:
     page: /:slug/
 
 params:
+    paginate:
+        slots: 5
     sitemap:
       exclude: ["tags", "categories"]
       exclude_url: ["/posts/", "/archives/", "/search/", "/page/", "/privacy/"]
