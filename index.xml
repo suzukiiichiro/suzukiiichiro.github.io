@@ -1,4 +1,201 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 19 Jan 2022 18:31:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（２）</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/</link><pubDate>Wed, 19 Jan 2022 18:31:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（２）" />&lt;h2 id="google-custom-search-api-10件目以降の取得方法について">Google Custom Search API 10件目以降の取得方法について&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 20 Jan 2022 14:10:38 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</link><pubDate>Thu, 20 Jan 2022 14:10:38 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch.png" alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。&lt;br>
+初心者の方、そうでない方など、いろいろな方大歓迎です。&lt;br>
+まずはWebデザイナーやコーダーと言われる人たちがいる、Web業界の実際はこうだよというのをお伝えします。&lt;/p>
+&lt;h3 id="web業界に入るためには未経験だと厳しい">Web業界に入るためには未経験だと厳しい？&lt;/h3>
+&lt;ul>
+&lt;li>未経験だと厳しい？&lt;/li>
+&lt;li>学校で習わないと難しそう。&lt;/li>
+&lt;/ul>
+&lt;p>このようなことを思っているかもしれません。しかし、そんなことなありません。&lt;br>
+Webで働いてみたいという気持ちとポートフォリオと呼ばれる作品集。&lt;br>
+なにより少しでもできるてしまえば、入れる業界だと思います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 150;
+flex-basis: 360px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img04.jpg" data-size="980x653">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img04.jpg"
+width="980"
+height="653"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img04_huc7d9f1096f7f2f3a88fda74fd8026d8f_103582_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img04_huc7d9f1096f7f2f3a88fda74fd8026d8f_103582_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="&amp;#34;&amp;#34;">
+&lt;/a>
+&lt;figcaption>&amp;quot;&amp;quot;&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h3 id="初期費用が色々かかる">初期費用が色々かかる？&lt;/h3>
+&lt;ul>
+&lt;li>パソコンを用意&lt;/li>
+&lt;li>Photoshopなどの高いアプリを買う必要がある&lt;/li>
+&lt;/ul>
+&lt;p>こういったことで、初期費用が色々かかるかと思っている人も多いと思います。&lt;br>
+今の時代は様々なWebサービスを駆使していろいろなことが無料でできます。&lt;/p>
+&lt;p>もちろん、パソコンを持っていたほうが作業は簡単かもしれませんが、iPhoneやiPad、廉価なChromeBookやWindowsなどでもデザインからコーディングまでできてしまいます。&lt;br>
+特にiPhoneやiPadはデザインに特化することができると思います。&lt;/p>
+&lt;p>そういったサービスやコンテンツ、アプリを使用してデザインからコーディングを行って誰でも簡単に自分のサイトを持つことができるようになりました。&lt;br>
+ほんといい時代になりましたね。&lt;/p>
+&lt;h2 id="webデザイナーとは">WEBデザイナーとは&lt;/h2>
+&lt;p>Webデザイナーと聞いてイメージするのは&lt;/p>
+&lt;ul>
+&lt;li>カッコいいサイトをデザインしている人&lt;/li>
+&lt;li>美的センスがいりそう&lt;/li>
+&lt;li>Photoshopを使ってデザインをしている&lt;/li>
+&lt;/ul>
+&lt;p>と思うかもしれません。しかし、それが重要だと私は思いません。&lt;br>
+もっと重要なのは「情報をわかりやすくして、配置する力」ではないかと思います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 177;
+flex-basis: 426px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img01.jpg" data-size="980x551">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img01.jpg"
+width="980"
+height="551"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img01_hu946e3f8bbcae0b17104cd283d724b512_99794_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img01_hu946e3f8bbcae0b17104cd283d724b512_99794_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="&amp;#34;&amp;#34;">
+&lt;/a>
+&lt;figcaption>&amp;quot;&amp;quot;&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h3 id="webデザイナーとは情報をわかりやすくして配置する人">WEBデザイナーとは「情報をわかりやすくして、配置する人」&lt;/h3>
+&lt;p>Webデザイナーと一般的なデザイナーの違いは「Webデザイナーは何かを表現するものではない」と言う点だと思います。&lt;br>
+「Webデザイナーは情報をわかりやすくして、配置する人」こういうものではないかなと私は考えてます。&lt;/p>
+&lt;p>デザインする上で、大事なのはそれぞれの関係性はどうなっているかです。&lt;br>
+それをわかりやすく伝える、そのためには関連性があるものは近くにあったほうがいい。&lt;br>
+そうやって散らばっている情報と情報をつなげていく。それがWebデザイナーではないかと思います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 149;
+flex-basis: 359px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img02.jpg" data-size="980x654">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img02.jpg"
+width="980"
+height="654"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img02_hu9908b1f492221e32eb828ee56b98caa3_133991_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img02_hu9908b1f492221e32eb828ee56b98caa3_133991_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="&amp;#34;&amp;#34;">
+&lt;/a>
+&lt;figcaption>&amp;quot;&amp;quot;&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h3 id="webコーダーはwebデザインを表示して使い勝手を作る人">Webコーダーは「Webデザインを表示して、使い勝手を作る人」&lt;/h3>
+&lt;p>WebコーダーはWebデザインを実際にHTMLと言われる言語に書き換えて、CSSと呼ばれる言語でHTMLをお化粧していきます。&lt;/p>
+&lt;p>お化粧をしていく上で大事なのはGoogleやBingのクローラーと呼ばれるプログラムに拾われやすくするということを意識しなければなりません。&lt;br>
+これを &lt;strong>SEO&lt;/strong> といいますが、今は知らなくても大丈夫です。&lt;br>
+簡単に言えば、ネットという広い海に出すためにわかりやすい地図を作ってくれる人にわかりやすく伝えるということです。&lt;/p>
+&lt;p>デザイナーは見た目を作っていきますが、コーダーは使い勝手を作っていると言ってもいいのかもしれません。&lt;/p>
+&lt;p>その他にも、Javascriptと呼ばれる言語を使って動きやいろいろな処理を行う場合もあります。&lt;/p>
+&lt;h2 id="webデザイナーとコーダーは別のほうがいい">Webデザイナーとコーダーは別のほうがいい？&lt;/h2>
+&lt;p>Webデザイナーとコーダーが別々の作業を行って、もう片方の仕事内容を知らないでもいいかといえば、そうではありません。相互に理解していたほうがいいと思います。&lt;/p>
+&lt;h3 id="webデザイナーがコーディングを知らない場合">Webデザイナーがコーディングを知らない場合&lt;/h3>
+&lt;p>例えば、Webデザイナーがボタンを押したときや開閉機能をつけたときの挙動をデザインしたとします。その場合の動作は誰が考えるのでしょう？&lt;br>
+多くの場合はデザイナーの頭の中に「ふわっと出したい」や「回転しながら出したい」といった考えがあるかと思います。スライドするコンテンツについても同様です。&lt;br>
+その際に、コーディングを知らなかったら指示を出せずに、コーダーの解釈でデザインが行われてしまいます。&lt;/p>
+&lt;h3 id="webコーダーがデザインを知らない場合">Webコーダーがデザインを知らない場合&lt;/h3>
+&lt;p>逆にコーダーがデザインを知らないと、どうでしょうか。&lt;br>
+小さなデザインを見落として、デザイナーが作ったものと違うものが出来上がってしまうかもしれません。&lt;br>
+小さなデザインだったら気にならないのでは？と思うかもしれませんが、デザインではその違いが大きな違いにつながったりします。&lt;/p>
+&lt;h3 id="お互いに知ることが大事">お互いに知ることが大事&lt;/h3>
+&lt;p>お互いのことを知っていることで、仕事の効率も上がると思いますし、デザイナーはそのうち「自分で書いたほうがより良いデザインができる」と考え、コーダーは「なんかデザインがおかしいから、デザインから自分でやってみる」といったことも往々にしてあります。&lt;br>
+わたしはそうでした。&lt;/p>
+&lt;p>特にWebのコンテンツはいろいろなことができてしまうので、知っているのと知らないのでは雲泥の差になります。&lt;/p>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>両方できるメリット&lt;/dt>
+&lt;dd>Webデザインとコーディングが両方できると、なんとアプリを作ることができてしまいます。なので、自分の力を増やしていくために、片方だけではなくデザインとコーディング、両方の力を養っていったほうが断然いいですね。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 150;
+flex-basis: 360px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img03.jpg" data-size="980x653">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img03.jpg"
+width="980"
+height="653"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img03_hufdcbbd3e1f6c9c22956dd7a20181d979_101373_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/img03_hufdcbbd3e1f6c9c22956dd7a20181d979_101373_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="&amp;#34;&amp;#34;">
+&lt;/a>
+&lt;figcaption>&amp;quot;&amp;quot;&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;h2 id="webデザイナーとコーダーに重要なこと">Webデザイナーとコーダーに重要なこと&lt;/h2>
+&lt;p>Webデザイナーとコーダーになる上で特に大事なことが2点あります。&lt;/p>
+&lt;ul>
+&lt;li>サイトのターゲットは誰なのか&lt;/li>
+&lt;li>サイトの最終的なゴール地点はどこなのか&lt;/li>
+&lt;li>サイトの使い勝手はいいか&lt;/li>
+&lt;li>必要としている情報に簡単にアクセスできるか&lt;/li>
+&lt;li>サイトのやブランドの持つイメージ&lt;/li>
+&lt;/ul>
+&lt;p>上記のようなことに注意して、デザインやコーディングを行っていく必要があります。&lt;/p>
+&lt;p>例えば、若者向けのサイトなのに、すごく文字が大きかったり、その逆などは使う側にとってのストレスとなってしまいます。&lt;br>
+デザインで言えば &lt;strong>配色&lt;/strong> や &lt;strong>文字サイズ&lt;/strong> には特に気をつける必要があります。&lt;br>
+コーダーで言えば &lt;strong>対象としているブラウザで崩れがないか&lt;/strong> や &lt;strong>動きがうるさくないか&lt;/strong> といったことに気をつける必要があります。&lt;/p>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>UXとは？&lt;/dt>
+&lt;dd>UX（User eXperience）といいます。日本語ではユーザー体験となりますね。ユーザーのストレスにならないようにすることを、Webを通してユーザーに快適な空間や体験を与えるということです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="次回の予定">次回の予定&lt;/h2>
+&lt;p>次回からはまず、簡単なWebデザインをしていきたいと思います。&lt;br>
+といっても、いきなりデザインを行うのは大変なのでまずは既存のサイトや、簡単な1ページのサイトの大枠を作成できたらなと思います。&lt;/p>
+&lt;p>それではまたの講座で会いましょう。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/HTML-CSS%e3%81%a8Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%8c1%e5%86%8a%e3%81%a7%e3%81%8d%e3%81%a1%e3%82%93%e3%81%a8%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8f%e6%9c%ac-%e5%a2%97%e8%a3%9c%e6%94%b9%e8%a8%82%e7%89%88-%e6%9c%8d%e9%83%a8-%e9%9b%84%e6%a8%b9/dp/4297125102/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51isr1Hz2BL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> HTML&amp;amp;CSSとWebデザインが1冊できちんと身につく本[増補改訂版] &lt;/h2>
+&lt;p> 美しいデザインでサイト制作の知識とワザが「1冊で」身につく本格入門! PC&amp;amp;モバイルサイトデザインの基礎力とHTML・CSSコーディングの知識が1冊で同時に身につく! ウェブ制作を仕事にするならHTMLとCSSを学ぶことから始めますが、本書は体系立てた文法学習よりも、まずは「コーディングとはどのような作業なのか」を理解できる初学者向け入門書です。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/1%e5%86%8a%e3%81%a7%e3%81%99%e3%81%b9%e3%81%a6%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8fHTML-CSS%e3%81%a8Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e5%85%a5%e9%96%80%e8%ac%9b%e5%ba%a7-Mana/dp/4797398892/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51xAu2jeqrL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 1冊ですべて身につくHTML &amp;amp; CSSとWebデザイン入門講座 &lt;/h2>
+&lt;p> 【全国の書店員さんがオススメする本「CPU大賞」第1位受賞!】
+&lt;p>ずっと、一番売れているHTML本!&lt;br>
+Web界隈やデザイナーに大人気! Web関連の情報やデザインについて記事が学べる『Webクリエイターボックス』の管理人、 Manaによる渾身のHTML &amp;amp; CSSとWebデザインが学べる本です。&lt;br>
+著者は、カナダやオーストラリア、イギリスの企業でWebデザイナーとして働き、現在は全国各地でWeb関連のセミナーに登壇し、Webサイト制作のインストラクターとして教育に携わっている。ブログ「Webクリエイターボックス」は2010年日本のアルファブロガーアワードを受賞。&lt;/p>&lt;br>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>&lt;br>
+&lt;/div>&lt;br>
+&lt;/a>&lt;br>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>&lt;/p>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%81%93%e3%82%8c%e3%81%a0%e3%81%91%e3%81%a7%e5%9f%ba%e6%9c%ac%e3%81%8c%e3%81%97%e3%81%a3%e3%81%8b%e3%82%8a%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8f-HTML-Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b31%e5%86%8a%e7%9b%ae%e3%81%ae%e6%9c%ac-Capybara-Design/dp/4798170119/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-na.ssl-images-amazon.com/images/I/51iJCT7O&amp;#43;YL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> これだけで基本がしっかり身につく HTML/CSS&amp;amp;Webデザイン1冊目の本 &lt;/h2>
+&lt;p> Webサイト制作をこれから学ぶ人へ送る “1冊目&amp;#34;に最適の入門書!
+&lt;p>【学びをサポートする4大特典つき】&lt;/p>
+&lt;p>本書は手を動かしてWebサイトを作りながら HTML/CSSとWebデザインの基本を楽しく学べる入門書です。&lt;/p>
+&lt;p>初学者が1冊目に読む本としてふさわしい内容を盛り込んでいるため、これを読めば必要な基礎知識がひととおり身につきます。 &lt;/p>&lt;br>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>&lt;br>
+&lt;/div>&lt;br>
+&lt;/a>&lt;br>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>&lt;/p>
+&lt;/aside></description></item><item><title>e-Stat でGoogle Custom Search APIを使おう（２）</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/</link><pubDate>Wed, 19 Jan 2022 18:31:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（２）" />&lt;h2 id="google-custom-search-api-10件目以降の取得方法について">Google Custom Search API 10件目以降の取得方法について&lt;/h2>
 &lt;p>「木材流通統計調査」をgoogleで検索してみると最初の方は、政府関係の木材流通統計調査の概要説明などが上位に並んでいる感じです。&lt;br>
 そういったものからは木材流通統計調査の社会的関心がある項目を抽出することは難しそうです。&lt;br>
 ２０件目超えたあたりに以下の記事が来ました。&lt;/p>
