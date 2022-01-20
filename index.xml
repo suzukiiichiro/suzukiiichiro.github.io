@@ -5293,7 +5293,13 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash comment_example.sh
 60
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>複数行コメントに関しては次の章で説明します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -5414,7 +5420,31 @@ bashではさまざまな方法で複数行コメントを使用できます。&
 &lt;pre tabindex="0">&lt;code>$ bash multiline-comment.sh
 25
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>多くの場合、マルチラインコメントの存在は知られていない。&lt;/dd>
+&lt;dd>ほとんどの人は、行頭に「#」をならべて複数行コメントを行う。&lt;/dd>
+&lt;dd>それは、過去のメジャーソースコードの冒頭にそうあるからだ。&lt;/dd>
+&lt;dd>そう、UNIX/Linuxの開発者のほとんどは、マルチラインコメントを知らないのだ。&lt;/dd>
+&lt;dd>
+&lt;p>今後出てくるであろうファイルの生成に「touch」というコマンドがある。これ実は 「:&amp;gt;ファイル名」で、空のファイルを生成する事ができる。「:」は、”なにもしないことを示す。if文の中で何もしない場合は、以下のように記述する。&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>if [ &amp;ldquo;$v&amp;rdquo; -eq 5 ];then&lt;/p>
+&lt;/dd>
+&lt;dd>: # 何もしない&lt;/dd>
+&lt;dd>fi&lt;/dd>
+&lt;dd>
+&lt;p>touchは既にファイルがあれば、そのファイルにはさわらない。&lt;/p>
+&lt;/dd>
+&lt;dd>:&amp;gt; は既にファイルがあれば、そのファイルさえも空にする。&lt;/dd>
+&lt;dd>上記 if 文の中の : は　何もしないことを示す。&lt;/dd>
+&lt;dd>マルチラインコメントも同じ「:」から始まり、何もしないことを示している。&lt;/dd>
+&lt;/dl>
+&lt;p>マルチラインコメントは「:&amp;gt;ファイル名」と&lt;/p>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -5541,7 +5571,33 @@ break&lt;span class="p">;&lt;/span>
 4
 5
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>上記ソースでトリッキーなのはwhileよりもむしろ&lt;/dd>
+&lt;dd>
+&lt;p>((COUNT++))&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>だろう。&lt;/p>
+&lt;/dd>
+&lt;dd>COUNT = COUNT + 1;&lt;/dd>
+&lt;dd>
+&lt;p>count=1&lt;/p>
+&lt;/dd>
+&lt;dd>count=$(expr $count + 1) # =&amp;gt; 2&lt;/dd>
+&lt;dd>let ++count # =&amp;gt; 2&lt;/dd>
+&lt;dd>let count++ # =&amp;gt; 3&lt;/dd>
+&lt;dd>count=$((++count)) # =&amp;gt; 2&lt;/dd>
+&lt;dd>count=$((count++)) # =&amp;gt; 2&lt;/dd>
+&lt;dd>count=$((count += 1)) # =&amp;gt; 3&lt;/dd>
+&lt;dd>
+&lt;p>変数に代入する必要がないから $(( )) ではなく、&lt;/p>
+&lt;/dd>
+&lt;dd>(( )) でよい。(( )) の中の変数を表す「$」は記述の必要はない&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -6340,7 +6396,13 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash comment_example.sh
 60
 $
-&lt;/code>&lt;/pre>&lt;h2 id="マルチラインコメント">マルチラインコメント&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>複数行コメントに関しては次の章で説明します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="マルチラインコメント">マルチラインコメント&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> 複数行コメントの使用&lt;/b>&lt;/font>&lt;br>
 bashではさまざまな方法で複数行コメントを使用できます。&lt;br>
 次の例に簡単な方法を示します。&lt;br>
@@ -6359,7 +6421,31 @@ bashではさまざまな方法で複数行コメントを使用できます。&
 &lt;pre tabindex="0">&lt;code>$ bash multiline-comment.sh
 25
 $
-&lt;/code>&lt;/pre>&lt;h2 id="while-ループ">while ループ&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>多くの場合、マルチラインコメントの存在は知られていない。&lt;/dd>
+&lt;dd>ほとんどの人は、行頭に「#」をならべて複数行コメントを行う。&lt;/dd>
+&lt;dd>それは、過去のメジャーソースコードの冒頭にそうあるからだ。&lt;/dd>
+&lt;dd>そう、UNIX/Linuxの開発者のほとんどは、マルチラインコメントを知らないのだ。&lt;/dd>
+&lt;dd>
+&lt;p>今後出てくるであろうファイルの生成に「touch」というコマンドがある。これ実は 「:&amp;gt;ファイル名」で、空のファイルを生成する事ができる。「:」は、”なにもしないことを示す。if文の中で何もしない場合は、以下のように記述する。&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>if [ &amp;ldquo;$v&amp;rdquo; -eq 5 ];then&lt;/p>
+&lt;/dd>
+&lt;dd>: # 何もしない&lt;/dd>
+&lt;dd>fi&lt;/dd>
+&lt;dd>
+&lt;p>touchは既にファイルがあれば、そのファイルにはさわらない。&lt;/p>
+&lt;/dd>
+&lt;dd>:&amp;gt; は既にファイルがあれば、そのファイルさえも空にする。&lt;/dd>
+&lt;dd>上記 if 文の中の : は　何もしないことを示す。&lt;/dd>
+&lt;dd>マルチラインコメントも同じ「:」から始まり、何もしないことを示している。&lt;/dd>
+&lt;/dl>
+&lt;p>マルチラインコメントは「:&amp;gt;ファイル名」と&lt;/p>
+&lt;/div>
+&lt;h2 id="while-ループ">while ループ&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> whileループの使用&lt;/b>&lt;/font>&lt;br>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。&lt;br>
 この例では、whileループが5回繰り返されます。&lt;br>
@@ -6384,7 +6470,33 @@ break&lt;span class="p">;&lt;/span>
 4
 5
 $
-&lt;/code>&lt;/pre>&lt;h2 id="for-ループ">for ループ&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>上記ソースでトリッキーなのはwhileよりもむしろ&lt;/dd>
+&lt;dd>
+&lt;p>((COUNT++))&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>だろう。&lt;/p>
+&lt;/dd>
+&lt;dd>COUNT = COUNT + 1;&lt;/dd>
+&lt;dd>
+&lt;p>count=1&lt;/p>
+&lt;/dd>
+&lt;dd>count=$(expr $count + 1) # =&amp;gt; 2&lt;/dd>
+&lt;dd>let ++count # =&amp;gt; 2&lt;/dd>
+&lt;dd>let count++ # =&amp;gt; 3&lt;/dd>
+&lt;dd>count=$((++count)) # =&amp;gt; 2&lt;/dd>
+&lt;dd>count=$((count++)) # =&amp;gt; 2&lt;/dd>
+&lt;dd>count=$((count += 1)) # =&amp;gt; 3&lt;/dd>
+&lt;dd>
+&lt;p>変数に代入する必要がないから $(( )) ではなく、&lt;/p>
+&lt;/dd>
+&lt;dd>(( )) でよい。(( )) の中の変数を表す「$」は記述の必要はない&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="for-ループ">for ループ&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> forループの使用&lt;/b>&lt;/font>&lt;br>
 基本的なforループ宣言を示します。&lt;br>
 &amp;lsquo;for_example.sh&amp;rsquo;という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。&lt;br>
@@ -6399,7 +6511,32 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash for_example.sh
 10 9 8 7 6 5 4 3 2 1
 $
-&lt;/code>&lt;/pre>&lt;h2 id="対話型入力">対話型入力&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>以下、どの記法も同じ。書きやすいものを選べばいい。&lt;/dd>
+&lt;dd>
+&lt;h1 id="冗長">冗長&lt;/h1>
+&lt;/dd>
+&lt;dd>for i in &lt;code>seq 10&lt;/code>&lt;/dd>
+&lt;dd>do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;/dd>
+&lt;dd>
+&lt;h1 id="簡素">簡素&lt;/h1>
+&lt;/dd>
+&lt;dd>for i in &lt;code>seq 10&lt;/code>;do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;/dd>
+&lt;dd>
+&lt;p>#C/Javaライク&lt;/p>
+&lt;/dd>
+&lt;dd>for((i=0;i&amp;lt;10;i++));do&lt;/dd>
+&lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
+&lt;dd>done&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="対話型入力">対話型入力&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b> ユーザー入力の取得&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;read&amp;rsquo;コマンドは、bashでユーザーから入力を受け取るために使用されます。&lt;br>
 &amp;lsquo;user_input.sh&amp;rsquo;という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。&lt;br>
