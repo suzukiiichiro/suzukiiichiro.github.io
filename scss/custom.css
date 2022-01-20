@@ -194,6 +194,12 @@ footer.site-footer {
     .pagination-area .pagination li.disabled {
       opacity: 0.2;
       pointer-events: none; }
+    .pagination-area .pagination li.dots-item {
+      margin: 0; }
+      .pagination-area .pagination li.dots-item .dots {
+        margin: 0;
+        margin-right: -5px;
+        padding: 10px; }
     .pagination-area .pagination li.page-item.active {
       font-weight: bold; }
       .pagination-area .pagination li.page-item.active a {
@@ -201,18 +207,26 @@ footer.site-footer {
         background-color: var(--pagenation-current);
         border-color: var(--pagenation-border-current); }
     .pagination-area .pagination li.page-item a {
-      padding: 5px 12px;
+      padding: 5px 8px;
       border-radius: 4px;
       display: inline-flex;
-      color: var(--card-text-color-secondary); }
+      color: var(--card-text-color-secondary);
+      border: 1px solid var(--pagenation-border); }
       .pagination-area .pagination li.page-item a:hover {
         cursor: pointer; }
+    .pagination-area .pagination li.smp-nav--show a {
+      border: none; }
     @media screen and (max-width: 640px) {
-      .pagination-area .pagination li ~ li {
-        margin-left: 4px; }
-      .pagination-area .pagination li a {
-        padding: 4px 18px;
-        font-size: 1em; } }
+      .pagination-area .pagination li {
+        display: none; }
+        .pagination-area .pagination li ~ li {
+          margin-left: 15px; }
+        .pagination-area .pagination li.smp-nav--show {
+          display: inherit !important; }
+          .pagination-area .pagination li.smp-nav--show a {
+            padding: 4px 18px;
+            font-size: 1em;
+            border: 1px solid #DDD; } }
 .section-card .section-term {
   font-size: 1.2rem;
   display: flex;
@@ -592,11 +606,12 @@ footer.site-footer {
         background-size: contain;
         background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23999999" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z" /></svg>'); }
     .tips-area dl dd {
-      line-height: 1.4;
+      line-height: 1.6;
       font-size: 0.9em;
       margin: 0;
-      margin-left: calc(1.2em + 6px);
-      padding: 0; }
+      margin-left: calc(1.2em + 8px);
+      padding: 0;
+      color: #333; }
   .tips-area.tips {
     background-color: #e5f8e2; }
     .tips-area.tips dt {
