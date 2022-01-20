@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 20 Jan 2022 14:10:38 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</link><pubDate>Thu, 20 Jan 2022 14:10:38 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch.png" alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 20 Jan 2022 17:50:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</link><pubDate>Thu, 20 Jan 2022 17:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）" />&lt;h2 id="google-custom-searchの検索結果をcsvに整形する">google Custom Searchの検索結果をcsvに整形する&lt;/h2>
+&lt;p>統計データから列名を取得してgoogle Custom Searchの検索結果に当てに行きマッチする回数の高い列名を社会的関心の高い項目に設定したいと思います。&lt;br>
+全開でgoogle Custom Searchの検索の絞り込みができたのでAPIを叩く回数は統計名ごとに3回にしたいと思います。&lt;/p>
+&lt;p>start パラメータを1から開始して10ずつインクリメントしていきます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=1'
+curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=11'
+curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=21'
+&lt;/code>&lt;/pre>&lt;p>3回APIを叩いた結果に対してマッチングをかけていきたいと思うのですが、google Custom Searchの検索結果を見やすくするため前準備としてcsvに整形したいと思います。&lt;br>
+google Custom Searchの検索結果はjsonですがjsonのパースはjqを使います。&lt;/p>
+&lt;h2 id="jqのインストール">jqのインストール&lt;/h2>
+&lt;p>jqのインストールは簡単です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>brew install jq
+&lt;/code>&lt;/pre>&lt;h2 id="jqを使ってgoogle-custom-searchの検索結果をjsonをパースする">jqを使ってgoogle Custom Searchの検索結果をjsonをパースする&lt;/h2>
+&lt;pre tabindex="0">&lt;code> &amp;quot;items&amp;quot;: [
+¦ {
+¦ ¦ &amp;quot;kind&amp;quot;: &amp;quot;customsearch#result&amp;quot;,
+¦ ¦ &amp;quot;title&amp;quot;: &amp;quot;昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞&amp;quot;,
+¦ ¦ &amp;quot;htmlTitle&amp;quot;: &amp;quot;昨年の\u003cb\u003e人権侵犯事件\u003c/b\u003e いじめ、教員関係が半減 | 教育新聞&amp;quot;,
+¦ ¦ &amp;quot;link&amp;quot;: &amp;quot;https://www.kyobun.co.jp/news/20210323_03/&amp;quot;,
+¦ ¦ &amp;quot;displayLink&amp;quot;: &amp;quot;www.kyobun.co.jp&amp;quot;,
+¦ ¦ &amp;quot;snippet&amp;quot;: &amp;quot;2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...&amp;quot;,
+¦ ¦ &amp;quot;htmlSnippet&amp;quot;: &amp;quot;2021/03/23 \u003cb\u003e...\u003c/b\u003e それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した\u003cb\u003e人権侵犯事件\u003c/b\u003eは9589件で、前年よりも5831件減少。同省の担当者は「他の\u003cb\u003e統計\u003c/b\u003e&amp;amp;nbsp;...&amp;quot;,
+&lt;/code>&lt;/pre>&lt;p>items配列の中に検索結果が保存されているみたいです。&lt;br>
+取得する項目は、title、snippet、linkにします。&lt;/p>
+&lt;p>jqでカウントを取得する方法は length です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>jq '.items | length'
+&lt;/code>&lt;/pre>&lt;p>配列以下の要素の取り方は&lt;/p>
+&lt;pre tabindex="0">&lt;code> jq -r .items[0].title
+&lt;/code>&lt;/pre>&lt;p>です。&lt;br>
+返却結果にダブルクォーテーションが入るのが邪魔なのでオプション -r をつけています。&lt;/p>
+&lt;h2 id="プログラムの内容出力結果">プログラムの内容、出力結果&lt;/h2>
+&lt;p>プログラムは以下となります&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/bin/bash
+#グーグルカスタムサーチの結果を取得します
+APKEY=&amp;quot;xxxxxxxxxxxxxxxxxxxxxxxxx&amp;quot;;
+EGID=&amp;quot;xxxxxxxxxxxx&amp;quot;;
+START=1;
+STATISTICS=&amp;quot;$1&amp;quot;;
+AWK=`which gawk`;
+SED=`which gsed`;
+TMP=&amp;quot;gcstmp.json&amp;quot;
+RST=&amp;quot;gcsrst.csv&amp;quot;;
+cnt=0;
+function parse(){
+items=$(cat &amp;quot;$TMP&amp;quot;|jq .items);
+length=$(echo &amp;quot;$items&amp;quot;|jq '.| length');
+pcnt=0;
+while :;do
+if [ &amp;quot;$pcnt&amp;quot; -ge &amp;quot;$length&amp;quot; ];then
+break;
+fi
+item=$(echo &amp;quot;$items&amp;quot;|jq .[$pcnt]);
+title=$(echo &amp;quot;$item&amp;quot;|jq -r .title);
+snippet=$(echo &amp;quot;$item&amp;quot;|jq -r .snippet);
+link=$(echo &amp;quot;$item&amp;quot;|jq -r .link);
+echo &amp;quot;$title,$snippet,$link&amp;quot;|tee -a &amp;quot;$RST&amp;quot;;
+pcnt=$((pcnt+1));
+done
+}
+function main(){
+:&amp;gt;&amp;quot;$RST&amp;quot;;
+while :;do
+if [ &amp;quot;$cnt&amp;quot; -ge 3 ];then
+break;
+fi
+st=$((cnt*10+1))
+curl &amp;quot;https://www.googleapis.com/customsearch/v1?key=$APKEY&amp;amp;cx=$EGID&amp;amp;q=$STATISTICS&amp;amp;start=$st&amp;quot; -o $TMP
+parse;
+cnt=$((cnt+1));
+done
+}
+main;
+exit;
+&lt;/code>&lt;/pre>&lt;p>整形した検索結果は以下のようになります&lt;/p>
+&lt;pre tabindex="0">&lt;code>昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞,2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...,https://www.kyobun.co.jp/news/20210323_03/
+難民とLGBT：世界における人権侵害の状況 | 難民研究フォーラム ...,2020/12/24 ... マッピング. 2019年末現在、「LGBTであること」や「同性間の性行為」などを刑法において犯罪としている国をマッピング ...,https://refugeestudies.jp/2020/12/lgbt/
+人権擁護委員 - Wikipedia,全国の人権擁護委員の2011年（平成23年）中の活動実績は、次のとおりである。 人権啓発活動従事回数 - 227,683回; 人権相談事件取扱件数 - 159,157件; 人権侵犯事件関与 ...,https://ja.wikipedia.org/wiki/%E4%BA%BA%E6%A8%A9%E6%93%81%E8%AD%B7%E5%A7%94%E5%93%A1
+法務省：インターネットによる人権侵害をなくしましょう – Gov base,2021/04/30 ... ※プロバイダ責任制限法等については、後述の「参考」をご覧ください。 インターネットに関する人権侵犯事件の新規救済手続開始件数. 法務省の人権擁護機関 ...,https://www.gov-base.info/2021/04/30/112474
+&lt;/code>&lt;/pre></description></item><item><title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</link><pubDate>Thu, 20 Jan 2022 14:10:38 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch.png" alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう" />&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。&lt;br>
 初心者の方、そうでない方など、いろいろな方大歓迎です。&lt;br>
 まずはWebデザイナーやコーダーと言われる人たちがいる、Web業界の実際はこうだよというのをお伝えします。&lt;/p>
@@ -252,85 +330,7 @@ alt="ニュース">
 &lt;/code>&lt;/pre>&lt;p>ウッドショック 林野庁・農林水産省作成資料 - 一般社団法人 宮城県&lt;br>
 木質バイオマス発電のFITは両刃の剣だ（2ページ目） | コラム | 環境&lt;br>
 【ウッドショック】木材価格の高騰は私たちにどう影響？ 住宅の&lt;br>
-など取得したいコンテンツの絞り込みができました。&lt;/p></description></item><item><title>e-Stat でGoogle Custom Search APIを使おう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</link><pubDate>Wed, 19 Jan 2022 18:31:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）" />&lt;h2 id="google-custom-searchの検索結果をcsvに整形する">google Custom Searchの検索結果をcsvに整形する&lt;/h2>
-&lt;p>統計データから列名を取得してgoogle Custom Searchの検索結果に当てに行きマッチする回数の高い列名を社会的関心の高い項目に設定したいと思います。&lt;br>
-全開でgoogle Custom Searchの検索の絞り込みができたのでAPIを叩く回数は統計名ごとに3回にしたいと思います。&lt;/p>
-&lt;p>start パラメータを1から開始して10ずつインクリメントしていきます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=1'
-curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=11'
-curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;amp;cx=xxxxxx&amp;amp;q=人権侵犯事件統計&amp;amp;start=21'
-&lt;/code>&lt;/pre>&lt;p>3回APIを叩いた結果に対してマッチングをかけていきたいと思うのですが、google Custom Searchの検索結果を見やすくするため前準備としてcsvに整形したいと思います。&lt;br>
-google Custom Searchの検索結果はjsonですがjsonのパースはjqを使います。&lt;/p>
-&lt;h2 id="jqのインストール">jqのインストール&lt;/h2>
-&lt;p>jqのインストールは簡単です。&lt;/p>
-&lt;pre tabindex="0">&lt;code>brew install jq
-&lt;/code>&lt;/pre>&lt;h2 id="jqを使ってgoogle-custom-searchの検索結果をjsonをパースする">jqを使ってgoogle Custom Searchの検索結果をjsonをパースする&lt;/h2>
-&lt;pre tabindex="0">&lt;code> &amp;quot;items&amp;quot;: [
-¦ {
-¦ ¦ &amp;quot;kind&amp;quot;: &amp;quot;customsearch#result&amp;quot;,
-¦ ¦ &amp;quot;title&amp;quot;: &amp;quot;昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞&amp;quot;,
-¦ ¦ &amp;quot;htmlTitle&amp;quot;: &amp;quot;昨年の\u003cb\u003e人権侵犯事件\u003c/b\u003e いじめ、教員関係が半減 | 教育新聞&amp;quot;,
-¦ ¦ &amp;quot;link&amp;quot;: &amp;quot;https://www.kyobun.co.jp/news/20210323_03/&amp;quot;,
-¦ ¦ &amp;quot;displayLink&amp;quot;: &amp;quot;www.kyobun.co.jp&amp;quot;,
-¦ ¦ &amp;quot;snippet&amp;quot;: &amp;quot;2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...&amp;quot;,
-¦ ¦ &amp;quot;htmlSnippet&amp;quot;: &amp;quot;2021/03/23 \u003cb\u003e...\u003c/b\u003e それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した\u003cb\u003e人権侵犯事件\u003c/b\u003eは9589件で、前年よりも5831件減少。同省の担当者は「他の\u003cb\u003e統計\u003c/b\u003e&amp;amp;nbsp;...&amp;quot;,
-&lt;/code>&lt;/pre>&lt;p>items配列の中に検索結果が保存されているみたいです。&lt;br>
-取得する項目は、title、snippet、linkにします。&lt;/p>
-&lt;p>jqでカウントを取得する方法は length です。&lt;/p>
-&lt;pre tabindex="0">&lt;code>jq '.items | length'
-&lt;/code>&lt;/pre>&lt;p>配列以下の要素の取り方は&lt;/p>
-&lt;pre tabindex="0">&lt;code> jq -r .items[0].title
-&lt;/code>&lt;/pre>&lt;p>です。&lt;br>
-返却結果にダブルクォーテーションが入るのが邪魔なのでオプション -r をつけています。&lt;/p>
-&lt;h2 id="プログラムの内容出力結果">プログラムの内容、出力結果&lt;/h2>
-&lt;p>プログラムは以下となります&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-#グーグルカスタムサーチの結果を取得します
-APKEY=&amp;quot;xxxxxxxxxxxxxxxxxxxxxxxxx&amp;quot;;
-EGID=&amp;quot;xxxxxxxxxxxx&amp;quot;;
-START=1;
-STATISTICS=&amp;quot;$1&amp;quot;;
-AWK=`which gawk`;
-SED=`which gsed`;
-TMP=&amp;quot;gcstmp.json&amp;quot;
-RST=&amp;quot;gcsrst.csv&amp;quot;;
-cnt=0;
-function parse(){
-items=$(cat &amp;quot;$TMP&amp;quot;|jq .items);
-length=$(echo &amp;quot;$items&amp;quot;|jq '.| length');
-pcnt=0;
-while :;do
-if [ &amp;quot;$pcnt&amp;quot; -ge &amp;quot;$length&amp;quot; ];then
-break;
-fi
-item=$(echo &amp;quot;$items&amp;quot;|jq .[$pcnt]);
-title=$(echo &amp;quot;$item&amp;quot;|jq -r .title);
-snippet=$(echo &amp;quot;$item&amp;quot;|jq -r .snippet);
-link=$(echo &amp;quot;$item&amp;quot;|jq -r .link);
-echo &amp;quot;$title,$snippet,$link&amp;quot;|tee -a &amp;quot;$RST&amp;quot;;
-pcnt=$((pcnt+1));
-done
-}
-function main(){
-:&amp;gt;&amp;quot;$RST&amp;quot;;
-while :;do
-if [ &amp;quot;$cnt&amp;quot; -ge 3 ];then
-break;
-fi
-st=$((cnt*10+1))
-curl &amp;quot;https://www.googleapis.com/customsearch/v1?key=$APKEY&amp;amp;cx=$EGID&amp;amp;q=$STATISTICS&amp;amp;start=$st&amp;quot; -o $TMP
-parse;
-cnt=$((cnt+1));
-done
-}
-main;
-exit;
-&lt;/code>&lt;/pre>&lt;p>整形した検索結果は以下のようになります&lt;/p>
-&lt;pre tabindex="0">&lt;code>昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞,2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...,https://www.kyobun.co.jp/news/20210323_03/
-難民とLGBT：世界における人権侵害の状況 | 難民研究フォーラム ...,2020/12/24 ... マッピング. 2019年末現在、「LGBTであること」や「同性間の性行為」などを刑法において犯罪としている国をマッピング ...,https://refugeestudies.jp/2020/12/lgbt/
-人権擁護委員 - Wikipedia,全国の人権擁護委員の2011年（平成23年）中の活動実績は、次のとおりである。 人権啓発活動従事回数 - 227,683回; 人権相談事件取扱件数 - 159,157件; 人権侵犯事件関与 ...,https://ja.wikipedia.org/wiki/%E4%BA%BA%E6%A8%A9%E6%93%81%E8%AD%B7%E5%A7%94%E5%93%A1
-法務省：インターネットによる人権侵害をなくしましょう – Gov base,2021/04/30 ... ※プロバイダ責任制限法等については、後述の「参考」をご覧ください。 インターネットに関する人権侵犯事件の新規救済手続開始件数. 法務省の人権擁護機関 ...,https://www.gov-base.info/2021/04/30/112474
-&lt;/code>&lt;/pre></description></item><item><title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/</link><pubDate>Wed, 19 Jan 2022 08:08:44 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch.jpg" alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://www.makeuseof.com/css-tips-and-tricks-you-must-know/" target="_blank" rel="noopener"
+など取得したいコンテンツの絞り込みができました。&lt;/p></description></item><item><title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/</link><pubDate>Wed, 19 Jan 2022 08:08:44 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch.jpg" alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://www.makeuseof.com/css-tips-and-tricks-you-must-know/" target="_blank" rel="noopener"
 >8 Essential CSS Tips and Tricks Every Developer Should Know&lt;/a>&lt;/p>
 &lt;p>CSSは、HTMLスケルトンを設定した後、Webページにスタイルを追加するために使用されます。さらに、わずか数行のコードでCSSで洗練されたデザインを作成できます。&lt;br>
 すべての開発者は、プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。&lt;br>
