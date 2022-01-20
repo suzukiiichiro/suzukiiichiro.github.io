@@ -34,12 +34,10 @@
     </div>
   </header>
   <h2 class="article-title">
-    <a href="{{ .RelPermalink }}">
       {{ if .Params.slugTitle }}
         {{- .Params.slugTitle -}}
       {{ else }}
         {{- .Title -}}
       {{ end }}
-    </a>
   </h2>
 </div>
