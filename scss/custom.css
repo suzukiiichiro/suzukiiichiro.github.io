@@ -207,7 +207,7 @@ footer.site-footer {
         background-color: var(--pagenation-current);
         border-color: var(--pagenation-border-current); }
     .pagination-area .pagination li.page-item a {
-      padding: 5px 8px;
+      padding: 5px 12px;
       border-radius: 4px;
       display: inline-flex;
       color: var(--card-text-color-secondary);
