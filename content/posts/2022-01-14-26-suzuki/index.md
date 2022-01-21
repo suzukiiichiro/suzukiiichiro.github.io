@@ -15,7 +15,7 @@ tags:
 
 
 # ファイルが存在するかどうかを確認
-<font color=orange><b>ファイルが存在するかどうかをテストします。</b></bont>
+<font color=orange><b>ファイルが存在するかどうかをテストします。</b></font>
 '-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。
 
 ``` bash:file_exist.sh
@@ -39,6 +39,70 @@ bash file_exist.sh level2.txt
 bash file_exist.sh level.txt
 ファイルが存在します。
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 「>>」（アペンド）を行う場合の注意点は、必ずアペンドするファイルが存在している必要があるところです。
+: ファイルが存在していればアペンド（追記）する。
+: ファイルが存在しなければファイルを作成して追記する。
+: といった処理が必要で、この処理を行わない場合、ファイルが存在しないにもかかわらず、値をファイルに追記しようとした際にエラーとなります。サンプルを以下に示します。
+{{% /tips-list %}}
+
+
+``` bash_append_file2.sh
+#!/bin/bash
+
+if [ -f level.txt ]; then
+  # ファイルが存在するならば追記する
+  echo "Bash Programming" >> level.txt;
+else
+  # ファイルが存在しないからlevel.txtを作成してから追記
+  :> level.txt;
+  echo "Bash Programming" >> level.txt;
+fi
+  
+echo "追加した後のファイル"
+cat level.txt;
+```
+
+{{% tips-list tips %}}
+ヒント
+: touch コマンドと :> の違いを明確にしておく必要があります。
+: 「:>」 は、該当ファイルがなければ作成、あっても空のファイルに置き換えます。
+: 「touch」は、該当ファイルがなければ作成しますが、あれば何もしません。 
+: この違いを利用するとif文はとても簡潔に書き換えることができます。
+: touchコマンドを使って上記ソースを書き換えてみます。
+{{% /tips-list %}}
+
+
+```bash:bash_append_file3.sh
+#!/bin/bash
+
+:> level.txt # 新規にファイルを作成
+echo "Shell Scripting" >> level.txt;
+echo "1回目に追加したファイル"
+cat level.txt;
+
+# 既にファイルが存在するので何もしない
+# 万が一、ファイルが存在しなければ作成。
+touch level.txt; 
+
+echo "Bash Programming" >> level.txt;
+  
+echo "2回目に追加したファイル"
+cat level.txt;
+```
+
+```
+$ bash bash_append_file3.sh
+1回目に追加したファイル
+Shell Scripting
+2回目に追加したファイル
+Shell Scripting
+Bash Programming
+$
+```
+
 
 
 # 関連記事

@@ -37,6 +37,25 @@ $ ls
 suzuki/
 ```
 
+{{% tips-list tips %}}
+ヒント
+: よく記述していたのは以下のようなコードでした。
+: 事前にディレクトリの存在チェックを行い、見つからなかった場合のみディレクトリを作成します。
+{{% /tips-list %}}
+
+``` bash:mkdir_example1.sh
+#!/bin/bash
+
+if [ -d "/tmp/of/work" ];then
+  : # 何もしない
+else
+  mkdir -p "/tmp/work";
+fi  
+
+cd "/tmp/of/work";
+```
+
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)

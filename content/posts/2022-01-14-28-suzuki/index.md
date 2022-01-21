@@ -42,8 +42,72 @@ Current Time is: 12:19:06
 $
 ```
 
+{{% tips-list tips %}}
+ヒント
+: dateコマンドは覚えるのではなく、manコマンドで都度、探しましょう。きりがないです。できる事を覚えておけばオッケーです。以下にありきたりなパターンを列挙しておきます。
+{{% /tips-list %}}
 
-# 関連記事
+```
+$ date '+%Y/%m/%d'
+2005/09/11
+
+$ date '+%Y/%m/%d(%a)'
+2005/09/11(Sun)
+
+$ date '+%y/%m/%d'
+05/09/11
+
+$ date '+%F'
+2005-09-11
+
+$ date '+%D'
+09/11/05
+
+$ date '+%R'
+01:18
+
+$ date '+%T'
+01:18:01
+
+$ date '+%r'
+01:18:06 AM
+
+$ date '+%Y/%m/%d%n%r'
+2005/09/11
+01:18:27 AM
+#↑%n を使用することで、出力に改行を含めることができる。
+
+# 1日後
+$ date -d '1 day'
+
+# 2日後
+$ date -d '2 days
+
+# 1日前
+$ date -d '1 day ago'
+
+# 1ヶ月前
+$ date -d '1 month ago'
+
+# 1年前
+$ date -d '1 year ago'
+
+# 1時間前
+$ date -d '1 hour ago'
+
+# 1分前
+$ date -d '1 minute ago'
+
+# 1秒前
+$ date -d '1 second ago'
+```
+
+```:直近5分以内にあるerrorログを表示
+$ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $(( $(date +"%s") - 300 )) -lt $(echo ${record} | cut -d" " -f 1,2,3 | date --date="$(cat -)" +"%s") ] ; then echo ${record} ; fi ; done | grep error ; IFS=${IFSBK}
+```
+
+
+ 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
 [ざっくりわかる シェルスクリプト【０２．echo コマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/)
 [ざっくりわかる シェルスクリプト【０３．コメント】](https://suzukiiichiro.github.io/posts/2022-01-14-03-suzuki/)

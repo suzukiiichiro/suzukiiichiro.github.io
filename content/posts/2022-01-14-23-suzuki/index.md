@@ -51,6 +51,72 @@ $ bash read_file.sh
 'read_file.sh'という名前のファイルを作成し、次のコードを追加して、'book.txt'という名前の既存のファイルを読み取ります。
 ```
 
+具体的に以下のファイルを作成してファイルを読み込み、必要な部分を抜き出して表示してみます。
+
+``` bash:instance-tag.list
+i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+```
+
+cat します。
+
+```
+$ cat instance-tag.list
+i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+$ 
+```
+
+以下のソースファイルを作成します。
+
+``` bash:whileread_example2.sh
+#!/bin/bash
+
+# catしてwhile read で1行ずつ読み込む
+# 「cat instance-tag.list」の結果を1行ずつ「line」
+# という変数に代入しています。
+cat instance-tag.list | while read line;do
+  # 二つの変数に値切り出して代入
+  # $()は()内で指定したコマンドの実行結果を返します。 
+  # 今回の場合、「echo $line | cut -d, -f 1」の実行結果が
+  # 「instance_id」に定義されます。
+  instance_id=$(echo $line | cut -d, -f 1)
+  tag_value=$(echo $line | cut -d, -f 2)
+  
+  # 表示
+  echo "instance_id: ${instance_id}";
+  echo "tag_value: ${tag_value}";
+done
+```
+
+bashコマンドでファイルを実行します。
+
+```
+$ bash whileread_example2.sh
+instance_id: i-0f6126b7aeedfabd6
+tag_value: hoge
+instance_id: i-050536efdd9dc1126
+tag_value: fuga
+instance_id: i-0869f24358fb3f698
+tag_value: f8k
+$
+```
+
+{{% tips-list tips %}}
+ヒント
+: cutコマンドの部分は、awkコマンドを使うこともあります。
+: 今回は、cutの方が処理速度が速いため、cutコマンドを使いました。
+
+: ちなみにawkの場合は、以下のように記述します。
+{{% /tips-list %}}
+
+```
+instance_id=$(echo $line | awk -F, '{print $1;}');
+tag_value=$(echo $line | awk -F, '{print $2;}');
+```
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)

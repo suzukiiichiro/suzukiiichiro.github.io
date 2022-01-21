@@ -35,6 +35,31 @@ $ bash sleep_example.sh
 $
 ```
 
+わかりにくいですね。
+少し高度だけど、わかりやすいサンプルも書いておきます。
+
+# wait コマンドのサンプル
+sleep コマンドをバックグラウンドで実行させ、前の章で使ったwait コマンドで同期をとります。。バックグランドで実行したコマンドのプロセス ID は $! で取得できます。
+
+``` bash:wait_example.sh
+#!/bin/bash
+
+for((i=0;i<3;i++));do
+  sleep 5 &;
+  array[i]=$!;
+  echo "Sleeping: ${i} : ${array[i]}";
+done
+
+wait ${array[@]};
+echo "Finish!!";
+```
+
+{{% tips-list tips %}}
+ヒント
+: 二つのコマンドの違いは以下の通りです。
+: sleepは指定した時間だけ処理を遅延
+: waitはプロセスやジョブの終了を待つ
+{{% /tips-list %}}
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
