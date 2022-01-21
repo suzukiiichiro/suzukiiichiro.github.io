@@ -15,7 +15,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-21T06:01:06+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-13T11:26:13+09:00"><meta property="article:modified_time" content="2022-01-21T06:10:56+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト３」 - NLP">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
@@ -103,7 +103,7 @@ Web開発
 2022.01.21
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 10分
+読了時間: 16分
 </time>
 </div>
 </header>
@@ -124,6 +124,8 @@ Web開発
 <li><a href=#ファイルに追加>ファイルに追加</a></li>
 <li><a href=#ファイルが存在するかどうかを確認>ファイルが存在するかどうかを確認</a></li>
 <li><a href=#mailコマンド>mailコマンド</a></li>
+</ol>
+<ol>
 <li><a href=#dateコマンド>dateコマンド</a></li>
 <li><a href=#waitコマンド>waitコマンド</a></li>
 <li><a href=#sleepコマンド>sleepコマンド</a></li>
@@ -158,7 +160,17 @@ Bash関数は、数値と文字列値の両方を渡すことができます。�
 suzuki
 関数からの戻り値は「こんにちは、suzuki」です。
 $
-</code></pre><h2 id=ディレクトリを作成する>ディレクトリを作成する</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>戻り値について</dt>
+<dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。</dd>
+<dd>
+<p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。</p>
+</dd>
+<dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。</dd>
+</dl>
+</div>
+<h2 id=ディレクトリを作成する>ディレクトリを作成する</h2>
 <p><font color=orange><b>ディレクトリを作成する：</b></font><br>
 Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。&lsquo;make_directory.sh&rsquo;という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:make_directory.sh data-lang=bash:make_directory.sh><span class=cp>#!/bin/bash
@@ -173,7 +185,23 @@ Bashは「mkdir」コマンドを使用して新しいディレクトリを作�
 suzuki
 $ ls
 suzuki/
-</code></pre><h2 id=存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>よく記述していたのは以下のようなコードでした。</dd>
+<dd>事前にディレクトリの存在チェックを行い、見つからなかった場合のみディレクトリを作成します。</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mkdir_example1.sh data-lang=bash:mkdir_example1.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>if</span> <span class=o>[</span> -d <span class=s2>&#34;/tmp/of/work&#34;</span> <span class=o>]</span><span class=p>;</span><span class=k>then</span>
+  : <span class=c1># 何もしない</span>
+<span class=k>else</span>
+  mkdir -p <span class=s2>&#34;/tmp/work&#34;</span><span class=p>;</span>
+<span class=k>fi</span>  
+
+<span class=nb>cd</span> <span class=s2>&#34;/tmp/of/work&#34;</span><span class=p>;</span>
+</code></pre></div><h2 id=存在を確認してディレクトリを作成する>存在を確認してディレクトリを作成する</h2>
 <p><font color=orange><b>存在を確認してディレクトリを作成します。</b></font><br>
 &lsquo;mkdir&rsquo;コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの&rsquo; -d &lsquo;オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。&lsquo;directory_exist.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:directory_exist.sh data-lang=bash:directory_exist.sh><span class=cp>#!/bin/bash
@@ -198,6 +226,45 @@ $ bash directory_exist.sh
 suzuki
 ディレクトリが存在します。
 $
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>実はディレクトリの存在チェックを行わなくても先のスクリプトは問題なく動作します。</dd>
+<dd>mkdir -p コマンドは以下のような挙動をします。</dd>
+<dd>
+<p>作成対象ディレクトリの親ディレクトリが存在しない場合 はすべての親ディレクトリを作成する</p>
+</dd>
+<dd>作成対象ディレクトリがすでに存在している場合 は何も行わず、エラーもはかない</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mkdir_example2.sh data-lang=bash:mkdir_example2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># 一旦ディレクトリを作成</span>
+mkdir -p /tmp/work
+
+ls -l -d /tmp/work/
+<span class=c1># 出力</span>
+<span class=c1># drwxr-xr-x 2 root root 64 Aug 22 08:26 /tmp/work/</span>
+
+<span class=c1># オプション無しですでに存在しているディレクトリを作成</span>
+mkdir /tmp/work
+<span class=c1># 出力</span>
+<span class=c1># mkdir: /tmp/work: File exists</span>
+
+<span class=nb>echo</span> <span class=nv>$?</span>
+<span class=c1># 1</span>
+
+<span class=c1># -pオプション有りだとエラーを吐かない</span>
+mkdir -p /tmp/work
+
+<span class=nb>echo</span> <span class=nv>$?</span>
+<span class=c1># 0</span>
+</code></pre></div><pre tabindex=0><code>$ bash mkdir_example2.sh
+drwxr-xr-x  2 suzukiiichiro  wheel  64  1 21 13:13 /tmp/work/
+mkdir: /tmp/work: File exists
+1
+0
+$
 </code></pre><h2 id=ファイルを読む>ファイルを読む</h2>
 <p><font color=orange><b>ファイルを読む：</b></font><br>
 whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。&lsquo;read_file.sh&rsquo;という名前のファイルを作成し、次のコードを追加してください。 別途作成する&rsquo;book.txt&rsquo;の内容を読み取ります。</p>
@@ -221,6 +288,55 @@ whileループでreadコマンドを使用すると、bashで任意のファイ�
 ファイルを読む：
 ループを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。
 'read_file.sh'という名前のファイルを作成し、次のコードを追加して、'book.txt'という名前の既存のファイルを読み取ります。
+</code></pre><p>具体的に以下のファイルを作成してファイルを読み込み、必要な部分を抜き出して表示してみます。</p>
+<pre tabindex=0><code class=language-bash:instance-tag.list data-lang=bash:instance-tag.list>i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+</code></pre><p>cat します。</p>
+<pre tabindex=0><code>$ cat instance-tag.list
+i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+$ 
+</code></pre><p>以下のソースファイルを作成します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:whileread_example2.sh data-lang=bash:whileread_example2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># catしてwhile read で1行ずつ読み込む</span>
+<span class=c1># 「cat instance-tag.list」の結果を1行ずつ「line」</span>
+<span class=c1># という変数に代入しています。</span>
+cat instance-tag.list <span class=p>|</span> <span class=k>while</span> <span class=nb>read</span> line<span class=p>;</span><span class=k>do</span>
+  <span class=c1># 二つの変数に値切り出して代入</span>
+  <span class=c1># $()は()内で指定したコマンドの実行結果を返します。 </span>
+  <span class=c1># 今回の場合、「echo $line | cut -d, -f 1」の実行結果が</span>
+  <span class=c1># 「instance_id」に定義されます。</span>
+  <span class=nv>instance_id</span><span class=o>=</span><span class=k>$(</span><span class=nb>echo</span> <span class=nv>$line</span> <span class=p>|</span> cut -d, -f 1<span class=k>)</span>
+  <span class=nv>tag_value</span><span class=o>=</span><span class=k>$(</span><span class=nb>echo</span> <span class=nv>$line</span> <span class=p>|</span> cut -d, -f 2<span class=k>)</span>
+  
+  <span class=c1># 表示</span>
+  <span class=nb>echo</span> <span class=s2>&#34;instance_id: </span><span class=si>${</span><span class=nv>instance_id</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;tag_value: </span><span class=si>${</span><span class=nv>tag_value</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<pre tabindex=0><code>$ bash whileread_example2.sh
+instance_id: i-0f6126b7aeedfabd6
+tag_value: hoge
+instance_id: i-050536efdd9dc1126
+tag_value: fuga
+instance_id: i-0869f24358fb3f698
+tag_value: f8k
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>cutコマンドの部分は、awkコマンドを使うこともあります。</dd>
+<dd>今回は、cutの方が処理速度が速いため、cutコマンドを使いました。</dd>
+<dd>
+<p>ちなみにawkの場合は、以下のように記述します。</p>
+</dd>
+</dl>
+</div>
+<pre tabindex=0><code>instance_id=$(echo $line | awk -F, '{print $1;}');
+tag_value=$(echo $line | awk -F, '{print $2;}');
 </code></pre><h2 id=ファイルを削除する>ファイルを削除する</h2>
 <p><font color=orange><b>ファイルを削除します：</b></font><br>
 &lsquo;rm&rsquo;コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
@@ -242,10 +358,42 @@ book.txt
 $ ls
 suzuki/
 $
-</code></pre><h2 id=ファイルに追加>ファイルに追加</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>基本的に、ファイルもディレクトリも削除するコマンドは同じです。ディレクトリには再帰的に（フォルダの階層も含めて）削除するオプション(-r リカーション)があります。</dd>
+<dd>
+<p>rm</p>
+</dd>
+<dd>-f :確認をせずに削除</dd>
+<dd>-r ：再帰的に削除</dd>
+<dd>
+<p>フォルダを削除</p>
+</dd>
+<dd>rm -rf <target directory></dd>
+</dl>
+</div>
+<div class="tips-area tips">
+<dl>
+<dt>高度なヒント</dt>
+<dd>シェルスクリプトで自動化処理を作成する場合、cp や rm で、確認をせずに実行したいことが多々あります。</dd>
+<dd>この場合は、</dd>
+<dd>
+<p>/bin/cp</p>
+</dd>
+<dd>
+<p>または</p>
+</dd>
+<dd>/bin/rm</dd>
+<dd>
+<p>を使うと、確認なしで実行することができます。</p>
+</dd>
+</dl>
+</div>
+<h2 id=ファイルに追加>ファイルに追加</h2>
 <p><font color=orange><b>ファイルに追加：</b></font><br>
-bashで「&#187;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&lsquo;append_file.sh &lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-:level.txt data-lang=:level.txt>1. Pro AngularJS
+bashで「&#187;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&lsquo;append_file.sh &lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「book.txt」ファイルのに追加されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-:book.txt data-lang=:book.txt>1. Pro AngularJS
 2. Learning JQuery
 3. PHP Programming
 4. Code Igniter
@@ -254,7 +402,7 @@ bashで「&#187;」演算子を使用すると、既存のファイルに新し�
 <span class=nb>echo</span> <span class=s2>&#34;追加する前のファイル&#34;</span><span class=p>;</span>
 cat book.txt<span class=p>;</span>
 
-<span class=nb>echo</span> <span class=s2>&#34;5. Bash Programming&#34;</span> &gt;&gt; level.txt
+<span class=nb>echo</span> <span class=s2>&#34;5. Bash Programming&#34;</span> &gt;&gt; book.txt
 <span class=nb>echo</span> <span class=s2>&#34;追加した後のファイル&#34;</span>
 cat book.txt<span class=p>;</span>
 </code></pre></div><p>bashコマンドでファイルを実行します。</p>
@@ -271,10 +419,16 @@ cat book.txt<span class=p>;</span>
 4. Code Igniter
 5. Bash Programming
 $
-</code></pre><p><font color=red>「>」はファイルを新しく作成して追記します。<br>
-「&#187;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&#187;」を行うと、ついするファイルがないため、エラーとなります。ファイルの存在を確認するための方法を次の章で説明します。</font></p>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>「>」はファイルを新しく作成して追記します。</dd>
+<dd>「&#187;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&#187;」を行うと、ついするファイルがないため、エラーとなります。</dd>
+<dd>ファイルの存在を確認するための方法を次の章で説明します。</dd>
+</dl>
+</div>
 <h2 id=ファイルが存在するかどうかを確認>ファイルが存在するかどうかを確認</h2>
-<p><font color=orange><b>ファイルが存在するかどうかをテストします。</b></bont><br>
+<p><font color=orange><b>ファイルが存在するかどうかをテストします。</b></font><br>
 &lsquo;-e&rsquo;または&rsquo;-f&rsquo;オプションを使用して、ファイルの存在を確認できます。次のコードの &lsquo;if [ ]&lsquo;では、ファイルの存在をテストするために「-f」オプションが使用されています。&rsquo; file_exist.sh &lsquo;という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:file_exist.sh data-lang=bash:file_exist.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
@@ -291,19 +445,90 @@ bash file_exist.sh level2.txt
 ファイルは存在しません。
 bash file_exist.sh level.txt
 ファイルが存在します。
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>「&#187;」（アペンド）を行う場合の注意点は、必ずアペンドするファイルが存在している必要があるところです。</dd>
+<dd>ファイルが存在していればアペンド（追記）する。</dd>
+<dd>ファイルが存在しなければファイルを作成して追記する。</dd>
+<dd>といった処理が必要で、この処理を行わない場合、ファイルが存在しないにもかかわらず、値をファイルに追記しようとした際にエラーとなります。サンプルを以下に示します。</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash_append_file2.sh data-lang=bash_append_file2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>if</span> <span class=o>[</span> -f level.txt <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=c1># ファイルが存在するならば追記する</span>
+  <span class=nb>echo</span> <span class=s2>&#34;Bash Programming&#34;</span> &gt;&gt; level.txt<span class=p>;</span>
+<span class=k>else</span>
+  <span class=c1># ファイルが存在しないからlevel.txtを作成してから追記</span>
+  :&gt; level.txt<span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;Bash Programming&#34;</span> &gt;&gt; level.txt<span class=p>;</span>
+<span class=k>fi</span>
+  
+<span class=nb>echo</span> <span class=s2>&#34;追加した後のファイル&#34;</span>
+cat level.txt<span class=p>;</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>touch コマンドと :> の違いを明確にしておく必要があります。</dd>
+<dd>「:>」 は、該当ファイルがなければ作成、あっても空のファイルに置き換えます。</dd>
+<dd>「touch」は、該当ファイルがなければ作成しますが、あれば何もしません。</dd>
+<dd>この違いを利用するとif文はとても簡潔に書き換えることができます。</dd>
+<dd>touchコマンドを使って上記ソースを書き換えてみます。</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bash_append_file3.sh data-lang=bash:bash_append_file3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+:&gt; level.txt <span class=c1># 新規にファイルを作成</span>
+<span class=nb>echo</span> <span class=s2>&#34;Shell Scripting&#34;</span> &gt;&gt; level.txt<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;1回目に追加したファイル&#34;</span>
+cat level.txt<span class=p>;</span>
+
+<span class=c1># 既にファイルが存在するので何もしない</span>
+<span class=c1># 万が一、ファイルが存在しなければ作成。</span>
+touch level.txt<span class=p>;</span> 
+
+<span class=nb>echo</span> <span class=s2>&#34;Bash Programming&#34;</span> &gt;&gt; level.txt<span class=p>;</span>
+  
+<span class=nb>echo</span> <span class=s2>&#34;2回目に追加したファイル&#34;</span>
+cat level.txt<span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash bash_append_file3.sh
+1回目に追加したファイル
+Shell Scripting
+2回目に追加したファイル
+Shell Scripting
+Bash Programming
+$
 </code></pre><h2 id=mailコマンド>mailコマンド</h2>
 <p><font color=orange><b>メールを送る：</b></font><br>
 ' mail &lsquo;または ' sendmail &lsquo;コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。&rsquo; mail_example.sh &lsquo;という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
+<h1 id=mailコマンドインストール>mailコマンドインストール</h1>
+<p>まずはここを参考に<br>
+<a class=link href=https://qiita.com/TanukiTam/items/abff82573c0f544b3b27 target=_blank rel=noopener>Macでコマンドからメールを送る Gmail</a></p>
+<p>linuxの場合は</p>
+<pre tabindex=0><code>$ yum install mailx
+</code></pre><h1 id=実際にメールを送ってみます>実際にメールを送ってみます。</h1>
+<pre tabindex=0><code>$ echo &quot;本文&quot; | mail -s &quot;タイトル&quot; -r from@example.com -c cc1@example.com -c cc2@example.com to1@example.com to2@example.com
+</code></pre><p>恐ろしいほどに簡単ですね。<br>
+おかしな事をかんがえるのはやめましょう。</p>
+<h1 id=シェルスクリプトでサンプルを作る>シェルスクリプトでサンプルを作る</h1>
 <p><a class=link href=mailto:admin@sample.com>admin@sample.com</a> の部分を自分のメールアドレスに置き換えて実行して下さい。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mail_example.sh data-lang=bash:mail_example.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
-<span class=nv>Recipient</span><span class=o>=</span>”admin@sample.com”
-<span class=nv>Subject</span><span class=o>=</span>”Greeting”
-<span class=nv>Message</span><span class=o>=</span>”Welcome to our site”
-<span class=sb>`</span>mail -s <span class=nv>$Subject</span> <span class=nv>$Recipient</span> <span class=o>&lt;&lt;&lt;</span> <span class=nv>$Message</span><span class=sb>`</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
+<span class=nv>Recipient</span><span class=o>=</span><span class=s2>&#34;admin@sample.com&#34;</span>
+<span class=nv>Subject</span><span class=o>=</span><span class=s2>&#34;Greeting”
+</span><span class=s2>Message=&#34;</span>Welcome to our site<span class=s2>&#34;
+</span><span class=s2>`mail -s </span><span class=nv>$Subject</span><span class=s2> </span><span class=nv>$Recipient</span><span class=s2> &lt;&lt;&lt; </span><span class=nv>$Message</span><span class=s2>`
+</span></code></pre></div><p>bashコマンドでファイルを実行します。</p>
 <pre tabindex=0><code>$ bash mail_example.sh
-</code></pre><h2 id=dateコマンド>dateコマンド</h2>
+$ 
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>くれぐれもおかしな事をかんがえるのはやめましょう。</dd>
+</dl>
+</div>
+<h2 id=dateコマンド>dateコマンド</h2>
 <p><font color=orange><b>現在の日付を解析する：</b></font><br>
 dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。&lsquo;date_parse.sh&rsquo;という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:date_parse.sh data-lang=bash:date_parse.sh><span class=cp>#!/bin/bash
@@ -323,6 +548,65 @@ dateコマンドを使用して、現在のシステムの日付と時刻の値�
 Current Date is: 13-01-2022
 Current Time is: 12:19:06
 $
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>dateコマンドは覚えるのではなく、manコマンドで都度、探しましょう。きりがないです。できる事を覚えておけばオッケーです。以下にありきたりなパターンを列挙しておきます。</dd>
+</dl>
+</div>
+<pre tabindex=0><code>$ date '+%Y/%m/%d'
+2005/09/11
+
+$ date '+%Y/%m/%d(%a)'
+2005/09/11(Sun)
+
+$ date '+%y/%m/%d'
+05/09/11
+
+$ date '+%F'
+2005-09-11
+
+$ date '+%D'
+09/11/05
+
+$ date '+%R'
+01:18
+
+$ date '+%T'
+01:18:01
+
+$ date '+%r'
+01:18:06 AM
+
+$ date '+%Y/%m/%d%n%r'
+2005/09/11
+01:18:27 AM
+#↑%n を使用することで、出力に改行を含めることができる。
+
+# 1日後
+$ date -d '1 day'
+
+# 2日後
+$ date -d '2 days
+
+# 1日前
+$ date -d '1 day ago'
+
+# 1ヶ月前
+$ date -d '1 month ago'
+
+# 1年前
+$ date -d '1 year ago'
+
+# 1時間前
+$ date -d '1 hour ago'
+
+# 1分前
+$ date -d '1 minute ago'
+
+# 1秒前
+$ date -d '1 second ago'
+</code></pre><pre tabindex=0><code class=language-:直近5分以内にあるerrorログを表示 data-lang=:直近5分以内にあるerrorログを表示>$ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $(( $(date +&quot;%s&quot;) - 300 )) -lt $(echo ${record} | cut -d&quot; &quot; -f 1,2,3 | date --date=&quot;$(cat -)&quot; +&quot;%s&quot;) ] ; then echo ${record} ; fi ; done | grep error ; IFS=${IFSBK}
 </code></pre><h2 id=waitコマンド>waitコマンド</h2>
 <p><font color=orange><b>waitコマンド：</b></font><br>
 waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。&rsquo; wait_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加します。</p>
@@ -337,7 +621,48 @@ waitコマンドは、実行中のプロセスの完了を待機するLinuxの�
 Wait command
 Exited with status 0
 $
-</code></pre><h2 id=sleepコマンド>sleepコマンド</h2>
+</code></pre><p>わかりにくいですね。<br>
+もう少しわかりやすく説明します。<br>
+waitコマンドは、他のプロセスの終了まで待機することができるコマンドです。<br>
+例えば、以下三つのファイルを実行します。<br>
+末尾に & がついているのは、それぞれの実行ファイルをバックグラウンドで並列で実行させることを意味しています。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+bash a.sh <span class=p>&amp;;</span>
+bash b.sh <span class=p>&amp;;</span>
+bash c.sh <span class=p>&amp;;</span>
+</code></pre></div><p>では、三つの実行ファイルが全て完了したらコメントを出力するソースに書き直してみます。</p>
+<pre tabindex=0><code class=language-bash:間違ったソース data-lang=bash:間違ったソース>#!/bin/bash
+
+bash a.sh &amp;;
+bash b.sh &amp;;
+bash c.sh &amp;;
+
+echo &quot;終了しました&quot;;
+</code></pre><p>上記のソースは、実行の終了を待たずに「終了しました」が出力されます。要するに、コメントの出力は全ての実行を待っていない訳です。正しいソースに書き直してみます。</p>
+<pre tabindex=0><code class=language-bash:正しいソース data-lang=bash:正しいソース>#!/bin/bash
+
+bash a.sh &amp;;
+bash b.sh &amp;;
+bash c.sh &amp;;
+wait;
+echo &quot;終了しました&quot;;
+</code></pre><p>上記のようにwaitコマンドを挟むことで、a.sh, b.sh, c.sh の実行が終了してから完了メッセージを表示させることが出来ました。</p>
+<p>前の処理終了を待ってから、次の処理を実行する方法は以下の通りです。</p>
+<pre tabindex=0><code class=language-bash:処理の終了を待って次の処理へ data-lang=bash:処理の終了を待って次の処理へ>#!/bin/bash
+
+command1 &amp;
+command2 &amp;
+wait
+command3
+</code></pre><p>上記の様にすると、command1とcommand2が終了してからcommand3が実行される様にできます。command1と2がバックグラウンドで実行され、waitコマンドで処理終了まで待機し、command3が実行されるといった流れです。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>waitコマンドと似ているsleepコマンドについて、次の章で説明します。またsleepコマンドとwaitコマンドを組み合わせて並列処理を行うサンプルも次の章で示します。</dd>
+</dl>
+</div>
+<h2 id=sleepコマンド>sleepコマンド</h2>
 <p><font color=orange><b>sleepコマンド：</b></font><br>
 コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。&lsquo;sleep_example.sh&rsquo; という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:sleep_example.sh data-lang=bash:sleep_example.sh><span class=cp>#!/bin/bash
@@ -350,7 +675,29 @@ sleep <span class=m>5</span>
 “Wait for 5 seconds”
 “Completed”
 $
-</code></pre><p>#関連記事<br>
+</code></pre><p>わかりにくいですね。<br>
+少し高度だけど、わかりやすいサンプルも書いておきます。</p>
+<h1 id=wait-コマンドのサンプル>wait コマンドのサンプル</h1>
+<p>sleep コマンドをバックグラウンドで実行させ、前の章で使ったwait コマンドで同期をとります。。バックグランドで実行したコマンドのプロセス ID は $! で取得できます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:wait_example.sh data-lang=bash:wait_example.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;3<span class=p>;</span>i++<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+  sleep <span class=m>5</span> <span class=p>&amp;;</span>
+  array<span class=o>[</span>i<span class=o>]=</span><span class=nv>$!</span><span class=p>;</span>
+  <span class=nb>echo</span> <span class=s2>&#34;Sleeping: </span><span class=si>${</span><span class=nv>i</span><span class=si>}</span><span class=s2> : </span><span class=si>${</span><span class=nv>array</span><span class=p>[i]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>done</span>
+
+<span class=nb>wait</span> <span class=si>${</span><span class=nv>array</span><span class=p>[@]</span><span class=si>}</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Finish!!&#34;</span><span class=p>;</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>二つのコマンドの違いは以下の通りです。</dd>
+<dd>sleepは指定した時間だけ処理を遅延</dd>
+<dd>waitはプロセスやジョブの終了を待つ</dd>
+</dl>
+</div>
+<p>#関連記事<br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト３」</a></p>
@@ -397,10 +744,10 @@ $
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -409,9 +756,9 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
+</div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
 </div>
 </a>
 </article>
@@ -431,6 +778,25 @@ $
 <h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
 </div><p class=article-subtitle>'-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
 </div>
 </a>
 </article>
@@ -469,25 +835,6 @@ $
 <h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
 </div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
 </div>
 </a>
 </article>

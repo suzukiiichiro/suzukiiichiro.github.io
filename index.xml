@@ -2219,7 +2219,17 @@ Bash関数は、数値と文字列値の両方を渡すことができます。�
 suzuki
 関数からの戻り値は「こんにちは、suzuki」です。
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>戻り値について&lt;/dt>
+&lt;dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。&lt;/dd>
+&lt;dd>
+&lt;p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。&lt;/p>
+&lt;/dd>
+&lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -2335,7 +2345,22 @@ Bashは「mkdir」コマンドを使用して新しいディレクトリを作�
 suzuki
 $ ls
 suzuki/
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>よく記述していたのは以下のようなコードでした。&lt;/dd>
+&lt;dd>事前にディレクトリの存在チェックを行い、見つからなかった場合のみディレクトリを作成します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir_example1.sh" data-lang="bash:mkdir_example1.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -d &lt;span class="s2">&amp;#34;/tmp/of/work&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+: &lt;span class="c1"># 何もしない&lt;/span>
+&lt;span class="k">else&lt;/span>
+mkdir -p &lt;span class="s2">&amp;#34;/tmp/work&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;/tmp/of/work&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -2462,6 +2487,40 @@ $ bash directory_exist.sh
 suzuki
 ディレクトリが存在します。
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>実はディレクトリの存在チェックを行わなくても先のスクリプトは問題なく動作します。&lt;/dd>
+&lt;dd>mkdir -p コマンドは以下のような挙動をします。&lt;/dd>
+&lt;dd>
+&lt;p>作成対象ディレクトリの親ディレクトリが存在しない場合 はすべての親ディレクトリを作成する&lt;/p>
+&lt;/dd>
+&lt;dd>作成対象ディレクトリがすでに存在している場合 は何も行わず、エラーもはかない&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir_example2.sh" data-lang="bash:mkdir_example2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># 一旦ディレクトリを作成&lt;/span>
+mkdir -p /tmp/work
+ls -l -d /tmp/work/
+&lt;span class="c1"># 出力&lt;/span>
+&lt;span class="c1"># drwxr-xr-x 2 root root 64 Aug 22 08:26 /tmp/work/&lt;/span>
+&lt;span class="c1"># オプション無しですでに存在しているディレクトリを作成&lt;/span>
+mkdir /tmp/work
+&lt;span class="c1"># 出力&lt;/span>
+&lt;span class="c1"># mkdir: /tmp/work: File exists&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$?&lt;/span>
+&lt;span class="c1"># 1&lt;/span>
+&lt;span class="c1"># -pオプション有りだとエラーを吐かない&lt;/span>
+mkdir -p /tmp/work
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$?&lt;/span>
+&lt;span class="c1"># 0&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash mkdir_example2.sh
+drwxr-xr-x 2 suzukiiichiro wheel 64 1 21 13:13 /tmp/work/
+mkdir: /tmp/work: File exists
+1
+0
+$
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -2587,6 +2646,54 @@ whileループでreadコマンドを使用すると、bashで任意のファイ�
 ファイルを読む：
 ループを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。
 'read_file.sh'という名前のファイルを作成し、次のコードを追加して、'book.txt'という名前の既存のファイルを読み取ります。
+&lt;/code>&lt;/pre>&lt;p>具体的に以下のファイルを作成してファイルを読み込み、必要な部分を抜き出して表示してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:instance-tag.list" data-lang="bash:instance-tag.list">i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+&lt;/code>&lt;/pre>&lt;p>cat します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat instance-tag.list
+i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+$
+&lt;/code>&lt;/pre>&lt;p>以下のソースファイルを作成します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:whileread_example2.sh" data-lang="bash:whileread_example2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># catしてwhile read で1行ずつ読み込む&lt;/span>
+&lt;span class="c1"># 「cat instance-tag.list」の結果を1行ずつ「line」&lt;/span>
+&lt;span class="c1"># という変数に代入しています。&lt;/span>
+cat instance-tag.list &lt;span class="p">|&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="nb">read&lt;/span> line&lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+&lt;span class="c1"># 二つの変数に値切り出して代入&lt;/span>
+&lt;span class="c1"># $()は()内で指定したコマンドの実行結果を返します。 &lt;/span>
+&lt;span class="c1"># 今回の場合、「echo $line | cut -d, -f 1」の実行結果が&lt;/span>
+&lt;span class="c1"># 「instance_id」に定義されます。&lt;/span>
+&lt;span class="nv">instance_id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$line&lt;/span> &lt;span class="p">|&lt;/span> cut -d, -f 1&lt;span class="k">)&lt;/span>
+&lt;span class="nv">tag_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$line&lt;/span> &lt;span class="p">|&lt;/span> cut -d, -f 2&lt;span class="k">)&lt;/span>
+&lt;span class="c1"># 表示&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;instance_id: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">instance_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;tag_value: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">tag_value&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash whileread_example2.sh
+instance_id: i-0f6126b7aeedfabd6
+tag_value: hoge
+instance_id: i-050536efdd9dc1126
+tag_value: fuga
+instance_id: i-0869f24358fb3f698
+tag_value: f8k
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>cutコマンドの部分は、awkコマンドを使うこともあります。&lt;/dd>
+&lt;dd>今回は、cutの方が処理速度が速いため、cutコマンドを使いました。&lt;/dd>
+&lt;dd>
+&lt;p>ちなみにawkの場合は、以下のように記述します。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code>instance_id=$(echo $line | awk -F, '{print $1;}');
+tag_value=$(echo $line | awk -F, '{print $2;}');
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -2710,7 +2817,39 @@ book.txt
 $ ls
 suzuki/
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>基本的に、ファイルもディレクトリも削除するコマンドは同じです。ディレクトリには再帰的に（フォルダの階層も含めて）削除するオプション(-r リカーション)があります。&lt;/dd>
+&lt;dd>
+&lt;p>rm&lt;/p>
+&lt;/dd>
+&lt;dd>-f :確認をせずに削除&lt;/dd>
+&lt;dd>-r ：再帰的に削除&lt;/dd>
+&lt;dd>
+&lt;p>フォルダを削除&lt;/p>
+&lt;/dd>
+&lt;dd>rm -rf &lt;target directory>&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>高度なヒント&lt;/dt>
+&lt;dd>シェルスクリプトで自動化処理を作成する場合、cp や rm で、確認をせずに実行したいことが多々あります。&lt;/dd>
+&lt;dd>この場合は、&lt;/dd>
+&lt;dd>
+&lt;p>/bin/cp&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>または&lt;/p>
+&lt;/dd>
+&lt;dd>/bin/rm&lt;/dd>
+&lt;dd>
+&lt;p>を使うと、確認なしで実行することができます。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -2814,8 +2953,8 @@ $
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside></description></item><item><title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」" />&lt;h1 id="ファイルに追加">ファイルに追加&lt;/h1>
 &lt;p>&lt;font color=orange>&lt;b>ファイルに追加：&lt;/b>&lt;/font>&lt;br>
-bashで「&amp;raquo;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&amp;lsquo;append_file.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:level.txt" data-lang=":level.txt">1. Pro AngularJS
+bashで「&amp;raquo;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&amp;lsquo;append_file.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「book.txt」ファイルのに追加されます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:book.txt" data-lang=":book.txt">1. Pro AngularJS
 2. Learning JQuery
 3. PHP Programming
 4. Code Igniter
@@ -2823,7 +2962,7 @@ bashで「&amp;raquo;」演算子を使用すると、既存のファイルに�
 &lt;/span>&lt;span class="cp">&lt;/span>
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加する前のファイル&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 cat book.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;5. Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;5. Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; book.txt
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加した後のファイル&amp;#34;&lt;/span>
 cat book.txt&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
@@ -2840,8 +2979,14 @@ cat book.txt&lt;span class="p">;&lt;/span>
 4. Code Igniter
 5. Bash Programming
 $
-&lt;/code>&lt;/pre>&lt;p>&lt;font color=red>「&amp;gt;」はファイルを新しく作成して追記します。&lt;br>
-「&amp;raquo;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&amp;raquo;」を行うと、ついするファイルがないため、エラーとなります。ファイルの存在を確認するための方法を次の章で説明します。&lt;/font>&lt;/p>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>「&amp;gt;」はファイルを新しく作成して追記します。&lt;/dd>
+&lt;dd>「&amp;raquo;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&amp;raquo;」を行うと、ついするファイルがないため、エラーとなります。&lt;/dd>
+&lt;dd>ファイルの存在を確認するための方法を次の章で説明します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -2945,7 +3090,7 @@ $
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside></description></item><item><title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」" />&lt;h1 id="ファイルが存在するかどうかを確認">ファイルが存在するかどうかを確認&lt;/h1>
-&lt;p>&lt;font color=orange>&lt;b>ファイルが存在するかどうかをテストします。&lt;/b>&lt;/bont>&lt;br>
+&lt;p>&lt;font color=orange>&lt;b>ファイルが存在するかどうかをテストします。&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;-e&amp;rsquo;または&amp;rsquo;-f&amp;rsquo;オプションを使用して、ファイルの存在を確認できます。次のコードの &amp;lsquo;if [ ]&amp;lsquo;では、ファイルの存在をテストするために「-f」オプションが使用されています。&amp;rsquo; file_exist.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:file_exist.sh" data-lang="bash:file_exist.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
@@ -2962,6 +3107,56 @@ bash file_exist.sh level2.txt
 ファイルは存在しません。
 bash file_exist.sh level.txt
 ファイルが存在します。
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>「&amp;raquo;」（アペンド）を行う場合の注意点は、必ずアペンドするファイルが存在している必要があるところです。&lt;/dd>
+&lt;dd>ファイルが存在していればアペンド（追記）する。&lt;/dd>
+&lt;dd>ファイルが存在しなければファイルを作成して追記する。&lt;/dd>
+&lt;dd>といった処理が必要で、この処理を行わない場合、ファイルが存在しないにもかかわらず、値をファイルに追記しようとした際にエラーとなります。サンプルを以下に示します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash_append_file2.sh" data-lang="bash_append_file2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f level.txt &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="c1"># ファイルが存在するならば追記する&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="k">else&lt;/span>
+&lt;span class="c1"># ファイルが存在しないからlevel.txtを作成してから追記&lt;/span>
+:&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加した後のファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>touch コマンドと :&amp;gt; の違いを明確にしておく必要があります。&lt;/dd>
+&lt;dd>「:&amp;gt;」 は、該当ファイルがなければ作成、あっても空のファイルに置き換えます。&lt;/dd>
+&lt;dd>「touch」は、該当ファイルがなければ作成しますが、あれば何もしません。&lt;/dd>
+&lt;dd>この違いを利用するとif文はとても簡潔に書き換えることができます。&lt;/dd>
+&lt;dd>touchコマンドを使って上記ソースを書き換えてみます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:bash_append_file3.sh" data-lang="bash:bash_append_file3.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+:&amp;gt; level.txt &lt;span class="c1"># 新規にファイルを作成&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Shell Scripting&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;1回目に追加したファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 既にファイルが存在するので何もしない&lt;/span>
+&lt;span class="c1"># 万が一、ファイルが存在しなければ作成。&lt;/span>
+touch level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;2回目に追加したファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash bash_append_file3.sh
+1回目に追加したファイル
+Shell Scripting
+2回目に追加したファイル
+Shell Scripting
+Bash Programming
+$
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -3067,16 +3262,34 @@ bash file_exist.sh level.txt
 &lt;/aside></description></item><item><title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」" />&lt;h1 id="mailコマンド">mailコマンド&lt;/h1>
 &lt;p>&lt;font color=orange>&lt;b>メールを送る：&lt;/b>&lt;/font>&lt;br>
 ' mail &amp;lsquo;または ' sendmail &amp;lsquo;コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。&amp;rsquo; mail_example.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して電子メールを送信します。&lt;/p>
+&lt;h1 id="mailコマンドインストール">mailコマンドインストール&lt;/h1>
+&lt;p>まずはここを参考に&lt;br>
+&lt;a class="link" href="https://qiita.com/TanukiTam/items/abff82573c0f544b3b27" target="_blank" rel="noopener"
+>Macでコマンドからメールを送る Gmail&lt;/a>&lt;/p>
+&lt;p>linuxの場合は&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ yum install mailx
+&lt;/code>&lt;/pre>&lt;h1 id="実際にメールを送ってみます">実際にメールを送ってみます。&lt;/h1>
+&lt;pre tabindex="0">&lt;code>$ echo &amp;quot;本文&amp;quot; | mail -s &amp;quot;タイトル&amp;quot; -r from@example.com -c cc1@example.com -c cc2@example.com to1@example.com to2@example.com
+&lt;/code>&lt;/pre>&lt;p>恐ろしいほどに簡単ですね。&lt;br>
+おかしな事をかんがえるのはやめましょう。&lt;/p>
+&lt;h1 id="シェルスクリプトでサンプルを作る">シェルスクリプトでサンプルを作る&lt;/h1>
 &lt;p>&lt;a class="link" href="mailto:admin@sample.com" >admin@sample.com&lt;/a> の部分を自分のメールアドレスに置き換えて実行して下さい。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mail_example.sh" data-lang="bash:mail_example.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">Recipient&lt;/span>&lt;span class="o">=&lt;/span>”admin@sample.com”
-&lt;span class="nv">Subject&lt;/span>&lt;span class="o">=&lt;/span>”Greeting”
-&lt;span class="nv">Message&lt;/span>&lt;span class="o">=&lt;/span>”Welcome to our site”
-&lt;span class="sb">`&lt;/span>mail -s &lt;span class="nv">$Subject&lt;/span> &lt;span class="nv">$Recipient&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&amp;lt;&lt;/span> &lt;span class="nv">$Message&lt;/span>&lt;span class="sb">`&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
+&lt;span class="nv">Recipient&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;admin@sample.com&amp;#34;&lt;/span>
+&lt;span class="nv">Subject&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Greeting”
+&lt;/span>&lt;span class="s2">Message=&amp;#34;&lt;/span>Welcome to our site&lt;span class="s2">&amp;#34;
+&lt;/span>&lt;span class="s2">`mail -s &lt;/span>&lt;span class="nv">$Subject&lt;/span>&lt;span class="s2"> &lt;/span>&lt;span class="nv">$Recipient&lt;/span>&lt;span class="s2"> &amp;lt;&amp;lt;&amp;lt; &lt;/span>&lt;span class="nv">$Message&lt;/span>&lt;span class="s2">`
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ bash mail_example.sh
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>くれぐれもおかしな事をかんがえるのはやめましょう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -3198,8 +3411,51 @@ dateコマンドを使用して、現在のシステムの日付と時刻の値�
 Current Date is: 13-01-2022
 Current Time is: 12:19:06
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>dateコマンドは覚えるのではなく、manコマンドで都度、探しましょう。きりがないです。できる事を覚えておけばオッケーです。以下にありきたりなパターンを列挙しておきます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code>$ date '+%Y/%m/%d'
+2005/09/11
+$ date '+%Y/%m/%d(%a)'
+2005/09/11(Sun)
+$ date '+%y/%m/%d'
+05/09/11
+$ date '+%F'
+2005-09-11
+$ date '+%D'
+09/11/05
+$ date '+%R'
+01:18
+$ date '+%T'
+01:18:01
+$ date '+%r'
+01:18:06 AM
+$ date '+%Y/%m/%d%n%r'
+2005/09/11
+01:18:27 AM
+#↑%n を使用することで、出力に改行を含めることができる。
+# 1日後
+$ date -d '1 day'
+# 2日後
+$ date -d '2 days
+# 1日前
+$ date -d '1 day ago'
+# 1ヶ月前
+$ date -d '1 month ago'
+# 1年前
+$ date -d '1 year ago'
+# 1時間前
+$ date -d '1 hour ago'
+# 1分前
+$ date -d '1 minute ago'
+# 1秒前
+$ date -d '1 second ago'
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-:直近5分以内にあるerrorログを表示" data-lang=":直近5分以内にあるerrorログを表示">$ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $(( $(date +&amp;quot;%s&amp;quot;) - 300 )) -lt $(echo ${record} | cut -d&amp;quot; &amp;quot; -f 1,2,3 | date --date=&amp;quot;$(cat -)&amp;quot; +&amp;quot;%s&amp;quot;) ] ; then echo ${record} ; fi ; done | grep error ; IFS=${IFSBK}
+&lt;/code>&lt;/pre>&lt;p>関連記事&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０２．echo コマンド】&lt;/a>&lt;br>
@@ -3314,7 +3570,45 @@ waitコマンドは、実行中のプロセスの完了を待機するLinuxの�
 Wait command
 Exited with status 0
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですね。&lt;br>
+もう少しわかりやすく説明します。&lt;br>
+waitコマンドは、他のプロセスの終了まで待機することができるコマンドです。&lt;br>
+例えば、以下三つのファイルを実行します。&lt;br>
+末尾に &amp;amp; がついているのは、それぞれの実行ファイルをバックグラウンドで並列で実行させることを意味しています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+bash a.sh &lt;span class="p">&amp;amp;;&lt;/span>
+bash b.sh &lt;span class="p">&amp;amp;;&lt;/span>
+bash c.sh &lt;span class="p">&amp;amp;;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>では、三つの実行ファイルが全て完了したらコメントを出力するソースに書き直してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:間違ったソース" data-lang="bash:間違ったソース">#!/bin/bash
+bash a.sh &amp;amp;;
+bash b.sh &amp;amp;;
+bash c.sh &amp;amp;;
+echo &amp;quot;終了しました&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>上記のソースは、実行の終了を待たずに「終了しました」が出力されます。要するに、コメントの出力は全ての実行を待っていない訳です。正しいソースに書き直してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:正しいソース" data-lang="bash:正しいソース">#!/bin/bash
+bash a.sh &amp;amp;;
+bash b.sh &amp;amp;;
+bash c.sh &amp;amp;;
+wait;
+echo &amp;quot;終了しました&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>上記のようにwaitコマンドを挟むことで、a.sh, b.sh, c.sh の実行が終了してから完了メッセージを表示させることが出来ました。&lt;/p>
+&lt;p>前の処理終了を待ってから、次の処理を実行する方法は以下の通りです。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:処理の終了を待って次の処理へ" data-lang="bash:処理の終了を待って次の処理へ">#!/bin/bash
+command1 &amp;amp;
+command2 &amp;amp;
+wait
+command3
+&lt;/code>&lt;/pre>&lt;p>上記の様にすると、command1とcommand2が終了してからcommand3が実行される様にできます。command1と2がバックグラウンドで実行され、waitコマンドで処理終了まで待機し、command3が実行されるといった流れです。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>waitコマンドと似ているsleepコマンドについて、次の章で説明します。またsleepコマンドとwaitコマンドを組み合わせて並列処理を行うサンプルも次の章で示します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;!-- ``` -->
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -3429,7 +3723,28 @@ sleep &lt;span class="m">5&lt;/span>
 “Wait for 5 seconds”
 “Completed”
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですね。&lt;br>
+少し高度だけど、わかりやすいサンプルも書いておきます。&lt;/p>
+&lt;h1 id="wait-コマンドのサンプル">wait コマンドのサンプル&lt;/h1>
+&lt;p>sleep コマンドをバックグラウンドで実行させ、前の章で使ったwait コマンドで同期をとります。。バックグランドで実行したコマンドのプロセス ID は $! で取得できます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:wait_example.sh" data-lang="bash:wait_example.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">for&lt;/span>&lt;span class="o">((&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span>i&amp;lt;3&lt;span class="p">;&lt;/span>i++&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+sleep &lt;span class="m">5&lt;/span> &lt;span class="p">&amp;amp;;&lt;/span>
+array&lt;span class="o">[&lt;/span>i&lt;span class="o">]=&lt;/span>&lt;span class="nv">$!&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Sleeping: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> : &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">array&lt;/span>&lt;span class="p">[i]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="nb">wait&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">array&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Finish!!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>二つのコマンドの違いは以下の通りです。&lt;/dd>
+&lt;dd>sleepは指定した時間だけ処理を遅延&lt;/dd>
+&lt;dd>waitはプロセスやジョブの終了を待つ&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -3553,7 +3868,17 @@ Bash関数は、数値と文字列値の両方を渡すことができます。�
 suzuki
 関数からの戻り値は「こんにちは、suzuki」です。
 $
-&lt;/code>&lt;/pre>&lt;h2 id="ディレクトリを作成する">ディレクトリを作成する&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>戻り値について&lt;/dt>
+&lt;dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。&lt;/dd>
+&lt;dd>
+&lt;p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。&lt;/p>
+&lt;/dd>
+&lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="ディレクトリを作成する">ディレクトリを作成する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>ディレクトリを作成する：&lt;/b>&lt;/font>&lt;br>
 Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。&amp;lsquo;make_directory.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:make_directory.sh" data-lang="bash:make_directory.sh">&lt;span class="cp">#!/bin/bash
@@ -3567,7 +3892,22 @@ Bashは「mkdir」コマンドを使用して新しいディレクトリを作�
 suzuki
 $ ls
 suzuki/
-&lt;/code>&lt;/pre>&lt;h2 id="存在を確認してディレクトリを作成する">存在を確認してディレクトリを作成する&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>よく記述していたのは以下のようなコードでした。&lt;/dd>
+&lt;dd>事前にディレクトリの存在チェックを行い、見つからなかった場合のみディレクトリを作成します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir_example1.sh" data-lang="bash:mkdir_example1.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -d &lt;span class="s2">&amp;#34;/tmp/of/work&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+: &lt;span class="c1"># 何もしない&lt;/span>
+&lt;span class="k">else&lt;/span>
+mkdir -p &lt;span class="s2">&amp;#34;/tmp/work&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="nb">cd&lt;/span> &lt;span class="s2">&amp;#34;/tmp/of/work&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="存在を確認してディレクトリを作成する">存在を確認してディレクトリを作成する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>存在を確認してディレクトリを作成します。&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;mkdir&amp;rsquo;コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの&amp;rsquo; -d &amp;lsquo;オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。&amp;lsquo;directory_exist.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:directory_exist.sh" data-lang="bash:directory_exist.sh">&lt;span class="cp">#!/bin/bash
@@ -3592,6 +3932,40 @@ $ bash directory_exist.sh
 suzuki
 ディレクトリが存在します。
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>実はディレクトリの存在チェックを行わなくても先のスクリプトは問題なく動作します。&lt;/dd>
+&lt;dd>mkdir -p コマンドは以下のような挙動をします。&lt;/dd>
+&lt;dd>
+&lt;p>作成対象ディレクトリの親ディレクトリが存在しない場合 はすべての親ディレクトリを作成する&lt;/p>
+&lt;/dd>
+&lt;dd>作成対象ディレクトリがすでに存在している場合 は何も行わず、エラーもはかない&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir_example2.sh" data-lang="bash:mkdir_example2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># 一旦ディレクトリを作成&lt;/span>
+mkdir -p /tmp/work
+ls -l -d /tmp/work/
+&lt;span class="c1"># 出力&lt;/span>
+&lt;span class="c1"># drwxr-xr-x 2 root root 64 Aug 22 08:26 /tmp/work/&lt;/span>
+&lt;span class="c1"># オプション無しですでに存在しているディレクトリを作成&lt;/span>
+mkdir /tmp/work
+&lt;span class="c1"># 出力&lt;/span>
+&lt;span class="c1"># mkdir: /tmp/work: File exists&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$?&lt;/span>
+&lt;span class="c1"># 1&lt;/span>
+&lt;span class="c1"># -pオプション有りだとエラーを吐かない&lt;/span>
+mkdir -p /tmp/work
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$?&lt;/span>
+&lt;span class="c1"># 0&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash mkdir_example2.sh
+drwxr-xr-x 2 suzukiiichiro wheel 64 1 21 13:13 /tmp/work/
+mkdir: /tmp/work: File exists
+1
+0
+$
 &lt;/code>&lt;/pre>&lt;h2 id="ファイルを読む">ファイルを読む&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>ファイルを読む：&lt;/b>&lt;/font>&lt;br>
 whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。&amp;lsquo;read_file.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加してください。 別途作成する&amp;rsquo;book.txt&amp;rsquo;の内容を読み取ります。&lt;/p>
@@ -3615,6 +3989,54 @@ whileループでreadコマンドを使用すると、bashで任意のファイ�
 ファイルを読む：
 ループを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。
 'read_file.sh'という名前のファイルを作成し、次のコードを追加して、'book.txt'という名前の既存のファイルを読み取ります。
+&lt;/code>&lt;/pre>&lt;p>具体的に以下のファイルを作成してファイルを読み込み、必要な部分を抜き出して表示してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:instance-tag.list" data-lang="bash:instance-tag.list">i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+&lt;/code>&lt;/pre>&lt;p>cat します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat instance-tag.list
+i-0f6126b7aeedfabd6,hoge
+i-050536efdd9dc1126,fuga
+i-0869f24358fb3f698,f8k
+$
+&lt;/code>&lt;/pre>&lt;p>以下のソースファイルを作成します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:whileread_example2.sh" data-lang="bash:whileread_example2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># catしてwhile read で1行ずつ読み込む&lt;/span>
+&lt;span class="c1"># 「cat instance-tag.list」の結果を1行ずつ「line」&lt;/span>
+&lt;span class="c1"># という変数に代入しています。&lt;/span>
+cat instance-tag.list &lt;span class="p">|&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="nb">read&lt;/span> line&lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+&lt;span class="c1"># 二つの変数に値切り出して代入&lt;/span>
+&lt;span class="c1"># $()は()内で指定したコマンドの実行結果を返します。 &lt;/span>
+&lt;span class="c1"># 今回の場合、「echo $line | cut -d, -f 1」の実行結果が&lt;/span>
+&lt;span class="c1"># 「instance_id」に定義されます。&lt;/span>
+&lt;span class="nv">instance_id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$line&lt;/span> &lt;span class="p">|&lt;/span> cut -d, -f 1&lt;span class="k">)&lt;/span>
+&lt;span class="nv">tag_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$line&lt;/span> &lt;span class="p">|&lt;/span> cut -d, -f 2&lt;span class="k">)&lt;/span>
+&lt;span class="c1"># 表示&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;instance_id: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">instance_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;tag_value: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">tag_value&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash whileread_example2.sh
+instance_id: i-0f6126b7aeedfabd6
+tag_value: hoge
+instance_id: i-050536efdd9dc1126
+tag_value: fuga
+instance_id: i-0869f24358fb3f698
+tag_value: f8k
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>cutコマンドの部分は、awkコマンドを使うこともあります。&lt;/dd>
+&lt;dd>今回は、cutの方が処理速度が速いため、cutコマンドを使いました。&lt;/dd>
+&lt;dd>
+&lt;p>ちなみにawkの場合は、以下のように記述します。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code>instance_id=$(echo $line | awk -F, '{print $1;}');
+tag_value=$(echo $line | awk -F, '{print $2;}');
 &lt;/code>&lt;/pre>&lt;h2 id="ファイルを削除する">ファイルを削除する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>ファイルを削除します：&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;rm&amp;rsquo;コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。&lt;/p>
@@ -3636,10 +4058,42 @@ book.txt
 $ ls
 suzuki/
 $
-&lt;/code>&lt;/pre>&lt;h2 id="ファイルに追加">ファイルに追加&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>基本的に、ファイルもディレクトリも削除するコマンドは同じです。ディレクトリには再帰的に（フォルダの階層も含めて）削除するオプション(-r リカーション)があります。&lt;/dd>
+&lt;dd>
+&lt;p>rm&lt;/p>
+&lt;/dd>
+&lt;dd>-f :確認をせずに削除&lt;/dd>
+&lt;dd>-r ：再帰的に削除&lt;/dd>
+&lt;dd>
+&lt;p>フォルダを削除&lt;/p>
+&lt;/dd>
+&lt;dd>rm -rf &lt;target directory>&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>高度なヒント&lt;/dt>
+&lt;dd>シェルスクリプトで自動化処理を作成する場合、cp や rm で、確認をせずに実行したいことが多々あります。&lt;/dd>
+&lt;dd>この場合は、&lt;/dd>
+&lt;dd>
+&lt;p>/bin/cp&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>または&lt;/p>
+&lt;/dd>
+&lt;dd>/bin/rm&lt;/dd>
+&lt;dd>
+&lt;p>を使うと、確認なしで実行することができます。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="ファイルに追加">ファイルに追加&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>ファイルに追加：&lt;/b>&lt;/font>&lt;br>
-bashで「&amp;raquo;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&amp;lsquo;append_file.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:level.txt" data-lang=":level.txt">1. Pro AngularJS
+bashで「&amp;raquo;」演算子を使用すると、既存のファイルに新しいデータを追加できます。&amp;lsquo;append_file.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「book.txt」ファイルのに追加されます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:book.txt" data-lang=":book.txt">1. Pro AngularJS
 2. Learning JQuery
 3. PHP Programming
 4. Code Igniter
@@ -3647,7 +4101,7 @@ bashで「&amp;raquo;」演算子を使用すると、既存のファイルに�
 &lt;/span>&lt;span class="cp">&lt;/span>
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加する前のファイル&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 cat book.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;5. Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;5. Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; book.txt
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加した後のファイル&amp;#34;&lt;/span>
 cat book.txt&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
@@ -3664,10 +4118,16 @@ cat book.txt&lt;span class="p">;&lt;/span>
 4. Code Igniter
 5. Bash Programming
 $
-&lt;/code>&lt;/pre>&lt;p>&lt;font color=red>「&amp;gt;」はファイルを新しく作成して追記します。&lt;br>
-「&amp;raquo;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&amp;raquo;」を行うと、ついするファイルがないため、エラーとなります。ファイルの存在を確認するための方法を次の章で説明します。&lt;/font>&lt;/p>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>「&amp;gt;」はファイルを新しく作成して追記します。&lt;/dd>
+&lt;dd>「&amp;raquo;」は既に存在するファイルに追記します。ですので、ファイルが存在しないにもかかわらず、「&amp;raquo;」を行うと、ついするファイルがないため、エラーとなります。&lt;/dd>
+&lt;dd>ファイルの存在を確認するための方法を次の章で説明します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;h2 id="ファイルが存在するかどうかを確認">ファイルが存在するかどうかを確認&lt;/h2>
-&lt;p>&lt;font color=orange>&lt;b>ファイルが存在するかどうかをテストします。&lt;/b>&lt;/bont>&lt;br>
+&lt;p>&lt;font color=orange>&lt;b>ファイルが存在するかどうかをテストします。&lt;/b>&lt;/font>&lt;br>
 &amp;lsquo;-e&amp;rsquo;または&amp;rsquo;-f&amp;rsquo;オプションを使用して、ファイルの存在を確認できます。次のコードの &amp;lsquo;if [ ]&amp;lsquo;では、ファイルの存在をテストするために「-f」オプションが使用されています。&amp;rsquo; file_exist.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:file_exist.sh" data-lang="bash:file_exist.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
@@ -3684,19 +4144,87 @@ bash file_exist.sh level2.txt
 ファイルは存在しません。
 bash file_exist.sh level.txt
 ファイルが存在します。
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>「&amp;raquo;」（アペンド）を行う場合の注意点は、必ずアペンドするファイルが存在している必要があるところです。&lt;/dd>
+&lt;dd>ファイルが存在していればアペンド（追記）する。&lt;/dd>
+&lt;dd>ファイルが存在しなければファイルを作成して追記する。&lt;/dd>
+&lt;dd>といった処理が必要で、この処理を行わない場合、ファイルが存在しないにもかかわらず、値をファイルに追記しようとした際にエラーとなります。サンプルを以下に示します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash_append_file2.sh" data-lang="bash_append_file2.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f level.txt &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="c1"># ファイルが存在するならば追記する&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="k">else&lt;/span>
+&lt;span class="c1"># ファイルが存在しないからlevel.txtを作成してから追記&lt;/span>
+:&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;追加した後のファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>touch コマンドと :&amp;gt; の違いを明確にしておく必要があります。&lt;/dd>
+&lt;dd>「:&amp;gt;」 は、該当ファイルがなければ作成、あっても空のファイルに置き換えます。&lt;/dd>
+&lt;dd>「touch」は、該当ファイルがなければ作成しますが、あれば何もしません。&lt;/dd>
+&lt;dd>この違いを利用するとif文はとても簡潔に書き換えることができます。&lt;/dd>
+&lt;dd>touchコマンドを使って上記ソースを書き換えてみます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:bash_append_file3.sh" data-lang="bash:bash_append_file3.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+:&amp;gt; level.txt &lt;span class="c1"># 新規にファイルを作成&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Shell Scripting&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;1回目に追加したファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 既にファイルが存在するので何もしない&lt;/span>
+&lt;span class="c1"># 万が一、ファイルが存在しなければ作成。&lt;/span>
+touch level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Bash Programming&amp;#34;&lt;/span> &amp;gt;&amp;gt; level.txt&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;2回目に追加したファイル&amp;#34;&lt;/span>
+cat level.txt&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash bash_append_file3.sh
+1回目に追加したファイル
+Shell Scripting
+2回目に追加したファイル
+Shell Scripting
+Bash Programming
+$
 &lt;/code>&lt;/pre>&lt;h2 id="mailコマンド">mailコマンド&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>メールを送る：&lt;/b>&lt;/font>&lt;br>
 ' mail &amp;lsquo;または ' sendmail &amp;lsquo;コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。&amp;rsquo; mail_example.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して電子メールを送信します。&lt;/p>
+&lt;h1 id="mailコマンドインストール">mailコマンドインストール&lt;/h1>
+&lt;p>まずはここを参考に&lt;br>
+&lt;a class="link" href="https://qiita.com/TanukiTam/items/abff82573c0f544b3b27" target="_blank" rel="noopener"
+>Macでコマンドからメールを送る Gmail&lt;/a>&lt;/p>
+&lt;p>linuxの場合は&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ yum install mailx
+&lt;/code>&lt;/pre>&lt;h1 id="実際にメールを送ってみます">実際にメールを送ってみます。&lt;/h1>
+&lt;pre tabindex="0">&lt;code>$ echo &amp;quot;本文&amp;quot; | mail -s &amp;quot;タイトル&amp;quot; -r from@example.com -c cc1@example.com -c cc2@example.com to1@example.com to2@example.com
+&lt;/code>&lt;/pre>&lt;p>恐ろしいほどに簡単ですね。&lt;br>
+おかしな事をかんがえるのはやめましょう。&lt;/p>
+&lt;h1 id="シェルスクリプトでサンプルを作る">シェルスクリプトでサンプルを作る&lt;/h1>
 &lt;p>&lt;a class="link" href="mailto:admin@sample.com" >admin@sample.com&lt;/a> の部分を自分のメールアドレスに置き換えて実行して下さい。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mail_example.sh" data-lang="bash:mail_example.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">Recipient&lt;/span>&lt;span class="o">=&lt;/span>”admin@sample.com”
-&lt;span class="nv">Subject&lt;/span>&lt;span class="o">=&lt;/span>”Greeting”
-&lt;span class="nv">Message&lt;/span>&lt;span class="o">=&lt;/span>”Welcome to our site”
-&lt;span class="sb">`&lt;/span>mail -s &lt;span class="nv">$Subject&lt;/span> &lt;span class="nv">$Recipient&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&amp;lt;&lt;/span> &lt;span class="nv">$Message&lt;/span>&lt;span class="sb">`&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
+&lt;span class="nv">Recipient&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;admin@sample.com&amp;#34;&lt;/span>
+&lt;span class="nv">Subject&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Greeting”
+&lt;/span>&lt;span class="s2">Message=&amp;#34;&lt;/span>Welcome to our site&lt;span class="s2">&amp;#34;
+&lt;/span>&lt;span class="s2">`mail -s &lt;/span>&lt;span class="nv">$Subject&lt;/span>&lt;span class="s2"> &lt;/span>&lt;span class="nv">$Recipient&lt;/span>&lt;span class="s2"> &amp;lt;&amp;lt;&amp;lt; &lt;/span>&lt;span class="nv">$Message&lt;/span>&lt;span class="s2">`
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ bash mail_example.sh
-&lt;/code>&lt;/pre>&lt;h2 id="dateコマンド">dateコマンド&lt;/h2>
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>くれぐれもおかしな事をかんがえるのはやめましょう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="dateコマンド">dateコマンド&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>現在の日付を解析する：&lt;/b>&lt;/font>&lt;br>
 dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。&amp;lsquo;date_parse.sh&amp;rsquo;という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:date_parse.sh" data-lang="bash:date_parse.sh">&lt;span class="cp">#!/bin/bash
@@ -3716,6 +4244,49 @@ dateコマンドを使用して、現在のシステムの日付と時刻の値�
 Current Date is: 13-01-2022
 Current Time is: 12:19:06
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>dateコマンドは覚えるのではなく、manコマンドで都度、探しましょう。きりがないです。できる事を覚えておけばオッケーです。以下にありきたりなパターンを列挙しておきます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code>$ date '+%Y/%m/%d'
+2005/09/11
+$ date '+%Y/%m/%d(%a)'
+2005/09/11(Sun)
+$ date '+%y/%m/%d'
+05/09/11
+$ date '+%F'
+2005-09-11
+$ date '+%D'
+09/11/05
+$ date '+%R'
+01:18
+$ date '+%T'
+01:18:01
+$ date '+%r'
+01:18:06 AM
+$ date '+%Y/%m/%d%n%r'
+2005/09/11
+01:18:27 AM
+#↑%n を使用することで、出力に改行を含めることができる。
+# 1日後
+$ date -d '1 day'
+# 2日後
+$ date -d '2 days
+# 1日前
+$ date -d '1 day ago'
+# 1ヶ月前
+$ date -d '1 month ago'
+# 1年前
+$ date -d '1 year ago'
+# 1時間前
+$ date -d '1 hour ago'
+# 1分前
+$ date -d '1 minute ago'
+# 1秒前
+$ date -d '1 second ago'
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-:直近5分以内にあるerrorログを表示" data-lang=":直近5分以内にあるerrorログを表示">$ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $(( $(date +&amp;quot;%s&amp;quot;) - 300 )) -lt $(echo ${record} | cut -d&amp;quot; &amp;quot; -f 1,2,3 | date --date=&amp;quot;$(cat -)&amp;quot; +&amp;quot;%s&amp;quot;) ] ; then echo ${record} ; fi ; done | grep error ; IFS=${IFSBK}
 &lt;/code>&lt;/pre>&lt;h2 id="waitコマンド">waitコマンド&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>waitコマンド：&lt;/b>&lt;/font>&lt;br>
 waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。&amp;rsquo; wait_example.sh&amp;rsquo;という名前のファイルを作成し、次のスクリプトを追加します。&lt;/p>
@@ -3730,7 +4301,44 @@ waitコマンドは、実行中のプロセスの完了を待機するLinuxの�
 Wait command
 Exited with status 0
 $
-&lt;/code>&lt;/pre>&lt;h2 id="sleepコマンド">sleepコマンド&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですね。&lt;br>
+もう少しわかりやすく説明します。&lt;br>
+waitコマンドは、他のプロセスの終了まで待機することができるコマンドです。&lt;br>
+例えば、以下三つのファイルを実行します。&lt;br>
+末尾に &amp;amp; がついているのは、それぞれの実行ファイルをバックグラウンドで並列で実行させることを意味しています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+bash a.sh &lt;span class="p">&amp;amp;;&lt;/span>
+bash b.sh &lt;span class="p">&amp;amp;;&lt;/span>
+bash c.sh &lt;span class="p">&amp;amp;;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>では、三つの実行ファイルが全て完了したらコメントを出力するソースに書き直してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:間違ったソース" data-lang="bash:間違ったソース">#!/bin/bash
+bash a.sh &amp;amp;;
+bash b.sh &amp;amp;;
+bash c.sh &amp;amp;;
+echo &amp;quot;終了しました&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>上記のソースは、実行の終了を待たずに「終了しました」が出力されます。要するに、コメントの出力は全ての実行を待っていない訳です。正しいソースに書き直してみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:正しいソース" data-lang="bash:正しいソース">#!/bin/bash
+bash a.sh &amp;amp;;
+bash b.sh &amp;amp;;
+bash c.sh &amp;amp;;
+wait;
+echo &amp;quot;終了しました&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>上記のようにwaitコマンドを挟むことで、a.sh, b.sh, c.sh の実行が終了してから完了メッセージを表示させることが出来ました。&lt;/p>
+&lt;p>前の処理終了を待ってから、次の処理を実行する方法は以下の通りです。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:処理の終了を待って次の処理へ" data-lang="bash:処理の終了を待って次の処理へ">#!/bin/bash
+command1 &amp;amp;
+command2 &amp;amp;
+wait
+command3
+&lt;/code>&lt;/pre>&lt;p>上記の様にすると、command1とcommand2が終了してからcommand3が実行される様にできます。command1と2がバックグラウンドで実行され、waitコマンドで処理終了まで待機し、command3が実行されるといった流れです。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>waitコマンドと似ているsleepコマンドについて、次の章で説明します。またsleepコマンドとwaitコマンドを組み合わせて並列処理を行うサンプルも次の章で示します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="sleepコマンド">sleepコマンド&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>sleepコマンド：&lt;/b>&lt;/font>&lt;br>
 コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。&amp;lsquo;sleep_example.sh&amp;rsquo; という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:sleep_example.sh" data-lang="bash:sleep_example.sh">&lt;span class="cp">#!/bin/bash
@@ -3743,7 +4351,28 @@ sleep &lt;span class="m">5&lt;/span>
 “Wait for 5 seconds”
 “Completed”
 $
-&lt;/code>&lt;/pre>&lt;p>#関連記事&lt;br>
+&lt;/code>&lt;/pre>&lt;p>わかりにくいですね。&lt;br>
+少し高度だけど、わかりやすいサンプルも書いておきます。&lt;/p>
+&lt;h1 id="wait-コマンドのサンプル">wait コマンドのサンプル&lt;/h1>
+&lt;p>sleep コマンドをバックグラウンドで実行させ、前の章で使ったwait コマンドで同期をとります。。バックグランドで実行したコマンドのプロセス ID は $! で取得できます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:wait_example.sh" data-lang="bash:wait_example.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">for&lt;/span>&lt;span class="o">((&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span>i&amp;lt;3&lt;span class="p">;&lt;/span>i++&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">do&lt;/span>
+sleep &lt;span class="m">5&lt;/span> &lt;span class="p">&amp;amp;;&lt;/span>
+array&lt;span class="o">[&lt;/span>i&lt;span class="o">]=&lt;/span>&lt;span class="nv">$!&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Sleeping: &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> : &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">array&lt;/span>&lt;span class="p">[i]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="nb">wait&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">array&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Finish!!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>二つのコマンドの違いは以下の通りです。&lt;/dd>
+&lt;dd>sleepは指定した時間だけ処理を遅延&lt;/dd>
+&lt;dd>waitはプロセスやジョブの終了を待つ&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>#関連記事&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
 >【まとめ版】ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
@@ -7851,7 +8480,17 @@ $nの値が10未満の場合、出力は「1桁の数値です」になります
 &lt;pre tabindex="0">&lt;code>$ bash simple_if.sh
 2桁の数値です
 $
-&lt;/code>&lt;/pre>&lt;h2 id="and-条件を-if-文で使う">and 条件を if 文で使う&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;/dd>
+&lt;dd>-eq -lt -gt を使う必要があります。&lt;/dd>
+&lt;dd>
+&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="and-条件を-if-文で使う">and 条件を if 文で使う&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>ANDロジックでifステートメントを使用する：&lt;/b>&lt;/font>&lt;br>
 2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。&lt;br>
 andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。&lt;br>
@@ -7883,7 +8522,17 @@ suzuki
 password
 無効なユーザーです
 $
-&lt;/code>&lt;/pre>&lt;!--
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>数値を比較する場合は、「&amp;lt;」「&amp;gt;」「=」ではなく、&lt;/dd>
+&lt;dd>-eq -lt -gt を使う必要があります。&lt;/dd>
+&lt;dd>
+&lt;p>文字列を比較する場合は 「==」または 「!=」を使います。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;!--
 ## １０．or 条件を if文で使う
 ## １１．else if と else
 ## １２．case 文
