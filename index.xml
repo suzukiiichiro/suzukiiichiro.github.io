@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 21 Jan 2022 13:50:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（４）</title><link>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</link><pubDate>Fri, 21 Jan 2022 13:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" />&lt;h2 id="google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる">Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる&lt;/h2>
 &lt;p>今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせて社会的に関心の高い列名を取得してみたいと思います。&lt;/p>
 &lt;p>今回は「人権侵犯事件統計」 を取り扱ってみたいと思います。&lt;br>
-人権侵犯事件統は、法務省の人権擁護機関で取り扱った人権侵犯事件及び人権相談に関する統計報告を集計したものである。&lt;/p>
+人権侵犯事件統は、法務省の人権擁護機関で取り扱った人権侵犯事件及び人権相談に関する統計報告を集計したものとのことです。&lt;/p>
 &lt;h2 id="e-stat-から統計データを取得する">e-Stat から統計データを取得する&lt;/h2>
 &lt;p>まずはe-StatのAPIにアクセスして統計データを取得します。&lt;br>
 将来的には新着の統計データを日時で取得して処理するようにしますが、今回は「人権侵犯事件統計」だけ取得します。&lt;/p>
