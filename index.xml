@@ -41,8 +41,8 @@
 &amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;2021001010&amp;quot;,&amp;quot;2021年10月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;1329&amp;quot;,&amp;quot;&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>データの中身を見てみると&amp;quot;VALUE&amp;quot;から上がヘッダー的な項目で、データは&amp;quot;VALUE&amp;quot;以下にありそうです。&lt;br>
 VALUE より上の行を削除しましょう。&lt;br>
-sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。&lt;br>
-grep -n でマッチした行数を取得できます。&lt;/p>
+sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。&lt;/p>
+&lt;p>grep -n でマッチした行数を取得できます。&lt;/p>
 &lt;p>sed -e &amp;ldquo;1,26d&amp;rdquo; で1行目から26行目までを削除できます&lt;/p>
 &lt;pre tabindex="0">&lt;code>&amp;quot;tab_code&amp;quot;,&amp;quot;表章項目&amp;quot;,&amp;quot;cat01_code&amp;quot;,&amp;quot;人権侵犯事件の受理・処理別&amp;quot;,&amp;quot;cat02_code&amp;quot;,&amp;quot;人権侵犯事件の種類別&amp;quot;,&amp;quot;time_code&amp;quot;,&amp;quot;時間軸(月次)&amp;quot;,&amp;quot;unit&amp;quot;,&amp;quot;value&amp;quot;,&amp;quot;annotation&amp;quot;
 &amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;2007000101&amp;quot;,&amp;quot;2007年1月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;2170&amp;quot;,&amp;quot;&amp;quot;

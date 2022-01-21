@@ -15,7 +15,7 @@
 <meta property="og:description" content="Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-21T13:50:13+09:00"><meta property="article:modified_time" content="2022-01-21T04:57:47+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-21T13:50:13+09:00"><meta property="article:modified_time" content="2022-01-21T04:58:51+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg">
 <meta name=twitter:title content="e-Stat でGoogle Custom Search APIを使おう（４） - NLP">
 <meta name=twitter:description content="Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
@@ -169,8 +169,8 @@ e-Stat でGoogle Custom Search APIを使おう（４）
 &quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;2021001010&quot;,&quot;2021年10月&quot;,&quot;件&quot;,&quot;1329&quot;,&quot;&quot;
 </code></pre><p>データの中身を見てみると"VALUE"から上がヘッダー的な項目で、データは"VALUE"以下にありそうです。<br>
 VALUE より上の行を削除しましょう。<br>
-sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。<br>
-grep -n でマッチした行数を取得できます。</p>
+sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。</p>
+<p>grep -n でマッチした行数を取得できます。</p>
 <p>sed -e &ldquo;1,26d&rdquo; で1行目から26行目までを削除できます</p>
 <pre tabindex=0><code>&quot;tab_code&quot;,&quot;表章項目&quot;,&quot;cat01_code&quot;,&quot;人権侵犯事件の受理・処理別&quot;,&quot;cat02_code&quot;,&quot;人権侵犯事件の種類別&quot;,&quot;time_code&quot;,&quot;時間軸(月次)&quot;,&quot;unit&quot;,&quot;value&quot;,&quot;annotation&quot;
 &quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;2007000101&quot;,&quot;2007年1月&quot;,&quot;件&quot;,&quot;2170&quot;,&quot;&quot;
