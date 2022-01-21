@@ -58,6 +58,11 @@ bash$ bash case_example.sh
 すみません、またチャレンジして下さい
 ```
 
+{{% tips-list tips %}}
+ヒント
+: case文の終わりには esac を指定します。
+{{% /tips-list %}}
+
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)

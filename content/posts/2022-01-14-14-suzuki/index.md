@@ -42,7 +42,27 @@ $ bash command_line_names.sh X=45 Y=30
 X+Y=75
 $
 ```
+{{% tips-list tips %}}
+ヒント
+: case文で入力された文字列の大文字と小文字に対応する。
+: または文字列に対応する場合は以下のソースを見て欲しい。
+: レベルアップしたソースコードはささいな気遣いから生まれる
+{{% /tips-list %}}
 
+``` bash
+#! /bin/bash
+case "$1" in
+  [Yy]|"yes")		#Y、yまたはyesという文字列
+    echo "YES"
+    echo "OK"
+    ;;
+  [Nn]|"no")		#N、nまたはnoという文字列
+    echo "NO"
+    ;;
+  *)
+    echo "undefined";;
+esac
+```
 
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)

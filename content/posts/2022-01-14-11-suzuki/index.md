@@ -55,6 +55,21 @@ $
 ```
 
 
+<table>
+<tr><td>比較演算子</td><td>使用例</td><td>意味</td></tr>
+<tr><td>-n</td><td>-n 文字列	</td><td>文字列の長さが0より大きければ真</td></tr>
+<tr><td>-z</td><td>-z 文字列	</td><td>文字列の長さが0であれば真</td></tr>
+<tr><td>=</td><td>文字列A = 文字列B	</td><td>文字列Aと文字列Bが等しければ真</td></tr>
+<tr><td>!=</td><td>文字列A != 文字列B	</td><td>文字列Aと文字列Bが等しくなければ真</td></tr>
+</table>
+
+{{% tips-list tips %}}
+ヒント
+: シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。
+: また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。 
+{{% /tips-list %}}
+
+
 # 関連記事
 [ざっくりわかる シェルスクリプト【０１．Hello World】](https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/)
 [ざっくりわかる シェルスクリプト【０２．echo コマンド】](https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/)

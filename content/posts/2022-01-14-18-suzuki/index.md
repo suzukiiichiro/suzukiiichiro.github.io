@@ -24,22 +24,70 @@ tags:
 <font color=orange><b>関数の作成：</b></font>
 簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。'function_example.sh'という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。
 
+``` bash
+#!/bin/bash
+
+function 関数の名前(){
+  処理
+}
+```
+
+このとき、functionは省略可能です。
+
+``` bash
+#!/bin/bash
+
+関数の名前(){
+  処理
+}
+```
+
+関数の呼び出しは、関数を定義した後に関数の名前を書くだけです。
+```
+関数の名前 引数
+```
+
+``` bash
+#!/bin/bash
+
+# 関数の定義
+function say_hello(){
+  echo "Hello, world!";
+}
+#
+# 関数の呼び出し
+say_hello;
+```
+
+{{% tips-list tips %}}
+ヒント
+: このとき、関数の名前に続けて、引数を書くことができます。関数内では、通常のシェルスクリプトの引数を処理するのと同じように$1、$2、...という形でアクセスできます。
+{{% /tips-list %}}
+
+
 ``` bash:function_example.sh
 #!/bin/bash
 
-function F1(){
-  echo 'わたしはbashプログラミングが大好きです。';
+# 関数の定義
+function say_hello(){
+  # 引数を受け取って表示
+  echo "$1, world!";
 }
+#
+# 関数の呼び出し 引数を渡す
+say_hello "Hello";
 
-F1;
 ```
+
+
 bashコマンドでファイルを実行します。
 
 ```
 $ bash function_example.sh
-わたしはbashプログラミングが大好きです。
+Hello, world!
 $
 ```
+
 
 
 # 関連記事

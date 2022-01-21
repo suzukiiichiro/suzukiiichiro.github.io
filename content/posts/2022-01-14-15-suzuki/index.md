@@ -40,8 +40,31 @@ Apple Mac OS
 Apple Mac OS は、とても優れたＯＳです。
 $
 ```
-<font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font>
 
+
+{{% tips-list tips %}}
+ヒント
+: Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。
+
+: 変数と文字列の結合は変数を{} でくくります。以下のソースを見て下さい。 
+{{% /tips-list %}}
+
+
+
+``` bash:string_example2.sh
+#!/bin/sh
+
+str1 = "Shell script"
+str = "${str1} is intersting!!"
+
+echo $str
+```
+
+```
+$ bash string_example2.sh
+$ Shell script is interesting!!
+$
+```
 
 
 # 関連記事
