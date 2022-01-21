@@ -68,6 +68,7 @@ curl -s "http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxxxx
 データの中身を見てみると"VALUE"から上がヘッダー的な項目で、データは"VALUE"以下にありそうです。  
 VALUE より上の行を削除しましょう。  
 sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。  
+
 grep -n でマッチした行数を取得できます。  
 
 sed -e "1,26d" で1行目から26行目までを削除できます  
