@@ -42,13 +42,13 @@ $
 : 以下、どの記法も同じ。書きやすいものを選べばいい。
 :
 : 冗長
-: for i in `seq 10`
+: for i in \`seq 10\`
 : do
 :   echo "test"
 : done
 :
 : 簡素
-: for i in `seq 10`;do
+: for i in \`seq 10\`;do
 :   echo "test"
 : done
 :
