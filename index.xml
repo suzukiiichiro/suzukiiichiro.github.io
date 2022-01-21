@@ -7558,13 +7558,13 @@ $
 &lt;dd>以下、どの記法も同じ。書きやすいものを選べばいい。&lt;br>
 :&lt;/dd>
 &lt;dd>冗長&lt;/dd>
-&lt;dd>for i in &lt;code>seq 10&lt;/code>&lt;/dd>
+&lt;dd>for i in `seq 10`&lt;/dd>
 &lt;dd>do&lt;/dd>
 &lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
 &lt;dd>done&lt;br>
 :&lt;/dd>
 &lt;dd>簡素&lt;/dd>
-&lt;dd>for i in &lt;code>seq 10&lt;/code>;do&lt;/dd>
+&lt;dd>for i in `seq 10`;do&lt;/dd>
 &lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
 &lt;dd>done&lt;br>
 :&lt;/dd>
@@ -8405,14 +8405,14 @@ $
 &lt;dd>
 &lt;h1 id="冗長">冗長&lt;/h1>
 &lt;/dd>
-&lt;dd>for i in &lt;code>seq 10&lt;/code>&lt;/dd>
+&lt;dd>for i in `seq 10`&lt;/dd>
 &lt;dd>do&lt;/dd>
 &lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
 &lt;dd>done&lt;/dd>
 &lt;dd>
 &lt;h1 id="簡素">簡素&lt;/h1>
 &lt;/dd>
-&lt;dd>for i in &lt;code>seq 10&lt;/code>;do&lt;/dd>
+&lt;dd>for i in `seq 10`;do&lt;/dd>
 &lt;dd>echo &amp;ldquo;test&amp;rdquo;&lt;/dd>
 &lt;dd>done&lt;/dd>
 &lt;dd>
