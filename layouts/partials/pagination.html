@@ -65,7 +65,7 @@
       {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
     {{- end }}
 
-    {{- if le $max (add $start $slots) }}
+    {{- if and (ge $start (div $slots 2)) (le $max (add $start $slots)) }}
     <li class="page-item">
       <a href="{{ .First.URL }}" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">{{- .First.PageNumber -}}</span></a>
     </li>

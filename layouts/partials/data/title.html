@@ -1,0 +1,36 @@
+{{- $title := .Title -}}
+{{- $siteTitle := .Site.Title -}}
+
+{{- if .IsHome -}}
+  <!-- Homepage, and it's pagination -->
+  <!-- Build paginator -->
+  {{ $pages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections }}
+  {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+  {{ $filtered := ($pages | intersect $notHidden) }}
+  {{ $pag := .Paginate ($filtered) }}
+
+  {{ if .Paginator.HasPrev }}
+    <!-- Paginated. Append page number to title -->
+    {{ $title = printf "%s / %dページ目 - %s" $siteTitle .Paginator.PageNumber .Site.Params.sidebar.subtitle }}
+  {{ else }}
+    {{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
+  {{ end }}
+
+{{- else if eq .Kind "term" -}}
+  <!-- Taxonomy page -->
+  <!-- Build paginator -->
+  {{ $notHidden := where .Pages "Params.hidden" "!=" true }}
+  {{ $pag := .Paginate ($notHidden) }}
+  {{ $title = slice (title .Data.Singular) $title }}
+  <!-- {TAXONOMY_TYPE}: {TAXONOMY_TERM} -->
+  {{ if .Paginator.HasPrev }}
+    <!-- Add page number-->
+    {{ $title = printf "%s: %sの記事一覧 / %dページ目 - %s" (index $title 0) (index $title 1) .Paginator.PageNumber $siteTitle }}
+  {{ else }}
+    {{ $title = printf "%s: %sの記事一覧 - %s" (index $title 0) (index $title 1) $siteTitle }}
+  {{ end }} 
+{{- else -}}
+  {{ $title = printf "%s - %s"  $title $siteTitle }}
+{{- end -}}
+
+{{ return $title }}

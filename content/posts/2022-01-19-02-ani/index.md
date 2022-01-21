@@ -61,7 +61,7 @@ https://developers.google.com/custom-search/v1/reference/rest/v1/cse/list
 ## schema.org で絞り込む
 現在は、検索エンジンの設定画面にある「schema.org」を使用して絞り込むみたいです。
 
-https://cse.google.com/cse/setup/basic
+https://cse.google.com/cse/
 
 schema.orgで設定できる項目は非常に沢山あって何を設定するか迷います。
 

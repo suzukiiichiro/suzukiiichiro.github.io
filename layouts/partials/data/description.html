@@ -1,0 +1,15 @@
+<!-- Use site subtitle by default -->
+{{ $description := .Site.Params.sidebar.subtitle }}
+
+{{- if .Description }}
+    <!-- Page description exists -->
+    {{ $description = .Description }}
+{{- else if .IsPage }}
+    <!-- Use page summary -->
+    {{ $description = .Summary }}
+{{- else if .IsHome -}}
+{{- else }}
+    {{ $description = printf "「%s」のページです。%s" .Title $description }}
+{{- end }}
+
+{{ return ($description | plainify)}}

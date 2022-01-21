@@ -3,7 +3,7 @@ name: Hugo
 on:
   push:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   gh-pages:
