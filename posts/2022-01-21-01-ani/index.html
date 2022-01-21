@@ -1,0 +1,775 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます">
+<title>e-Stat でGoogle Custom Search APIを使おう（４） - NLP</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
+<meta property="og:title" content="e-Stat でGoogle Custom Search APIを使おう（４） - NLP">
+<meta property="og:description" content="Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-21T13:50:13+09:00"><meta property="article:modified_time" content="2022-01-21T04:52:11+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg">
+<meta name=twitter:title content="e-Stat でGoogle Custom Search APIを使おう（４） - NLP">
+<meta name=twitter:description content="Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-21-01-ani/anal.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_53>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_13>
+Web開発
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section">
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<time class="article-time--item article-time--published">2022.01.21</time>
+<time class="article-time--item article-time--reading">
+読了時間: 10分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+e-Stat でGoogle Custom Search APIを使おう（４）
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる>Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる</a></li>
+<li><a href=#e-stat-から統計データを取得する>e-Stat から統計データを取得する</a></li>
+<li><a href=#統計データの中身を見てみる>統計データの中身を見てみる</a></li>
+<li><a href=#mecabを使ってマッチングキーワードを最適化する>mecabを使ってマッチングキーワードを最適化する</a></li>
+<li><a href=#マッチングしてみる>マッチングしてみる</a></li>
+<li><a href=#プログラム>プログラム</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<h2 id=google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる>Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる</h2>
+<p>今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせて社会的に関心の高い列名を取得してみたいと思います。</p>
+<p>今回は「人権侵犯事件統計」 を取り扱ってみたいと思います。<br>
+人権侵犯事件統は、法務省の人権擁護機関で取り扱った人権侵犯事件及び人権相談に関する統計報告を集計したものである。</p>
+<h2 id=e-stat-から統計データを取得する>e-Stat から統計データを取得する</h2>
+<p>まずはe-StatのAPIにアクセスして統計データを取得します。<br>
+将来的には新着の統計データを日時で取得して処理するようにしますが、今回は「人権侵犯事件統計」だけ取得します。</p>
+<pre tabindex=0><code>curl -s &quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxxxxxxxxxxxxx&amp;lang=J&amp;statsDataId=0003286680&amp;metaGetFlg=Y&amp;cntGetFlg=N&amp;explanationGetFlg=Y&amp;annotationGetFlg=Y&amp;sectionHeaderFlg=1&amp;replaceSpChars=0&quot; -o &quot;$STCSV&quot;
+</code></pre><h2 id=統計データの中身を見てみる>統計データの中身を見てみる</h2>
+<pre tabindex=0><code>&quot;RESULT&quot;
+&quot;STATUS&quot;,&quot;0&quot;
+&quot;ERROR_MSG&quot;,&quot;正常に終了しました。&quot;
+&quot;DATE&quot;,&quot;2022-01-21T09:58:51.856+09:00&quot;
+&quot;RESULT_INF&quot;
+&quot;TOTAL_NUMBER&quot;,&quot;403425&quot;
+&quot;FROM_NUMBER&quot;,&quot;1&quot;
+&quot;TO_NUMBER&quot;,&quot;100000&quot;
+&quot;NEXT_KEY&quot;,&quot;100001&quot;
+&quot;TABLE_INF&quot;,&quot;0003286680&quot;
+&quot;STAT_NAME&quot;,&quot;00250010&quot;,&quot;人権侵犯事件統計&quot;
+&quot;GOV_ORG&quot;,&quot;00250&quot;,&quot;法務省&quot;
+&quot;STATISTICS_NAME&quot;,&quot;人権侵犯事件統計&quot;
+&quot;TITLE&quot;,&quot;&quot;,&quot;人権侵犯事件 種類別　人権侵犯事件の受理及び
+処理件数　（月次）&quot;
+&quot;CYCLE&quot;,&quot;月次&quot;
+&quot;SURVEY_DATE&quot;,&quot;201801&quot;
+&quot;OPEN_DATE&quot;,&quot;2022-01-20&quot;
+&quot;SMALL_AREA&quot;,&quot;0&quot;
+&quot;COLLECT_AREA&quot;,&quot;該当なし&quot;
+&quot;MAIN_CATEGORY&quot;,&quot;14&quot;,&quot;司法・安全・環境&quot;
+&quot;SUB_CATEGORY&quot;,&quot;01&quot;,&quot;司法&quot;
+&quot;OVERALL_TOTAL_NUMBER&quot;,&quot;0&quot;
+&quot;UPDATED_DATE&quot;,&quot;2022-01-20&quot;
+&quot;STATISTICS_NAME_SPEC&quot;,&quot;人権侵犯事件統計&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+&quot;TITLE_SPEC&quot;,&quot;人権侵犯事件&quot;,&quot;種類別　人権侵犯事件の受理
+及び処理件数　（月次）&quot;,&quot;処理の合計件数と，その内訳であ
+る措置，措置猶予，侵犯事実不存在，侵犯事実不明確，打切&gt;り，中止，移送及び啓発の各件数の合計とが一致しない場合&gt;があるのは，１つの事件につき複数の措置を採る場合がある&gt;こと等による。&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+&quot;VALUE&quot;
+&quot;tab_code&quot;,&quot;表章項目&quot;,&quot;cat01_code&quot;,&quot;人権侵犯事件の受理&gt;・処理別&quot;,&quot;cat02_code&quot;,&quot;人権侵犯事件の種類別&quot;,&quot;time_code&quot;,&quot;時間軸(月次)&quot;,&quot;unit&quot;,&quot;value&quot;,&quot;annotation&quot;
+&quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;2021001111&quot;,&quot;2021年11月&quot;,&quot;件&quot;,&quot;1430&quot;,&quot;&quot;
+&quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;2021001010&quot;,&quot;2021年10月&quot;,&quot;件&quot;,&quot;1329&quot;,&quot;&quot;
+</code></pre><p>データの中身を見てみると"VALUE"から上がヘッダー的な項目で、データは"VALUE"以下にありそうです。<br>
+VALUE より上の行を削除しましょう。<br>
+sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。<br>
+grep -n でマッチした行数を取得できます。</p>
+<p>sed -e &ldquo;1,26d&rdquo; で1行目から26行目までを削除できます</p>
+<pre tabindex=0><code>&quot;tab_code&quot;,&quot;表章項目&quot;,&quot;cat01_code&quot;,&quot;人権侵犯事件の受理・処理別&quot;,&quot;cat02_code&quot;,&quot;人権侵犯事件の種類別&quot;,&quot;time_code&quot;,&quot;時間軸(月次)&quot;,&quot;unit&quot;,&quot;value&quot;,&quot;annotation&quot;
+&quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;2007000101&quot;,&quot;2007年1月&quot;,&quot;件&quot;,&quot;2170&quot;,&quot;&quot;
+.
+.
+&quot;100&quot;,&quot;件数&quot;,&quot;100&quot;,&quot;総数&quot;,&quot;130&quot;,&quot;私人等に関するもの&quot;,&quot;2021001111&quot;,&quot;2021年11月&quot;,&quot;件&quot;,&quot;1230&quot;,&quot;&quot;
+</code></pre><p>VALUE以下の内容を見てみると「_code」はコードが入るだけなので無視して良さそうです。<br>
+表章項目も「件数」しかないので無視して良さそうです。<br>
+時間軸、unite、value、annotationもいらなそうです。<br>
+「人権侵犯事件の受理・処理別」は</p>
+<pre tabindex=0><code>&quot;旧受&quot;
+&quot;総数&quot;
+&quot;新受_計&quot;
+&quot;新受_申告_委員受&quot;
+&quot;新受_申告_職員受&quot;
+&quot;新受_人権擁護委員の通報&quot;
+&quot;新受_関係行政機関の通報&quot;
+&quot;人権侵犯事件の受理・処理別&quot;
+</code></pre><p>これは一旦は総数だけ使えば良さそうです</p>
+<p>「人権侵犯事件の種類別」は</p>
+<pre tabindex=0><code>&quot;総数&quot;
+&quot;私人等に関するもの&quot;
+&quot;私人等に関するもの_売春&quot;
+&quot;私人等に関するもの_その他&quot;
+&quot;私人等に関するもの_村八分&quot;
+&quot;私人等に関するもの_交通事故&quot;
+&quot;私人等に関するもの_人身売買&quot;
+.
+.
+.
+</code></pre><p>人権侵犯事件の種類が並べられています。この部分から社会的関心の高いものを抽出できると良さそうですね。</p>
+<p>抽出対象の列をどこにするのかも将来的に自動化したいのですが今回は固定で「人権侵犯事件の種類別」の列を抽出対象にしたいと思います。</p>
+<h2 id=mecabを使ってマッチングキーワードを最適化する>mecabを使ってマッチングキーワードを最適化する</h2>
+<pre tabindex=0><code>  cat &quot;$STCSV&quot;|$SED -e &quot;1,$((vnum+1))d&quot;|$AWK -F, '{print $6;}'|sed -e &quot;s|\&quot;||g&quot;|sort|uniq;
+</code></pre><pre tabindex=0><code>&quot;私人等に関するもの_売春&quot;
+&quot;私人等に関するもの_その他&quot;
+&quot;私人等に関するもの_村八分&quot;
+&quot;私人等に関するもの_交通事故&quot;
+&quot;私人等に関するもの_人身売買&quot;
+&quot;私人等に関するもの_医療関係&quot;
+&quot;私人等に関するもの_私的制裁&quot;
+&quot;私人等に関するもの_差別待遇_女性&quot;
+&quot;私人等に関するもの_差別待遇_その他&quot;
+&quot;私人等に関するもの_差別待遇_外国人&quot;
+&quot;私人等に関するもの_差別待遇_性自認&quot;
+</code></pre><p>「私人等に関するもの_交通事故」という文字列はニュースなどではそのまま使われないでしょうからそのままgoogle custom search  の検索結果にマッチングをかけてもダメそうです。<br>
+mecab   を使って文字列を分解してマッチングをかけたいと思います。</p>
+<p>mecabはオープンソースの形態素解析エンジンです入力した文字列を構文解析してくれます。</p>
+<pre tabindex=0><code>echo &quot;私人等に関するもの_差別待遇_女性&quot;|mecab
+</code></pre><pre tabindex=0><code>私人	名詞,一般,*,*,*,*,私人,シジン,シジン
+等	名詞,接尾,一般,*,*,*,等,トウ,トー
+に関する	助詞,格助詞,連語,*,*,*,に関する,ニカンスル,ニカンスル
+も	助詞,係助詞,*,*,*,*,も,モ,モ
+の	助詞,連体化,*,*,*,*,の,ノ,ノ
+_	名詞,サ変接続,*,*,*,*,*
+差別	名詞,サ変接続,*,*,*,*,差別,サベツ,サベツ
+待遇	名詞,サ変接続,*,*,*,*,待遇,タイグウ,タイグー
+_	名詞,サ変接続,*,*,*,*,*
+女性	名詞,一般,*,*,*,*,女性,ジョセイ,ジョセイ
+EOS
+</code></pre><p>取り出すのは名詞だけで良さそうですし、名詞でも1文字だけのものは除外したほうが良さそうですね</p>
+<pre tabindex=0><code>echo &quot;私人等に関するもの_差別待遇_女性&quot;|mecab|grep &quot;名詞&quot;|awk '{print $1;}'|grep -v ^.$
+</code></pre><pre tabindex=0><code>私人
+差別
+待遇
+女性
+</code></pre><h2 id=マッチングしてみる>マッチングしてみる</h2>
+<p>このキーワードでgoogle custom search  の検索結果にマッチングをかけカウント数を取得して見ましょう。</p>
+<pre tabindex=0><code>11,私人等に関するもの_強制・強要_家族間のもの_親の子に対するもの
+11,私人等に関するもの_社会福祉施設関係_施設職員によるもの
+14,私人等に関するもの_差別待遇_同和問題（うち公務員によるもの）
+18,私人等に関するもの_社会福祉施設関係_施設職員によるもの（うち公営の施設に従事する職員によるもの）
+19,私人等に関するもの_プライバシー関係_インターネット（うち同和問題に関する侵犯）
+</code></pre><p>インターネットがマッチしたのは良いのですが「同和問題」の中の「問題」の部分でカウント数を稼いでしまって思うような感じにはなりません。<br>
+「もの」とかもカウント数を稼いでいるので汎用的なキーワードを除外する処理を入れる必要がありそうです。</p>
+<p>自動化の道のりは遠いですね。</p>
+<h2 id=プログラム>プログラム</h2>
+<pre tabindex=0><code>function getStatistics(){
+  :
+  #curl -s &quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=$ESID&amp;lang=J&amp;statsDataId=0003286680&amp;metaGetFlg=Y&amp;cntGetFlg=N&amp;explanationGetFlg=Y&amp;annotationGetFlg=Y&amp;sectionHeaderFlg=1&amp;replaceSpChars=0&quot; -o &quot;$STCSV&quot;
+}
+function matchGcs(){
+  #VALUEより上の行を削除する 
+  vnum=$(cat &quot;$STCSV&quot;|grep -n &quot;VALUE&quot;|$AWK -F: '{print $1;}')
+  echo &quot;$vnum&quot;
+  cat &quot;$STCSV&quot;|$SED -e &quot;1,$((vnum+1))d&quot;|$AWK -F, '{print $6;}'|$SED -e &quot;s|\&quot;||g&quot;|sort|uniq|while read line;do
+    local mcnt=$(echo &quot;$line&quot;|mecab|grep &quot;名詞&quot;|awk '{print $1;}'|grep -v -e ^.$|while read word;do
+      cat &quot;$GCSCSV&quot;|grep &quot;$word&quot;|wc -l      
+
+    done| awk '{sum+=$0} END{print sum;}');
+    echo &quot;$mcnt,$line&quot;
+
+  done|sort|uniq|sort -n  
+
+}
+function main(){
+  #統計名でgoogle cloud searchを検索する
+  getGcs;&lt;---前回作成したもの
+  #統計データを取得する
+  getStatistics;
+  #統計データの列情報とgoogle cloud searchの検索結果をマッチングする
+  matchGcs;
+
+}
+
+main;
+exit;
+</code></pre>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（３）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果をjqでパースする方法を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>Google Custom Search APIで10件目以降の取得方法、newsなど検索対象の絞り込み方法について説明します。検索エンジンの設定にあるschema.orgを使用します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（１）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（１）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>2022年1月時点でのGoogle Custom Search APIの設定方法を説明します。APIキーの作成、検索エンジンIDの取得が中心です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（３）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.17</time>
+</div><p class=article-subtitle>ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.17</time>
+</div><p class=article-subtitle>ここでは時系列データの異常値検知アルゴリズムであるhampel（ハンペル）のpythonライブラリの利用方法を説明します。インストールから基本的な使い方を説明します。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/>e-Stat</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/>データマイニング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（３）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<p>
+<label>検索</label>
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</p>
+</form>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１．Hello World】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２．echo コマンド】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【２．echo コマンド】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-04-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-04-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【４．マルチラインコメント】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【４．マルチラインコメント】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【９．and 条件を if 文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【９．and 条件を if 文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-19-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-19-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１９．関数パラメーターを使用する】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１９．関数パラメーターを使用する】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-07-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-07-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【７．対話型入力】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【７．対話型入力】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年01月>
+2022年01月（51）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_39>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_39>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_39>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_39>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_23>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_11>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_11>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_11>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_11>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_10>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_9>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_8>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_7>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_7>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_7>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_7>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_4>
+github pages
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_4>
+Webテクニック
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト１」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト２」" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</aside>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>

@@ -1,4 +1,151 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 20 Jan 2022 17:50:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</link><pubDate>Thu, 20 Jan 2022 17:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）" />&lt;h2 id="google-custom-searchの検索結果をcsvに整形する">google Custom Searchの検索結果をcsvに整形する&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 21 Jan 2022 13:50:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（４）</title><link>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</link><pubDate>Fri, 21 Jan 2022 13:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" />&lt;h2 id="google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる">Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる&lt;/h2>
+&lt;p>今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせて社会的に関心の高い列名を取得してみたいと思います。&lt;/p>
+&lt;p>今回は「人権侵犯事件統計」 を取り扱ってみたいと思います。&lt;br>
+人権侵犯事件統は、法務省の人権擁護機関で取り扱った人権侵犯事件及び人権相談に関する統計報告を集計したものである。&lt;/p>
+&lt;h2 id="e-stat-から統計データを取得する">e-Stat から統計データを取得する&lt;/h2>
+&lt;p>まずはe-StatのAPIにアクセスして統計データを取得します。&lt;br>
+将来的には新着の統計データを日時で取得して処理するようにしますが、今回は「人権侵犯事件統計」だけ取得します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -s &amp;quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=xxxxxxxxxxxxxxxxxx&amp;amp;lang=J&amp;amp;statsDataId=0003286680&amp;amp;metaGetFlg=Y&amp;amp;cntGetFlg=N&amp;amp;explanationGetFlg=Y&amp;amp;annotationGetFlg=Y&amp;amp;sectionHeaderFlg=1&amp;amp;replaceSpChars=0&amp;quot; -o &amp;quot;$STCSV&amp;quot;
+&lt;/code>&lt;/pre>&lt;h2 id="統計データの中身を見てみる">統計データの中身を見てみる&lt;/h2>
+&lt;pre tabindex="0">&lt;code>&amp;quot;RESULT&amp;quot;
+&amp;quot;STATUS&amp;quot;,&amp;quot;0&amp;quot;
+&amp;quot;ERROR_MSG&amp;quot;,&amp;quot;正常に終了しました。&amp;quot;
+&amp;quot;DATE&amp;quot;,&amp;quot;2022-01-21T09:58:51.856+09:00&amp;quot;
+&amp;quot;RESULT_INF&amp;quot;
+&amp;quot;TOTAL_NUMBER&amp;quot;,&amp;quot;403425&amp;quot;
+&amp;quot;FROM_NUMBER&amp;quot;,&amp;quot;1&amp;quot;
+&amp;quot;TO_NUMBER&amp;quot;,&amp;quot;100000&amp;quot;
+&amp;quot;NEXT_KEY&amp;quot;,&amp;quot;100001&amp;quot;
+&amp;quot;TABLE_INF&amp;quot;,&amp;quot;0003286680&amp;quot;
+&amp;quot;STAT_NAME&amp;quot;,&amp;quot;00250010&amp;quot;,&amp;quot;人権侵犯事件統計&amp;quot;
+&amp;quot;GOV_ORG&amp;quot;,&amp;quot;00250&amp;quot;,&amp;quot;法務省&amp;quot;
+&amp;quot;STATISTICS_NAME&amp;quot;,&amp;quot;人権侵犯事件統計&amp;quot;
+&amp;quot;TITLE&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;人権侵犯事件 種類別　人権侵犯事件の受理及び
+処理件数　（月次）&amp;quot;
+&amp;quot;CYCLE&amp;quot;,&amp;quot;月次&amp;quot;
+&amp;quot;SURVEY_DATE&amp;quot;,&amp;quot;201801&amp;quot;
+&amp;quot;OPEN_DATE&amp;quot;,&amp;quot;2022-01-20&amp;quot;
+&amp;quot;SMALL_AREA&amp;quot;,&amp;quot;0&amp;quot;
+&amp;quot;COLLECT_AREA&amp;quot;,&amp;quot;該当なし&amp;quot;
+&amp;quot;MAIN_CATEGORY&amp;quot;,&amp;quot;14&amp;quot;,&amp;quot;司法・安全・環境&amp;quot;
+&amp;quot;SUB_CATEGORY&amp;quot;,&amp;quot;01&amp;quot;,&amp;quot;司法&amp;quot;
+&amp;quot;OVERALL_TOTAL_NUMBER&amp;quot;,&amp;quot;0&amp;quot;
+&amp;quot;UPDATED_DATE&amp;quot;,&amp;quot;2022-01-20&amp;quot;
+&amp;quot;STATISTICS_NAME_SPEC&amp;quot;,&amp;quot;人権侵犯事件統計&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;TITLE_SPEC&amp;quot;,&amp;quot;人権侵犯事件&amp;quot;,&amp;quot;種類別　人権侵犯事件の受理
+及び処理件数　（月次）&amp;quot;,&amp;quot;処理の合計件数と，その内訳であ
+る措置，措置猶予，侵犯事実不存在，侵犯事実不明確，打切&amp;gt;り，中止，移送及び啓発の各件数の合計とが一致しない場合&amp;gt;があるのは，１つの事件につき複数の措置を採る場合がある&amp;gt;こと等による。&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;VALUE&amp;quot;
+&amp;quot;tab_code&amp;quot;,&amp;quot;表章項目&amp;quot;,&amp;quot;cat01_code&amp;quot;,&amp;quot;人権侵犯事件の受理&amp;gt;・処理別&amp;quot;,&amp;quot;cat02_code&amp;quot;,&amp;quot;人権侵犯事件の種類別&amp;quot;,&amp;quot;time_code&amp;quot;,&amp;quot;時間軸(月次)&amp;quot;,&amp;quot;unit&amp;quot;,&amp;quot;value&amp;quot;,&amp;quot;annotation&amp;quot;
+&amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;2021001111&amp;quot;,&amp;quot;2021年11月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;1430&amp;quot;,&amp;quot;&amp;quot;
+&amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;2021001010&amp;quot;,&amp;quot;2021年10月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;1329&amp;quot;,&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>データの中身を見てみると&amp;quot;VALUE&amp;quot;から上がヘッダー的な項目で、データは&amp;quot;VALUE&amp;quot;以下にありそうです。&lt;br>
+VALUE より上の行を削除しましょう。&lt;br>
+sed でマッチした行より上を削除する方法ががあると良いのですがわからないのでgrepと組み合わせます。&lt;br>
+grep -n でマッチした行数を取得できます。&lt;/p>
+&lt;p>sed -e &amp;ldquo;1,26d&amp;rdquo; で1行目から26行目までを削除できます&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;quot;tab_code&amp;quot;,&amp;quot;表章項目&amp;quot;,&amp;quot;cat01_code&amp;quot;,&amp;quot;人権侵犯事件の受理・処理別&amp;quot;,&amp;quot;cat02_code&amp;quot;,&amp;quot;人権侵犯事件の種類別&amp;quot;,&amp;quot;time_code&amp;quot;,&amp;quot;時間軸(月次)&amp;quot;,&amp;quot;unit&amp;quot;,&amp;quot;value&amp;quot;,&amp;quot;annotation&amp;quot;
+&amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;2007000101&amp;quot;,&amp;quot;2007年1月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;2170&amp;quot;,&amp;quot;&amp;quot;
+.
+.
+&amp;quot;100&amp;quot;,&amp;quot;件数&amp;quot;,&amp;quot;100&amp;quot;,&amp;quot;総数&amp;quot;,&amp;quot;130&amp;quot;,&amp;quot;私人等に関するもの&amp;quot;,&amp;quot;2021001111&amp;quot;,&amp;quot;2021年11月&amp;quot;,&amp;quot;件&amp;quot;,&amp;quot;1230&amp;quot;,&amp;quot;&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>VALUE以下の内容を見てみると「_code」はコードが入るだけなので無視して良さそうです。&lt;br>
+表章項目も「件数」しかないので無視して良さそうです。&lt;br>
+時間軸、unite、value、annotationもいらなそうです。&lt;br>
+「人権侵犯事件の受理・処理別」は&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;quot;旧受&amp;quot;
+&amp;quot;総数&amp;quot;
+&amp;quot;新受_計&amp;quot;
+&amp;quot;新受_申告_委員受&amp;quot;
+&amp;quot;新受_申告_職員受&amp;quot;
+&amp;quot;新受_人権擁護委員の通報&amp;quot;
+&amp;quot;新受_関係行政機関の通報&amp;quot;
+&amp;quot;人権侵犯事件の受理・処理別&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>これは一旦は総数だけ使えば良さそうです&lt;/p>
+&lt;p>「人権侵犯事件の種類別」は&lt;/p>
+&lt;pre tabindex="0">&lt;code>&amp;quot;総数&amp;quot;
+&amp;quot;私人等に関するもの&amp;quot;
+&amp;quot;私人等に関するもの_売春&amp;quot;
+&amp;quot;私人等に関するもの_その他&amp;quot;
+&amp;quot;私人等に関するもの_村八分&amp;quot;
+&amp;quot;私人等に関するもの_交通事故&amp;quot;
+&amp;quot;私人等に関するもの_人身売買&amp;quot;
+.
+.
+.
+&lt;/code>&lt;/pre>&lt;p>人権侵犯事件の種類が並べられています。この部分から社会的関心の高いものを抽出できると良さそうですね。&lt;/p>
+&lt;p>抽出対象の列をどこにするのかも将来的に自動化したいのですが今回は固定で「人権侵犯事件の種類別」の列を抽出対象にしたいと思います。&lt;/p>
+&lt;h2 id="mecabを使ってマッチングキーワードを最適化する">mecabを使ってマッチングキーワードを最適化する&lt;/h2>
+&lt;pre tabindex="0">&lt;code> cat &amp;quot;$STCSV&amp;quot;|$SED -e &amp;quot;1,$((vnum+1))d&amp;quot;|$AWK -F, '{print $6;}'|sed -e &amp;quot;s|\&amp;quot;||g&amp;quot;|sort|uniq;
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>&amp;quot;私人等に関するもの_売春&amp;quot;
+&amp;quot;私人等に関するもの_その他&amp;quot;
+&amp;quot;私人等に関するもの_村八分&amp;quot;
+&amp;quot;私人等に関するもの_交通事故&amp;quot;
+&amp;quot;私人等に関するもの_人身売買&amp;quot;
+&amp;quot;私人等に関するもの_医療関係&amp;quot;
+&amp;quot;私人等に関するもの_私的制裁&amp;quot;
+&amp;quot;私人等に関するもの_差別待遇_女性&amp;quot;
+&amp;quot;私人等に関するもの_差別待遇_その他&amp;quot;
+&amp;quot;私人等に関するもの_差別待遇_外国人&amp;quot;
+&amp;quot;私人等に関するもの_差別待遇_性自認&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>「私人等に関するもの_交通事故」という文字列はニュースなどではそのまま使われないでしょうからそのままgoogle custom search  の検索結果にマッチングをかけてもダメそうです。&lt;br>
+mecab   を使って文字列を分解してマッチングをかけたいと思います。&lt;/p>
+&lt;p>mecabはオープンソースの形態素解析エンジンです入力した文字列を構文解析してくれます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>echo &amp;quot;私人等に関するもの_差別待遇_女性&amp;quot;|mecab
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>私人 名詞,一般,*,*,*,*,私人,シジン,シジン
+等 名詞,接尾,一般,*,*,*,等,トウ,トー
+に関する 助詞,格助詞,連語,*,*,*,に関する,ニカンスル,ニカンスル
+も 助詞,係助詞,*,*,*,*,も,モ,モ
+の 助詞,連体化,*,*,*,*,の,ノ,ノ
+_ 名詞,サ変接続,*,*,*,*,*
+差別 名詞,サ変接続,*,*,*,*,差別,サベツ,サベツ
+待遇 名詞,サ変接続,*,*,*,*,待遇,タイグウ,タイグー
+_ 名詞,サ変接続,*,*,*,*,*
+女性 名詞,一般,*,*,*,*,女性,ジョセイ,ジョセイ
+EOS
+&lt;/code>&lt;/pre>&lt;p>取り出すのは名詞だけで良さそうですし、名詞でも1文字だけのものは除外したほうが良さそうですね&lt;/p>
+&lt;pre tabindex="0">&lt;code>echo &amp;quot;私人等に関するもの_差別待遇_女性&amp;quot;|mecab|grep &amp;quot;名詞&amp;quot;|awk '{print $1;}'|grep -v ^.$
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>私人
+差別
+待遇
+女性
+&lt;/code>&lt;/pre>&lt;h2 id="マッチングしてみる">マッチングしてみる&lt;/h2>
+&lt;p>このキーワードでgoogle custom search  の検索結果にマッチングをかけカウント数を取得して見ましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>11,私人等に関するもの_強制・強要_家族間のもの_親の子に対するもの
+11,私人等に関するもの_社会福祉施設関係_施設職員によるもの
+14,私人等に関するもの_差別待遇_同和問題（うち公務員によるもの）
+18,私人等に関するもの_社会福祉施設関係_施設職員によるもの（うち公営の施設に従事する職員によるもの）
+19,私人等に関するもの_プライバシー関係_インターネット（うち同和問題に関する侵犯）
+&lt;/code>&lt;/pre>&lt;p>インターネットがマッチしたのは良いのですが「同和問題」の中の「問題」の部分でカウント数を稼いでしまって思うような感じにはなりません。&lt;br>
+「もの」とかもカウント数を稼いでいるので汎用的なキーワードを除外する処理を入れる必要がありそうです。&lt;/p>
+&lt;p>自動化の道のりは遠いですね。&lt;/p>
+&lt;h2 id="プログラム">プログラム&lt;/h2>
+&lt;pre tabindex="0">&lt;code>function getStatistics(){
+:
+#curl -s &amp;quot;http://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData?appId=$ESID&amp;amp;lang=J&amp;amp;statsDataId=0003286680&amp;amp;metaGetFlg=Y&amp;amp;cntGetFlg=N&amp;amp;explanationGetFlg=Y&amp;amp;annotationGetFlg=Y&amp;amp;sectionHeaderFlg=1&amp;amp;replaceSpChars=0&amp;quot; -o &amp;quot;$STCSV&amp;quot;
+}
+function matchGcs(){
+#VALUEより上の行を削除する
+vnum=$(cat &amp;quot;$STCSV&amp;quot;|grep -n &amp;quot;VALUE&amp;quot;|$AWK -F: '{print $1;}')
+echo &amp;quot;$vnum&amp;quot;
+cat &amp;quot;$STCSV&amp;quot;|$SED -e &amp;quot;1,$((vnum+1))d&amp;quot;|$AWK -F, '{print $6;}'|$SED -e &amp;quot;s|\&amp;quot;||g&amp;quot;|sort|uniq|while read line;do
+local mcnt=$(echo &amp;quot;$line&amp;quot;|mecab|grep &amp;quot;名詞&amp;quot;|awk '{print $1;}'|grep -v -e ^.$|while read word;do
+cat &amp;quot;$GCSCSV&amp;quot;|grep &amp;quot;$word&amp;quot;|wc -l
+done| awk '{sum+=$0} END{print sum;}');
+echo &amp;quot;$mcnt,$line&amp;quot;
+done|sort|uniq|sort -n
+}
+function main(){
+#統計名でgoogle cloud searchを検索する
+getGcs;&amp;lt;---前回作成したもの
+#統計データを取得する
+getStatistics;
+#統計データの列情報とgoogle cloud searchの検索結果をマッチングする
+matchGcs;
+}
+main;
+exit;
+&lt;/code>&lt;/pre></description></item><item><title>e-Stat でGoogle Custom Search APIを使おう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</link><pubDate>Thu, 20 Jan 2022 17:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）" />&lt;h2 id="google-custom-searchの検索結果をcsvに整形する">google Custom Searchの検索結果をcsvに整形する&lt;/h2>
 &lt;p>統計データから列名を取得してgoogle Custom Searchの検索結果に当てに行きマッチする回数の高い列名を社会的関心の高い項目に設定したいと思います。&lt;br>
 全開でgoogle Custom Searchの検索の絞り込みができたのでAPIを叩く回数は統計名ごとに3回にしたいと思います。&lt;/p>
 &lt;p>start パラメータを1から開始して10ずつインクリメントしていきます。&lt;/p>
