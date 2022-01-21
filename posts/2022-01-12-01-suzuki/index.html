@@ -15,7 +15,7 @@
 <meta property="og:description" content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-12T12:30:57+09:00"><meta property="article:modified_time" content="2022-01-21T03:00:50+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-12T12:30:57+09:00"><meta property="article:modified_time" content="2022-01-21T03:20:38+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg">
 <meta name=twitter:title content="ざっくりわかる「シェルスクリプト２」 - NLP">
 <meta name=twitter:description content="ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
@@ -103,7 +103,7 @@ Web開発
 2022.01.21
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 9分
+読了時間: 12分
 </time>
 </div>
 </header>
@@ -159,7 +159,21 @@ $ bash if_with_or.sh
 45
 ゲームに勝ちました
 bash-5.1$
-</code></pre><h2 id=else-if-と-else>else if と else</h2>
+</code></pre><table>
+<tr><td>比較演算子</td><td>使用例</td><td>意味</td></tr>
+<tr><td>-n</td><td>-n 文字列 </td><td>文字列の長さが0より大きければ真</td></tr>
+<tr><td>-z</td><td>-z 文字列 </td><td>文字列の長さが0であれば真</td></tr>
+<tr><td>=</td><td>文字列A = 文字列B </td><td>文字列Aと文字列Bが等しければ真</td></tr>
+<tr><td>!=</td><td>文字列A != 文字列B </td><td>文字列Aと文字列Bが等しくなければ真</td></tr>
+</table>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。</dd>
+<dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。</dd>
+</dl>
+</div>
+<h2 id=else-if-と-else>else if と else</h2>
 <p><font color=orange><b>else ifステートメントの使用：</b></font><br>
 else if条件の使用は、bashでは「elif」を定義します。&lsquo;elseif_example.sh&rsquo;という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:elseif_example.sh data-lang=bash:elseif_example.sh><span class=cp>#!/bin/bash
@@ -191,7 +205,21 @@ bash$ bash elseif_example.sh
 すみません、またチャレンジして下さい
 bash$ bash elseif_example.sh
 $
-</code></pre><h2 id=case-文>case 文</h2>
+</code></pre><table>
+<tr><td>比較演算子</td><td>使用例</td><td>意味</td></tr>
+<tr><td>-n</td><td>-n 文字列 </td><td>文字列の長さが0より大きければ真</td></tr>
+<tr><td>-z</td><td>-z 文字列 </td><td>文字列の長さが0であれば真</td></tr>
+<tr><td>=</td><td>文字列A = 文字列B </td><td>文字列Aと文字列Bが等しければ真</td></tr>
+<tr><td>!=</td><td>文字列A != 文字列B </td><td>文字列Aと文字列Bが等しくなければ真</td></tr>
+</table>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。</dd>
+<dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。</dd>
+</dl>
+</div>
+<h2 id=case-文>case 文</h2>
 <p><font color=orange><b>caseステートメントの使用：</b></font><br>
 caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。&lsquo;case_example.sh&rsquo;という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:case_example.sh data-lang=bash:case_example.sh><span class=cp>#!/bin/bash
@@ -226,7 +254,13 @@ bash$ bash case_example.sh
 あなたのラッキーナンバーを入力して下さい。
 777
 すみません、またチャレンジして下さい
-</code></pre><h2 id=コマンドラインから引数を取得>コマンドラインから引数を取得</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>case文の終わりには esac を指定します。</dd>
+</dl>
+</div>
+<h2 id=コマンドラインから引数を取得>コマンドラインから引数を取得</h2>
 <p><font color=orange><b>コマンドラインから引数を取得：</b></font><br>
 Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line.sh data-lang=bash:command_line.sh><span class=cp>#!/bin/bash
@@ -241,7 +275,15 @@ Bashスクリプトは、他のプログラミング言語と同様に、コマ�
 一つ目の引数 = apple
 二つ目の引数 = windows
 $
-</code></pre><h2 id=名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>echo の引数として変数を渡すときは、"$1" のようにダブルクォートで囲む癖をつけます。</dd>
+<dd>$1 のようにダブルクォートで囲まずに変数をそのまま記述してしまうと、値として連続するスペースが含まれていたときに1つのスペースにまとめられてしまいます。また、値が入っていない場合に、正しく処理ができなくなります。</dd>
+<dd>シェルスクリプトの変数はほとんどの場合は &ldquo;$value&rdquo; と囲みます。</dd>
+</dl>
+</div>
+<h2 id=名前を使用してコマンドラインから引数を取得する>名前を使用してコマンドラインから引数を取得する</h2>
 <p><font color=orange><b>コマンドラインから名前付きの引数を取得：</b></font><br>
 名前付きのコマンドライン引数を読み取る方法を示します。&lsquo;command_line_names.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:command_line_names.sh data-lang=bash:command_line_names.sh><span class=cp>#!/bin/bash
@@ -262,7 +304,27 @@ $
 <pre tabindex=0><code>$ bash command_line_names.sh X=45 Y=30
 X+Y=75
 $
-</code></pre><h2 id=変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>case文で入力された文字列の大文字と小文字に対応する。</dd>
+<dd>または文字列に対応する場合は以下のソースを見て欲しい。</dd>
+<dd>レベルアップしたソースコードはささいな気遣いから生まれる</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#! /bin/bash
+</span><span class=cp></span><span class=k>case</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> in
+  <span class=o>[</span>Yy<span class=o>]</span><span class=p>|</span><span class=s2>&#34;yes&#34;</span><span class=o>)</span>		<span class=c1>#Y、yまたはyesという文字列</span>
+    <span class=nb>echo</span> <span class=s2>&#34;YES&#34;</span>
+    <span class=nb>echo</span> <span class=s2>&#34;OK&#34;</span>
+    <span class=p>;;</span>
+  <span class=o>[</span>Nn<span class=o>]</span><span class=p>|</span><span class=s2>&#34;no&#34;</span><span class=o>)</span>		<span class=c1>#N、nまたはnoという文字列</span>
+    <span class=nb>echo</span> <span class=s2>&#34;NO&#34;</span>
+    <span class=p>;;</span>
+  *<span class=o>)</span>
+    <span class=nb>echo</span> <span class=s2>&#34;undefined&#34;</span><span class=p>;;</span>
+<span class=k>esac</span>
+</code></pre></div><h2 id=変数に2つの文字列を組み合わせる>変数に2つの文字列を組み合わせる</h2>
 <p><font color=orange><b>文字列変数を組み合わせる：</b></font><br>
 文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:string_combine.sh data-lang=bash:string_combine.sh><span class=cp>#!/bin/bash
@@ -281,8 +343,25 @@ $
 Apple Mac OS
 Apple Mac OS は、とても優れたＯＳです。
 $
-</code></pre><p><font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</font></p>
-<h2 id=文字列の部分文字列を取得する>文字列の部分文字列を取得する</h2>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。</dd>
+<dd>
+<p>変数と文字列の結合は変数を{} でくくります。以下のソースを見て下さい。</p>
+</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:string_example2.sh data-lang=bash:string_example2.sh><span class=cp>#!/bin/sh
+</span><span class=cp></span>
+<span class=nv>str1</span> <span class=o>=</span> <span class=s2>&#34;Shell script&#34;</span>
+<span class=nv>str</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>str1</span><span class=si>}</span><span class=s2> is intersting!!&#34;</span>
+
+<span class=nb>echo</span> <span class=nv>$str</span>
+</code></pre></div><pre tabindex=0><code>$ bash string_example2.sh
+$ Shell script is interesting!!
+$
+</code></pre><h2 id=文字列の部分文字列を取得する>文字列の部分文字列を取得する</h2>
 <p><font color=orange><b>文字列の部分文字列を取得します。</b></font><br>
 他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:substring_example.sh data-lang=bash:substring_example.sh><span class=cp>#!/bin/bash
@@ -295,6 +374,74 @@ $
 <pre tabindex=0><code>$ bash substring_example.sh
 Bash
 $
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>基本パターンは以下の通り</dd>
+<dd>${パラメータ:オフセット:長さ}<br>
+:</dd>
+<dd>Bashでの文字列の切り出しはかなりの頻度で使います。</dd>
+<dd>知っているのと知らないのとでは、苦労が違ってきます。</dd>
+<dd>具体例を以下にしめします。</dd>
+</dl>
+</div>
+<pre tabindex=0><code class=language-bash:部分文字列抽出 data-lang=bash:部分文字列抽出>#!/bin/bash
+
+HOGE=&quot;abcdef&quot;
+
+# オフセット位置から長さ分を取得
+echo ${HOGE:0:2}
+# -&gt; ab
+
+echo ${HOGE:2:2}
+# -&gt; cd
+
+echo ${HOGE:4:2}
+# -&gt; ef
+
+# 長さを省略した場合はオフセットから最後まで出力
+echo ${HOGE:2}
+# -&gt; cdef
+
+# 長さにマイナスを指定した場合は最後からマイナス分引いた位置までの長さになる
+echo ${HOGE:0:-2}
+# -&gt; abcd
+
+# オフセットの位置にマイナスを指定した場合は文法として別のパラメータ展開になる(デフォルト値の指定)
+# 指定した変数が空文字列の場合は右に指定した文字が入る
+echo ${HOGE:-2}
+# -&gt; abcdef
+HOGE=
+echo ${HOGE:-2}
+# -&gt; 2
+</code></pre><pre tabindex=0><code class=language-bash:右端からのパターン一致除外 data-lang=bash:右端からのパターン一致除外>#!/bin/bash
+
+HOGE=hoge.tar.bz2
+
+echo ${HOGE}
+# -&gt; hoge.tar.bz2
+
+# 最短除外
+echo ${HOGE%.*}
+# -&gt; hoge.tar
+
+# 最長除外
+echo ${HOGE%%.*}
+# -&gt; hoge
+</code></pre><pre tabindex=0><code class=language-bash:左端からのパターン一致除外 data-lang=bash:左端からのパターン一致除外>#!/bin/bash
+
+HOGE=/home/user/hoge
+
+echo ${HOGE}
+# -&gt; /home/user/hoge
+
+# 最短除外
+echo ${HOGE#*/}
+# -&gt; home/user/hoge
+
+# 最長除外
+echo ${HOGE##*/}
+# -&gt; hoge
 </code></pre><h2 id=変数に2つの数値を追加します>変数に2つの数値を追加します</h2>
 <p><font color=orange><b>2つの数字を追加します。</b></font><br>
 さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。</p>
@@ -316,21 +463,66 @@ $
 56
 加算の結果=81
 $
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>((sum=x+y));</dd>
+<dd>昔の書籍でシェルスクリプトを勉強している人は、驚くかもしれない。だが、今の時代、Bashでは上記のように書く。昔は</dd>
+<dd>
+<p>$ echo `expr 1 + 1`</p>
+</dd>
+<dd>
+<p>こんな書き方をした。現在のBashでは算術演算子が使える。</p>
+</dd>
+<dd>以下ににまとめてみた。2重括弧でくくればいい。2重括弧の中に変数を使うことも可能だ。さらに変数は見にくい「$」をつける必要すらない。</dd>
+</dl>
+</div>
+<pre tabindex=0><code class=language-bash:算術演算子 data-lang=bash:算術演算子>$ echo `expr 1+1` # 昔のやり方
+$ echo $((5+5))   # 今のやり方
+$ echo $((5-5))
+$ echo $((5*5))
+$ echo $((5/5))
+$ echo $((5%5))
+
+# なんと比較演算子もいける！
+$ echo $((0==1))  # 等号、結果: 0
+$ echo $((0!=1))  # 否定等号、結果: 1
+$ echo $((0&lt;1))   # 未満、結果: 1
+$ echo $((0&lt;=1))  # 以下、結果: 1
+$ echo $((0&gt;1))   # 大なり、結果: 0
+$ echo $((0&gt;=1))  # 以上、結果: 0
 </code></pre><h2 id=関数を作成する>関数を作成する</h2>
 <p><font color=orange><b>関数の作成：</b></font><br>
 簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。&lsquo;function_example.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_example.sh data-lang=bash:function_example.sh><span class=cp>#!/bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
 </span><span class=cp></span>
-<span class=k>function</span> F1<span class=o>(){</span>
-  <span class=nb>echo</span> <span class=s1>&#39;わたしはbashプログラミングが大好きです。&#39;</span><span class=p>;</span>
+<span class=k>function</span> 関数の名前<span class=o>(){</span>
+  処理
 <span class=o>}</span>
-
-F1<span class=p>;</span>
-</code></pre></div><p>bashコマンドでファイルを実行します。</p>
-<pre tabindex=0><code>$ bash function_example.sh
-わたしはbashプログラミングが大好きです。
-$
-</code></pre><h2 id=関数パラメーターを使用する>関数パラメーターを使用する</h2>
+</code></pre></div><p>このとき、functionは省略可能です。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+関数の名前<span class=o>(){</span>
+  処理
+<span class=o>}</span>
+</code></pre></div><p>関数の呼び出しは、関数を定義した後に関数の名前を書くだけです。</p>
+<pre tabindex=0><code>関数の名前 引数
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># 関数の定義</span>
+<span class=k>function</span> say_hello<span class=o>(){</span>
+  <span class=nb>echo</span> <span class=s2>&#34;Hello, world!&#34;</span><span class=p>;</span>
+<span class=o>}</span>
+<span class=c1>#</span>
+<span class=c1># 関数の呼び出し</span>
+say_hello<span class=p>;</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>このとき、関数の名前に続けて、引数を書くことができます。関数内では、通常のシェルスクリプトの引数を処理するのと同じように$1、$2、&mldr;という形でアクセスできます。</dd>
+</dl>
+</div>
+<h2 id=関数パラメーターを使用する>関数パラメーターを使用する</h2>
 <p><font color=orange><b>パラメータを使用して関数を作成します。</b></font><br>
 Bashは、関数宣言時に関数パラメーターまたは引数を宣言できません。ただし、他の変数を使用して、関数内でパラメーターを使用できます。関数の呼び出し時に2つの値が渡された場合、値の読み取りには$1と$2の変数が使用されます。&lsquo;function_parameter.sh&rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、関数 &lsquo;Rectangle_Area&rsquo;は、パラメーター値に基づいて長方形の面積を計算します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:function_parameter.sh data-lang=bash:function_parameter.sh><span class=cp>#!/bin/bash
@@ -345,7 +537,16 @@ Rectangle_Area <span class=m>10</span> 20<span class=p>;</span>
 <pre tabindex=0><code>bash-5.1$ bash tmp
 面積は : 200
 bash-5.1$
-</code></pre>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>戻り値について</dt>
+<dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。</dd>
+<dd>
+<p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。</p>
+</dd>
+<dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。</dd>
+</dl>
+</div>
 <h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
@@ -412,6 +613,63 @@ bash-5.1$
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post ざっくりわかる「シェルスクリプト３」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかる「シェルスクリプト３」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
 <header class=article-header>
 <div class=article-image>
@@ -427,63 +685,6 @@ bash-5.1$
 <h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
 </div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_1600x0_resize_q75_box.jpg 1600w" width=800 height=240 loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
 </div>
 </a>
 </article>

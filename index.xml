@@ -3742,7 +3742,21 @@ $ bash if_with_or.sh
 45
 ゲームに勝ちました
 bash-5.1$
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;table>
+&lt;tr>&lt;td>比較演算子&lt;/td>&lt;td>使用例&lt;/td>&lt;td>意味&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-n&lt;/td>&lt;td>-n 文字列 &lt;/td>&lt;td>文字列の長さが0より大きければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-z&lt;/td>&lt;td>-z 文字列 &lt;/td>&lt;td>文字列の長さが0であれば真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>=&lt;/td>&lt;td>文字列A = 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>!=&lt;/td>&lt;td>文字列A != 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しくなければ真&lt;/td>&lt;/tr>
+&lt;/table>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。&lt;/dd>
+&lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -3875,7 +3889,21 @@ bash$ bash elseif_example.sh
 すみません、またチャレンジして下さい
 bash$ bash elseif_example.sh
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;table>
+&lt;tr>&lt;td>比較演算子&lt;/td>&lt;td>使用例&lt;/td>&lt;td>意味&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-n&lt;/td>&lt;td>-n 文字列 &lt;/td>&lt;td>文字列の長さが0より大きければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-z&lt;/td>&lt;td>-z 文字列 &lt;/td>&lt;td>文字列の長さが0であれば真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>=&lt;/td>&lt;td>文字列A = 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>!=&lt;/td>&lt;td>文字列A != 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しくなければ真&lt;/td>&lt;/tr>
+&lt;/table>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。&lt;/dd>
+&lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4011,7 +4039,13 @@ bash$ bash case_example.sh
 あなたのラッキーナンバーを入力して下さい。
 777
 すみません、またチャレンジして下さい
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>case文の終わりには esac を指定します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4127,7 +4161,15 @@ Bashスクリプトは、他のプログラミング言語と同様に、コマ�
 一つ目の引数 = apple
 二つ目の引数 = windows
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>echo の引数として変数を渡すときは、&amp;quot;$1&amp;quot; のようにダブルクォートで囲む癖をつけます。&lt;/dd>
+&lt;dd>$1 のようにダブルクォートで囲まずに変数をそのまま記述してしまうと、値として連続するスペースが含まれていたときに1つのスペースにまとめられてしまいます。また、値が入っていない場合に、正しく処理ができなくなります。&lt;/dd>
+&lt;dd>シェルスクリプトの変数はほとんどの場合は &amp;ldquo;$value&amp;rdquo; と囲みます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4249,7 +4291,27 @@ Y&lt;span class="o">)&lt;/span> &lt;span class="nv">y&lt;/span>&lt;span class="o
 &lt;pre tabindex="0">&lt;code>$ bash command_line_names.sh X=45 Y=30
 X+Y=75
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>case文で入力された文字列の大文字と小文字に対応する。&lt;/dd>
+&lt;dd>または文字列に対応する場合は以下のソースを見て欲しい。&lt;/dd>
+&lt;dd>レベルアップしたソースコードはささいな気遣いから生まれる&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#! /bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> in
+&lt;span class="o">[&lt;/span>Yy&lt;span class="o">]&lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="s2">&amp;#34;yes&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="c1">#Y、yまたはyesという文字列&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;YES&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;OK&amp;#34;&lt;/span>
+&lt;span class="p">;;&lt;/span>
+&lt;span class="o">[&lt;/span>Nn&lt;span class="o">]&lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="s2">&amp;#34;no&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="c1">#N、nまたはnoという文字列&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;NO&amp;#34;&lt;/span>
+&lt;span class="p">;;&lt;/span>
+*&lt;span class="o">)&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;undefined&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
+&lt;span class="k">esac&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4367,8 +4429,24 @@ $
 Apple Mac OS
 Apple Mac OS は、とても優れたＯＳです。
 $
-&lt;/code>&lt;/pre>&lt;p>&lt;font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。&lt;/font>&lt;/p>
-&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。&lt;/dd>
+&lt;dd>
+&lt;p>変数と文字列の結合は変数を{} でくくります。以下のソースを見て下さい。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:string_example2.sh" data-lang="bash:string_example2.sh">&lt;span class="cp">#!/bin/sh
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="nv">str1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Shell script&amp;#34;&lt;/span>
+&lt;span class="nv">str&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">str1&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> is intersting!!&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$str&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash string_example2.sh
+$ Shell script is interesting!!
+$
+&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4482,6 +4560,59 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash substring_example.sh
 Bash
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>基本パターンは以下の通り&lt;/dd>
+&lt;dd>${パラメータ:オフセット:長さ}&lt;br>
+:&lt;/dd>
+&lt;dd>Bashでの文字列の切り出しはかなりの頻度で使います。&lt;/dd>
+&lt;dd>知っているのと知らないのとでは、苦労が違ってきます。&lt;/dd>
+&lt;dd>具体例を以下にしめします。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code class="language-bash:部分文字列抽出" data-lang="bash:部分文字列抽出">#!/bin/bash
+HOGE=&amp;quot;abcdef&amp;quot;
+# オフセット位置から長さ分を取得
+echo ${HOGE:0:2}
+# -&amp;gt; ab
+echo ${HOGE:2:2}
+# -&amp;gt; cd
+echo ${HOGE:4:2}
+# -&amp;gt; ef
+# 長さを省略した場合はオフセットから最後まで出力
+echo ${HOGE:2}
+# -&amp;gt; cdef
+# 長さにマイナスを指定した場合は最後からマイナス分引いた位置までの長さになる
+echo ${HOGE:0:-2}
+# -&amp;gt; abcd
+# オフセットの位置にマイナスを指定した場合は文法として別のパラメータ展開になる(デフォルト値の指定)
+# 指定した変数が空文字列の場合は右に指定した文字が入る
+echo ${HOGE:-2}
+# -&amp;gt; abcdef
+HOGE=
+echo ${HOGE:-2}
+# -&amp;gt; 2
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-bash:右端からのパターン一致除外" data-lang="bash:右端からのパターン一致除外">#!/bin/bash
+HOGE=hoge.tar.bz2
+echo ${HOGE}
+# -&amp;gt; hoge.tar.bz2
+# 最短除外
+echo ${HOGE%.*}
+# -&amp;gt; hoge.tar
+# 最長除外
+echo ${HOGE%%.*}
+# -&amp;gt; hoge
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-bash:左端からのパターン一致除外" data-lang="bash:左端からのパターン一致除外">#!/bin/bash
+HOGE=/home/user/hoge
+echo ${HOGE}
+# -&amp;gt; /home/user/hoge
+# 最短除外
+echo ${HOGE#*/}
+# -&amp;gt; home/user/hoge
+# 最長除外
+echo ${HOGE##*/}
+# -&amp;gt; hoge
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -4603,6 +4734,33 @@ $
 56
 加算の結果=81
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>((sum=x+y));&lt;/dd>
+&lt;dd>昔の書籍でシェルスクリプトを勉強している人は、驚くかもしれない。だが、今の時代、Bashでは上記のように書く。昔は&lt;/dd>
+&lt;dd>
+&lt;p>$ echo `expr 1 + 1`&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>こんな書き方をした。現在のBashでは算術演算子が使える。&lt;/p>
+&lt;/dd>
+&lt;dd>以下ににまとめてみた。2重括弧でくくればいい。2重括弧の中に変数を使うことも可能だ。さらに変数は見にくい「$」をつける必要すらない。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code class="language-bash:算術演算子" data-lang="bash:算術演算子">$ echo `expr 1+1` # 昔のやり方
+$ echo $((5+5)) # 今のやり方
+$ echo $((5-5))
+$ echo $((5*5))
+$ echo $((5/5))
+$ echo $((5%5))
+# なんと比較演算子もいける！
+$ echo $((0==1)) # 等号、結果: 0
+$ echo $((0!=1)) # 否定等号、結果: 1
+$ echo $((0&amp;lt;1)) # 未満、結果: 1
+$ echo $((0&amp;lt;=1)) # 以下、結果: 1
+$ echo $((0&amp;gt;1)) # 大なり、結果: 0
+$ echo $((0&amp;gt;=1)) # 以上、結果: 0
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
@@ -4715,15 +4873,47 @@ $
 &lt;h1 id="関数を作成する">関数を作成する&lt;/h1>
 &lt;p>&lt;font color=orange>&lt;b>関数の作成：&lt;/b>&lt;/font>&lt;br>
 簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。&amp;lsquo;function_example.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">function&lt;/span> 関数の名前&lt;span class="o">(){&lt;/span>
+処理
+&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このとき、functionは省略可能です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+関数の名前&lt;span class="o">(){&lt;/span>
+処理
+&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>関数の呼び出しは、関数を定義した後に関数の名前を書くだけです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>関数の名前 引数
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># 関数の定義&lt;/span>
+&lt;span class="k">function&lt;/span> say_hello&lt;span class="o">(){&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello, world!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># 関数の呼び出し&lt;/span>
+say_hello&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>このとき、関数の名前に続けて、引数を書くことができます。関数内では、通常のシェルスクリプトの引数を処理するのと同じように$1、$2、&amp;hellip;という形でアクセスできます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:function_example.sh" data-lang="bash:function_example.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">function&lt;/span> F1&lt;span class="o">(){&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;わたしはbashプログラミングが大好きです。&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 関数の定義&lt;/span>
+&lt;span class="k">function&lt;/span> say_hello&lt;span class="o">(){&lt;/span>
+&lt;span class="c1"># 引数を受け取って表示&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">, world!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="o">}&lt;/span>
-F1&lt;span class="p">;&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># 関数の呼び出し 引数を渡す&lt;/span>
+say_hello &lt;span class="s2">&amp;#34;Hello&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ bash function_example.sh
-わたしはbashプログラミングが大好きです。
+Hello, world!
 $
 &lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
@@ -4841,7 +5031,17 @@ Rectangle_Area &lt;span class="m">10&lt;/span> 20&lt;span class="p">;&lt;/span>
 &lt;pre tabindex="0">&lt;code>bash-5.1$ bash tmp
 面積は : 200
 bash-5.1$
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>戻り値について&lt;/dt>
+&lt;dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。&lt;/dd>
+&lt;dd>
+&lt;p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。&lt;/p>
+&lt;/dd>
+&lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/" target="_blank" rel="noopener"
 >ざっくりわかる シェルスクリプト【０１．Hello World】&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/" target="_blank" rel="noopener"
@@ -4968,7 +5168,21 @@ $ bash if_with_or.sh
 45
 ゲームに勝ちました
 bash-5.1$
-&lt;/code>&lt;/pre>&lt;h2 id="else-if-と-else">else if と else&lt;/h2>
+&lt;/code>&lt;/pre>&lt;table>
+&lt;tr>&lt;td>比較演算子&lt;/td>&lt;td>使用例&lt;/td>&lt;td>意味&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-n&lt;/td>&lt;td>-n 文字列 &lt;/td>&lt;td>文字列の長さが0より大きければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-z&lt;/td>&lt;td>-z 文字列 &lt;/td>&lt;td>文字列の長さが0であれば真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>=&lt;/td>&lt;td>文字列A = 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>!=&lt;/td>&lt;td>文字列A != 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しくなければ真&lt;/td>&lt;/tr>
+&lt;/table>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。&lt;/dd>
+&lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="else-if-と-else">else if と else&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>else ifステートメントの使用：&lt;/b>&lt;/font>&lt;br>
 else if条件の使用は、bashでは「elif」を定義します。&amp;lsquo;elseif_example.sh&amp;rsquo;という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:elseif_example.sh" data-lang="bash:elseif_example.sh">&lt;span class="cp">#!/bin/bash
@@ -4999,7 +5213,21 @@ bash$ bash elseif_example.sh
 すみません、またチャレンジして下さい
 bash$ bash elseif_example.sh
 $
-&lt;/code>&lt;/pre>&lt;h2 id="case-文">case 文&lt;/h2>
+&lt;/code>&lt;/pre>&lt;table>
+&lt;tr>&lt;td>比較演算子&lt;/td>&lt;td>使用例&lt;/td>&lt;td>意味&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-n&lt;/td>&lt;td>-n 文字列 &lt;/td>&lt;td>文字列の長さが0より大きければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>-z&lt;/td>&lt;td>-z 文字列 &lt;/td>&lt;td>文字列の長さが0であれば真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>=&lt;/td>&lt;td>文字列A = 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しければ真&lt;/td>&lt;/tr>
+&lt;tr>&lt;td>!=&lt;/td>&lt;td>文字列A != 文字列B &lt;/td>&lt;td>文字列Aと文字列Bが等しくなければ真&lt;/td>&lt;/tr>
+&lt;/table>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>シェルスクリプトの比較式には「比較演算子」の左右に空白（半角スペース）が必要です（代入とは別）。&lt;/dd>
+&lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="case-文">case 文&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>caseステートメントの使用：&lt;/b>&lt;/font>&lt;br>
 caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。&amp;lsquo;case_example.sh&amp;rsquo;という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:case_example.sh" data-lang="bash:case_example.sh">&lt;span class="cp">#!/bin/bash
@@ -5033,7 +5261,13 @@ bash$ bash case_example.sh
 あなたのラッキーナンバーを入力して下さい。
 777
 すみません、またチャレンジして下さい
-&lt;/code>&lt;/pre>&lt;h2 id="コマンドラインから引数を取得">コマンドラインから引数を取得&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>case文の終わりには esac を指定します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="コマンドラインから引数を取得">コマンドラインから引数を取得&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>コマンドラインから引数を取得：&lt;/b>&lt;/font>&lt;br>
 Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:command_line.sh" data-lang="bash:command_line.sh">&lt;span class="cp">#!/bin/bash
@@ -5047,7 +5281,15 @@ Bashスクリプトは、他のプログラミング言語と同様に、コマ�
 一つ目の引数 = apple
 二つ目の引数 = windows
 $
-&lt;/code>&lt;/pre>&lt;h2 id="名前を使用してコマンドラインから引数を取得する">名前を使用してコマンドラインから引数を取得する&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>echo の引数として変数を渡すときは、&amp;quot;$1&amp;quot; のようにダブルクォートで囲む癖をつけます。&lt;/dd>
+&lt;dd>$1 のようにダブルクォートで囲まずに変数をそのまま記述してしまうと、値として連続するスペースが含まれていたときに1つのスペースにまとめられてしまいます。また、値が入っていない場合に、正しく処理ができなくなります。&lt;/dd>
+&lt;dd>シェルスクリプトの変数はほとんどの場合は &amp;ldquo;$value&amp;rdquo; と囲みます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="名前を使用してコマンドラインから引数を取得する">名前を使用してコマンドラインから引数を取得する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>コマンドラインから名前付きの引数を取得：&lt;/b>&lt;/font>&lt;br>
 名前付きのコマンドライン引数を読み取る方法を示します。&amp;lsquo;command_line_names.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、XとYの2つの引数がこのスクリプトによって読み取られ、XとYの合計が出力されます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:command_line_names.sh" data-lang="bash:command_line_names.sh">&lt;span class="cp">#!/bin/bash
@@ -5067,7 +5309,27 @@ Y&lt;span class="o">)&lt;/span> &lt;span class="nv">y&lt;/span>&lt;span class="o
 &lt;pre tabindex="0">&lt;code>$ bash command_line_names.sh X=45 Y=30
 X+Y=75
 $
-&lt;/code>&lt;/pre>&lt;h2 id="変数に2つの文字列を組み合わせる">変数に2つの文字列を組み合わせる&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>case文で入力された文字列の大文字と小文字に対応する。&lt;/dd>
+&lt;dd>または文字列に対応する場合は以下のソースを見て欲しい。&lt;/dd>
+&lt;dd>レベルアップしたソースコードはささいな気遣いから生まれる&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#! /bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="k">case&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> in
+&lt;span class="o">[&lt;/span>Yy&lt;span class="o">]&lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="s2">&amp;#34;yes&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="c1">#Y、yまたはyesという文字列&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;YES&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;OK&amp;#34;&lt;/span>
+&lt;span class="p">;;&lt;/span>
+&lt;span class="o">[&lt;/span>Nn&lt;span class="o">]&lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="s2">&amp;#34;no&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="c1">#N、nまたはnoという文字列&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;NO&amp;#34;&lt;/span>
+&lt;span class="p">;;&lt;/span>
+*&lt;span class="o">)&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;undefined&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
+&lt;span class="k">esac&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="変数に2つの文字列を組み合わせる">変数に2つの文字列を組み合わせる&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>文字列変数を組み合わせる：&lt;/b>&lt;/font>&lt;br>
 文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:string_combine.sh" data-lang="bash:string_combine.sh">&lt;span class="cp">#!/bin/bash
@@ -5083,8 +5345,24 @@ $
 Apple Mac OS
 Apple Mac OS は、とても優れたＯＳです。
 $
-&lt;/code>&lt;/pre>&lt;p>&lt;font color=red>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。&lt;/font>&lt;/p>
-&lt;h2 id="文字列の部分文字列を取得する">文字列の部分文字列を取得する&lt;/h2>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>Bash は += 演算子を用いて文字列を連結することもできます。単純に a+=b とすると、a=a+b と理解することができます。&lt;/dd>
+&lt;dd>
+&lt;p>変数と文字列の結合は変数を{} でくくります。以下のソースを見て下さい。&lt;/p>
+&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:string_example2.sh" data-lang="bash:string_example2.sh">&lt;span class="cp">#!/bin/sh
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="nv">str1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Shell script&amp;#34;&lt;/span>
+&lt;span class="nv">str&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">str1&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> is intersting!!&amp;#34;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$str&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash string_example2.sh
+$ Shell script is interesting!!
+$
+&lt;/code>&lt;/pre>&lt;h2 id="文字列の部分文字列を取得する">文字列の部分文字列を取得する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>文字列の部分文字列を取得します。&lt;/b>&lt;/font>&lt;br>
 他のプログラミング言語と同様に、bashには文字列データから値を切り取る組み込み関数はありません。ただし、次のスクリプトに示すbashで、別の方法で部分文字列のタスクを実行できます。スクリプトをテストするには、次のコードを使用して「substring_example.sh」という名前のファイルを作成します。ここで、値6は部分文字列が開始する開始点を示し、5は部分文字列の長さを示します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:substring_example.sh" data-lang="bash:substring_example.sh">&lt;span class="cp">#!/bin/bash
@@ -5096,6 +5374,59 @@ $
 &lt;pre tabindex="0">&lt;code>$ bash substring_example.sh
 Bash
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>基本パターンは以下の通り&lt;/dd>
+&lt;dd>${パラメータ:オフセット:長さ}&lt;br>
+:&lt;/dd>
+&lt;dd>Bashでの文字列の切り出しはかなりの頻度で使います。&lt;/dd>
+&lt;dd>知っているのと知らないのとでは、苦労が違ってきます。&lt;/dd>
+&lt;dd>具体例を以下にしめします。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code class="language-bash:部分文字列抽出" data-lang="bash:部分文字列抽出">#!/bin/bash
+HOGE=&amp;quot;abcdef&amp;quot;
+# オフセット位置から長さ分を取得
+echo ${HOGE:0:2}
+# -&amp;gt; ab
+echo ${HOGE:2:2}
+# -&amp;gt; cd
+echo ${HOGE:4:2}
+# -&amp;gt; ef
+# 長さを省略した場合はオフセットから最後まで出力
+echo ${HOGE:2}
+# -&amp;gt; cdef
+# 長さにマイナスを指定した場合は最後からマイナス分引いた位置までの長さになる
+echo ${HOGE:0:-2}
+# -&amp;gt; abcd
+# オフセットの位置にマイナスを指定した場合は文法として別のパラメータ展開になる(デフォルト値の指定)
+# 指定した変数が空文字列の場合は右に指定した文字が入る
+echo ${HOGE:-2}
+# -&amp;gt; abcdef
+HOGE=
+echo ${HOGE:-2}
+# -&amp;gt; 2
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-bash:右端からのパターン一致除外" data-lang="bash:右端からのパターン一致除外">#!/bin/bash
+HOGE=hoge.tar.bz2
+echo ${HOGE}
+# -&amp;gt; hoge.tar.bz2
+# 最短除外
+echo ${HOGE%.*}
+# -&amp;gt; hoge.tar
+# 最長除外
+echo ${HOGE%%.*}
+# -&amp;gt; hoge
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-bash:左端からのパターン一致除外" data-lang="bash:左端からのパターン一致除外">#!/bin/bash
+HOGE=/home/user/hoge
+echo ${HOGE}
+# -&amp;gt; /home/user/hoge
+# 最短除外
+echo ${HOGE#*/}
+# -&amp;gt; home/user/hoge
+# 最長除外
+echo ${HOGE##*/}
+# -&amp;gt; hoge
 &lt;/code>&lt;/pre>&lt;h2 id="変数に2つの数値を追加します">変数に2つの数値を追加します&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>2つの数字を追加します。&lt;/b>&lt;/font>&lt;br>
 さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。&lt;/p>
@@ -5115,20 +5446,65 @@ $
 56
 加算の結果=81
 $
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>((sum=x+y));&lt;/dd>
+&lt;dd>昔の書籍でシェルスクリプトを勉強している人は、驚くかもしれない。だが、今の時代、Bashでは上記のように書く。昔は&lt;/dd>
+&lt;dd>
+&lt;p>$ echo `expr 1 + 1`&lt;/p>
+&lt;/dd>
+&lt;dd>
+&lt;p>こんな書き方をした。現在のBashでは算術演算子が使える。&lt;/p>
+&lt;/dd>
+&lt;dd>以下ににまとめてみた。2重括弧でくくればいい。2重括弧の中に変数を使うことも可能だ。さらに変数は見にくい「$」をつける必要すらない。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;pre tabindex="0">&lt;code class="language-bash:算術演算子" data-lang="bash:算術演算子">$ echo `expr 1+1` # 昔のやり方
+$ echo $((5+5)) # 今のやり方
+$ echo $((5-5))
+$ echo $((5*5))
+$ echo $((5/5))
+$ echo $((5%5))
+# なんと比較演算子もいける！
+$ echo $((0==1)) # 等号、結果: 0
+$ echo $((0!=1)) # 否定等号、結果: 1
+$ echo $((0&amp;lt;1)) # 未満、結果: 1
+$ echo $((0&amp;lt;=1)) # 以下、結果: 1
+$ echo $((0&amp;gt;1)) # 大なり、結果: 0
+$ echo $((0&amp;gt;=1)) # 以上、結果: 0
 &lt;/code>&lt;/pre>&lt;h2 id="関数を作成する">関数を作成する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>関数の作成：&lt;/b>&lt;/font>&lt;br>
 簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。&amp;lsquo;function_example.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:function_example.sh" data-lang="bash:function_example.sh">&lt;span class="cp">#!/bin/bash
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">function&lt;/span> F1&lt;span class="o">(){&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;わたしはbashプログラミングが大好きです。&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">function&lt;/span> 関数の名前&lt;span class="o">(){&lt;/span>
+処理
 &lt;span class="o">}&lt;/span>
-F1&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>bashコマンドでファイルを実行します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash function_example.sh
-わたしはbashプログラミングが大好きです。
-$
-&lt;/code>&lt;/pre>&lt;h2 id="関数パラメーターを使用する">関数パラメーターを使用する&lt;/h2>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このとき、functionは省略可能です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+関数の名前&lt;span class="o">(){&lt;/span>
+処理
+&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>関数の呼び出しは、関数を定義した後に関数の名前を書くだけです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>関数の名前 引数
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="c1"># 関数の定義&lt;/span>
+&lt;span class="k">function&lt;/span> say_hello&lt;span class="o">(){&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello, world!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="c1">#&lt;/span>
+&lt;span class="c1"># 関数の呼び出し&lt;/span>
+say_hello&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>このとき、関数の名前に続けて、引数を書くことができます。関数内では、通常のシェルスクリプトの引数を処理するのと同じように$1、$2、&amp;hellip;という形でアクセスできます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="関数パラメーターを使用する">関数パラメーターを使用する&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>パラメータを使用して関数を作成します。&lt;/b>&lt;/font>&lt;br>
 Bashは、関数宣言時に関数パラメーターまたは引数を宣言できません。ただし、他の変数を使用して、関数内でパラメーターを使用できます。関数の呼び出し時に2つの値が渡された場合、値の読み取りには$1と$2の変数が使用されます。&amp;lsquo;function_parameter.sh&amp;rsquo;という名前のファイルを作成し、次のコードを追加します。ここで、関数 &amp;lsquo;Rectangle_Area&amp;rsquo;は、パラメーター値に基づいて長方形の面積を計算します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:function_parameter.sh" data-lang="bash:function_parameter.sh">&lt;span class="cp">#!/bin/bash
@@ -5142,7 +5518,17 @@ Rectangle_Area &lt;span class="m">10&lt;/span> 20&lt;span class="p">;&lt;/span>
 &lt;pre tabindex="0">&lt;code>bash-5.1$ bash tmp
 面積は : 200
 bash-5.1$
-&lt;/code>&lt;/pre>&lt;!--
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>戻り値について&lt;/dt>
+&lt;dd>bashシェルスクリプトには「戻り値」というものは基本的に存在しない。&lt;/dd>
+&lt;dd>
+&lt;p>解決策として関数やコマンドの「実行結果を直接変数に代入する」という手段をとることになる。&lt;/p>
+&lt;/dd>
+&lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;!--
 ## ２０．スクリプトからの戻り値を渡す
 ## ２１．ディレクトリを作成する
 ## ２２．存在を確認してディレクトリを作成する
