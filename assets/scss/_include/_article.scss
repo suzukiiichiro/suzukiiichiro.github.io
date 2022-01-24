@@ -276,6 +276,9 @@
       border-radius: 2px;
       font-size: 0.8em;
     }
+    iframe {
+      min-height: 300px;
+    }
   }
   .article-header {
     display: flex;

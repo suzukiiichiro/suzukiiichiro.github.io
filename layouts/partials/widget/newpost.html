@@ -1,0 +1,11 @@
+<section class="widget archives sidearticle-contents--wrapper" id="newpost-articles">
+  <h2 class="section-title">最新記事</h2>
+    <div class="sidearticle-contents">
+      <div class="flex article-list--tile">
+        {{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+        {{- range first .Site.Params.widgets.newpost.limit $pages -}}
+          {{- partial "article-list/tile" (dict "context" . "size" "400x238" "Type" "articleList") -}}
+        {{- end -}}
+    </div>
+  </div>
+</section>
