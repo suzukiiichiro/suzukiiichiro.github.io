@@ -1,4 +1,12 @@
 User-agent: *
+Disallow: /assets/
+Disallow: /404.html
+Disallow: /js/
+Disallow: /ts/
+Disallow: /images/
+Disallow: /scss/
+Disallow: /css/
+Disallow: /assets/
 Allow: /
 
 Sitemap: https://suzukiiichiro.github.io/sitemap_index.xml
