@@ -3,7 +3,7 @@ title: "【９．and 条件を if 文で使う】ざっくりわかる「シェ�
 date: 2022-01-07T10:03:12+09:00
 description: "2つ以上の条件を持つifステートメントでは、さまざまなタイプの論理条件を使用できます。andロジックを使用してifステートメントで複数の条件を定義する方法を次の例に示します。"
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

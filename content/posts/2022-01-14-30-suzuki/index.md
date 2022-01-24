@@ -3,7 +3,7 @@ title: "【３０．sleepコマンド】ざっくりわかる「シェルスク�
 description: "コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

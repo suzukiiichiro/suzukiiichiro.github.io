@@ -3,7 +3,7 @@ title: "【２０．スクリプトからの戻り値を渡す】ざっくりわ
 description: "Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

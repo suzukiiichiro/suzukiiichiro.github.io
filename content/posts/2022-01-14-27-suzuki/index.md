@@ -3,7 +3,7 @@ title: "【２７．mailコマンド】ざっくりわかる「シェルスク�
 description: "' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

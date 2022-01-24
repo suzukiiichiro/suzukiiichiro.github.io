@@ -3,7 +3,7 @@ title: "【２５．ファイルに追加】ざっくりわかる「シェルス
 description: "bashで「>>」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 "
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

@@ -3,7 +3,7 @@ title: "【２１．ディレクトリを作成する】ざっくりわかる「
 description: "Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:
@@ -53,6 +53,49 @@ else
 fi  
 
 cd "/tmp/of/work";
+```
+
+{{% tips-list tips %}}
+ヒント
+: 実はディレクトリの存在チェックを行わなくても先のスクリプトは問題なく動作します。
+: mkdir -p コマンドは以下のような挙動をします。 
+
+: 作成対象ディレクトリの親ディレクトリが存在しない場合 はすべての親ディレクトリを作成する
+: 作成対象ディレクトリがすでに存在している場合 は何も行わず、エラーもはかない
+{{% /tips-list %}}
+
+``` bash:mkdir_example2.sh
+#!/bin/bash
+
+# 一旦ディレクトリを作成
+mkdir -p /tmp/work
+
+ls -l -d /tmp/work/
+# 出力
+# drwxr-xr-x 2 root root 64 Aug 22 08:26 /tmp/work/
+
+# オプション無しですでに存在しているディレクトリを作成
+mkdir /tmp/work
+# 出力
+# mkdir: /tmp/work: File exists
+
+echo $?
+# 1
+
+# -pオプション有りだとエラーを吐かない
+mkdir -p /tmp/work
+
+echo $?
+# 0
+```
+
+```
+$ bash bash
+drwxr-xr-x  2 suzukiiichiro  wheel  64  1 21 13:13 /tmp/work/
+mkdir: /tmp/work: File exists
+1
+0
+bash-5.1$
 ```
 
 

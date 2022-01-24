@@ -3,7 +3,7 @@ title: "【１８．関数を作成する】ざっくりわかる「シェルス
 description: "簡単な関数を作成して関数を呼び出す方法を次のスクリプトに示します。'function_example.sh'という名前のファイルを作成し、次のコードを追加します。bashスクリプトで角かっこを使用せずに、名前でのみ関数を呼び出すことができます。"
 date: 2022-01-12T12:30:57+09:00
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:

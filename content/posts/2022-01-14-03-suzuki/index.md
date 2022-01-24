@@ -3,7 +3,7 @@ title: "【３．コメント】ざっくりわかる「シェルスクリプト
 date: 2022-01-07T10:03:12+09:00
 description: "「#」記号は、bashスクリプトに1行コメントを追加するために使用されます。'comment_example.sh'という名前の新しいファイルを作成し、1行コメント付きの次のスクリプトを追加します。"
 draft: false
-image: 2021-12-23-bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:
