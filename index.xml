@@ -1,4 +1,366 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 21 Jan 2022 13:50:13 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>e-Stat でGoogle Custom Search APIを使おう（４）</title><link>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</link><pubDate>Fri, 21 Jan 2022 13:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" />&lt;h2 id="google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる">Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 24 Jan 2022 16:18:06 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SVGとCSSを使用したUIコンポーネントの構築</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</link><pubDate>Mon, 24 Jan 2022 16:18:06 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg" alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/building-components-svg-css/" target="_blank" rel="noopener"
+> Building UI Components With SVG and CSS - Ahmad Shadeed &lt;/a>&lt;/p>
+&lt;p>SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。&lt;br>
+CSSと比較してSVGを使用することが非常に理にかなっているユースケースはたくさんあります。たとえば、円形の読み込みアニメーションを作成したり、画像にマスクを適用したりします。このような場合、CSSを使用できないという意味ではありませんが、使用する手法（マスクなど）に基づいてクロスブラウザの問題と戦うのは難しい場合があるため、SVGを使用すると時間と労力を節約できます。&lt;/p>
+&lt;p>SVGの優れている点は、応答性、パフォーマンス、およびHTML＆CSSを使用してすぐに使用できることです。この記事では、SVGをHTMLおよびCSSとともに使用して特定のUIコンポーネントを構築できるさまざまなユースケースを紹介することを目標としています。&lt;/p>
+&lt;p>それでは、ユースケースを見てみましょう。&lt;/p>
+&lt;h2 id="カットアウトアバター">カットアウトアバター&lt;/h2>
+&lt;p>切り抜かれたアバターは、FacebookのCSSを調べているときに見つけたものです。&lt;br>
+メッセンジャーでは、ユーザーアバターにバッジを付けることができ、バッジ用のスペースを割り当てるためにアバターが切り取られます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 214;
+flex-basis: 514px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png" data-size="1750x816">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png"
+width="1750"
+height="816"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1_hud6b90f44175eca3709f245e68d8fff31_19391_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1_hud6b90f44175eca3709f245e68d8fff31_19391_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これは、CSSの白い境界線を追加することで実行できます（簡単な修正として）が、さらに動的SVGコンポーネントに取り入れてみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>borderが機能する場合、なぜSVGを使用するのか考えているかもしれませんが、間違いではありません。&lt;br>
+しかし、他よりも優れた解決策があります。数学の授業で、教師が問題にさまざまな解決策がある可能性があり、そのうちの1つが柔軟性の点で優れている可能性があると述べたことを覚えていますか？今回の問題もそれと同じです。&lt;/p>
+&lt;p>とにかく、border の解決策がどのようにすぐに失敗するかを示してみましょう。&lt;/p>
+&lt;p>失敗例&lt;/p>
+&lt;ul>
+&lt;li>ホバー時：カードの背景が変わるため、白い境界線が奇妙に見えます。&lt;/li>
+&lt;li>ダークモード：白い境界線は黒っぽい背景の上になります&lt;/li>
+&lt;/ul>
+&lt;p>次の図では、バッジの白い境界線が暗い背景とホバー状態にどのように干渉しているかに注目してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 188;
+flex-basis: 452px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png" data-size="1750x928">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png"
+width="1750"
+height="928"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2_hu345871d4517a775520d28a7a74800c8a_54045_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2_hu345871d4517a775520d28a7a74800c8a_54045_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>ホバー時に境界線colorを変更することでそれを解決できますが、それは最善の解決策とは思えません。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">card&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">lightgrey&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#454545&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>SVGを使用すると、バッジの下の領域をカットすることで、上記の問題をより適切に解決できます。そうすれば、あらゆる種類のバックグラウンドで機能します。&lt;/p>
+&lt;p>次の図を見てください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 193;
+flex-basis: 463px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png" data-size="1600x828">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png"
+width="1600"
+height="828"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3_hu1dfc4250d15839442548e23b4240505f_48169_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3_hu1dfc4250d15839442548e23b4240505f_48169_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>アバターを含めるためにSVG &lt;code>&amp;lt;image&amp;gt;&lt;/code>要素を使用しています。バッジ領域を切り取るには、2つの&lt;code>&amp;lt;circle&amp;gt;&lt;/code>要素を作成する必要があります。1つは白で、もう1つは黒です。&lt;br>
+マスクでは、黒で塗りつぶされた要素はすべて非表示になります、白の要素は表示されます。黒い円は、半径18の右下隅に配置されています。&lt;br>
+開発者ツールでは、上記は減算と呼ばれます。大きい円から小さい円を引きます。&lt;br>
+これが最後のデモです&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/09f3rqbn/1/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="タイトルの装飾">タイトルの装飾&lt;/h2>
+&lt;p>あるクライアントのプロジェクトで、SVGとCSSを組み合わせてセクションタイトルをデザイン・構築したことがあります。&lt;br>
+セキュリティに関連するブランドなので、このようなスタイルを使うことがあるかもしれません。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png"
+width="1750"
+height="704"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1_hu9762e89e78fcee199e452efd51216fd0_7071_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1_hu9762e89e78fcee199e452efd51216fd0_7071_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>コンポーネントは短いタイトルと長いタイトルで動作する必要があり、タイトルが長すぎる場合は、レイアウトを壊さずに複数の行に折り返す必要があります。&lt;br>
+それを構築するためには、以下のような対応が必要です。&lt;/p>
+&lt;ul>
+&lt;li>最初に、固定部分（右側）をコピーして、インラインSVGとして追加する。&lt;/li>
+&lt;li>CSSを使用して、タイトルの下に行を作成しました。また、行の最初と最後にある小さな円にも使用。&lt;/li>
+&lt;li>不要なポジショニングを使用しないように、flexboxを使用してコンポーネントレイアウトを作成。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png"
+width="1750"
+height="704"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2_hu394589bfd0b7a3a1a1e8070563f4c8e8_9959_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2_hu394589bfd0b7a3a1a1e8070563f4c8e8_9959_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>それでは基本的なHTMLとCSSから始めましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;c-section__title&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>CSS is awesome&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;128&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;34.5&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 128 34.5&amp;#34;&lt;/span> &lt;span class="na">preserveAspectRatio&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 344;
+flex-basis: 826px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png" data-size="1750x508">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png"
+width="1750"
+height="508"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3_hu3dbcc93cd3cef5aa1b1c62a8d7a75132_3696_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3_hu3dbcc93cd3cef5aa1b1c62a8d7a75132_3696_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>次のステップでは、&lt;code>span&lt;/code> 要素の下にボーダーを追加して、SVGに接続された線を追加したいと思います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 195;
+flex-basis: 468px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png" data-size="1750x896">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png"
+width="1750"
+height="896"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4_hubc361b642de3bb76c2da3ab6d5fecd03_18846_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4_hubc361b642de3bb76c2da3ab6d5fecd03_18846_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>SVGが回線に接続されていないことに気づきました。&lt;br>
+&lt;code>flexbox&lt;/code>を使用しているので、修正するのは簡単です。&lt;code>flex-item&lt;/code> を&lt;code>flex-end&lt;/code>に揃える必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">align-items&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex-end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>次に、絶対位置指定で擬似要素を使って、最初と最後に円を追加する必要があります。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/j4pydfmb/1/embed/html,css,result/dark/">&lt;/script>
+&lt;p>また、SVGを使うと何がいいかというと、SVGのパスを点線にして、アニメーションさせることができるのです。&lt;br>
+そのためには、SVGで書き出されたパスがアウトライン化されていないことを確認する必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このテクニックは、Jake Archibald氏の&lt;a class="link" href="https://jakearchibald.com/2013/animated-line-drawing-svg/" target="_blank" rel="noopener"
+>素晴らしい記事&lt;/a> から学びました。このアイデアは、パスの長さを求めるというものです。&lt;/p>
+&lt;p>Chrome DevToolsで、SVGを検査し、&lt;code>&amp;lt;path&amp;gt;&lt;/code>要素を選択すると、その末尾の横に&lt;code>== $0&lt;/code>と表示されることがわかります。これを選択したまま、コンソールに移動し、以下のスクリプトを記述します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">$0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1">// 139.46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このようなことをしなくても、DOMから要素を選択するには、&lt;code>$0&lt;/code>が手っ取り早いです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">let&lt;/span> &lt;span class="nx">sectionPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#path&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sectionPath&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>それはこの例の文脈の中での簡単なヒントでした。&lt;/p>
+&lt;p>さて、長さが決まったら、あとは好きなようにやってみましょう。例えば、ホバー時にアニメーションさせることができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">stroke-dasharray&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">transition&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>または、単純に点線に変えることもできます（この場合、パスの長さを知る必要はありません）。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png"
+width="1750"
+height="704"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6_hufea4942fc354058db1acd216d661be7d_7119_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6_hufea4942fc354058db1acd216d661be7d_7119_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/wp9k7Lb6/1/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="svgを使ったカスタムリンクの下線">SVGを使ったカスタムリンクの下線&lt;/h2>
+&lt;p>SVGを使って、ワクワクするようなカスタムリンクのアンダーラインを作成することができます。私は数年前に、ランダムにパスを生成し、ホバー時にそれを再描画するスクリプトを作成しました。&lt;/p>
+&lt;p>次の図で、プレビューの前と後を考えてみてください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png"
+width="1750"
+height="704"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1_hu6126c7f6cba4a32449db210456c89e40_24540_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1_hu6126c7f6cba4a32449db210456c89e40_24540_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>アイデアは、各リンクにSVGを挿入することであり、次のようになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;400&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;35&amp;#34;&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;pathItem&amp;#34;&lt;/span>
+&lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M5 5 Q 30 15 170 5&amp;#34;&lt;/span>
+&lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;black&amp;#34;&lt;/span>
+&lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;transparent&amp;#34;&lt;/span>
+&lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;7&amp;#34;&lt;/span>
+&lt;span class="na">stroke-linecap&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;round&amp;#34;&lt;/span>&lt;span class="p">/&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>この手法は &lt;code>d&lt;/code> 属性値を変更することによって起こります。これは、パスが実際にどのように描画されるかを示すビジュアルです。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/670razvf/7/embed/">&lt;/script>
+&lt;h2 id="カスタムsvgテープ">カスタムSVGテープ&lt;/h2>
+&lt;p>クライアントのプロジェクトに携わっているとき、CSSでどこにでも配置可能で、1つのCSS変数のみで色を変更できるほどダイナミックな方法で、テープをセクションに取り付ける方法が必要でした。&lt;/p>
+&lt;p>次の図を考えて見ましょう。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png"
+width="2048"
+height="1130"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1_hu7a6b0474904ab4d7e4664c349952f204_31681_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1_hu7a6b0474904ab4d7e4664c349952f204_31681_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>Adobe Illustratorで、テープをレイヤーに分割しました。&lt;/p>
+&lt;ul>
+&lt;li>ベース：塗りつぶしの色を取ります&lt;/li>
+&lt;li>透明な黒：暗い領域を示します&lt;/li>
+&lt;li>透明な白：明るい領域を示します&lt;/li>
+&lt;/ul>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png"
+width="2048"
+height="1130"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2_hu6d11a472e3d2258a31d46931a092b14d_35445_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2_hu6d11a472e3d2258a31d46931a092b14d_35445_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>SVGコードを見てみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>fill=currentColor&lt;/code>を追加したことに注意してください。&lt;br>
+&lt;code>currentColor&lt;/code>キーワードは、CSS &lt;code>color&lt;/code> プロパティから値を継承するため、1つのプロパティのみを使用して色を動的に変更できます。&lt;br>
+単色のベースと、明るい領域と暗い領域に他の2つのレイヤーがあることを考えると、色を変更すると、テープの外観が異なります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png"
+width="2048"
+height="1130"
+srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3_hu25aab5de30a1346572ef8e7e06225a02_23429_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3_hu25aab5de30a1346572ef8e7e06225a02_23429_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>さらに良いことに、SVGをテンプレートに変換し、&lt;code>&amp;lt;use&amp;gt;&lt;/code> SVG要素の助けを借りて、SVGを複製せずにテープを再利用することができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;display: none;&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- An example of using the tape from a template --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;--angle: 10deg; color: red; --size: 120px;&amp;#34;&lt;/span> &lt;span class="na">aria-hidden&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;true&amp;#34;&lt;/span> &lt;span class="na">focusable&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 123 47&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">use&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#tape&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">use&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;use&amp;gt;&lt;/code>要素を介してテープを追加した方法に注目してください。これの良いところは、CSS変数をインラインスタイルとして使用することです。&lt;br>
+CSSは次のようになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">tape&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">angle&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;script async src="//jsfiddle.net/wyoshi/1jrL4cg6/8/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>SVGを使用してUIコンポーネントを構築すると、作業がより簡単かつ簡単になります。一部のUIコンポーネントは、100％完璧なユースケースやSVG（アバターカットアウトなど）ではない場合がありますが、作業しているプロジェクトのコンテキストによって異なります。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/SVG%e3%82%a8%e3%83%83%e3%82%bb%e3%83%b3%e3%82%b7%e3%83%a3%e3%83%ab%e3%82%ba-%e7%ac%ac2%e7%89%88-J-David-Eisenberg/dp/4873117976/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Mx7fILd8L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> SVGエッセンシャルズ 第2版 &lt;/h2>
+&lt;p> SVGの解説書。SVGは2001年にW3C勧告として公開されたXMLベースの画像フォーマットです。 ベクターグラフィックスなので拡大縮小、変形しても美しさが損なわれません。 会社のロゴをSVGで作る企業も増えていますし、D3.jsによるデータビジュアライゼーションでも基盤技術としてSVGが使われています。 本書では簡潔なサンプルを数多く使い、基本的な図形の作成、アニメーションや複雑なグラフィックスの作成、さらにはスクリプトによる制御など、SVGの基礎から応用までをわかりやすく解説します。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%80%90%e7%89%b9%e5%85%b8%e4%bb%98%e3%81%8d%e3%80%91HTML5-CSS3%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3-%e7%8f%be%e5%a0%b4%e3%81%ae%e6%96%b0%e6%a8%99%e6%ba%96%e3%82%ac%e3%82%a4%e3%83%89%e3%80%90%e7%ac%ac2%e7%89%88%e3%80%91-Compass-Books%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba/dp/4839974594/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-na.ssl-images-amazon.com/images/I/51&amp;#43;8c&amp;#43;a5D7L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 【特典付き】HTML5&amp;amp;CSS3デザイン 現場の新標準ガイド【第2版】 (Compass Booksシリーズ) &lt;/h2>
+&lt;p> 体系的に学ぶHTMLとCSSの仕様と実践 フロントエンドエンジニアはじめ、Web制作に関わっている人のためのHTML5/CSS3ガイドブックです。 HTMLとCSSの最新仕様を整理するとともに、主要ブラウザの対応状況など、現時点でどのポイントに留意して制作を進めていけばよいか、現場で必要不可欠な情報を解説しています。 また、フレキシブルボックスレイアウトやグリッドレイアウトなど、現在知っておくべきHTML&amp;#43;CSSレイアウトの手法についても、詳細に解説しています。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>e-Stat でGoogle Custom Search APIを使おう（４）</title><link>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</link><pubDate>Fri, 21 Jan 2022 13:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" />&lt;h2 id="google-custom-search-apiの検索結果と統計名の列名をマッチンングさせる">Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる&lt;/h2>
 &lt;p>今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせて社会的に関心の高い列名を取得してみたいと思います。&lt;/p>
 &lt;p>今回は「人権侵犯事件統計」 を取り扱ってみたいと思います。&lt;br>
 人権侵犯事件統は、法務省の人権擁護機関で取り扱った人権侵犯事件及び人権相談に関する統計報告を集計したものとのことです。&lt;/p>
@@ -1647,46 +2009,4 @@ alt="blockchain">
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>s-Stat 時系列データで異常値を検知しよう（３）</title><link>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</link><pubDate>Mon, 17 Jan 2022 17:46:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal.jpg" alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）" />&lt;h2 id="pandas-dataframeオブジェクト">Pandas DataFrameオブジェクト&lt;/h2>
-&lt;p>Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。&lt;br>
-DataFramオブジェクトは２次元配列な感じです。&lt;br>
-１次元目が列、２次元目が行のイメージみたいです。&lt;/p>
-&lt;p>例えば以下のcsvだと&lt;/p>
-&lt;pre tabindex="0">&lt;code>date,value
-2019,2845
-2020,3246
-2021,3633
-&lt;/code>&lt;/pre>&lt;p>read_csvしたDataFrameオブジェクトの変数名をdfとすると&lt;br>
-それぞれのデータには以下の方法でアクセスします。&lt;/p>
-&lt;pre tabindex="0">&lt;code>df['date'][0]-&amp;gt;2019
-df['date'][1]-&amp;gt;2020
-df['date'][2]-&amp;gt;2021
-df['value'][0]-&amp;gt;2845
-df['value][1]-&amp;gt;3246
-df['value'][2]-&amp;gt;3633
-&lt;/code>&lt;/pre>&lt;p>read_csvするとデフォルトだと１行目を列名とみなすみたいです。&lt;br>
-アクセスの方法も列名が反映され連想配列っぽくなります。&lt;/p>
-&lt;h2 id="pandas-seriesオブジェクト">Pandas Seriesオブジェクト&lt;/h2>
-&lt;p>hampelの第１引数はPandasのSeriesオブジェクトです。&lt;br>
-Seriesオブジェクトは１次元の配列みたいです。&lt;br>
-DataFrameオブジェクトからSeriesオブジェクトに変換する方法ですが&lt;br>
-以下の方法でできます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>input=pd.Series(df['value'])
-&lt;/code>&lt;/pre>&lt;h2 id="csvを読み込んでhampelメソッドを使い異常値を検出する-">csvを読み込んでhampelメソッドを使い異常値を検出する 。&lt;/h2>
-&lt;p>プログラムは以下の流れになります。&lt;br>
-csvをread_csvでDataFrameオブジェクトとして読み込む。&lt;br>
-DataFrameオブジェクトからSeriesオブジェクトを生成する。&lt;br>
-Seriesオブジェクトを使ってhampelメソッドを呼び出して異常値を検出する。&lt;/p>
-&lt;p>ソースコードは以下の通り&lt;/p>
-&lt;pre tabindex="0">&lt;code>import matplotlib.pyplot as plt
-import pandas as pd
-from hampel import hampel
-# データ取得
-df = pd.read_csv('./kome.csv')
-print(df.columns)
-print(df['value'])
-input = pd.Series(df['value'])
-rsts = hampel(input, window_size=5, n=3)
-for rst in rsts:
-print('%d:date:%s value:%d' % (rst,df['date'][rst],df['value'][rst]))
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/aside></description></item></channel></rss>
