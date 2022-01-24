@@ -6,7 +6,6 @@ Disallow: /ts/
 Disallow: /images/
 Disallow: /scss/
 Disallow: /css/
-Disallow: /assets/
 Allow: /
 
 Sitemap: {{ .Site.BaseURL }}sitemap_index.xml
