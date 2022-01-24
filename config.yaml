@@ -162,6 +162,7 @@ params:
         enabled:
             - 300x250
             - search
+            - newpost
             - popular-articles
             - archives
             - tag-cloud
@@ -175,6 +176,9 @@ params:
 
         populerArticles:
             limit: 10
+
+        newpost:
+            limit: 5
 
 #     opengraph:
 #         twitter:
