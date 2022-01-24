@@ -13,6 +13,7 @@
         {{- if and $image.resource (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
             {{- $thumbnail := $image.resource.Fill "400x250" -}}
             {{- $imagePermalink = (absURL $thumbnail.Permalink) -}}
+            {{- $imagePermalink = $image.permalink -}}
         {{- else -}}
             {{- $imagePermalink = $image.permalink -}}
         {{- end -}}

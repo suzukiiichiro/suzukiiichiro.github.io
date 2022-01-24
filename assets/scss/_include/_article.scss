@@ -529,3 +529,16 @@
     }
   }
 }
+
+
+.article-list--compact {
+  article {
+    .article-image {
+      border: none !important;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
