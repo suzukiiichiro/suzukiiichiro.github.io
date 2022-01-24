@@ -1,5 +1,5 @@
 ---
-title: "デザイナーでもできる初めてのHugo #01"
+title: "デザイナーでもできる初めてのHUGO #01"
 date: 2021-12-22T13:07:49+09:00
 draft: false
 categories:
@@ -18,20 +18,152 @@ Wordpressのインストールのためにはサーバも必要ですし、ド�
 色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。
 無料で、httpsも設定できるので非常に便利です。
 
+## HUGOとは
+[HUGO](https://gohugo.io/)とはGo言語で記述され、速度や使いやすさ、設定のしやすさなどを重視して最適化された静的なHTMLやCSSのサイトジェネレータです。コンテンツとテンプレートを分けて構築し、それらを組み合わせてHTMLをレンダリングします。
+
+HUGOでブログを記述する際には「Markdown」と呼ばれる言語を使います。
+そして、サイトを公開、再構築する際には「hugo」というコマンドを使用しますが、このコマンドはどのディレクトリからでも実行することができるので、特権アカウントを持っていない共有ホストやその他のシステムで使用することも可能です。
+
+そして、中程度のサイズの典型的なWebサイトをほんの一瞬でレンダリングします。
+経験則として、各コンテンツは約1ミリ秒でレンダリングされ、ブログやドキュメントなど、どのような種類のウェブサイトでもうまく動作するように設計されています。
+
+
+### サポートされるアーキテクチャ
+サポートされるアーキテクチャは2022年1月時点で、Windows、Linux、FreeBSD、NetBSD、DragonFly BSD、OpenBSD、macOS (Darwin)、 Android 用に x64、i386、ARM アーキテクチャ用の Hugo バイナリをビルド済みで提供しています。
+
+HUGOは、Goコンパイラツールが実行できる場所であれば、ソースからコンパイルすることもできます。例えば、Plan 9やSolarisを含む他のオペレーティングシステムにも対応しています。
+
 
 ## Hugoのインストール
-Hugoを使うためにはhugoをインストールする必要があります。
-インストールは簡単です。
+HUGOをサイトジェネレータとして使用する場合は、すごく簡単で、Hugoバイナリをインストールするだけで、バイナリには外部依存関係はありません。
 
+### バイナリ（クロスプラットフォーム） 
+GitHubにある [Releases](https://github.com/gohugoio/hugo/releases) からプラットフォームに適したバージョンをダウンロードします。
+ダウンロードしたバイナリはどこからでも実行可能です。
+グローバルな場所にインストールする必要はなく、権限の無いアカウントや共有ホストやその他のシステムでも動作します。
+
+理想的には、 ```/usr/local/bin``` など使いやすいようにどこかにインストールする必要があります。
+
+
+### Macでbrewを使う場合
+macOSを使用していて、[Homebrew](https://brew.sh/index_ja "Homebrew")を使用している場合は、次のワンライナーを使用してHugoをインストールできます。
 <small>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。</small>
-
-
-[Homebrew](https://brew.sh/index_ja "Homebrew") が必要になります。
-```
+```bash
 brew install hugo
 ```
 
+### MacPortsの場合
+macOSを使用していてMacPortsを使用している場合は、次のワンライナーを使用してHugoをインストールできます。
+```bash
+port install hugo
+```
+
+その他の端末でもコマンドを利用してダウンロード可能です。
+詳しくは [Install Hugo](https://gohugo.io/getting-started/installing/) を見てみてください。
+
 ## 設定
+HUGOは様々なコマンドラインの機能を備えていますが、コマンドラインに不慣れな場合でも簡単に使用できます。
+以下は、Hugoプロジェクトの開発中に使用する最も一般的なコマンドの説明です。
+
+### インストールの確認
+Hugoをインストールしたら、PATHがあることを確認してください。```help```コマンドを使用して、Hugoが正しくインストールされていることをテストできます。
+```bash
+hugo help
+```
+
+実行すると、コンソールに表示される出力は次のようになるかと思います。
+```bash
+hugo is the main command, used to build your Hugo site.
+
+Hugo is a Fast and Flexible Static Site Generator
+built with love by spf13 and friends in Go.
+
+Complete documentation is available at http://gohugo.io/.
+
+Usage:
+  hugo [flags]
+  hugo [command]
+
+Available Commands:
+  check       Contains some verification checks
+  completion  generate the autocompletion script for the specified shell
+  config      Print the site configuration
+  convert     Convert your content to different formats
+  deploy      Deploy your site to a Cloud provider.
+  env         Print Hugo version and environment info
+  gen         A collection of several useful generators.
+  help        Help about any command
+  import      Import your site from others.
+  list        Listing out various types of content
+  mod         Various Hugo Modules helpers.
+  new         Create new content for your site
+  server      A high performance webserver
+  version     Print the version number of Hugo
+
+Flags:
+  -b, --baseURL string             hostname (and path) to the root, e.g. http://spf13.com/
+  -D, --buildDrafts                include content marked as draft
+  -E, --buildExpired               include expired content
+  -F, --buildFuture                include content with publishdate in the future
+      --cacheDir string            filesystem path to cache directory. Defaults: $TMPDIR/hugo_cache/
+      --cleanDestinationDir        remove files from destination not found in static directories
+      --config string              config file (default is path/config.yaml|json|toml)
+      --configDir string           config dir (default "config")
+  -c, --contentDir string          filesystem path to content directory
+      --debug                      debug output
+  -d, --destination string         filesystem path to write files to
+      --disableKinds strings       disable different kind of pages (home, RSS etc.)
+      --enableGitInfo              add Git revision, date and author info to the pages
+  -e, --environment string         build environment
+      --forceSyncStatic            copy all files when static is changed.
+      --gc                         enable to run some cleanup tasks (remove unused cache files) after the build
+  -h, --help                       help for hugo
+      --i18n-warnings              print missing translations
+      --ignoreCache                ignores the cache directory
+      --ignoreVendor               ignores any _vendor directory
+      --ignoreVendorPaths string   ignores any _vendor for module paths matching the given Glob pattern
+  -l, --layoutDir string           filesystem path to layout directory
+      --log                        enable Logging
+      --logFile string             log File path (if set, logging enabled automatically)
+      --minify                     minify any supported output format (HTML, XML etc.)
+      --noChmod                    don't sync permission mode of files
+      --noTimes                    don't sync modification time of files
+      --path-warnings              print warnings on duplicate target paths etc.
+      --poll string                set this to a poll interval, e.g --poll 700ms, to use a poll based approach to watch for file system changes
+      --print-mem                  print memory usage to screen at intervals
+      --quiet                      build in quiet mode
+      --renderToMemory             render to memory (only useful for benchmark testing)
+  -s, --source string              filesystem path to read files relative from
+      --templateMetrics            display metrics about template executions
+      --templateMetricsHints       calculate some improvement hints when combined with --templateMetrics
+  -t, --theme strings              themes to use (located in /themes/THEMENAME/)
+      --themesDir string           filesystem path to themes directory
+      --trace file                 write trace to file (not useful in general)
+  -v, --verbose                    verbose output
+      --verboseLog                 verbose logging
+  -w, --watch                      watch filesystem for changes and recreate as needed
+
+Use "hugo [command] --help" for more information about a command.
+```
+
+### hugoコマンド
+最も一般的な使い方は、カレント・ディレクトリを入力ディレクトリとしてhugoを実行することだと思います。
+デフォルトで public/ ディレクトリにウェブサイトを生成しますが、サイトの設定（configファイル）で publishDir フィールドを変更することにより、出力ディレクトリをカスタマイズすることができます。
+
+hugo コマンドはサイトを public/ ディレクトリにレンダリングし、ウェブサーバにデプロイする準備ができます。
+
+```
+$ hugo
+0 draft content
+0 future content
+99 pages created
+0 paginator pages created
+16 tags created
+0 groups created
+in 90 ms
+```
+
+## 使ってみる
 hugoのインストールが終わったら、サイトを作成します。
 ```
 hugo new site ＜作成するディレクトリ＞
@@ -71,7 +203,25 @@ draft: true
 ```
 
 draft の部分が下書き状態を表しています。
-trueにすることで公開となり表示されます。
+falseにすることで公開となり表示されます。
+
+### HUGOでの下書き、未来、期限切れについて
+Hugoでは、コンテンツのフロントマターにドラフト、公開日、そして有効期限を設定することができます。デフォルトでは、Hugoは公開(draft: true) しません。
+
+また、以下の場合はコンテンツを公開しないので、注意してください
+- publishdate が将来の公開日を指定したコンテンツ
+- draft: trueのステータスを持つコンテンツ
+- 有効期限（expirydate）を過ぎたコンテンツ
+
+{{% tips-list tips %}}
+予約投稿
+: 公開日付（**publishdate**）が未来で、公開状態にある記事は予約投稿として扱われます。
+{{% /tips-list %}}
+
+{{% tips-list tips %}}
+有効期限付き
+: **expirydate** に日付を指定することで、記事の有効期限を設定することも可能です。
+{{% /tips-list %}}
 
 ## 確認
 サイトの確認を行うには
