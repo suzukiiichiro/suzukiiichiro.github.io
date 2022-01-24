@@ -360,7 +360,7 @@ CSSは次のようになります。&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>【まとめ版】ざっくりわかる「grep」</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/</link><pubDate>Mon, 24 Jan 2022 10:53:58 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg" alt="Featured image of post 【まとめ版】ざっくりわかる「grep」" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;/aside></description></item><item><title>ざっくりわかるシェルスクリプト「grep」</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/</link><pubDate>Mon, 24 Jan 2022 10:53:58 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg" alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" />&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコマンドを使いこなしています。Webサーバーのログから特定のユーザーのみを抽出するちいさなスクリプトから、膨大なシステムログからロケットの軌道修正を計算する処理プログラムなど、半世紀もの長い間、一糸乱れることなく動き続けています。&lt;/p>
 &lt;p>「grep」コマンドは、文字列、またはファイル内のをテキストを検索するための便利で不可欠なコマンドです。&lt;br>
 「grep」コマンドの正式な名称は「“global regular expression print.”」です。&lt;br>
