@@ -487,7 +487,7 @@ $
 <font color=orange><b>メールを送る：</b></font>
 ' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。
 
-# mailコマンドインストール
+mailコマンドインストール
 
 まずはここを参考に
 [Macでコマンドからメールを送る Gmail](https://qiita.com/TanukiTam/items/abff82573c0f544b3b27)
@@ -497,7 +497,7 @@ linuxの場合は
 $ yum install mailx
 ```
 
-# 実際にメールを送ってみます。
+実際にメールを送ってみます。
 
 ```
 $ echo "本文" | mail -s "タイトル" -r from@example.com -c cc1@example.com -c cc2@example.com to1@example.com to2@example.com
@@ -506,7 +506,8 @@ $ echo "本文" | mail -s "タイトル" -r from@example.com -c cc1@example.com 
 恐ろしいほどに簡単ですね。
 おかしな事をかんがえるのはやめましょう。
 
-# シェルスクリプトでサンプルを作る
+
+シェルスクリプトでサンプルを作る
 admin@sample.com の部分を自分のメールアドレスに置き換えて実行して下さい。
 
 ``` bash:mail_example.sh
