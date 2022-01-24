@@ -161,8 +161,8 @@ params:
     widgets:
         enabled:
             - 300x250
-            - search
             - newpost
+            - search
             - popular-articles
             - archives
             - tag-cloud
