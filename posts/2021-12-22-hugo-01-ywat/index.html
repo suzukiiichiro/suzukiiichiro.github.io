@@ -5,18 +5,18 @@
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
 <meta name=description content="CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word">
-<title>デザイナーでもできる初めてのHugo #01 - NLP</title>
+<title>デザイナーでもできる初めてのHUGO #01 - NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
-<meta property="og:title" content="デザイナーでもできる初めてのHugo #01 - NLP">
+<meta property="og:title" content="デザイナーでもできる初めてのHUGO #01 - NLP">
 <meta property="og:description" content="CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2022-01-24T02:14:43+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
-<meta name=twitter:title content="デザイナーでもできる初めてのHugo #01 - NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2022-01-24T02:38:45+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
+<meta name=twitter:title content="デザイナーでもできる初めてのHUGO #01 - NLP">
 <meta name=twitter:description content="CMSではWordpressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージがあります。 Word"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
@@ -103,12 +103,12 @@ Web開発
 2022.01.24
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 3分
+読了時間: 7分
 </time>
 </div>
 </header>
 <h2 class=article-title>
-デザイナーでもできる初めてのHugo #01
+デザイナーでもできる初めてのHUGO #01
 </h2>
 </div>
 <section class="widget archives tableOfContents">
@@ -116,14 +116,35 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#hugoのインストール>Hugoのインストール</a></li>
+<li><a href=#hugoとは>HUGOとは</a>
+<ol>
+<li><a href=#サポートされるアーキテクチャ>サポートされるアーキテクチャ</a></li>
+</ol>
+</li>
+<li><a href=#hugoのインストール>Hugoのインストール</a>
+<ol>
+<li><a href=#バイナリクロスプラットフォーム>バイナリ（クロスプラットフォーム）</a></li>
+<li><a href=#macでbrewを使う場合>Macでbrewを使う場合</a></li>
+<li><a href=#macportsの場合>MacPortsの場合</a></li>
+</ol>
+</li>
 <li><a href=#設定>設定</a>
+<ol>
+<li><a href=#インストールの確認>インストールの確認</a></li>
+<li><a href=#hugoコマンド>hugoコマンド</a></li>
+</ol>
+</li>
+<li><a href=#使ってみる>使ってみる</a>
 <ol>
 <li><a href=#設定ファイル>設定ファイル</a></li>
 </ol>
 </li>
 <li><a href=#記事の投稿>記事の投稿</a></li>
-<li><a href=#下書きから公開へ>下書きから公開へ</a></li>
+<li><a href=#下書きから公開へ>下書きから公開へ</a>
+<ol>
+<li><a href=#hugoでの下書き未来期限切れについて>HUGOでの下書き、未来、期限切れについて</a></li>
+</ol>
+</li>
 <li><a href=#確認>確認</a></li>
 <li><a href=#公開>公開</a></li>
 <li><a href=#終わりに>終わりに</a></li>
@@ -138,13 +159,122 @@ Web開発
 Wordpressのインストールのためにはサーバも必要ですし、ドメインだって必要です。<br>
 色々用意するのが手間だなと思う人にはHugo+GitHubでさっくりサイトを作るのがおすすめです。<br>
 無料で、httpsも設定できるので非常に便利です。</p>
+<h2 id=hugoとは>HUGOとは</h2>
+<p><a class=link href=https://gohugo.io/ target=_blank rel=noopener>HUGO</a>とはGo言語で記述され、速度や使いやすさ、設定のしやすさなどを重視して最適化された静的なHTMLやCSSのサイトジェネレータです。コンテンツとテンプレートを分けて構築し、それらを組み合わせてHTMLをレンダリングします。</p>
+<p>HUGOでブログを記述する際には「Markdown」と呼ばれる言語を使います。<br>
+そして、サイトを公開、再構築する際には「hugo」というコマンドを使用しますが、このコマンドはどのディレクトリからでも実行することができるので、特権アカウントを持っていない共有ホストやその他のシステムで使用することも可能です。</p>
+<p>そして、中程度のサイズの典型的なWebサイトをほんの一瞬でレンダリングします。<br>
+経験則として、各コンテンツは約1ミリ秒でレンダリングされ、ブログやドキュメントなど、どのような種類のウェブサイトでもうまく動作するように設計されています。</p>
+<h3 id=サポートされるアーキテクチャ>サポートされるアーキテクチャ</h3>
+<p>サポートされるアーキテクチャは2022年1月時点で、Windows、Linux、FreeBSD、NetBSD、DragonFly BSD、OpenBSD、macOS (Darwin)、 Android 用に x64、i386、ARM アーキテクチャ用の Hugo バイナリをビルド済みで提供しています。</p>
+<p>HUGOは、Goコンパイラツールが実行できる場所であれば、ソースからコンパイルすることもできます。例えば、Plan 9やSolarisを含む他のオペレーティングシステムにも対応しています。</p>
 <h2 id=hugoのインストール>Hugoのインストール</h2>
-<p>Hugoを使うためにはhugoをインストールする必要があります。<br>
-インストールは簡単です。</p>
-<p><small>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。</small></p>
-<p><a class=link href=https://brew.sh/index_ja title=Homebrew target=_blank rel=noopener>Homebrew</a> が必要になります。</p>
-<pre tabindex=0><code>brew install hugo
-</code></pre><h2 id=設定>設定</h2>
+<p>HUGOをサイトジェネレータとして使用する場合は、すごく簡単で、Hugoバイナリをインストールするだけで、バイナリには外部依存関係はありません。</p>
+<h3 id=バイナリクロスプラットフォーム>バイナリ（クロスプラットフォーム）</h3>
+<p>GitHubにある <a class=link href=https://github.com/gohugoio/hugo/releases target=_blank rel=noopener>Releases</a> からプラットフォームに適したバージョンをダウンロードします。<br>
+ダウンロードしたバイナリはどこからでも実行可能です。<br>
+グローバルな場所にインストールする必要はなく、権限の無いアカウントや共有ホストやその他のシステムでも動作します。</p>
+<p>理想的には、 <code>/usr/local/bin</code> など使いやすいようにどこかにインストールする必要があります。</p>
+<h3 id=macでbrewを使う場合>Macでbrewを使う場合</h3>
+<p>macOSを使用していて、<a class=link href=https://brew.sh/index_ja title=Homebrew target=_blank rel=noopener>Homebrew</a>を使用している場合は、次のワンライナーを使用してHugoをインストールできます。<br>
+<small>※端末はMacで進めていきます。開発なども便利なのでMacを持っていると何かと便利ですよ。</small></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install hugo
+</code></pre></div><h3 id=macportsの場合>MacPortsの場合</h3>
+<p>macOSを使用していてMacPortsを使用している場合は、次のワンライナーを使用してHugoをインストールできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>port install hugo
+</code></pre></div><p>その他の端末でもコマンドを利用してダウンロード可能です。<br>
+詳しくは <a class=link href=https://gohugo.io/getting-started/installing/ target=_blank rel=noopener>Install Hugo</a> を見てみてください。</p>
+<h2 id=設定>設定</h2>
+<p>HUGOは様々なコマンドラインの機能を備えていますが、コマンドラインに不慣れな場合でも簡単に使用できます。<br>
+以下は、Hugoプロジェクトの開発中に使用する最も一般的なコマンドの説明です。</p>
+<h3 id=インストールの確認>インストールの確認</h3>
+<p>Hugoをインストールしたら、PATHがあることを確認してください。<code>help</code>コマンドを使用して、Hugoが正しくインストールされていることをテストできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hugo <span class=nb>help</span>
+</code></pre></div><p>実行すると、コンソールに表示される出力は次のようになるかと思います。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hugo is the main command, used to build your Hugo site.
+
+Hugo is a Fast and Flexible Static Site Generator
+built with love by spf13 and friends in Go.
+
+Complete documentation is available at http://gohugo.io/.
+
+Usage:
+  hugo <span class=o>[</span>flags<span class=o>]</span>
+  hugo <span class=o>[</span>command<span class=o>]</span>
+
+Available Commands:
+  check       Contains some verification checks
+  completion  generate the autocompletion script <span class=k>for</span> the specified shell
+  config      Print the site configuration
+  convert     Convert your content to different formats
+  deploy      Deploy your site to a Cloud provider.
+  env         Print Hugo version and environment info
+  gen         A collection of several useful generators.
+  <span class=nb>help</span>        Help about any <span class=nb>command</span>
+  import      Import your site from others.
+  list        Listing out various types of content
+  mod         Various Hugo Modules helpers.
+  new         Create new content <span class=k>for</span> your site
+  server      A high performance webserver
+  version     Print the version number of Hugo
+
+Flags:
+  -b, --baseURL string             hostname <span class=o>(</span>and path<span class=o>)</span> to the root, e.g. http://spf13.com/
+  -D, --buildDrafts                include content marked as draft
+  -E, --buildExpired               include expired content
+  -F, --buildFuture                include content with publishdate in the future
+      --cacheDir string            filesystem path to cache directory. Defaults: <span class=nv>$TMPDIR</span>/hugo_cache/
+      --cleanDestinationDir        remove files from destination not found in static directories
+      --config string              config file <span class=o>(</span>default is path/config.yaml<span class=p>|</span>json<span class=p>|</span>toml<span class=o>)</span>
+      --configDir string           config dir <span class=o>(</span>default <span class=s2>&#34;config&#34;</span><span class=o>)</span>
+  -c, --contentDir string          filesystem path to content directory
+      --debug                      debug output
+  -d, --destination string         filesystem path to write files to
+      --disableKinds strings       disable different kind of pages <span class=o>(</span>home, RSS etc.<span class=o>)</span>
+      --enableGitInfo              add Git revision, date and author info to the pages
+  -e, --environment string         build environment
+      --forceSyncStatic            copy all files when static is changed.
+      --gc                         <span class=nb>enable</span> to run some cleanup tasks <span class=o>(</span>remove unused cache files<span class=o>)</span> after the build
+  -h, --help                       <span class=nb>help</span> <span class=k>for</span> hugo
+      --i18n-warnings              print missing translations
+      --ignoreCache                ignores the cache directory
+      --ignoreVendor               ignores any _vendor directory
+      --ignoreVendorPaths string   ignores any _vendor <span class=k>for</span> module paths matching the given Glob pattern
+  -l, --layoutDir string           filesystem path to layout directory
+      --log                        <span class=nb>enable</span> Logging
+      --logFile string             log File path <span class=o>(</span><span class=k>if</span> set, logging enabled automatically<span class=o>)</span>
+      --minify                     minify any supported output format <span class=o>(</span>HTML, XML etc.<span class=o>)</span>
+      --noChmod                    don<span class=s1>&#39;t sync permission mode of files
+</span><span class=s1>      --noTimes                    don&#39;</span>t sync modification <span class=nb>time</span> of files
+      --path-warnings              print warnings on duplicate target paths etc.
+      --poll string                <span class=nb>set</span> this to a poll interval, e.g --poll 700ms, to use a poll based approach to watch <span class=k>for</span> file system changes
+      --print-mem                  print memory usage to screen at intervals
+      --quiet                      build in quiet mode
+      --renderToMemory             render to memory <span class=o>(</span>only useful <span class=k>for</span> benchmark testing<span class=o>)</span>
+  -s, --source string              filesystem path to <span class=nb>read</span> files relative from
+      --templateMetrics            display metrics about template executions
+      --templateMetricsHints       calculate some improvement hints when combined with --templateMetrics
+  -t, --theme strings              themes to use <span class=o>(</span>located in /themes/THEMENAME/<span class=o>)</span>
+      --themesDir string           filesystem path to themes directory
+      --trace file                 write trace to file <span class=o>(</span>not useful in general<span class=o>)</span>
+  -v, --verbose                    verbose output
+      --verboseLog                 verbose logging
+  -w, --watch                      watch filesystem <span class=k>for</span> changes and recreate as needed
+
+Use <span class=s2>&#34;hugo [command] --help&#34;</span> <span class=k>for</span> more information about a command.
+</code></pre></div><h3 id=hugoコマンド>hugoコマンド</h3>
+<p>最も一般的な使い方は、カレント・ディレクトリを入力ディレクトリとしてhugoを実行することだと思います。<br>
+デフォルトで public/ ディレクトリにウェブサイトを生成しますが、サイトの設定（configファイル）で publishDir フィールドを変更することにより、出力ディレクトリをカスタマイズすることができます。</p>
+<p>hugo コマンドはサイトを public/ ディレクトリにレンダリングし、ウェブサーバにデプロイする準備ができます。</p>
+<pre tabindex=0><code>$ hugo
+0 draft content
+0 future content
+99 pages created
+0 paginator pages created
+16 tags created
+0 groups created
+in 90 ms
+</code></pre><h2 id=使ってみる>使ってみる</h2>
 <p>hugoのインストールが終わったら、サイトを作成します。</p>
 <pre tabindex=0><code>hugo new site ＜作成するディレクトリ＞
 </code></pre><p>色々表示されているかと思いますが、気にしないで大丈夫です。</p>
@@ -173,7 +303,27 @@ date: 2021-12-22T11:23:09Z
 draft: true
 ---
 </code></pre><p>draft の部分が下書き状態を表しています。<br>
-trueにすることで公開となり表示されます。</p>
+falseにすることで公開となり表示されます。</p>
+<h3 id=hugoでの下書き未来期限切れについて>HUGOでの下書き、未来、期限切れについて</h3>
+<p>Hugoでは、コンテンツのフロントマターにドラフト、公開日、そして有効期限を設定することができます。デフォルトでは、Hugoは公開(draft: true) しません。</p>
+<p>また、以下の場合はコンテンツを公開しないので、注意してください</p>
+<ul>
+<li>publishdate が将来の公開日を指定したコンテンツ</li>
+<li>draft: trueのステータスを持つコンテンツ</li>
+<li>有効期限（expirydate）を過ぎたコンテンツ</li>
+</ul>
+<div class="tips-area tips">
+<dl>
+<dt>予約投稿</dt>
+<dd>公開日付（<strong>publishdate</strong>）が未来で、公開状態にある記事は予約投稿として扱われます。</dd>
+</dl>
+</div>
+<div class="tips-area tips">
+<dl>
+<dt>有効期限付き</dt>
+<dd><strong>expirydate</strong> に日付を指定することで、記事の有効期限を設定することも可能です。</dd>
+</dl>
+</div>
 <h2 id=確認>確認</h2>
 <p>サイトの確認を行うには<br>
 hugoをインストールしたディレクトリで</p>
@@ -673,10 +823,10 @@ Webテクニック
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHugo #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHUGO #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
 </div>
 <div class=article-details>
-<h2 class=article-title>デザイナーでもできる初めてのHugo #01</h2>
+<h2 class=article-title>デザイナーでもできる初めてのHUGO #01</h2>
 </div>
 </a>
 </article>
