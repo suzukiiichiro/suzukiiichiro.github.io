@@ -1,12 +1,12 @@
 User-agent: Googlebot-Image
-Allow: /posts/*.jpg
-Allow: /posts/*.png
-Allow: /posts/*.gif
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.gif$
 
 User-agent: *
-Disallow: /posts/*.jpg
-Disallow: /posts/*.png
-Disallow: /posts/*.gif
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$
 Disallow: /assets/
 Disallow: /404.html
 Disallow: /js/
