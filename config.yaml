@@ -35,10 +35,12 @@ frontmatter:
 
 # Robots.txtを作成
 enableRobotsTXT: true
-
 sitemap:
   filename: sitemap.xml
   priority: 0.5
+Services:
+    RSS:
+        Limit: 10
 
 permalinks:
     # /: /:year/:month/:filename/
