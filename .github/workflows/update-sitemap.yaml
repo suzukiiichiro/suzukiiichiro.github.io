@@ -10,5 +10,7 @@ jobs:
     steps:
       - name: Ping to Google and Bing
         run: |
-          curl -X GET "http://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/sitemap.xml"
-          curl -X GET "http://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/sitemap.xml"
+          curl -X GET "https://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/sitemap.xml"
+          curl -X GET "https://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/sitemap.xml"
+          curl -X GET "https://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/index.xml"
+          curl -X GET "https://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/index.xml"
