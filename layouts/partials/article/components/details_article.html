@@ -12,6 +12,17 @@
     </div>
     {{ end }}
     <div class="article-info">
+      {{- $author := partial "data/author" . }}
+      <span class="article-time--item article-time--author">
+        <span class="icon" style="background-image: url(https://github.com/{{- $author.name -}}.png)"></span>
+        <span class="name">
+         {{- if .Params.authors -}}
+           {{- range (.GetTerms "authors") -}}<a href="{{ .Permalink }}">{{- $author.name -}}</a>{{- end -}}
+         {{- else }}
+          {{- $author.name -}}
+         {{- end -}}
+        </span>
+      </span>
       {{ if or (not .Date.IsZero) (.Site.Params.article.readingTime) }}
         {{ if not .Date.IsZero }}
         <time class="article-time--item article-time--published">
