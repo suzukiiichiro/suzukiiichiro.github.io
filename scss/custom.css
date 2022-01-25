@@ -266,7 +266,23 @@ footer.site-footer {
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23999999" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H10V19H5V8H19V9H21V5A2,2 0 0,0 19,3M21.7,13.35L20.7,14.35L18.65,12.35L19.65,11.35C19.85,11.14 20.19,11.13 20.42,11.35L21.7,12.63C21.89,12.83 21.89,13.15 21.7,13.35M12,18.94L18.07,12.88L20.12,14.88L14.06,21H12V18.94Z" /></svg>'); }
   .article-time--item.article-time--reading {
     padding: 0; }
-
+  .article-time--item.article-time--author {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0;
+    padding-left: 0; }
+    .article-time--item.article-time--author .icon {
+      width: 1.5em;
+      height: 1.5em;
+      background: no-repeat center center;
+      background-size: cover;
+      margin-right: 5px;
+      border-radius: 50%; }
+    @media screen and (max-width: 640px) {
+      .article-time--item.article-time--author {
+        position: absolute;
+        right: 10px;
+        top: 10px; } }
 .article-category a, .article-page .main-article .article-footer .article-tags a, .article-tags a {
   color: var(--card-text-color-secondary);
   background-color: transparent;
@@ -282,7 +298,20 @@ footer.site-footer {
 @media screen and (max-width: 640px) {
   .article-page .main-article .article-header {
     flex-direction: column;
-    align-items: flex-start; } }
+    align-items: flex-start;
+    position: relative;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+    .article-page .main-article .article-header .article-category, .article-page .main-article .article-header .article-tags {
+      margin-bottom: 5px;
+      background-color: #34495e;
+      padding: 2px 12px;
+      line-height: 1;
+      font-weight: bold;
+      border-radius: 8px; }
+      .article-page .main-article .article-header .article-category a, .article-page .main-article .article-header .article-tags a {
+        color: #FFF !important; } }
 
 .article-page .main-article .article-header .article-details {
   padding: 0; }
@@ -644,6 +673,15 @@ footer.site-footer {
   .article-list--compact article .article-image img {
     width: 100%;
     height: auto; }
+
+@media screen and (max-width: 640px) {
+  .article-info {
+    width: 100%;
+    padding-left: 0;
+    justify-content: space-between; }
+    .article-info .article-time--item {
+      margin-left: 0 !important;
+      font-weight: normal; } }
 
 .archives-date.section-title {
   margin: 20px 15px;
