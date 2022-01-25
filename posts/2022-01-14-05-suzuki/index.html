@@ -15,14 +15,14 @@
 <meta property="og:description" content="whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。この例では、whileループが5回繰り返されます。count変数の値は、各ステップで1ずつ増加します。count変数の値が5になると、whileループは終了します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-25T12:01:27+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-07T10:03:12+09:00"><meta property="article:modified_time" content="2022-01-25T12:39:30+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【５．while ループ】ざっくりわかる「シェルスクリプト」 - NLP">
 <meta name=twitter:description content="whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。この例では、whileループが5回繰り返されます。count変数の値は、各ステップで1ずつ増加します。count変数の値が5になると、whileループは終了します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-14-05-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【５．while ループ】ざっくりわかる「シェルスクリプト」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/shellscript.jpg"],"datePublished":"2022-01-07T10:03:12+09:00","dateModified":"2022-01-25T12:01:27.177470481Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【５．while ループ】ざっくりわかる「シェルスクリプト」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-14-05-suzuki/shellscript.jpg"],"datePublished":"2022-01-07T10:03:12+09:00","dateModified":"2022-01-25T12:39:30.178007586Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -264,10 +264,10 @@ $
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -276,17 +276,17 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
+</div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -295,17 +295,17 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
+</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
 </div>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-21-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_1600x0_resize_q75_box.jpg 1600w" width=800 height=1016 loading=lazy alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -314,9 +314,9 @@ $
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２１．ディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>Bashは「mkdir」コマンドを使用して新しいディレクトリを作成します。'make_directory.sh'という名前のファイルを作成し、次のコードを追加して、ユーザーから新しいディレクトリ名を取得します。ディレクトリ名が現在の場所に存在しない場合は、ディレクトリが作成されます。</p>
+</div><p class=article-subtitle>'-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
 </div>
 </a>
 </article>
