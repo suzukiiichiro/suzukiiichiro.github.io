@@ -4,7 +4,7 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="Hugoで記事を投稿する方法を説明しています">
+<meta name=description content="hugo で記事を作成して、投稿するためには専用のコマンドを使ってファイルを作成するか、posts などのディレクトリに markdown の.md ファイルを設置する必要があります。今回はhugoでの記事の投稿の仕方を説明していきます。">
 <title>Hugoで記事の投稿の仕方 - NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
@@ -12,17 +12,17 @@
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-21-01/>
 <meta property="og:title" content="Hugoで記事の投稿の仕方 - NLP">
-<meta property="og:description" content="Hugoで記事を投稿する方法を説明しています">
+<meta property="og:description" content="hugo で記事を作成して、投稿するためには専用のコマンドを使ってファイルを作成するか、posts などのディレクトリに markdown の.md ファイルを設置する必要があります。今回はhugoでの記事の投稿の仕方を説明していきます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-21-01/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="Web"><meta property="article:tag" content="Web開発"><meta property="article:published_time" content="2021-12-21T18:08:57+09:00"><meta property="article:modified_time" content="2022-01-25T07:00:56+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="Web"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:published_time" content="2021-12-21T18:08:57+09:00"><meta property="article:modified_time" content="2022-01-25T07:30:21+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg">
 <meta name=twitter:title content="Hugoで記事の投稿の仕方 - NLP">
-<meta name=twitter:description content="Hugoで記事を投稿する方法を説明しています"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="hugo で記事を作成して、投稿するためには専用のコマンドを使ってファイルを作成するか、posts などのディレクトリに markdown の.md ファイルを設置する必要があります。今回はhugoでの記事の投稿の仕方を説明していきます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-21-01/2021-12-21-1.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hugoで記事の投稿の仕方","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg"],"datePublished":"2021-12-21T18:08:57+09:00","dateModified":"2022-01-25T07:00:56.654431649Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hugoで記事の投稿の仕方","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-21-01/2021-12-21-1.jpg"],"datePublished":"2021-12-21T18:08:57+09:00","dateModified":"2022-01-25T07:30:21.047037212Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -99,16 +99,14 @@ Web開発
 </a>
 </div>
 <div class=article-info>
-<span class="article-time--item article-time--author">
-<span class=icon style=background-image:url(https://github.com/wYoshi.png)></span>
-<span class=name>wYoshi</span>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
 </span>
 <time class="article-time--item article-time--published">2021.12.21</time>
 <time class="article-time--item article-time--updatedate">
 2022.01.25
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 1分
+読了時間: 4分
 </time>
 </div>
 </header>
@@ -116,15 +114,120 @@ Web開発
 Hugoで記事の投稿の仕方
 </h2>
 </div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#記事を投稿する>記事を投稿する</a></li>
+<li><a href=#hugo-new-で記事を投稿>hugo new で記事を投稿</a></li>
+<li><a href=#hugo-newをカスタマイズする>hugo newをカスタマイズする</a></li>
+<li><a href=#公開用ビルドする>公開用ビルドする</a></li>
+<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+</ol>
+</nav>
+</div>
+</section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
+<h2 id=記事を投稿する>記事を投稿する</h2>
+<p>hugo で記事を作成して、投稿するためには専用のコマンドを使ってファイルを作成するか、posts などのディレクトリに markdown の.md ファイルを設置する必要があります。<br>
+今回はhugoでの記事の投稿の仕方を説明していきます。</p>
+<h2 id=hugo-new-で記事を投稿>hugo new で記事を投稿</h2>
+<p>HUGOで記事を投稿するには、専用のコマンド <code>hugo new</code> を使う必要があります。</p>
+<p>このコマンドを実行すると、提供されたパスに基づいて、作成するファイルの種類を推測し、新しいコンテンツファイルを作成して、日付とタイトルを自動的に設定します。</p>
+<p><code>-k KIND</code> で種類を指定することもできます。</p>
+<p>テーマまたはサイトでアーキタイプが提供されている場合は、それらが使用されます。<br>
+これは、サイトのルートディレクトリ内で実行してください。</p>
+<pre tabindex=0><code>hugo new [path] [flags]
+</code></pre><p>postsというディレクトリにファイルを作成する場合は以下のようになります。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ hugo new posts/<span class=o>[</span>ファイル名<span class=o>]</span>.md
-$ vim content/posts/2021-12-21.md
-</code></pre></div><p><code>draft: false</code> にする事でドラフトを公開にすることができる</p>
-<p>ビルドする</p>
+</code></pre></div><p>このファイルを開いてみてみると、</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown>---
+title: &#34;Test&#34;
+date: [作成日時]
+draft: true
+---
+
+</code></pre></div><p>このようなファイルが作成されているかと思います。ファイルの中身の構成は下記のようになります。</p>
+<ul>
+<li>title: 記事のタイトル</li>
+<li>date: 記事の作成日</li>
+<li>draft: 下書きかどうか</li>
+</ul>
+<p><code>draft: false</code> にする事でドラフトを公開にすることができる</p>
+<p>上記のような作成ファイルの他に、HUGOには様々な情報を <strong>Params</strong> として付与することが可能です<br>
+新規作成した際にできるファイルの初期値を変えたい場合はどうしたらいいでしょうか？</p>
+<h2 id=hugo-newをカスタマイズする>hugo newをカスタマイズする</h2>
+<p><code>hugo new</code> した際にできるファイルの初期値を変えるには、</p>
+<ul>
+<li>archetypes/posts.md</li>
+<li>archetypes/default.md</li>
+</ul>
+<p>などのファイルを修正してやることで可能です。</p>
+<p>実際にファイルを見てみると初期状態では下記のようになっていました。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown:archetypes/default.md data-lang=markdown:archetypes/default.md>---
+title: &#34;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#34;
+date: {{ .Date }}
+draft: true
+---
+
+
+</code></pre></div><p>ではここに、画像やカテゴリのフィールドを追加してみましょう。<br>
+先程のを開いて、編集します。<br>
+今回はキャッチ画像とカテゴリを追加するので、image と categories を追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown:archetypes/default.md data-lang=markdown:archetypes/default.md>---
+title: &#34;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#34;
+date: {{ .Date }}
+draft: true
+
+image: &#34;&#34;
+categories:
+  <span class=k>-</span> カテゴリ名
+---
+</code></pre></div><p>この状態でファイルを保存して、<code>hugo new</code> で新規作成して見ましょう。<br>
+すると、初期状態のファイルではなかった image と categories の項目が追加されているかと思います。<br>
+さらに、categories には「カテゴリ名」というカテゴリも反映されているかと思います。このように、初期値を調整することが可能なのです。</p>
+<p>これを応用すると、初期状態を<strong>下書き</strong>ではなく、<strong>公開</strong>状態でファイルを新規作成することも可能です。</p>
+<h2 id=公開用ビルドする>公開用ビルドする</h2>
+<p>さて、記事がかけたところで、サイトを公開しようといたしましょう。</p>
+<p>残念なことに、hugo で作成したファイルは markdown 形式であるために、そのままではwebページに公開できません。<br>
+作成したファイルを静的HTMLとして書き出し、ビルド（構築）する必要があるのです。<br>
+ビルドは一瞬で終わってしまうのが hugo のすごいところです。</p>
+<p>hugoで作成したファイルをビルドするためのコマンドが以下になります。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ hugo
-</code></pre></div>
+</code></pre></div><p>上記のコマンドを実行することで、<code>public</code>ディレクトリにHTMファイルが生成されます。<br>
+実行した際に、サイトの情報も表示されているので、合わせて確認するとなにか新しい発見があるかもしれません。</p>
+<pre tabindex=0><code>Start building sites …
+hugo v0.91.0+extended darwin/amd64 BuildDate=unknown
+                   | JA
+-------------------+------
+  Pages            | 185
+  Paginator pages  |  42
+  Non-page files   | 205
+  Static files     |   9
+  Processed images | 620
+  Aliases          |  56
+  Sitemaps         |   1
+  Cleaned          |   0
+
+Total in 981 ms
+</code></pre><p>さて、public ディレクトリのファイルをサーバにアップすることでサイトが公開できるということになります。</p>
+<h2 id=おすすめの書籍>おすすめの書籍</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) </h2>
+<p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
@@ -233,6 +336,7 @@ Web開発
 <a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
 <a href=https://suzukiiichiro.github.io/tags/web/>Web</a>
 <a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/>Web開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
 </section>
 </footer>
 <div class=article-pager>
@@ -491,6 +595,9 @@ Bash
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_24>
 プログラム
 </a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_12>
+wyoshi
+</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_12>
 デザイナー
 </a>
@@ -499,9 +606,6 @@ Bash
 </a>
 <a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_11>
 e-Stat
-</a>
-<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_11>
-wyoshi
 </a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_11>
 データマイニング
