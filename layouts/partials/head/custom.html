@@ -62,11 +62,9 @@
   },
   "author": {
     "@type": "Person",
-    "name": {{- (partial "data/author" .).name }}
-    {{- if (partial "data/author" .).url -}}
-    ,"url": {{- (partial "data/author" .).url }}
-    {{- end }}
-  },
+    "name": {{- (partial "data/author" .).name }},
+    "url": {{- (partial "data/author" .).url }}
+  }
 },{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",

@@ -1,16 +1,17 @@
 {{- $author := "nlp" -}}
-{{- $url := "" -}}
+{{- $url := slice -}}
 {{- if .GitInfo -}}
   {{- $author = .GitInfo.AuthorName -}}
   {{ $result := findRE "[亜-熙ぁ-んァ-ヶ]" $author }}
   {{ if $result }}
     {{- $author = "anikotaro" -}}
   {{- end -}}
+  {{- $url = $url | append (printf "https://github.com/%s" $author) -}}
 {{- end -}}
 
 {{- if .Params.authors -}}
   {{- range (.GetTerms "authors") -}}
-    {{- $url = .Permalink -}}
+    {{- $url = $url | append .Permalink -}}
   {{- end -}}
 {{- end -}}
 {{ return (dict "name" $author "url" $url) }}
