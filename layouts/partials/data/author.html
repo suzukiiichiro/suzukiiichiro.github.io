@@ -1,0 +1,16 @@
+{{- $author := "nlp" -}}
+{{- $url := "" -}}
+{{- if .GitInfo -}}
+  {{- $author = .GitInfo.AuthorName -}}
+  {{ $result := findRE "[亜-熙ぁ-んァ-ヶ]" $author }}
+  {{ if $result }}
+    {{- $author = "anikotaro" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .Params.authors -}}
+  {{- range (.GetTerms "authors") -}}
+    {{- $url = .Permalink -}}
+  {{- end -}}
+{{- end -}}
+{{ return (dict "name" $author "url" $url) }}

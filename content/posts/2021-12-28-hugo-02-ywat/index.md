@@ -2,6 +2,7 @@
 title: "GitHub Pagesを使って無料でSSL付きのサイトを公開"
 date: 2021-12-28T12:07:19+09:00
 draft: false
+authors: wyoshi
 image: settings.jpg
 categories:
   - Web開発

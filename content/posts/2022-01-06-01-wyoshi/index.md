@@ -3,6 +3,7 @@ title: "簡単にできるHugoで人気の記事を表示する方法 #1"
 date: 2022-01-06T16:50:50+09:00
 draft: false
 image: analytics.jpg
+authors: wyoshi
 categories:
   - Web開発
 tags:

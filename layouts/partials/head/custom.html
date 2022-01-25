@@ -27,9 +27,11 @@
 {{- $cat := "" -}}
 {{- if .Params.categories -}}
   {{- range (.GetTerms "categories") -}}
-  {{- $cat = . -}}
+    {{- $cat = . -}}
   {{- end -}}
 {{- end -}}
+
+
 <script type="application/ld+json">
 {{- if eq "posts" .Type }}
 [{
@@ -57,7 +59,14 @@
       "@type": "ImageObject",
       "url": {{- printf "%s%s" .Site.BaseURL .Site.Params.sidebar.avatar.src -}}
     }
-  }
+  },
+  "author": {
+    "@type": "Person",
+    "name": {{- (partial "data/author" .).name }}
+    {{- if (partial "data/author" .).url -}}
+    ,"url": {{- (partial "data/author" .).url }}
+    {{- end }}
+  },
 },{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",

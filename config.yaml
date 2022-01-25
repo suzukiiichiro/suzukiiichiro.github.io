@@ -47,6 +47,11 @@ permalinks:
     post: /p/:slug/
     page: /:slug/
 
+taxonomies:
+    tag: tags
+    category: categories
+    author: authors
+
 params:
     paginate:
         slots: 5

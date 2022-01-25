@@ -2,6 +2,7 @@
 title: "ファビコンは1サイズのみでいい。さらにダークモード対応させる"
 date: 2022-01-18T17:17:37+09:00
 draft: false
+authors: wyoshi
 image: "catch.jpg"
 
 categories:

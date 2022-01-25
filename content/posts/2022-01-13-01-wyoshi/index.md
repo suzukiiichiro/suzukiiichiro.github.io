@@ -3,6 +3,7 @@ title: "現役Webデザイナーが教えるHTML初心者講座 - 初めてのHT
 date: 2022-01-13T14:14:30+09:00
 draft: false
 
+authors: wyoshi
 image: image.jpg
 categories:
   - Web開発

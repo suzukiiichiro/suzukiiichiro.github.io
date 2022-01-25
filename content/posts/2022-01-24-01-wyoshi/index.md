@@ -3,6 +3,7 @@ title: "SVGとCSSを使用したUIコンポーネントの構築"
 date: 2022-01-24T16:18:06+09:00
 draft: false
 image: "catch.jpg"
+authors: wyoshi
 
 dedscription: "SVGを使用すると時間と労力を節約できます。SVGの優れている点は、応答性、パフォーマンス、およびHTML＆CSSを使用してすぐに使用できることです。この記事では、SVGをHTMLおよびCSSとともに使用して特定のUIコンポーネントを構築できるさまざまなユースケースを紹介することを目標としています。"
 

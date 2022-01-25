@@ -4,6 +4,7 @@ date: 2022-01-19T08:08:44+09:00
 draft: false
 
 image: "catch.jpg"
+authors: wyoshi
 
 description: "今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。"
 categories:

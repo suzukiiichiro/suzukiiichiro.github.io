@@ -4,6 +4,7 @@ date: 2022-01-07T11:54:15+09:00
 draft: false
 
 image: analytics.jpg
+authors: wyoshi
 categories:
   - Web開発
 tags:
