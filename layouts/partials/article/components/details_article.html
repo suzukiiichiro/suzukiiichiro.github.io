@@ -14,7 +14,13 @@
     <div class="article-info">
       {{- $author := partial "data/author" . }}
       <span class="article-time--item article-time--author">
+       {{- if .Params.authors -}}
+        {{- if ne "" .Params.authors -}}
+        {{- if ne "nlp" $author.name -}}
         <span class="icon" style="background-image: url(https://github.com/{{- $author.name -}}.png)"></span>
+        {{- end -}}
+        {{- end -}}
+       {{- end -}}
         <span class="name">
          {{- if .Params.authors -}}
            {{- range (.GetTerms "authors") -}}<a href="{{ .Permalink }}">{{- $author.name -}}</a>{{- end -}}
