@@ -1,0 +1,1009 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で">
+<title>HUGOでxmlやファイルを複数出力する方法 - NLP</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<meta property="og:title" content="HUGOでxmlやファイルを複数出力する方法 - NLP">
+<meta property="og:description" content="HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="CSS"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="Hugo"><meta property="article:published_time" content="2022-01-26T14:37:51+09:00"><meta property="article:modified_time" content="2022-01-26T07:12:29+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg">
+<meta name=twitter:title content="HUGOでxmlやファイルを複数出力する方法 - NLP">
+<meta name=twitter:description content="HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-26-01-wyoshi/catch.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"HUGOでxmlやファイルを複数出力する方法","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg"],"datePublished":"2022-01-26T14:37:51+09:00","dateModified":"2022-01-26T07:12:29.67898712Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_55>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_15>
+Web開発
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section">
+<li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.01.26</time>
+<time class="article-time--item article-time--reading">
+読了時間: 6分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+HUGOでxmlやファイルを複数出力する方法
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#config-に設定を追加する>config に設定を追加する</a></li>
+<li><a href=#出力ファイルの形式>出力ファイルの形式</a></li>
+<li><a href=#出力ファイルの種類>出力ファイルの種類</a>
+<ol>
+<li>
+<ol>
+<li><a href=#出力の形式>出力の形式</a></li>
+<li><a href=#出力形式を設定する>出力形式を設定する</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#出力するページを選択>出力するページを選択</a></li>
+<li><a href=#テンプレートファイルを追加する>テンプレートファイルを追加する</a></li>
+<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>HUGOは非常に強力な静的HTMLジェネレーターです。<br>
+複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装できましたので、そのやり方を共有します。</p>
+<p>今回は sitemap.xml を複数設置する必要があったため、その方法になります。<br>
+この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力できるようになると思います。</p>
+<h2 id=config-に設定を追加する>config に設定を追加する</h2>
+<p>まずは <code>config.yaml</code> に出力用の設定をします。<br>
+設定の内容は下記のようになります。</p>
+<p>私は yaml 形式の設定ファイルを使っているのですが、toml や json 形式の設定ファイルを使っている方は、<a class=link href=https://gohugo.io/templates/output-formats/ target=_blank rel=noopener> HUGO のページ</a>を見ながらそれぞれにあった記述にしてください。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>mediaTypes</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>application/xml</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>suffixes</span><span class=p>:</span><span class=w> </span><span class=l>xml</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>outputFormats</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>Sitemap</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>MediaType</span><span class=p>:</span><span class=w> </span><span class=l>application/xml</span><span class=w>
+</span><span class=w>        </span><span class=nt>baseName</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;google_sitemap&#34;</span><span class=w>
+</span><span class=w>        </span><span class=nt>noUgly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>outputs</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>home</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>HTML, Sitemap, RSS]</span><span class=w>
+</span><span class=w>
+</span></code></pre></div><p>上から順に説明します。</p>
+<h2 id=出力ファイルの形式>出力ファイルの形式</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>mediaTypes</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>application/xml</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>suffixes</span><span class=p>:</span><span class=w> </span><span class=l>xml</span><span class=w>
+</span></code></pre></div><p>ここでは出力したい形式を選択してます。今回は、xmlのタイプを選んでます。<br>
+ちなみに、この部分は記述しないでも問題がない部分です。<br>
+私の環境では出力した場合に、エラーにならずに正常にファイルが出力されました。</p>
+<p><code>suffixes</code>の部分では複数の形式を記述することが可能です。<br>
+例えば、rss+xmlの場合は</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>mediaTypes</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>application/rss+xml</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>suffixes</span><span class=p>:</span><span class=w> 
+</span><span class=w>          </span>- <span class=l>xml</span><span class=w>
+</span><span class=w>          </span>- <span class=l>rss</span><span class=w>
+</span></code></pre></div><p>となります。</p>
+<h2 id=出力ファイルの種類>出力ファイルの種類</h2>
+<p>次に、outputFormats部分ですが、この部分が出力の際に重要になってきます。<br>
+今回はサイトマップ形式で出力するので、下記のようにしました。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>outputFormats</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>Sitemap</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>MediaType</span><span class=p>:</span><span class=w> </span><span class=l>application/xml</span><span class=w>
+</span><span class=w>        </span><span class=nt>baseName</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;google_sitemap&#34;</span><span class=w>
+</span><span class=w>        </span><span class=nt>noUgly</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></div><p>上の yaml を説明すると、<br>
+Sitemap 形式で MediaTypeはサイトマップを表す<code>application/xml</code>を使用して、<code>google_sitemap</code>というファイル名のXMLを出力します。</p>
+<h4 id=出力の形式>出力の形式</h4>
+<p>出力形式のオプションは以下のようになります。</p>
+<div class="tips-area info">
+<dl>
+<dt>1つのページに多くの出力形式で出力可能</dt>
+<dd>1つのページを好きなだけ多くの出力形式で出力することができ、ファイルシステム上の一意なパスに解決する限り、無限に出力形式を定義することができるのです。<br>表では、AMPとHTMLの比較が最も良い例です。AMPはHTML版を上書きしないようにPathにampという値を持っています。<br>例えば、/index.htmlと/amp/index.htmlの両方を持つことができるようになりました。</dd>
+</dl>
+</div>
+<div class="tips-area info">
+<dl>
+<dt>MediaTypeはは既存のもののみ</dt>
+<dd>MediaTypeは、既に定義されているメディアタイプのTypeと一致する必要があります。</dd>
+</dl>
+</div>
+<div class="tips-area info">
+<dl>
+<dt>再定義可能</dt>
+<dd>新しい出力形式を定義したり、組み込みの出力形式を再定義することができます。<br>例えば、AMPページを別のパスに配置したい場合などです。</dd>
+</dl>
+</div>
+<p>出力フォーマットを追加または変更するには、サイトの設定ファイルのoutputFormatsセクションで、すべてのサイトまたは特定の言語について定義します。</p>
+<div style=line-height:1.1;word-break:break-word;font-size:.8em>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>mediaType</th>
+<th>path</th>
+<th>baseName</th>
+<th>rel</th>
+<th>protocol</th>
+<th>isPlainText</th>
+<th>isHTML</th>
+<th>noUgly</th>
+<th>permalinkable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTML</td>
+<td>text/html</td>
+<td></td>
+<td>index</td>
+<td>canonical</td>
+<td></td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>AMP</td>
+<td>text/html</td>
+<td>amp</td>
+<td>index</td>
+<td>amphtml</td>
+<td></td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>text/css</td>
+<td></td>
+<td>styles</td>
+<td>stylesheet</td>
+<td></td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>CSV</td>
+<td>text/csv</td>
+<td></td>
+<td>index</td>
+<td>alternate</td>
+<td></td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Calendar</td>
+<td>text/calendar</td>
+<td></td>
+<td>index</td>
+<td>alternate</td>
+<td>webcal://</td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td>application/json</td>
+<td></td>
+<td>index</td>
+<td>alternate</td>
+<td></td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>ROBOTS</td>
+<td>text/plain</td>
+<td></td>
+<td>robots</td>
+<td>alternate</td>
+<td></td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>application/rss+xml</td>
+<td></td>
+<td>index</td>
+<td>alternate</td>
+<td></td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Sitemap</td>
+<td>application/xml</td>
+<td></td>
+<td>sitemap</td>
+<td>sitemap</td>
+<td></td>
+<td>false</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>WebAppManifest</td>
+<td>application/manifest+json</td>
+<td></td>
+<td>manifest</td>
+<td>manifest</td>
+<td></td>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id=出力形式を設定する>出力形式を設定する</h4>
+<p>以下は、出力形式に関する設定オプションの全リストとそのデフォルト値になります。</p>
+<dl>
+<dt>name</dt>
+<dd>出力形式の識別子です。これは、ページに必要な出力形式を定義するために使用されます。</dd>
+<dt>mediaType</dt>
+<dd>定義されたメディアタイプのTypeと一致しなければなりません。</dd>
+<dt>path</dt>
+<dd>出力ファイルを保存するサブパス。</dd>
+<dt>baseName</dt>
+<dd>ファイル名です。デフォルトはindex。</dd>
+<dt>rel</dt>
+<dd>リンクタグのrel値を作成するために使用します。デフォルトはalternate。</dd>
+<dt>protocol</dt>
+<dd>この出力形式に対して、baseURL の &ldquo;http://&rdquo; または &ldquo;https://&rdquo; を置き換えます。</dd>
+<dt>isPlainText</dt>
+<dd>テンプレートにGoのプレーンテキストテンプレートパーサーを使用します。デフォルト: false。</dd>
+<dt>isHTML</dt>
+<dd>HTMLタイプのフォーマットにのみ関連する状況で使用されます; 例えば、ページのエイリアスなどです。</dd>
+<dt>noUgly</dt>
+<dd>uglyURLs がサイト内で true に設定されている場合、醜い URL をオフにするために使用されます。デフォルト：false</dd>
+<dt>notAlternative</dt>
+<dd>このフォーマットをPageのAlternativeOutputFormatsフォーマットのリストに含めることが意味をなさない場合（例えば、CSSなど）有効にします。<br>注意点として、必ずしも他のフォーマットを置き換えるわけではないので、ここではalternateではなくalternativeという用語を使っています。デフォルト：false</dd>
+<dt>permalinkable</dt>
+<dd>.Permalink と .RelPermalink が main ではなくレンダリング出力形式を返すようにしました。これは、HTMLとAMPでデフォルトで有効になっています。デフォルト：false</dd>
+<dt>weight</dt>
+<dd>0 以外の値を設定すると、最初のソート条件として使用されます。</dd>
+</dl>
+<h2 id=出力するページを選択>出力するページを選択</h2>
+<p>最後に出力するページに関してです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>outputs</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>home</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>HTML, Sitemap, RSS]</span><span class=w>
+</span></code></pre></div><p>この部分はどのページで出力するかを選択できます。<br>
+今回はサイトマップを作成したいので、ドキュメントルートに当たる home (/index.html) 部分でのみの出力としてます。<br>
+HTML形式と、Sitemap、RSSを出力するようにしてます。HTMLでは index.html を出力し、RSSでは index.xml のRSS形式のフィードを出力してます。そして、今回追加したSitemapでサイトマップ形式のファイルを出力するようにしました。</p>
+<p>各ページの初期状態での出力は下記を参考にしてください。</p>
+<table>
+<thead>
+<tr>
+<th>page</th>
+<th>HTML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>home</td>
+<td>HTML, RSS</td>
+</tr>
+<tr>
+<td>section</td>
+<td>HTML, RSS</td>
+</tr>
+<tr>
+<td>taxonomy</td>
+<td>HTML, RSS</td>
+</tr>
+<tr>
+<td>term</td>
+<td>HTML, RSS</td>
+</tr>
+</tbody>
+</table>
+<h2 id=テンプレートファイルを追加する>テンプレートファイルを追加する</h2>
+<p>設定が終わったので、次はテンプレートファイルを設置します。<br>
+サイトマップ用のテンプレートを作成して、<code>layouts/_default</code>ディレクトリに配置します。<br>
+ここが一番のポイントで、配置する際のファイル名は <strong>[page].[outputFormatsの名前].[suffixe]</strong> となります。<br>
+つまり、今回でいうと <strong>home.sitemap.xml</strong> となります。</p>
+<p>ただし、pageの場合は下記のようにmarkdownに埋め込んで出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown:page/search.md data-lang=markdown:page/search.md>---
+title: &#34;Search&#34;
+layout: &#34;search&#34;
+outputs:
+    <span class=k>-</span> html
+    <span class=k>-</span> json
+---
+</code></pre></div><p>これによって、<code>layouts/page/search.html</code> と <code>layouts/page/search.json</code> ファイルを使用して出力ファイルを作成します。</p>
+<h2 id=おすすめの書籍>おすすめの書籍</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) </h2>
+<p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_1600x0_resize_q75_box.jpg 1600w" width=800 height=600 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_800x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_800x0_resize_box_3.png 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_1600x0_resize_box_3.png 1600w" width=800 height=800 loading=lazy alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回は「Webデザイナー、コーダーってなに？」です。「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。 初心者の方、そうでない方など、いろいろな方大歓迎です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_1600x0_resize_q75_box.jpg 1600w" width=800 height=541 loading=lazy alt="Featured image of post 2022年のウェブデザインのトレンドとレイアウト">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のウェブデザインのトレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年のトレンドは、より大胆で、よりクリエイティブで、よりインタラクティブなデザインに移行しています。2022年に期待されるトレンドを取り入れ、新しい年のクリエイティビティを高めてください。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_1600x0_resize_q75_box.jpg 1600w" width=800 height=533 loading=lazy alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.18>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_1600x0_resize_q75_box.jpg 1600w" width=800 height=428 loading=lazy alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.18</time>
+</div><p class=article-subtitle>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりまし...</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/>Web開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/html/>HTML</a>
+<a href=https://suzukiiichiro.github.io/tags/css/>css</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>Webデザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/>フロントエンジニア</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/>コーダー</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.4cf86ce06911487bfe84aa834af96a7c_huca2437bae218f92182b398b39750fa47_117863_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" data-hash="md5-TPhs4GkRSHv+hKqDSvlqfA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.4cf86ce06911487bfe84aa834af96a7c_huca2437bae218f92182b398b39750fa47_117863_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" data-hash="md5-TPhs4GkRSHv+hKqDSvlqfA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Stat hampelで時系列データの異常値検知" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Stat hampelで時系列データの異常値検知</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" data-hash="md5-TYyEsFfpI0MZsMVhktAXyA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" data-hash="md5-TYyEsFfpI0MZsMVhktAXyA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【wLu】Bashで便利なコマンドを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-１」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-09-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【９．and 条件を if 文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【９．and 条件を if 文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-14-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１４．名前を使用してコマンドラインから引数を取得する】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statのデータの見方" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statのデータの見方</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年01月>
+2022年01月（55）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_40>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_40>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_26>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_13>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_13>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_13>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_12>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_12>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_10>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_10>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_9>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_9>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_9>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_9>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_4>
+github pages
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-１」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_22400ad90bae8b26699fc738ee34bc5b.jpg width=400 height=238 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-２」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHUGO #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHUGO #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-4P6WX6R5CT"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>

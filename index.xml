@@ -1,4 +1,302 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 24 Jan 2022 16:18:06 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SVGとCSSを使用したUIコンポーネントの構築</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</link><pubDate>Mon, 24 Jan 2022 16:18:06 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg" alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/building-components-svg-css/" target="_blank" rel="noopener"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 26 Jan 2022 14:37:51 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>HUGOでxmlやファイルを複数出力する方法</title><link>https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/</link><pubDate>Wed, 26 Jan 2022 14:37:51 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg" alt="Featured image of post HUGOでxmlやファイルを複数出力する方法" />&lt;p>HUGOは非常に強力な静的HTMLジェネレーターです。&lt;br>
+複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装できましたので、そのやり方を共有します。&lt;/p>
+&lt;p>今回は sitemap.xml を複数設置する必要があったため、その方法になります。&lt;br>
+この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力できるようになると思います。&lt;/p>
+&lt;h2 id="config-に設定を追加する">config に設定を追加する&lt;/h2>
+&lt;p>まずは &lt;code>config.yaml&lt;/code> に出力用の設定をします。&lt;br>
+設定の内容は下記のようになります。&lt;/p>
+&lt;p>私は yaml 形式の設定ファイルを使っているのですが、toml や json 形式の設定ファイルを使っている方は、&lt;a class="link" href="https://gohugo.io/templates/output-formats/" target="_blank" rel="noopener"
+> HUGO のページ&lt;/a>を見ながらそれぞれにあった記述にしてください。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">outputFormats&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">Sitemap&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">MediaType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">application/xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">baseName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;google_sitemap&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">noUgly&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">outputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">home&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">HTML, Sitemap, RSS]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上から順に説明します。&lt;/p>
+&lt;h2 id="出力ファイルの形式">出力ファイルの形式&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここでは出力したい形式を選択してます。今回は、xmlのタイプを選んでます。&lt;br>
+ちなみに、この部分は記述しないでも問題がない部分です。&lt;br>
+私の環境では出力した場合に、エラーにならずに正常にファイルが出力されました。&lt;/p>
+&lt;p>&lt;code>suffixes&lt;/code>の部分では複数の形式を記述することが可能です。&lt;br>
+例えば、rss+xmlの場合は&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/rss+xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">rss&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>となります。&lt;/p>
+&lt;h2 id="出力ファイルの種類">出力ファイルの種類&lt;/h2>
+&lt;p>次に、outputFormats部分ですが、この部分が出力の際に重要になってきます。&lt;br>
+今回はサイトマップ形式で出力するので、下記のようにしました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">outputFormats&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">Sitemap&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">MediaType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">application/xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">baseName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;google_sitemap&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">noUgly&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上の yaml を説明すると、&lt;br>
+Sitemap 形式で MediaTypeはサイトマップを表す&lt;code>application/xml&lt;/code>を使用して、&lt;code>google_sitemap&lt;/code>というファイル名のXMLを出力します。&lt;/p>
+&lt;h4 id="出力の形式">出力の形式&lt;/h4>
+&lt;p>出力形式のオプションは以下のようになります。&lt;/p>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>1つのページに多くの出力形式で出力可能&lt;/dt>
+&lt;dd>1つのページを好きなだけ多くの出力形式で出力することができ、ファイルシステム上の一意なパスに解決する限り、無限に出力形式を定義することができるのです。&lt;br>表では、AMPとHTMLの比較が最も良い例です。AMPはHTML版を上書きしないようにPathにampという値を持っています。&lt;br>例えば、/index.htmlと/amp/index.htmlの両方を持つことができるようになりました。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>MediaTypeはは既存のもののみ&lt;/dt>
+&lt;dd>MediaTypeは、既に定義されているメディアタイプのTypeと一致する必要があります。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>再定義可能&lt;/dt>
+&lt;dd>新しい出力形式を定義したり、組み込みの出力形式を再定義することができます。&lt;br>例えば、AMPページを別のパスに配置したい場合などです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>出力フォーマットを追加または変更するには、サイトの設定ファイルのoutputFormatsセクションで、すべてのサイトまたは特定の言語について定義します。&lt;/p>
+&lt;div style="line-height: 1.1; word-break: break-word; font-size: 0.8em;">
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>name&lt;/th>
+&lt;th>mediaType&lt;/th>
+&lt;th>path&lt;/th>
+&lt;th>baseName&lt;/th>
+&lt;th>rel&lt;/th>
+&lt;th>protocol&lt;/th>
+&lt;th>isPlainText&lt;/th>
+&lt;th>isHTML&lt;/th>
+&lt;th>noUgly&lt;/th>
+&lt;th>permalinkable&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>HTML&lt;/td>
+&lt;td>text/html&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>canonical&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AMP&lt;/td>
+&lt;td>text/html&lt;/td>
+&lt;td>amp&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>amphtml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CSS&lt;/td>
+&lt;td>text/css&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>styles&lt;/td>
+&lt;td>stylesheet&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CSV&lt;/td>
+&lt;td>text/csv&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Calendar&lt;/td>
+&lt;td>text/calendar&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>webcal://&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>JSON&lt;/td>
+&lt;td>application/json&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ROBOTS&lt;/td>
+&lt;td>text/plain&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>robots&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RSS&lt;/td>
+&lt;td>application/rss+xml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Sitemap&lt;/td>
+&lt;td>application/xml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>sitemap&lt;/td>
+&lt;td>sitemap&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WebAppManifest&lt;/td>
+&lt;td>application/manifest+json&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>manifest&lt;/td>
+&lt;td>manifest&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/div>
+&lt;h4 id="出力形式を設定する">出力形式を設定する&lt;/h4>
+&lt;p>以下は、出力形式に関する設定オプションの全リストとそのデフォルト値になります。&lt;/p>
+&lt;dl>
+&lt;dt>name&lt;/dt>
+&lt;dd>出力形式の識別子です。これは、ページに必要な出力形式を定義するために使用されます。&lt;/dd>
+&lt;dt>mediaType&lt;/dt>
+&lt;dd>定義されたメディアタイプのTypeと一致しなければなりません。&lt;/dd>
+&lt;dt>path&lt;/dt>
+&lt;dd>出力ファイルを保存するサブパス。&lt;/dd>
+&lt;dt>baseName&lt;/dt>
+&lt;dd>ファイル名です。デフォルトはindex。&lt;/dd>
+&lt;dt>rel&lt;/dt>
+&lt;dd>リンクタグのrel値を作成するために使用します。デフォルトはalternate。&lt;/dd>
+&lt;dt>protocol&lt;/dt>
+&lt;dd>この出力形式に対して、baseURL の &amp;ldquo;http://&amp;rdquo; または &amp;ldquo;https://&amp;rdquo; を置き換えます。&lt;/dd>
+&lt;dt>isPlainText&lt;/dt>
+&lt;dd>テンプレートにGoのプレーンテキストテンプレートパーサーを使用します。デフォルト: false。&lt;/dd>
+&lt;dt>isHTML&lt;/dt>
+&lt;dd>HTMLタイプのフォーマットにのみ関連する状況で使用されます; 例えば、ページのエイリアスなどです。&lt;/dd>
+&lt;dt>noUgly&lt;/dt>
+&lt;dd>uglyURLs がサイト内で true に設定されている場合、醜い URL をオフにするために使用されます。デフォルト：false&lt;/dd>
+&lt;dt>notAlternative&lt;/dt>
+&lt;dd>このフォーマットをPageのAlternativeOutputFormatsフォーマットのリストに含めることが意味をなさない場合（例えば、CSSなど）有効にします。&lt;br>注意点として、必ずしも他のフォーマットを置き換えるわけではないので、ここではalternateではなくalternativeという用語を使っています。デフォルト：false&lt;/dd>
+&lt;dt>permalinkable&lt;/dt>
+&lt;dd>.Permalink と .RelPermalink が main ではなくレンダリング出力形式を返すようにしました。これは、HTMLとAMPでデフォルトで有効になっています。デフォルト：false&lt;/dd>
+&lt;dt>weight&lt;/dt>
+&lt;dd>0 以外の値を設定すると、最初のソート条件として使用されます。&lt;/dd>
+&lt;/dl>
+&lt;h2 id="出力するページを選択">出力するページを選択&lt;/h2>
+&lt;p>最後に出力するページに関してです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">outputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">home&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">HTML, Sitemap, RSS]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>この部分はどのページで出力するかを選択できます。&lt;br>
+今回はサイトマップを作成したいので、ドキュメントルートに当たる home (/index.html) 部分でのみの出力としてます。&lt;br>
+HTML形式と、Sitemap、RSSを出力するようにしてます。HTMLでは index.html を出力し、RSSでは index.xml のRSS形式のフィードを出力してます。そして、今回追加したSitemapでサイトマップ形式のファイルを出力するようにしました。&lt;/p>
+&lt;p>各ページの初期状態での出力は下記を参考にしてください。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>page&lt;/th>
+&lt;th>HTML&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>home&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>section&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>taxonomy&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>term&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="テンプレートファイルを追加する">テンプレートファイルを追加する&lt;/h2>
+&lt;p>設定が終わったので、次はテンプレートファイルを設置します。&lt;br>
+サイトマップ用のテンプレートを作成して、&lt;code>layouts/_default&lt;/code>ディレクトリに配置します。&lt;br>
+ここが一番のポイントで、配置する際のファイル名は &lt;strong>[page].[outputFormatsの名前].[suffixe]&lt;/strong> となります。&lt;br>
+つまり、今回でいうと &lt;strong>home.sitemap.xml&lt;/strong> となります。&lt;/p>
+&lt;p>ただし、pageの場合は下記のようにmarkdownに埋め込んで出力します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown:page/search.md" data-lang="markdown:page/search.md">---
+title: &amp;#34;Search&amp;#34;
+layout: &amp;#34;search&amp;#34;
+outputs:
+&lt;span class="k">-&lt;/span> html
+&lt;span class="k">-&lt;/span> json
+---
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これによって、&lt;code>layouts/page/search.html&lt;/code> と &lt;code>layouts/page/search.json&lt;/code> ファイルを使用して出力ファイルを作成します。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) &lt;/h2>
+&lt;p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>SVGとCSSを使用したUIコンポーネントの構築</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</link><pubDate>Mon, 24 Jan 2022 16:18:06 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg" alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/building-components-svg-css/" target="_blank" rel="noopener"
 > Building UI Components With SVG and CSS - Ahmad Shadeed &lt;/a>&lt;/p>
 &lt;p>SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。&lt;br>
 CSSと比較してSVGを使用することが非常に理にかなっているユースケースはたくさんあります。たとえば、円形の読み込みアニメーションを作成したり、画像にマスクを適用したりします。このような場合、CSSを使用できないという意味ではありませんが、使用する手法（マスクなど）に基づいてクロスブラウザの問題と戦うのは難しい場合があるため、SVGを使用すると時間と労力を節約できます。&lt;/p>
@@ -2118,105 +2416,4 @@ Javascript記述するよりも、cssのほうが軽量です。&lt;br>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>e-Stat でGoogle Custom Search APIを使おう（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/</link><pubDate>Wed, 19 Jan 2022 00:31:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal.jpg" alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（１）" />&lt;h2 id="統計名でgoogle検索して関心度の高いキーワードを抽出しよう">統計名でgoogle検索して関心度の高いキーワードを抽出しよう&lt;/h2>
-&lt;p>e-Statの解析の目標として、膨大な統計データの中から一般の人に関心度の高いものを抽出してデータを要約したいと考えています。&lt;br>
-google検索で上位にくるものは関心度が高いと言えるでしょうから統計名でgoogle検索して関心度の高いキーワードを抽出したいと思います。&lt;br>
-google検索を自動でするためにGoogle Custom Search APIを使います。&lt;br>
-Google Custom Search API は１日１００回までは無料で、それ以上だと１０００回につき５ドル課金されるみたいです。&lt;br>
-&lt;a class="link" href="https://developers.google.com/custom-search/v1/overview#pricing" target="_blank" rel="noopener"
->https://developers.google.com/custom-search/v1/overview#pricing&lt;/a>&lt;br>
-１日に発表される統計は10個いかないくらいなので無料の範囲で使えそうです。&lt;br>
-Google Custom Search APIを使ってみましょう。&lt;/p>
-&lt;h2 id="google-custom-search-api-を使えるように設定する2022年1月時点">Google Custom Search API を使えるように設定する（2022年1月時点)&lt;/h2>
-&lt;p>以下の手順で設定します。&lt;br>
-・googleアカウントを取得する&lt;br>
-gmailのメールアドレスです。&lt;br>
-・Google Cloud Platformでクレジットカード情報を登録する&lt;br>
-&lt;a class="link" href="https://console.cloud.google.com/billing/create?hl=ja" target="_blank" rel="noopener"
->https://console.cloud.google.com/billing/create?hl=ja&lt;/a>&lt;br>
-・プロジェクトを作成する&lt;br>
-&lt;a class="link" href="https://console.cloud.google.com/projectcreate" target="_blank" rel="noopener"
->https://console.cloud.google.com/projectcreate&lt;/a>&lt;br>
-・認証情報を作成する&lt;br>
-&lt;a class="link" href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener"
->https://console.cloud.google.com/apis/credentials&lt;/a>&lt;br>
-「+認証情報を作成」をクリックして「APIキー」を選択すると&lt;br>
-APIキーが作成されますのでコピーしておきましょう&lt;br>
-・APIキーの利用制限&lt;br>
-キーの制限をクリックしてAPIキーの利用を制限しておきましょう&lt;br>
-接続元が固定のIPアドレスを持っているなら「アプリケーションの制限」でIPアドレスを設定しましょう。&lt;br>
-APIの制限もとりあえすCustom Search API １個にしときます。&lt;br>
-保存ボタンをクリックします&lt;br>
-・Custom Search API を有効にする&lt;br>
-&lt;a class="link" href="https://console.cloud.google.com/apis/library/customsearch.googleapis.com" target="_blank" rel="noopener"
->https://console.cloud.google.com/apis/library/customsearch.googleapis.com&lt;/a>&lt;br>
-「有効にする」ボタンをクリックします。&lt;br>
-・検索エンジンIDの取得&lt;br>
-&lt;a class="link" href="https://cse.google.com/create/new" target="_blank" rel="noopener"
->https://cse.google.com/create/new&lt;/a>&lt;br>
-検索するサイトは「www.google.co.jp（後で削除するので適当で良いです）」&lt;br>
-言語は「日本語」&lt;br>
-検索エンジンの名前は適当で良いです。&lt;br>
-左側の設定ボタンを押すと画面中央中段に「検索エンジンID」があるのでコピーします。&lt;br>
-検索するサイトをで「www.google.co.jp」を「削除」します&lt;br>
-「ウェブ全体を検索」を「オン」にします&lt;/p>
-&lt;h2 id="curlでgoogle-custom-search-api検索する">CurlでGoogle Custom Search API検索する&lt;/h2>
-&lt;p>試しに検索してみましょう。&lt;br>
-curlを利用します。&lt;br>
-curlでAPIキー、検索エンジンID、キーワードを指定して検索します。&lt;br>
-curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
->https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジン ID&amp;amp;q=検索キーワード&amp;rsquo;&lt;/p>
-&lt;p>「木材流通統計調査」で検索してみました。&lt;/p>
-&lt;p>curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
->https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジンID&amp;amp;q=木材流通統計調査&amp;rsquo;&lt;/p>
-&lt;p>結果はjsonで返ってきます。&lt;br>
-見た感じ、ブラウザのgoogle検索の結果と同じ感じなので良さそうですね。&lt;/p>
-&lt;pre tabindex="0">&lt;code> &amp;quot;items&amp;quot;: [
-{
-&amp;quot;kind&amp;quot;: &amp;quot;customsearch#result&amp;quot;,
-&amp;quot;title&amp;quot;: &amp;quot;木材流通統計調査：農林水産省&amp;quot;,
-&amp;quot;htmlTitle&amp;quot;: &amp;quot;\u003cb\u003e木材流通統計調査\u003c/b\u003e：農林水産省&amp;quot;,
-&amp;quot;link&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
-&amp;quot;displayLink&amp;quot;: &amp;quot;www.maff.go.jp&amp;quot;,
-&amp;quot;snippet&amp;quot;: &amp;quot;木材流通構造調査, 木材の販売金額、素材及び材料の入荷先別入荷量、製材品、合板及び集成材の出荷先別出荷量、製材用、合単板及び木材チップ製造用機械の所有状況、 ...&amp;quot;,
-&amp;quot;htmlSnippet&amp;quot;: &amp;quot;\u003cb\u003e木材流通\u003c/b\u003e構造\u003cb\u003e調査\u003c/b\u003e, \u003cb\u003e木材\u003c/b\u003eの販売金額、素材及び材料の入荷先別入荷量、製材品、合板及び集成材の出荷先別出荷量、製材用、合単板及び\u003cb\u003e木材\u003c/b\u003eチップ製造用機械の所有状況、&amp;amp;nbsp;...&amp;quot;,
-&amp;quot;cacheId&amp;quot;: &amp;quot;cMExMff56bgJ&amp;quot;,
-&amp;quot;formattedUrl&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
-&amp;quot;htmlFormattedUrl&amp;quot;: &amp;quot;https://www.maff.go.jp/j/tokei/kouhyou/mokuryu/&amp;quot;,
-&amp;quot;pagemap&amp;quot;: {
-&amp;quot;cse_thumbnail&amp;quot;: [
-{
-&amp;quot;src&amp;quot;: &amp;quot;https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSmlCF9ltcQbjL9DAnpZfJIotIT2ej4cd_YfBfs5ew-v2FR_NxjLAGdFTTI&amp;quot;,
-&amp;quot;width&amp;quot;: &amp;quot;200&amp;quot;,
-&amp;quot;height&amp;quot;: &amp;quot;200&amp;quot;
-}
-],
-&amp;quot;metatags&amp;quot;: [
-{
-&amp;quot;viewport&amp;quot;: &amp;quot;width=device-width, initial-scale=1&amp;quot;,
-&amp;quot;format-detection&amp;quot;: &amp;quot;telephone=no&amp;quot;
-}
-],
-&amp;quot;cse_image&amp;quot;: [
-{
-&amp;quot;src&amp;quot;: &amp;quot;https://www.maff.go.jp/j/shared_new/shared/images/icon_pnavi@2x.png&amp;quot;
-}
-]
-}
-},
-&lt;/code>&lt;/pre>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 128;
-flex-basis: 307px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search.png" data-size="880x686">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search.png"
-width="880"
-height="686"
-srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search_hu8dd0c2c2a9412bdad55a43227a1eee02_223997_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/search_hu8dd0c2c2a9412bdad55a43227a1eee02_223997_1024x0_resize_box_3.png 1024w"
-loading="lazy"
-alt="検索結果">
-&lt;/a>
-&lt;figcaption>検索結果&lt;/figcaption>
-&lt;/figure>&lt;/p></description></item></channel></rss>
+&lt;/aside></description></item></channel></rss>

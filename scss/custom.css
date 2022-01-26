@@ -527,6 +527,24 @@ footer.site-footer {
   color: #FFF;
   margin: 0 5px; }
 
+.article-content > dl {
+  display: flex;
+  flex-wrap: wrap; }
+  .article-content > dl dt {
+    margin: 0;
+    padding: 5px;
+    width: 10em;
+    font-weight: bold; }
+    .article-content > dl dt ~ dt {
+      margin-top: 10px; }
+  .article-content > dl dd {
+    margin: 0;
+    padding: 5px;
+    width: calc(100% - 10em);
+    line-height: 1.4; }
+    .article-content > dl dd ~ dd {
+      margin-top: 10px; }
+
 .gallery a[href*="gif"] {
   display: flex;
   align-items: center;
