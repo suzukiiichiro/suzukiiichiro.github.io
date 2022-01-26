@@ -36,7 +36,7 @@ frontmatter:
 # Robots.txtを作成
 enableRobotsTXT: true
 sitemap:
-  filename: sitemap.xml
+  filename: google_sitemap.xml
   priority: 0.5
 Services:
     RSS:
