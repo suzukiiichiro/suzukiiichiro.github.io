@@ -36,7 +36,7 @@ frontmatter:
 # Robots.txtを作成
 enableRobotsTXT: true
 sitemap:
-  filename: google_sitemap.xml
+  filename: sitemap.xml
   priority: 0.5
 Services:
     RSS:
@@ -51,6 +51,18 @@ taxonomies:
     tag: tags
     category: categories
     author: authors
+
+
+mediaTypes:
+    application/xml:
+        suffixes: xml
+outputFormats:
+    Sitemap:
+        MediaType: application/xml
+        baseName: "google_sitemap"
+        noUgly: true
+outputs:
+    home: [HTML, Sitemap, RSS]
 
 params:
     paginate:
