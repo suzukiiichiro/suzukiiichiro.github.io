@@ -370,6 +370,28 @@
       margin: 0 5px;
     }
   }
+  > dl {
+    display: flex;
+    flex-wrap: wrap;
+    dt {
+      margin: 0;
+      padding: 5px;
+      width: 10em;
+      font-weight: bold;
+      ~ dt {
+        margin-top: 10px;
+      }
+    }
+    dd {
+      margin: 0;
+      padding: 5px;
+      width: calc(100% - 10em);
+      line-height: 1.4;
+      ~ dd {
+        margin-top: 10px;
+      }
+    }
+  }
 }
 
 .gallery {

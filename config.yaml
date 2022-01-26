@@ -53,14 +53,12 @@ taxonomies:
     author: authors
 
 
-mediaTypes:
-    application/xml:
-        suffixes: xml
 outputFormats:
     Sitemap:
         MediaType: application/xml
         baseName: "google_sitemap"
         noUgly: true
+        
 outputs:
     home: [HTML, Sitemap, RSS]
 
