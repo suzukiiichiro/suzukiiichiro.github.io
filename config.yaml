@@ -47,10 +47,10 @@ permalinks:
     post: /p/:slug/
     page: /:slug/
 
-# taxonomies:
-#     tag: tags
-#     category: categories
-#     author: authors
+taxonomies:
+    tag: tags
+    category: categories
+    author: authors
 
 
 # outputFormats:
