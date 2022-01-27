@@ -47,20 +47,25 @@ permalinks:
     post: /p/:slug/
     page: /:slug/
 
-taxonomies:
-    tag: tags
-    category: categories
-    author: authors
+# taxonomies:
+#     tag: tags
+#     category: categories
+#     author: authors
 
 
-outputFormats:
-    Sitemap:
-        MediaType: application/xml
-        baseName: "google_sitemap"
-        noUgly: true
+# outputFormats:
+#     Sitemap:
+#         MediaType: application/xml
+#         baseName: "google_sitemap"
+#         noUgly: true
         
 outputs:
-    home: [HTML, Sitemap, RSS]
+    home: [HTML]
+    section: [HTML]
+    taxonomy: [HTML]
+    term: [HTML]
+
+disableKinds: ["sitemap"]
 
 params:
     paginate:
