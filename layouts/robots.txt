@@ -15,8 +15,3 @@ Disallow: /images/
 Disallow: /scss/
 Disallow: /css/
 Allow: /
-
-Sitemap: {{ .Site.BaseURL }}google_sitemap.xml
-Sitemap: {{ .Site.BaseURL }}sitemap_index.xml
-Sitemap: {{ .Site.BaseURL }}sitemap.xml
-Sitemap: {{ .Site.BaseURL }}index.xml
