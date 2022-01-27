@@ -1,7 +1,12 @@
 ---
-title: "pythonでnqueen（エイトクイーン）ブルートフォース　力任せ探索（１）"
-description: "pythonを勉強しながらnqueen（エイトクイーン）問題を解いていきます。今回は第一回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。" date: 2022-01-27T13:50:13+09:00 draft: false image: chess.jpg categories: - プログラミング tags: - e-Stat 
-  - データマイニング
+title: "pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）"
+description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第一回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。" 
+date: 2022-01-27T13:50:13+09:00 
+draft: false 
+image: chess.jpg 
+categories: - プログラミング 
+tags: - Python 
+  - NQueen
   - プログラム
 ---
 ##  Nクイーン問題とは 
