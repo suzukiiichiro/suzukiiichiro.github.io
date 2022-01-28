@@ -83,4 +83,88 @@ $ /home/suzuki
 $
 ```
 
+## ~/.bashrc の修正
+ここでは ~/.basrcファイルを修正します。
+まず、~/.basrc ファイルのバックアップをとります。
+ここではファイル名先頭のピリオドを落として ls コマンドで見えるようにしておきます。
+
+```
+$ cp ~/.bashrc ~/bashrc.bak
+```
+
+では、~/.bashrc を vimで開いて編集します。
+
+```
+$ vim ~/.bashrc
+```
+
+``` bash:~/.bashrc
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# ターミナルの表示
+export PS1="bash-\v$ " ;
+# 基本言語フォーマットをUTF-8へ
+export LANG="ja_JP.UTF-8" ;
+
+# User specific environment and startup programs
+alias rm='rm -i' ;
+alias cp='cp -i' ;
+alias mv='mv -i' ;
+# grepとls のカラー表示
+alias grep='grep --color=auto' ;
+alias ls='ls --color=auto' ;
+# screen
+alias s='screen -RR' ;
+# Github ディレクトリへ移動
+alias g='cd ~/GitHub' ;
+```
+
+編集が終わったら ~/.bashrc を再読込します。
+Linux での再読込は . です
+
+```
+$ . ~/.bashrc
+$ 
+```
+
+では GitHub にある様々なディレクトリを格納する Githubディレクトリを作成します。
+
+```
+$ mkdir GitHub
+$ 
+```
+
+以降の github プロジェクトは今作成した GitHub ディレクトリ以下に作成します。
+
+## ターミナルの入力で大文字と小文字を区別せずに補完する
+
+``` bash:~/.inputrc
+# 大文字小文字を区別しない
+set completion-ignore-case on
+# 以下日本語入力の必要がある場合に必要(なくてもよい）
+set input-meta on
+set output-meta on
+set convert-meta off
+set meta-flag on
+```
+
+編集が終わったら ~/.inputrc を再読込します。
+Linux での再読込は . です
+
+```
+$ . ~/.inputrc
+$ cd ~
+$ pwd
+/home/suzuki
+$ g
+$ pwd
+/home/suzuki/GitHub
+$
+```
+
 
