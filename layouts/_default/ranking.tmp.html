@@ -30,9 +30,6 @@
       {{ range $index, $element := first 50 $json }}
         {{- $article := index (where $page ".RelPermalink" "eq" .link ) 0  -}}
         {{- if $article -}}
-          {{- if eq $index 3 -}}
-              {{ partial "ads/list-infeed" }}
-          {{- end -}}
           <div class="ranking-item" data-rank="{{- $element.pv -}}">
             {{ partial "article/components/header" $article }}
           </div>
