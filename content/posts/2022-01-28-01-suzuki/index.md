@@ -402,4 +402,9 @@ suzuki:x:1001:
 
 
 
+## おすすめの書籍
+{{% amazon title=" iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) " url="https://www.amazon.co.jp/iPad完全マニュアル2022-全機種対応-基本操作から活用技まで詳細解説-standards/dp/4866365285/?tag=nlpqueens-22" summary=` iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 ` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg" %}}
+
+{{% amazon title=" AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 " url="https://www.amazon.co.jp/AWSではじめるインフラ構築入門-安全で堅牢な本番環境のつくり方-中垣-健志/dp/4798163430/?tag=nlpqueens-22" summary=` AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg" %}}
+
 
