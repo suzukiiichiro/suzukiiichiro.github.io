@@ -12,7 +12,7 @@ tags:
   - 鈴木維一郎
 ---
 
-# 必要なもの
+## 必要なもの
  - iPad
  - Termiusというアプリ
   [Termius: Terminal & SSH client](https://apps.apple.com/jp/app/termius-ssh-client/id549039908)
@@ -21,7 +21,7 @@ tags:
  - AWSインスタンスにログインするために必要なpemファイル（キーチェイン）
  [AWS EC2にSSHでアクセスする方法](https://qiita.com/takuma-jpn/items/b2c04b7a271a4472a900)
 
-# AWSインスタンスへの接続
+## AWSインスタンスへの接続
 pemファイルをスマホに送る
 インスタンスを作るときにpemファイルをダウンロードしたと思います
 （してなかったら、pemファイルは一回しかダウンロードさせてくれないのでインスタンスを作り直しましょう）
@@ -35,7 +35,7 @@ pemファイルをTermiusで読み込みます
 [iPadからAWSのEC2インスタンス(LINUX)にSSH接続する方法](https://pkunallnet.com/pcinfo/apple/ipad-aws-linuxconnection/)
 
 
-# アカウントの作成
+## アカウントの作成
 rootでの作業でも良いのですが、一般論としてここではアカウントの作成から説明します。
 
 まずは、サーバーに接続します。
