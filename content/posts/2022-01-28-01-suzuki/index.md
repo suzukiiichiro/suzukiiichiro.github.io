@@ -335,3 +335,71 @@ $ exit
 : screen は王者のコマンドです。プログラマーの多くはローカルのターミナルでタブを作成します。screen はサーバー上で仮想端末を作成します。screenはvim同様、プログラマーを選びます。Linuxを語るなら vim と screen そして bash の習熟が必須なのです。
 {{% /tips-list %}}
 
+
+## sudoユーザーを追加する方法
+sudoユーザーに追加していないユーザーでsudoコマンドを実行すると、
+
+```
+$ sudo less /etc/passwd
+[sudo] password for suzuki: 
+suzuki is not in the sudoers file.  This incident will be reported.
+```
+
+こんな事を言われます。
+ということで、ここでは特定のユーザー（ここでは「suzuki」）がsudoコマンドを実行できるようにします。
+
+/etc/sudoers ファイルにユーザーを追加します。
+
+まずはrootユーザーになります。
+
+ユーザーsuzuki をぬけてrootになります。
+
+```
+$ exit
+```
+
+現在のグループを確認します。
+
+```
+# sudo vim /etc/sudoers
+```
+
+以下の記述があれば wheelグループに suzukiを追加すればよいです。
+
+``` bash:/etc/sudoersの抜粋
+
+## Allow members of group sudo to execute any command
+%wheel   ALL=(ALL:ALL) ALL
+```
+
+ではまず現状を確認します。
+
+```
+# cat /etc/group | grep suzuki
+```
+
+sudoのグループ（centosなら wheel) に suzuki を追加します。
+
+```
+# sudo usermod -G wheel suzuki
+```
+
+確認します。
+
+```
+# cat /etc/group | grep suzuki
+wheel:x:10:suzuki
+suzuki:x:1001:
+#
+```
+
+これで、ローカルアカウント suzuki で、必要に応じて sudoコマンドをつかって安全に作業することができるようになりました。
+
+{{% tips-list tips %}}
+ヒント
+: 当たり前の話ではありますが、root で作業するのはやめましょう。必要に応じて $ su すればよいのです。Linux/Unixとはそういうものなのです。
+{{% /tips-list %}}
+
+
+
+
