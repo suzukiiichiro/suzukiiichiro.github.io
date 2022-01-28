@@ -1,15 +1,24 @@
 <!-- Use site subtitle by default -->
 {{ $description := .Site.Params.sidebar.subtitle }}
 
+{{ $title := .Title }}
+{{ if .Params.slugTitle }}
+  {{ $title = .Params.slugTitle }}
+{{ end }}
+
 {{- if .Description }}
-    <!-- Page description exists -->
-    {{ $description = .Description }}
+  <!-- Page description exists -->
+  {{ $description = .Description }}
 {{- else if .IsPage }}
-    <!-- Use page summary -->
+  {{- if .Summary }}
     {{ $description = .Summary }}
+  {{- else -}}
+    {{ $description = printf "「%s」のページです。%s" $title $description }}
+  {{- end -}}
+  <!-- Use page summary -->
 {{- else if .IsHome -}}
 {{- else }}
-    {{ $description = printf "「%s」のページです。%s" .Title $description }}
+  {{ $description = printf "「%s」のページです。%s" $title $description }}
 {{- end }}
 
 {{ return ($description | plainify)}}

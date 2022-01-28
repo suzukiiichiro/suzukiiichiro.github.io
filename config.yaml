@@ -46,12 +46,12 @@ permalinks:
     # /: /:year/:month/:filename/
     post: /p/:slug/
     page: /:slug/
+    ranking: /:section/:slug/
 
 taxonomies:
     tag: tags
     category: categories
     author: authors
-
 
 # outputFormats:
 #     Sitemap:
@@ -59,20 +59,27 @@ taxonomies:
 #         baseName: "google_sitemap"
 #         noUgly: true
         
+# outputs:
+#     home: [HTML, Sitemap, RSS]
 outputs:
     home: [HTML]
     section: [HTML]
     taxonomy: [HTML]
     term: [HTML]
 
-disableKinds: ["sitemap"]
+# キャッシュのコントロール
+# https://gohugo.io/getting-started/configuration/#configure-file-caches
+caches:
+  getjson:
+    dir: :cacheDir/:project
+    maxAge: 10m
 
 params:
     paginate:
         slots: 5
     sitemap:
       exclude: ["authors", "tags", "categories"]
-      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/"]
+      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/", "/sitemap/", "/ranking/"]
     mainSections:
         - posts
 #     featuredImageField: image

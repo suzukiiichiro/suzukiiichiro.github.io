@@ -1,0 +1,36 @@
+#sitemap {
+  padding: 20px 40px 60px;
+  > .title {
+    color: var(--card-text-color-main);
+  }
+  .sitemap-items {
+    ~ .sitemap-items {
+      margin-top: 20px;
+      border-top: 1px solid var(--card-separator-color);
+    }
+    .title {
+      margin: 0;
+      padding: 10px 0;
+      font-size: 1rem;
+    }
+    ul {
+      font-size: 0.8rem;
+      margin: 0;
+      padding: 0 0.8rem;
+      list-style: none;
+      columns: 2;
+      column-gap: 30px;
+      line-height: 1.2;
+      @include mq(smp) {
+        columns: 1;
+        column-gap: 0;
+      }
+      &:empty {
+        display: none;
+      }
+      .list-title {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

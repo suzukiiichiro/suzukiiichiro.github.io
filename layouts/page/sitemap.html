@@ -1,0 +1,58 @@
+{{ define "body-class" }}template-archives{{ end }}
+
+{{ define "main" }}
+  <div id="sitemap">
+    {{- $title := .Title -}}
+    {{- if .Params.slugTitle -}}
+      {{- $title = .Params.slugTitle -}}
+    {{- end -}}
+    <h2 class="title">{{ $title }}</h2>
+      <section class="sitemap-items">
+        <h2 class="title"><a href="{{ .Site.BaseURL | relLangURL }}">TOP</a></h2>
+      </section>
+
+      {{- $part := "" -}}
+      {{- $childs := slice -}}
+      {{- $show := 0 -}}
+
+      {{- $items := .Site.Pages -}}
+      {{- range sort $items "Permalink" "asc" -}}
+        {{- $urls := split .URL "/" -}} 
+        {{- if ne $part (index $urls 1) -}}
+            </ul>
+            </section>
+            <section class="sitemap-items">
+              {{- $title := .Title -}}
+              {{- if .Params.slugTitle -}}
+                {{- $title = .Params.slugTitle -}}
+              {{- end -}}
+              <h2 class="title"><a href="{{- .Permalink -}}">{{- $title -}}</a></h2>
+              <ul>
+          {{- if ne $part "" -}}
+            {{- $show = 1 -}}
+          {{- else -}}
+            {{- $show = 0 -}}
+          {{- end -}}
+          {{- $part = index $urls 1 -}}
+          {{- $childs = slice -}}
+        {{- else -}}
+          {{- if eq $show 1}}
+          {{- $title := .Title -}}
+          {{- if .Params.slugTitle -}}
+            {{- $title = .Params.slugTitle -}}
+          {{- end -}}
+          <li class="list-title"><a href="{{- .Permalink -}}">{{- $title -}}</a></li>
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+        </ul>
+      </section>
+
+  </div>
+
+{{- end -}}
+
+{{ define "right-sidebar" }}
+{{ partialCached "sidebar/right.html" . }}
+{{ end }}
+

@@ -1,0 +1,98 @@
+#ranking {
+  > .title {
+    margin: 20px;
+    color: var(--card-text-color-main);
+  }
+  &.rank-top {
+    .article-list {
+      article {
+        .article-link {
+          .article-header {
+            .article-image {
+            }
+          }
+        }
+      }
+    }
+  }
+  .section-title {
+    padding: 10px;
+    ~ .section-title {
+      margin-top: 80px;
+    }
+  }
+  #ranking-menu-area {
+    display: flex;
+  }
+  #ranking-menu {
+    display: flex;
+    text-align: center;
+    margin: 20px auto 0;
+    list-style: none;
+    border: 1px solid var(--card-separator-color);
+    border-radius: 16px;
+    padding: 0;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0.8rem;
+    top: 0;
+    li {
+      margin: 0;
+      &.current {
+        a {
+          color: #FFF;
+          font-weight: bold;
+          background-color: #34495e;
+        }
+      }
+      ~ li {
+        border-left: 1px solid var(--card-separator-color);
+      }
+      a {
+        display: block;
+        padding: 8px 20px;
+      }
+    }
+  }
+  .link {
+    margin: 40px auto 80px;
+    a {
+      display: block;
+      border: 1px solid var(--card-separator-color);
+      padding: 10px 20px;
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--card-text-color-main);
+      background: var(--card-background);
+      box-shadow: var(--shadow-l1);
+      border-radius: 4px;
+    }
+  }
+  .ranking-item {
+    position: relative;
+    &:before {
+      content: attr(data-rank)" PV";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: #f39c12;
+      color: #FFF;
+      font-size: 0.8em;
+      display: block;
+      min-width: calc(1em + 16px);
+      padding: 4px 8px;
+      line-height: 1;
+      z-index: 1;
+      text-align: center;
+      transition: bottom ease-out 0.4s;
+    }
+    &:hover {
+      z-index: 1;
+      &:before {
+        z-index: 2;
+        bottom: 5px;
+      }
+    }
+  }
+}

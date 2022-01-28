@@ -1,0 +1,49 @@
+{{- define "body-class" -}}template-archives{{- end -}}
+
+
+{{- define "main" -}}
+  {{- $title := .Title -}}
+  {{- if .Params.slugTitle -}}
+      {{- $title = .Params.slugTitle -}}
+  {{- end -}}
+
+  {{- $json_d := getJSON "https://script.google.com/macros/s/AKfycbw3wm1sNh16M4DACO_PUR29YeNFnbOECyv73_zyWw-oVy4uwRGYrDcZRP_9a7fzJVN70w/exec?s=day" -}}
+  {{- $json_m := getJSON "https://script.google.com/macros/s/AKfycbw3wm1sNh16M4DACO_PUR29YeNFnbOECyv73_zyWw-oVy4uwRGYrDcZRP_9a7fzJVN70w/exec?s=month" -}}
+  {{- $json_y := getJSON "https://script.google.com/macros/s/AKfycbw3wm1sNh16M4DACO_PUR29YeNFnbOECyv73_zyWw-oVy4uwRGYrDcZRP_9a7fzJVN70w/exec?s=year" -}}
+
+  {{- $jsons := slice $json_d $json_m $json_y -}}
+
+  {{- $page := .Site.Pages -}}
+  <div id="ranking" class="archives-group rank-top">
+    <h1 class="title">{{- $title -}}</h1>
+    {{- $ranks := slice -}}
+    {{- range where .Site.Pages "Section" "ranking" -}}
+      {{- if ne .URL "/ranking/" -}}
+      {{- $ranks = $ranks | append .}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{- range $i, $rank := $ranks -}}
+       {{- $title := .Title -}}
+       {{- if .Params.slugTitle -}}
+        {{- $title = .Params.slugTitle -}}
+       {{- end -}}
+      <h2 class="archives-date section-title">{{- $title -}}</h2>
+      <div class="article-list">
+      {{- range $index, $element := first 5 (index $jsons $i) -}}
+        {{- $article := index (where $page ".RelPermalink" "eq" .link ) 0  -}}
+        {{- if $article -}}
+          <div class="ranking-item" data-rank="{{- $element.pv -}}">
+            {{- partial "article/components/header" $article -}}
+          </div>
+        {{- end -}}
+      {{- end -}}
+      </div>
+      <div class="link"><a href="{{- .Permalink -}}">{{- $title -}}をもっと見る</a></div>
+    {{- end -}}
+  </div>
+{{- end -}}
+
+{{- define "right-sidebar" -}}
+{{- partialCached "sidebar/right.html" . -}}
+{{- end -}}

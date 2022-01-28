@@ -1,0 +1,50 @@
+{{ define "body-class" }}template-archives{{ end }}
+
+{{ define "main" }}
+  {{- $title := .Title -}}
+  {{- if .Params.slugTitle -}}
+    {{- $title = .Params.slugTitle -}}
+  {{- end -}}
+  {{- $json := getJSON (printf "https://script.google.com/macros/s/AKfycbw3wm1sNh16M4DACO_PUR29YeNFnbOECyv73_zyWw-oVy4uwRGYrDcZRP_9a7fzJVN70w/exec?s=%s" .Params.mode) -}}
+  {{- $page := .Site.Pages -}}
+
+  <div id="ranking" class="archives-group">
+    <h1 class="title">{{- $title -}}</h1>
+    <nav id="ranking-menu-area">
+      <ul id="ranking-menu">
+      {{- $currentPage := . -}}
+      {{- range where .Site.Pages "Section" "ranking" -}}
+        {{- $active := or (eq $currentPage.Title .Name) -}}
+        {{- if ne .URL "/ranking/" -}}
+         {{- $title := .Title -}}
+         {{- if .Params.slugTitle -}}
+          {{- $title = .Params.slugTitle -}}
+         {{- end -}}
+         <li {{ if $active }} class="current" {{ end }}><a href="{{- .URL | relLangURL -}}">{{- $title -}}</a></li>
+        {{- end -}}
+      {{- end -}}
+      </ul>
+    </nav>
+    <h2 class="archives-date section-title">{{- $title -}}</h2>
+    <div class="article-list">
+      {{- range $index, $element := first 50 $json -}}
+        {{- $article := index (where $page ".RelPermalink" "eq" .link ) 0  -}}
+        {{- if $article -}}
+          {{- if eq $index 3 -}}
+              {{- partial "ads/list-infeed" -}}
+          {{- end -}}
+          <div class="ranking-item" data-rank="{{- $element.pv -}}">
+            {{- partial "article/components/header" $article -}}
+          </div>
+        {{- end -}}
+      {{- end -}}
+    </div>
+    {{- with .Site.GetPage "/ranking" -}}
+    <div class="link"><a href="{{- .Permalink -}}">ランキングTOPへ</a></div>
+    {{- end -}}
+  </div>
+{{ end }}
+
+{{ define "right-sidebar" }}
+{{ partialCached "sidebar/right.html" . }}
+{{ end }}

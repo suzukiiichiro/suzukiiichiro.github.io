@@ -4,11 +4,13 @@ date: 2021-12-22T17:16:15+09:00
 aliases:
   - privacy
 description: "当サイトでは、皆様の個人情報の重要性を認識し、その適正な収集、利用、保護をはかるとともに、安全管理を行うため、プライバシーポリシーを定め、次のとおり運用します。"
+
 menu:
     main: 
-        weight: -90
-        params:
+        weight: 80
+
 slugTitle: "プライバシーポリシー"
+layout: "noinfo"
 
 ---
 ## 広告の配信について

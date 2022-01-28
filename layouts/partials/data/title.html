@@ -1,6 +1,10 @@
 {{- $title := .Title -}}
 {{- $siteTitle := .Site.Title -}}
 
+{{- if .Params.slugTitle -}}
+{{- $title = .Params.slugTitle -}}
+{{- end -}}
+
 {{- if .IsHome -}}
   <!-- Homepage, and it's pagination -->
   <!-- Build paginator -->

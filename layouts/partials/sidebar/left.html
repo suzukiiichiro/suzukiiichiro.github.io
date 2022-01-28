@@ -63,17 +63,21 @@
       </nav>
       <nav>
         <ol class="menu menu-section">
-          {{ $currentPage := . }}
-          {{ range .Site.Menus.main }}
-          {{ $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}
-          {{ if ne .URL "/categories/" }}
-          <li {{ if $active }} class='current' {{ end }}>
-            <a href='{{ .URL | relLangURL }}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
+          {{- $currentPage := . -}}
+          {{- $menu := slice -}}
+          {{- range .Site.Menus.main -}}
+            {{- if .Weight -}}
+              {{- $menu = $menu | append . -}}
+            {{- end -}}
+          {{- end -}}
+          {{- range (sort $menu ".Params.menu.main.weight" "asc") -}}
+          {{- $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) -}}
+          <li {{- if $active -}} class='current' {{- end -}}>
+            <a href='{{- .URL | relLangURL -}}' {{- if eq .Params.newTab true -}} target="_blank" {{- end -}}>
               <span>{{- .Name -}}</span>
             </a>
           </li>
-          {{ end }}
-          {{ end }}
+          {{- end -}}
         </ol>
       </nav>
       </div>
