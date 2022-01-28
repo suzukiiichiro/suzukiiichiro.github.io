@@ -1,7 +1,7 @@
-{{- define "body-class" -}}template-archives{{- end -}}
+{{ define "body-class" }}template-archives{{ end }}
 
 
-{{- define "main" -}}
+{{ define "main" }}
   {{- $title := .Title -}}
   {{- if .Params.slugTitle -}}
       {{- $title = .Params.slugTitle -}}
@@ -13,7 +13,7 @@
 
   {{- $jsons := slice $json_d $json_m $json_y -}}
 
-  {{- $page := .Site.Pages -}}
+  {{ $page := .Site.Pages }}
   <div id="ranking" class="archives-group rank-top">
     <h1 class="title">{{- $title -}}</h1>
     {{- $ranks := slice -}}
@@ -30,20 +30,20 @@
        {{- end -}}
       <h2 class="archives-date section-title">{{- $title -}}</h2>
       <div class="article-list">
-      {{- range $index, $element := first 5 (index $jsons $i) -}}
+      {{ range $index, $element := first 5 (index $jsons $i) }}
         {{- $article := index (where $page ".RelPermalink" "eq" .link ) 0  -}}
         {{- if $article -}}
           <div class="ranking-item" data-rank="{{- $element.pv -}}">
             {{- partial "article/components/header" $article -}}
           </div>
         {{- end -}}
-      {{- end -}}
+      {{ end }}
       </div>
       <div class="link"><a href="{{- .Permalink -}}">{{- $title -}}をもっと見る</a></div>
     {{- end -}}
   </div>
-{{- end -}}
+{{ end }}
 
-{{- define "right-sidebar" -}}
-{{- partialCached "sidebar/right.html" . -}}
-{{- end -}}
+{{ define "right-sidebar" }}
+{{ partialCached "sidebar/right.html" . }}
+{{ end }}

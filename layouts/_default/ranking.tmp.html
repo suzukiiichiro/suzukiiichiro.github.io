@@ -27,17 +27,17 @@
     </nav>
     <h2 class="archives-date section-title">{{- $title -}}</h2>
     <div class="article-list">
-      {{- range $index, $element := first 50 $json -}}
+      {{ range $index, $element := first 50 $json }}
         {{- $article := index (where $page ".RelPermalink" "eq" .link ) 0  -}}
         {{- if $article -}}
           {{- if eq $index 3 -}}
-              {{- partial "ads/list-infeed" -}}
+              {{ partial "ads/list-infeed" }}
           {{- end -}}
           <div class="ranking-item" data-rank="{{- $element.pv -}}">
-            {{- partial "article/components/header" $article -}}
+            {{ partial "article/components/header" $article }}
           </div>
         {{- end -}}
-      {{- end -}}
+      {{ end }}
     </div>
     {{- with .Site.GetPage "/ranking" -}}
     <div class="link"><a href="{{- .Permalink -}}">ランキングTOPへ</a></div>
