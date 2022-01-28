@@ -1,13 +1,27 @@
 ---
 title: "パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿"
-date: 2022-01-28T13:52:18+09:00
-draft: true
+date: 2022-01-28T15:35:18+09:00
+draft: false
 
 authors: wyoshi
-image: 
+image: img11.jpg
 
 categories:
+  - Web開発
 tags:
+  - プログラム
+  - デザイナー
+  - 開発
+  - Web開発
+  - wyoshi
+  - HTML
+  - CSS
+  - Webデザイナー
+  - フロントエンジニア
+  - コーダー
+  - Hugo
+  - EC2
+  - AWS
 ---
 
 iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。
@@ -90,7 +104,7 @@ hugo server --baseURL=[URL]
 
 最終的なコマンドは
 ```
-hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
 ```
 となります。
 
@@ -107,13 +121,42 @@ EC2のインバウンドルールに開けたいポートを追加します。
 
 ![](img09.png "")
 
+
 下にある「ルールを追加」を押して、「カスタムTCP」にします。
 次に、ポート範囲に開けたいポートを入力して、CIDR ブロックにインターネットゲートウェイを指すすべての IPv4 トラフィック (0.0.0.0/0) のルートを追加します。
 IPv6の場合も追加したいので、もう一度「ルールを追加」を押して、ポートを入力し、IPv6 トラフィック (::/0) のルートを入力します。
 設定が終わったら、保存しましょう。
 これでポートの設定が完了しました。
+
 ![](img10.png "")
 
 
 ## iPadで確認しながら更新をする
-それでは
+サーバにログインして、先程の
+```
+$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+```
+でサーバを立ち上げます。
+このとき、下書きの記事を表示したいときは
+```
+$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート] -D
+```
+として下書きも表示するようにしましょう。
+
+また、サーバのアドレスがわからない場合は
+```
+$ curl -s ifconfig.me
+```
+とすればIPアドレスがわかります。
+
+iPadにはSplitビューがついているので、片方でブログを書きながら、　もう片方でSafariなどを立ち上げて立ち上げて記事を確認しながら記述することが可能です。
+![](img11.jpg "")
+
+## まとめ
+iPadを使うとどこでも、重いパソコンを持たなくても簡単にブログを更新することができるようになります。是非オススメなので、みなさんも試してみてください。
+
+## おすすめの書籍
+{{% amazon title=" iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) " url="https://www.amazon.co.jp/iPad完全マニュアル2022-全機種対応-基本操作から活用技まで詳細解説-standards/dp/4866365285/?tag=nlpqueens-22" summary=` iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 ` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg" %}}
+
+{{% amazon title=" AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 " url="https://www.amazon.co.jp/AWSではじめるインフラ構築入門-安全で堅牢な本番環境のつくり方-中垣-健志/dp/4798163430/?tag=nlpqueens-22" summary=` AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg" %}}
+
