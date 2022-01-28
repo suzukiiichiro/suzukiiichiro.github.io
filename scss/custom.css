@@ -1178,3 +1178,104 @@ html[data-scheme="dark"] #popular-articles--month .contents-area button {
 
 .search-result--list {
   margin: 0 15px 80px; }
+
+#sitemap {
+  padding: 20px 40px 60px; }
+  #sitemap > .title {
+    color: var(--card-text-color-main); }
+  #sitemap .sitemap-items ~ .sitemap-items {
+    margin-top: 20px;
+    border-top: 1px solid var(--card-separator-color); }
+  #sitemap .sitemap-items .title {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 1rem; }
+  #sitemap .sitemap-items ul {
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0 0.8rem;
+    list-style: none;
+    columns: 2;
+    column-gap: 30px;
+    line-height: 1.2; }
+    @media screen and (max-width: 640px) {
+      #sitemap .sitemap-items ul {
+        columns: 1;
+        column-gap: 0; } }
+    #sitemap .sitemap-items ul:empty {
+      display: none; }
+    #sitemap .sitemap-items ul .list-title {
+      margin-bottom: 15px; }
+
+#ranking > .title {
+  margin: 20px;
+  color: var(--card-text-color-main); }
+
+#ranking .section-title {
+  padding: 10px; }
+  #ranking .section-title ~ .section-title {
+    margin-top: 80px; }
+
+#ranking #ranking-menu-area {
+  display: flex; }
+
+#ranking #ranking-menu {
+  display: flex;
+  text-align: center;
+  margin: 20px auto 0;
+  list-style: none;
+  border: 1px solid var(--card-separator-color);
+  border-radius: 16px;
+  padding: 0;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 0.8rem;
+  top: 0; }
+  #ranking #ranking-menu li {
+    margin: 0; }
+    #ranking #ranking-menu li.current a {
+      color: #FFF;
+      font-weight: bold;
+      background-color: #34495e; }
+    #ranking #ranking-menu li ~ li {
+      border-left: 1px solid var(--card-separator-color); }
+    #ranking #ranking-menu li a {
+      display: block;
+      padding: 8px 20px; }
+
+#ranking .link {
+  margin: 40px auto 80px; }
+  #ranking .link a {
+    display: block;
+    border: 1px solid var(--card-separator-color);
+    padding: 10px 20px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--card-text-color-main);
+    background: var(--card-background);
+    box-shadow: var(--shadow-l1);
+    border-radius: 4px; }
+
+#ranking .ranking-item {
+  position: relative; }
+  #ranking .ranking-item:before {
+    content: attr(data-rank) " PV";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f39c12;
+    color: #FFF;
+    font-size: 0.8em;
+    display: block;
+    min-width: calc(1em + 16px);
+    padding: 4px 8px;
+    line-height: 1;
+    z-index: 1;
+    text-align: center;
+    transition: bottom ease-out 0.4s; }
+  #ranking .ranking-item:hover {
+    z-index: 1; }
+    #ranking .ranking-item:hover:before {
+      z-index: 2;
+      bottom: 5px; }
