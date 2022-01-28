@@ -12,6 +12,12 @@ tags:
   - 鈴木維一郎
 ---
 
+## はじめに
+  + まずはこちらをやりましょう。
+[パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿](https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/)
+
+
+
 ## 必要なもの
  - iPad
  - Termiusというアプリ
@@ -322,4 +328,10 @@ $ exit
 
   + 詳しくはこちら
   [Linux screenコマンド使い方](https://qiita.com/hnishi/items/3190f2901f88e2594a5f)
+
+
+{{% tips-list tips %}}
+ヒント
+: screen は王者のコマンドです。プログラマーの多くはローカルのターミナルでタブを作成します。screen はサーバー上で仮想端末を作成します。screenはvim同様、プログラマーを選びます。Linuxを語るなら vim と screen そして bash の習熟が必須なのです。
+{{% /tips-list %}}
 
