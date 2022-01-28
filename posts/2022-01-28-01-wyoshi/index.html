@@ -1,0 +1,869 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末">
+<title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 - NLP</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<meta property="og:title" content="パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 - NLP">
+<meta property="og:description" content="iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="CSS"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="EC2"><meta property="article:tag" content="AWS"><meta property="article:published_time" content="2022-01-28T15:35:18+09:00"><meta property="article:modified_time" content="2022-01-28T06:41:03+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg">
+<meta name=twitter:title content="パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 - NLP">
+<meta name=twitter:description content="iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-28-01-wyoshi/img11.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg"],"datePublished":"2022-01-28T15:35:18+09:00","dateModified":"2022-01-28T06:41:03.838873708Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_56>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_17>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.01.28</time>
+<time class="article-time--item article-time--reading">
+読了時間: 6分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#iphoneやipadでターミナルを使う>iPhoneやiPadでターミナルを使う</a></li>
+<li><a href=#初期設定>初期設定</a></li>
+<li><a href=#サーバに接続>サーバに接続</a></li>
+<li><a href=#tabはどうするの>Tabはどうするの？</a></li>
+<li><a href=#hugoで記事を書いて確認する>hugoで記事を書いて確認する</a>
+<ol>
+<li><a href=#ec2でファイヤーウォールを設定している場合>EC2でファイヤーウォールを設定している場合</a></li>
+</ol>
+</li>
+<li><a href=#ipadで確認しながら更新をする>iPadで確認しながら更新をする</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。<br>
+そうした端末を使って記事が投稿できたら、スタバやドトールなどのカフェでコーヒーを飲みながら記事を書くことができてしまいます。</p>
+<p>今回は、AmazonのEC2上にあるHugoのブログをiPadを使って更新して見たいと思います。</p>
+<h2 id=iphoneやipadでターミナルを使う>iPhoneやiPadでターミナルを使う</h2>
+<p>iPhoneやiPadにも数多くの素晴らしいターミナルアプリがあります。<br>
+その中でも私が使っているのは<a class=link href=https://apps.apple.com/jp/app/termius-ssh-client/id549039908 target=_blank rel=noopener>Termius: Terminal & SSH client</a>というアプリです。</p>
+<p>このアプリはターミナルの機能を持っており、SSHでのサーバ接続も可能です。もちろんログインの際にpemファイルなどを使用することも可能です。</p>
+<p>基本的な機能は無料で使用できるので、まずはインストールをしてみましょう。</p>
+<h2 id=初期設定>初期設定</h2>
+<p>起動すると、アカウントの登録が必要かと思いますが、必要ありません。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01_hu52e9f72a490da9d682971811510aaec3_345831_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01_hu52e9f72a490da9d682971811510aaec3_345831_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>下にある「Learn more」を押して、「Continue without account」にてログイン無しで使えます。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02_hu577cbb33b1bef7ebfdbb4ae55c9f95df_202008_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02_hu577cbb33b1bef7ebfdbb4ae55c9f95df_202008_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>課金すると様々な機能を使えるようになるので、そういった機能でより便利に使いたい人は是非、課金してください。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03_hu843b7e0264b2a3c52b792f3a0af02a7c_202962_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03_hu843b7e0264b2a3c52b792f3a0af02a7c_202962_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>インストールが終わったら「New Hosts」をタプして、ログインしたいサーバを追加するか、「Hosts」メニューの右上にある「＋」ボタンを押してサーバを追加します。</p>
+<p>Alias には自分がわかりやすい名前をつけます。<br>
+Hostname にはサーバのドメイン名やIPアドレスを入力します。<br>
+Port はSSHを使うときのポートです。<br>
+そして、ユーザー名とパスワードを使っている人はパスワードを入力します。<br>
+<figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04_hu1961b9175bd8eda56d7f90c720d553e6_193432_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04_hu1961b9175bd8eda56d7f90c720d553e6_193432_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>pemファイルを使っている人は、pemの内容をコピーして貼り付けるか、パソコンからpemを送信します。<br>
+送信はパソコンでiPadなどを接続して、ファイルタブから贈りたいpemファイルをドラッグ・アンド・ドロップします。<br>
+<figure class=gallery-image style=flex-grow:180;flex-basis:433px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg data-size=980x543>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg width=980 height=543 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05_hu9755058bdec45cce3dbd7b63989a6fe0_79154_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05_hu9755058bdec45cce3dbd7b63989a6fe0_79154_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>pemファイルをiPadに送り終わったら、Keyを押して、左上の「+」「Import Key」にて先程送ったファイルを選択します。<br>
+これでキーが設定されました。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06_hu4f374d158c08ff1b7dd3a6d2fb2ac46f_235529_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06_hu4f374d158c08ff1b7dd3a6d2fb2ac46f_235529_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>ここまで設定できたら、左上の「Save」にて保存しましょう。<br>
+以上でサーバに接続する準備ができました。</p>
+<h2 id=サーバに接続>サーバに接続</h2>
+<p>Alias に設定した名前でアイコンが作成されているかと思います。<br>
+そのアイコンを押すと、know hostsに登録するかどうか聞かれるので、「Continue」を押して追加します。<br>
+うまく設定できていたらサーバに接続できると思います。<br>
+できない場合は、アイコンを長押しして、「Edit」にて情報を正しいものに修正しましょう。</p>
+<h2 id=tabはどうするの>Tabはどうするの？</h2>
+<p>SSHではtabコマンドで入力の補完を設定しているケースがあるともいます。<br>
+iPadにはタブというキーがありません。さて……どうしたものでしょうか。Termius はそこもよく考えられていて、通常であれば画面をタブルタップすると「Tab」と一瞬表示されてタブキーを押したときと同様のことが行なえます。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07_hu9755058bdec45cce3dbd7b63989a6fe0_92183_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07_hu9755058bdec45cce3dbd7b63989a6fe0_92183_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>その他にも、キーボードの上にある「…」マークを押して、「ギアーアイコン」を押すと初期のキーボード上部のボタンを変更することが可能です。</p>
+<p><figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08_hu9755058bdec45cce3dbd7b63989a6fe0_108913_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08_hu9755058bdec45cce3dbd7b63989a6fe0_108913_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>Tabキーやコントロールキーが使えるとiPadでも十分使えますね。</p>
+<h2 id=hugoで記事を書いて確認する>hugoで記事を書いて確認する</h2>
+<p>hugoで記事を書くやり方は<a class=link href=http://localhost:1313/posts/2021-12-22-hugo-01-ywat/ target=_blank rel=noopener>デザイナーでもできる初めてのHUGO #01</a>を参照してください。</p>
+<p>EC2で記事を書いて、確認しようとするとある疑問を持ってしまいます。それは確認用のサーバはどうしたら良いのかということです。<br>
+通常であれば「localhost:1313」などのURLで確認できます。しかし、EC2ではlocalhostとしてもEC2本体のアドレスではないので、確認できません。</p>
+<p>hugoにはIPを指定してサーバを起動する機能があります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>hugo server --baseURL<span class=o>=[</span>URL<span class=o>]</span>
+</code></pre></div><p>上記のコマンドでアクセスできるかというと、まだ駄目です。</p>
+<p>最終的なコマンドは</p>
+<pre tabindex=0><code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+</code></pre><p>となります。</p>
+<p>ここで重要なのが<code>--bind=0.0.0.0</code>になります。</p>
+<p>ここまできたら、ほぼほぼ確認できるようになっています。</p>
+<h3 id=ec2でファイヤーウォールを設定している場合>EC2でファイヤーウォールを設定している場合</h3>
+<p>EC2を使用している場合、ALBやELBを設定していることが多いと思います。<br>
+先程指定したポートが空いているか確認して、空いていない場合は、EC2の設定で開けましょう。</p>
+<p>EC2のインバウンドルールに開けたいポートを追加します。<br>
+セキュリティーグループを使用している場合は、「インバウンドのルールを編集」をクリックして追加します。</p>
+<p><figure class=gallery-image style=flex-grow:164;flex-basis:395px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png data-size=980x594>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png width=980 height=594 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09_hu3cb57a7e4d04bb4aec75398ddaff6f7a_121070_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09_hu3cb57a7e4d04bb4aec75398ddaff6f7a_121070_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>下にある「ルールを追加」を押して、「カスタムTCP」にします。<br>
+次に、ポート範囲に開けたいポートを入力して、CIDR ブロックにインターネットゲートウェイを指すすべての IPv4 トラフィック (0.0.0.0/0) のルートを追加します。<br>
+IPv6の場合も追加したいので、もう一度「ルールを追加」を押して、ポートを入力し、IPv6 トラフィック (::/0) のルートを入力します。<br>
+設定が終わったら、保存しましょう。<br>
+これでポートの設定が完了しました。</p>
+<p><figure class=gallery-image style=flex-grow:411;flex-basis:988px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png data-size=980x238>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png width=980 height=238 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10_hud82d274ef2fdd6aec2256538b94853ba_49084_480x0_resize_box_3.png 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10_hud82d274ef2fdd6aec2256538b94853ba_49084_1024x0_resize_box_3.png 1024w" loading=lazy>
+</a>
+</figure></p>
+<h2 id=ipadで確認しながら更新をする>iPadで確認しながら更新をする</h2>
+<p>サーバにログインして、先程の</p>
+<pre tabindex=0><code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+</code></pre><p>でサーバを立ち上げます。<br>
+このとき、下書きの記事を表示したいときは</p>
+<pre tabindex=0><code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート] -D
+</code></pre><p>として下書きも表示するようにしましょう。</p>
+<p>また、サーバのアドレスがわからない場合は</p>
+<pre tabindex=0><code>$ curl -s ifconfig.me
+</code></pre><p>とすればIPアドレスがわかります。</p>
+<p>iPadにはSplitビューがついているので、片方でブログを書きながら、　もう片方でSafariなどを立ち上げて立ち上げて記事を確認しながら記述することが可能です。<br>
+<figure class=gallery-image style=flex-grow:152;flex-basis:365px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg data-size=980x644>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg width=980 height=644 srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_480x0_resize_q75_box.jpg 480w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_1024x0_resize_q75_box.jpg 1024w" loading=lazy>
+</a>
+</figure></p>
+<h2 id=まとめ>まとめ</h2>
+<p>iPadを使うとどこでも、重いパソコンを持たなくても簡単にブログを更新することができるようになります。是非オススメなので、みなさんも試してみてください。</p>
+<h2 id=おすすめの書籍>おすすめの書籍</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) </h2>
+<p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 </p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 </h2>
+<p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_1600x0_resize_q75_box.jpg 1600w" width=800 height=800 loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_1600x0_resize_q75_box.jpg 1600w" width=800 height=558 loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_1600x0_resize_q75_box.jpg 1600w" width=800 height=600 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_800x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_800x0_resize_box_3.png 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_1600x0_resize_box_3.png 1600w" width=800 height=800 loading=lazy alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回は「Webデザイナー、コーダーってなに？」です。「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。 初心者の方、そうでない方など、いろいろな方大歓迎です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_800x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_800x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_1600x0_resize_q75_box.jpg 1600w" width=800 height=541 loading=lazy alt="Featured image of post 2022年のウェブデザインのトレンドとレイアウト">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のウェブデザインのトレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年のトレンドは、より大胆で、よりクリエイティブで、よりインタラクティブなデザインに移行しています。2022年に期待されるトレンドを取り入れ、新しい年のクリエイティビティを高めてください。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/>Web開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/html/>HTML</a>
+<a href=https://suzukiiichiro.github.io/tags/css/>css</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>Webデザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/>フロントエンジニア</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/>コーダー</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/ec2/>EC2</a>
+<a href=https://suzukiiichiro.github.io/tags/aws/>AWS</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" data-hash="md5-ctW+IgIy6OGJUXCAttIr6A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法" data-hash="md5-oXmVUdrErutU+xsHiXcMrg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" data-hash="md5-TYyEsFfpI0MZsMVhktAXyA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-１」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-２」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-16-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-16-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【１６．文字列の部分文字列を取得する】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１６．文字列の部分文字列を取得する】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年01月>
+2022年01月（59）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_41>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_41>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_29>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_15>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_15>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_15>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_12>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_11>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_11>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_11>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_11>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_5>
+コーダー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-１」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.488b55009e75038e124921f9eab8112f_hub5e89b620d2afe5c10cf3894738f1203_124480_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" data-hash="md5-SItVAJ51A44SSSH56rgRLw==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-２」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post デザイナーでもできる初めてのHUGO #01" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHUGO #01</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
