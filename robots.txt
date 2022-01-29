@@ -1,17 +1,3 @@
-User-agent: Googlebot-Image
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.gif$
-
 User-agent: *
-Disallow: /*.jpg$
-Disallow: /*.png$
-Disallow: /*.gif$
-Disallow: /assets/
 Disallow: /404.html
-Disallow: /js/
-Disallow: /ts/
-Disallow: /images/
-Disallow: /scss/
-Disallow: /css/
 Allow: /
