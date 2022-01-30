@@ -74,6 +74,8 @@ caches:
     dir: :cacheDir/:project
     maxAge: 10m
 
+disableKinds: ["RSS", "sitemap"]
+
 params:
     paginate:
         slots: 5
