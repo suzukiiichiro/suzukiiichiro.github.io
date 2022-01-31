@@ -21,11 +21,9 @@
     <section id="{{ .Name }}">
       <h2 class="archives-date section-title">{{- .Name -}}</h2>
       <div class="article-list related-contents--wrapper">
-        <div class="article-list">
-          {{ range first 6 .Pages }}
-            {{ partial "article-list/default" . }}
-          {{ end }}
-        </div>
+      {{ range first 6 .Pages }}
+        {{ partial "article-list/default" . }}
+      {{ end }}
       </div>
       <div class="link-btns"><a href="{{- .Page.Permalink -}}">{{ .Name }}をもっと見る</a></div>
     {{- end -}}
