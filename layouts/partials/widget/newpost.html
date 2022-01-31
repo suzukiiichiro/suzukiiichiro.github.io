@@ -4,7 +4,7 @@
       <div class="flex article-list--tile">
         {{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
         {{- range first .Site.Params.widgets.newpost.limit $pages -}}
-          {{- partial "article-list/tile" (dict "context" . "size" "160x90" "Type" "articleList") -}}
+          {{- partial "article-list/tile" (dict "context" . "size" "160x90 webp" "Type" "articleList") -}}
         {{- end -}}
     </div>
   </div>
