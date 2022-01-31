@@ -5,6 +5,13 @@
 {{- $title = .Params.slugTitle -}}
 {{- end -}}
 
+{{- $siteSub := "" -}}
+{{- if .Site.Params.sidebar.subtitle -}}
+{{- $siteSub = .Site.Params.sidebar.subtitle -}}
+{{- $siteTitle = printf "%s | %s" $siteTitle .Site.Params.sidebar.subtitle -}}
+{{- end -}}
+
+
 {{- if .IsHome -}}
   <!-- Homepage, and it's pagination -->
   <!-- Build paginator -->
@@ -15,9 +22,9 @@
 
   {{ if .Paginator.HasPrev }}
     <!-- Paginated. Append page number to title -->
-    {{ $title = printf "%s / %dページ目 - %s" $siteTitle .Paginator.PageNumber .Site.Params.sidebar.subtitle }}
+    {{ $title = printf "%dページ目 - %s" .Paginator.PageNumber $siteTitle}}
   {{ else }}
-    {{ $title = printf "%s - %s" $title .Site.Params.sidebar.subtitle }}
+    {{ $title = printf "%s" $siteTitle}}
   {{ end }}
 
 {{- else if eq .Kind "term" -}}

@@ -167,3 +167,21 @@ body {
     height: auto !important;
   }
 }
+
+
+
+.link-btns {
+  margin: 40px auto 80px;
+  a {
+    display: block;
+    border: 1px solid var(--card-separator-color);
+    padding: 10px 20px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--card-text-color-main);
+    background: var(--card-background);
+    box-shadow: var(--shadow-l1);
+    border-radius: 4px;
+  }
+}

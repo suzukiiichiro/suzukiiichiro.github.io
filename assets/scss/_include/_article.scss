@@ -609,3 +609,45 @@
     }
   }
 }
+
+.terms-top {
+  > .title {
+    padding: 0 20px;
+  }
+  #terms-nav {
+    padding: 10px 20px;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      li {
+        line-height: 1;
+        margin: 0 8px 8px 0;
+        padding: 6px 12px;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        a {
+          color: var(--card-text-color-secondary);
+          display: block;
+        }
+      }
+    }
+  }
+  .archives-date {
+    &.section-title {
+      padding: 10px;
+    }
+  }
+  .related-contents--wrapper {
+    margin: 0 -5px;
+    padding: 0 20px;
+    .article-list {
+      article {
+        width: calc(100% / 3);
+      }
+    }
+  }
+}
