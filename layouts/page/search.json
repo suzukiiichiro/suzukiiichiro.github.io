@@ -11,7 +11,7 @@
     {{- if $image.exists -}}
         {{- $imagePermalink := "" -}}
         {{- if and $image.resource (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
-            {{- $thumbnail := $image.resource.Resize "x400 webp" -}}
+            {{- $thumbnail := $image.resource.Resize "x400" -}}
             {{- $imagePermalink = (absURL $thumbnail.Permalink) -}}
         {{- else -}}
             {{- $imagePermalink = $image.permalink -}}
