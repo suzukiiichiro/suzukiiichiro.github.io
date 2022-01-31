@@ -14,9 +14,6 @@
         <h2 class="archives-date section-title"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></h2>
         <div class="article-list">
             {{ range $index, $element := .Pages }}
-            {{- if eq $index 3 -}}
-                {{- partial "ads/list-infeed" -}}
-            {{- end -}}
             {{ partial "article/components/header" . }}
             {{ end }}
         </div>
