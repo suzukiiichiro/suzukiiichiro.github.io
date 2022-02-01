@@ -162,6 +162,12 @@ body {
     box-shadow: var(--shadow-l1);
     border-radius: 4px; }
 
+.main h1.title {
+  font-size: 1.4rem; }
+
+.main > h1.title {
+  margin: 20px; }
+
 footer.site-footer {
   background-color: #34495e;
   color: #FFF;
@@ -716,6 +722,7 @@ footer.site-footer {
       font-weight: normal; } }
 
 .terms-top > .title {
+  font-size: 1.4rem;
   padding: 0 20px; }
 
 .terms-top #terms-nav {
