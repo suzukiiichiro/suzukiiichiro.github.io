@@ -1,0 +1,951 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って">
+<title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
+<meta property="og:title" content="Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="Javascript"><meta property="article:published_time" content="2022-02-01T14:19:43+09:00"><meta property="article:modified_time" content="2022-02-01T06:47:40+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg">
+<meta name=twitter:title content="Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-01-01-wyoshi/catch.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"],"datePublished":"2022-02-01T14:19:43+09:00","dateModified":"2022-02-01T06:47:40.188523774Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class="site-name site-avatar">
+<a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt>
+</a>
+</h1>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_56>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_18>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</aside>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.02.01</time>
+<time class="article-time--item article-time--reading">
+読了時間: 6分
+</time>
+</div>
+</header>
+<h2 class=article-title>
+Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。
+</h2>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#uiをロックしてしまうループ処理>UIをロックしてしまうループ処理</a></li>
+<li><a href=#workerとは>Workerとは</a></li>
+<li><a href=#uiをロックしないで行えるループ>UIをロックしないで行えるループ</a></li>
+<li><a href=#settimeoutでもできるけどおすすめはしない>setTimeoutでもできるけど、おすすめはしない</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。</p>
+<p>特に重い処理を行うと、js の処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。</p>
+<p>そういったときは <strong>Worker</strong> を使って重い処理を別タスクとして実行することで、画面上の処理と、重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。</p>
+<p>今回はその方法を説明していきます。</p>
+<h2 id=uiをロックしてしまうループ処理>UIをロックしてしまうループ処理</h2>
+<p>まずは画面をロックしてしまうような記述です。<br>
+下記のような HTML があったとしましょう。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html:index.html data-lang=html:index.html><span class=cp>&lt;!DOCTYPE html&gt;</span>
+<span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;ja&#34;</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;UTF-8&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;viewport&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;width=device-width, initial-scale=1.0&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span>Document<span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+    <span class=p>#</span><span class=nn>animation</span><span class=p>:</span><span class=nd>before</span> <span class=p>{</span>
+      <span class=k>content</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+      <span class=k>width</span><span class=p>:</span> <span class=mi>5</span><span class=kt>em</span><span class=p>;</span>
+      <span class=k>height</span><span class=p>:</span> <span class=mi>5</span><span class=kt>em</span><span class=p>;</span>
+      <span class=k>display</span><span class=p>:</span> <span class=kc>block</span><span class=p>;</span>
+      <span class=k>border</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>black</span><span class=p>;</span>
+      <span class=k>margin</span><span class=p>:</span> <span class=mi>50</span><span class=kt>px</span> <span class=kc>auto</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=p>@</span><span class=k>keyframes</span> <span class=nt>rotation</span> <span class=p>{</span>
+      <span class=nt>0</span><span class=o>%</span><span class=p>{</span> <span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>0</span><span class=p>);}</span>
+      <span class=nt>100</span><span class=o>%</span><span class=p>{</span> <span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>);</span> <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=p>.</span><span class=nc>run</span> <span class=p>#</span><span class=nn>animation</span><span class=p>:</span><span class=nd>before</span> <span class=p>{</span>
+      <span class=k>animation</span><span class=p>:</span> <span class=mi>2</span><span class=kt>s</span> <span class=kc>linear</span> <span class=kc>infinite</span> <span class=k>rotation</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=p>.</span><span class=nc>run</span> <span class=nt>button</span> <span class=p>{</span>
+      <span class=k>background-color</span><span class=p>:</span> <span class=kc>red</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;animation&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;button&#34;</span> <span class=na>onClick</span><span class=o>=</span><span class=s>&#34;run()&#34;</span><span class=p>&gt;</span>Run<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>h1</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;counter&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;time&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></div><p>この HTML は counter 部分 に文字を出力できるようにしてあります。<br>
+そして、実行時間を time 部分に出力できるようにしてあります。</p>
+<p>それでは、ここに for 文を使って、文字を追加していってみます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:for01.js data-lang=javascript:for01.js><span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>add</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>start</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span>
+  <span class=kr>const</span> <span class=nx>elem</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#counter&#34;</span><span class=p>);</span>
+  <span class=k>for</span><span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=mi>100000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+   <span class=nx>elem</span><span class=p>.</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nx>i</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#time&#34;</span><span class=p>).</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span> <span class=o>-</span> <span class=nx>start</span><span class=p>;</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>remove</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+<span class=p>};</span>
+</code></pre></div><p>上のようなfor文で記述したスクリプトを作ってみました。<br>
+iの値をcounterに反映していくだけのものです。<br>
+まずはiの最大値を 100000 くらいで実行してみましょう。</p>
+<p>実行したところ、999999 と表示され、time部分の処理は 569 ミリ秒ということになります。</p>
+<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif data-size=1604x1324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif width=1604 height=1324 srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01_hufbe1bf99156ed460c8ed956758505474_1711199_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01_hufbe1bf99156ed460c8ed956758505474_1711199_1024x0_resize_box.gif 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>ここで注目してほしいのが、counter の文字を変化させているにも関わらず、その文字が反映されていないという点です。<br>
+Chrome の Developper tool で確認しても、変化しているようではありますが、画面上では反映されていません。</p>
+<p>重い処理を行う場合をフロントで行うと、 UX の低下につながってしまいます。<br>
+そこで使うのが、 Worker 処理ということになります。</p>
+<h2 id=workerとは>Workerとは</h2>
+<p>Worker とはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。</p>
+<p>フロントで処理を行わないので、画面ロックを発生させることなく重い処理を実行できます。<br>
+Worker を使用するには実行したいファイル名を指定して呼びします。</p>
+<p>そして、対象のワーカーに値などを <strong>postMessage</strong> で値を渡します。<br>
+postMessage 部分は配列や連想配列のデータでも構いません。</p>
+<p>そして、対象のWorker側でpostされたデータを受信するように設定します。<br>
+受信の際はフロントであれば <code>worker.addEventListener('message', (e) => {})</code> を、Workerであれば <code>self.addEventListener('message', (e) => {})</code> を使用します。<br>
+処理内容を返却する際は、先ほどと同じように postMessage を使います。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:main.js data-lang=javascript:main.js><span class=kr>const</span> <span class=nx>worker</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Worker</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>fileName</span><span class=p>);</span>
+<span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nx>worker</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=s2>&#34;run&#34;</span><span class=p>);</span>
+<span class=p>};</span>
+<span class=nx>worker</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>data</span><span class=p>);</span>
+<span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:worker.js data-lang=javascript:worker.js><span class=nx>self</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=c1>//処理内容
+</span><span class=c1></span>
+  <span class=c1>//処理結果を送信
+</span><span class=c1></span>  <span class=nx>self</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>data</span><span class=p>);</span>
+<span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
+</code></pre></div><h2 id=uiをロックしないで行えるループ>UIをロックしないで行えるループ</h2>
+<p>それでは、先ほどロックしてしまったjsをworkerにしてみましょう。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:worker_main.js data-lang=javascript:worker_main.js><span class=kr>const</span> <span class=nx>worker</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Worker</span><span class=p>(</span><span class=s2>&#34;worker.js&#34;</span><span class=p>);</span>
+<span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>add</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>start</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span>
+  <span class=kr>const</span> <span class=nx>elem</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#counter&#34;</span><span class=p>);</span>
+  <span class=nx>worker</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=s2>&#34;run&#34;</span><span class=p>);</span>
+  <span class=nx>worker</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=k>if</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>mode</span> <span class=o>===</span> <span class=s1>&#39;end&#39;</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#time&#34;</span><span class=p>).</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span> <span class=o>-</span> <span class=nx>start</span><span class=p>;</span>
+      <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>remove</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+      <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#counter&#34;</span><span class=p>).</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>();</span>
+  <span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
+<span class=p>};</span>
+</code></pre></div><p>続いて、Worker部分の処理になります。<br>
+worker部分ではフロントの worker_main.js から実行されたタイミングで動作を開始して、ループの値をフロントに戻すようにしてあります。<br>
+ループが終了すると、mode: end と終わったことを通知するようにしました。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:worker.js data-lang=javascript:worker.js><span class=nx>self</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=c1>//処理内容
+</span><span class=c1></span>  <span class=k>for</span><span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=mi>100000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+   <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>i</span><span class=p>);</span>
+   <span class=nx>self</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>({</span><span class=nx>value</span><span class=o>:</span> <span class=nx>i</span><span class=p>});</span>
+  <span class=p>}</span>
+  <span class=nx>self</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>({</span><span class=nx>mode</span><span class=o>:</span> <span class=s1>&#39;end&#39;</span><span class=p>});</span>
+  <span class=c1>//処理結果を送信
+</span><span class=c1></span><span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
+</code></pre></div><p>それでは実行してみましょう。</p>
+<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif data-size=1604x1324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif width=1604 height=1324 srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02_hucbe026786833fba60d06a8f7aef80903_6907129_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02_hucbe026786833fba60d06a8f7aef80903_6907129_1024x0_resize_box.gif 1024w" loading=lazy>
+</a>
+</figure></p>
+<p>実行すると、先ほどと全く違うUIになっているかと思います。<br>
+実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。<br>
+Workerなしの処理ではJavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。</p>
+<h2 id=settimeoutでもできるけどおすすめはしない>setTimeoutでもできるけど、おすすめはしない</h2>
+<p>UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。<br>
+この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:timer.js data-lang=javascript:timer.js><span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>add</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+  <span class=kr>const</span> <span class=nx>start</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span>
+  <span class=kr>const</span> <span class=nx>elem</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#counter&#34;</span><span class=p>);</span>
+  <span class=k>for</span><span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=mi>100000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>setTimeout</span><span class=p>(()=&gt;{</span>
+      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>i</span><span class=p>);</span>
+      <span class=nx>elem</span><span class=p>.</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nx>i</span><span class=p>;</span>
+    <span class=p>},</span> <span class=mi>0</span><span class=p>);</span>
+  <span class=p>}</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#time&#34;</span><span class=p>).</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span> <span class=o>-</span> <span class=nx>start</span><span class=p>;</span>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>remove</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
+<span class=p>};</span>
+</code></pre></div><p>数字部分は変化しますが、先程のようにアニメーションは行われません。<br>
+forの処理が先に終了してしまうため、cssのアニメーションが一瞬で終了してしまうのです。</p>
+<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif data-size=1604x1324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif width=1604 height=1324 srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03_hu94f2e2a9a13736a35064f8ae9d0944dd_2288115_480x0_resize_box.gif 480w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03_hu94f2e2a9a13736a35064f8ae9d0944dd_2288115_1024x0_resize_box.gif 1024w" loading=lazy>
+</a>
+</figure></p>
+<h2 id=まとめ>まとめ</h2>
+<p>Javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。<br>
+Worker を使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。</p>
+<p>重い処理を行う際は、Workerを使って別タスクで行ってユーザーにストレスを与えないサイトを作っていきましょう。</p>
+<h2 id=おすすめの書籍>おすすめの書籍</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/%e3%82%b2%e3%83%bc%e3%83%a0%e3%81%a7%e5%ad%a6%e3%81%b6JavaScript%e5%85%a5%e9%96%80-HTML5-CSS%e3%82%82%e8%ba%ab%e3%81%ab%e4%bb%98%e3%81%8f-%e7%94%b0%e4%b8%ad-%e8%b3%a2%e4%b8%80%e9%83%8e/dp/4844339788/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/51SCEJnrZGL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> ゲームで学ぶJavaScript入門 HTML5&CSSも身に付く! </h2>
+<p> 「JavaScriptでココまでできる!」 中学生、高校生のための、ゲームプログラミング入門書の決定版! JavaScriptを使用したWebブラウザゲームの製作ノウハウを解説する入門書です。 Webページをまったく作ったことはないが、現在主流となっているブラウザゲームに興味があり、 「自分でもゲームプログラミングに挑戦してみたい!」と考えている初心者、とくに中・高校生に最適です。 本書では「より面白く」「見栄え良く」をモットーに、13本のサンプルゲームを紹介しています。 ゲームを作りながら、JavaScriptだけでなくHTML5やCSSといったWeb技術の基本もしっかり学習できます。 最後までラクに読めて、感覚的に仕組みを理解できるように、 「楽しさ」が感じられて「飽きさせない」ことを重視した構成になっています。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/%e7%a2%ba%e3%81%8b%e3%81%aa%e5%8a%9b%e3%81%8c%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8fJavaScript%e3%80%8c%e8%b6%85%e3%80%8d%e5%85%a5%e9%96%80-%e7%ac%ac2%e7%89%88-%e7%8b%a9%e9%87%8e-%e7%a5%90%e6%9d%b1/dp/4815601577/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/51RXlVPRVuL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> 確かな力が身につくJavaScript「超」入門 第2版 </h2>
+<p> ◎ 3万部突破のベストセラーが充実のアップデート! JavaScriptをこれから始める人にも、前に挫折したことのある人にも。 手を動かしてサンプルをひとつずつ作っていくことで、知識だけでなく、 現場で活きる、応用・実践につながる基礎力が「この一冊で」身につきます。 ポイント1「サンプルが楽しい。」 よくある“勉強のためのサンプル"を可能な限り排除し、「こういうの見たことある! 」「こういうのが作ってみたかった! 」というような、実際に仕事に使えそうなサンプルを集めました。なので、最初の「やるぞ! 」というモチベーションを維持したまま、最後のページまで読み進めることができます。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.28>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x400_resize_q75_box.jpg 1600w" width=304 height=200 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.28</time>
+</div><p class=article-subtitle>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x400_resize_q75_box.jpg 1600w" width=200 height=200 loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x400_resize_q75_box.jpg 1600w" width=287 height=200 loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x400_resize_q75_box.jpg 1600w" width=267 height=200 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x200_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x200_resize_box_3.png 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x400_resize_box_3.png 1600w" width=200 height=200 loading=lazy alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回は「Webデザイナー、コーダーってなに？」です。「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。 初心者の方、そうでない方など、いろいろな方大歓迎です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x400_resize_q75_box.jpg 1600w" width=296 height=200 loading=lazy alt="Featured image of post 2022年のウェブデザインのトレンドとレイアウト">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のウェブデザインのトレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年のトレンドは、より大胆で、よりクリエイティブで、よりインタラクティブなデザインに移行しています。2022年に期待されるトレンドを取り入れ、新しい年のクリエイティビティを高めてください。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.18>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu535661bce2c742bf7a0f6a055ac0b6d1_28043_0x400_resize_q75_box.jpg 1600w" width=374 height=200 loading=lazy alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.18</time>
+</div><p class=article-subtitle>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりまし...</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/>Web開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/html/>HTML</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>Webデザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/>フロントエンジニア</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/>コーダー</a>
+<a href=https://suzukiiichiro.github.io/tags/javascript/>Javascript</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_400x238_fill_q75_box_smart1.jpg width=400 height=238 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" data-hash="md5-ctW+IgIy6OGJUXCAttIr6A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。" data-hash="md5-T9BjCbCDfGnhw1lzW8uCZA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" data-hash="md5-ctW+IgIy6OGJUXCAttIr6A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法" data-hash="md5-oXmVUdrErutU+xsHiXcMrg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" data-hash="md5-ctW+IgIy6OGJUXCAttIr6A==">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" data-hash="md5-TYyEsFfpI0MZsMVhktAXyA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_e323c40fdcfb845cf9d0df3d7be9613a.jpg width=160 height=90 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-３」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+2022年02月（1）
+</option><option value=/archives/#2022年01月>
+2022年01月（59）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_41>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_41>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_30>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_16>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_16>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_16>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_12>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_12>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_12>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_12>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_12>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_6>
+コーダー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+</div>
+</section>
+</aside>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-１」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法 #1" data-hash="md5-0iw6KfxFKCYkfXknIY8z1Q==">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-２」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 【８．If 文】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「bash-３」" data-hash="md5-f9/yBgPJeKvy4MwwiS1WPA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」" data-hash="md5-TYyEsFfpI0MZsMVhktAXyA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ" data-hash="md5-RmVb8Tz0dSVJyKAcswNkmg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x90_fill_q75_box_smart1.jpg width=160 height=90 loading=lazy alt="Featured image of post 【１．Hello World】ざっくりわかる「シェルスクリプト」" data-hash="md5-v1c/u88s4H3x/aPSsD8dXA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
