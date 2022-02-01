@@ -231,11 +231,11 @@ params:
 #         # Available values: auto, light, dark
 #         default: auto
 
-#     imageProcessing:
+    imageProcessing:
 #         cover:
 #             enabled: true
-#         content:
-#             enabled: true
+        content:
+            enabled: false
 
 # ### Custom menu
 # ### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
