@@ -5,23 +5,34 @@
     </span>
   </button>
   <header class="site-info">
+    {{ $ishome := .IsHome }}
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
+    {{- if $ishome -}}
     <h1 class="site-name site-avatar">
+    {{- else -}}
+    <div class="site-name site-avatar">
+    {{- end -}}
+
       <a href="{{ .Site.BaseURL | relLangURL }}">
         {{ if not .local }}
-        <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        <img src="{{ .src }}" width="60" height="60" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
         {{ else }}
         {{ $avatar := resources.Get (.src) }}
         {{ if $avatar }}
-        {{ $avatarResized := $avatar.Resize "300x" }}
+        {{ $avatarResized := $avatar.Resize "60x" }}
         <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
         {{ else }}
         {{ errorf "Failed loading avatar from %q" . }}
         {{ end }}
         {{ end }}
       </a>
+    {{- if $ishome -}}
     </h1>
+    {{- else -}}
+    </div>
+    {{- end -}}
+
     {{ end }}
     {{ end }}
     <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>

@@ -19,7 +19,7 @@
     </nav>
     {{- range $lists }}
     <section id="{{ .Name }}">
-      <h2 class="archives-date section-title">{{- .Name -}}</h2>
+      <h1 class="archives-date section-title">{{- .Name -}}</h1>
       <div class="article-list related-contents--wrapper">
       {{ range first 6 .Pages }}
         {{ partial "article-list/default" . }}

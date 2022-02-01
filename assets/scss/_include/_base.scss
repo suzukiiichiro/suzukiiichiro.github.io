@@ -185,3 +185,12 @@ body {
     border-radius: 4px;
   }
 }
+
+.main {
+  h1.title {
+    font-size: 1.4rem;
+  }
+  > h1.title {
+    margin:20px;
+  }
+}
