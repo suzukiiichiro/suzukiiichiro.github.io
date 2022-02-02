@@ -1,0 +1,936 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第２回目。再帰の挙動などアルゴリズムを使わないブルートフォース力任せ探索についてプログラムの詳細部分を説明します。">
+<title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<meta property="og:title" content="pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第２回目。再帰の挙動などアルゴリズムを使わないブルートフォース力任せ探索についてプログラムの詳細部分を説明します。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-27T15:55:55+09:00"><meta property="article:modified_time" content="2022-02-02T10:57:10+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/chess.jpg">
+<meta name=twitter:title content="pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第２回目。再帰の挙動などアルゴリズムを使わないブルートフォース力任せ探索についてプログラムの詳細部分を説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/chess.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/chess.jpg"],"datePublished":"2022-01-27T15:55:55+09:00","dateModified":"2022-02-02T10:57:10.661061975Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_60x0_resize_box_3.png width=60 height=60 class=site-logo loading=lazy alt>
+</a></div>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_57>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_18>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</div>
+<main class="main full-width">
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=name>anikotaro</span>
+</span>
+<time class="article-time--item article-time--published">2022.01.27</time>
+<time class="article-time--item article-time--updatedate">
+2022.02.02
+</time>
+<time class="article-time--item article-time--reading">
+読了時間: 6分
+</time>
+</div>
+</header>
+<h1 class=article-title>
+pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2）
+</h1>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#グローバル変数>グローバル変数</a></li>
+<li><a href=#nqueenメソッド>nqueenメソッド</a></li>
+<li><a href=#再帰の動きについて>再帰の動きについて</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<h2 id=グローバル変数>グローバル変数</h2>
+<p>今回は、前回からの引き続きでブルートフォース力任せ探索のプログラムの詳細部分を説明します。</p>
+<p>プログラムのソースは以下のURLをご覧ください。</p>
+<p><a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py</a></p>
+<p>まず、グローバル変数を見ていきましょう。</p>
+<p>417~420行目で設定しています。</p>
+<p>417行目 MAX、418行目 SIZEでNの数を指定します。<br>
+プログラムは8ですが、動作を説明するために4に変更してみてください。</p>
+<pre tabindex=0><code>MAX = 4
+SIZE = 4
+
+</code></pre><p>以降はN=4の問題として説明します。</p>
+<p>419行目 ABOARDという配列を宣言しクイーンを置いていきます。<br>
+ABOARD = [0 for i in range(MAX)]で4個の要素を0で初期化しています。<br>
+ABOARD = [0,0,0,0] と同じです。</p>
+<p>ABOARD[0]は1行目のクイーンを置く位置です0から3までの数字が入ります。<br>
+ABOARD[0]が3だと右から4番目にクイーンを置く感じになります。</p>
+<p>420行目 COUNT=0 でCOUNTを初期化しています。</p>
+<h2 id=nqueenメソッド>nqueenメソッド</h2>
+<p>グローバル変数の宣言が終わったら441行目でnqueenメソッドが呼び出されます。</p>
+<p>439行目でnqueenメソッドを再帰的に呼び出しているのが最も特徴的です。</p>
+<p>全体の動作については次の「再帰について」で図を交えて説明しますが前提として各行が何をしているか押さえましょう。</p>
+<pre tabindex=0><code> global ABOARD
+</code></pre><p>433行目で global ABOARDとして変数宣言しています。<br>
+関数内でグローバル変数に値を代入したい場合は、変数宣言時にglobalをつける必要があります。<br>
+globalをつけないとローカル変数として扱われます。<br>
+ちなみに、私は試しに433行目を削除して実行してみたのですがエラーになりました。</p>
+<pre tabindex=0><code> if row is SIZE:
+   printout()              
+</code></pre><p>434行目 if row is SIZE: はrowイコールSIZEという意味です。<br>
+if row == SIZE: としても今回は同じ動きになります。</p>
+<p>434-435行でやっていることは434行目のif文で最終行までクイーンを置き終わっているかどうかを判定し置き終わっていたらprintoutメソッドを呼び出してCOUNT数と各行のクイーンの設置場所を出力します。</p>
+<pre tabindex=0><code>  for i in range(SIZE)
+</code></pre><p>437行目 for i in range(SIZE) は0からスタートしてSIZEの回数分0,1,2,3と1ずつインクリメントしながらfor文を回します。<br>
+やっていることは各行にクイーンを設置する場所を右から左に1個ずつずらしています。1番左端までいったらfor文を抜けます。</p>
+<pre tabindex=0><code>  ABOARD[row] = i
+</code></pre><p>438行目のABOARD[row]=iでクイーンを設置しています。<br>
+rowは行を意味します。0からスタートして0,1,2,3まであります。<br>
+例えば、0だと1行目、3だと4行目となります。</p>
+<p>iはクイーンを設置する列になります。<br>
+0からスタートして0,1,2,3まであります。<br>
+例えば、0だと右から1列目、3だと右から4列目となります。</p>
+<p>例えばABOARD[2]=3 の場合は<br>
+3行目は右から4列目にクイーンを置くことになります。</p>
+<pre tabindex=0><code>  nqueen(row+1)
+</code></pre><p>439行目のnqueen(row+1)で再帰的にnqueenメソッドを呼び出しています。<br>
+やっていることは次の行への移動です。</p>
+<h2 id=再帰の動きについて>再帰の動きについて</h2>
+<p>再帰の基本的な動作で押さえたいのは以下の2つです。<br>
+・再帰を呼び出した時の動作<br>
+通常のメソッド呼び出しと同じです。メソッドの先頭に移動します。引数に渡された値が反映されます。<br>
+・再帰から抜ける時の動作<br>
+再帰から抜けると1階層前に戻り再帰を呼び出した場所の次の行に移動します。<br>
+変数の状態は再帰を呼び出す直前の状態に戻ります。</p>
+<p>再帰の呼び出しが実際にどういう動きになっているかは頭で考えても難しいので図を見ながら説明します。</p>
+<p>444行目でnqueenを0を渡して呼び出します(1階層目)。<br>
+432行目からスタートして<br>
+row=0なので436行目のelse:に行きそのまま437行目のfor文に入ります<br>
+最初のfor文なのでi=0です。<br>
+row=0なので<br>
+ABOARD[0]=0<br>
+で<br>
+1行目の右端にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q1.png data-size=322x324>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q1.png width=322 height=324 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを呼び出します。<br>
+row=0 row+1=1なので<br>
+nqueenを引数1を渡して呼び出します(2階層目)<br>
+432行目からスタートして<br>
+row=1なので436行目のelse:に行きそのまま437行目のfor文に入ります<br>
+最初のfor文なのでi=0です。<br>
+さっきもfor文が出てきましたが再帰は階層ごとにローカル変数を別に考える必要があります。<br>
+row=1なので<br>
+ABOARD[1]=0<br>
+で<br>
+2行目の右端にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:103;flex-basis:249px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q2.png data-size=328x316>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q2.png width=328 height=316 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数2を渡して呼び出します(3階層目)。<br>
+同様にfor文に入り、i=0 row=2なので<br>
+ABOARD[2]=0<br>
+で<br>
+3行目の右端にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q3.png data-size=330x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q3.png width=330 height=330 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数3を渡して呼び出します(4階層目)。</p>
+<p>同様にfor文に入り、i=0 row=3なので<br>
+ABOARD[3]=0<br>
+で<br>
+4行目の右端にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:98;flex-basis:237px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q4.png data-size=324x328>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q4.png width=324 height=328 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。</p>
+<p>row=4なのでif row is SIZE:でprintout()メソッドを呼び出してCOUNTと各行のクイーンの位置を出力します。<br>
+printout()後再帰から抜けて4階層目の439行目の後ろに移動します。<br>
+変数は再帰を呼び出す直前のものに戻るのでrowは3 iは0になります。</p>
+<p>for文の中にあるのでiを1インクリメントしてiは1になり次のfor文に移動します。<br>
+_<br>
+ABOARD[3]=1<br>
+で<br>
+4行目の右から2番目にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:241px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q5.png data-size=322x320>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q5.png width=322 height=320 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。<br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。</p>
+<p>for文の中にあるのでiを1インクリメントしてiは2になり次のfor文に移動します。<br>
+_<br>
+ABOARD[3]=2<br>
+で<br>
+4行目の右から3番目にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:241px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q6.png data-size=326x324>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q6.png width=326 height=324 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。<br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。</p>
+<p>for文の中にあるのでiを1インクリメントしてiは3になり次のfor文に移動します。<br>
+_<br>
+ABOARD[3]=3<br>
+で<br>
+4行目の右から4番目にクイーンを置きます。</p>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:241px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q7.png data-size=332x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q7.png width=332 height=330 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。<br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。<br>
+for文でiを1インクリメントすると4ですがrange(4)だと0,1,2,3までなのでここでfor文を抜けます。</p>
+<p>for文を抜けると439行目には移動しないので再帰から抜けて3階層目の439行目に移動します。</p>
+<p>3階層目ではrow=2 iは0です。<br>
+for文の中にあるのでiを1インクリメントしてiは1になり次のfor文に移動します。</p>
+<p>ABOARD[2]=1</p>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q8.png data-size=326x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q8.png width=326 height=326 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数3を渡して呼び出します(4階層目)。</p>
+<p>row=3なので436行目のelse:に行きそのまま437行目のfor文に入ります<br>
+最初のfor文なのでi=0です。</p>
+<p>ABOARD[3]=0</p>
+<p><figure class=gallery-image style=flex-grow:101;flex-basis:244px>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q9.png data-size=326x320>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q9.png width=326 height=320 loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。<br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。<br>
+という感じで下の階層からfor文でぐるぐる回転しながらうごいてゆきます。</p>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第一回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat hampelで時系列データの異常値検知">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat hampelで時系列データの異常値検知</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>e-Statの統計データhampelを使って時系列データの異常値検知試みます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.21>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.21</time>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（３）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果をjqでパースする方法を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>Google Custom Search APIで10件目以降の取得方法、newsなど検索対象の絞り込み方法について説明します。検索エンジンの設定にあるschema.orgを使用します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（１）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（１）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>2022年1月時点でのGoogle Custom Search APIの設定方法を説明します。APIキーの作成、検索エンジンIDの取得が中心です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（３）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（３）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.17</time>
+</div><p class=article-subtitle>ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post s-Stat 時系列データで異常値を検知しよう（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.17</time>
+</div><p class=article-subtitle>ここでは時系列データの異常値検知アルゴリズムであるhampel（ハンペル）のpythonライブラリの利用方法を説明します。インストールから基本的な使い方を説明します。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/nqueen/>nQueen</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--next>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post iPadに開発環境を構築してみるテスト" data-hash="md5-sVwYVINuMj97H8opWKXeHQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+</div>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<div class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_320x0_resize_q75_box.jpg 1600w" width=160 height=106 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_320x0_resize_q75_box.jpg 1600w" width=160 height=105 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/chess.jpg loading=lazy data-key data-hash=/chess.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_320x0_resize_q75_box.jpg 1600w" width=160 height=160 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+2022年02月（1）
+</option><option value=/archives/#2022年01月>
+2022年01月（60）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_41>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_41>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_31>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_16>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_16>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_16>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_12>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_12>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_12>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_12>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_12>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_6>
+コーダー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+</div>
+</section>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
