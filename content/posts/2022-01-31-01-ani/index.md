@@ -1,7 +1,7 @@
 ---
-title: "pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2）"
+title: "pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）"
 description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第２回目。再帰の挙動などアルゴリズムを使わないブルートフォース力任せ探索についてプログラムの詳細部分を説明します。" 
-date: 2022-01-27T15:55:55+09:00
+date: 2022-02-01T15:55:55+09:00
 draft: false 
 image: chess.jpg
 categories:
