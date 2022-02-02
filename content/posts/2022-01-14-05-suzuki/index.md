@@ -1,4 +1,5 @@
 ---
+authors: suzuki
 title: "【５．while ループ】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。この例では、whileループが5回繰り返されます。count変数の値は、各ステップで1ずつ増加します。count変数の値が5になると、whileループは終了します。"

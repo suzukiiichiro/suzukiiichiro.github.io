@@ -1,8 +1,8 @@
 ---
+authors: suzuki
 title: "iPadに開発環境を構築してみるテスト"
 date: 2022-01-28T14:02:55+09:00
 draft: false
-authors: suzuki
 image: linux.jpg
 categories:
   - サーバー構築
