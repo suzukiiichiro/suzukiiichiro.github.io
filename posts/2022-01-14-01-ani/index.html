@@ -15,14 +15,14 @@
 <meta property="og:description" content="ここではe-Statデータで時系列データの異常値検知の必要性を説明し、前提条件としてpythonを利用してcsvの読み込み方を説明します。Pandasを利用します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-14T13:40:13+09:00"><meta property="article:modified_time" content="2022-02-02T11:01:36+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="e-Stat"><meta property="article:tag" content="データマイニング"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-01-14T13:40:13+09:00"><meta property="article:modified_time" content="2022-02-02T11:04:18+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg">
 <meta name=twitter:title content="s-Stat 時系列データで異常値を検知しよう（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="ここではe-Statデータで時系列データの異常値検知の必要性を説明し、前提条件としてpythonを利用してcsvの読み込み方を説明します。Pandasを利用します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-14-01-ani/anal.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"s-Stat 時系列データで異常値を検知しよう（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg"],"datePublished":"2022-01-14T13:40:13+09:00","dateModified":"2022-02-02T11:01:36.279550809Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"s-Stat 時系列データで異常値を検知しよう（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal.jpg"],"datePublished":"2022-01-14T13:40:13+09:00","dateModified":"2022-02-02T11:04:18.076900512Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -420,6 +420,16 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_320x0_resize_q75_box.jpg 1600w" width=160 height=106 loading=lazy alt="Featured image of post ">
@@ -446,16 +456,6 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 </div>
 <div class=article-details>
 <h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
-</div>
-<div class=article-details>
-<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（2）</h2>
 </div>
 </a>
 </article>
@@ -580,9 +580,9 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 <section class="widget archives">
 <h2 class="widget-title section-title">アーカイブ</h2>
 <select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
-2022年02月（1）
+2022年02月（2）
 </option><option value=/archives/#2022年01月>
-2022年01月（60）
+2022年01月（59）
 </option><option value=/archives/#2021年12月>
 2021年12月（15）
 </option></select>
