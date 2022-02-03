@@ -4,24 +4,25 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<title> - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。">
+<title>ざっくりわかるシェルスクリプト「grep」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
-<meta property="og:title" content=" - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:title" content="ざっくりわかるシェルスクリプト「grep」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:modified_time" content="2022-02-03T01:08:34+00:00">
-<meta name=twitter:title content=" - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-24T10:53:58+09:00"><meta property="article:modified_time" content="2022-02-03T01:12:21+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg">
+<meta name=twitter:title content="ざっくりわかるシェルスクリプト「grep」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80")</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-24-01-suzuki/grep.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/"},"datePublished":"0001-01-01T00:00:00Z","dateModified":"2022-02-03T01:08:34.356592285Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"ざっくりわかるシェルスクリプト「grep」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg"],"datePublished":"2022-01-24T10:53:58+09:00","dateModified":"2022-02-03T01:12:21.92799223Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -47,13 +48,18 @@ on-phone--column extended">
 <a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
 <ul class=menu-list>
 <li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_57>
+プログラミング
+</a>
+</li>
+<li>
 <a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_18>
 Web開発
 </a>
 </li>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_17>
-プログラミング
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
 </a>
 </li>
 </ul>
@@ -91,46 +97,815 @@ Web開発
 </div>
 </div>
 <main class="main full-width">
-<article class=main-article>
+<article class="has-image main-article">
 <div class="article-details arcile-single">
 <header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
 <div class=article-info>
-<span class="article-time--item article-time--author"><span class=name>wYoshi</span>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>wYoshi</a></span>
 </span>
+<time class="article-time--item article-time--published">2022.01.24</time>
 <time class="article-time--item article-time--updatedate">
 2022.02.03
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 0分
+読了時間: 16分
 </time>
 </div>
 </header>
 <h1 class=article-title>
+ざっくりわかるシェルスクリプト「grep」
 </h1>
 </div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#はじめに>はじめに</a></li>
+<li><a href=#カラー表示>カラー表示</a></li>
+<li><a href=#構文>構文</a></li>
+<li><a href=#一致する文字列を検索>一致する文字列を検索</a></li>
+<li><a href=#一致しない文字列のみを検索>一致しない文字列のみを検索</a></li>
+<li><a href=#大文字と小文字を区別しない一致の検索文字列>大文字と小文字を区別しない一致の検索文字列</a></li>
+<li><a href=#単語全体のみを検索>単語全体のみを検索</a></li>
+<li><a href=#現在のディレクトリで複数のファイルを検索する>現在のディレクトリで複数のファイルを検索する</a></li>
+<li><a href=#ディレクトリを再帰的に検索する>ディレクトリを再帰的に検索する</a></li>
+<li><a href=#行番号を出力に追加します>行番号を出力に追加します</a></li>
+<li><a href=#一致する行の後に特定の行数を印刷します>一致する行の後に特定の行数を印刷します</a></li>
+<li><a href=#一致する行の前に特定の行数を印刷します>一致する行の前に特定の行数を印刷します</a></li>
+<li><a href=#一致する行の前後の特定の行数を印刷します>一致する行の前後の特定の行数を印刷します</a></li>
+<li><a href=#ブラケットを使用して特定の数字を一致させる>ブラケットを使用して特定の数字を一致させる[]</a></li>
+<li><a href=#3番目のブラケットを使用してパターンを特定の文字と一致させる>3番目のブラケットを使用してパターンを特定の文字と一致させる[]</a></li>
+<li><a href=#alnumクラスを使用してアルファベットと数字を一致させる>[：alnum：]クラスを使用してアルファベットと数字を一致させる</a></li>
+<li><a href=#alphaクラスを使用してアルファベット文字を照合する>[：alpha：]クラスを使用してアルファベット文字を照合する</a></li>
+<li><a href=#digitクラスを使用して数字を照合する>[：digit：]クラスを使用して数字を照合する</a></li>
+<li><a href=#lowerクラスを使用して小文字を照合する>[：lower：]クラスを使用して小文字を照合する</a></li>
+<li><a href=#spaceクラスを使用してスペース文字を一致させる>[：space：]クラスを使用してスペース文字を一致させる</a></li>
+<li><a href=#行頭からの検索>行頭からの検索</a></li>
+<li><a href=#行の終わりに一致する>行の終わりに一致する</a></li>
+<li><a href=#連結との一致>連結との一致</a></li>
+</ol>
+</nav>
+</div>
+</section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
+<h2 id=はじめに>はじめに</h2>
+<p>grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコマンドを使いこなしています。Webサーバーのログから特定のユーザーのみを抽出するちいさなスクリプトから、膨大なシステムログからロケットの軌道修正を計算する処理プログラムなど、半世紀もの長い間、一糸乱れることなく動き続けています。</p>
+<p>「grep」コマンドは、文字列、またはファイル内のをテキストを検索するための便利で不可欠なコマンドです。<br>
+「grep」コマンドの正式な名称は「“global regular expression print.”」です。<br>
+このコマンドの名前は、正規表現に基づいてコンテンツを検索できる「g / re / p」に由来しています。<br>
+「grep」コマンドには、ファイル内の文字列またはテキストを検索するため、複数の方法が用意されている。</p>
+<p>以下に「grep」コマンドを使用するいくつかの構文を示します。</p>
+<h2 id=カラー表示>カラー表示</h2>
+<p>まず、grep コマンドをカラー表示にしてみます。<br>
+以下のコマンドで、~/.bashrc を開きます。</p>
+<pre tabindex=0><code>$ vim ~/.bashrc
+</code></pre><p>以下の2行を ~/.bashrc に追記して保存して下さい。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:~/.bashrc data-lang=bash:~/.bashrc><span class=nb>alias</span> <span class=nv>grep</span><span class=o>=</span><span class=s1>&#39;grep --color=auto&#39;</span>
+<span class=nb>alias</span> <span class=nv>egrep</span><span class=o>=</span><span class=s1>&#39;egrep --color=auto&#39;</span>
+<span class=nb>alias</span> <span class=nv>fgrep</span><span class=o>=</span><span class=s1>&#39;fgrep --color=auto&#39;</span>
+<span class=nb>alias</span> <span class=nv>ls</span><span class=o>=</span><span class=s1>&#39;ls -FG&#39;</span><span class=p>;</span> 
+</code></pre></div><p>grep/egrep/fgrep そしてついでに lsコマンドもカラー表示に変更します。変更したら ~/.bashrcを以下のコマンドで再読込します。</p>
+<pre tabindex=0><code>$ . ~/.bashrc
+$ 
+</code></pre><p>では、grep コマンドを使ってみます。<br>
+ここでは /etc/passwordファイルをgrepしてrootを検索してみます。</p>
+<pre>
+$ grep root /etc/password
+$
+</pre>
+<h2 id=構文>構文</h2>
+<p>次の「grep」コマンドは、ファイル内の特定の文字列またはテキストを検索するために使用されます。</p>
+<pre tabindex=0><code>$ grep 検索文字列 ファイル名
+</code></pre><p>次の「grep」コマンドは、複数のファイル内の特定の文字列またはテキストを検索するために使用されます。</p>
+<pre tabindex=0><code>$ grep 検索文字列 filename1 filename2 filename3
+$ 
+</code></pre><p>次は、空白を含む文字列を検索します。この場合はシングルクォーテーション「'」、またはダブるクォーテーション「"」で文字列を囲む必要があります。</p>
+<pre tabindex=0><code>$ grep &quot;検索文字列 検索文字列&quot; filename1
+$ 
+</code></pre><p>次の「grep」コマンドは、ファイル内の特定のオプションを含む文字列を検索するために使用されます。「 grep」コマンドでは、さまざまな目的でさまざまなオプションが使用されます。<br>
+ここでは「-v」を紹介します。「-v」オプションは、検索文字列を含まない行を抽出するオプションです。<br>
+このオプションは、非常に多くの場面で利用されます。</p>
+<pre>
+$ cat /etc/passwd | head
+##
+# User Database
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode.  At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+bash-5.1$ cat /etc/passwd | head
+##
+# User Database
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode.  At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+$
+bash-5.1$ cat /etc/passwd | head | grep "User"
+# <font color=red>User</font> Database
+$
+$ cat /etc/passwd | head | grep -v "User"
+##
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode.  At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+$ 
+</pre>
+<p>まず、</p>
+<pre tabindex=0><code>$ cat /etc/passwd
+$
+</code></pre><p>で、/etc/passwd ファイルをcat します。<br>
+catするというのは、ファイル内容を出力すると言う意味になります。さらに、</p>
+<pre tabindex=0><code>$ cat /etc/passwd | head 
+$
+</code></pre><p>の、headは、出力された /etc/passwd ファイルの冒頭１０行を抽出するというコマンド「head」です。「head」コマンドで -n5 オプションをつけることで冒頭5行目とすることもできます。</p>
+<pre tabindex=0><code>$ cat /etc/passwd | head -n5
+$
+</code></pre><p>シェルスクリプトは、「| 」パイプでコマンドを連ねることで、前のコマンドに続いて、さらにコマンドの出力結果を絞り込むことができます。<br>
+次のコマンドは、/etc/passwd ファイルを catコマンドで表示し、headコマンドで冒頭１０行を抽出、さらに grep -v コマンドで User を除く行を出力します。</p>
+<pre tabindex=0><code>$ cat /etc/passwd | head | grep -v &quot;User&quot;
+</code></pre><p>「 grep -v 」コマンドは、指定した文字列を含まない行を抽出するという意味です。</p>
+<p>-v をつけなければ、User という文字列を含む文字列が抽出されることになります。</p>
+<p>さらにgrepには強力な「-i」オプションがあります。<br>
+「-i」オプションは、検索文字列の大文字、小文字を区別せずに抽出します。</p>
+<pre tabindex=0><code>$ cat /etc/passwd | head | grep -iv &quot;user&quot;
+##
+#
+# Note that this file is consulted directly only when the system is running
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>grep コマンドで最も使われる書式は</dd>
+<dd>$ cat &lt;ファイル名> | grep &ldquo;検索文字列&rdquo;</dd>
+<dd>です。</dd>
+<dd>以下、'-v' &lsquo;-i&rsquo; 二つのオプションをパイプで駆使すればgrepコマンドを使いこなしていると言っても過言ではありません。</dd>
+</dl>
+<pre>
+# -v 除外
+$ cat <ファイル名> | grep -v "検索文字列"
+
+# -i 大文字小文字を区別しない
+$ cat <ファイル名> | grep -i "検索文字列"
+</pre>
+</div>
+<h2 id=一致する文字列を検索>一致する文字列を検索</h2>
+<p>では手始めに、次のコマンドで、Customers.txtファイルの内容を表示します。以下の内容をCustomers.txtとして保存して下さい。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:Customers.txt data-lang=bash:Customers.txt>ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+</code></pre></div><p>Customers.txtを表示します。</p>
+<pre tabindex=0><code>$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</code></pre><p>次の「grep」コマンドは、Customers.txtファイルのテキスト「 MalihaChowdhury 」を検索します。検索テキストがファイルに存在する場合、テキストを含む行が印刷されます。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep Ali
+45  Minhaz <font color=red>Ali</font>      ali@gmail.com       +8801190761212
+$
+</pre>
+<p>次の「grep」コマンドは、Customers.txtファイルのテキスト「 MalihaChowdhury 」を検索します。検索テキストがファイルに存在する場合、テキストを含む行が印刷されます。</p>
+<pre>
+$ cat Customers.txt | grep 'Maliha Chowdhury'
+56  <font color=red>Maliha Chowdhury</font>    maliha@gmail.com        +8801820001980
+$
+</pre>
+<h2 id=一致しない文字列のみを検索>一致しない文字列のみを検索</h2>
+<p>「grep」コマンドの-vオプションは、ファイルから一致しない文字列を検索するために使用されます。この例では、-vオプションを指定した「grep」コマンドを使用して、最初の例で作成したCustomers.txtファイルから一致しない文字列を検索しています。</p>
+<p>次のコマンドは、customers.txtファイルの内容を表示します。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -v 'Abir'
+ID  Name            Email           Phone
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>-vオプションは、ファイルから一致しない文字列を検索するために使用されます。</dd>
+<dd></dd>
+<dd>検索文字列を除外して検索する場合は、'-v&rsquo;オプションを使います。<br>
+$ cat &lt;ファイル名> | grep -v &ldquo;検索文字列&rdquo;</dd>
+</dl>
+</div>
+<h2 id=大文字と小文字を区別しない一致の検索文字列>大文字と小文字を区別しない一致の検索文字列</h2>
+<p>「grep」コマンドは、デフォルトで大文字と小文字を区別してファイルから文字列を検索します。<br>
+「grep」コマンドの &lsquo;-i&rsquo; オプションは、大文字と小文字を区別しない方法でファイルから文字列を検索するために使用されます。<br>
+この例では、'-i' オプションを指定した「grep」コマンドを使用して、前に作成したCustomers.txtファイルから大文字と小文字を区別しない方法で特定の文字列を検索しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -i 'minhaz'
+45  <font color=red>Minhaz</font> Ali      ali@gmail.com       +8801190761212
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>文字が大文字または小文字の文字列を含む1つ以上の行がファイルに存在する場合、その行が出力されます。</dd>
+<dd>大文字小文字を区別しないで検索する場合は、'-i&rsquo;オプションを使います。<br>
+$ cat &lt;ファイル名> | grep -i &ldquo;検索文字列&rdquo;</dd>
+</dl>
+</div>
+<h2 id=単語全体のみを検索>単語全体のみを検索</h2>
+<p>「grep」コマンドの &lsquo;-w&rsquo; オプションは、大文字と小文字を区別してファイルから単語全体を検索するために使用されます。<br>
+この例では、'-w' オプションを指定した「grep」コマンドを使用して、最初の例で作成されたCustomers.txtファイルから単語全体を検索しています。</p>
+<p>次のコマンドは、customers.txtファイルの内容を表示します。</p>
+<pre tabindex=0><code>$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</code></pre><p>次の「grep」コマンドは、文字列「Ma」を含むテキストファイルの行を検索します。ファイルのいずれかの行に文字列「Ma」が含まれている場合、その行が出力されます。</p>
+<pre>
+$ cat Customers.txt | grep 'Ma'
+56  <font color=red>Ma</font>liha Chowdhury    maliha@gmail.com        +8801820001980
+79  <font color=red>Ma</font>ruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<p>次の「grep」コマンドは、「Ma」という単語を含むテキストファイルの行を「正確」に検索します。<br>
+ファイルのいずれかの行に「Ma」という単語が正確に含まれている場合、その行が出力されます。<br>
+「Ma」という単語がないため、出力されません。</p>
+<pre tabindex=0><code>$ cat Customers.txt | grep -w 'Ma'
+$ 
+</code></pre><p>次の「grep」コマンドは、「Maliha」という単語を含むテキストファイルの行を正確に検索します。<br>
+ファイルのいずれかの行に「Maliha」という単語が正確に含まれている場合、その行が出力されます。</p>
+<pre>
+$ cat Customers.txt | grep -w 'Maliha'
+56  <font color=red>Maliha</font> Chowdhury    maliha@gmail.com        +8801820001980
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>&lsquo;-w&rsquo; オプションと検索語「Ma」を指定した「grep」コマンドは、テキストファイルに「Ma」という単語が含まれていないため、何も返しませんでした。</dd>
+<dd>-wオプションと検索語「Maliha」を指定した「grep」コマンドは、「Maliha」という単語を含むファイルの5行目を返しました。</dd>
+<dd>&lsquo;-w&rsquo; オプションは正確な単語を検索対象とするオプションです。</dd>
+</dl>
+</div>
+<h2 id=現在のディレクトリで複数のファイルを検索する>現在のディレクトリで複数のファイルを検索する</h2>
+<p>「grep」コマンドは、ファイル内の特定のコンテンツを検索し、検索文字列またはパターンに基づいて現在のディレクトリ内の複数のファイルを検索するために使用されます。<br>
+* ワイルドカードを使用して現在のディレクトリ内の複数のファイルを検索する方法は、Customers.txtファイルのこの例に示されています。</p>
+<p>次の「grep」コマンドは、「split」という単語を含む現在のディレクトリのファイルを再帰的に検索します。<br>
+&lsquo;split&rsquo;という単語を含む現在のディレクトリとサブディレクトリのファイルは、次の行で出力されます。</p>
+<pre tabindex=0><code>$ grep -w split *
+$ 
+</code></pre><h2 id=ディレクトリを再帰的に検索する>ディレクトリを再帰的に検索する</h2>
+<p>&lsquo;-r&rsquo; オプションは、「grep」コマンドとともに使用して、ディレクトリ内の特定の文字列またはパターンを再帰的に検索します。<br>
+この例では、「grep」コマンドを使用して現在のディレクトリを再帰的に検索し、Customers.txtファイルを検索します。</p>
+<pre tabindex=0><code>$ grep -wr split *
+$ 
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ディレクトリを指定して再帰的に検索したい場合は、<br>
+$ grep 検索文字列 検索したい場所</dd>
+<dd>となります。</dd>
+</dl>
+<pre>
+$ grep -wr kpasswd /etc/services
+<font color=red>kpasswd</font>         464/udp     # kpasswd
+<font color=red>kpasswd</font>         464/tcp     # kpasswd
+<font color=red>rpasswd</font>	        774/tcp #
+$
+</pre>
+</div>
+<h2 id=行番号を出力に追加します>行番号を出力に追加します</h2>
+<p>「grep」コマンドの &lsquo;-n&rsquo; オプションは、ファイルの行番号とともに検索文字列の出力を出力するために使用されます。<br>
+この例では、'-n&rsquo; オプションを指定した「grep」コマンドを使用して、最初の例で作成されたCustomers.txtファイルの行番号を含む検索出力を表示しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -n "Ali"
+4:45  Minhaz <font color=red>Ali</font>      ali@gmail.com       +8801190761212
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ターミナルから前のコマンドを実行すると、次の出力が表示されます。文字列「Riya」はファイルの3行目にあります。4行目と5行目は、一致する行の次の2行です。したがって、3行目、4行目、および5行目は、一致する文字列を強調表示することによって出力に出力されています。</dd>
+</dl>
+</div>
+<h2 id=一致する行の後に特定の行数を印刷します>一致する行の後に特定の行数を印刷します</h2>
+<p>数値を含む &lsquo;-A&rsquo; オプションは、ファイル内で見つかった一致する文字列またはパターンの後に特定の行数を出力するために使用されます。<br>
+この例では、Customers.txtファイルに対して「grep」コマンドの &lsquo;-A&rsquo; オプションを使用しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -A2 "Ali"
+45  Minhaz <font color=red>Ali</font>      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ターミナルから前のコマンドを実行すると、次の出力が表示されます。文字列「Riya」はファイルの3行目にあります。4行目と5行目は、一致する行の次の2行です。したがって、3行目、4行目、および5行目は、一致する文字列を強調表示することによって出力に出力されています。</dd>
+</dl>
+</div>
+<h2 id=一致する行の前に特定の行数を印刷します>一致する行の前に特定の行数を印刷します</h2>
+<p>数値を含む &lsquo;-B&rsquo; オプションは、ファイル内で一致する文字列またはパターンの前に特定の行数を出力するために使用されます。<br>
+この例では、Customers.txtファイルに対して「grep」コマンドの &lsquo;-B&rsquo; オプションの使用法を示しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -B1 "Riya"
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  <font color=red>Riya</font> Chakroborti    riya@gmail.com      +8801937864534
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>文字列「Riya」はファイルの3行目にあります。2行目は、一致する行の前の行です。したがって、2行目と3行目は、一致する文字列を強調表示することによって出力に出力されています。</dd>
+</dl>
+</div>
+<h2 id=一致する行の前後の特定の行数を印刷します>一致する行の前後の特定の行数を印刷します</h2>
+<p>数値を指定した &lsquo;-C&rsquo; オプションは、ファイル内で見つかった一致する文字列またはパターンの前後の特定の行数を出力するために使用されます。<br>
+この例では、 Customers.txtファイルの「grep」コマンドの &lsquo;-C&rsquo; オプションの使用法を示しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -C1 "Maliha"
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  <font color=red>Maliha</font> Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ターミナルから前のコマンドを実行すると、次の出力が表示されます。5行目には、文字列 &lsquo;Maliha&rsquo;が含まれています。4行目は一致する行の前の行で、6行目は一致する行の次の行です。したがって、4行目、5行目、および6行目は、一致する文字列を強調表示することによって出力に出力されています。</dd>
+</dl>
+</div>
+<h2 id=ブラケットを使用して特定の数字を一致させる>ブラケットを使用して特定の数字を一致させる[]</h2>
+<p>特定の桁の範囲は、角かっこ[]を使用して、「grep」コマンドの正規表現パターンで定義できます。<br>
+この例では、Customers.txtファイルの「grep」コマンドを使用して特定の数字を検索する方法を示します。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$ cat Customers.txt | grep '[3-5]'
+$
+11  Md. Abir        abir@gmail.com      +880181<font color=red>34</font>62<font color=red>45</font>8
+2<font color=red>3</font>  Riya Chakroborti    riya@gmail.com      +88019<font color=red>3</font>786<font color=red>4534</font>
+<font color=red>45</font>  Minhaz Ali      ali@gmail.com       +8801190761212
+<font color=red>5</font>6  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>[3-5] は、3,4,5 のいずれかを検索文字列とするという意味となります。</dd>
+<dd>2,3,4,5,6 としたい場合は、 [2-6]となります。</dd>
+</dl>
+</div>
+<h2 id=3番目のブラケットを使用してパターンを特定の文字と一致させる>3番目のブラケットを使用してパターンを特定の文字と一致させる[]</h2>
+<p>ファイルの特定の文字は、角かっこ[]を使用してさまざまな方法で一致させることができます。<br>
+角かっこを使用してファイルから特定の行を検索することにより、正規表現パターンで文字の範囲または特定の文字を使用できます。<br>
+この例では、文字範囲または特定の文字のパターンを使用して、Customers.txtファイル内の特定の文字を検索する方法を示します。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep 'Ma[lr]'
+56  <font color=red>Mal</font>iha Chowdhury    maliha@gmail.com        +8801820001980
+79  <font color=red>Mar</font>uf Sarkar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>Ma から始まる単語を検索し、さらに続く文字列が &lsquo;[lr]&rsquo; すなわち、l または r である文字列を検索します。いわゆる「Mal」と「Mar」を検索するという意味になります。</dd>
+</dl>
+</div>
+<h2 id=alnumクラスを使用してアルファベットと数字を一致させる>[：alnum：]クラスを使用してアルファベットと数字を一致させる</h2>
+<p>[:alnum:]クラスは、アルファベットと数字を照合するために正規表現パターンで使用されます。<br>
+パターン[A-z0-9]に相当します。</p>
+<h2 id=alphaクラスを使用してアルファベット文字を照合する>[：alpha：]クラスを使用してアルファベット文字を照合する</h2>
+<p>[:alpha:]クラスは、アルファベット文字のみに一致する正規表現パターンで使用されます。<br>
+パターン[A-z]に相当します。</p>
+<h2 id=digitクラスを使用して数字を照合する>[：digit：]クラスを使用して数字を照合する</h2>
+<p>[:digit:]クラスは、正規表現パターンで数字のみに一致するために使用されます。<br>
+パターン[0-9]と同等です。</p>
+<h2 id=lowerクラスを使用して小文字を照合する>[：lower：]クラスを使用して小文字を照合する</h2>
+<p>[:lower:]クラスは、すべての小文字のみに一致するように正規表現パターンで使用されます。<br>
+パターン[a-z]と同等です。</p>
+<h2 id=spaceクラスを使用してスペース文字を一致させる>[：space：]クラスを使用してスペース文字を一致させる</h2>
+<p>[:space:]クラスは、スペース文字を含む行と一致させるために正規表現パターンで使用されます。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>tab文字、空白も含めて検索対象となります。</dd>
+<dd>$ grep &ldquo;test(タブ文字)&rdquo; /path/to/file<br>
+:と、入力したい場合は、ctrl-v を入力してからタブを打つと入力される。</dd>
+<dd>
+<p>&lsquo;[[:space:]]&rsquo; では空白文字もタブ文字もマッチする。</p>
+</dd>
+<dd>これならメモなどからコピペできる。<br>
+$ grep &ldquo;test[[:space:]]&rdquo; /path/to/file</dd>
+<dd>
+<p>また、<br>
+$ grep test$'\t&rsquo; /path/to/file<br>
+であればタブだけがマッチする。</p>
+</dd>
+</dl>
+</div>
+<h2 id=行頭からの検索>行頭からの検索</h2>
+<p>キャレット（^）記号は、ファイル内の特定の文字または文字列で始まる行と一致するように正規表現で使用されます。<br>
+この記号の使用法は、前に作成されたCustomers.txtファイルのこの例で示されています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep ^4
+<font color=red>4</font>5  Minhaz Ali      ali@gmail.com       +8801190761212
+$
+
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ターミナルから前のコマンドを実行すると、次の出力が表示されます。出力によると、customers.txtファイルには「 4 」で始まる行が1行だけ存在します。これは、出力に出力されたファイルの4行目です。</dd>
+</dl>
+</div>
+<h2 id=行の終わりに一致する>行の終わりに一致する</h2>
+<p>ドル（$）記号は、ファイル内の特定の文字または文字列と行末を一致させるために正規表現で使用されます。<br>
+この記号の使用法は、前に作成されたCustomers.txtファイルのこの例で示されています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep 1212$
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>customers.txtファイルには「1212」で終わる行が1行だけ存在します。これは、出力に出力されたファイルの4行目です。</dd>
+</dl>
+</div>
+<h2 id=連結との一致>連結との一致</h2>
+<p>正規表現パターンは、複数のパターンを連結することで作成できます。<br>
+ドット（.）は、パターンを連結するために使用されます。<br>
+この例では、 Customers.txtファイルに対して「grep」コマンドと連結して使用する方法を示しています。</p>
+<pre>
+$ cat Customers.txt
+ID  Name            Email           Phone
+11  Md. Abir        abir@gmail.com      +8801813462458
+23  Riya Chakroborti    riya@gmail.com      +8801937864534
+45  Minhaz Ali      ali@gmail.com       +8801190761212
+56  Maliha Chowdhury    maliha@gmail.com        +8801820001980
+79  Maruf Sarkar        maruf@gmail.com     +8801670908966
+$
+$ cat Customers.txt | grep -e '[MR]\.\*[Kk]'
+23  <font color=red>Riya Chak</font>roborti    riya@gmail.com      +8801937864534
+79  <font color=red>Maruf Sark</font>ar        maruf@gmail.com     +8801670908966
+$
+</pre>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>customers.txtファイルには「R」と「M 」で始まり「 k 」で終わる2行が存在します。したがって、ファイルの3行目と6行目が出力に出力されています。</dd>
+</dl>
+</div>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかる「grep」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト１」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト２」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【まとめ版】ざっくりわかるシェルスクリプト３」</a></p>
+<h1 id=書籍の紹介>書籍の紹介</h1>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4774186945&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） 2017/1/20</h2>
+<p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00QJINS1A&linkCode=as2&tag=nlpqueens-22&linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00QJINS1A&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>UNIXシェルスクリプト マスターピース132</h2>
+<p>すべてのUNIXエンジニア必携!!
+<p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。<br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。</p>
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>bashで「>>」演算子を使用すると、既存のファイルに新しいデータを追加できます。'append_file.sh 'という名前のファイルを作成し、次のコードを追加して、ファイルの最後に新しいコンテンツを追加します。ここで、「Learning Level 5」は、スクリプトの実行後に「level.txt」ファイルのに追加されます。 </p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
 <footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/grep/>grep</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+</section>
 </footer>
 <div class=article-pager>
 <div class=article-pager--next>
-<article>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post e-Stat hampelで時系列データの異常値検知" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>e-Stat hampelで時系列データの異常値検知</h2>
 </div>
 </a>
 </article>
 </div>
 <div class=article-pager--prev>
-<article>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h2>
 </div>
 </a>
 </article>
@@ -215,22 +990,22 @@ Web開発
 </a>
 </article>
 <article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
 <h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_320x0_resize_q75_box.jpg 1600w" width=160 height=160 loading=lazy alt="Featured image of post ">
-</div>
-<div class=article-details>
-<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2>
 </div>
 </a>
 </article>
@@ -249,17 +1024,13 @@ Web開発
 <h2 class=section-title>人気コンテンツ</h2>
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
-<article>
-<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
-<div class=article-details>
-<h2 class=article-title></h2>
-</div>
-</a>
-</article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
@@ -283,38 +1054,53 @@ Web開発
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
@@ -336,16 +1122,26 @@ Web開発
 <select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
 2022年02月（2）
 </option><option value=/archives/#2022年01月>
-2022年01月（23）
+2022年01月（59）
 </option><option value=/archives/#2021年12月>
-2021年12月（10）
-</option><option value=/archives/#0001年01月>
-0001年01月（41）
+2021年12月（15）
 </option></select>
 </section>
 <section class="widget tagCloud">
 <h2 class="widget-title section-title">タグ</h2>
 <div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_41>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_41>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_31>
 プログラム
 </a>
@@ -370,6 +1166,9 @@ css
 <a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_12>
 HTML
 </a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
 <a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_12>
 Webデザイナー
 </a>
@@ -379,32 +1178,17 @@ Web開発
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_12>
 フロントエンジニア
 </a>
-<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_11>
-Hugo
-</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_6>
 コーダー
 </a>
 <a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
 Webテクニック
 </a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
 <a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
 GitHub
-</a>
-<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_4>
-github pages
-</a>
-<a href=https://suzukiiichiro.github.io/tags/aws/ class=font_size_2>
-AWS
-</a>
-<a href=https://suzukiiichiro.github.io/tags/ec2/ class=font_size_2>
-EC2
-</a>
-<a href=https://suzukiiichiro.github.io/tags/gas/ class=font_size_2>
-GAS
-</a>
-<a href=https://suzukiiichiro.github.io/tags/google-analytics/ class=font_size_2>
-Google Analytics
 </a>
 </div>
 </section>
@@ -424,10 +1208,13 @@ Google Analytics
 </header>
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
 </div>
 </a>
 </article>
@@ -441,10 +1228,13 @@ Google Analytics
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
 </div>
 </a>
 </article>
@@ -458,45 +1248,63 @@ Google Analytics
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
 </div>
 </a>
 </article>
-<article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
 <div class=article-details>
-<h2 class=article-title></h2>
+<h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2>
 </div>
 </a>
 </article>
