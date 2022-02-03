@@ -347,3 +347,4 @@ UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Sola
 　　　UNIXはドキュメントを忌み嫌う
 ```
 
+<!-- EOL -->

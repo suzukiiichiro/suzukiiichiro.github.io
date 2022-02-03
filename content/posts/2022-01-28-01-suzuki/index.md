@@ -408,3 +408,4 @@ suzuki:x:1001:
 {{% amazon title=" AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 " url="https://www.amazon.co.jp/AWSではじめるインフラ構築入門-安全で堅牢な本番環境のつくり方-中垣-健志/dp/4798163430/?tag=nlpqueens-22" summary=` AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg" %}}
 
 
+<!-- EOL -->
