@@ -15,14 +15,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第３回目。今回は配置フラグ（制約テスト高速化）について説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-03T15:55:55+09:00"><meta property="article:modified_time" content="2022-02-03T09:01:18+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-03T15:55:55+09:00"><meta property="article:modified_time" content="2022-02-03T09:03:42+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg">
 <meta name=twitter:title content="pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第３回目。今回は配置フラグ（制約テスト高速化）について説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-03-01-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg"],"datePublished":"2022-02-03T15:55:55+09:00","dateModified":"2022-02-03T09:01:18.450593793Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg"],"datePublished":"2022-02-03T15:55:55+09:00","dateModified":"2022-02-03T09:03:42.407893377Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -140,29 +140,29 @@ pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高�
 <p>エイトクイーン問題はクイーンの利き筋上下左右斜め８方向にクイーンを置けないという制約があるのですが、今回は上下の制約、同じ列にはクイーンを置けないという制約を配置フラグを使って追加してみます。</p>
 <p>例えば、<br>
 1行目で右端にクイーンを置くと以降の行では右端にクイーンを置けなくなります。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q2.png>
-<img src=https://suzukiiichiro.github.io/q2.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png data-size=322x324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png width=322 height=324 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
 この図だと2行目で右端にクイーンを置こうとしているのでNGです。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q4.png>
-<img src=https://suzukiiichiro.github.io/q4.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:100;flex-basis:241px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png data-size=324x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png width=324 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
 この図は3行目で右端にクイーンを置こうとしているのでNGです。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q10.png>
-<img src=https://suzukiiichiro.github.io/q10.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:98;flex-basis:235px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png data-size=324x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png width=324 height=330 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q14.png>
-<img src=https://suzukiiichiro.github.io/q14.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png data-size=322x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png width=322 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -190,9 +190,9 @@ nqueen(row+1)で再帰的にnqueenを呼び出し次の行に進んでいまし�
 iは今回クイーンを置いた場所を意味します。</p>
 <p>444行目でクイーンを置いた列の配置フラグをあらかじめ1にしておきます。</p>
 <p>例えば以下の図の様な場合</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q14.png>
-<img src=https://suzukiiichiro.github.io/q14.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png data-size=322x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png width=322 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
