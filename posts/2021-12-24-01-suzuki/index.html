@@ -4,25 +4,24 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法">
-<title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<title> - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
-<meta property="og:title" content="【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法">
+<meta property="og:title" content=" - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-24T11:55:21+09:00"><meta property="article:modified_time" content="2022-02-03T00:44:04+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg">
-<meta name=twitter:title content="【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:modified_time" content="2022-02-03T00:57:24+00:00">
+<meta name=twitter:title content=" - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="「」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80")</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg"],"datePublished":"2021-12-24T11:55:21+09:00","dateModified":"2022-02-03T00:44:04.48310055Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/"},"datePublished":"0001-01-01T00:00:00Z","dateModified":"2022-02-03T00:57:24.005204133Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -48,18 +47,13 @@ on-phone--column extended">
 <a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
 <ul class=menu-list>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_57>
-プログラミング
-</a>
-</li>
-<li>
 <a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_18>
 Web開発
 </a>
 </li>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
-サーバー構築
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_17>
+プログラミング
 </a>
 </li>
 </ul>
@@ -97,292 +91,46 @@ Web開発
 </div>
 </div>
 <main class="main full-width">
-<article class="has-image main-article">
+<article class=main-article>
 <div class="article-details arcile-single">
 <header class=article-header>
-<div class=article-category>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
-プログラミング
-</a>
-</div>
 <div class=article-info>
-<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/root.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>root</a></span>
+<span class="article-time--item article-time--author"><span class=name>suzukiiichiro</span>
 </span>
-<time class="article-time--item article-time--published">2021.12.24</time>
 <time class="article-time--item article-time--updatedate">
 2022.02.03
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 2分
+読了時間: 0分
 </time>
 </div>
 </header>
 <h1 class=article-title>
-【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法
 </h1>
 </div>
-<section class="widget archives tableOfContents">
-<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
-<div class=widget--toc>
-<nav id=TableOfContents>
-<ol>
-<li><a href=#関連記事>関連記事</a></li>
-<li><a href=#やりたいこと>やりたいこと</a></li>
-<li><a href=#イメージ>イメージ</a></li>
-</ol>
-</nav>
-</div>
-</section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h2 id=関連記事>関連記事</h2>
-<ul>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ target=_blank rel=noopener>【wLu】Bashで便利なコマンドを作ってみようって話</a></li>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/ target=_blank rel=noopener>【unComp】Bashで便利なコマンドを作ってみようって話</a></li>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/ target=_blank rel=noopener>【プログレスバー】Bashでプログレスバーを作ってみようって話</a></li>
-<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-21-01-suzuki/ target=_blank rel=noopener>【ssh/bash】ssh/Bashでサーバーへログイン・実行・ログアウトの一連自動化処理を作ってみようって話</a></li>
-</ul>
-<h2 id=やりたいこと>やりたいこと</h2>
-<p>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法ってなにかないでしょうか。</p>
-<h2 id=イメージ>イメージ</h2>
-<p>従来の方法</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ローカルＰＣのターミナル
-
-↓ Linuxサーバーにログイン
-
-<span class=nv>$df</span> <span class=nv>$uptime</span> などを実行
-
-↓ Linuxサーバーをログアウト
-
-ローカルＰＣにもどる
-</code></pre></div><p>これからつくるBash/ssh</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ローカルＰＣのターミナル
-↓ 
-Linuxサーバーにログイン 
-<span class=nv>$df</span> <span class=nv>$uptime</span> などを実行 
-Linuxサーバーをログアウト
-↓ 
-ローカルＰＣのターミナルにもどる
-</code></pre></div><p>わかりにくいですか？<br>
-まず、メリットとしてサーバーでコマンドからログアウトする必要がありません。<br>
-これができれば、一台一台サーバーのヘルスチェックをせずとも、数十台のサーバーを<br>
-順番に訪ね歩きファイルに出力する事も可能です。</p>
-<p>以下、ソースです。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/usr/bin/bash
-</span><span class=cp></span>
-<span class=c1>##############################################</span>
-<span class=c1># sshでサーバーにログインして、なんらかのコマンドを</span>
-<span class=c1># 実行しターミナルに表示、ミッション終了後、ターミ</span>
-<span class=c1># ナルを自動的にログアウトしてローカルに何事もなか</span>
-<span class=c1># ったかのようにもどってくる最も簡単シェルスクリプト</span>
-<span class=c1>##############################################</span>
-<span class=c1>#</span>
-<span class=c1># サーバーのＩＰアドレスとか</span>
-<span class=nv>SERVER</span><span class=o>=</span><span class=s2>&#34;centos@xx.xx.xx.xxx&#34;</span>
-<span class=c1># 実行したいコマンドを &amp;&amp; でつなぐ</span>
-<span class=nv>COMMAND</span><span class=o>=</span><span class=s2>&#34;uptime &amp;&amp; df -h&#34;</span><span class=p>;</span>
-
-<span class=nb>echo</span> <span class=s2>&#34;centosサーバーログイン&#34;</span><span class=p>;</span> 
-
-<span class=c1># ポイントは -t です。</span>
-ssh <span class=nv>$SERVER</span>  -t <span class=nv>$COMMAND</span><span class=p>;</span> 
-
-<span class=nb>echo</span> <span class=s2>&#34;centosサーバーログアウト&#34;</span><span class=p>;</span>
-
-exit<span class=p>;</span>
-</code></pre></div><p>たったこれだけですが、この工夫により多くのサーバーを<br>
-スクリプトで一括回遊することができます。 お試しあれ。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
-<section class="section related-contents--wrapper">
-<h2 class=section-title>関連するコンテンツ</h2>
-<div class=article-list>
-<article class="has-image article-item" data-date=2022.01.06>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.06</time>
-</div><p class=article-subtitle>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2021.12.23>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.23</time>
-</div><p class=article-subtitle>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2021.12.23>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.23</time>
-</div><p class=article-subtitle>今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2021.12.23>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【wLu】Bashで便利なコマンドを作ってみようって話</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.23</time>
-</div><p class=article-subtitle>今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.24>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x400_resize_q75_box.jpg 1600w" width=118 height=200 loading=lazy alt="Featured image of post ざっくりわかるシェルスクリプト「grep」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.24</time>
-</div><p class=article-subtitle>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-26-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２６．ファイルが存在するかどうかを確認】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>'-e'または'-f'オプションを使用して、ファイルの存在を確認できます。次のコードの 'if [ ]'では、ファイルの存在をテストするために「-f」オプションが使用されています。' file_exist.sh 'という名前のファイルを作成し、次のコードを追加します。ここで、ファイル名はコマンドラインから渡されます。</p>
-</div>
-</a>
-</article>
-</div>
-</section>
 <footer class=article-footer>
-<section class=article-tags>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
-<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/>ユーティリティ</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
-</section>
 </footer>
 <div class=article-pager>
 <div class=article-pager--next>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.4a3525657978aa91ee6931d3cc2be069_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post 知識ゼロからのe-Statマイニング" data-hash="md5-SjUlZXl4qpHuaTHTzCvgaQ==">
-</div>
+<article>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
 <div class=article-details>
-<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
 </div>
 <div class=article-pager--prev>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/_huf3902e4d08fb0294f3a250034e0748e3_207097_e8abc53af22189f7657f9bb5cf85b119.jpg width=160 height=100 loading=lazy alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" data-hash="md5-Lko8+U9f9V7h+fd2cQhYqQ==">
-</div>
+<article>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
 <div class=article-details>
-<h2 class=article-title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
@@ -467,22 +215,22 @@ exit<span class=p>;</span>
 </a>
 </article>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
-</div>
-<div class=article-details>
-<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
 <h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.a1799551dac4aeeb54fb1b0789770cae_huc7082b0252bf301b68f9a1efcdf78a08_226327_320x0_resize_q75_box.jpg 1600w" width=160 height=160 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2>
 </div>
 </a>
 </article>
@@ -501,13 +249,17 @@ exit<span class=p>;</span>
 <h2 class=section-title>人気コンテンツ</h2>
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
-</div>
+<article>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
 <div class=article-details>
-<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+<h2 class=article-title></h2>
+</div>
+</a>
+</article>
+<article>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-details>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
@@ -531,53 +283,38 @@ exit<span class=p>;</span>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
@@ -599,26 +336,16 @@ exit<span class=p>;</span>
 <select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
 2022年02月（2）
 </option><option value=/archives/#2022年01月>
-2022年01月（59）
+2022年01月（23）
 </option><option value=/archives/#2021年12月>
-2021年12月（15）
+2021年12月（10）
+</option><option value=/archives/#0001年01月>
+0001年01月（41）
 </option></select>
 </section>
 <section class="widget tagCloud">
 <h2 class="widget-title section-title">タグ</h2>
 <div class=tagCloud-tags>
-<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_41>
-Bash
-</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_41>
-鈴木維一郎
-</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_40>
-シェルスクリプト
-</a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
-プログラミング
-</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_31>
 プログラム
 </a>
@@ -643,9 +370,6 @@ css
 <a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_12>
 HTML
 </a>
-<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
-Hugo
-</a>
 <a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_12>
 Webデザイナー
 </a>
@@ -655,17 +379,32 @@ Web開発
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_12>
 フロントエンジニア
 </a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_11>
+Hugo
+</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_6>
 コーダー
 </a>
 <a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
 Webテクニック
 </a>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
-ユーティリティ
-</a>
 <a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
 GitHub
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github-pages/ class=font_size_4>
+github pages
+</a>
+<a href=https://suzukiiichiro.github.io/tags/aws/ class=font_size_2>
+AWS
+</a>
+<a href=https://suzukiiichiro.github.io/tags/ec2/ class=font_size_2>
+EC2
+</a>
+<a href=https://suzukiiichiro.github.io/tags/gas/ class=font_size_2>
+GAS
+</a>
+<a href=https://suzukiiichiro.github.io/tags/google-analytics/ class=font_size_2>
+Google Analytics
 </a>
 </div>
 </section>
@@ -685,13 +424,10 @@ GitHub
 </header>
 <div class=sidearticle-contents>
 <div class="flex article-list--tile">
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-１」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
@@ -705,13 +441,10 @@ GitHub
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
@@ -725,63 +458,45 @@ GitHub
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-２」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/bash.7fdff20603c978abf2e0cc30892d563c_hua0d4d4b24f4da3a102e4452ac738b95f_108311_320x0_resize_q75_box.jpg 1600w" width=160 height=206 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「bash-３」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
-<article class=has-image>
+<article>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-14-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
-</div>
 <div class=article-details>
-<h2 class=article-title>【１．Hello World】ざっくりわかる「シェルスクリプト」</h2>
+<h2 class=article-title></h2>
 </div>
 </a>
 </article>
