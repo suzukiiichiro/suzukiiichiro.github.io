@@ -1,10 +1,10 @@
 ---
 authors: suzuki
-title: "ざっくりわかるシェルスクリプト「bash-１」"
+title: "ざっくりわかるシェルスクリプト１」"
 date: 2022-01-07T10:03:12+09:00
 description: "ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。"
 draft: false
-image: bash.jpg
+image: shellscript.jpg
 categories:
   - プログラミング
 tags:
