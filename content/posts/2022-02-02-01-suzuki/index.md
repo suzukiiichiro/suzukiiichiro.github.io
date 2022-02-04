@@ -3,7 +3,7 @@ authors: suzuki
 title: "【grep/sed/awkも】ざっくりわかるシェルスクリプト５」"
 description: "この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"
 date: 2022-02-02T15:55:47+09:00
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング
