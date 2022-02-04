@@ -1,6 +1,6 @@
 ---
 authors: suzuki
-title: "ざっくりわかるシェルスクリプト３"
+title: "【はじめから】ざっくりわかるシェルスクリプト３"
 description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
@@ -754,10 +754,13 @@ echo "Finish!!";
 {{% /tips-list %}}
 
 
-#関連記事
-[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+
+# 関連記事
+[【はじめから】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【 grep 特集】ざっくりわかるシェルスクリプト４](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+[【ちょい広め】ざっくりわかるシェルスクリプト５](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
 
 
 # 書籍の紹介

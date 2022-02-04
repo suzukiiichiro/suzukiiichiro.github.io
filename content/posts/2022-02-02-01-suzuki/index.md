@@ -1,7 +1,7 @@
 ---
 authors: suzuki
-title: "もっとざっくりわかる「シェルスクリプト」"
-description: "この記事はシェルスクリプトをざっくりマスターできるチュートリアルです。過去にシェルスクリプトを習熟した経験がある人を対象としていますが、非常に内容の濃いビギナーのための教科書でもあります。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"
+title: "【grep/sed/awkも】ざっくりわかるシェルスクリプト５」"
+description: "この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"
 date: 2022-02-02T15:55:47+09:00
 draft: true
 image: shellscript.jpg
@@ -18,9 +18,9 @@ tags:
 ---
 
 
-この記事はシェルスクリプトをざっくりマスターできるチュートリアルです。過去にシェルスクリプトを習熟した経験がある人を対象としていますが、非常に内容の濃いビギナーのための教科書でもあります。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。
+この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。
+では次のトピックについて説明します。
 
-次のトピックについて説明します。
 
 はじめてのバッシュスクリプト
 ファイルへの出力
@@ -47,16 +47,16 @@ sedコマンドの紹介
 
 ## はじめてのシェルスクリプト
 
-このトピックでは、echoコマンドを使用して「Hello, shell script.」を出力します。あわせてスクリプトファイルを作成する方法、ファイルを実行可能にする方法をも紹介します。
+このトピックでは、catコマンドでシェルの場所を確認後、スクリプトファイルの作成、echoコマンドを使用して「Hello,shellscript.」記述し、スクリプトファイルを実行可能にします。
 
-ターミナルに次のコマンドを入力します。
+ではまず、ターミナルに次のコマンドを入力します。
 
 
 ```
 $ cat  /etc/shells
 ```
 
-実行すると次の出力となります。
+実行するとおおよそ次の出力となります。
 
 
 $ cat /etc/shells
@@ -79,27 +79,31 @@ $ which bash
 $
 ```
 
-このパスを 実行するすべてのシェルスクリプトのページ先頭に書き込む必要があります。
+{{% tips-list tips %}}
+ヒント
+: このパスをシェバンといいます。シェルスクリプトを実行する「bash」のPATHは「/usr/bin/bash」であることがわかりました。このシェバンを、すべてのシェルスクリプトのページ先頭に書き込む必要があります。
+{{% /tips-list %}}
 
+
+シェバンをソースファイルの先頭行に書きます。
 
 ``` bash:helloScript.sh
 #!/usr/bin/bash
 
 ```
 
-「helloScript.sh」ファイルの内容は以下の通りです。
+ではさっそく「helloScript.sh」ファイルに「Hello,shellscript.」を記述しましょう。内容は以下の通りです。
 
 
 ``` bash:helloScript.sh
 #! /bin/bash
 
-echo "Hello, shell script.";
+echo "Hello,shellscript.";
 
 ```
 
 ファイルを保存し、ターミナルに戻り、「ls」コマンドを実行してファイルの存在を確認します。「ls -la」を使用してファイルの詳細を取得することもできます。
-
-その結果、次のようになります。
+その結果は、次のようになります。
 
 
 ```
@@ -114,10 +118,22 @@ $ ls -la
 $
 ```
 
-ファイルがまだ実行可能ではないことは出力から明らかです。 
 'rw-rw-r' は、ファイルの所有者が、ファイへの読み取り、および書き込み権限を持っていることを示します。
-このスクリプトを実行可能にするには、ターミナルで次のコマンドを実行する必要があります。
 
+
+読むことができる (Readable)		r	4
+書くことができる (Writable)		w	2
+実行することができる (eXecutable)	x	1
+なにもできない				-	0
+
+
+３つのブロックにわかれているのは、グループを示しています。
+
+自分 グループ	他人
+ xrw    xrw     xrw
+
+現在のhelloScript.shは -rw ですから、読むことと、書くことはできるものの、実行する権限がないようです。
+このスクリプトを実行可能にするには、ターミナルで次のコマンドを実行する必要があります。
 
 ```
 $ chmod +x helloScript.sh
@@ -130,16 +146,42 @@ $ chmod +x helloScript.sh
 $ ls -la
 -rwxrwxr-x   1 suzuki suzuki    44  2月  2 18:30 helloScript.sh
 $
+```
 
-
+実行権限が付きました。
 次に、ターミナルのコマンド「$ bash /helloScript.sh」を使用してファイルを実行します。
 
 
 ```
-$ bash helloScript.sh
+$ ./helloScript.sh
 Hello, shell script.
 $
 ```
+
+
+
+{{% tips-list tips %}}
+ヒント
+: ファイルの実行方法はざっくりと２種類あります。
+: $ chmod +x <ファイル名> 
+: で、実行権限を与えたうえで、
+: $ ./<ファイル名>
+: とする方法。
+
+: ファイルに実行権限を与えずに
+: $ bash <ファイル名> 
+: と、する方法です。
+
+: セキュリティ的には後者が望ましいです。
+: 理由は、悪意を持つ第三者、または誤操作によってスクリプトファイルが簡単に実行できてしまう環境を作るべきではないからです。
+: 何のファイルかわかりもせずに　
+: $ ./<ファイル名> 
+: で実行できてしまうのは恐怖です。
+: 実行する場合、ソースの中身を確認するのはもちろんですが、実行権限を軽率に与えることは控えましょう。
+{{% /tips-list %}}
+
+
+
 
 
 ## ファイルへの出力
@@ -147,7 +189,9 @@ $
 このトピックでは、シェルスクリプトの実行結果を、別のファイルに出力する方法を紹介します。「helloScript.sh」の echo 行の末尾に少し追記するだけです。
 
 
-```
+``` bash:helloScript.sh
+#!/bin/bash
+
 echo "Hello, shell script." > hello.txt;
 ```
 
@@ -162,53 +206,127 @@ $
 ```
 
 
+{{% tips-list tips %}}
+ヒント
+: 「>」をリダイレクトと言います。
+{{% tips-list %}}
+
+
+ファイルの出力は２種類あります。
+リダイレクト出力は、新規に空のファイルを作成したうえで文字を出力します。
+もう一つの出力方法は「アペンド >> 」です。
+アペンドは、既に存在するファイルに追記します。
+追記方法は簡単で、>> を使うだけです。
+
+``` bash:helloScript.sh
+#!/bin/bash
+
+echo "Hello, shell script." > hello.txt;
+echo "and bash." >> hello.txt; # ここで追記
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: 「>>」をアペンドと言います。
+: アペンドするときの注意点は、アペンドする場合は、既にファイルが存在している必要があります。「touch」コマンドでファイルを生成したうえでアペンドするか、あらかじめ「> リダイレクト」でファイルを生成し、文字列を追記したうえで、「>> アペンド」します。
+{{% tips-list %}}
+
+
+
 
 ## コメント
 
-コメントにはスクリプトに値がありません。スクリプトでは、コメントを書くと何もしません。以前に書かれた現在のプログラマーにコードを説明します。このトピックでは、これら3つのことを学びます。
+コメントはスクリプトの実行時に無視されます。スクリプトでは、コメントは何もしません。コメントには３つの種類があります。
 
 1行のコメント
 複数行のコメント
 HereDoc Delimeter
 
-1行のコメントの場合、コメントステートメントの前に「#」記号を使用できます。次のコードは「helloScript.sh」に書くことができます。
+1行のコメントの場合、コメントステートメントの前に「#」記号を半角で書きます。
 
 
 ``` bash:lineComment.sh
 #! /bin/bash 
 
-#this is a cat command
-cat>> file.txt
+# this is a 1st comment
+echo "Hello,shellscript." > file.txt;
 ```
 
-プログラミング中は、複数のコード行があり、その場合、これらの1行のコメントを1行ずつ使用することはできません。これは最も時間のかかるプロセスになります。この問題を解決するには、複数行のコメントである他のコメント方法を好むことができます。これを行う必要があるのは、最初のコメントの先頭の前に「:」を置き、最後のコメントの後に「」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。
+コメントを複数行にわたって書きたいことがあります。行頭に「# 」を書けばよいのですが、改行の度に行頭に「# 」を挿入する必要があり、とっても面倒です。
+C 言語やJava、HTMLですらも複数行コメントがあるのに。。。
+シェルスクリプトにもあります。あるんです。みんな知らないだけです。
+最初のコメントの先頭の前に「:'」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。
 
 
 ``` bash:multiComment.sh
 #! /bin/bash
 
-: ‘
+:'
 This is the segment of multi-line comments
 Through this script, you will learn
 How to do multi-line commenting
-‘
-cat>>file.txt
+'
+
+# this is a 1st comment
+echo "Hello,shellscript." > file.txt
 ```
 
-したがって、これらの行には値がありません。コードをよりよく理解するために、スクリプトに存在するだけです。
+
+仰々しいマルチラインコメントもあります。
+こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。
 
 
-次に学ぶことは、ここヒアドキュメントです。ヒアドキュメントは、シェルと対話するのに役立つ現象です。コメントとヒアドキュメントの目に見える違いは、ヒアドキュメントの下の行が端末に表示され、コメントの場合、コメントは実行後にスクリプト内にのみ存在することです。ヒアドキュメントの構文を以下に示します。
+``` bash:multiComment.sh
+#! /bin/bash
+
+# 仰々しいマルチラインコメント
+<<COMMENT
+    your comment 1
+    comment 2
+    blah
+COMMENT
+
+# シンプルなマルチラインコメント
+:'
+This is the segment of multi-line comments
+Through this script, you will learn
+How to do multi-line commenting
+'
+
+# this is a 1st comment
+echo "Hello,shellscript." > file.txt;
+```
+
+
+ヒアドキュメントはとてもべんりな出力方法です。
+コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。
+
+通常、複数の行出力は以下のように記述します。
 
 
 ``` bash:hereDocuments.sh
 #!/bin/bash
 
-cat << hereDoc
-this is a hereDocDelimeter
-It is a variable
-You can name it whatever you want to
-hereDoc
+touch file.txt;
+echo "Hello,shellscript 1." >> file.txt;
+echo "Hello,shellscript 2." >> file.txt;
+echo "Hello,shellscript 3." >> file.txt;
+```
+
+
+とっても面倒ですね。
+そこでヒアドキュメントの出番となります。ヒアドキュメントでは以下のように書くことができます。
+
+
+``` bash:hereDocuments.sh
+#!/bin/bash
+
+cat << EOS
+Hello,shellscript 1.
+Hello,shellscript 2.
+Hello,shellscript 3.
+EOS
 ```
 
 スクリプトを実行すると、次の出力が表示されます。
@@ -216,63 +334,124 @@ hereDoc
 
 ```
 $ bash hereDocuments.sh
-this is a hereDocDelimeter
-It is a variable
-You can name it whatever you want to
+Hello,shellscript 1.
+Hello,shellscript 2.
+Hello,shellscript 3.
 $
 ```
 
 
+cat の後ろに 「 - ハイフン」を置くと、インデントが有効になります。
+
+
+``` bash:hereDocuments.sh
+#!/bin/bash
+
+cat <<-EOS
+	Hello,shellscript 1.
+	Hello,shellscript 2.
+	Hello,shellscript 3.
+EOS
+```
+
+
+スクリプトを実行すると、次の出力が表示されます。
+
+
+```
+$ bash hereDocuments.sh
+	Hello,shellscript 1.
+	Hello,shellscript 2.
+	Hello,shellscript 3.
+$
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: cat <<-EOS
+: (-)ハイフンを置くtipsを忘れずに。
+{{% /tips-list %}}
+
+
+
+
 ##  条件分岐
 
-このトピックでは、ifステートメント、if-elseステートメント、if-else ifステートメント、AND演算子とOR演算子を使用した条件文について説明します。
+このトピックでは以下について説明します。
+
+ifステートメント
+if-elseステートメント
+if-else ifステートメント
+AND演算子とOR演算子
+
 
 
 ### Ifステートメント
 ifセグメントに条件を書き込むには、条件の前後に「[ ]」内に余分なものを与える必要があります。その後、条件コードを述べ、次の行に移動し、「その後」と書き、条件がtrueの場合に実行するコード行を述べます。最後に、ifステートメントを閉じるには「fi」を使用します。以下は、ifステートメントの構文を理解するスクリプトコードの例です。
 
+ifステートメントには「[   ]」内に条件を書きます。
+「if」と 「[」の間には半角スペースが必要です。
+また、「[」と条件文、条件文と「]」の間にも半角スペースが必要です。
+ifの終わりには、「fi」で閉じる必要があります。
+
+
+
 ``` bash:if-statements.sh
 #! /bin/bash
 
-count=10
-if [ $count -eq 10 ]; then 
-    echo "the condition is true"
+count=10;
+if [ "$count" -eq 10 ]; then 
+    echo "the condition is true";
 fi
+```
 
 
-まず、このスクリプトは変数「カウント」に「10」の値を割り当てます。「if」のブロックに向かってくると、「[ $count -eq 10 ]」は、count変数の値が「等しい」10であるかどうかを確認する条件です。この条件がtrueになると、実行手順は次のステートメントに移動します。 'then'条件がtrueの場合、私の後に書かれたコードブロックを実行することを指定します。最後に「fi」は、このif-statementブロックの終了を示すキーワードです。この場合、「$count」は変数カウントの値(10)を表すため、条件はtrueです。条件はtrueで、「その後」キーワードに移動し、端末に「条件は真です」を印刷します。
+このスクリプトは変数「カウント」に「10」の値を割り当てます。
+「if」の条件「[ "$count" -eq 10 ]」は、count変数の値が10と「等しい」かどうかを確認する条件文です。
+この条件がtrueで成立すると、処理は次のステートメントに移動します。
+最後の「fi」は、このif-statementブロックの終了を示すキーワードです。
 
 
-条件が間違っている場合はどうなりますか?「このプログラムには「エルスブロック」がないため、何をすべきかわかりません。「else clock」では、条件が間違っているときに実行されるステートメントを書くことができます。以下は、「helloScript.sh」ファイルに書き込んで、プログラムでelseブロックがどのように機能するかを確認できるコードです。
+条件が成立しない場合、このプログラムには「else」ブロックがないため、何もしません。
+
+次のプログラムは条件が成立しない場合の処理となります。
 
 
 ``` bash:ifelse-statements.sh
 #! /bin/bash
 
-count=11
-if [ $count -eq 10 ]; then 
-    echo "the condition is true"
- else
-    echo "the condition is false"
+count=11; # COUNT は 11とする
+if [ "$count" -eq 10 ]; then 
+    echo "the condition is true";
+else
+    echo "the condition is false. count: $count";
 fi
 ```
 
-このプログラムでは、「カウント」変数は11の値で割り当てられます。プログラムは「ifステートメント」をチェックします。ifブロックの条件が真ではないため、「その後」セクション全体を無視して「else」ブロックに移動します。端末は、条件がfalseであるというステートメントを表示します。
+このプログラムでは、「$count」変数は11の値で割り当てています。
+この場合、ifブロックの条件が成立しないため、「if」セクション全体を無視して「else」ブロックに移動します。
+端末は、条件がfalseであるというステートメントと$countを表示します。
 
 
-条件を書くための別の形式もあります。この方法では、「[ ]」を「(( ))」括弧に置き換え、それらの間に条件を書き込むだけです。この形式の例を次に示します。
+条件を書くための別の形式もあります。
+「[ ]」を「(( ))」括弧に置き換え、それらの間に条件を書き込むだけです。
+C言語、Javaに慣れている人は、この記述方法のほうが直観的かもしれません。
+この形式の例を次に示します。
 
 
 ``` bash:bracketIfelse-statements.sh
 #! /bin/bash
 
-count=10
-if (( $count > 9 )); then 
-    echo "the condition is true"
+count=11; # COUNT は 11とする
+if ((count==10)); then 
+    echo "the condition is true";
  else
-    echo "the condition is false"
+    echo "the condition is false count: $count";
 fi
 ```
+
+
 
 ### if-else ifステートメント
 スクリプトでif-else ifをステートメントのブロックとして使用すると、プログラムは条件を再チェックします。同様に、以下のサンプルコードを「helloScript.sh」に記述すると、プログラムは最初に「if」条件をチェックすることがわかります。「カウント」変数には「10」の値が割り当てられます。最初の「if」条件では、プログラムは「カウント」が9より大きい値を持っていることを確認します。その後、「if」ブロックに書かれたステートメントが実行され、そこから出てきます。たとえば、「elif」で書かれた条件がtrueの場合、プログラムは「elif」ブロックで書かれたステートメントのみを実行し、ステートメントの「if」および「else」ブロックを無視します。
@@ -281,19 +460,20 @@ fi
 ``` bash:ifelseif-statements.sh
 #! /bin/bash
 
-count=10
-if (( $count > 9 )); then 
-    echo "the first condition is true"
- elif (( $count <= 9 ));  then
-    echo "then second condition is true"
- else
-    echo "the condition is false"
+count=8;
+if ((count>9)); then 
+    echo "the first condition is true";
+elif ((count<=9)); then
+    echo "then second condition is true";
+else
+    echo "the condition is false";
 fi
 ```
 
-## 演算子
+
 ### AND演算子
-条件で「AND」演算子を使用するには、条件間で記号「&&」を使用して両方を確認する必要があります。たとえば、「helloScript.sh」に次のコードを書くと、プログラムは両方の条件「[ "$age」-gt 18 ]& [「$age」-lt 40 ]'をチェックし、年齢が18より大きく、年齢が40未満の場合、これはfalseであることがわかります。プログラムは「その後」の後に書かれたステートメントを無視し、端末に「年齢は正しくない」と印刷して「else」ブロックに向かって移動します
+条件で「AND」演算子を使用するには、条件間で記号「&&」を使用します。
+たとえば、「[ "$age" -gt 18 ] と [ "$age" -lt 40 ]をチェックし、年齢が18より大きく、年齢が40未満の場合、これはfalseであることがわかります。プログラムは「その後」の後に書かれたステートメントを無視し、端末に「年齢は正しくない」と印刷して「else」ブロックに向かって移動します
 
 
 ``` bash:andOperator.sh
@@ -405,6 +585,7 @@ fi
 
 
 
+<!-- 
 ## ループ
 
 このトピックでは、
@@ -1735,4 +1916,49 @@ fi
 ```
 
 
+-->
+
+# 関連記事
+[【はじめから】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【 grep 特集】ざっくりわかるシェルスクリプト４](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+[【ちょい広め】ざっくりわかるシェルスクリプト５](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
+
+
+# 書籍の紹介
+{{% amazon
+
+title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー）  2017/1/20"
+
+url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
+
+summary=`定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。`
+imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4774186945&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
+%}}
+
+{{% amazon
+
+title="UNIXシェルスクリプト マスターピース132"
+
+url="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00QJINS1A&linkCode=as2&tag=nlpqueens-22&linkId=36dff1cf8fa7d4852b5a4a3cf874304b"
+
+summary=`すべてのUNIXエンジニア必携!!
+
+サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。
+`
+imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00QJINS1A&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
+%}}
+
+
+
 <!-- EOL -->
+
+

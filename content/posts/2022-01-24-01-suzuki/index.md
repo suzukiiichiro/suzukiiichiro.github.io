@@ -1,6 +1,6 @@
 ---
 authors: suzuki
-title: "ざっくりわかるシェルスクリプト「grep」"
+title: "【grep特集】ざっくりわかるシェルスクリプト４"
 description: "bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。"
 date: 2022-01-24T10:53:58+09:00
 image: grep.jpg
@@ -671,11 +671,12 @@ $
 
 
 
-
-[【まとめ版】ざっくりわかる「grep」](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+# 関連記事
+[【はじめから】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【 grep 特集】ざっくりわかるシェルスクリプト４](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+[【ちょい広め】ざっくりわかるシェルスクリプト５](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
 
 
 

@@ -1,6 +1,6 @@
 ---
 authors: suzuki
-title: "ざっくりわかるシェルスクリプト２"
+title: "【はじめから】ざっくりわかるシェルスクリプト２"
 description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
 date: 2022-01-12T12:30:57+09:00
 draft: false
@@ -560,10 +560,14 @@ bash-5.1$
 ## ３０．sleepコマンド
 -->
 
+
 # 関連記事
-[【まとめ版】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[【まとめ版】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【はじめから】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【 grep 特集】ざっくりわかるシェルスクリプト４](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+[【ちょい広め】ざっくりわかるシェルスクリプト５](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
+
 
 
 # 書籍の紹介
@@ -600,3 +604,4 @@ imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&AS
 
 
 <!-- EOL -->
+
