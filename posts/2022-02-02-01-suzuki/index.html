@@ -1,0 +1,1087 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
+<title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
+<meta property="og:title" content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-04T10:05:18+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-04T10:05:18.362835485Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_60x0_resize_box_3.png width=60 height=60 class=site-logo loading=lazy alt>
+</a></div>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_30>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_19>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</div>
+<main class="main full-width">
+<nav class=breadcrumb-area>
+<ol class=breadcrumb>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
+<li><span class=breadcrumb-item>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</span>
+</ol>
+</nav>
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.02.02</time>
+<time class="article-time--item article-time--updatedate">
+2022.02.04
+</time>
+<time class="article-time--item article-time--reading">
+読了時間: 45分
+</time>
+</div>
+</header>
+<h1 class=article-title>
+【grep/sed/awkも】ざっくりわかるシェルスクリプト５」
+</h1>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#はじめてのシェルスクリプト>はじめてのシェルスクリプト</a></li>
+<li><a href=#ファイルへの出力>ファイルへの出力</a></li>
+<li><a href=#スクリプトのカール>スクリプトのカール</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。<br>
+では次のトピックについて説明します。</p>
+<p>はじめてのバッシュスクリプト<br>
+ファイルへの出力<br>
+コメント<br>
+条件文<br>
+ループ<br>
+スクリプトへの入力<br>
+スクリプトからの出力<br>
+別のスクリプトに値を渡す<br>
+文字列処理<br>
+数値計算<br>
+declareコマンドで宣言する<br>
+配列<br>
+関数<br>
+ファイルとディレクトリ<br>
+curlコマンドでurlを扱う<br>
+プロフェッショナルメニュー<br>
+inotifyを使用してファイルシステムを待つ<br>
+grepコマンドの紹介<br>
+awkコマンドの紹介<br>
+sedコマンドの紹介<br>
+シェルスクリプトのデバッグ</p>
+<h2 id=はじめてのシェルスクリプト>はじめてのシェルスクリプト</h2>
+<p>このトピックでは、catコマンドでシェルの場所を確認後、スクリプトファイルの作成、echoコマンドを使用して「Hello,shellscript.」記述し、スクリプトファイルを実行可能にします。</p>
+<p>ではまず、ターミナルに次のコマンドを入力します。</p>
+<pre tabindex=0><code>$ cat  /etc/shells
+</code></pre><p>実行するとおおよそ次の出力となります。</p>
+<p>$ cat /etc/shells<br>
+/bin/sh<br>
+/bin/bash<br>
+/sbin/nologin<br>
+/usr/bin/sh<br>
+/usr/bin/bash<br>
+/usr/sbin/nologin<br>
+$</p>
+<p>このコマンドは、システムで利用可能なすべてのシェルを表示し、それらのいずれかを使用できます。<br>
+このタスクでシステムにbashシェルがあるかどうかを確認できました。bashのパスを知るには、ターミナルで「$ which bash」を実行します。</p>
+<pre tabindex=0><code>$ which bash
+/usr/bin/bash
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>このパスをシェバンといいます。シェルスクリプトを実行する「bash」のPATHは「/usr/bin/bash」であることがわかりました。このシェバンを、すべてのシェルスクリプトのページ先頭に書き込む必要があります。</dd>
+</dl>
+</div>
+<p>シェバンをソースファイルの先頭行に書きます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#!/usr/bin/bash
+</span><span class=cp></span>
+</code></pre></div><p>ではさっそく「helloScript.sh」ファイルに「Hello,shellscript.」を記述しましょう。内容は以下の通りです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span><span class=p>;</span>
+
+</code></pre></div><p>ファイルを保存し、ターミナルに戻り、「ls」コマンドを実行してファイルの存在を確認します。「ls -la」を使用してファイルの詳細を取得することもできます。<br>
+その結果は、次のようになります。</p>
+<pre tabindex=0><code>$ ls
+helloScript.sh
+$
+</code></pre><pre tabindex=0><code>$ ls -la
+-rw-rw-r--   1 suzuki suzuki    44  2月  2 18:30 helloScript.sh
+$
+</code></pre><p>&lsquo;rw-rw-r&rsquo; は、ファイルの所有者が、ファイへの読み取り、および書き込み権限を持っていることを示します。</p>
+<p>読むことができる (Readable) r 4<br>
+書くことができる (Writable) w 2<br>
+実行することができる (eXecutable) x 1<br>
+なにもできない - 0</p>
+<p>３つのブロックにわかれているのは、グループを示しています。</p>
+<p>自分 グループ 他人<br>
+xrw xrw xrw</p>
+<p>現在のhelloScript.shは -rw ですから、読むことと、書くことはできるものの、実行する権限がないようです。<br>
+このスクリプトを実行可能にするには、ターミナルで次のコマンドを実行する必要があります。</p>
+<pre tabindex=0><code>$ chmod +x helloScript.sh
+</code></pre><p>次に、「ls -la」コマンドを使用して「helloScript.sh」ファイルのアクセス許可を確認し、次の出力が得られます。</p>
+<pre tabindex=0><code>$ ls -la
+-rwxrwxr-x   1 suzuki suzuki    44  2月  2 18:30 helloScript.sh
+$
+</code></pre><p>実行権限が付きました。<br>
+次に、ターミナルのコマンド「$ bash /helloScript.sh」を使用してファイルを実行します。</p>
+<pre tabindex=0><code>$ ./helloScript.sh
+Hello, shell script.
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ファイルの実行方法はざっくりと２種類あります。</dd>
+<dd>$ chmod +x &lt;ファイル名></dd>
+<dd>で、実行権限を与えたうえで、</dd>
+<dd>$ ./&lt;ファイル名></dd>
+<dd>とする方法。</dd>
+<dd>
+<p>ファイルに実行権限を与えずに</p>
+</dd>
+<dd>$ bash &lt;ファイル名></dd>
+<dd>と、する方法です。</dd>
+<dd>
+<p>セキュリティ的には後者が望ましいです。</p>
+</dd>
+<dd>理由は、悪意を持つ第三者、または誤操作によってスクリプトファイルが簡単に実行できてしまう環境を作るべきではないからです。</dd>
+<dd>何のファイルかわかりもせずに　</dd>
+<dd>$ ./&lt;ファイル名></dd>
+<dd>で実行できてしまうのは恐怖です。</dd>
+<dd>実行する場合、ソースの中身を確認するのはもちろんですが、実行権限を軽率に与えることは控えましょう。</dd>
+</dl>
+</div>
+<h2 id=ファイルへの出力>ファイルへの出力</h2>
+<p>このトピックでは、シェルスクリプトの実行結果を、別のファイルに出力する方法を紹介します。「helloScript.sh」の echo 行の末尾に少し追記するだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello, shell script.&#34;</span> &gt; hello.txt<span class=p>;</span>
+</code></pre></div><p>ファイルを保存し、「$ bash helloScript.sh」でスクリプトを実行します。<br>
+次の出力が表示されます。「ls -la」を押して、新しいファイルが存在することを確認してください。</p>
+<pre tabindex=0><code>$ ls -la 
+helloScript.sh      hello.txt
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>「>」をリダイレクトと言います。</dd>
+</dl>
+<div class=tips-area>
+<p>ファイルの出力は２種類あります。<br>
+リダイレクト出力は、新規に空のファイルを作成したうえで文字を出力します。<br>
+もう一つの出力方法は「アペンド &#187; 」です。<br>
+アペンドは、既に存在するファイルに追記します。<br>
+追記方法は簡単で、&#187; を使うだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello, shell script.&#34;</span> &gt; hello.txt<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;and bash.&#34;</span> &gt;&gt; hello.txt<span class=p>;</span> <span class=c1># ここで追記</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>「&#187;」をアペンドと言います。</dd>
+<dd>アペンドするときの注意点は、アペンドする場合は、既にファイルが存在している必要があります。「touch」コマンドでファイルを生成したうえでアペンドするか、あらかじめ「> リダイレクト」でファイルを生成し、文字列を追記したうえで、「&#187; アペンド」します。</dd>
+</dl>
+<div class=tips-area>
+<h2 id=コメント>コメント</h2>
+<p>コメントはスクリプトの実行時に無視されます。スクリプトでは、コメントは何もしません。コメントには３つの種類があります。</p>
+<p>1行のコメント<br>
+複数行のコメント<br>
+HereDoc Delimeter</p>
+<p>1行のコメントの場合、コメントステートメントの前に「#」記号を半角で書きます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:lineComment.sh data-lang=bash:lineComment.sh><span class=cp>#! /bin/bash 
+</span><span class=cp></span>
+<span class=c1># this is a 1st comment</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span> &gt; file.txt<span class=p>;</span>
+</code></pre></div><p>コメントを複数行にわたって書きたいことがあります。行頭に「# 」を書けばよいのですが、改行の度に行頭に「# 」を挿入する必要があり、とっても面倒です。<br>
+C 言語やJava、HTMLですらも複数行コメントがあるのに。。。<br>
+シェルスクリプトにもあります。あるんです。みんな知らないだけです。<br>
+最初のコメントの先頭の前に「:'」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+:<span class=s1>&#39;
+</span><span class=s1>This is the segment of multi-line comments
+</span><span class=s1>Through this script, you will learn
+</span><span class=s1>How to do multi-line commenting
+</span><span class=s1>&#39;</span>
+<p><span class=c1># this is a 1st comment</span><br>
+<span class=nb>echo</span> <span class=s2>&quot;Hello,shellscript.&quot;</span> &gt; file.txt<br>
+</code></pre></div><p>仰々しいマルチラインコメントもあります。<br><br>
+こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。</p></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=c1># 仰々しいマルチラインコメント</span>
+<span class=s>&lt;&lt;COMMENT
+</span><span class=s>    your comment 1
+</span><span class=s>    comment 2
+</span><span class=s>    blah
+</span><span class=s>COMMENT</span>
+<p><span class=c1># シンプルなマルチラインコメント</span><br>
+:<span class=s1>'<br>
+</span><span class=s1>This is the segment of multi-line comments<br>
+</span><span class=s1>Through this script, you will learn<br>
+</span><span class=s1>How to do multi-line commenting<br>
+</span><span class=s1>'</span></p>
+<p><span class=c1># this is a 1st comment</span><br>
+<span class=nb>echo</span> <span class=s2>&quot;Hello,shellscript.&quot;</span> &gt; file.txt<span class=p>;</span><br>
+</code></pre></div><p>ヒアドキュメントはとてもべんりな出力方法です。<br><br>
+コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。</p></p>
+<p>通常、複数の行出力は以下のように記述します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:hereDocuments.sh data-lang=bash:hereDocuments.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+touch file.txt<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript 1.&#34;</span> &gt;&gt; file.txt<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript 2.&#34;</span> &gt;&gt; file.txt<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript 3.&#34;</span> &gt;&gt; file.txt<span class=p>;</span>
+</code></pre></div><p>とっても面倒ですね。<br>
+そこでヒアドキュメントの出番となります。ヒアドキュメントでは以下のように書くことができます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:hereDocuments.sh data-lang=bash:hereDocuments.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+cat <span class=s>&lt;&lt; EOS
+</span><span class=s>Hello,shellscript 1.
+</span><span class=s>Hello,shellscript 2.
+</span><span class=s>Hello,shellscript 3.
+</span><span class=s>EOS</span>
+</code></pre></div><p>スクリプトを実行すると、次の出力が表示されます。</p>
+<pre tabindex=0><code>$ bash hereDocuments.sh
+Hello,shellscript 1.
+Hello,shellscript 2.
+Hello,shellscript 3.
+$
+</code></pre><p>cat の後ろに 「 - ハイフン」を置くと、インデントが有効になります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:hereDocuments.sh data-lang=bash:hereDocuments.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+cat <span class=s>&lt;&lt;-EOS
+</span><span class=s>	Hello,shellscript 1.
+</span><span class=s>	Hello,shellscript 2.
+</span><span class=s>	Hello,shellscript 3.
+</span><span class=s>EOS</span>
+</code></pre></div><p>スクリプトを実行すると、次の出力が表示されます。</p>
+<pre tabindex=0><code>$ bash hereDocuments.sh
+	Hello,shellscript 1.
+	Hello,shellscript 2.
+	Hello,shellscript 3.
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>cat &#171;-EOS</dd>
+<dd>(-)ハイフンを置くtipsを忘れずに。</dd>
+</dl>
+</div>
+<h2 id=条件分岐>条件分岐</h2>
+<p>このトピックでは以下について説明します。</p>
+<p>ifステートメント<br>
+if-elseステートメント<br>
+if-else ifステートメント<br>
+AND演算子とOR演算子</p>
+<h3 id=ifステートメント>Ifステートメント</h3>
+<p>ifセグメントに条件を書き込むには、条件の前後に「[ ]」内に余分なものを与える必要があります。その後、条件コードを述べ、次の行に移動し、「その後」と書き、条件がtrueの場合に実行するコード行を述べます。最後に、ifステートメントを閉じるには「fi」を使用します。以下は、ifステートメントの構文を理解するスクリプトコードの例です。</p>
+<p>ifステートメントには「[ ]」内に条件を書きます。<br>
+「if」と 「[」の間には半角スペースが必要です。<br>
+また、「[」と条件文、条件文と「]」の間にも半角スペースが必要です。<br>
+ifの終わりには、「fi」で閉じる必要があります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if-statements.sh data-lang=bash:if-statements.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>count</span><span class=o>=</span>10<span class=p>;</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span> -eq <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span> 
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is true&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>このスクリプトは変数「カウント」に「10」の値を割り当てます。<br>
+「if」の条件「[ &ldquo;$count&rdquo; -eq 10 ]」は、count変数の値が10と「等しい」かどうかを確認する条件文です。<br>
+この条件がtrueで成立すると、処理は次のステートメントに移動します。<br>
+最後の「fi」は、このif-statementブロックの終了を示すキーワードです。</p>
+<p>条件が成立しない場合、このプログラムには「else」ブロックがないため、何もしません。</p>
+<p>次のプログラムは条件が成立しない場合の処理となります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelse-statements.sh data-lang=bash:ifelse-statements.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>count</span><span class=o>=</span>11<span class=p>;</span> <span class=c1># COUNT は 11とする</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span> -eq <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span> 
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is true&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is false. count: </span><span class=nv>$count</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>このプログラムでは、「$count」変数は11の値で割り当てています。<br>
+この場合、ifブロックの条件が成立しないため、「if」セクション全体を無視して「else」ブロックに移動します。<br>
+端末は、条件がfalseであるというステートメントと$countを表示します。</p>
+<p>条件を書くための別の形式もあります。<br>
+「[ ]」を「(( ))」括弧に置き換え、それらの間に条件を書き込むだけです。<br>
+C言語、Javaに慣れている人は、この記述方法のほうが直観的かもしれません。<br>
+この形式の例を次に示します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bracketIfelse-statements.sh data-lang=bash:bracketIfelse-statements.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>count</span><span class=o>=</span>11<span class=p>;</span> <span class=c1># COUNT は 11とする</span>
+<span class=k>if</span> <span class=o>((</span><span class=nv>count</span><span class=o>==</span>10<span class=o>))</span><span class=p>;</span> <span class=k>then</span> 
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is true&#34;</span><span class=p>;</span>
+ <span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is false count: </span><span class=nv>$count</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><h3 id=if-else-ifステートメント>if-else ifステートメント</h3>
+<p>スクリプトでif-else ifをステートメントのブロックとして使用すると、プログラムは条件を再チェックします。同様に、以下のサンプルコードを「helloScript.sh」に記述すると、プログラムは最初に「if」条件をチェックすることがわかります。「カウント」変数には「10」の値が割り当てられます。最初の「if」条件では、プログラムは「カウント」が9より大きい値を持っていることを確認します。その後、「if」ブロックに書かれたステートメントが実行され、そこから出てきます。たとえば、「elif」で書かれた条件がtrueの場合、プログラムは「elif」ブロックで書かれたステートメントのみを実行し、ステートメントの「if」および「else」ブロックを無視します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelseif-statements.sh data-lang=bash:ifelseif-statements.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>count</span><span class=o>=</span>8<span class=p>;</span>
+<span class=k>if</span> <span class=o>((</span>count&gt;9<span class=o>))</span><span class=p>;</span> <span class=k>then</span> 
+    <span class=nb>echo</span> <span class=s2>&#34;the first condition is true&#34;</span><span class=p>;</span>
+<span class=k>elif</span> <span class=o>((</span>count&lt;<span class=o>=</span>9<span class=o>))</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;then second condition is true&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;the condition is false&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><h3 id=and演算子>AND演算子</h3>
+<p>条件で「AND」演算子を使用するには、条件間で記号「&&」を使用します。<br>
+たとえば、「[ &ldquo;$age&rdquo; -gt 18 ] と [ &ldquo;$age&rdquo; -lt 40 ]をチェックし、年齢が18より大きく、年齢が40未満の場合、これはfalseであることがわかります。プログラムは「その後」の後に書かれたステートメントを無視し、端末に「年齢は正しくない」と印刷して「else」ブロックに向かって移動します</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator.sh data-lang=bash:andOperator.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>10</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><p>条件を次の形式で書くこともできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator2.sh data-lang=bash:andOperator2.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> <span class=o>&amp;&amp;</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]]</span>
+<span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><p>「&&」の代わりに「-a」を使用して、プログラムの条件でAND演算子を使用することもできます。それは同じように動作します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator3.sh data-lang=bash:andOperator3.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> -a <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span>
+<span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><p>このコードを「helloScript.sh」スクリプトに保存し、ターミナルから実行します</p>
+<h3 id=or演算子>OR演算子</h3>
+<p>2つの条件があり、それらのいずれかまたは両方がtrueの場合、前述のステートメントを実行する場合、OR演算子が使用されます。 「-o」はOR演算子を表すために使用されます。「||」記号を使用することもできます。<br>
+次のサンプルコードを「helloScript.sh」に書き、ターミナルから実行して動作を確認します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator.sh data-lang=bash:orOperator.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><p>OR演算子をよりよく理解するために、さまざまな条件を試すこともできます。以下に４つのサンプルを記します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator1.sh data-lang=bash:orOperator1.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator2.sh data-lang=bash:orOperator2.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator3.sh data-lang=bash:orOperator3.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> <span class=o>||</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator4.sh data-lang=bash:orOperator4.sh><span class=cp>#! /bin/bash
+</span><span class=cp></span>
+<span class=nv>age</span><span class=o>=</span><span class=m>30</span>
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> <span class=o>]</span> <span class=o>||</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is correct&#34;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
+<span class=k>fi</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hua0d4d4b24f4da3a102e4452ac738b95f_215331_0x400_resize_q75_box.jpg 1600w" width=118 height=200 loading=lazy alt="Featured image of post 【grep特集】ざっくりわかるシェルスクリプト４">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【はじめから】ざっくりわかるシェルスクリプト３">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト３</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.13</time>
+</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.12>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【はじめから】ざっくりわかるシェルスクリプト２">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト２</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.12</time>
+</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.07>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript_hua0d4d4b24f4da3a102e4452ac738b95f_110409_0x400_resize_q75_box.jpg 1600w" width=158 height=200 loading=lazy alt="Featured image of post 【はじめから】ざっくりわかるシェルスクリプト１」">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト１」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.07</time>
+</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.06>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.06</time>
+</div><p class=article-subtitle>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.25>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.25</time>
+</div><p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div><p class=article-subtitle>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.23>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div><p class=article-subtitle>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>プログラミング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/grep/>grep</a>
+<a href=https://suzukiiichiro.github.io/tags/sed/>sed</a>
+<a href=https://suzukiiichiro.github.io/tags/awk/>awk</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--next>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</h2>
+</div>
+</a>
+</article>
+</div>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<div class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoでテーマが反映されない（画面が真っ白のまま）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト１」</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+2022年02月（6）
+</option><option value=/archives/#2022年01月>
+2022年01月（29）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_34>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_17>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_17>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_17>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_13>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_13>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_13>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_13>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_12>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_12>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_12>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_11>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_11>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_7>
+コーダー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+</div>
+</section>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト２</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト３</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
