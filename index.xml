@@ -1,0 +1,2057 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 03 Feb 2022 15:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
+&lt;p>前回は全くアルゴリズムを使わないで全パターン１行に１つずつクイーンを設置するブルートフォース　力任せ探索でした。&lt;br>
+エイトクイーン(N=8)ですら凄く時間がかかることが体感できたかと思います。&lt;/p>
+&lt;p>今回も解を出すまでには至りませんが、一つ進んで、配置フラグ（制約テスト高速化）を使いより効率よく解の候補を列挙する方法を説明したいと思います。&lt;/p>
+&lt;p>エイトクイーン問題はクイーンの利き筋上下左右斜め８方向にクイーンを置けないという制約があるのですが、今回は「上下の制約」すなわち、同じ列にはクイーンを置けないという制約を配置フラグを使って追加してみます。&lt;/p>
+&lt;p>例えば、&lt;br>
+1行目で右端にクイーンを置くと以降の行では右端にクイーンを置けなくなります。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png" data-size="322x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png"
+width="322"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+上の図だと2行目で1行目ですでにクイーンを置いている右端にクイーンを置こうとしているのでNGです。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png" data-size="324x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png"
+width="324"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+上の図は2行目は良いのですが3行目で1行目にすでにクイーンを置いている右端にクイーンを置こうとしているのでNGです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 98;
+flex-basis: 235px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png" data-size="324x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png"
+width="324"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png" data-size="322x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png"
+width="322"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>上の２つの図のように同じ列にクイーンを置かないパターンを探索します。&lt;/p>
+&lt;p>配置フラグ（制約テスト高速化）を使って私の端末でエイトクイーン(N=8)を実行すると、0m0.554sかかります。ブルートフォースが3m7.321sかかったので360倍くらい速いですね。&lt;/p>
+&lt;h2 id="グローバル変数について">グローバル変数について&lt;/h2>
+&lt;p>それではプログラムについて説明していきましょう。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py&lt;/a>&lt;/p>
+&lt;p>プログラムの作りとしては前回のブルートフォースをベースにしてそこに配置フラグを追加したものとなりますので、ブルートフォースとの差異を説明していきたいと思います。&lt;/p>
+&lt;p>まず、グローバル変数について説明します。&lt;br>
+今回も動作をわかりやすくするため419,420行目のMAXとSIZEを4に変更してみてください。&lt;/p>
+&lt;p>423行目 配列 FA がグローバル変数として新しく追加されています。&lt;br>
+0 for i in range(SIZE) で0に初期化しています。&lt;br>
+どの列にクイーンを置いたかをフラグで管理します。&lt;br>
+FA[0]が右端,FA[1]が右端から2番目,FA[2]が右端から3番目,FA[3]が右端から4番目(左端)になります。&lt;br>
+例えば2列目にクイーンを置くとFA[1]=1にしてフラグを立てます。&lt;/p>
+&lt;h2 id="nqueenメソッドについて">nqueenメソッドについて&lt;/h2>
+&lt;p>nqueenメソッドの作りも基本的に前回のブルートフォースと同じです。&lt;br>
+443行目〜446行目に配置フラグFAの処理が追加されているところが違う部分となります。&lt;/p>
+&lt;p>442行目 ABOARD[row]=i でクイーンを設置します。&lt;br>
+前回のブルートフォースの場合は&lt;br>
+無条件で次の行でnqueen(row+1)で再帰的にnqueenを呼び出していました。 &lt;br>
+今回の配置フラグでは&lt;br>
+443行目 if FA[i] == 0: の条件を満たした場合だけ再帰的にnqueenを呼び出しています。&lt;/p>
+&lt;p>iは今回クイーンを置いた場所を意味します。&lt;/p>
+&lt;p>444行目でクイーンを置いた列の配置フラグをあらかじめ1にしておきます。&lt;/p>
+&lt;p>例えば以下の図の様な場合&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png" data-size="322x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png"
+width="322"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+1行目では右端にクイーンを置くので、&lt;br>
+444行目の処理でFA[0]=1となります。&lt;br>
+2行目は右端から2番目にクイーンを置くので、&lt;br>
+FA[1]=1となります。&lt;br>
+3行目は右端にクイーンを置いているのでiは0です。&lt;br>
+443行目の if FA[i]== 0 : の判定で&lt;br>
+FA[0]は1ですので443行目から446行目の処理には入らず次のfor文に移動することになります。&lt;/p>
+&lt;p>この443,444,446行目の処理によってすでに同じ列にクイーンを置いている場合は下の行に行くのをやめるという動きを実現しています。&lt;/p>
+&lt;p>446行目でFA[i]=0 という処理があります。&lt;br>
+この処理は再帰の動きを理解する上で非常に重要な処理になります。&lt;br>
+再帰から戻ってきた時は445行目の下からスタートすることになります。&lt;br>
+再帰から戻ってきた時は変数の状態を再帰に入る直前の状態に戻す必要があります。&lt;br>
+ローカル変数については特別にプログラムしないでも再帰前の状態に戻るのですが、グローバル変数は自分で設定しないと元に戻りません。&lt;br>
+再帰から戻ってきた時はiにクイーンを置かなかったことになるのですから&lt;br>
+FA[i]=0で明示的にフラグを落としてあげています。&lt;/p>
+&lt;p>今回は配置フラグの全体的な流れを説明しました。次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item><item><title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</title><link>https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/</link><pubDate>Tue, 01 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）" />&lt;h2 id="グローバル変数">グローバル変数&lt;/h2>
+&lt;p>今回は、前回からの引き続きでブルートフォース力任せ探索のプログラムの詳細部分を説明します。&lt;/p>
+&lt;p>プログラムのソースは以下のURLをご覧ください。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py&lt;/a>&lt;/p>
+&lt;p>まず、グローバル変数を見ていきましょう。&lt;/p>
+&lt;p>417~420行目で設定しています。&lt;/p>
+&lt;p>417行目 MAX、418行目 SIZEでNの数を指定します。&lt;br>
+プログラムは8ですが、動作を説明するために4に変更してみてください。&lt;/p>
+&lt;pre tabindex="0">&lt;code>MAX = 4
+SIZE = 4
+&lt;/code>&lt;/pre>&lt;p>以降はN=4の問題として説明します。&lt;/p>
+&lt;p>419行目 ABOARDという配列を宣言しクイーンを置いていきます。&lt;br>
+ABOARD = [0 for i in range(MAX)]で4個の要素を0で初期化しています。&lt;br>
+ABOARD = [0,0,0,0] と同じです。&lt;/p>
+&lt;p>ABOARD[0]は1行目のクイーンを置く位置です0から3までの数字が入ります。&lt;br>
+ABOARD[0]が3だと右から4番目にクイーンを置く感じになります。&lt;/p>
+&lt;p>420行目 COUNT=0 でCOUNTを初期化しています。&lt;/p>
+&lt;h2 id="nqueenメソッド">nqueenメソッド&lt;/h2>
+&lt;p>グローバル変数の宣言が終わったら441行目でnqueenメソッドが呼び出されます。&lt;/p>
+&lt;p>439行目でnqueenメソッドを再帰的に呼び出しているのが最も特徴的です。&lt;/p>
+&lt;p>全体の動作については次の「再帰について」で図を交えて説明しますが前提として各行が何をしているか押さえましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code> global ABOARD
+&lt;/code>&lt;/pre>&lt;p>433行目で global ABOARDとして変数宣言しています。&lt;br>
+関数内でグローバル変数に値を代入したい場合は、変数宣言時にglobalをつける必要があります。&lt;br>
+globalをつけないとローカル変数として扱われます。&lt;br>
+ちなみに、私は試しに433行目を削除して実行してみたのですがエラーになりました。&lt;/p>
+&lt;pre tabindex="0">&lt;code> if row is SIZE:
+printout()
+&lt;/code>&lt;/pre>&lt;p>434行目 if row is SIZE: はrowイコールSIZEという意味です。&lt;br>
+if row == SIZE: としても今回は同じ動きになります。&lt;/p>
+&lt;p>434-435行でやっていることは434行目のif文で最終行までクイーンを置き終わっているかどうかを判定し置き終わっていたらprintoutメソッドを呼び出してCOUNT数と各行のクイーンの設置場所を出力します。&lt;/p>
+&lt;pre tabindex="0">&lt;code> for i in range(SIZE)
+&lt;/code>&lt;/pre>&lt;p>437行目 for i in range(SIZE) は0からスタートしてSIZEの回数分0,1,2,3と1ずつインクリメントしながらfor文を回します。&lt;br>
+やっていることは各行にクイーンを設置する場所を右から左に1個ずつずらしています。1番左端までいったらfor文を抜けます。&lt;/p>
+&lt;pre tabindex="0">&lt;code> ABOARD[row] = i
+&lt;/code>&lt;/pre>&lt;p>438行目のABOARD[row]=iでクイーンを設置しています。&lt;br>
+rowは行を意味します。0からスタートして0,1,2,3まであります。&lt;br>
+例えば、0だと1行目、3だと4行目となります。&lt;/p>
+&lt;p>iはクイーンを設置する列になります。&lt;br>
+0からスタートして0,1,2,3まであります。&lt;br>
+例えば、0だと右から1列目、3だと右から4列目となります。&lt;/p>
+&lt;p>例えばABOARD[2]=3 の場合は&lt;br>
+3行目は右から4列目にクイーンを置くことになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code> nqueen(row+1)
+&lt;/code>&lt;/pre>&lt;p>439行目のnqueen(row+1)で再帰的にnqueenメソッドを呼び出しています。&lt;br>
+やっていることは次の行への移動です。&lt;/p>
+&lt;h2 id="再帰の動きについて">再帰の動きについて&lt;/h2>
+&lt;p>再帰の基本的な動作で押さえたいのは以下の2つです。&lt;br>
+・再帰を呼び出した時の動作&lt;br>
+通常のメソッド呼び出しと同じです。メソッドの先頭に移動します。引数に渡された値が反映されます。&lt;br>
+・再帰から抜ける時の動作&lt;br>
+再帰から抜けると1階層前に戻り再帰を呼び出した場所の次の行に移動します。&lt;br>
+変数の状態は再帰を呼び出す直前の状態に戻ります。&lt;/p>
+&lt;p>再帰の呼び出しが実際にどういう動きになっているかは頭で考えても難しいので図を見ながら説明します。&lt;/p>
+&lt;p>444行目でnqueenを0を渡して呼び出します(1階層目)。&lt;br>
+432行目からスタートして&lt;br>
+row=0なので436行目のelse:に行きそのまま437行目のfor文に入ります&lt;br>
+最初のfor文なのでi=0です。&lt;br>
+row=0なので&lt;br>
+ABOARD[0]=0&lt;br>
+で&lt;br>
+1行目の右端にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q1.png" data-size="322x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q1.png"
+width="322"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを呼び出します。&lt;br>
+row=0 row+1=1なので&lt;br>
+nqueenを引数1を渡して呼び出します(2階層目)&lt;br>
+432行目からスタートして&lt;br>
+row=1なので436行目のelse:に行きそのまま437行目のfor文に入ります&lt;br>
+最初のfor文なのでi=0です。&lt;br>
+さっきもfor文が出てきましたが再帰は階層ごとにローカル変数を別に考える必要があります。&lt;br>
+row=1なので&lt;br>
+ABOARD[1]=0&lt;br>
+で&lt;br>
+2行目の右端にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 103;
+flex-basis: 249px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q2.png" data-size="328x316">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q2.png"
+width="328"
+height="316"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数2を渡して呼び出します(3階層目)。&lt;br>
+同様にfor文に入り、i=0 row=2なので&lt;br>
+ABOARD[2]=0&lt;br>
+で&lt;br>
+3行目の右端にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q3.png" data-size="330x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q3.png"
+width="330"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数3を渡して呼び出します(4階層目)。&lt;/p>
+&lt;p>同様にfor文に入り、i=0 row=3なので&lt;br>
+ABOARD[3]=0&lt;br>
+で&lt;br>
+4行目の右端にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 98;
+flex-basis: 237px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q4.png" data-size="324x328">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q4.png"
+width="324"
+height="328"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;/p>
+&lt;p>row=4なのでif row is SIZE:でprintout()メソッドを呼び出してCOUNTと各行のクイーンの位置を出力します。&lt;br>
+printout()後再帰から抜けて4階層目の439行目の後ろに移動します。&lt;br>
+変数は再帰を呼び出す直前のものに戻るのでrowは3 iは0になります。&lt;/p>
+&lt;p>for文の中にあるのでiを1インクリメントしてiは1になり次のfor文に移動します。&lt;br>
+_&lt;br>
+ABOARD[3]=1&lt;br>
+で&lt;br>
+4行目の右から2番目にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q5.png" data-size="322x320">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q5.png"
+width="322"
+height="320"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。&lt;/p>
+&lt;p>for文の中にあるのでiを1インクリメントしてiは2になり次のfor文に移動します。&lt;br>
+_&lt;br>
+ABOARD[3]=2&lt;br>
+で&lt;br>
+4行目の右から3番目にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q6.png" data-size="326x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q6.png"
+width="326"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。&lt;/p>
+&lt;p>for文の中にあるのでiを1インクリメントしてiは3になり次のfor文に移動します。&lt;br>
+_&lt;br>
+ABOARD[3]=3&lt;br>
+で&lt;br>
+4行目の右から4番目にクイーンを置きます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q7.png" data-size="332x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q7.png"
+width="332"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。&lt;br>
+for文でiを1インクリメントすると4ですがrange(4)だと0,1,2,3までなのでここでfor文を抜けます。&lt;/p>
+&lt;p>for文を抜けると439行目には移動しないので再帰から抜けて3階層目の439行目に移動します。&lt;/p>
+&lt;p>3階層目ではrow=2 iは0です。&lt;br>
+for文の中にあるのでiを1インクリメントしてiは1になり次のfor文に移動します。&lt;/p>
+&lt;p>ABOARD[2]=1&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q8.png" data-size="326x326">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q8.png"
+width="326"
+height="326"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数3を渡して呼び出します(4階層目)。&lt;/p>
+&lt;p>row=3なので436行目のelse:に行きそのまま437行目のfor文に入ります&lt;br>
+最初のfor文なのでi=0です。&lt;/p>
+&lt;p>ABOARD[3]=0&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 244px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q9.png" data-size="326x320">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/q9.png"
+width="326"
+height="320"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;br>
+row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。&lt;br>
+という感じで下の階層からfor文でぐるぐる回転しながらうごいてゆきます。&lt;/p></description></item><item><title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</title><link>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</link><pubDate>Tue, 01 Feb 2022 14:19:43 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg" alt="Featured image of post Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。" />&lt;p>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。&lt;/p>
+&lt;p>特に重い処理を行うと、js の処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。&lt;/p>
+&lt;p>そういったときは &lt;strong>Worker&lt;/strong> を使って重い処理を別タスクとして実行することで、画面上の処理と、重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。&lt;/p>
+&lt;p>今回はその方法を説明していきます。&lt;/p>
+&lt;h2 id="uiをロックしてしまうループ処理">UIをロックしてしまうループ処理&lt;/h2>
+&lt;p>まずは画面をロックしてしまうような記述です。&lt;br>
+下記のような HTML があったとしましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html:index.html" data-lang="html:index.html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;ja&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;UTF-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;viewport&amp;#34;&lt;/span> &lt;span class="na">content&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">#&lt;/span>&lt;span class="nn">animation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">before&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">block&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="kc">black&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">keyframes&lt;/span> &lt;span class="nt">rotation&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nt">0&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);}&lt;/span>
+&lt;span class="nt">100&lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">360&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">run&lt;/span> &lt;span class="p">#&lt;/span>&lt;span class="nn">animation&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">before&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">animation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">s&lt;/span> &lt;span class="kc">linear&lt;/span> &lt;span class="kc">infinite&lt;/span> &lt;span class="k">rotation&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">run&lt;/span> &lt;span class="nt">button&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">red&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;animation&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;button&amp;#34;&lt;/span> &lt;span class="na">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;run()&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Run&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;counter&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;time&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>この HTML は counter 部分 に文字を出力できるようにしてあります。&lt;br>
+そして、実行時間を time 部分に出力できるようにしてあります。&lt;/p>
+&lt;p>それでは、ここに for 文を使って、文字を追加していってみます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:for01.js" data-lang="javascript:for01.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">elem&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#counter&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">elem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#time&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>上のようなfor文で記述したスクリプトを作ってみました。&lt;br>
+iの値をcounterに反映していくだけのものです。&lt;br>
+まずはiの最大値を 100000 くらいで実行してみましょう。&lt;/p>
+&lt;p>実行したところ、999999 と表示され、time部分の処理は 569 ミリ秒ということになります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 290px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif" data-size="980x809">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif"
+width="980"
+height="809"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>ここで注目してほしいのが、counter の文字を変化させているにも関わらず、その文字が反映されていないという点です。&lt;br>
+Chrome の Developper tool で確認しても、変化しているようではありますが、画面上では反映されていません。&lt;/p>
+&lt;p>重い処理を行う場合をフロントで行うと、 UX の低下につながってしまいます。&lt;br>
+そこで使うのが、 Worker 処理ということになります。&lt;/p>
+&lt;h2 id="workerとは">Workerとは&lt;/h2>
+&lt;p>Worker とはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。&lt;/p>
+&lt;p>フロントで処理を行わないので、画面ロックを発生させることなく重い処理を実行できます。&lt;br>
+Worker を使用するには実行したいファイル名を指定して呼びします。&lt;/p>
+&lt;p>そして、対象のワーカーに値などを &lt;strong>postMessage&lt;/strong> で値を渡します。&lt;br>
+postMessage 部分は配列や連想配列のデータでも構いません。&lt;/p>
+&lt;p>そして、対象のWorker側でpostされたデータを受信するように設定します。&lt;br>
+受信の際はフロントであれば &lt;code>worker.addEventListener('message', (e) =&amp;gt; {})&lt;/code> を、Workerであれば &lt;code>self.addEventListener('message', (e) =&amp;gt; {})&lt;/code> を使用します。&lt;br>
+処理内容を返却する際は、先ほどと同じように postMessage を使います。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:main.js" data-lang="javascript:main.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">worker&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Worker&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fileName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">worker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;run&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="nx">worker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:worker.js" data-lang="javascript:worker.js">&lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="c1">//処理内容
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="c1">//処理結果を送信
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="uiをロックしないで行えるループ">UIをロックしないで行えるループ&lt;/h2>
+&lt;p>それでは、先ほどロックしてしまったjsをworkerにしてみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:worker_main.js" data-lang="javascript:worker_main.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">worker&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Worker&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;worker.js&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">elem&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#counter&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">worker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;run&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">worker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">mode&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;end&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#time&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#counter&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>続いて、Worker部分の処理になります。&lt;br>
+worker部分ではフロントの worker_main.js から実行されたタイミングで動作を開始して、ループの値をフロントに戻すようにしてあります。&lt;br>
+ループが終了すると、mode: end と終わったことを通知するようにしました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:worker.js" data-lang="javascript:worker.js">&lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="c1">//処理内容
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="nx">mode&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;end&amp;#39;&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;span class="c1">//処理結果を送信
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>それでは実行してみましょう。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 290px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif" data-size="980x809">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif"
+width="980"
+height="809"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>実行すると、先ほどと全く違うUIになっているかと思います。&lt;br>
+実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。&lt;br>
+Workerなしの処理ではJavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。&lt;/p>
+&lt;h2 id="settimeoutでもできるけどおすすめはしない">setTimeoutでもできるけど、おすすめはしない&lt;/h2>
+&lt;p>UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。&lt;br>
+この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:timer.js" data-lang="javascript:timer.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">elem&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#counter&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()=&amp;gt;{&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">elem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#time&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>数字部分は変化しますが、先程のようにアニメーションは行われません。&lt;br>
+forの処理が先に終了してしまうため、cssのアニメーションが一瞬で終了してしまうのです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 121;
+flex-basis: 290px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif" data-size="980x809">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif"
+width="980"
+height="809"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>Javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。&lt;br>
+Worker を使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。&lt;/p>
+&lt;p>重い処理を行う際は、Workerを使って別タスクで行ってユーザーにストレスを与えないサイトを作っていきましょう。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%82%b2%e3%83%bc%e3%83%a0%e3%81%a7%e5%ad%a6%e3%81%b6JavaScript%e5%85%a5%e9%96%80-HTML5-CSS%e3%82%82%e8%ba%ab%e3%81%ab%e4%bb%98%e3%81%8f-%e7%94%b0%e4%b8%ad-%e8%b3%a2%e4%b8%80%e9%83%8e/dp/4844339788/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51SCEJnrZGL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> ゲームで学ぶJavaScript入門 HTML5&amp;amp;CSSも身に付く! &lt;/h2>
+&lt;p> 「JavaScriptでココまでできる!」 中学生、高校生のための、ゲームプログラミング入門書の決定版! JavaScriptを使用したWebブラウザゲームの製作ノウハウを解説する入門書です。 Webページをまったく作ったことはないが、現在主流となっているブラウザゲームに興味があり、 「自分でもゲームプログラミングに挑戦してみたい!」と考えている初心者、とくに中・高校生に最適です。 本書では「より面白く」「見栄え良く」をモットーに、13本のサンプルゲームを紹介しています。 ゲームを作りながら、JavaScriptだけでなくHTML5やCSSといったWeb技術の基本もしっかり学習できます。 最後までラクに読めて、感覚的に仕組みを理解できるように、 「楽しさ」が感じられて「飽きさせない」ことを重視した構成になっています。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e7%a2%ba%e3%81%8b%e3%81%aa%e5%8a%9b%e3%81%8c%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8fJavaScript%e3%80%8c%e8%b6%85%e3%80%8d%e5%85%a5%e9%96%80-%e7%ac%ac2%e7%89%88-%e7%8b%a9%e9%87%8e-%e7%a5%90%e6%9d%b1/dp/4815601577/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51RXlVPRVuL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 確かな力が身につくJavaScript「超」入門 第2版 &lt;/h2>
+&lt;p> ◎ 3万部突破のベストセラーが充実のアップデート! JavaScriptをこれから始める人にも、前に挫折したことのある人にも。 手を動かしてサンプルをひとつずつ作っていくことで、知識だけでなく、 現場で活きる、応用・実践につながる基礎力が「この一冊で」身につきます。 ポイント1「サンプルが楽しい。」 よくある“勉強のためのサンプル&amp;#34;を可能な限り排除し、「こういうの見たことある! 」「こういうのが作ってみたかった! 」というような、実際に仕事に使えそうなサンプルを集めました。なので、最初の「やるぞ! 」というモチベーションを維持したまま、最後のページまで読み進めることができます。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</title><link>https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/</link><pubDate>Fri, 28 Jan 2022 15:35:18 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg" alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" />&lt;p>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。&lt;br>
+そうした端末を使って記事が投稿できたら、スタバやドトールなどのカフェでコーヒーを飲みながら記事を書くことができてしまいます。&lt;/p>
+&lt;p>今回は、AmazonのEC2上にあるHugoのブログをiPadを使って更新して見たいと思います。&lt;/p>
+&lt;h2 id="iphoneやipadでターミナルを使う">iPhoneやiPadでターミナルを使う&lt;/h2>
+&lt;p>iPhoneやiPadにも数多くの素晴らしいターミナルアプリがあります。&lt;br>
+その中でも私が使っているのは&lt;a class="link" href="https://apps.apple.com/jp/app/termius-ssh-client/id549039908" target="_blank" rel="noopener"
+>Termius: Terminal &amp;amp; SSH client&lt;/a>というアプリです。&lt;/p>
+&lt;p>このアプリはターミナルの機能を持っており、SSHでのサーバ接続も可能です。もちろんログインの際にpemファイルなどを使用することも可能です。&lt;/p>
+&lt;p>基本的な機能は無料で使用できるので、まずはインストールをしてみましょう。&lt;/p>
+&lt;h2 id="初期設定">初期設定&lt;/h2>
+&lt;p>起動すると、アカウントの登録が必要かと思いますが、必要ありません。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>下にある「Learn more」を押して、「Continue without account」にてログイン無しで使えます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>課金すると様々な機能を使えるようになるので、そういった機能でより便利に使いたい人は是非、課金してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>インストールが終わったら「New Hosts」をタプして、ログインしたいサーバを追加するか、「Hosts」メニューの右上にある「＋」ボタンを押してサーバを追加します。&lt;/p>
+&lt;p>Alias には自分がわかりやすい名前をつけます。&lt;br>
+Hostname にはサーバのドメイン名やIPアドレスを入力します。&lt;br>
+Port はSSHを使うときのポートです。&lt;br>
+そして、ユーザー名とパスワードを使っている人はパスワードを入力します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>pemファイルを使っている人は、pemの内容をコピーして貼り付けるか、パソコンからpemを送信します。&lt;br>
+送信はパソコンでiPadなどを接続して、ファイルタブから贈りたいpemファイルをドラッグ・アンド・ドロップします。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 180;
+flex-basis: 433px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg" data-size="980x543">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg"
+width="980"
+height="543"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>pemファイルをiPadに送り終わったら、Keyを押して、左上の「+」「Import Key」にて先程送ったファイルを選択します。&lt;br>
+これでキーが設定されました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>ここまで設定できたら、左上の「Save」にて保存しましょう。&lt;br>
+以上でサーバに接続する準備ができました。&lt;/p>
+&lt;h2 id="サーバに接続">サーバに接続&lt;/h2>
+&lt;p>Alias に設定した名前でアイコンが作成されているかと思います。&lt;br>
+そのアイコンを押すと、know hostsに登録するかどうか聞かれるので、「Continue」を押して追加します。&lt;br>
+うまく設定できていたらサーバに接続できると思います。&lt;br>
+できない場合は、アイコンを長押しして、「Edit」にて情報を正しいものに修正しましょう。&lt;/p>
+&lt;h2 id="tabはどうするの">Tabはどうするの？&lt;/h2>
+&lt;p>SSHではtabコマンドで入力の補完を設定しているケースがあるともいます。&lt;br>
+iPadにはタブというキーがありません。さて……どうしたものでしょうか。Termius はそこもよく考えられていて、通常であれば画面をタブルタップすると「Tab」と一瞬表示されてタブキーを押したときと同様のことが行なえます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>その他にも、キーボードの上にある「…」マークを押して、「ギアーアイコン」を押すと初期のキーボード上部のボタンを変更することが可能です。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>Tabキーやコントロールキーが使えるとiPadでも十分使えますね。&lt;/p>
+&lt;h2 id="hugoで記事を書いて確認する">hugoで記事を書いて確認する&lt;/h2>
+&lt;p>hugoで記事を書くやり方は&lt;a class="link" href="http://localhost:1313/posts/2021-12-22-hugo-01-ywat/" target="_blank" rel="noopener"
+>デザイナーでもできる初めてのHUGO #01&lt;/a>を参照してください。&lt;/p>
+&lt;p>EC2で記事を書いて、確認しようとするとある疑問を持ってしまいます。それは確認用のサーバはどうしたら良いのかということです。&lt;br>
+通常であれば「localhost:1313」などのURLで確認できます。しかし、EC2ではlocalhostとしてもEC2本体のアドレスではないので、確認できません。&lt;/p>
+&lt;p>hugoにはIPを指定してサーバを起動する機能があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server --baseURL&lt;span class="o">=[&lt;/span>URL&lt;span class="o">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>上記のコマンドでアクセスできるかというと、まだ駄目です。&lt;/p>
+&lt;p>最終的なコマンドは&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+&lt;/code>&lt;/pre>&lt;p>となります。&lt;/p>
+&lt;p>ここで重要なのが&lt;code>--bind=0.0.0.0&lt;/code>になります。&lt;/p>
+&lt;p>ここまできたら、ほぼほぼ確認できるようになっています。&lt;/p>
+&lt;h3 id="ec2でファイヤーウォールを設定している場合">EC2でファイヤーウォールを設定している場合&lt;/h3>
+&lt;p>EC2を使用している場合、ALBやELBを設定していることが多いと思います。&lt;br>
+先程指定したポートが空いているか確認して、空いていない場合は、EC2の設定で開けましょう。&lt;/p>
+&lt;p>EC2のインバウンドルールに開けたいポートを追加します。&lt;br>
+セキュリティーグループを使用している場合は、「インバウンドのルールを編集」をクリックして追加します。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 164;
+flex-basis: 395px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png" data-size="980x594">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png"
+width="980"
+height="594"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>下にある「ルールを追加」を押して、「カスタムTCP」にします。&lt;br>
+次に、ポート範囲に開けたいポートを入力して、CIDR ブロックにインターネットゲートウェイを指すすべての IPv4 トラフィック (0.0.0.0/0) のルートを追加します。&lt;br>
+IPv6の場合も追加したいので、もう一度「ルールを追加」を押して、ポートを入力し、IPv6 トラフィック (::/0) のルートを入力します。&lt;br>
+設定が終わったら、保存しましょう。&lt;br>
+これでポートの設定が完了しました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 411;
+flex-basis: 988px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png" data-size="980x238">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png"
+width="980"
+height="238"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h2 id="ipadで確認しながら更新をする">iPadで確認しながら更新をする&lt;/h2>
+&lt;p>サーバにログインして、先程の&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
+&lt;/code>&lt;/pre>&lt;p>でサーバを立ち上げます。&lt;br>
+このとき、下書きの記事を表示したいときは&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート] -D
+&lt;/code>&lt;/pre>&lt;p>として下書きも表示するようにしましょう。&lt;/p>
+&lt;p>また、サーバのアドレスがわからない場合は&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ curl -s ifconfig.me
+&lt;/code>&lt;/pre>&lt;p>とすればIPアドレスがわかります。&lt;/p>
+&lt;p>iPadにはSplitビューがついているので、片方でブログを書きながら、　もう片方でSafariなどを立ち上げて立ち上げて記事を確認しながら記述することが可能です。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 152;
+flex-basis: 365px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg" data-size="980x644">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg"
+width="980"
+height="644"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>構築が終わったら&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/" target="_blank" rel="noopener"
+>iPadに開発環境を構築してみるテスト&lt;/a>を参考にして、EC2内での詳細な設定をしてみましょう。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>iPadを使うとどこでも、重いパソコンを持たなくても簡単にブログを更新することができるようになります。是非オススメなので、みなさんも試してみてください。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) &lt;/h2>
+&lt;p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 &lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 &lt;/h2>
+&lt;p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&amp;amp;サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>iPadに開発環境を構築してみるテスト</title><link>https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/</link><pubDate>Fri, 28 Jan 2022 14:02:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg" alt="Featured image of post iPadに開発環境を構築してみるテスト" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;ul>
+&lt;li>まずはこちらをやりましょう。&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/" target="_blank" rel="noopener"
+>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="必要なもの">必要なもの&lt;/h2>
+&lt;ul>
+&lt;li>iPad&lt;/li>
+&lt;li>Termiusというアプリ&lt;br>
+&lt;a class="link" href="https://apps.apple.com/jp/app/termius-ssh-client/id549039908" target="_blank" rel="noopener"
+>Termius: Terminal &amp;amp; SSH client&lt;/a>&lt;/li>
+&lt;li>AWSのサーバーインスタンス&lt;br>
+&lt;a class="link" href="https://qiita.com/kanegoon/items/4bcdf5184cf1752eb44f" target="_blank" rel="noopener"
+>AWS EC2 インスタンスの作成&lt;/a>&lt;/li>
+&lt;li>AWSインスタンスにログインするために必要なpemファイル（キーチェイン）&lt;br>
+&lt;a class="link" href="https://qiita.com/takuma-jpn/items/b2c04b7a271a4472a900" target="_blank" rel="noopener"
+>AWS EC2にSSHでアクセスする方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="awsインスタンスへの接続">AWSインスタンスへの接続&lt;/h2>
+&lt;p>pemファイルをスマホに送る&lt;br>
+インスタンスを作るときにpemファイルをダウンロードしたと思います&lt;br>
+（してなかったら、pemファイルは一回しかダウンロードさせてくれないのでインスタンスを作り直しましょう）&lt;br>
+このpemファイルをＰＣのエディターで開き、内容をテキストファイルにペーストします。&lt;br>
+このファイルをＬＩＮＥなりメールなりGoogleドライブなりでスマホに送ります。&lt;/p>
+&lt;p>pemファイルをTermiusで読み込みます&lt;/p>
+&lt;ul>
+&lt;li>ＰＣ上で鍵ファイル(.pem)をテキスト化してiPadで内容をコピーして貼り付けられるようにしておくことが重要です。&lt;br>
+&lt;a class="link" href="https://tomikyblog.com/termius%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target="_blank" rel="noopener"
+>iPad Proでsshクライアント「Termius」を使ってみた&lt;br>
+&lt;/a>&lt;br>
+&lt;a class="link" href="https://pkunallnet.com/pcinfo/apple/ipad-aws-linuxconnection/" target="_blank" rel="noopener"
+>iPadからAWSのEC2インスタンス(LINUX)にSSH接続する方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="アカウントの作成">アカウントの作成&lt;/h2>
+&lt;p>rootでの作業でも良いのですが、一般論としてここではアカウントの作成から説明します。&lt;/p>
+&lt;p>まずは、サーバーに接続します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$
+&lt;/code>&lt;/pre>&lt;p>いわゆるrootでログインした訳です。&lt;br>
+ここでユーザー名 suzuki を追加します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ useradd suzuki
+&lt;/code>&lt;/pre>&lt;p>さらに suzuki のパスワードも設定します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ passwd suzuki
+&lt;/code>&lt;/pre>&lt;p>パスワードは２回同じ入力を求められます&lt;br>
+では rootからsuzukiにアカウントを切り換えます。&lt;br>
+ユーザーの切り替えは su コマンドを使います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ su suzuki
+パスワード：
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>suzukiに切り替わりました。&lt;br>
+自分自身がどこにいるのかを確認します。&lt;br>
+カレントディレクトリの確認は pwd コマンドを使います。&lt;br>
+ディレクトリの移動は cd コマンド&lt;br>
+ホームディレクトリは ~ で表します。&lt;br>
+ホームディレクトリへの移動は cd ~ となります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ pwd
+/home/centos
+$ cd ~
+$ pwd
+$ /home/suzuki
+$
+&lt;/code>&lt;/pre>&lt;h2 id="bashrc-の修正">~/.bashrc の修正&lt;/h2>
+&lt;p>ここでは ~/.basrcファイルを修正します。&lt;br>
+まず、~/.basrc ファイルのバックアップをとります。&lt;br>
+ここではファイル名先頭のピリオドを落として ls コマンドで見えるようにしておきます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cp ~/.bashrc ~/bashrc.bak
+&lt;/code>&lt;/pre>&lt;p>では、~/.bashrc を vimで開いて編集します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ vim ~/.bashrc
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:~/.bashrc" data-lang="bash:~/.bashrc">&lt;span class="c1"># .bashrc&lt;/span>
+&lt;span class="c1"># Source global definitions&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f /etc/bashrc &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+. /etc/bashrc
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1"># ターミナルの表示&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">PS1&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;bash-\v&lt;/span>$&lt;span class="s2"> &amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 基本言語フォーマットをUTF-8へ&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">LANG&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;ja_JP.UTF-8&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># User specific environment and startup programs&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">rm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;rm -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">cp&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;cp -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">mv&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;mv -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># grepとls のカラー表示&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">grep&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;grep --color=auto&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">ls&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ls --color=auto&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># screen&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">s&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;screen -RR&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># Github ディレクトリへ移動&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">g&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;cd ~/GitHub&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>編集が終わったら ~/.bashrc を再読込します。&lt;br>
+Linux での再読込は . です&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ . ~/.bashrc
+$
+&lt;/code>&lt;/pre>&lt;p>では GitHub にある様々なディレクトリを格納する Githubディレクトリを作成します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ mkdir GitHub
+$
+&lt;/code>&lt;/pre>&lt;p>以降の github プロジェクトは今作成した GitHub ディレクトリ以下に作成します。&lt;/p>
+&lt;h2 id="ターミナルの入力で大文字と小文字を区別せずに補完する">ターミナルの入力で大文字と小文字を区別せずに補完する&lt;/h2>
+&lt;pre tabindex="0">&lt;code class="language-bash:~/.inputrc" data-lang="bash:~/.inputrc">
+# 大文字小文字を区別しない
+set completion-ignore-case on
+# 以下日本語入力の必要がある場合に必要(なくてもよい）
+set input-meta on
+set output-meta on
+set convert-meta off
+set meta-flag on
+&lt;/code>&lt;/pre>&lt;p>編集が終わったら ~/.inputrc を再読込します。&lt;br>
+Linux での再読込は . です&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ . ~/.inputrc
+$ cd ~
+$ pwd
+/home/suzuki
+$ g
+$ pwd
+/home/suzuki/GitHub
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>~/.inputrc を root ユーザーになって /etc/inputrc に追記するとすべてのユーザーが大文字小文字を区別することなくターミナルで補完することができます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="screen-のインストール">screen のインストール&lt;/h2>
+&lt;p>screen はターミナル内で複数の仮想ターミナルを起動して使うことができる画面管理ソフトです。&lt;br>
+メリットは、&lt;/p>
+&lt;ul>
+&lt;li>ターミナルウインドウのタブを複数作成し、ここのタブでサーバーにログインする必要がないので、不要なセッションを作らなくてすむ。&lt;/li>
+&lt;li>開いていた端末の状態を保持しておける。&lt;/li>
+&lt;li>回線が切れる、スタンバイなどのセッション切れでもレジュームされる。&lt;/li>
+&lt;li>一つの画面をさらに分割できるので、複数端末でログ監視したいときなどに超便利。&lt;/li>
+&lt;/ul>
+&lt;p>まずはscreen がインストールされているのかの確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ screen -v
+Screen version 4.08.00 (GNU) 05-Feb-20
+$
+&lt;/code>&lt;/pre>&lt;p>インストールされていれば以下の作業はする必要がありません。&lt;br>
+インストールされていなければ、yum コマンドでインストールして下さい。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo ＜sudo で rootになります＞
+# ＜rootになると # になります&amp;gt;
+# yum -y install screen
+読み込んだプラグイン:fastestmirror
+base | 3.6 kB 00:00:00
+extras | 3.4 kB 00:00:00
+updates | 3.4 kB 00:00:00
+(1/2): extras/7/x86_64/primary_db | 115 kB 00:00:00
+(2/2): updates/7/x86_64/primary_db | 2.2 MB 00:00:00
+Loading mirror speeds from cached hostfile
+* base: ftp.iij.ad.jp
+* extras: ftp.iij.ad.jp
+* updates: www.ftp.ne.jp
+依存性の解決をしています
+--&amp;gt; トランザクションの確認を実行しています。
+---&amp;gt; パッケージ screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2 を インストール
+--&amp;gt; 依存性解決を終了しました。
+依存性を解決しました
+======================================================================================================================================================
+Package アーキテクチャー バージョン リポジトリー 容量
+======================================================================================================================================================
+インストール中:
+screen x86_64 4.1.0-0.23.20120314git3c2946.el7_2 base 552 k
+トランザクションの要約
+======================================================================================================================================================
+インストール 1 パッケージ
+総ダウンロード容量: 552 k
+インストール容量: 914 k
+Downloading packages:
+screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64.rpm | 552 kB 00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+インストール中 : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64 1/1
+検証中 : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64 1/1
+インストール:
+screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2
+完了しました!
+$
+# rootからsuzukiにアカウントを切り換えます
+$ su suzuki
+# screenコマンドがどこにインストールされているのかを確認します。
+$ which screen
+/usr/bin/screen
+$
+&lt;/code>&lt;/pre>&lt;h2 id="screenrc-の修正">screenrc の修正&lt;/h2>
+&lt;p>screenコマンドをさらに便利にするために screenrc ファイルを修正します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># ユーザーをroot から suzuki に変えます。
+$ su suzuki
+$
+&lt;/code>&lt;/pre>&lt;p>以下を ~/.screenrc として作成して保存します。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:~/.screenrc" data-lang="bash:~/.screenrc">
+# Ctrl + z で screenの操作モードへの切り換え
+escape ^Zz
+# スクロールバッファを大きくする
+defscrollback 10000
+# ステータスバーをカスタマイズ
+hardstatus on
+hardstatus alwayslastline '%{= kw}%02c:%s %{= .y}%H %L=%{= .b}%-w%46&amp;gt;%{= .r}%n %t*%{= .b}%+w%-16=%{= .y}[%l]'
+# スタートメッセージを表示させない
+startup_message off
+# ビープを鳴らさない
+vbell off
+#termの設定
+term ansi
+bind r
+bind ^r
+#
+&lt;/code>&lt;/pre>&lt;p>上記 ~/.bashrc の修正で、screenコマンドの呼び出しを s にしています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:~/.bashrc" data-lang="bash:~/.bashrc">
+&lt;span class="c1"># screen&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">s&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;screen -RR&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ですので、ターミナルからは s だけで screen -RR コマンドを実行したことと同じになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code># screenの起動
+$ screen
+# screenの終了
+$ exit
+$
+# screenの起動
+$ s
+# screenの終了
+$ exit
+&lt;/code>&lt;/pre>&lt;p>~/.bashrc にエイリアスを作成していなければ screen で起動しますし、~/.bashrcにエイリアスを作成していれば（ここでは「s」） $ s で一発起動します。screenを抜けるときは「exit」です。&lt;/p>
+&lt;h2 id="screen-を使ってみます">screen を使ってみます&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>screen の起動(screen)&lt;br>
+まず screen を起動しなくては始まりません。 ログインしたターミナルで「screen」と打てば screen が起動します。 screen から抜けるには普通にログアウトするように 「exit」 や [Ctrl+d]で抜けられます。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>新しいウィンドウを開始する([Ctrl+c])&lt;br>
+「[Ctrl+c]」で新しいウィンドウを開始できます。 幾つでも作れます。 不要になったウィンドウは 「exit」 や [Ctrl+d] で消せます。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>次のウィンドウに移動する([Ctrl+n])&lt;br>
+開いている隣のウインドウに移動します。カスタマイズした~/.screenrcを使っている人はステータスバーで確認できて便利です。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>詳しくはこちら&lt;br>
+&lt;a class="link" href="https://qiita.com/hnishi/items/3190f2901f88e2594a5f" target="_blank" rel="noopener"
+>Linux screenコマンド使い方&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>screen は王者のコマンドです。プログラマーの多くはローカルのターミナルでタブを作成します。screen はサーバー上で仮想端末を作成します。screenはvim同様、プログラマーを選びます。Linuxを語るなら vim と screen そして bash の習熟が必須なのです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="sudoユーザーを追加する方法">sudoユーザーを追加する方法&lt;/h2>
+&lt;p>sudoユーザーに追加していないユーザーでsudoコマンドを実行すると、&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo less /etc/passwd
+[sudo] password for suzuki:
+suzuki is not in the sudoers file. This incident will be reported.
+&lt;/code>&lt;/pre>&lt;p>こんな事を言われます。&lt;br>
+ということで、ここでは特定のユーザー（ここでは「suzuki」）がsudoコマンドを実行できるようにします。&lt;/p>
+&lt;p>/etc/sudoers ファイルにユーザーを追加します。&lt;/p>
+&lt;p>まずはrootユーザーになります。&lt;/p>
+&lt;p>ユーザーsuzuki をぬけてrootになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ exit
+&lt;/code>&lt;/pre>&lt;p>現在のグループを確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># sudo vim /etc/sudoers
+&lt;/code>&lt;/pre>&lt;p>以下の記述があれば wheelグループに suzukiを追加すればよいです。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:/etc/sudoersの抜粋" data-lang="bash:/etc/sudoersの抜粋">
+## Allow members of group sudo to execute any command
+%wheel ALL=(ALL:ALL) ALL
+&lt;/code>&lt;/pre>&lt;p>ではまず現状を確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># cat /etc/group | grep suzuki
+&lt;/code>&lt;/pre>&lt;p>sudoのグループ（centosなら wheel) に suzuki を追加します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># sudo usermod -G wheel suzuki
+&lt;/code>&lt;/pre>&lt;p>確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># cat /etc/group | grep suzuki
+wheel:x:10:suzuki
+suzuki:x:1001:
+#
+&lt;/code>&lt;/pre>&lt;p>これで、ローカルアカウント suzuki で、必要に応じて sudoコマンドをつかって安全に作業することができるようになりました。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>当たり前の話ではありますが、root で作業するのはやめましょう。必要に応じて $ su すればよいのです。Linux/Unixとはそういうものなのです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) &lt;/h2>
+&lt;p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 &lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 &lt;/h2>
+&lt;p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&amp;amp;サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;!-- EOL --></description></item><item><title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/</link><pubDate>Thu, 27 Jan 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" />&lt;h2 id="nクイーン問題とは">Nクイーン問題とは&lt;/h2>
+&lt;p>Nクイーン問題とは、チェスの盤面にクイーンを１行に１個ずつ効き筋に当たらないように置いていこうという問題です。&lt;/p>
+&lt;p>&lt;a class="link" href="https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3" target="_blank" rel="noopener"
+>https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3&lt;/a>&lt;/p>
+&lt;p>NクイーンのNは盤面の行・列の数です８クイーンだと８x８です。&lt;br>
+おける場所の数を算出する法則はないのでプログラムを組んでクイーンを配置していくしかないのですが、&lt;br>
+Nの数が増えれば置ける場所の候補が爆発的に増えていきプログラムでも何年経っても終わらないようなものになります。&lt;br>
+現在最大のNは２７クイーンです。&lt;/p>
+&lt;p>Nクイーンを早く解く方法はいくつかあって、&lt;br>
+①アルゴリズムを使って探索を効率化する&lt;br>
+②ビット計算で計算速度を上げる&lt;br>
+③GPUなどを使って並列計算をする&lt;br>
+などがあります。&lt;/p>
+&lt;h2 id="pythonで頑張る">Pythonで頑張る&lt;/h2>
+&lt;p>Python は最近すっかりメジャーになり、プログラミング教育が小学校で必修化され最初に学ぶのがPythonだという話もあります。&lt;br>
+ライブラリも非常に充実しています。&lt;br>
+そこで勉強を兼ねてPythonを使ってNクイーン問題を解いていこうと思います。&lt;/p>
+&lt;h2 id="アルゴリズムなしでnクイーン問題を解こうとすると">アルゴリズムなしでNクイーン問題を解こうとすると。。。&lt;/h2>
+&lt;p>Nクイーンはアルゴリズムを使うとどのくらい早くなるのでしょうか。&lt;br>
+それを体感するために今回はまったくアルゴリズムを使わないでプログラムにNクイーン問題に取り組ませてみましょう。&lt;br>
+まったくアルゴリズムを使わない方法は「ブルートフォース　力任せ探索」と呼ばれるものです。&lt;/p>
+&lt;p>N4だと4の4乗で256パターン&lt;br>
+私のPCだと0m0.042sで終了しますが&lt;br>
+N8だと8の8乗で16777216パターン&lt;br>
+3m7.321sもかかってしまいます。&lt;/p>
+&lt;p>ちなみに今後やる検索効率化アルゴリズム「バックトラック」だと&lt;br>
+N8でと0m0.03sで完了します（もっと早いアルゴリズムも出てきます。）。&lt;/p>
+&lt;p>ここでは触って動かしてみていただいて時間かかるなあと思っていただければ良いです。&lt;/p>
+&lt;h2 id="プログラムについて">プログラムについて&lt;/h2>
+&lt;p>プログラムは以下のgitにあります。&lt;br>
+&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py&lt;/a>&lt;/p>
+&lt;p>このプログラムは鈴木維一郎先生が作成したものです。&lt;br>
+私はこのプログラムを初めてみながらpythonだとこう書くんだと思いながら&lt;br>
+pythonの勉強させてもらいながらコメントしていく感じになります。&lt;/p>
+&lt;p>プログラムのダウンロード方法は以下です。&lt;/p>
+&lt;p>git clone &lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/&lt;/a>&lt;/p>
+&lt;p>実行方法は&lt;br>
+N-Queens/03Pythonに移動して&lt;br>
+python py01_nqueen.py&lt;/p>
+&lt;p>です。&lt;/p>
+&lt;h2 id="プログラム概要">プログラム概要&lt;/h2>
+&lt;p>このプログラムでやりたいことはエイトクイーン(N=8)の時に全ての可能性のある解の候補を体系的に数え上げます。&lt;br>
+利き筋などは全く考えず1行に1個ずつクイーンを置いていきます。&lt;br>
+パターン数はNxNになるのでエイトクイーン(N=8)だと8の8乗16777216パターンクイーンを配置します。&lt;/p>
+&lt;p>プログラムがやるのはここまでです。これが正解かどうかはプログラムではチェックしません。&lt;br>
+プログラムが列挙したパターンから人力でどれが正解かをチェックしようと思ったらエイトクイーン(N=8)でも相当の年月がかかりますね。&lt;/p>
+&lt;p>出力はパターンのカウント数と各行にクイーンが置かれた場所になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1: 00000000
+2: 00000001
+3: 00000002
+4: 00000003
+.
+.
+.
+163100: 00476433
+163101: 00476434
+163102: 00476435
+163103: 00476436
+.
+.
+.
+16777213: 77777774
+16777214: 77777775
+16777215: 77777776
+16777216: 77777777
+&lt;/code>&lt;/pre>&lt;p>例えば&lt;br>
+163101: 00476434&lt;br>
+だと&lt;/p>
+&lt;p>163101はカウント数です。163101番目のパターンという意味です。&lt;/p>
+&lt;p>00476434はクイーンが置かれた場所です&lt;br>
+左端が1行目で左から右へ行数が増えていきます。&lt;br>
+クイーンの位置が&lt;br>
+0:1行目は0なので右から1番目&lt;br>
+0:2行目は0なので右から1番目&lt;br>
+4:3行目は4なので右から5番目&lt;br>
+7:4行目は7なので右から8番目&lt;br>
+6:5行目は6なので右から7番目&lt;br>
+4:6行目は4なので右から5番目&lt;br>
+3:7行目は3なので右から4番目&lt;br>
+4:8行目は4なので右から5番目&lt;br>
+に置かれたということを表現しています。&lt;/p>
+&lt;p>図にすると以下になります&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/q1.png" data-size="353x351">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/q1.png"
+width="353"
+height="351"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>この例だと2行目に1行目と同じ列にクイーンを配置しているので、2行目の段階で1行目の下の効き筋に引っかかっているので解にはなりません。&lt;/p>
+&lt;p>次回はプログラム詳細について説明していきたいと思います。&lt;/p></description></item><item><title>Amazon EC2でもGo言語とHugoを使えるようにする方法</title><link>https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/</link><pubDate>Thu, 27 Jan 2022 13:31:52 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.jpg" alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法" />&lt;p>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールしてみたいと思います。&lt;/p>
+&lt;h2 id="go言語をcentos7にインストール">GO言語をCentOS7にインストール&lt;/h2>
+&lt;p>Hugoを利用するためにGo言語をインストールするのですが、yumでインストールすると様々ななエラーが出る場合があるので、今回はtarファイルを解凍して配置します。&lt;/p>
+&lt;p>brewがすでにインストールされている場合はbrewでのインストールが早いです。&lt;/p>
+&lt;h3 id="go言語をインストール">GO言語をインストール&lt;/h3>
+&lt;p>まずは、GO言語のファイルをダウンロードして、解凍、インストールする場所に配置してやりましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ wget https://golang.org/dl/go1.16.linux-amd64.tar.gz
+$ sudo tar zxf go1.16.linux-amd64.tar.gz -C /usr/local/
+$ export PATH=$PATH:/usr/local/go/bin
+&lt;/code>&lt;/pre>&lt;p>インストールされたGoのバージョンを確認します&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ go version
+&lt;/code>&lt;/pre>&lt;p>インストールが成功していれば、下記のようなバージョンが表示されます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>go version go1.15.14 linux/amd64
+&lt;/code>&lt;/pre>&lt;p>GOROOTも確認しておきます&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ go env|grep GOROOT
+GOROOT=&amp;quot;/usr/local/go&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>Hugoをインストールする上で、GOPATHが必要なので設定しましょう。&lt;br>
+GOPATHとGOROOTが同じ場所にならないようにすることに注意してください。&lt;br>
+同じ場所に設定してしまうと、&lt;/p>
+&lt;pre tabindex="0">&lt;code>warning: GOPATH set to GOROOT (/usr/local/go) has no effect
+&lt;/code>&lt;/pre>&lt;p>といったワーニングが表示されてしまいます。&lt;br>
+なので、GOPATHとGOROOTを別にしてやりましょう。&lt;/p>
+&lt;p>それではGOPATHを設定していきます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>vi ~/.bash_profile
+&lt;/code>&lt;/pre>&lt;p>上記のコマンドで、.bash_profileをひらいて、下記のコマンドを追加します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:~/.bash_profile" data-lang=":~/.bash_profile">&lt;span class="nb">export&lt;/span> &lt;span class="nv">GOPATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$HOME&lt;/span>/go
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$GOPATH&lt;/span>/bin:&lt;span class="nv">$PATH&lt;/span>:&lt;span class="nv">$HOME&lt;/span>/bin
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定を反映させて、確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ source ~/.bash_profile
+$ echo $GOPATH
+/home/[user]/go
+$ echo $PATH
+/home/[user]/go/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin:/root/bin:/root/bin
+&lt;/code>&lt;/pre>&lt;p>無事追加できました。&lt;br>
+以上がGo言語の設定になります。&lt;/p>
+&lt;h2 id="hugoをcentos7にインストール">HugoをCentOS7にインストール&lt;/h2>
+&lt;p>それでは、いよいよHugoをインストールしましょう。&lt;br>
+GitHubからHugoを取得します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">mkdir &lt;span class="nv">$HOME&lt;/span>/src
+&lt;span class="nb">cd&lt;/span> &lt;span class="nv">$HOME&lt;/span>/src
+git clone https://github.com/gohugoio/hugo.git
+&lt;span class="nb">cd&lt;/span> hugo
+go install --tags extended
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>インストールできたら hugo してみましょう&lt;/p>
+&lt;h2 id="gitinfoを使っているとエラーになる場合がある">GitInfoを使っているとエラーになる場合がある&lt;/h2>
+&lt;p>Gitのバージョンが古いと、&lt;code>hugo&lt;/code>した際に、情報を取得できないくてエラーになってしまうようです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>hugo v0.93.0-DEV+extended linux/amd64 BuildDate=unknown
+ERROR 2022/01/27 Failed to read Git log: Unknown option: -C
+usage: git [--version] [--help] [-c name=value]
+[--exec-path[=&amp;lt;path&amp;gt;]] [--html-path] [--man-path] [--info-path]
+[-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+[--git-dir=&amp;lt;path&amp;gt;] [--work-tree=&amp;lt;path&amp;gt;] [--namespace=&amp;lt;name&amp;gt;]
+&amp;lt;command&amp;gt; [&amp;lt;args&amp;gt;]
+&lt;/code>&lt;/pre>&lt;p>私の環境ではGitのバージョンが&lt;code>git version 1.8.3.1&lt;/code> となっていたため、これをアップデートして正しく動作するようにします。&lt;/p>
+&lt;p>まずはすでにインストールされているGitを削除します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo yum -y remove git
+&lt;/code>&lt;/pre>&lt;p>次に、2系の配布がされているiusリポジトリを追加します。&lt;br>
+私の環境はCentOS7だったので下記のコマンドでyumからインストールします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo yum -y install https://repo.ius.io/ius-release-el7.rpm
+&lt;/code>&lt;/pre>&lt;p>iusはサードパーティのリポジトリのため、常に有効にならないように設定ファイルを確認しておきます。&lt;code>enabled = 0&lt;/code> となっていたら、常に有効にならない設定です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>[ius-debuginfo]
+name = IUS for Enterprise Linux 7 - $basearch - Debug
+baseurl = https://repo.ius.io/7/$basearch/debug/
+enabled = 0
+repo_gpgcheck = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
+[ius-source]
+name = IUS for Enterprise Linux 7 - Source
+baseurl = https://repo.ius.io/7/src/
+enabled = 0
+repo_gpgcheck = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
+&lt;/code>&lt;/pre>&lt;p>それでは。インストール可能なGitを調べます。&lt;br>
+yumでiusを使うときは、yumコマンドの際に、&lt;code>--enablerepo=ius&lt;/code>オプションをつけます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo yum list --enablerepo=ius | grep git2
+…
+git224.x86_64 2.24.4-1.el7.ius ius
+…
+&lt;/code>&lt;/pre>&lt;p>インストール可能なGitがあったので、インストールをします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo yum -y install --enablerepo=ius git224
+&lt;/code>&lt;/pre>&lt;p>インストールが無事完了したことを確認しましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ git --version
+git version 2.24.3
+&lt;/code>&lt;/pre>&lt;p>バージョンが表示されていたら、正常にインストールが完了してます。&lt;br>
+これで GitInfo 使ったhugoのサーバでも&lt;code>hugo&lt;/code>コマンドが実行できるようになりました。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51ITQMzMG2L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 改訂2版 わかばちゃんと学ぶ Git使い方入門〈GitHub、SourceTree、コマンド操作対応〉 &lt;/h2>
+&lt;p> マンガと実践で学ぶGitの入門書が最新情報に対応して改訂しました! Gitの概念はもちろん、GitHubについても丁寧に解説しています。これからGitを使い始める人にオススメの1冊です。 本書ではクリック操作でGitを使えるSourceTreeを中心に解説しているので、初心者でも安心です。 せっかく学ぶなら、やっぱり楽しい方がいい 「Gitって難しそう」 「勉強しようとは思っているけど、なかなか一歩が踏み出せない」 そんな方のために、楽しくGitを理解できる本を作りました。 ・個性的なキャラクターたちが登場するマンガ ・感覚的にわかる図解 ・丁寧な実践パート 上記3つの特長で、Gitを無理なく学べます。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) &lt;/h2>
+&lt;p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>HUGOでxmlやファイルを複数出力する方法</title><link>https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/</link><pubDate>Wed, 26 Jan 2022 14:37:51 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg" alt="Featured image of post HUGOでxmlやファイルを複数出力する方法" />&lt;p>HUGOは非常に強力な静的HTMLジェネレーターです。&lt;br>
+複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装できましたので、そのやり方を共有します。&lt;/p>
+&lt;p>今回は sitemap.xml を複数設置する必要があったため、その方法になります。&lt;br>
+この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力できるようになると思います。&lt;/p>
+&lt;h2 id="config-に設定を追加する">config に設定を追加する&lt;/h2>
+&lt;p>まずは &lt;code>config.yaml&lt;/code> に出力用の設定をします。&lt;br>
+設定の内容は下記のようになります。&lt;/p>
+&lt;p>私は yaml 形式の設定ファイルを使っているのですが、toml や json 形式の設定ファイルを使っている方は、&lt;a class="link" href="https://gohugo.io/templates/output-formats/" target="_blank" rel="noopener"
+> HUGO のページ&lt;/a>を見ながらそれぞれにあった記述にしてください。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">outputFormats&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">Sitemap&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">MediaType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">application/xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">baseName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;google_sitemap&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">noUgly&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">outputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">home&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">HTML, Sitemap, RSS]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上から順に説明します。&lt;/p>
+&lt;h2 id="出力ファイルの形式">出力ファイルの形式&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここでは出力したい形式を選択してます。今回は、xmlのタイプを選んでます。&lt;br>
+ちなみに、この部分は記述しないでも問題がない部分です。&lt;br>
+私の環境では出力した場合に、エラーにならずに正常にファイルが出力されました。&lt;/p>
+&lt;p>&lt;code>suffixes&lt;/code>の部分では複数の形式を記述することが可能です。&lt;br>
+例えば、rss+xmlの場合は&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">mediaTypes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">application/rss+xml&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">suffixes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">rss&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>となります。&lt;/p>
+&lt;h2 id="出力ファイルの種類">出力ファイルの種類&lt;/h2>
+&lt;p>次に、outputFormats部分ですが、この部分が出力の際に重要になってきます。&lt;br>
+今回はサイトマップ形式で出力するので、下記のようにしました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">outputFormats&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">Sitemap&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">MediaType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">application/xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">baseName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;google_sitemap&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">noUgly&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上の yaml を説明すると、&lt;br>
+Sitemap 形式で MediaTypeはサイトマップを表す&lt;code>application/xml&lt;/code>を使用して、&lt;code>google_sitemap&lt;/code>というファイル名のXMLを出力します。&lt;/p>
+&lt;h4 id="出力の形式">出力の形式&lt;/h4>
+&lt;p>出力形式のオプションは以下のようになります。&lt;/p>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>1つのページに多くの出力形式で出力可能&lt;/dt>
+&lt;dd>1つのページを好きなだけ多くの出力形式で出力することができ、ファイルシステム上の一意なパスに解決する限り、無限に出力形式を定義することができるのです。&lt;br>表では、AMPとHTMLの比較が最も良い例です。AMPはHTML版を上書きしないようにPathにampという値を持っています。&lt;br>例えば、/index.htmlと/amp/index.htmlの両方を持つことができるようになりました。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>MediaTypeはは既存のもののみ&lt;/dt>
+&lt;dd>MediaTypeは、既に定義されているメディアタイプのTypeと一致する必要があります。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area info">
+&lt;dl>
+&lt;dt>再定義可能&lt;/dt>
+&lt;dd>新しい出力形式を定義したり、組み込みの出力形式を再定義することができます。&lt;br>例えば、AMPページを別のパスに配置したい場合などです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>出力フォーマットを追加または変更するには、サイトの設定ファイルのoutputFormatsセクションで、すべてのサイトまたは特定の言語について定義します。&lt;/p>
+&lt;div style="line-height: 1.1; word-break: break-word; font-size: 0.8em;">
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>name&lt;/th>
+&lt;th>mediaType&lt;/th>
+&lt;th>path&lt;/th>
+&lt;th>baseName&lt;/th>
+&lt;th>rel&lt;/th>
+&lt;th>protocol&lt;/th>
+&lt;th>isPlainText&lt;/th>
+&lt;th>isHTML&lt;/th>
+&lt;th>noUgly&lt;/th>
+&lt;th>permalinkable&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>HTML&lt;/td>
+&lt;td>text/html&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>canonical&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AMP&lt;/td>
+&lt;td>text/html&lt;/td>
+&lt;td>amp&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>amphtml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CSS&lt;/td>
+&lt;td>text/css&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>styles&lt;/td>
+&lt;td>stylesheet&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CSV&lt;/td>
+&lt;td>text/csv&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Calendar&lt;/td>
+&lt;td>text/calendar&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>webcal://&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>JSON&lt;/td>
+&lt;td>application/json&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ROBOTS&lt;/td>
+&lt;td>text/plain&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>robots&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RSS&lt;/td>
+&lt;td>application/rss+xml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>index&lt;/td>
+&lt;td>alternate&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Sitemap&lt;/td>
+&lt;td>application/xml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>sitemap&lt;/td>
+&lt;td>sitemap&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WebAppManifest&lt;/td>
+&lt;td>application/manifest+json&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>manifest&lt;/td>
+&lt;td>manifest&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/div>
+&lt;h4 id="出力形式を設定する">出力形式を設定する&lt;/h4>
+&lt;p>以下は、出力形式に関する設定オプションの全リストとそのデフォルト値になります。&lt;/p>
+&lt;dl>
+&lt;dt>name&lt;/dt>
+&lt;dd>出力形式の識別子です。これは、ページに必要な出力形式を定義するために使用されます。&lt;/dd>
+&lt;dt>mediaType&lt;/dt>
+&lt;dd>定義されたメディアタイプのTypeと一致しなければなりません。&lt;/dd>
+&lt;dt>path&lt;/dt>
+&lt;dd>出力ファイルを保存するサブパス。&lt;/dd>
+&lt;dt>baseName&lt;/dt>
+&lt;dd>ファイル名です。デフォルトはindex。&lt;/dd>
+&lt;dt>rel&lt;/dt>
+&lt;dd>リンクタグのrel値を作成するために使用します。デフォルトはalternate。&lt;/dd>
+&lt;dt>protocol&lt;/dt>
+&lt;dd>この出力形式に対して、baseURL の &amp;ldquo;http://&amp;rdquo; または &amp;ldquo;https://&amp;rdquo; を置き換えます。&lt;/dd>
+&lt;dt>isPlainText&lt;/dt>
+&lt;dd>テンプレートにGoのプレーンテキストテンプレートパーサーを使用します。デフォルト: false。&lt;/dd>
+&lt;dt>isHTML&lt;/dt>
+&lt;dd>HTMLタイプのフォーマットにのみ関連する状況で使用されます; 例えば、ページのエイリアスなどです。&lt;/dd>
+&lt;dt>noUgly&lt;/dt>
+&lt;dd>uglyURLs がサイト内で true に設定されている場合、醜い URL をオフにするために使用されます。デフォルト：false&lt;/dd>
+&lt;dt>notAlternative&lt;/dt>
+&lt;dd>このフォーマットをPageのAlternativeOutputFormatsフォーマットのリストに含めることが意味をなさない場合（例えば、CSSなど）有効にします。&lt;br>注意点として、必ずしも他のフォーマットを置き換えるわけではないので、ここではalternateではなくalternativeという用語を使っています。デフォルト：false&lt;/dd>
+&lt;dt>permalinkable&lt;/dt>
+&lt;dd>.Permalink と .RelPermalink が main ではなくレンダリング出力形式を返すようにしました。これは、HTMLとAMPでデフォルトで有効になっています。デフォルト：false&lt;/dd>
+&lt;dt>weight&lt;/dt>
+&lt;dd>0 以外の値を設定すると、最初のソート条件として使用されます。&lt;/dd>
+&lt;/dl>
+&lt;h2 id="出力するページを選択">出力するページを選択&lt;/h2>
+&lt;p>最後に出力するページに関してです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">outputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">home&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">HTML, Sitemap, RSS]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>この部分はどのページで出力するかを選択できます。&lt;br>
+今回はサイトマップを作成したいので、ドキュメントルートに当たる home (/index.html) 部分でのみの出力としてます。&lt;br>
+HTML形式と、Sitemap、RSSを出力するようにしてます。HTMLでは index.html を出力し、RSSでは index.xml のRSS形式のフィードを出力してます。そして、今回追加したSitemapでサイトマップ形式のファイルを出力するようにしました。&lt;/p>
+&lt;p>各ページの初期状態での出力は下記を参考にしてください。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>page&lt;/th>
+&lt;th>HTML&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>home&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>section&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>taxonomy&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>term&lt;/td>
+&lt;td>HTML, RSS&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="テンプレートファイルを追加する">テンプレートファイルを追加する&lt;/h2>
+&lt;p>設定が終わったので、次はテンプレートファイルを設置します。&lt;br>
+サイトマップ用のテンプレートを作成して、&lt;code>layouts/_default&lt;/code>ディレクトリに配置します。&lt;br>
+ここが一番のポイントで、配置する際のファイル名は &lt;strong>[page].[outputFormatsの名前].[suffixe]&lt;/strong> となります。&lt;br>
+つまり、今回でいうと &lt;strong>home.sitemap.xml&lt;/strong> となります。&lt;/p>
+&lt;p>ただし、pageの場合は下記のようにmarkdownに埋め込んで出力します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown:page/search.md" data-lang="markdown:page/search.md">---
+title: &amp;#34;Search&amp;#34;
+layout: &amp;#34;search&amp;#34;
+outputs:
+&lt;span class="k">-&lt;/span> html
+&lt;span class="k">-&lt;/span> json
+---
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これによって、&lt;code>layouts/page/search.html&lt;/code> と &lt;code>layouts/page/search.json&lt;/code> ファイルを使用して出力ファイルを作成します。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) &lt;/h2>
+&lt;p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>SVGとCSSを使用したUIコンポーネントの構築</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</link><pubDate>Mon, 24 Jan 2022 16:18:06 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg" alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/building-components-svg-css/" target="_blank" rel="noopener"
+> Building UI Components With SVG and CSS - Ahmad Shadeed &lt;/a>&lt;/p>
+&lt;p>SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。&lt;br>
+CSSと比較してSVGを使用することが非常に理にかなっているユースケースはたくさんあります。たとえば、円形の読み込みアニメーションを作成したり、画像にマスクを適用したりします。このような場合、CSSを使用できないという意味ではありませんが、使用する手法（マスクなど）に基づいてクロスブラウザの問題と戦うのは難しい場合があるため、SVGを使用すると時間と労力を節約できます。&lt;/p>
+&lt;p>SVGの優れている点は、応答性、パフォーマンス、およびHTML＆CSSを使用してすぐに使用できることです。この記事では、SVGをHTMLおよびCSSとともに使用して特定のUIコンポーネントを構築できるさまざまなユースケースを紹介することを目標としています。&lt;/p>
+&lt;p>それでは、ユースケースを見てみましょう。&lt;/p>
+&lt;h2 id="カットアウトアバター">カットアウトアバター&lt;/h2>
+&lt;p>切り抜かれたアバターは、FacebookのCSSを調べているときに見つけたものです。&lt;br>
+メッセンジャーでは、ユーザーアバターにバッジを付けることができ、バッジ用のスペースを割り当てるためにアバターが切り取られます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 214;
+flex-basis: 514px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png" data-size="1750x816">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png"
+width="1750"
+height="816"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これは、CSSの白い境界線を追加することで実行できます（簡単な修正として）が、さらに動的SVGコンポーネントに取り入れてみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>borderが機能する場合、なぜSVGを使用するのか考えているかもしれませんが、間違いではありません。&lt;br>
+しかし、他よりも優れた解決策があります。数学の授業で、教師が問題にさまざまな解決策がある可能性があり、そのうちの1つが柔軟性の点で優れている可能性があると述べたことを覚えていますか？今回の問題もそれと同じです。&lt;/p>
+&lt;p>とにかく、border の解決策がどのようにすぐに失敗するかを示してみましょう。&lt;/p>
+&lt;p>失敗例&lt;/p>
+&lt;ul>
+&lt;li>ホバー時：カードの背景が変わるため、白い境界線が奇妙に見えます。&lt;/li>
+&lt;li>ダークモード：白い境界線は黒っぽい背景の上になります&lt;/li>
+&lt;/ul>
+&lt;p>次の図では、バッジの白い境界線が暗い背景とホバー状態にどのように干渉しているかに注目してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 188;
+flex-basis: 452px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png" data-size="1750x928">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png"
+width="1750"
+height="928"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>ホバー時に境界線colorを変更することでそれを解決できますが、それは最善の解決策とは思えません。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">card&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">lightgrey&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#454545&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>SVGを使用すると、バッジの下の領域をカットすることで、上記の問題をより適切に解決できます。そうすれば、あらゆる種類のバックグラウンドで機能します。&lt;/p>
+&lt;p>次の図を見てください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 193;
+flex-basis: 463px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png" data-size="1600x828">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png"
+width="1600"
+height="828"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>アバターを含めるためにSVG &lt;code>&amp;lt;image&amp;gt;&lt;/code>要素を使用しています。バッジ領域を切り取るには、2つの&lt;code>&amp;lt;circle&amp;gt;&lt;/code>要素を作成する必要があります。1つは白で、もう1つは黒です。&lt;br>
+マスクでは、黒で塗りつぶされた要素はすべて非表示になります、白の要素は表示されます。黒い円は、半径18の右下隅に配置されています。&lt;br>
+開発者ツールでは、上記は減算と呼ばれます。大きい円から小さい円を引きます。&lt;br>
+これが最後のデモです&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/09f3rqbn/1/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="タイトルの装飾">タイトルの装飾&lt;/h2>
+&lt;p>あるクライアントのプロジェクトで、SVGとCSSを組み合わせてセクションタイトルをデザイン・構築したことがあります。&lt;br>
+セキュリティに関連するブランドなので、このようなスタイルを使うことがあるかもしれません。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png"
+width="1750"
+height="704"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>コンポーネントは短いタイトルと長いタイトルで動作する必要があり、タイトルが長すぎる場合は、レイアウトを壊さずに複数の行に折り返す必要があります。&lt;br>
+それを構築するためには、以下のような対応が必要です。&lt;/p>
+&lt;ul>
+&lt;li>最初に、固定部分（右側）をコピーして、インラインSVGとして追加する。&lt;/li>
+&lt;li>CSSを使用して、タイトルの下に行を作成しました。また、行の最初と最後にある小さな円にも使用。&lt;/li>
+&lt;li>不要なポジショニングを使用しないように、flexboxを使用してコンポーネントレイアウトを作成。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png"
+width="1750"
+height="704"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>それでは基本的なHTMLとCSSから始めましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;c-section__title&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>CSS is awesome&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;128&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;34.5&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 128 34.5&amp;#34;&lt;/span> &lt;span class="na">preserveAspectRatio&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 344;
+flex-basis: 826px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png" data-size="1750x508">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png"
+width="1750"
+height="508"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>次のステップでは、&lt;code>span&lt;/code> 要素の下にボーダーを追加して、SVGに接続された線を追加したいと思います。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 195;
+flex-basis: 468px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png" data-size="1750x896">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png"
+width="1750"
+height="896"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>SVGが回線に接続されていないことに気づきました。&lt;br>
+&lt;code>flexbox&lt;/code>を使用しているので、修正するのは簡単です。&lt;code>flex-item&lt;/code> を&lt;code>flex-end&lt;/code>に揃える必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">align-items&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex-end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>次に、絶対位置指定で擬似要素を使って、最初と最後に円を追加する必要があります。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/j4pydfmb/1/embed/html,css,result/dark/">&lt;/script>
+&lt;p>また、SVGを使うと何がいいかというと、SVGのパスを点線にして、アニメーションさせることができるのです。&lt;br>
+そのためには、SVGで書き出されたパスがアウトライン化されていないことを確認する必要があります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このテクニックは、Jake Archibald氏の&lt;a class="link" href="https://jakearchibald.com/2013/animated-line-drawing-svg/" target="_blank" rel="noopener"
+>素晴らしい記事&lt;/a> から学びました。このアイデアは、パスの長さを求めるというものです。&lt;/p>
+&lt;p>Chrome DevToolsで、SVGを検査し、&lt;code>&amp;lt;path&amp;gt;&lt;/code>要素を選択すると、その末尾の横に&lt;code>== $0&lt;/code>と表示されることがわかります。これを選択したまま、コンソールに移動し、以下のスクリプトを記述します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">$0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1">// 139.46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このようなことをしなくても、DOMから要素を選択するには、&lt;code>$0&lt;/code>が手っ取り早いです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">let&lt;/span> &lt;span class="nx">sectionPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#path&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sectionPath&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>それはこの例の文脈の中での簡単なヒントでした。&lt;/p>
+&lt;p>さて、長さが決まったら、あとは好きなようにやってみましょう。例えば、ホバー時にアニメーションさせることができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">stroke-dasharray&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">transition&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>または、単純に点線に変えることもできます（この場合、パスの長さを知る必要はありません）。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png"
+width="1750"
+height="704"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/wp9k7Lb6/1/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="svgを使ったカスタムリンクの下線">SVGを使ったカスタムリンクの下線&lt;/h2>
+&lt;p>SVGを使って、ワクワクするようなカスタムリンクのアンダーラインを作成することができます。私は数年前に、ランダムにパスを生成し、ホバー時にそれを再描画するスクリプトを作成しました。&lt;/p>
+&lt;p>次の図で、プレビューの前と後を考えてみてください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 248;
+flex-basis: 596px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png" data-size="1750x704">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png"
+width="1750"
+height="704"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>アイデアは、各リンクにSVGを挿入することであり、次のようになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;400&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;35&amp;#34;&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;pathItem&amp;#34;&lt;/span>
+&lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M5 5 Q 30 15 170 5&amp;#34;&lt;/span>
+&lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;black&amp;#34;&lt;/span>
+&lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;transparent&amp;#34;&lt;/span>
+&lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;7&amp;#34;&lt;/span>
+&lt;span class="na">stroke-linecap&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;round&amp;#34;&lt;/span>&lt;span class="p">/&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>この手法は &lt;code>d&lt;/code> 属性値を変更することによって起こります。これは、パスが実際にどのように描画されるかを示すビジュアルです。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/670razvf/7/embed/">&lt;/script>
+&lt;h2 id="カスタムsvgテープ">カスタムSVGテープ&lt;/h2>
+&lt;p>クライアントのプロジェクトに携わっているとき、CSSでどこにでも配置可能で、1つのCSS変数のみで色を変更できるほどダイナミックな方法で、テープをセクションに取り付ける方法が必要でした。&lt;/p>
+&lt;p>次の図を考えて見ましょう。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png"
+width="2048"
+height="1130"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>Adobe Illustratorで、テープをレイヤーに分割しました。&lt;/p>
+&lt;ul>
+&lt;li>ベース：塗りつぶしの色を取ります&lt;/li>
+&lt;li>透明な黒：暗い領域を示します&lt;/li>
+&lt;li>透明な白：明るい領域を示します&lt;/li>
+&lt;/ul>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png"
+width="2048"
+height="1130"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>SVGコードを見てみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>fill=currentColor&lt;/code>を追加したことに注意してください。&lt;br>
+&lt;code>currentColor&lt;/code>キーワードは、CSS &lt;code>color&lt;/code> プロパティから値を継承するため、1つのプロパティのみを使用して色を動的に変更できます。&lt;br>
+単色のベースと、明るい領域と暗い領域に他の2つのレイヤーがあることを考えると、色を変更すると、テープの外観が異なります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png" data-size="2048x1130">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png"
+width="2048"
+height="1130"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>さらに良いことに、SVGをテンプレートに変換し、&lt;code>&amp;lt;use&amp;gt;&lt;/code> SVG要素の助けを借りて、SVGを複製せずにテープを再利用することができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;display: none;&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="c">&amp;lt;!-- An example of using the tape from a template --&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;--angle: 10deg; color: red; --size: 120px;&amp;#34;&lt;/span> &lt;span class="na">aria-hidden&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;true&amp;#34;&lt;/span> &lt;span class="na">focusable&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 123 47&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">use&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#tape&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">use&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;use&amp;gt;&lt;/code>要素を介してテープを追加した方法に注目してください。これの良いところは、CSS変数をインラインスタイルとして使用することです。&lt;br>
+CSSは次のようになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">tape&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">angle&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;script async src="//jsfiddle.net/wyoshi/1jrL4cg6/8/embed/html,css,result/dark/">&lt;/script>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>SVGを使用してUIコンポーネントを構築すると、作業がより簡単かつ簡単になります。一部のUIコンポーネントは、100％完璧なユースケースやSVG（アバターカットアウトなど）ではない場合がありますが、作業しているプロジェクトのコンテキストによって異なります。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/SVG%e3%82%a8%e3%83%83%e3%82%bb%e3%83%b3%e3%82%b7%e3%83%a3%e3%83%ab%e3%82%ba-%e7%ac%ac2%e7%89%88-J-David-Eisenberg/dp/4873117976/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Mx7fILd8L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> SVGエッセンシャルズ 第2版 &lt;/h2>
+&lt;p> SVGの解説書。SVGは2001年にW3C勧告として公開されたXMLベースの画像フォーマットです。 ベクターグラフィックスなので拡大縮小、変形しても美しさが損なわれません。 会社のロゴをSVGで作る企業も増えていますし、D3.jsによるデータビジュアライゼーションでも基盤技術としてSVGが使われています。 本書では簡潔なサンプルを数多く使い、基本的な図形の作成、アニメーションや複雑なグラフィックスの作成、さらにはスクリプトによる制御など、SVGの基礎から応用までをわかりやすく解説します。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e3%80%90%e7%89%b9%e5%85%b8%e4%bb%98%e3%81%8d%e3%80%91HTML5-CSS3%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3-%e7%8f%be%e5%a0%b4%e3%81%ae%e6%96%b0%e6%a8%99%e6%ba%96%e3%82%ac%e3%82%a4%e3%83%89%e3%80%90%e7%ac%ac2%e7%89%88%e3%80%91-Compass-Books%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba/dp/4839974594/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-na.ssl-images-amazon.com/images/I/51&amp;#43;8c&amp;#43;a5D7L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 【特典付き】HTML5&amp;amp;CSS3デザイン 現場の新標準ガイド【第2版】 (Compass Booksシリーズ) &lt;/h2>
+&lt;p> 体系的に学ぶHTMLとCSSの仕様と実践 フロントエンドエンジニアはじめ、Web制作に関わっている人のためのHTML5/CSS3ガイドブックです。 HTMLとCSSの最新仕様を整理するとともに、主要ブラウザの対応状況など、現時点でどのポイントに留意して制作を進めていけばよいか、現場で必要不可欠な情報を解説しています。 また、フレキシブルボックスレイアウトやグリッドレイアウトなど、現在知っておくべきHTML&amp;#43;CSSレイアウトの手法についても、詳細に解説しています。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>e-Stat hampelで時系列データの異常値検知</title><link>https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/</link><pubDate>Mon, 24 Jan 2022 13:50:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal.jpg" alt="Featured image of post e-Stat hampelで時系列データの異常値検知" />&lt;h2 id="hampelによる異常値部分を追加しよう">hampelによる異常値部分を追加しよう&lt;/h2>
+&lt;p>前回はgoogle custom search の検索結果を利用して社会的に関心の高そうな列の抽出を試みました。&lt;br>
+今回は、以前紹介したhampelによる時系列データの異常値検知を組み込んで見たいと思います。&lt;br>
+前回取得した「人権侵犯事件の種類別」ごとにtime_code、valueをまとめcsvにしてhampelメソッドを適用します。&lt;br>
+time_codeは月次なのですが、月ごとの事件数はかなりムラがあって比較が難しいので年次にまとめます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>私人等に関するもの_暴行・虐待_家族間のもの_夫の妻に対するもの
+date,value
+2007,2537
+2008,2645
+2009,2461
+2010,2250
+2011,2242
+2012,2031
+2013,1683
+2014,1477
+2015,1352
+2016,1297
+2017,1113
+2018,900
+2019,782
+2020,534
+&lt;/code>&lt;/pre>&lt;p>コロナの影響なのか結構急激に下がっているのに検知しませんでした。&lt;br>
+母数が流石に少なすぎるのかちょっと見直しが必要ですね。&lt;br>
+閾値を色々変えてみましたがだめでした。&lt;br>
+残念です。&lt;br>
+年次のものについては一旦前の年との増減分を比較して閾値を超えたらアラートをあげるようにしようと思います。&lt;/p>
+&lt;h2 id="プログラム">プログラム&lt;/h2>
+&lt;p>プログラムは以下の通りです。&lt;br>
+シェルプログラムから以前作ったhampelメソッドのpython を呼び出しています。&lt;br>
+grep -e &amp;ldquo;^$nyear&amp;rdquo; -e &amp;ldquo;^$lyear&amp;rdquo; で直近２年間に異常値があった場合のみ検知するように絞りをかけています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>function getHampel(){
+echo &amp;quot;$column&amp;quot;|while read line;do
+cat &amp;quot;$STCSV&amp;quot;|grep &amp;quot;総数&amp;quot;|grep &amp;quot;,\&amp;quot;$line\&amp;quot;,&amp;quot;|$AWK -F, '{print $7&amp;quot;,&amp;quot;$10;}'|$SED -e &amp;quot;s|\&amp;quot;||g&amp;quot; &amp;gt; &amp;quot;$TMPHCSV&amp;quot;;
+#月次だとムラがあって比較が難しいので年次にする
+years=$(cat &amp;quot;$TMPHCSV&amp;quot;|cut -c 1-4|sort|uniq -c|grep &amp;quot;^ 12&amp;quot;|$AWK '{print $2;}');
+echo &amp;quot;date,value&amp;quot; &amp;gt; &amp;quot;$TMPHYCSV&amp;quot;
+echo &amp;quot;$years&amp;quot;|while read year;do
+local mcnt=$(cat &amp;quot;$TMPHCSV&amp;quot;|grep &amp;quot;^$year&amp;quot;|$AWK -F, '{print $2;}'|$AWK '{sum+=$0} END{print sum;}');
+echo &amp;quot;$year,$mcnt&amp;quot; &amp;gt;&amp;gt;&amp;quot;$TMPHYCSV&amp;quot;;
+done
+#0:date:2021001111 value:5230
+nyear=$(date +%Y);
+lyear=$((nyear-1));
+hampelalert=$(python gethampel.py &amp;quot;$TMPHYCSV&amp;quot;|grep -e &amp;quot;^$nyear&amp;quot; -e &amp;quot;^$lyear&amp;quot;|tr &amp;quot;\n&amp;quot; &amp;quot;:&amp;quot;);
+if [ -n &amp;quot;$hampelalert&amp;quot; ];then
+echo &amp;quot;$line,$hampelalert&amp;quot;;
+fi
+done
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

@@ -1,3 +1,8 @@
 User-agent: *
 Disallow: /404.html
 Allow: /
+
+Sitemap: https://suzukiiichiro.github.io/google_sitemap.xml
+Sitemap: https://suzukiiichiro.github.io/sitemap_index.xml
+Sitemap: https://suzukiiichiro.github.io/sitemap.xml
+Sitemap: https://suzukiiichiro.github.io/index.xml
