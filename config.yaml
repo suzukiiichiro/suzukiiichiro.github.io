@@ -36,9 +36,11 @@ frontmatter:
 
 # Robots.txtを作成
 enableRobotsTXT: true
-# sitemap:
-#   filename: sitemap.xml
-#   priority: 0.5
+
+sitemap:
+  filename: sitemap.xml
+  priority: 0.5
+
 Services:
     RSS:
         Limit: 10
@@ -54,19 +56,14 @@ taxonomies:
     category: categories
     author: authors
 
-# outputFormats:
-#     Sitemap:
-#         MediaType: application/xml
-#         baseName: "google_sitemap"
-#         noUgly: true
+outputFormats:
+    Sitemap:
+        MediaType: application/xml
+        baseName: "google_sitemap"
+        noUgly: true
         
-# outputs:
-#     home: [HTML, Sitemap, RSS]
 outputs:
-    home: [HTML]
-    section: [HTML]
-    taxonomy: [HTML]
-    term: [HTML]
+    home: [HTML, Sitemap, RSS]
 
 # キャッシュのコントロール
 # https://gohugo.io/getting-started/configuration/#configure-file-caches
@@ -75,7 +72,7 @@ caches:
     dir: :cacheDir/:project
     maxAge: 10m
 
-disableKinds: ["RSS", "sitemap"]
+# disableKinds: ["sitemap"]
 
 params:
     paginate:
