@@ -51,7 +51,20 @@
 {{/* List only pages that are not a subsection */}}
 {{ $paginator := .Paginate $pages }}
 <section class="article-list">
-  {{ range $paginator.Pages }}
+  {{ range $i, $el := $paginator.Pages }}
+    {{- if eq $i 3 -}}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-gd-2h+9j-9f-6v"
+     data-ad-client="ca-pub-8689199204567424"
+     data-ad-slot="4087990064"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    {{- end -}}
   {{ partial "article/components/header" . }}
   {{ end }}
 </section>
