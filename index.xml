@@ -617,8 +617,7 @@ alt="図">
 row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
 439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
 &lt;p>細く動作をみていくとこんな感じになります。&lt;br>
-ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが。&lt;br>
-制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
+ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
 &lt;p>前回は全くアルゴリズムを使わないで全パターン１行に１つずつクイーンを設置するブルートフォース　力任せ探索でした。&lt;br>
 エイトクイーン(N=8)ですら凄く時間がかかることが体感できたかと思います。&lt;/p>
 &lt;p>今回も解を出すまでには至りませんが、一つ進んで、配置フラグ（制約テスト高速化）を使いより効率よく解の候補を列挙する方法を説明したいと思います。&lt;/p>
