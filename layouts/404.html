@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <div class="not-found-card">
+    <h1 class="article-title">{{ T "notFound.title" }}</h1>
+    <h2 class="article-subtitle">{{ T "notFound.subtitle" }}</h2>
+  </div>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424"
+     crossorigin="anonymous"></script>
+    <!-- 404 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8689199204567424"
+         data-ad-slot="9182542253"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+  {{ partial "footer/footer" . }}
+{{ end }}
+{{- define "right-sidebar" -}}
+  {{- partial "sidebar/right.html" . -}}
+{{ end }}

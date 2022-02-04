@@ -189,6 +189,7 @@ body {
 .main {
   h1.title {
     font-size: 1.4rem;
+    color: var(--card-text-color-main);
   }
   > h1.title {
     margin:20px;

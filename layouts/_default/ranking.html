@@ -41,8 +41,10 @@
       {{ end }}
       </div>
       <div class="link-btns"><a href="{{- .Permalink -}}">{{- $title -}}をもっと見る</a></div>
+      {{- partial "ads/ranking" -}}
     {{- end -}}
   </div>
+
 {{ end }}
 
 {{ define "right-sidebar" }}
