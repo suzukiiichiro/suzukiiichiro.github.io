@@ -1334,7 +1334,7 @@ html[data-scheme="dark"] #popular-articles--month .contents-area button {
 
 .search-list--form {
   margin: 0;
-  padding: 20px 15px 20px;
+  padding: 0 15px 20px;
   background: none;
   position: sticky;
   top: 0;
@@ -1343,7 +1343,10 @@ html[data-scheme="dark"] #popular-articles--month .contents-area button {
   .search-list--form .form-area {
     display: flex;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px; }
+    border-radius: 4px;
+    align-items: center;
+    background-color: var(--card-background);
+    overflow: hidden; }
     .search-list--form .form-area label {
       position: relative;
       display: flex; }
@@ -1352,6 +1355,8 @@ html[data-scheme="dark"] #popular-articles--month .contents-area button {
       padding: 15px;
       border: none;
       box-shadow: none; }
+    .search-list--form .form-area button {
+      position: relative; }
 
 .search-list .section-title {
   background: none;
