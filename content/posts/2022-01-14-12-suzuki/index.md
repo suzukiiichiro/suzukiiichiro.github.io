@@ -3,7 +3,7 @@ authors: suzuki
 title: "【１２．case 文】ざっくりわかる「シェルスクリプト」"
 description: "caseステートメントは、if-elseif-elseステートメントの代わりに使用されます。このステートメントの開始ブロックと終了ブロックは、「case」と「esac」によって定義されます。'case_example.sh'という名前の新しいファイルを作成し、次のスクリプトを追加します。次のスクリプトの出力は、例として前のelseと同じになります。"
 date: 2022-01-12T12:30:57+09:00
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング

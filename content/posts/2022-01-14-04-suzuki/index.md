@@ -3,7 +3,7 @@ authors: suzuki
 title: "【４．マルチラインコメント】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "bashではさまざまな方法で複数行コメントを使用できます。次の例に簡単な方法を示します。'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。ここでは、「:」と「'」でbashで複数行コメントを実現しています。"
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング

@@ -3,7 +3,7 @@ authors: suzuki
 title: "【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」"
 description: "文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。"
 date: 2022-01-12T12:30:57+09:00
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング

@@ -3,7 +3,7 @@ authors: suzuki
 title: "【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」"
 description: "'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。"
 date: 2022-01-13T11:26:13+09:00
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング

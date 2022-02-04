@@ -4,7 +4,7 @@ date: 2022-01-14T10:16:57+09:00
 title: "【１．Hello World】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。"
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング

@@ -3,7 +3,7 @@ authors: suzuki
 title: "【２９．waitコマンド】ざっくりわかる「シェルスクリプト」"
 description: "waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。"
 date: 2022-01-13T11:26:13+09:00
-draft: false
+draft: true
 image: shellscript.jpg
 categories:
   - プログラミング
