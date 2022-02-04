@@ -7,7 +7,11 @@
 {{ define "main" }}
   {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
 <form action="{{ .Permalink }}" class="search-list--form search-form" {{ with .OutputFormats.Get "json" -}} data-json="{{ .Permalink }}" {{- end }}>
-  <h1 class="title">{{ .Title }}</h1>
+  {{- $title := .Title -}}
+  {{- if .Params.slugTitle -}}
+    {{- $title = .Params.slugTitle -}}
+  {{- end -}}
+  <h1 class="title">{{ $title }}</h1>
   <div class="form-area">
       <input name="keyword" placeholder="{{ T `search.placeholder` }}" />
       <button title="{{ T `search.title` }}">{{ partial "helper/icon" "search" }}</button>

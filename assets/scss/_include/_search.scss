@@ -1,6 +1,6 @@
 .search-list--form {
   margin: 0;
-  padding: 20px 15px 20px;
+  padding: 0 15px 20px;
   background: none;
   position: sticky;
   top: 0;
@@ -10,6 +10,9 @@
     display: flex;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 4px;
+    align-items: center;
+    background-color: var(--card-background);
+    overflow: hidden;
     label {
       position: relative;
       display: flex;
@@ -19,6 +22,9 @@
       padding: 15px;
       border :none;
       box-shadow: none;
+    }
+    button {
+      position: relative;
     }
   }
 }
