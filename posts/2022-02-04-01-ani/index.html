@@ -15,14 +15,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第4回目。今回は配置フラグ（制約テスト高速化）について図で示しながら詳細な動きを説明します。再帰とfor文が絡み合っている時にどうやって動くのかを中心に説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-04T09:55:55+09:00"><meta property="article:modified_time" content="2022-02-04T04:44:35+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-04T09:55:55+09:00"><meta property="article:modified_time" content="2022-02-04T04:51:45+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg">
 <meta name=twitter:title content="pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第4回目。今回は配置フラグ（制約テスト高速化）について図で示しながら詳細な動きを説明します。再帰とfor文が絡み合っている時にどうやって動くのかを中心に説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-04-01-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg"],"datePublished":"2022-02-04T09:55:55+09:00","dateModified":"2022-02-04T04:44:35.581309086Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg"],"datePublished":"2022-02-04T09:55:55+09:00","dateModified":"2022-02-04T04:51:45.335287219Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -113,7 +113,7 @@ Web開発
 </a>
 </div>
 <div class=article-info>
-<span class="article-time--item article-time--author"><span class=name>root</span>
+<span class="article-time--item article-time--author"><span class=name>anikotaro</span>
 </span>
 <time class="article-time--item article-time--published">2022.02.04</time>
 <time class="article-time--item article-time--reading">
@@ -147,19 +147,20 @@ pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高�
 <p><a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py</a></p>
 <p>プログラムはエイトクイーン(N=8)ですが説明をしやすくするため4x4のN=4で説明します。実際に動かしてプログラムの動作を確認したい方は419,420行目のMAXとSIZEを4に変更してみてください。</p>
 <h2 id=おさらい>おさらい</h2>
-<p>ブルートフォースからのおさらいとして次の点を押さえておきましょう。</p>
-<p>442行目のABOARD[row]=i はクイーンを配置する動きです。</p>
-<p>445行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。</p>
-<p>438,439は最終行(4行目)までクイーンを置ききった後にCOUNT と各行にクイーンを置いた場所を出力します。</p>
-<p>再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭435行目に移動します。<br>
+<p>ブルートフォースからのおさらいとして次の点を押さえておきましょう。<br>
+・442行目のABOARD[row]=i はクイーンを配置する動きです。<br>
+・445行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。<br>
+・438,439は最終行(4行目)までクイーンを置ききった後にCOUNT と各行にクイーンを置いた場所を出力します。<br>
+再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭435行目に移動します。<br>
 引数で渡されたrow以外のローカル変数はすべて初期化された状態になります。</p>
-<p>再帰から抜ける部分は2箇所あります。</p>
-<p>一つ目は、438,439行目で最終行(4行目)までクイーンを置ききった後にprintoutする時</p>
+<p>・再帰から抜ける部分は2箇所あります。<br>
+一つ目は、438,439行目で最終行(4行目)までクイーンを置ききった後にprintoutする時</p>
 <p>二つ目は、441行目のfor文がSIZE数の数(N=4だと3)だけ回りきったあとです。</p>
 <p>再帰から抜けたときは再帰を呼び出した445行目のすぐ後ろからスタートします。<br>
 ローカル変数の状態は再帰を呼び出す直前の状態になります。<br>
 1行前に戻るような動きとなります。</p>
-<p>ちなみに441行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです左端までクイーンを置ききったらfor文を抜けるイメージです。</p>
+<p>ちなみに441行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです。<br>
+左端までクイーンを置ききったらfor文を抜けるイメージです。</p>
 <h2 id=nqueen-メソッドの動き>nqueen メソッドの動き</h2>
 <p>448行目のnqueen(0)からスタートします。<br>
 メソッドの先頭435行目に移動します。<br>
