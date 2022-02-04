@@ -4,7 +4,7 @@ title: "ざっくりわかるシェルスクリプト「bash-３」"
 description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
-image: shellscript.jpg
+image: bash.jpg
 categories:
   - プログラミング
 tags:
