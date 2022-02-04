@@ -1,6 +1,7 @@
 {{ define "body-class" }}template-archives{{ end }}
 
 {{ define "main" }}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
   {{- $title := .Title -}}
   {{- if .Params.slugTitle -}}
     {{- $title = .Params.slugTitle -}}

@@ -1,0 +1,24 @@
+<nav class="breadcrumb-area">
+  <ol class="breadcrumb">
+  {{- template "breadcrumb-tmp" (dict "node" . "start" .) }}
+  </ol>
+</nav>
+
+{{- define "breadcrumb-tmp" }}
+  {{- if .node.Parent }}
+    {{- template "breadcrumb-tmp" (dict "node" .node.Parent "start" .start) }}
+  {{- else if not .node.IsHome }}
+    {{- template "breadcrumb-tmp" (dict "node" .node.Site.Home "start" .start) }}
+  {{- end }}
+
+  {{- $title := .node.LinkTitle -}}
+  {{- if .node.Params.slugTitle -}}
+  {{- $title = .node.Params.slugTitle -}}
+  {{- end -}}
+
+  {{- if eq .node .start }}
+    <li><span class="breadcrumb-item">{{ $title }}</span>
+  {{- else }}
+    <li><a class="breadcrumb-item" href="{{ .node.Permalink }}">{{ $title }}</a>
+  {{- end }}
+{{- end }}

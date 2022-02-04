@@ -7,6 +7,7 @@
 {{ end }}
 
 {{ define "main" }}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
     <article class="{{ if .Params.image }}has-image {{ end }}main-article">
       {{ partialCached "article/components/details_page" . .RelPermalink }}
       {{ partial "article/components/content" . }}

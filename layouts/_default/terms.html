@@ -6,6 +6,7 @@
   {{- if .Params.slugTitle -}}
       {{- $title = .Params.slugTitle -}}
   {{- end -}}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
 
   <div class="archives-group terms-top">
     <h1 class="title">{{- $title -}}</h1>

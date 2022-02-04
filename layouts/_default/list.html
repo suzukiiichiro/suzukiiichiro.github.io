@@ -1,8 +1,11 @@
 {{ define "main" }}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
 
 <div class="section-card">
   <div class="section-details">
-    <h1 class="section-term">{{ .Title }}<span class="section-count">{{ T "list.page" (len .Pages) }}</span></h1>
+    <div class="section-title-area">
+      <h1 class="section-term">{{ .Title }}<span class="section-count">{{ T "list.page" (len .Pages) }}</span></h1>
+    </div>
     {{ with .Params.description }}
     <h2 class="section-description">{{ . }}</h2>
     {{ end }}

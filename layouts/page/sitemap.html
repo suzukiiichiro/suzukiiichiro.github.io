@@ -1,6 +1,7 @@
 {{ define "body-class" }}template-archives{{ end }}
 
 {{ define "main" }}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
   <div id="sitemap">
     {{- $title := .Title -}}
     {{- if .Params.slugTitle -}}

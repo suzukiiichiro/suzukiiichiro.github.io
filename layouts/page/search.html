@@ -5,6 +5,7 @@
 {{- end -}}
 {{ end }}
 {{ define "main" }}
+  {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
 <form action="{{ .Permalink }}" class="search-list--form search-form" {{ with .OutputFormats.Get "json" -}} data-json="{{ .Permalink }}" {{- end }}>
   <h1 class="title">{{ .Title }}</h1>
   <div class="form-area">

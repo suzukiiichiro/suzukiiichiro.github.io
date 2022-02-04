@@ -194,3 +194,56 @@ body {
     margin:20px;
   }
 }
+
+.section-card {
+  box-shadow: none;
+}
+
+.breadcrumb-area {
+  overflow: hidden;
+  width: 100%;
+  .breadcrumb {
+    background-color: #f5f5f5;
+    padding: 8px 20px;
+    margin: 5px 20px;
+    list-style: none;
+    display: flex;
+    font-size: 0.8rem;
+    align-items: center;
+    border: none;
+    border-radius: 2px;
+    li {
+      margin: 0;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      overflow: hidden;
+      .breadcrumb-item {
+        margin: 0;
+        padding: 0;
+        font-size: 1em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &:last-child {
+        font-weight: bold;
+        flex: 1;
+        color: var(--card-text-color-secondary);
+      }
+      &:not(:last-child) {
+        &::after {
+          width: 1em;
+          height: 1em;
+          background: no-repeat center center;
+          @include icon("M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z")
+          background-size: 70% auto;
+          content: '';
+          padding: 0 0.5em;
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {{ define "body-class" }}template-archives{{ end }}
 
 {{ define "main" }}
+    {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
     {{- $taxonomy := $.Site.GetPage "taxonomyTerm" "categories" -}}
     {{- $terms := $taxonomy.Pages -}}
 

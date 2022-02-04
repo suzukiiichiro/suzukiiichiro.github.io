@@ -9,6 +9,7 @@
 {{ end }}
 
 {{ define "main" }}
+   {{ partialCached "article/components/breadcrumb" . .RelPermalink }}
     {{ partial "article/article.html" . }}
     {{ if not (eq .Params.comments false) }}
         {{ partial "comments/include" . }}
