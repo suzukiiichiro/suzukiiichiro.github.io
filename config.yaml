@@ -36,9 +36,11 @@ frontmatter:
 
 # Robots.txtを作成
 enableRobotsTXT: true
-# sitemap:
-#   filename: sitemap.xml
-#   priority: 0.5
+
+sitemap:
+  filename: sitemap.xml
+  priority: 0.5
+
 Services:
     RSS:
         Limit: 10
@@ -70,7 +72,7 @@ caches:
     dir: :cacheDir/:project
     maxAge: 10m
 
-disableKinds: ["sitemap"]
+# disableKinds: ["sitemap"]
 
 params:
     paginate:
