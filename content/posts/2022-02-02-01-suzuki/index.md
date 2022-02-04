@@ -21,7 +21,7 @@ tags:
 この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。
 では次のトピックについて説明します。
 
-
+<!-- 
 はじめてのバッシュスクリプト
 ファイルへの出力
 コメント
@@ -43,7 +43,7 @@ grepコマンドの紹介
 awkコマンドの紹介
 sedコマンドの紹介
 シェルスクリプトのデバッグ
-
+-->
 
 ## はじめてのシェルスクリプト
 
@@ -209,7 +209,7 @@ $
 {{% tips-list tips %}}
 ヒント
 : 「>」をリダイレクトと言います。
-{{% tips-list %}}
+{{% /tips-list %}}
 
 
 ファイルの出力は２種類あります。
@@ -230,7 +230,7 @@ echo "and bash." >> hello.txt; # ここで追記
 ヒント
 : 「>>」をアペンドと言います。
 : アペンドするときの注意点は、アペンドする場合は、既にファイルが存在している必要があります。「touch」コマンドでファイルを生成したうえでアペンドするか、あらかじめ「> リダイレクト」でファイルを生成し、文字列を追記したうえで、「>> アペンド」します。
-{{% tips-list %}}
+{{% /tips-list %}}
 
 
 
@@ -1918,12 +1918,14 @@ fi
 
 -->
 
+
 # 関連記事
-[【はじめから】ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
-[【はじめから】ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
-[【はじめから】ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
-[【 grep 特集】ざっくりわかるシェルスクリプト４](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
-[【ちょい広め】ざっくりわかるシェルスクリプト５](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
+[【はじめから】「ざっくりわかるシェルスクリプト１」](https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/)
+[【はじめから】「ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
+[【はじめから】「ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
+[【 grep 特集】「ざっくりわかるシェルスクリプト４」](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+[【ちょい広め】「ざっくりわかるシェルスクリプト５」](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
+
 
 
 # 書籍の紹介
