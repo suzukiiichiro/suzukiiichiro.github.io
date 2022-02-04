@@ -265,7 +265,359 @@ Bingでの流入やSNSでの流入はもちろん大事ですが、Googleで検�
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
+&lt;/aside></description></item><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/</link><pubDate>Fri, 04 Feb 2022 09:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
+&lt;p>今回も引き続き配置フラグ（制約テスト高速化）を説明していきたいと思います。 &lt;br>
+前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの再帰と配置フラグの動きについて図で示しながら説明していきたいとおもいます。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py&lt;/a>&lt;/p>
+&lt;p>プログラムはエイトクイーン(N=8)ですが説明をしやすくするため4x4のN=4で説明します。実際に動かしてプログラムの動作を確認したい方は419,420行目のMAXとSIZEを4に変更してみてください。&lt;/p>
+&lt;h2 id="おさらい">おさらい&lt;/h2>
+&lt;p>ブルートフォースからのおさらいとして次の点を押さえておきましょう。&lt;/p>
+&lt;p>442行目のABOARD[row]=i はクイーンを配置する動きです。&lt;/p>
+&lt;p>445行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。&lt;/p>
+&lt;p>438,439は最終行(4行目)までクイーンを置ききった後にCOUNT と各行にクイーンを置いた場所を出力します。&lt;/p>
+&lt;p>再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭435行目に移動します。&lt;br>
+引数で渡されたrow以外のローカル変数はすべて初期化された状態になります。&lt;/p>
+&lt;p>再帰から抜ける部分は2箇所あります。&lt;/p>
+&lt;p>一つ目は、438,439行目で最終行(4行目)までクイーンを置ききった後にprintoutする時&lt;/p>
+&lt;p>二つ目は、441行目のfor文がSIZE数の数(N=4だと3)だけ回りきったあとです。&lt;/p>
+&lt;p>再帰から抜けたときは再帰を呼び出した445行目のすぐ後ろからスタートします。&lt;br>
+ローカル変数の状態は再帰を呼び出す直前の状態になります。&lt;br>
+1行前に戻るような動きとなります。&lt;/p>
+&lt;p>ちなみに441行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです左端までクイーンを置ききったらfor文を抜けるイメージです。&lt;/p>
+&lt;h2 id="nqueen-メソッドの動き">nqueen メソッドの動き&lt;/h2>
+&lt;p>448行目のnqueen(0)からスタートします。&lt;br>
+メソッドの先頭435行目に移動します。&lt;br>
+row=0なので440行目の else: に移動します。&lt;br>
+441行目のfor文に入りi=0からスタートします。&lt;br>
+442行目のABOARD[0]=0で1行目の右端にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 98;
+flex-basis: 235px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q1.png" data-size="324x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q1.png"
+width="324"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+1個目のクイーンなので当然配置フラグはどれもOの状態ですから443行目のif FA[0] == 0 の条件を満たしてif文の中に入ります。&lt;br>
+右端にクイーンを置いたのですから444行目でFA[0]=1 で右端の位置にフラグをたてます。&lt;br>
+445行目でnqueenを引数1を渡して呼び出して2行目に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=1の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=1なので440行目の else: に移動します。&lt;br>
+441行目のfor文に入りi=0からスタートします。&lt;br>
+442行目のABOARD[1]=0で2行目の右端にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q2.png" data-size="322x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q2.png"
+width="322"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+1行目で既に右端にクイーンを設置していますのでFA[0]は1になりますので443行目のif FA[i]==0の条件を満たしません。&lt;br>
+if文に入らずに次のfor文に進みます。&lt;/p>
+&lt;p>この部分が今回追加された配置フラグの制御になります。&lt;br>
+この処理のおかげで上下の利き筋に引っかかる場合は次の行に移動するのをやめ探索を効率化することができます。&lt;/p>
+&lt;p>441行目で次のfor文に進みi=1となります。&lt;/p>
+&lt;p>442行目のABOARD[1]=1で2行目の右から2列目にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q3.png" data-size="324x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q3.png"
+width="324"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>1行目で右端にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==0
+FA[2]==0
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>FA[1]は0なのでif FA[i]==0の条件を満たすのでif 文の中に入ります。&lt;/p>
+&lt;p>右端から2列目にクイーンを置いたのですから444行目でFA[1]=1 で右端から2番目の位置にフラグをたてます。&lt;br>
+445行目でnqueenを引数2を渡して呼び出して3行目に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=2の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=2なので440行目の else: に移動します。&lt;br>
+441行目のfor文に入りi=0からスタートします。&lt;br>
+442行目のABOARD[2]=0で3行目の右端にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q4.png" data-size="324x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q4.png"
+width="324"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>1行目で右端に、2行目で右から2列目にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==0
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>i=0 FA[0]=1なのでif FA[i]==0の条件を満たさずに次のfor文に進みます。&lt;/p>
+&lt;p>441行目で次のfor文に進みi=1となります。&lt;br>
+442行目のABOARD[2]=1で3行目の右から2列目にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 244px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q5.png" data-size="330x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q5.png"
+width="330"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>1行目で右端に、2行目で右から2列目にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==0
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>i=1 FA[1]=1なのでif FA[i]==0の条件を満たさずに次のfor文に進みます。&lt;/p>
+&lt;p>441行目で次のfor文に進みi=2となります。&lt;br>
+442行目のABOARD[2]=2で3行目の右から3列目にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 241px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q6.png" data-size="328x326">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q6.png"
+width="328"
+height="326"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==0
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>i=2 FA[2]=0なのでif FA[i]==0の条件を満たすのでif文の中に入ります。&lt;br>
+右端から3列目にクイーンを置いたのですから444行目でFA[2]=1 で右から3列目の位置にフラグをたてます。&lt;br>
+445行目でnqueenを引数3を渡して呼び出して4行目に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=3の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=3なので440行目の else: に移動します。&lt;br>
+441行目のfor文に入りi=0からスタートします。&lt;br>
+for文の中で右端から左端へ順番にクイーンを置いていくことになりますが。&lt;br>
+すでに、1行目で右端、2行目で右から2列目、3行目で右から3列目にクイーンを設置しています。&lt;br>
+FAの状態を見てみると以下の通りです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==1
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>そのためiが0,1,2の時は443行目の配置フラグの制約に引っかかりif文の中には入らず次のfor文に進みます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 102;
+flex-basis: 246px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q7.png" data-size="324x316">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q7.png"
+width="324"
+height="316"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 242px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q8.png" data-size="328x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q8.png"
+width="328"
+height="324"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 104;
+flex-basis: 250px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q9.png" data-size="332x318">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q9.png"
+width="332"
+height="318"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>i=3では&lt;br>
+ABOARD[3]=3で4行目の左端にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 98;
+flex-basis: 235px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q10.png" data-size="324x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q10.png"
+width="324"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+やっとフラグの制約に引っかからず443行のif文の中にはいれます。&lt;/p>
+&lt;p>FA[3]=1&lt;br>
+444行目でFA[3]=1 で右から4番目の位置にフラグをたてます。&lt;br>
+445行目でnqueenを引数4を渡して呼び出して先に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=4の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
+439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
+&lt;p>そして、再帰を抜け4行目の処理（row=3）に戻ります。&lt;br>
+戻る場所は445行目のすぐ下です。&lt;br>
+ローカル変数は再帰を呼び出す直前の状態にもどっています。&lt;br>
+row=3 i=3です。&lt;br>
+446行目でFA[3]=0 でフラグを落としています。&lt;br>
+グローバル変数は再帰からもどっても再帰を呼び出す直前の状態に自動的にはもどらないので明示的にフラグを落とす必要があります。&lt;/p>
+&lt;p>446行目でフラグを落としたあと次のfor文に進むのですが、すでにi=3なのでfor文を抜けます。&lt;br>
+for文を抜けると再帰を抜け3行目の処理(row=2)に戻ります。&lt;br>
+ここではrow=4,row=3と立て続けに再帰をぬけrow=2に戻る形となります。&lt;/p>
+&lt;p>戻る場所は445行目のすぐ下です。&lt;br>
+ローカル変数は再帰を呼び出す直前の状態にもどっています。&lt;br>
+3行目はforは0,1,2まで進んでいました。&lt;br>
+row=2 i=3です。&lt;br>
+446行目でFA[2]=0 でフラグを落としています。&lt;br>
+そして次のfor文に進みます。&lt;br>
+i=3で&lt;br>
+ABOARD[2]=3で3行目の左端にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 97;
+flex-basis: 234px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q11.png" data-size="324x332">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q11.png"
+width="324"
+height="332"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+FAの状態を見てみると以下の通りです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==0
+FA[3]==0
+&lt;/code>&lt;/pre>&lt;p>FA[3]=0なのでif FA[i]==0:の条件を満たしてif 文の中に入ります。&lt;br>
+右から4列目にクイーンを置いているので444行目でFA[3]=1 でフラグをたてます。&lt;br>
+445行目でnqueenを引数3を渡して呼び出して先に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=3の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=3なので440行目の else: に移動します。&lt;br>
+441行目のfor文に入りi=0からスタートします。&lt;br>
+for文の中で右端から左端へ順番にクイーンを置いていくことになりますが。&lt;br>
+すでに、1行目で右端、2行目で右から2番目、3行目で右から4番目にクイーンを設置しています。&lt;br>
+FAの状態を見てみると以下の通りです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]==1
+FA[1]==1
+FA[2]==0
+FA[3]==1
+&lt;/code>&lt;/pre>&lt;p>そのためiが0,1の時は443行目の配置フラグの制約に引っかかりif文の中には入らず次のfor文に進みます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q12.png" data-size="328x328">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q12.png"
+width="328"
+height="328"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q13.png" data-size="326x326">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q13.png"
+width="326"
+height="326"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>i=2では&lt;br>
+ABOARD[3]=2で4行目の右から3列目にクイーンを設置します。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q14.png" data-size="322x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q14.png"
+width="322"
+height="322"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+やっとフラグの制約に引っかからず443行のif文の中にはいれます。&lt;/p>
+&lt;p>FA[2]=1&lt;br>
+444行目でFA[2]=1 で右から3列目の位置にフラグをたてます。&lt;br>
+445行目でnqueenを引数4を渡して呼び出して先に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=4の状態でメソッドの先頭435行目に移動します。&lt;br>
+row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
+439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
+&lt;p>細く動作をみていくとこんな感じになります。&lt;br>
+ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが。&lt;br>
+制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item><item><title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
 &lt;p>前回は全くアルゴリズムを使わないで全パターン１行に１つずつクイーンを設置するブルートフォース　力任せ探索でした。&lt;br>
 エイトクイーン(N=8)ですら凄く時間がかかることが体感できたかと思います。&lt;/p>
 &lt;p>今回も解を出すまでには至りませんが、一つ進んで、配置フラグ（制約テスト高速化）を使いより効率よく解の候補を列挙する方法を説明したいと思います。&lt;/p>
@@ -1918,356 +2270,6 @@ outputs:
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name"> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) &lt;/h2>
 &lt;p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>SVGとCSSを使用したUIコンポーネントの構築</title><link>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</link><pubDate>Mon, 24 Jan 2022 16:18:06 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg" alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/building-components-svg-css/" target="_blank" rel="noopener"
-> Building UI Components With SVG and CSS - Ahmad Shadeed &lt;/a>&lt;/p>
-&lt;p>SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。&lt;br>
-CSSと比較してSVGを使用することが非常に理にかなっているユースケースはたくさんあります。たとえば、円形の読み込みアニメーションを作成したり、画像にマスクを適用したりします。このような場合、CSSを使用できないという意味ではありませんが、使用する手法（マスクなど）に基づいてクロスブラウザの問題と戦うのは難しい場合があるため、SVGを使用すると時間と労力を節約できます。&lt;/p>
-&lt;p>SVGの優れている点は、応答性、パフォーマンス、およびHTML＆CSSを使用してすぐに使用できることです。この記事では、SVGをHTMLおよびCSSとともに使用して特定のUIコンポーネントを構築できるさまざまなユースケースを紹介することを目標としています。&lt;/p>
-&lt;p>それでは、ユースケースを見てみましょう。&lt;/p>
-&lt;h2 id="カットアウトアバター">カットアウトアバター&lt;/h2>
-&lt;p>切り抜かれたアバターは、FacebookのCSSを調べているときに見つけたものです。&lt;br>
-メッセンジャーでは、ユーザーアバターにバッジを付けることができ、バッジ用のスペースを割り当てるためにアバターが切り取られます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 214;
-flex-basis: 514px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png" data-size="1750x816">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-1.png"
-width="1750"
-height="816"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>これは、CSSの白い境界線を追加することで実行できます（簡単な修正として）が、さらに動的SVGコンポーネントに取り入れてみましょう。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">badge&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>borderが機能する場合、なぜSVGを使用するのか考えているかもしれませんが、間違いではありません。&lt;br>
-しかし、他よりも優れた解決策があります。数学の授業で、教師が問題にさまざまな解決策がある可能性があり、そのうちの1つが柔軟性の点で優れている可能性があると述べたことを覚えていますか？今回の問題もそれと同じです。&lt;/p>
-&lt;p>とにかく、border の解決策がどのようにすぐに失敗するかを示してみましょう。&lt;/p>
-&lt;p>失敗例&lt;/p>
-&lt;ul>
-&lt;li>ホバー時：カードの背景が変わるため、白い境界線が奇妙に見えます。&lt;/li>
-&lt;li>ダークモード：白い境界線は黒っぽい背景の上になります&lt;/li>
-&lt;/ul>
-&lt;p>次の図では、バッジの白い境界線が暗い背景とホバー状態にどのように干渉しているかに注目してください。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 188;
-flex-basis: 452px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png" data-size="1750x928">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-2.png"
-width="1750"
-height="928"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>ホバー時に境界線colorを変更することでそれを解決できますが、それは最善の解決策とは思えません。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="kc">solid&lt;/span> &lt;span class="mh">#ff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">.&lt;/span>&lt;span class="nc">card&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">lightgrey&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">@&lt;/span>&lt;span class="k">media&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="nt">prefers-color-scheme&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nt">dark&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="p">.&lt;/span>&lt;span class="nc">card__badge&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">border-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#454545&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>SVGを使用すると、バッジの下の領域をカットすることで、上記の問題をより適切に解決できます。そうすれば、あらゆる種類のバックグラウンドで機能します。&lt;/p>
-&lt;p>次の図を見てください。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 193;
-flex-basis: 463px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png" data-size="1600x828">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-1-3.png"
-width="1600"
-height="828"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>アバターを含めるためにSVG &lt;code>&amp;lt;image&amp;gt;&lt;/code>要素を使用しています。バッジ領域を切り取るには、2つの&lt;code>&amp;lt;circle&amp;gt;&lt;/code>要素を作成する必要があります。1つは白で、もう1つは黒です。&lt;br>
-マスクでは、黒で塗りつぶされた要素はすべて非表示になります、白の要素は表示されます。黒い円は、半径18の右下隅に配置されています。&lt;br>
-開発者ツールでは、上記は減算と呼ばれます。大きい円から小さい円を引きます。&lt;br>
-これが最後のデモです&lt;/p>
-&lt;script async src="//jsfiddle.net/wyoshi/09f3rqbn/1/embed/html,css,result/dark/">&lt;/script>
-&lt;h2 id="タイトルの装飾">タイトルの装飾&lt;/h2>
-&lt;p>あるクライアントのプロジェクトで、SVGとCSSを組み合わせてセクションタイトルをデザイン・構築したことがあります。&lt;br>
-セキュリティに関連するブランドなので、このようなスタイルを使うことがあるかもしれません。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 248;
-flex-basis: 596px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png" data-size="1750x704">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-1.png"
-width="1750"
-height="704"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>コンポーネントは短いタイトルと長いタイトルで動作する必要があり、タイトルが長すぎる場合は、レイアウトを壊さずに複数の行に折り返す必要があります。&lt;br>
-それを構築するためには、以下のような対応が必要です。&lt;/p>
-&lt;ul>
-&lt;li>最初に、固定部分（右側）をコピーして、インラインSVGとして追加する。&lt;/li>
-&lt;li>CSSを使用して、タイトルの下に行を作成しました。また、行の最初と最後にある小さな円にも使用。&lt;/li>
-&lt;li>不要なポジショニングを使用しないように、flexboxを使用してコンポーネントレイアウトを作成。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 248;
-flex-basis: 596px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png" data-size="1750x704">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-2.png"
-width="1750"
-height="704"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>それでは基本的なHTMLとCSSから始めましょう。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;c-section__title&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>CSS is awesome&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;128&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;34.5&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 128 34.5&amp;#34;&lt;/span> &lt;span class="na">preserveAspectRatio&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 344;
-flex-basis: 826px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png" data-size="1750x508">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-3.png"
-width="1750"
-height="508"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>次のステップでは、&lt;code>span&lt;/code> 要素の下にボーダーを追加して、SVGに接続された線を追加したいと思います。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 195;
-flex-basis: 468px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png" data-size="1750x896">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-4.png"
-width="1750"
-height="896"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>SVGが回線に接続されていないことに気づきました。&lt;br>
-&lt;code>flexbox&lt;/code>を使用しているので、修正するのは簡単です。&lt;code>flex-item&lt;/code> を&lt;code>flex-end&lt;/code>に揃える必要があります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">max-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">fit-content&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">align-items&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex-end&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">margin-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">margin-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>次に、絶対位置指定で擬似要素を使って、最初と最後に円を追加する必要があります。&lt;/p>
-&lt;script async src="//jsfiddle.net/wyoshi/j4pydfmb/1/embed/html,css,result/dark/">&lt;/script>
-&lt;p>また、SVGを使うと何がいいかというと、SVGのパスを点線にして、アニメーションさせることができるのです。&lt;br>
-そのためには、SVGで書き出されたパスがアウトライン化されていないことを確認する必要があります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M127 1H33.5L1 33.5&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;none&amp;#34;&lt;/span> &lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#d8d8d8&amp;#34;&lt;/span> &lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;2&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このテクニックは、Jake Archibald氏の&lt;a class="link" href="https://jakearchibald.com/2013/animated-line-drawing-svg/" target="_blank" rel="noopener"
->素晴らしい記事&lt;/a> から学びました。このアイデアは、パスの長さを求めるというものです。&lt;/p>
-&lt;p>Chrome DevToolsで、SVGを検査し、&lt;code>&amp;lt;path&amp;gt;&lt;/code>要素を選択すると、その末尾の横に&lt;code>== $0&lt;/code>と表示されることがわかります。これを選択したまま、コンソールに移動し、以下のスクリプトを記述します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">$0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;span class="c1">// 139.46
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このようなことをしなくても、DOMから要素を選択するには、&lt;code>$0&lt;/code>が手っ取り早いです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">let&lt;/span> &lt;span class="nx">sectionPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#path&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sectionPath&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getTotalLength&lt;/span>&lt;span class="p">());&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>それはこの例の文脈の中での簡単なヒントでした。&lt;/p>
-&lt;p>さて、長さが決まったら、あとは好きなようにやってみましょう。例えば、ホバー時にアニメーションさせることができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="n">stroke-dasharray&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">transition&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">s&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">.&lt;/span>&lt;span class="nc">c-section__title--dashed&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="nt">path&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="n">stroke-dashoffset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">139&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>または、単純に点線に変えることもできます（この場合、パスの長さを知る必要はありません）。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 248;
-flex-basis: 596px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png" data-size="1750x704">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/cut-out-avatar-2-6.png"
-width="1750"
-height="704"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;script async src="//jsfiddle.net/wyoshi/wp9k7Lb6/1/embed/html,css,result/dark/">&lt;/script>
-&lt;h2 id="svgを使ったカスタムリンクの下線">SVGを使ったカスタムリンクの下線&lt;/h2>
-&lt;p>SVGを使って、ワクワクするようなカスタムリンクのアンダーラインを作成することができます。私は数年前に、ランダムにパスを生成し、ホバー時にそれを再描画するスクリプトを作成しました。&lt;/p>
-&lt;p>次の図で、プレビューの前と後を考えてみてください。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 248;
-flex-basis: 596px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png" data-size="1750x704">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/custom-underline-1-1.png"
-width="1750"
-height="704"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>アイデアは、各リンクにSVGを挿入することであり、次のようになります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;400&amp;#34;&lt;/span> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;35&amp;#34;&lt;/span> &lt;span class="na">xmlns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;http://www.w3.org/2000/svg&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">path&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;pathItem&amp;#34;&lt;/span>
-&lt;span class="na">d&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M5 5 Q 30 15 170 5&amp;#34;&lt;/span>
-&lt;span class="na">stroke&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;black&amp;#34;&lt;/span>
-&lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;transparent&amp;#34;&lt;/span>
-&lt;span class="na">stroke-width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;7&amp;#34;&lt;/span>
-&lt;span class="na">stroke-linecap&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;round&amp;#34;&lt;/span>&lt;span class="p">/&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>この手法は &lt;code>d&lt;/code> 属性値を変更することによって起こります。これは、パスが実際にどのように描画されるかを示すビジュアルです。&lt;/p>
-&lt;script async src="//jsfiddle.net/wyoshi/670razvf/7/embed/">&lt;/script>
-&lt;h2 id="カスタムsvgテープ">カスタムSVGテープ&lt;/h2>
-&lt;p>クライアントのプロジェクトに携わっているとき、CSSでどこにでも配置可能で、1つのCSS変数のみで色を変更できるほどダイナミックな方法で、テープをセクションに取り付ける方法が必要でした。&lt;/p>
-&lt;p>次の図を考えて見ましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 181;
-flex-basis: 434px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png" data-size="2048x1130">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-1.png"
-width="2048"
-height="1130"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>Adobe Illustratorで、テープをレイヤーに分割しました。&lt;/p>
-&lt;ul>
-&lt;li>ベース：塗りつぶしの色を取ります&lt;/li>
-&lt;li>透明な黒：暗い領域を示します&lt;/li>
-&lt;li>透明な白：明るい領域を示します&lt;/li>
-&lt;/ul>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 181;
-flex-basis: 434px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png" data-size="2048x1130">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-2.png"
-width="2048"
-height="1130"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>SVGコードを見てみましょう。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>fill=currentColor&lt;/code>を追加したことに注意してください。&lt;br>
-&lt;code>currentColor&lt;/code>キーワードは、CSS &lt;code>color&lt;/code> プロパティから値を継承するため、1つのプロパティのみを使用して色を動的に変更できます。&lt;br>
-単色のベースと、明るい領域と暗い領域に他の2つのレイヤーがあることを考えると、色を変更すると、テープの外観が異なります。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 181;
-flex-basis: 434px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png" data-size="2048x1130">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/svg-tape-1-3.png"
-width="2048"
-height="1130"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>さらに良いことに、SVGをテンプレートに変換し、&lt;code>&amp;lt;use&amp;gt;&lt;/code> SVG要素の助けを借りて、SVGを複製せずにテープを再利用することができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;display: none;&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">g&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">fill&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;currentColor&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="c">&amp;lt;!-- path contents --&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">g&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">defs&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="c">&amp;lt;!-- An example of using the tape from a template --&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">svg&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;tape&amp;#34;&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;--angle: 10deg; color: red; --size: 120px;&amp;#34;&lt;/span> &lt;span class="na">aria-hidden&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;true&amp;#34;&lt;/span> &lt;span class="na">focusable&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span> &lt;span class="na">viewBox&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;0 0 123 47&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">use&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#tape&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">use&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">svg&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;use&amp;gt;&lt;/code>要素を介してテープを追加した方法に注目してください。これの良いところは、CSS変数をインラインスタイルとして使用することです。&lt;br>
-CSSは次のようになります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">tape&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rotate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">angle&lt;/span>&lt;span class="p">));&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;script async src="//jsfiddle.net/wyoshi/1jrL4cg6/8/embed/html,css,result/dark/">&lt;/script>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>SVGを使用してUIコンポーネントを構築すると、作業がより簡単かつ簡単になります。一部のUIコンポーネントは、100％完璧なユースケースやSVG（アバターカットアウトなど）ではない場合がありますが、作業しているプロジェクトのコンテキストによって異なります。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/SVG%e3%82%a8%e3%83%83%e3%82%bb%e3%83%b3%e3%82%b7%e3%83%a3%e3%83%ab%e3%82%ba-%e7%ac%ac2%e7%89%88-J-David-Eisenberg/dp/4873117976/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Mx7fILd8L.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> SVGエッセンシャルズ 第2版 &lt;/h2>
-&lt;p> SVGの解説書。SVGは2001年にW3C勧告として公開されたXMLベースの画像フォーマットです。 ベクターグラフィックスなので拡大縮小、変形しても美しさが損なわれません。 会社のロゴをSVGで作る企業も増えていますし、D3.jsによるデータビジュアライゼーションでも基盤技術としてSVGが使われています。 本書では簡潔なサンプルを数多く使い、基本的な図形の作成、アニメーションや複雑なグラフィックスの作成、さらにはスクリプトによる制御など、SVGの基礎から応用までをわかりやすく解説します。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e3%80%90%e7%89%b9%e5%85%b8%e4%bb%98%e3%81%8d%e3%80%91HTML5-CSS3%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3-%e7%8f%be%e5%a0%b4%e3%81%ae%e6%96%b0%e6%a8%99%e6%ba%96%e3%82%ac%e3%82%a4%e3%83%89%e3%80%90%e7%ac%ac2%e7%89%88%e3%80%91-Compass-Books%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba/dp/4839974594/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-na.ssl-images-amazon.com/images/I/51&amp;#43;8c&amp;#43;a5D7L.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 【特典付き】HTML5&amp;amp;CSS3デザイン 現場の新標準ガイド【第2版】 (Compass Booksシリーズ) &lt;/h2>
-&lt;p> 体系的に学ぶHTMLとCSSの仕様と実践 フロントエンドエンジニアはじめ、Web制作に関わっている人のためのHTML5/CSS3ガイドブックです。 HTMLとCSSの最新仕様を整理するとともに、主要ブラウザの対応状況など、現時点でどのポイントに留意して制作を進めていけばよいか、現場で必要不可欠な情報を解説しています。 また、フレキシブルボックスレイアウトやグリッドレイアウトなど、現在知っておくべきHTML&amp;#43;CSSレイアウトの手法についても、詳細に解説しています。&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
