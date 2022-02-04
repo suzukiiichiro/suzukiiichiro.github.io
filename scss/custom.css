@@ -1151,9 +1151,10 @@ footer.site-footer {
 html[data-scheme="dark"] #toggle-menu .hamburger-box {
   background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24"><path fill="%23FFFFFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>'); }
 
-.sidebar ins.adsbygoogle {
-  margin-left: -20px;
-  margin-right: -20px; }
+@media screen and (max-width: 640px) {
+  .sidebar ins.adsbygoogle {
+    margin-left: -20px;
+    margin-right: -20px; } }
 
 .sidearticle-contents--wrapper {
   padding: 0; }

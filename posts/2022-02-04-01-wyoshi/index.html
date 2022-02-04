@@ -1,0 +1,893 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで">
+<title>Googleにインデックスされないときの対応方法は？ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
+<meta property="og:title" content="Googleにインデックスされないときの対応方法は？ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="SEO"><meta property="article:tag" content="Googleインデックス"><meta property="article:tag" content="クローラー"><meta property="article:published_time" content="2022-02-04T12:03:03+09:00"><meta property="article:modified_time" content="2022-02-04T04:39:29+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg">
+<meta name=twitter:title content="Googleにインデックスされないときの対応方法は？ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-04-01-wyoshi/catch.jpg'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Googleにインデックスされないときの対応方法は？","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg"],"datePublished":"2022-02-04T12:03:03+09:00","dateModified":"2022-02-04T04:39:29.896099608Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo_hu12b89683d6bd9e53894baebceaccfd3e_143217_60x0_resize_box_3.png width=60 height=60 class=site-logo loading=lazy alt>
+</a></div>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_28>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_19>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_1>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</div>
+<main class="main full-width">
+<nav class=breadcrumb-area>
+<ol class=breadcrumb>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a>
+<li><span class=breadcrumb-item>Googleにインデックスされないときの対応方法は？</span>
+</ol>
+</nav>
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.02.04</time>
+<time class="article-time--item article-time--reading">
+読了時間: 7分
+</time>
+</div>
+</header>
+<h1 class=article-title>
+Googleにインデックスされないときの対応方法は？
+</h1>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#ブログを公開>ブログを公開</a></li>
+<li><a href=#サイトマップをつくる>サイトマップをつくる</a></li>
+<li><a href=#サイト公開から半月>サイト公開から半月</a></li>
+<li><a href=#サイト公開から１ヶ月>サイト公開から１ヶ月</a></li>
+<li><a href=#対応策を試す>対応策を試す</a>
+<ol>
+<li><a href=#robotstxtを編集する>robots.txtを編集する</a></li>
+<li><a href=#構造体データを追加>構造体データを追加</a></li>
+<li><a href=#サイトマップを消す>サイトマップを消す</a></li>
+<li><a href=#タイトルを変える>タイトルを変える</a></li>
+<li><a href=#サイトマップのhtmlを作成する>サイトマップのHTMLを作成する</a></li>
+<li><a href=#ランキングを作成する>ランキングを作成する</a></li>
+<li><a href=#seo対策>SEO対策</a>
+<ol>
+<li><a href=#画像のサイズの最適化>画像のサイズの最適化</a></li>
+<li><a href=#asideのdiv化>asideのdiv化</a></li>
+<li><a href=#内部リンクを増やす>内部リンクを増やす</a></li>
+<li><a href=#h1タグの正規化>h1タグの正規化</a></li>
+<li><a href=#パンくずを追加>パンくずを追加</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#url検査を行う>URL検査を行う</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p>近年、ブログやWEBサイトを作って公開している人が増えてきました。<br>
+そうした中で、Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事もGoogleにインデックスされないと検索結果に表示されません。</p>
+<p>Googleにインデックスされないとき、どうしたら良いのでしょうか？</p>
+<h2 id=ブログを公開>ブログを公開</h2>
+<p>まずはブログを公開する際に、GoogleアナリティクスやSearch Consoleの設定などを行いましょう。<br>
+これによって、どんな人が来ているのかなどを閲覧することができたり、実際にサーバを閲覧することなくGoogleクローラーの状況やインデックスの状況、SEO対策などの機能などが盛りだくさんです。</p>
+<p>そして、Googleだけでなく Bingの方も登録しておくことをオススメします。Bingのクローラーはかなり早く、以前のGoogleのようにインデックスをしてくれます。</p>
+<p><figure class=gallery-image style=flex-grow:164;flex-basis:395px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png data-size=980x594>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png width=980 height=594 loading=lazy>
+</a>
+</figure></p>
+<h2 id=サイトマップをつくる>サイトマップをつくる</h2>
+<p>サイトマップと呼ばれるXMLを作成しましょう。<br>
+小規模なサイトやページ同士がしっかりリンクしているサイトであれば不要かもしれませんが、サイトマップは作っているに限ります。<br>
+クローラーはそのサイトマップを見て、サイトの構造を把握していきます。<br>
+もちろん、ページ構成がしっかりしたサイトであればクローラーは内部リンクのみでサイトマップを構築することが可能です。<br>
+クローラーの手助けとなるために、内部リンクをしっかり作り、サイトマップも作っておけばクローラビリティが格段にアップするでしょう。</p>
+<h2 id=サイト公開から半月>サイト公開から半月</h2>
+<p>サイトを公開してから半月、クローラーが１回来て、サイトマップをのデータからクローラーを開始したようです。<br>
+<figure class=gallery-image style=flex-grow:203;flex-basis:488px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png data-size=980x481>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png width=980 height=481 loading=lazy>
+</a>
+</figure></p>
+<p>Googleで検索しても表示されるようになりました。<br>
+<figure class=gallery-image style=flex-grow:115;flex-basis:276px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png data-size=980x850>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png width=980 height=850 loading=lazy>
+</a>
+</figure></p>
+<h2 id=サイト公開から１ヶ月>サイト公開から１ヶ月</h2>
+<p>クローラーはほぼ仕事をしなくなりました。<br>
+来ていないということはなく、来ても数ページクロールして去っていきます。<br>
+新しいページをクロールすることはありませんでした。</p>
+<p><figure class=gallery-image style=flex-grow:114;flex-basis:274px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png data-size=980x857>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png width=980 height=857 loading=lazy>
+</a>
+</figure></p>
+<p>以前の作成したサイトと比較してもクローラーの活動頻度が激減していることは確かです。<br>
+数年前に作成して更新していないサイトのサイトマップのクロール頻度は１週間程度でした。新しく作成したサイトでは1ヶ月過ぎてもサイトマップへのクローラーがきませでした。</p>
+<h2 id=対応策を試す>対応策を試す</h2>
+<h3 id=robotstxtを編集する>robots.txtを編集する</h3>
+<p>クロールの結果を見ると画像やcss、jsなどにアクセスしていたため、htmlへのクロールを促すために、これらをrobots.txtにて許可しない設定にしてみました。<br>
+理由としては、すべてクロールするようにしてますが、cssやjsなどのファイルもクロールされており、そこにリソースが使われてHTMLまでクロールされていないのではないかと考えたためです。</p>
+<pre tabindex=0><code>User-agent: Googlebot-Image
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.gif$
+
+User-agent: *
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$
+Disallow: /assets/
+Disallow: /404.html
+Disallow: /js/
+Disallow: /ts/
+Disallow: /images/
+Disallow: /scss/
+Disallow: /css/
+Allow: /
+</code></pre><p>後でわかったのですが、これは完全にNGです。<br>
+<a class=link href=https://developers.google.com/search/blog/2014/10/updating-our-technical-webmaster target=_blank rel=noopener>Googleの記事</a>を呼んでいると、従来のテキストベースから実際のブラウザのように動作し、レンダリング速度なども考慮しているとのことでした。結果、現在は404のページ以外はフルオープンにしております。</p>
+<pre tabindex=0><code>User-agent: *
+Disallow: /404.html
+Allow: /
+</code></pre><h3 id=構造体データを追加>構造体データを追加</h3>
+<p>SEO効果があるということで、構造体データを追加してみました。構造化データの仕組みについては<a class=link href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=ja" target=_blank rel=noopener>こちら</a>を確認してください。<br>
+効果があるかはまだわかりませんが、Search Consoleを見てみると、数ページは認識しているようです。<br>
+SEO効果があるかと言われると、重要ではないといった話もあるので余力のある方は実装といったことになるかと思います。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;application/ld+json&#34;</span><span class=p>&gt;</span>
+<span class=p>[{</span>
+  <span class=s2>&#34;@context&#34;</span><span class=o>:</span> <span class=s2>&#34;https://schema.org&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;BlogPosting&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;headline&#34;</span><span class=o>:</span><span class=s2>&#34;Googleにインデックスされないときの対応方法は？&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;mainEntityOfPage&#34;</span><span class=o>:</span><span class=p>{</span>
+    <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;WebPage&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;@id&#34;</span><span class=o>:</span><span class=s2>&#34;[$URL]&#34;</span>
+  <span class=p>},</span>
+  <span class=s2>&#34;datePublished&#34;</span><span class=o>:</span><span class=s2>&#34;&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;dateModified&#34;</span><span class=o>:</span><span class=s2>&#34;&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;publisher&#34;</span><span class=o>:</span> <span class=p>{</span>
+    <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;Organization&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;name&#34;</span><span class=o>:</span><span class=s2>&#34;NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;logo&#34;</span><span class=o>:</span> <span class=p>{</span>
+      <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;ImageObject&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;url&#34;</span><span class=o>:</span><span class=s2>&#34;[$URL]/images/logo.png&#34;</span><span class=p>}</span>
+  <span class=p>},</span>
+  <span class=s2>&#34;author&#34;</span><span class=o>:</span> <span class=p>{</span>
+    <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;Person&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;name&#34;</span><span class=o>:</span><span class=s2>&#34;nlp&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;url&#34;</span><span class=o>:</span><span class=p>[</span><span class=s2>&#34;[$URL]/authors/wyoshi/&#34;</span><span class=p>]</span>
+  <span class=p>}</span>
+<span class=p>},{</span>
+  <span class=s2>&#34;@context&#34;</span><span class=o>:</span> <span class=s2>&#34;https://schema.org&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;BreadcrumbList&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;itemListElement&#34;</span><span class=o>:</span> <span class=p>[{</span>
+    <span class=s2>&#34;@type&#34;</span><span class=o>:</span> <span class=s2>&#34;ListItem&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;position&#34;</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span>
+    <span class=s2>&#34;name&#34;</span><span class=o>:</span><span class=s2>&#34;NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;item&#34;</span><span class=o>:</span><span class=s2>&#34;[$URL]&#34;</span>
+  <span class=p>}]</span>
+<span class=p>}]</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:154;flex-basis:369px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png data-size=980x636>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png width=980 height=636 loading=lazy>
+</a>
+</figure></p>
+<h3 id=サイトマップを消す>サイトマップを消す</h3>
+<p>サイトマップ自体へのアクセスが頻繁に行われていないので、サイトマップを消してみました。<br>
+クロールされないかと思いましたが、Bingで新しい記事をクロールして取得されてました。<br>
+しかし、記事のタイトルを変えてもなかなか変わらないのでやはりサイトマップは必要かもしれません。</p>
+<h3 id=タイトルを変える>タイトルを変える</h3>
+<p>タイトルを変えて、ページに更新をかけてみましたが、クロールされませんでした。<br>
+Bingも同様にタイトルを変えただけではクロールされないようでした。</p>
+<h3 id=サイトマップのhtmlを作成する>サイトマップのHTMLを作成する</h3>
+<p>クローラーがクロールしやすいように<a class=link href=https://suzukiiichiro.github.io/sitemap/>サイトマップのHTML</a>を作成しました。<br>
+これによって、クローラーが内部リンクを通じて各ページにアクセスできるかなと思いますが、まだ効果の程はわかりません。</p>
+<h3 id=ランキングを作成する>ランキングを作成する</h3>
+<p><a class=link href=https://suzukiiichiro.github.io/ranking/>ランキングページ</a>の作成も上記の「サイトマップのHTMLを作成する」のようにクローラビリティを上げるためになります。<br>
+あとは、自分たちでもどんな記事を読まれているのかといった指標をすぐ閲覧できるからです。</p>
+<h3 id=seo対策>SEO対策</h3>
+<h4 id=画像のサイズの最適化>画像のサイズの最適化</h4>
+<p>画像のサイズが最適化できていなかったので、画像のサイズの最適化を行いました。<br>
+これによってSEOのスコアを上げることができました。サイトの速度もインデックスされるためには重要な指標になってくるので、きれいな画像を使用したいときは各デバイスに最適化された画像を用意して、サイトの速度を落とさないようにしましょう。</p>
+<h4 id=asideのdiv化>asideのdiv化</h4>
+<p>ページに直接関係ない部分をasideタグで書いていたのですが、内部リンクをたどってないのではないかと考えて、asideをdivに変更しました。<br>
+これによって、効果があるかはわかりませんが……。</p>
+<h4 id=内部リンクを増やす>内部リンクを増やす</h4>
+<p>カテゴリーだけでなく、著者のページなどを作成して内部リンクするようにしました。<br>
+これは若干の効果があって、サイトマップ</p>
+<h4 id=h1タグの正規化>h1タグの正規化</h4>
+<p>以前はロゴに当たる部分が h1 となっていたので、各ページでタイトルになる部分に h1 が当たるように変更しました。<br>
+ロゴに h1 を当てる人が多いかと思いますが、各ページのタイトル部分に当てたほうが、ページのタイトルとh1との整合性が取れます。</p>
+<p>また、h1は1ページに1つとされていますが、あくまで原則で、何個出てきても大丈夫です。ただし、たくさん使うのはNGになるので注意してください。</p>
+<h4 id=パンくずを追加>パンくずを追加</h4>
+<p>孤立ページを出さないように、そして、ページごとの回遊率を上げるためにパンくずを設置しました。<br>
+パンくずはクローラーにとっても内部リンクをたどっていけるようになるのではないかと考えております。</p>
+<h2 id=url検査を行う>URL検査を行う</h2>
+<p><figure class=gallery-image style=flex-grow:165;flex-basis:397px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img06.jpg data-size=980x591>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img06.jpg width=980 height=591 loading=lazy>
+</a>
+</figure><br>
+クローラーが活動をしていないので、サイトマップへ自動的にアクセスして追加してくれるという望みを諦めて、「URL検査」を使って、手動でクローラーを呼び寄せます。</p>
+<p><figure class=gallery-image style=flex-grow:104;flex-basis:251px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png data-size=980x936>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png width=980 height=936 loading=lazy>
+</a>
+</figure></p>
+<p>これによって、以前は除外が22件あったものが2月1日では4件まで減りました。</p>
+<p>そして、新しく作成したページも2件ほどGoogle検索に出るようになり、すでにインデックスされていたページは変更が検知され、タイトルの表記が変わりました。</p>
+<p><figure class=gallery-image style=flex-grow:154;flex-basis:370px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png data-size=980x635>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png width=980 height=635 loading=lazy>
+</a>
+</figure></p>
+<p><strong>URL検査は非常に効果的</strong>です。</p>
+<p>しかし、記事ページへのアクセスはまだないので、これは再度原因を探る必要があります。<br>
+変更されたのは以前サイトマップに登録されていたページなので、クローラーがサイトマップでインデックスしたものを優先している可能性がありそうです。</p>
+<h2 id=まとめ>まとめ</h2>
+<p>Googleにインデックスされない問題はかなり多いようです。<br>
+Bingでの流入やSNSでの流入はもちろん大事ですが、Googleで検索している人が多い以上対応する必要があります。<br>
+まずは記事の品質を上げて、SEO対策し、そして「URL検査」を行う。そうして、Googleクローラーが来てインデックスされるのを待つほかいまのところありません。</p>
+<p>また何か動きがあれば掲載してきたいと思います。</p>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.02.01>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_0x400_resize_q75_box.jpg 1600w" width=301 height=200 loading=lazy alt="Featured image of post Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.01</time>
+</div><p class=article-subtitle>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.28>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_0x400_resize_q75_box.jpg 1600w" width=304 height=200 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.28</time>
+</div><p class=article-subtitle>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc7082b0252bf301b68f9a1efcdf78a08_226327_0x400_resize_q75_box.jpg 1600w" width=200 height=200 loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_0x400_resize_q75_box.jpg 1600w" width=287 height=200 loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_0x400_resize_q75_box.jpg 1600w" width=267 height=200 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x200_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x200_resize_box_3.png 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu5536d92fadedd0441c43cc63d14f7fb2_1427671_0x400_resize_box_3.png 1600w" width=200 height=200 loading=lazy alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回は「Webデザイナー、コーダーってなに？」です。「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。 初心者の方、そうでない方など、いろいろな方大歓迎です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_0x400_resize_q75_box.jpg 1600w" width=296 height=200 loading=lazy alt="Featured image of post 2022年のウェブデザインのトレンドとレイアウト">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のウェブデザインのトレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年のトレンドは、より大胆で、よりクリエイティブで、よりインタラクティブなデザインに移行しています。2022年に期待されるトレンドを取り入れ、新しい年のクリエイティビティを高めてください。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_hu144dc8c1d01c2bc536cd605c73db2bc8_60732_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>デザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/>Web開発</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/html/>HTML</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/>Webデザイナー</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/>フロントエンジニア</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/>コーダー</a>
+<a href=https://suzukiiichiro.github.io/tags/seo/>SEO</a>
+<a href=https://suzukiiichiro.github.io/tags/google%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9/>Googleインデックス</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/>クローラー</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" data-hash="md5-yLXRNzxRM4Ynil99Xga5GQ==">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<div class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.4fd06309b0837c69e1c359735bcb8264_hu76eecea6b0108d716a0248cfde205ca5_73592_320x0_resize_q75_box.jpg 1600w" width=160 height=106 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.72d5be220232e8e189517080b6d22be8_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_320x0_resize_q75_box.jpg 1600w" width=160 height=105 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Hugoでテーマが反映されない（画面が真っ白のまま）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+2022年02月（4）
+</option><option value=/archives/#2022年01月>
+2022年01月（29）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+<section class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_33>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_17>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_17>
+デザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_17>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_13>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC/ class=font_size_13>
+Webデザイナー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E9%96%8B%E7%99%BA/ class=font_size_13>
+Web開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2/ class=font_size_13>
+フロントエンジニア
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_12>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_12>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_11>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_11>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_10>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_10>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC/ class=font_size_7>
+コーダー
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF/ class=font_size_5>
+Webテクニック
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3/ class=font_size_5>
+ユーティリティ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_4>
+GitHub
+</a>
+</div>
+</section>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.d22c3a29fc452826247d7927218f33d5_huc3037b2e6dc6703167c8466692625b0d_86753_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法 #1</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト２</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.4d8c84b057e9234319b0c56192d017c8_hua0d4d4b24f4da3a102e4452ac738b95f_215331_320x0_resize_q75_box.jpg 1600w" width=160 height=272 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト「grep」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>ざっくりわかるシェルスクリプト３</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.b15c1854836e323f7b1fca2958a5de1d_hu86d6acd804ad404fbf9e1694bf0c7390_22913_320x0_resize_q75_box.jpg 1600w" width=160 height=120 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
