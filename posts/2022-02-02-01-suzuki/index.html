@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-04T10:05:18+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-04T10:14:52+00:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-04T10:05:18.362835485Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-04T10:14:52.888025464Z","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.04
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 45分
+読了時間: 27分
 </time>
 </div>
 </header>
@@ -135,7 +135,15 @@ Web開発
 <ol>
 <li><a href=#はじめてのシェルスクリプト>はじめてのシェルスクリプト</a></li>
 <li><a href=#ファイルへの出力>ファイルへの出力</a></li>
-<li><a href=#スクリプトのカール>スクリプトのカール</a></li>
+<li><a href=#コメント>コメント</a></li>
+<li><a href=#条件分岐>条件分岐</a>
+<ol>
+<li><a href=#ifステートメント>Ifステートメント</a></li>
+<li><a href=#if-else-ifステートメント>if-else ifステートメント</a></li>
+<li><a href=#and演算子>AND演算子</a></li>
+<li><a href=#or演算子>OR演算子</a></li>
+</ol>
+</li>
 </ol>
 </nav>
 </div>
@@ -145,27 +153,6 @@ Web開発
 <section class=article-content>
 <p>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。<br>
 では次のトピックについて説明します。</p>
-<p>はじめてのバッシュスクリプト<br>
-ファイルへの出力<br>
-コメント<br>
-条件文<br>
-ループ<br>
-スクリプトへの入力<br>
-スクリプトからの出力<br>
-別のスクリプトに値を渡す<br>
-文字列処理<br>
-数値計算<br>
-declareコマンドで宣言する<br>
-配列<br>
-関数<br>
-ファイルとディレクトリ<br>
-curlコマンドでurlを扱う<br>
-プロフェッショナルメニュー<br>
-inotifyを使用してファイルシステムを待つ<br>
-grepコマンドの紹介<br>
-awkコマンドの紹介<br>
-sedコマンドの紹介<br>
-シェルスクリプトのデバッグ</p>
 <h2 id=はじめてのシェルスクリプト>はじめてのシェルスクリプト</h2>
 <p>このトピックでは、catコマンドでシェルの場所を確認後、スクリプトファイルの作成、echoコマンドを使用して「Hello,shellscript.」記述し、スクリプトファイルを実行可能にします。</p>
 <p>ではまず、ターミナルに次のコマンドを入力します。</p>
@@ -264,7 +251,7 @@ $
 <dt>ヒント</dt>
 <dd>「>」をリダイレクトと言います。</dd>
 </dl>
-<div class=tips-area>
+</div>
 <p>ファイルの出力は２種類あります。<br>
 リダイレクト出力は、新規に空のファイルを作成したうえで文字を出力します。<br>
 もう一つの出力方法は「アペンド &#187; 」です。<br>
@@ -280,7 +267,7 @@ $
 <dd>「&#187;」をアペンドと言います。</dd>
 <dd>アペンドするときの注意点は、アペンドする場合は、既にファイルが存在している必要があります。「touch」コマンドでファイルを生成したうえでアペンドするか、あらかじめ「> リダイレクト」でファイルを生成し、文字列を追記したうえで、「&#187; アペンド」します。</dd>
 </dl>
-<div class=tips-area>
+</div>
 <h2 id=コメント>コメント</h2>
 <p>コメントはスクリプトの実行時に無視されます。スクリプトでは、コメントは何もしません。コメントには３つの種類があります。</p>
 <p>1行のコメント<br>
@@ -302,10 +289,11 @@ C 言語やJava、HTMLですらも複数行コメントがあるのに。。。<
 </span><span class=s1>Through this script, you will learn
 </span><span class=s1>How to do multi-line commenting
 </span><span class=s1>&#39;</span>
-<p><span class=c1># this is a 1st comment</span><br>
-<span class=nb>echo</span> <span class=s2>&quot;Hello,shellscript.&quot;</span> &gt; file.txt<br>
-</code></pre></div><p>仰々しいマルチラインコメントもあります。<br><br>
-こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。</p></p>
+
+<span class=c1># this is a 1st comment</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span> &gt; file.txt
+</code></pre></div><p>仰々しいマルチラインコメントもあります。<br>
+こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#! /bin/bash
 </span><span class=cp></span>
 <span class=c1># 仰々しいマルチラインコメント</span>
@@ -314,16 +302,18 @@ C 言語やJava、HTMLですらも複数行コメントがあるのに。。。<
 </span><span class=s>    comment 2
 </span><span class=s>    blah
 </span><span class=s>COMMENT</span>
-<p><span class=c1># シンプルなマルチラインコメント</span><br>
-:<span class=s1>'<br>
-</span><span class=s1>This is the segment of multi-line comments<br>
-</span><span class=s1>Through this script, you will learn<br>
-</span><span class=s1>How to do multi-line commenting<br>
-</span><span class=s1>'</span></p>
-<p><span class=c1># this is a 1st comment</span><br>
-<span class=nb>echo</span> <span class=s2>&quot;Hello,shellscript.&quot;</span> &gt; file.txt<span class=p>;</span><br>
-</code></pre></div><p>ヒアドキュメントはとてもべんりな出力方法です。<br><br>
-コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。</p></p>
+
+<span class=c1># シンプルなマルチラインコメント</span>
+:<span class=s1>&#39;
+</span><span class=s1>This is the segment of multi-line comments
+</span><span class=s1>Through this script, you will learn
+</span><span class=s1>How to do multi-line commenting
+</span><span class=s1>&#39;</span>
+
+<span class=c1># this is a 1st comment</span>
+<span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span> &gt; file.txt<span class=p>;</span>
+</code></pre></div><p>ヒアドキュメントはとてもべんりな出力方法です。<br>
+コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。</p>
 <p>通常、複数の行出力は以下のように記述します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:hereDocuments.sh data-lang=bash:hereDocuments.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
@@ -503,10 +493,48 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
 </code></pre></div>
+<h1 id=関連記事>関連記事</h1>
+<p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト３」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/ target=_blank rel=noopener>【 grep 特集】「ざっくりわかるシェルスクリプト４」</a><br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/ target=_blank rel=noopener>【ちょい広め】「ざっくりわかるシェルスクリプト５」</a></p>
+<h1 id=書籍の紹介>書籍の紹介</h1>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4774186945&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
 </div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） 2017/1/20</h2>
+<p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。</p>
+<span class=link>Amazonで詳細を見る</span>
 </div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00QJINS1A&linkCode=as2&tag=nlpqueens-22&linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00QJINS1A&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
 </div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>UNIXシェルスクリプト マスターピース132</h2>
+<p>すべてのUNIXエンジニア必携!!
+<p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。<br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。</p>
+</p>
+<span class=link>Amazonで詳細を見る</span>
 </div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
@@ -868,12 +896,12 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 </a>
 </article>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
+<img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.bf573fbbcf2ce07df1fda3d2b03f1d5c_hua0d4d4b24f4da3a102e4452ac738b95f_110409_320x0_resize_q75_box.jpg 1600w" width=160 height=203 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
-<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト１」</h2>
+<h2 class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</h2>
 </div>
 </a>
 </article>
