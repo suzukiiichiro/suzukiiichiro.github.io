@@ -15,14 +15,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-07T16:55:55+09:00"><meta property="article:modified_time" content="2022-02-07T17:12:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-07T16:55:55+09:00"><meta property="article:modified_time" content="2022-02-07T17:12:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg">
 <meta name=twitter:title content="pythonでNQueen（エイトクイーン）バックトラック（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/chess.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-04-02-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）バックトラック（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/chess.jpg"],"datePublished":"2022-02-07T16:55:55+09:00","dateModified":"2022-02-07T17:12:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）バックトラック（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg"],"datePublished":"2022-02-07T16:55:55+09:00","dateModified":"2022-02-07T17:12:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -171,28 +171,28 @@ FBが左斜め、FCが右斜めの対角線の利き筋を配置フラグでチ�
 図で見てみましょう。</p>
 <p>上下の利き筋について簡単です。<br>
 例えば、1行目の右から2列目にクイーンを置いた場合は2、3、4行目の2列目にクイーンを置けなくなります。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/d1.png>
-<img src=https://suzukiiichiro.github.io/d1.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:101;flex-basis:242px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png data-size=330x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png width=330 height=326 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
 <p>2、3、4行目の右から2列目にクイーンを置いた場合はその他の行の2列目にクイーンを置けなくなります。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/d2.png>
-<img src=https://suzukiiichiro.github.io/d2.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:101;flex-basis:242px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png data-size=326x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png width=326 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
-<figure>
-<a href=https://suzukiiichiro.github.io/d3.png>
-<img src=https://suzukiiichiro.github.io/d3.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png data-size=330x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png width=330 height=330 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
-<figure>
-<a href=https://suzukiiichiro.github.io/d4.png>
-<img src=https://suzukiiichiro.github.io/d4.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png data-size=322x324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png width=322 height=324 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -211,9 +211,9 @@ row-i+(size-1)<br>
 2行目2列目 [1,1]
 3行目3列目 [2,2]
 4行目4列目 [3,3]
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/l1.png>
-<img src=https://suzukiiichiro.github.io/l1.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png data-size=326x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png width=326 height=326 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -228,9 +228,9 @@ row-i+(size-1)<br>
 <pre tabindex=0><code>1行目2列目 [0,1]
 2行目3列目 [1,2]
 3行目4列目 [2,3]
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/l5.png>
-<img src=https://suzukiiichiro.github.io/l5.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png data-size=330x332>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png width=330 height=332 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -251,9 +251,9 @@ row+i<br>
 2行目2列目 [1,2]
 3行目3列目 [2,1]
 4行目4列目 [3,0]
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/r1.png>
-<img src=https://suzukiiichiro.github.io/r1.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:102;flex-basis:245px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png data-size=330x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png width=330 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -269,9 +269,9 @@ row+i<br>
 2行目2列目 [1,1]
 3行目3列目 [2,0]
 4行目4列目 [3,0]
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/r5.png>
-<img src=https://suzukiiichiro.github.io/r5.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png data-size=334x336>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png width=334 height=336 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -513,7 +513,7 @@ row+i<br>
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/chess.jpg loading=lazy data-key data-hash=/chess.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
 <h2 class=article-title>pythonでNQueen（エイトクイーン）バックトラック（１）</h2>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 16:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 16:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
 &lt;p>今回はバックトラックを説明していきたいと思います。 &lt;br>
 今回のバックトラックのロジックは前回の配置フラグの拡張版です。&lt;br>
 配置フラグは上下の利き筋までしかチェックしていませんでしたが今回のバックトラックは左右斜めの対角線上の利き筋もチェックします。&lt;br>
@@ -31,9 +31,15 @@ FBが左斜め、FCが右斜めの対角線の利き筋を配置フラグでチ�
 &lt;p>上下の利き筋について簡単です。&lt;br>
 例えば、1行目の右から2列目にクイーンを置いた場合は2、3、4行目の2列目にクイーンを置けなくなります。&lt;/p>
 &lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 242px"
 >
-&lt;a href="https://suzukiiichiro.github.io/d1.png" >
-&lt;img src="https://suzukiiichiro.github.io/d1.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png" data-size="330x326">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png"
+width="330"
+height="326"
 loading="lazy"
 alt="図">
 &lt;/a>
@@ -41,27 +47,45 @@ alt="図">
 &lt;/figure>&lt;/p>
 &lt;p>2、3、4行目の右から2列目にクイーンを置いた場合はその他の行の2列目にクイーンを置けなくなります。&lt;/p>
 &lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 242px"
 >
-&lt;a href="https://suzukiiichiro.github.io/d2.png" >
-&lt;img src="https://suzukiiichiro.github.io/d2.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png" data-size="326x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png"
+width="326"
+height="322"
 loading="lazy"
 alt="図">
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
 &lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
 >
-&lt;a href="https://suzukiiichiro.github.io/d3.png" >
-&lt;img src="https://suzukiiichiro.github.io/d3.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png" data-size="330x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png"
+width="330"
+height="330"
 loading="lazy"
 alt="図">
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
 &lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
 >
-&lt;a href="https://suzukiiichiro.github.io/d4.png" >
-&lt;img src="https://suzukiiichiro.github.io/d4.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png" data-size="322x324">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png"
+width="322"
+height="324"
 loading="lazy"
 alt="図">
 &lt;/a>
@@ -83,9 +107,15 @@ row-i+(size-1)&lt;br>
 3行目3列目 [2,2]
 4行目4列目 [3,3]
 &lt;/code>&lt;/pre>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 100;
+flex-basis: 240px"
 >
-&lt;a href="https://suzukiiichiro.github.io/l1.png" >
-&lt;img src="https://suzukiiichiro.github.io/l1.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png" data-size="326x326">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png"
+width="326"
+height="326"
 loading="lazy"
 alt="図">
 &lt;/a>
@@ -103,9 +133,15 @@ alt="図">
 2行目3列目 [1,2]
 3行目4列目 [2,3]
 &lt;/code>&lt;/pre>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
 >
-&lt;a href="https://suzukiiichiro.github.io/l5.png" >
-&lt;img src="https://suzukiiichiro.github.io/l5.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png" data-size="330x332">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png"
+width="330"
+height="332"
 loading="lazy"
 alt="図">
 &lt;/a>
@@ -129,9 +165,15 @@ row+i&lt;br>
 3行目3列目 [2,1]
 4行目4列目 [3,0]
 &lt;/code>&lt;/pre>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 102;
+flex-basis: 245px"
 >
-&lt;a href="https://suzukiiichiro.github.io/r1.png" >
-&lt;img src="https://suzukiiichiro.github.io/r1.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png" data-size="330x322">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png"
+width="330"
+height="322"
 loading="lazy"
 alt="図">
 &lt;/a>
@@ -150,9 +192,15 @@ alt="図">
 3行目3列目 [2,0]
 4行目4列目 [3,0]
 &lt;/code>&lt;/pre>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 99;
+flex-basis: 238px"
 >
-&lt;a href="https://suzukiiichiro.github.io/r5.png" >
-&lt;img src="https://suzukiiichiro.github.io/r5.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png" data-size="334x336">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png"
+width="334"
+height="336"
 loading="lazy"
 alt="図">
 &lt;/a>
