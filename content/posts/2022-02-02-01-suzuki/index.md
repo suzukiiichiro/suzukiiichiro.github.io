@@ -19,6 +19,8 @@ tags:
 
 
 この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。
+過去、bashの経験があり、久しぶりにbashを各必要に迫られた人、他の言語でプログラム経験があり、bash独自の書き方をざっくりと思い出したい人は、このトピックを長め読むだけで、充分 bashを思い出せるはずです。
+
 では次のトピックについて説明します。
 
 <!-- 
@@ -27,9 +29,7 @@ tags:
 コメント
 条件文
 ループ
-スクリプトへの入力
-スクリプトからの出力
-別のスクリプトに値を渡す
+スクリプトへの値渡し「実行パラメータ」
 文字列処理
 数値計算
 declareコマンドで宣言する
@@ -96,7 +96,7 @@ $
 
 
 ``` bash:helloScript.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "Hello,shellscript.";
 
@@ -247,7 +247,7 @@ HereDoc Delimeter
 
 
 ``` bash:lineComment.sh
-#! /bin/bash 
+#!/bin/bash 
 
 # this is a 1st comment
 echo "Hello,shellscript." > file.txt;
@@ -260,7 +260,7 @@ C 言語やJava、HTMLですらも複数行コメントがあるのに。。。
 
 
 ``` bash:multiComment.sh
-#! /bin/bash
+#!/bin/bash
 
 :'
 This is the segment of multi-line comments
@@ -278,7 +278,7 @@ echo "Hello,shellscript." > file.txt
 
 
 ``` bash:multiComment.sh
-#! /bin/bash
+#!/bin/bash
 
 # 仰々しいマルチラインコメント
 <<COMMENT
@@ -398,7 +398,7 @@ ifの終わりには、「fi」で閉じる必要があります。
 
 
 ``` bash:if-statements.sh
-#! /bin/bash
+#!/bin/bash
 
 count=10;
 if [ "$count" -eq 10 ]; then 
@@ -419,7 +419,7 @@ fi
 
 
 ``` bash:ifelse-statements.sh
-#! /bin/bash
+#!/bin/bash
 
 count=11; # COUNT は 11とする
 if [ "$count" -eq 10 ]; then 
@@ -441,7 +441,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 
 
 ``` bash:bracketIfelse-statements.sh
-#! /bin/bash
+#!/bin/bash
 
 count=11; # COUNT は 11とする
 if ((count==10)); then 
@@ -458,7 +458,7 @@ fi
 
 
 ``` bash:ifelseif-statements.sh
-#! /bin/bash
+#!/bin/bash
 
 count=8;
 if ((count>9)); then 
@@ -477,7 +477,7 @@ fi
 
 
 ``` bash:andOperator.sh
-#! /bin/bash
+#!/bin/bash
 
 age=10
 if [ "$age" -gt 18 ] && [ "$age" -lt 40 ]; then
@@ -490,7 +490,7 @@ fi
 条件を次の形式で書くこともできます。
 
 ``` bash:andOperator2.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [[ "$age" -gt 18 && "$age" -lt 40 ]]
@@ -505,7 +505,7 @@ fi
 
 
 ``` bash:andOperator3.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [ "$age" -gt 18 -a "$age" -lt 40 ]
@@ -524,7 +524,7 @@ fi
 次のサンプルコードを「helloScript.sh」に書き、ターミナルから実行して動作を確認します。
 
 ``` bash:orOperator.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [ "$age" -gt 18 -o "$age" -lt 40 ]; then
@@ -537,7 +537,7 @@ OR演算子をよりよく理解するために、さまざまな条件を試す
 
 
 ``` bash:orOperator1.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [ "$age" -lt 18 -o "$age" -lt 40 ]; then
@@ -549,7 +549,7 @@ fi
 
 
 ``` bash:orOperator2.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [ "$age" -lt 18 -o "$age" -gt 40 ]; then
@@ -561,7 +561,7 @@ fi
 
 
 ``` bash:orOperator3.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [[ "$age" -lt 18 || "$age" -gt 40 ]]; then
@@ -573,7 +573,7 @@ fi
 
 
 ``` bash:orOperator4.sh
-#! /bin/bash
+#!/bin/bash
 
 age=30
 if [ "$age" -lt 18 ] || [ "$age" -gt 40 ]; then
@@ -585,62 +585,89 @@ fi
 
 
 
-<!-- 
 ## ループ
 
-このトピックでは、
+このトピックでは、以下の説明をします。
 
 whileループ
 until ループ
 for ループ
-break と continueステートメント
+break と continue
 
 
 ### Whileループ:
-一方、ループは条件がtrueの場合にコードブロック(do...doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。条件がfalseになると、whileループは終了します。コードを書くためにスクリプトに戻ると、その中にループがあります。キーワード「while」を使用し、その後、チェックする条件を書きます。その後、「do」キーワードを使用し、プログラムの条件がtrueの場合に実行するステートメントの束を書きます。また、ループを進むように、ここに増分ステータスを記述する必要があります。キーワード「done」を書いてwhileループを閉じます。スクリプトを「helloScript.sh」として保存します。
+ループは条件がtrueの場合にコードブロック(do...doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。
+
+条件がfalseになると、whileループは終了します。
+whileループは、キーワード「while」から始まり、そのうしろに条件文を書きます。
+条件文を閉じたらキーワード「do」を使用し、プログラムの条件がtrueの場合に実行する処理ステートメントの束を書きます。
+処理ステートメントの終了後、キーワード「done」を書いてwhileループを閉じます。
+
+以下、スクリプトを「helloScript.sh」として保存します。
 
 
 
 ``` bash:whileLoop.sh
-#! /bin/bash
+#!/bin/bash
 
-number=1
+number=1;
 while [ $number -lt 10 ]; do
-    echo "$number"
-    number=$(( number+1 ))
+  echo "$number";
+  number=$(( number+1 ));
 done
 ```
+
 
 ターミナルで「$ ./whileLoop.sh」コマンドを使用してスクリプトを実行ます。
 
-
-Whileループでは、まず、条件が真かどうかをチェックします。条件がfalseの場合、ループから出てプログラムを終了します。ただし、条件が true の場合、実行シーケンスはキーワード 'do' の後に書かれたステートメントに移動します。あなたの場合、「エコー」ステートメントを使用しているため、番号が印刷されます。次に、ループ自体をループさせるincrementステートメントに言及する必要があります。条件変数をインクリメントした後、条件を再度チェックして前進します。条件がfalseになると、ループから出てプログラムを終了します。
-
-
-``` bash:whileLoop2.sh
-#! /bin/bash
-
-number=1
-while [ $number -le 10 ]
-do
-    echo "$number"
-    number=$(( number+1 ))
-done
+```
+$ bash whileLoop.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+$
 ```
 
-until ループ:
-Loopが条件がfalseのときにコードブロック(do...doneで囲まれている)を実行し、条件がtrueになるまで実行し続けるまで。条件が true になると、 until ループは終了します。Untilループの構文はwhileループの構文とほぼ同じですが、「while」の代わりに「until」という言葉を使用する必要があります。以下に示す例では、「number」という名前の変数に「1」の値が割り当てられています。この例では、ループは条件をチェックし、falseの場合、前進し、端末に「数値」変数の値を出力します。次に、「数値」変数の増分に関連するステートメントがあります。値をインクリメントし、条件を再度チェックします。「数値」変数値が10になるまで、値は何度も出力されます。条件がfalseになると、プログラムは終了します。
 
+Whileループでは、まず、条件が真かどうかをチェックします。
+条件がfalseの場合、ループから出てプログラムを終了します。
+
+条件が true の場合、実行シーケンスはキーワード 'do' の後に書かれたステートメントに移動します。
+上記サンプルのは、「echo」により１から９までが出力されます。
+
+
+{{% tips-list tips %}}
+ヒント
+: ループ自体をループさせるincrementステートメントについて
+: $(( )) は、括弧内で計算された値が引き出されます。
+: (( )) 内は、変数の冒頭に $ は必要ありません。
+: (( )) 内は、四則演算が可能です。スペースを空ける必要もありません。
+{{% /tips-list %}}
+
+
+
+
+### until ループ:
+loopが条件がfalseのときにコードブロック(do...doneで囲まれている)を実行し、条件がtrueになるまで実行し続けるまでループし続け、条件が true になると、until ループは終了します。
+untilループの構文はwhileループの構文と同じで、「while」の代わりに「until」という言葉を使用します。
+
+
+ターミナルで「$ ./untilLoop.sh」コマンドを使用してスクリプトを実行ます。
 
 
 ``` bash:untilLoop.sh
-#! /bin/bash
+#!/bin/bash
 
-number=1
-until [ $number -ge 10 ]
-do
-    echo "$number"
-    number=$(( number+1 ))
+number=1;
+until [ $number -ge 10 ]; do
+  echo "$number";
+  number=$(( number+1 ));
 done
 ```
 
@@ -648,21 +675,43 @@ done
 
 
 ```
-$ ./untilLoop.sh
+$ bash untilLoop.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: whileループは、条件が true の時に( do ...done) ブロックを実行し、条件が false になるとループを終了します。
+: untilループは、条件が false の時に( do ...done) ブロックを実行し、条件が true になるとループを終了します。
+{{% /tips-list %}}
 
-for ループ:
-これは、ループが繰り返し実行される条件を指定するループのタイプです。コードにforループを書くには、2つの基本的な方法があります。最初の方法では、反復用の数字を書くことができます。以下に示すコードでは、これらの反復は反復を制御する変数 'i' に指定されるため、for ループは 5 回実行されます。スクリプトファイル「helloScript.sh」にコードを保存します。
+
+
+### for ループ:
+forループは、繰り返し実行される条件を指定するループのタイプです。
+forループには、いくつかの記述方法があります。
+最初の方法として、反復用の数字を書きます。
+以下に示すコードでは、反復用の数字反復を制御する変数 'i' にさせます。
+以下のfor ループは 5 回実行されます。
+スクリプトファイル「helloScript.sh」にコードを保存します。
 
 
 
 ``` bash:forLoop.sh
-#! /bin/bash
+#!/bin/bash
 
- for i in 1 2 3 4 5 ; do 
-    echo $i
- done
+for i in 1 2 3 4 5 ; do 
+  echo $i;
+done
 ```
 
 ターミナルで次のコマンドを入力して、「forLoop.sh」ファイルを実行します。
@@ -670,300 +719,304 @@ for ループ:
 
 ```
 $ bash forLoop.sh
-```
-
-この方法はシンプルに見えますが、1000回実行したい場合はどうなりますか?1から1000までの反復回数を書く必要はなく、代わりにループに他の書き方を使用します。このメソッドでは、以下のサンプルコード「for i in {0..10}」のように、反復の開始点と終了点を宣言する必要があります。forループは10回実行されます。 '0'は開始点として定義され、「10」は反復の終了点として定義されます。このforループは、各反復で「i」の値を出力します。
-
-
-``` bash:forLoop2.sh
-#! /bin/bash
-
- for i in {0..10}
- do
-    echo $i
- done
-```
-
-ファイル「forLoop.sh」にコードを保存します。ファイルを実行すると、次の出力が表示されます。
-
-```
-$ bash forLoop2.sh
+1
+2
+3
+4
+5
 $
 ```
 
-ループを制御する変数の増分値を定義することもできます。たとえば、「for i in {0..10..2}」では、0はループの開始点、10は終点、ループは「i」の2の増分で「エコー$i」ステートメントを実行します。したがって、以下に示す例では、プログラムはループの最初の実行で0を出力し、その後、「i」の値をインクリメントします。これで「i」の値は2です。ターミナルに2を印刷します。このコードは、「i」の値を0,2,4,6,8,10として出力します。
+この方法はシンプルに見えますが、1000回実行したい場合は、実行したい数値を列挙する必要があるため大変です。
+実は、1から1000までの反復回数を書く必要はなく、ループに他の書き方を使用します。
+以下のサンプルコード「for i in {0..10}」のように、反復の開始点と終了点を宣言します。
+この書き方によってforループは10回実行されます。 '0' は開始点として定義され、'10' は反復の終了点として定義されます。
 
+
+``` bash:forLoop2.sh
+#!/bin/bash
+
+for i in {0..10}; do
+  echo $i;
+done
+```
+
+ファイル「forLoop2.sh」にコードを保存します。ファイルを実行すると、次の出力が表示されます。
+
+
+```
+$ bash forLoop2.sh
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+$
+```
+
+ループを制御する変数の増分値を定義することもできます。
+たとえば、「for i in {0..10..2}」では、'0' をループの開始点、'10' は終点、'2' はループは 'i' 2の増分で、echo $i ステートメントを実行します。
+したがって、以下に示す例では、プログラムはループの最初の実行で0を出力し、その後、「i」の値を２つずつインクリメントします。
+このコードは、「i」の値を0,2,4,6,8,10として出力します。
 
 
 ``` bash forLoop3.sh
-#! /bin/bash
+#!/bin/bash
 
- for i in {0..10..2}; do
- #{starting..ending..increment}
-   echo $i
- done
+for i in {0..10..2}; do
+  echo $i;
+done
 ```
 
 
-すべてのプログラミング言語で従来の「for loop」を書く別の方法があります。以下のサンプルコードは、このメソッドを使用して「forループ」を表しました。ここでステートメント ‘ for (( i=0; i<5; i++ ))’ では、'i’ はループ全体を制御する変数です。まず、値 '0' で初期化され、次にループ 'i<5' の制御ステートメントがあり、値 0,1,2,3,または 4 がある場合にループが実行されることを示します。次に、ループのインクリメントステートメントである「i++」があります。
+```
+$ bash forLoop3.sh
+0
+2
+4
+6
+8
+10
+$
+```
+
+多くのプログラミング言語でおなじみ「for loop」書式の記述も可能です。
+以下のサンプルコードは、このメソッドを使用して「forループ」を書いています。
+'for (( i=0; i<5; i++ ))’ では、'i’ はループ全体を制御する変数です。
+まず、値 'i' は 値 '0' で初期化され、次にループ 'i<5' の制御ステートメント、'i++' はループのたびに１つずつインクリメントする事をあわらします。
 
 
 ``` bash:increments.sh
-#! /bin/bash
+#!/bin/bash
 
- for (( i=0; i<5; i++ )); do
-    echo $i
- done
+for (( i=0; i<5; i++ )); do
+  echo $i;
+done
 ```
 
-プログラムはforループに来ます。 'i'は0で初期化され、'i'の値が5未満の条件をチェックします。この場合、trueです。先に進み、端末に「i」の値を「0」として出力します。その値「i」が増加すると、プログラムはその値が5未満であるかどうかを再度確認するので、再び「i」の値('1」を出力します。この実行フローは、「i」が「5」の値に達するまで続き、プログラムはforループから出て、プログラムは終了します。
+'i'は0で初期化され、'i'の値が5未満の条件をチェックします。
+最初条件の結果は 'true' です。
+処理ステートメントに進み、、echo コマンドにより端末に「i」の値を「0」として出力します。
+処理が進むにつれ、値「i」が一つずつ増加します。
+プログラムは処理の中で、「i」の値が5未満であるかどうかを再度確認し、再び「i」の値('1」を出力します。
+    この実行フローは、「i」の値が「5」の値に達するまで続き、「５」に達した段階ではforループをぬけてプログラムは終了します。
 
-コードを保存します。ターミナルからファイルを実行すると、次の出力が表示されます。
+
+```
+$ bash increments.sh
+0
+1
+2
+3
+4
+$
+```
 
 
 ### breakとcontinue
-breakステートメントは、指定された条件でループを終了するために使用されます。たとえば、以下に示すコードでは、for loopは「i」の値が6になるまで通常の実行を行います。コードでこのことを指定したように、forループは自分自身を壊し、「i」が5より大きくなるとさらに反復を停止します。
+breakステートメントは、指定された条件でループを終了するために使用されます。
+以下に示すコードでは、for loopは if ステートメントの条件により、「i」の値が '5' になるまで通常の実行を行い、「i」が '5以上' ループを停止します。
 
 
+``` bash:break.sh
+#!/bin/bash
 
-```
-#! /bin/bash
-
- for (( i=0; i<=10; i++ )); do
-    if [ $i -gt 5 ]; then
-        break
-    fi
-    echo $i
- done
+for (( i=0; i<=10; i++ )); do
+  if [ $i -gt 5 ]; then
+    break;
+  fi
+  echo $i;
+done
 ```
 
 スクリプトを保存し、ファイルを実行します。次の出力が得られます。
 
 
-Continueステートメントは、breakステートメントとは対照的に機能します。条件が真であるところはどこでも反復をスキップし、次の反復に向かって移動します。たとえば、ループに示すコードは、3と7を除いて、0から20までの端末に「i」変数の値を出力します。ステートメント 'if [ $i -eq 3 ] || [ $i -eq 7 ]' として、'i' の値が 3 または 7 に等しいときはいつでも反復をスキップし、印刷せずに次の反復に移動するようにプログラムに指示します。
+```
+$ bash break.sh
+0
+1
+2
+3
+4
+5
+$
+```
+
+
+Continueステートメントは、breakステートメントとは対照的に機能します。
+条件が真である場合は反復をスキップ( continue )し、次の反復に向かって処理を進めます。
+以下のループは、'3' と '7' を除いて、'0' から '20' までの端末に 'i' 変数の値を出力します。
+ifステートメント 'if [ $i -eq 3 ] || [ $i -eq 7 ]' は、'i' の値が 3 または 7 に等しいときは反復をスキップし、echoせずにforループの処理を進めます。
 
 この概念をよりよく理解するために、次のコードを実行します。
 
 
-``` bash:breakAndContinue.sh
-#! /bin/bash
+``` bash:continue.sh
+#!/bin/bash
 
- for (( i=0; i<=10; i++ ))
- do
-    if [ $i -eq 3 ] || [  $i -eq 7 ]
-    then
-    continue
-    fi
-    echo $i
- done
+for (( i=0; i<=10; i++ )); do
+  if [ $i -eq 3 ] || [  $i -eq 7 ]; then
+    continue;
+  fi
+  echo $i;
+done
 ```
 
 
-## 入力
+```
+$ bash continue.sh
+0
+1
+2
+4
+5
+6
+8
+9
+10
+$
+```
 
-このトピックの最初の例は、スクリプトを実行し、スクリプトの入力として値を与えるための単一のコマンドを与えることができるコードを指します。
+以下のように書くこともできます。こちらの記述のほうがすっきりしていて、Ｃ言語やＪａｖａに慣れ親しんでいる人は、直感的に理解できるかもしれません。
+
+``` bash continue2.sh
+for (( i=0; i<=10; i++ )); do
+	if (( i==3 || i==7 ));then
+    continue;
+  fi
+  echo $i;
+done
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: (( )) で囲む記述で書いていく方が良いかもしれません。
+: 他の言語で慣れ親しんでいる書き方を踏襲することで、bash独特の書き方に振り回される事がないからです。
+: なにより、(( )) 内は、変数の冒頭に '$' が不要になるだけでも、コードが見やすくなります。
+{{% /tips-list %}}
+
+
+
+
+
+## スクリプトへの値渡し「実行パラメータ」
+
+このトピックの最初の例は、スクリプトを実行する際に、スクリプトへの入力として値を与えるための説明をします。
 
 
 ``` bash:input.sh
-#! /bin/bash
+#!/bin/bash
 
- echo $1 $2 $3
+echo $1 $2 $3;
 ```
 
 
-このコードは、端末に3つの値を出力します。上記のコードをスクリプト「helloScript.sh」に保存し、ターミナルに印刷される3つの値でコマンドを「./helloScript.sh」に書き込みます。この例では、
+このコードは、端末に3つの値を出力します。
+上記のコードをスクリプト「input.sh」に保存します。実行時に実行ファイル名に続き、三つの値を指定して、スクリプトに値を渡します。
 
 
 ```
 $ bash input.sh BMW MERCEDES TOYOTA
 $ BMW MERCEDES TOYOTA
 $ 
-
 ```
 
 
-「BMW」は「$1」を表し、「MERCEDES」は「$2」を表し、「TOYOTA」は「$3」を表します。
+スクリプト実行時に渡した３つの値はそれぞれコードの中で、「BMW」は「$1」、「MERCEDES」は「$2」、「TOYOTA」は「$3」に値は入力されます。
 
 
 echoステートメントに「$0」を指定すると、スクリプト名も出力されます。
 
 
 ``` bash:input2.sh
-#! /bin/bash
+#!/bin/bash
 
- echo $0 $1 $2 $3
+echo $0 $1 $2 $3;
 ```
 
+
 ```
-$ bash input.sh BMW MERCEDES TOYOTA
-$ inpush.sh BMW MERCEDES TOYOTA
+$ bash input2.sh BMW MERCEDES TOYOTA
+$ input2.sh BMW MERCEDES TOYOTA
 $ 
 ```
 
-
-
-
-この目的のために配列を使用することもできます。無限の数の配列を宣言するには、コード 'args=(“$@”)' を使用します。このコード 'args' は配列の名前であり、'@' は無限の数の値を持つ可能性があることを表します。このタイプの配列宣言は、入力のサイズがわからない場合に使用できます。この配列は、入力ごとにブロックを割り当て、最後の1つに達するまでブロックを割り当て続けます。
+この目的のために配列を使用することもできます。
+配列を宣言するには、コード 'args=("$@")' を使用します。
+このコード 'args' は配列の名前であり、'@' は無限の数の値を持つ可能性があることを表します。
+このタイプの配列宣言は、入力のサイズがわからない場合に便利です。
 
 
 
 ``` bash:args.sh
-#! /bin/bash
+#!/bin/bash
 
- args=("$@") #you can also specify the array size here
- echo ${args[0]} ${args[1]} ${args[2]}
-
+args=("$@");
+echo ${args[0]} ${args[1]} ${args[2]};
 ```
 
-スクリプトをファイル「args.sh」に保存します。ターミナルを開き、スクリプト内の宣言された配列の要素を表す値でコマンド「$ bash args.sh」を使用してファイルを実行します。以下で使用されるコマンドによると、BMW'は${args[0]}を表し、「MERCEDES」は${args[1]}を表し、「HONDA」は${args[2]}を表します。
-
-
-以下に示すコードを使用して、無限の数の値を持つ配列を宣言し、それらの値を端末に印刷できます。これと前の例の違いは、この例では配列要素を表すすべての値を出力し、前の例で使用されるコマンド「エコー${args[0]} ${args[1]} ${args[2]}は配列の最初の3つの値のみを出力することです。
-
-
-
-``` bash:args2.sh
-#! /bin/bash
-
- args=("$@") 
- echo $@
-```
-
-スクリプトに「エコー$#」と書いて配列サイズを出力することもできます。スクリプトを保存します。ターミナルを使用してファイルを実行します。
-
-
-``` bash:args3.sh
-#! /bin/bash
-
- args=("$@") 
- echo $@   #prints all the array elements 
- echo $#   #print the array size
-```
-
-## stdinを使用してファイルを読み取る
-「stdin」を使用してファイルを読み取ることもできます。スクリプトを使用してファイルを読み取るには、まずファイルラインを1行ずつ読み、端末に印刷するコードを書くwhileループを使用します。キーワード 'done' を使用して while ループを閉じた後、ファイルの読み取りに使用するように、'stdin' ファイル' < "${1:-/dev/stdin}" ' のパスを指定します。以下に示すスクリプトは、この概念をよりよく理解するために使用できます。
-
-
-``` bash:stdin.sh
-#! /bin/bash
-
-while read line; do
-    echo "$line"    
-done < "${1:-/dev/stdin}"
-```
-
-スクリプトをファイル「stdin.sh」に保存します。ターミナルを開き、読みたいファイル名で「stdin.sh」を実行するコマンドを記述します。この場合、読みたいファイルは「無題のドキュメント1」という名前でデスクトップに配置されます。両方の「\」は、これが単一のファイル名であることを表すために使用されます。それ以外の場合は、「無題のドキュメント1」を書くだけで複数のファイルと見なされます。
+BMW'は${args[0]}、「MERCEDES」は${args[1]}、「HONDA」は${args[2]}を表します。
 
 
 ```
-$ bash helloScript.sh Untitled\ Document\ 1
+$ bash args.sh BMW MERCEDES TOYOTA
+$ BMW MERCEDES TOYOTA
 $ 
 ```
 
-## スクリプト出力
 
-このトピックでは、標準出力と標準エラーについて学びます。標準出力はコマンドの結果であるデータの出力ストリームですが、標準エラーはコマンドラインからのエラーメッセージの場所です。
-
-標準出力と標準エラーを単一または複数のファイルにリダイレクトできます。以下に示すスクリプトコードは、両方を単一のファイルにリダイレクトします。ここで「ls -la 1>file1.txt 2>file2.txt」、1は標準出力を表し、2は標準エラーを表します。標準出力は「file1.txt」にリダイレクトされ、標準エラーは「file2.txt」にリダイレクトされます。
+以下に示すコードは、無限の数の値を持つ配列の値を出力できます。
+前の例では、使用されるコマンド 'echo ${args[0]} ${args[1]} ${args[2]}は配列の最初の3つの値のみを出力しますが、今回のコードは、出力を指定することなく、渡された値の全てを出力します。
 
 
-``` bash:stdin.sh
-#! /bin/bash
+``` bash:args2.sh
+#!/bin/bash
 
-ls -la 1>file1.txt 2>file2.txt
+args=("$@") ;
+echo $@;
 ```
 
 
-このコードを「stdin.sh」に保存し、「$ bash stdin.sh」コマンドを使用してターミナルを介して実行します。まず、デスクトップに2つのファイルを作成し、それぞれの出力をリダイレクトします。この後、「ls」コマンドを使用して、ファイルが作成されているかどうかを確認できます。
-
-
-その後、両方のファイルの内容を確認してください。
-
-ご覧のとおり、標準出力は「file1.txt」にリダイレクトされます。
-
-
-
-スクリプトに標準エラーが存在しないため、「file2.txt」は空です。それでは、標準エラーを作成してみましょう。そのためには、コマンドを 'ls -la' から 'ls +al'に変更する必要があります。以下に示すスクリプトを保存し、ターミナルからファイルを実行し、両方のファイルをリロードして結果を表示します。
-
-
-``` bash:stdin2.sh
-#! /bin/bash
-
-ls +al 1>file1.txt 2>file2.txt
 ```
-
-ターミナルでコマンド「./stdin2.sh」を使用してファイルを実行し、ファイルを確認します。
-
-
-スクリプトの標準出力が存在しないため、「file1.txt」は空であり、標準エラーは以下に示すように「file2.txt」に保存されます。
-
-
-この目的のために2つの別々のスクリプトを作成することもできます。この場合、最初のスクリプトは標準出力を「file1.txt」に保存し、2番目のスクリプトは標準エラーを保存します。両方のスクリプトは、それぞれの出力で以下に示されています。
-
-
-``` bash:stdin3.sh
-#! /bin/bash
-
-ls -la >file1.txt
-```
-
-標準出力と標準出力を保存するために単一のファイルを使用することもできます。そのスクリプトの例を次に示します。
-
-
-``` bash:stdin3.sh
-#! /bin/bash
-
-ls -la >file1.txt 2>&1
-```
-
-
-## あるスクリプトから別のスクリプトに出力を渡す
-
-あるスクリプトから別のスクリプトに出力を送信するには、2つのことが不可欠です。まず、両方のスクリプトが同じ場所に存在し、両方のファイルを実行可能である必要があります。ステップ1は、2つのスクリプトを作成することです。1つは「firstScript.sh」、もう1つは「secondScript.sh」として保存します。
-
-「firstScript.sh」ファイルを開き、以下に示すコードを書いてください。
-
-
-``` bash:firstScript.sh
-#! /bin/bash
-
-MESSAGE="Hello LinuxHint Audience"
-export MESSAGE
-```
-
-ターミナルで次のコマンドを入力して、「firstScript.sh」を実行可能にします。
-
-```
-$ chmod +x ./firstScript.sh
+$ bash args2.sh BMW MERCEDES TOYOTA
+BMW MERCEDES TOYOTA
+$ bash args2.sh BMW MERCEDES TOYOTA HONDA
+BMW MERCEDES TOYOTA HONDA
 $
 ```
 
 
-このスクリプトは、「$MESSAGE」変数に格納されている値をexportします。
-
-このファイルを保存し、コーディングのために他のファイルに進みます。
-
-新たに「secondScript.sh」に次のコードを書いて、firstScript.shの「$MESSAGE」をsecondScript.shが取得し、ターミナルに出力します。
+'echo $#' と書いて配列サイズを出力することもできます。
 
 
-``` bash:secondScript.sh
+``` bash:args3.sh
 #!/bin/bash
 
-echo "helloScriptからのメッセージは: $MESSAGE"
+args=("$@");
+echo $@;
+echo $#;  
 ```
 
 
-ターミナルで次のコマンドを入力して、「secondScript.sh」を実行可能にします。
-
-
 ```
-$ chmod +x ./secondScript.sh
+$ bash args3.sh BMW MERCEDES TOYOTA
+BMW MERCEDES TOYOTA
+3
+$ bash args3.sh BMW MERCEDES TOYOTA HONDA
+BMW MERCEDES TOYOTA HONDA
+4
+$
 ```
 
-次に、「firstScript.sh」ファイルを実行して、目的の結果を取得します。
-
-
-
+<!--
 ## 文字列処理
 
 このトピックで最初に学ぶ操作は、文字列の比較です。文字列の形でユーザーから2つの入力を取ります。ターミナルからその値を読み、2つの異なる変数に格納します。「==」演算子を使用して両方の変数の値を比較するには、「if」ステートメントを使用します。ステートメントをコード化して、「文字列が一致する」が同じかどうかを表示し、「else」ステートメントに「文字列が一致しない」と書き、'if」ステートメントを閉じます。以下は、この手順全体のスクリプトコードです。
@@ -971,7 +1024,7 @@ $ chmod +x ./secondScript.sh
 
 ``` bash:String.sh
 
-#! /bin/bash
+#!/bin/bash
 echo "enter Ist string"
 read st1
 echo "enter 2nd string"
@@ -999,7 +1052,7 @@ fi
 
 
 ``` bash:stringSmaller.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter Ist string"
 read st1
@@ -1019,7 +1072,7 @@ fi
 
 
 ``` bash:connect.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter Ist string"
 read st1
@@ -1039,7 +1092,7 @@ echo $c
 
 
 ``` bash:connect.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter Ist string"
 read st1
@@ -1055,7 +1108,7 @@ echo ${st2^^} #for uppercase
 
 
 ``` bash:turnFirstLetterCapital.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter Ist string"
 read st1
@@ -1065,13 +1118,15 @@ read st2
 echo ${st1^l} #for capitalizing the first letter
 ```
 
-## 数字と算術
+<!--
+
+## 数値処理
 
 このトピックでは、スクリプトを使用してさまざまな算術演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
 
 
 ``` bash:numberCalc.sh
-#! /bin/bash
+#!/bin/bash
 
 n1=4
 n2=20
@@ -1082,7 +1137,7 @@ echo $((  n1 + n2 ))
 
 
 ``` bash:numberCalc2.sh
-#! /bin/bash
+#!/bin/bash
 
 n1=20
 n2=4
@@ -1099,7 +1154,7 @@ echo $(( n1 % n2 ))
 
 
 ``` bash:numberCalc3.sh
-#! /bin/bash
+#!/bin/bash
 
 n1=20
 n2=4
@@ -1111,7 +1166,7 @@ echo $(expr $n1 + $n2 )
 
 
 ``` bash:numberCalc4.sh
-#! /bin/bash
+#!/bin/bash
 
 n1=20
 n2=4
@@ -1128,7 +1183,7 @@ echo $(expr $n1 % $n2 )
 
 
 ``` bash:numberCalc5.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "Enter Hex number of your choice"
 read Hex
@@ -1165,7 +1220,7 @@ $ declare -p
 
 
 ``` bash:declare.sh
-#! /bin/bash
+#!/bin/bash
 
 declare -r pwdfile=/etc/passwd
 echo $pwdfile
@@ -1175,7 +1230,7 @@ echo $pwdfile
 
 
 ``` bash:declare2.sh
-#! /bin/bash
+#!/bin/bash
 
 declare -r pwdfile=/etc/passwd
 echo $pwdfile
@@ -1191,7 +1246,7 @@ pwdfile=/etc/abc.txt
 
 
 ``` bash:array.sh
-#! /bin/bash
+#!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA')
 echo "${car[@]}"
@@ -1202,7 +1257,7 @@ echo "${car[@]}"
 
 
 ``` bash:array2.sh
-#! /bin/bash
+#!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA')
 echo "${car[@]}"
@@ -1216,7 +1271,7 @@ echo "${car[2]}"
 配列のインデックスを印刷することもできます。このためには、「${!車[@]}”、ここ’!’インデックスを表すために使用され、「@」は配列全体を表します。
 
 ``` bash:array3.sh
-#! /bin/bash
+#!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA')
 echo "${car[@]}"
@@ -1228,7 +1283,7 @@ echo "${!car[@]}"
 
 
 ``` bash:array3.sh
-#! /bin/bash
+#!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
 echo "${car[@]}"
@@ -1243,7 +1298,7 @@ echo "${#car[@]}"
 
 ``` bash:array4.sh
 
-#! /bin/bash
+#!/bin/bash
 car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
 unset car[2]
 echo "${car[@]}"
@@ -1259,7 +1314,7 @@ echo "${#car[@]}"
 
 
 ``` bash:array5.sh
-#! /bin/bash
+#!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
 unset car[2]
@@ -1280,7 +1335,7 @@ echo "${#car[@]}"
 
 
 ``` bash:method.sh
-#! /bin/bash
+#!/bin/bash
 
 function funcName()
 {
@@ -1295,7 +1350,7 @@ funcName
 
 
 ``` bash:method2.sh
-#! /bin/bash
+#!/bin/bash
 
 function funcPrint()
 {
@@ -1309,7 +1364,7 @@ funcPrint HI
 
 
 ``` bash:method3.sh
-#! /bin/bash
+#!/bin/bash
 
 function funcPrint()
 {
@@ -1323,7 +1378,7 @@ funcPrint Hi This is Bash programming
 
 
 ``` bash:funcCheck.sh
-#! /bin/bash
+#!/bin/bash
 
 function funcCheck()
 {
@@ -1340,7 +1395,7 @@ function funcCheck()
 
 
 ``` bash:funcCheck2.sh
-#! /bin/bash
+#!/bin/bash
 
 function funcCheck()
 {
@@ -1367,7 +1422,7 @@ echo $returningValue
 
 
 ``` bash:mkdir.sh
-#! /bin/bash
+#!/bin/bash
 
 mkdir -p Directory2
 ```
@@ -1376,7 +1431,7 @@ mkdir -p Directory2
 
 
 ``` bash:mkdir-p.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter directory name to check"
 read direct
@@ -1396,7 +1451,7 @@ fi
 
 
 ``` bash:touch.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name to create"
 read fileName
@@ -1410,7 +1465,7 @@ touch $fileName
 スクリプトに従って、スクリプトを介してディレクトリを検索することもできます。「-f」フラグがファイルを検索し、ディレクトリが「-d」を検索するため、「-d」フラグを「-f」に置き換えるだけです。
 
 ``` bash:checkFile.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name to check"
 read fileName
@@ -1426,7 +1481,7 @@ fi
 
 
 ``` bash:appendFile.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name in which you want to append text"
 read fileName
@@ -1444,7 +1499,7 @@ fi
 
 
 ``` bash:redirect.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name in which you want to append text"
 read fileName
@@ -1465,7 +1520,7 @@ fi
 
 
 ``` bash:IFS.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name from which you want to read"
 read fileName
@@ -1483,7 +1538,7 @@ fi
 
 
 ``` bash: rm.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter file name from which you want to delete"
 
@@ -1510,7 +1565,7 @@ curlをインストールした後、URLを使用してテストファイルを�
 
 
 ``` bash:curl.sh
-#! /bin/bash
+#!/bin/bash
 
 url="http://www.ovh.net/files/1Mb.dat"
 curl ${url} -O
@@ -1520,7 +1575,7 @@ curl ${url} -O
 
 
 ``` bash:curl2.sh
-#! /bin/bash
+#!/bin/bash
 
 url="http://www.ovh.net/files/1Mb.dat"
 curl ${url} -o NewFileDownload
@@ -1530,7 +1585,7 @@ curl ${url} -o NewFileDownload
 
 
 ``` bash:curl4.sh
-#! /bin/bash
+#!/bin/bash
 
 url="http://www.ovh.net/files/1Mb.dat"
 curl -I ${url}
@@ -1545,7 +1600,7 @@ curl -I ${url}
 
 
 ``` bash:professionalMenu.sh
-#! /bin/bash
+#!/bin/bash
 
 select car in BMW MERCEDES TESLA ROVER TOYOTA; do
     echo "you have selected $car"
@@ -1557,7 +1612,7 @@ done
 
 
 ``` bash:ProfessionalManu2.sh
-#! /bin/bash
+#!/bin/bash
 select car in BMW MERCEDES TESLA ROVER TOYOTA
 do
     case $car in
@@ -1582,7 +1637,7 @@ done
 
 
 ``` bash:professionalManu3.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "press any key to continue"
 while [ true ]; do
@@ -1609,7 +1664,7 @@ $ yum install inotify-tools
 虚数ディレクトリでinotifyを試して、それがどのように反応するかを確認できます。
 
 ``` bash:inotify.sh
-#! /bin/bash
+#!/bin/bash
 
 mkdir -p iNotifyTest
 inotifywait -m iNotifyTest
@@ -1656,7 +1711,7 @@ This is MAC
 
 
 ```
-#! /bin/bash
+#!/bin/bash
 
 echo "enter a filename to search text from"
 read fileName
@@ -1706,7 +1761,7 @@ awkはデータファイルを変換し、フォーマットされたレポー�
 
 
 ``` bash:arktest1.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter a filename to print from awk"
 read fileName
@@ -1721,7 +1776,7 @@ fi
 
 
 ``` bash:awktest2.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to print from awk"
 read fileName
@@ -1755,7 +1810,7 @@ This is MAC 4000
 
 ``` bash:awktest3.sh
 
-#! /bin/bash
+#!/bin/bash
 
 echo "enter a filename to print from awk"
 read fileName
@@ -1770,7 +1825,7 @@ fi
 「Linux」を見つけた行の最後の単語「$4」を取得するための「awk」コマンドでスクリプトを実行します。
 
 ``` bash:awktest4.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to print from awk"
 read fileName
@@ -1787,7 +1842,7 @@ fi
 
 
 ``` bash:awktest5.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to print from awk"
 read fileName
@@ -1806,7 +1861,7 @@ sedコマンドはストリームエディタの略で、標準入力または�
 
 
 ``` bash:sedtest1.txt
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to substitute using sed"
 read fileName
@@ -1821,7 +1876,7 @@ fi
 
 
 ``` bash:sedtest2.txt
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to substitute using sed"
 read fileName
@@ -1846,7 +1901,7 @@ cat filegrep.txt | sed 's/i/I/g' > newfile.txt
 
 
 ``` bash:sedtest3.txt
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to substitute using sed"
 read fileName
@@ -1863,7 +1918,7 @@ fi
 Bashは広範なデバッグ機能を提供しています。bashスクリプトをデバッグすることができ、計画に従って何かがうまくいかない場合は、それを見ることができます。これが私たちが今行っていることです。端末で発生するエラーの種類を確認するために、意図的にエラーを作成しましょう。次のコードを「helloScript.sh」ファイルに保存します。ターミナルを使用してファイルを実行し、結果をチェックアウトします。
 
 ``` bash:debug.sh
-#! /bin/bash
+#!/bin/bash
 
 echo "enter filename to substitute using sed"
 read fileName
@@ -1884,7 +1939,7 @@ bashパスの後、スクリプトの最初の行に「-x」フラグを入力�
 
 
 ``` bash:debug2.sh
-#! /bin/bash -x
+#!/bin/bash -x
 
 echo "enter filename to substitute using sed"
 read fileName
@@ -1900,7 +1955,7 @@ fi
 
 
 ``` bash:debug3.sh
-#! /bin/bash 
+#!/bin/bash 
 
 set -x
 echo "enter filename to substitute using sed"
