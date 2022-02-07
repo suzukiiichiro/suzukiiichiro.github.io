@@ -1,4 +1,170 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 11:28:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</link><pubDate>Mon, 07 Feb 2022 11:28:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch.jpg" alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法" />&lt;p>Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探っていこうと思います。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 16:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
+&lt;p>今回はバックトラックを説明していきたいと思います。 &lt;br>
+今回のバックトラックのロジックは前回の配置フラグの拡張版です。&lt;br>
+配置フラグは上下の利き筋までしかチェックしていませんでしたが今回のバックトラックは左右斜めの対角線上の利き筋もチェックします。&lt;br>
+上下の配置フラグの他に右斜め、左斜めの配置フラグを作ってチェックします。&lt;br>
+ブルートフォース、配置フラグでは解の候補を出すに止まりましたが、今回で左右、上下、対角線上とクイーンのすべての利き筋をチェックすることができるますので、プログラム独力で解を出せるようになります。&lt;br>
+出力は解の数となっております。&lt;/p>
+&lt;p>ブルートフォース、配置フラグ、バックトラックの関係は以下の通りです。&lt;/p>
+&lt;p>・ブルートフォース&lt;br>
+1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
+・配置フラグ&lt;br>
+1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
+配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる&lt;br>
+・バックトラック&lt;br>
+1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
+配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる&lt;br>
+配置フラグを拡張し左右斜めにクイーンを置けないようにする 対角線上の利き筋をみる&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py&lt;/a>&lt;/p>
+&lt;h2 id="グローバル変数">グローバル変数&lt;/h2>
+&lt;p>432,433行目でTOTAL,UNIQUEというグローバル変数が追加されています。&lt;br>
+ブルートフォース、配置フラグは解の候補を列挙するにとどまっていましたが、今回からはプログラム内で正解数を出力するようになります。&lt;br>
+TOTALは正解数の総数です。&lt;br>
+UNIQUEですが、NQueenの解は左右ミラー反転、90度、180度、270度と左右反転していくと同じ形のものが結構あります。左右反転して同じ形のものを同一解としてカウントした数がUNIQUEとなります。&lt;/p>
+&lt;p>436,437行目にFB,FC配列が追加されています。&lt;br>
+FBが左斜め、FCが右斜めの対角線の利き筋を配置フラグでチェックします。&lt;/p>
+&lt;h2 id="対角線上の配置フラグ">対角線上の配置フラグ&lt;/h2>
+&lt;p>対角線の利き筋ですが１次元配列でチェックすることができます。&lt;br>
+図で見てみましょう。&lt;/p>
+&lt;p>上下の利き筋について簡単です。&lt;br>
+例えば、1行目の右から2列目にクイーンを置いた場合は2、3、4行目の2列目にクイーンを置けなくなります。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/d1.png" >
+&lt;img src="https://suzukiiichiro.github.io/d1.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>2、3、4行目の右から2列目にクイーンを置いた場合はその他の行の2列目にクイーンを置けなくなります。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/d2.png" >
+&lt;img src="https://suzukiiichiro.github.io/d2.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/d3.png" >
+&lt;img src="https://suzukiiichiro.github.io/d3.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/d4.png" >
+&lt;img src="https://suzukiiichiro.github.io/d4.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>ですのでフラグはクイーンを置いた列番号に立てれば良いことになります。&lt;br>
+2列目だったらFA[1]=1です。&lt;/p>
+&lt;p>対角線の利き筋についても計算が必要ではあるのですが法則性があり1次元配列で表現することが可能です。&lt;/p>
+&lt;p>FB 左斜め対角線の利き筋について見てみましょう&lt;/p>
+&lt;p>左斜め対角線のフラグの位置の計算法則は&lt;br>
+行数-クイーンを置いた列数+(サイズ-1)&lt;br>
+row-i+(size-1)&lt;br>
+で1次元配列で表現できます。&lt;/p>
+&lt;p>図で見てみましょう。&lt;br>
+1行目の1列目にクイーンを置いた場合&lt;br>
+左斜め対角線の利き筋は以下の通りになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,0]
+2行目2列目 [1,1]
+3行目3列目 [2,2]
+4行目4列目 [3,3]
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/l1.png" >
+&lt;img src="https://suzukiiichiro.github.io/l1.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>row-i+(size-1) で計算してみましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,0] 0-0+(4-1)=3
+2行目2列目 [1,1] 1-1+(4-1)=3
+3行目3列目 [2,2] 2-2+(4-1)=3
+4行目4列目 [3,3] 3-3+(4-1)=3
+&lt;/code>&lt;/pre>&lt;p>FB[4] にフラグをたてれば左対角線の利き筋をチェックすることができます。&lt;/p>
+&lt;p>2行目3列目にクイーンを置いた場合はどうなるでしょう&lt;/p>
+&lt;p>左斜め対角線の利き筋は以下の通りになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目2列目 [0,1]
+2行目3列目 [1,2]
+3行目4列目 [2,3]
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/l5.png" >
+&lt;img src="https://suzukiiichiro.github.io/l5.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>row-i+(size-1) で計算してみましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目2列目 [0,1] 0-1+(4-1)=2
+2行目3列目 [1,2] 1-2+(4-1)=2
+3行目4列目 [2,3] 2-3+(4-1)=2
+&lt;/code>&lt;/pre>&lt;p>FB[3] にフラグをたてれば左対角線の利き筋をチェックすることができます。&lt;/p>
+&lt;p>FC 右斜め対角線の利き筋について見てみましょう&lt;/p>
+&lt;p>右斜め対角線のフラグの位置の計算法則は&lt;br>
+行数+クイーンを置いた列数&lt;br>
+row+i&lt;br>
+で1次元配列で表現できます。&lt;/p>
+&lt;p>図で見てみましょう。&lt;br>
+1行目の4列目にクイーンを置いた場合&lt;br>
+右斜め対角線の利き筋は以下の通りになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,3]
+2行目2列目 [1,2]
+3行目3列目 [2,1]
+4行目4列目 [3,0]
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/r1.png" >
+&lt;img src="https://suzukiiichiro.github.io/r1.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>row+iで計算してみましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,3] 0+3=3
+2行目2列目 [1,2] 1+2=3
+3行目3列目 [2,1] 2+1=3
+4行目4列目 [3,0] 3+0=3
+&lt;/code>&lt;/pre>&lt;p>FC[4] にフラグをたてれば右対角線の利き筋をチェックすることができます。&lt;/p>
+&lt;p>2行目の2列目にクイーンを置いた場合&lt;br>
+右斜め対角線の利き筋は以下の通りになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,2]
+2行目2列目 [1,1]
+3行目3列目 [2,0]
+4行目4列目 [3,0]
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/r5.png" >
+&lt;img src="https://suzukiiichiro.github.io/r5.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>row+iで計算してみましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>1行目1列目 [0,2] 0+2=2
+2行目2列目 [1,1] 1+1=2
+3行目3列目 [2,0] 2+0=2
+&lt;/code>&lt;/pre>&lt;p>FC[3] にフラグをたてれば右対角線の利き筋をチェックすることができます。&lt;/p>
+&lt;p>長くなりましたので今回はグローバル変数の説明だけで終わります。&lt;br>
+次回は、新しく追加されたmainメソッドからプログラムの概要を説明したいと思います。&lt;/p></description></item><item><title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</link><pubDate>Mon, 07 Feb 2022 11:28:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch.jpg" alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法" />&lt;p>Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探っていこうと思います。&lt;/p>
 &lt;p>Hugoの導入や記事の投稿についての情報は&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21-01/" target="_blank" rel="noopener"
 >Hugoで記事の投稿の仕方&lt;/a>や&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/" target="_blank" rel="noopener"
 >デザイナーでもできる初めてのHUGO #01&lt;/a>を確認してください。&lt;/p>
@@ -3312,104 +3478,4 @@ suzuki:x:1001:
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
-&lt;!-- EOL --></description></item><item><title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</title><link>https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/</link><pubDate>Thu, 27 Jan 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）" />&lt;h2 id="nクイーン問題とは">Nクイーン問題とは&lt;/h2>
-&lt;p>Nクイーン問題とは、チェスの盤面にクイーンを１行に１個ずつ効き筋に当たらないように置いていこうという問題です。&lt;/p>
-&lt;p>&lt;a class="link" href="https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3" target="_blank" rel="noopener"
->https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3&lt;/a>&lt;/p>
-&lt;p>NクイーンのNは盤面の行・列の数です８クイーンだと８x８です。&lt;br>
-おける場所の数を算出する法則はないのでプログラムを組んでクイーンを配置していくしかないのですが、&lt;br>
-Nの数が増えれば置ける場所の候補が爆発的に増えていきプログラムでも何年経っても終わらないようなものになります。&lt;br>
-現在最大のNは２７クイーンです。&lt;/p>
-&lt;p>Nクイーンを早く解く方法はいくつかあって、&lt;br>
-①アルゴリズムを使って探索を効率化する&lt;br>
-②ビット計算で計算速度を上げる&lt;br>
-③GPUなどを使って並列計算をする&lt;br>
-などがあります。&lt;/p>
-&lt;h2 id="pythonで頑張る">Pythonで頑張る&lt;/h2>
-&lt;p>Python は最近すっかりメジャーになり、プログラミング教育が小学校で必修化され最初に学ぶのがPythonだという話もあります。&lt;br>
-ライブラリも非常に充実しています。&lt;br>
-そこで勉強を兼ねてPythonを使ってNクイーン問題を解いていこうと思います。&lt;/p>
-&lt;h2 id="アルゴリズムなしでnクイーン問題を解こうとすると">アルゴリズムなしでNクイーン問題を解こうとすると。。。&lt;/h2>
-&lt;p>Nクイーンはアルゴリズムを使うとどのくらい早くなるのでしょうか。&lt;br>
-それを体感するために今回はまったくアルゴリズムを使わないでプログラムにNクイーン問題に取り組ませてみましょう。&lt;br>
-まったくアルゴリズムを使わない方法は「ブルートフォース　力任せ探索」と呼ばれるものです。&lt;/p>
-&lt;p>N4だと4の4乗で256パターン&lt;br>
-私のPCだと0m0.042sで終了しますが&lt;br>
-N8だと8の8乗で16777216パターン&lt;br>
-3m7.321sもかかってしまいます。&lt;/p>
-&lt;p>ちなみに今後やる検索効率化アルゴリズム「バックトラック」だと&lt;br>
-N8でと0m0.03sで完了します（もっと早いアルゴリズムも出てきます。）。&lt;/p>
-&lt;p>ここでは触って動かしてみていただいて時間かかるなあと思っていただければ良いです。&lt;/p>
-&lt;h2 id="プログラムについて">プログラムについて&lt;/h2>
-&lt;p>プログラムは以下のgitにあります。&lt;br>
-&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py01_nqueen.py&lt;/a>&lt;/p>
-&lt;p>このプログラムは鈴木維一郎先生が作成したものです。&lt;br>
-私はこのプログラムを初めてみながらpythonだとこう書くんだと思いながら&lt;br>
-pythonの勉強させてもらいながらコメントしていく感じになります。&lt;/p>
-&lt;p>プログラムのダウンロード方法は以下です。&lt;/p>
-&lt;p>git clone &lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/&lt;/a>&lt;/p>
-&lt;p>実行方法は&lt;br>
-N-Queens/03Pythonに移動して&lt;br>
-python py01_nqueen.py&lt;/p>
-&lt;p>です。&lt;/p>
-&lt;h2 id="プログラム概要">プログラム概要&lt;/h2>
-&lt;p>このプログラムでやりたいことはエイトクイーン(N=8)の時に全ての可能性のある解の候補を体系的に数え上げます。&lt;br>
-利き筋などは全く考えず1行に1個ずつクイーンを置いていきます。&lt;br>
-パターン数はNxNになるのでエイトクイーン(N=8)だと8の8乗16777216パターンクイーンを配置します。&lt;/p>
-&lt;p>プログラムがやるのはここまでです。これが正解かどうかはプログラムではチェックしません。&lt;br>
-プログラムが列挙したパターンから人力でどれが正解かをチェックしようと思ったらエイトクイーン(N=8)でも相当の年月がかかりますね。&lt;/p>
-&lt;p>出力はパターンのカウント数と各行にクイーンが置かれた場所になります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>1: 00000000
-2: 00000001
-3: 00000002
-4: 00000003
-.
-.
-.
-163100: 00476433
-163101: 00476434
-163102: 00476435
-163103: 00476436
-.
-.
-.
-16777213: 77777774
-16777214: 77777775
-16777215: 77777776
-16777216: 77777777
-&lt;/code>&lt;/pre>&lt;p>例えば&lt;br>
-163101: 00476434&lt;br>
-だと&lt;/p>
-&lt;p>163101はカウント数です。163101番目のパターンという意味です。&lt;/p>
-&lt;p>00476434はクイーンが置かれた場所です&lt;br>
-左端が1行目で左から右へ行数が増えていきます。&lt;br>
-クイーンの位置が&lt;br>
-0:1行目は0なので右から1番目&lt;br>
-0:2行目は0なので右から1番目&lt;br>
-4:3行目は4なので右から5番目&lt;br>
-7:4行目は7なので右から8番目&lt;br>
-6:5行目は6なので右から7番目&lt;br>
-4:6行目は4なので右から5番目&lt;br>
-3:7行目は3なので右から4番目&lt;br>
-4:8行目は4なので右から5番目&lt;br>
-に置かれたということを表現しています。&lt;/p>
-&lt;p>図にすると以下になります&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 241px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/q1.png" data-size="353x351">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/q1.png"
-width="353"
-height="351"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>この例だと2行目に1行目と同じ列にクイーンを配置しているので、2行目の段階で1行目の下の効き筋に引っかかっているので解にはなりません。&lt;/p>
-&lt;p>次回はプログラム詳細について説明していきたいと思います。&lt;/p></description></item></channel></rss>
+&lt;!-- EOL --></description></item></channel></rss>

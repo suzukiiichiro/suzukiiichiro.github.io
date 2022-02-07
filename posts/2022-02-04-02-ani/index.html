@@ -4,29 +4,31 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="「シェルスクリプト」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<title>Tag: シェルスクリプトの記事一覧 / 2ページ目 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。">
+<title>pythonでNQueen（エイトクイーン）バックトラック（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
-<link rel=prev href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>
-<link rel=canonical href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>
-<meta property="og:title" content="Tag: シェルスクリプトの記事一覧 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="「シェルスクリプト」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:url" content="https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/">
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/>
+<meta property="og:title" content="pythonでNQueen（エイトクイーン）バックトラック（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2022-02-07T17:12:56+09:00 ">
-<meta name=twitter:title content="Tag: シェルスクリプトの記事一覧 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="「シェルスクリプト」のページです。最新技術やプログラム、デザインなど様々な情報を提供するサイト"><link rel=alternate type=application/rss+xml href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/index.xml><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-07T16:55:55+09:00"><meta property="article:modified_time" content="2022-02-07T17:12:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/chess.jpg">
+<meta name=twitter:title content="pythonでNQueen（エイトクイーン）バックトラック（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80")</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"http://schema.org","@type":"WebSite","url":"https://suzukiiichiro.github.io/","potentialAction":{"@type":"SearchAction","target":"https://suzukiiichiro.github.io/search/?keyword={search_term_string}","query-input":"required name=search_term_string"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"シェルスクリプト","item":"https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）バックトラック（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/chess.jpg"],"datePublished":"2022-02-07T16:55:55+09:00","dateModified":"2022-02-07T17:12:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
-<body>
+<body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
-<div class="container main-container flex on-phone--column extended"><div class="sidebar left-sidebar sticky">
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
 <button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box>
 <span class=hamburger-inner></span>
@@ -93,27 +95,204 @@ Web開発
 <li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
 </li>
 </div>
-</div><main class="main full-width">
+</div>
+<main class="main full-width">
 <nav class=breadcrumb-area>
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
-<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/tags/>Tags</a>
-<li><span class=breadcrumb-item>シェルスクリプト</span>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
+<li><span class=breadcrumb-item>pythonでNQueen（エイトクイーン）バックトラック（１）</span>
 </ol>
 </nav>
-<div class=section-card>
-<div class=section-details>
-<div class=section-title-area>
-<h1 class=section-term>シェルスクリプト<span class=section-count>11 pages</span></h1>
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
+プログラミング
+</a>
 </div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=name>root</span>
+</span>
+<time class="article-time--item article-time--published">2022.02.07</time>
+<time class="article-time--item article-time--reading">
+読了時間: 4分
+</time>
 </div>
+</header>
+<h1 class=article-title>
+pythonでNQueen（エイトクイーン）バックトラック（１）
+</h1>
 </div>
-<section class=article-list>
-<article class="has-image article-item" data-date=2021.12.23>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#バックトラック>バックトラック</a></li>
+<li><a href=#グローバル変数>グローバル変数</a></li>
+<li><a href=#対角線上の配置フラグ>対角線上の配置フラグ</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<h2 id=バックトラック>バックトラック</h2>
+<p>今回はバックトラックを説明していきたいと思います。 <br>
+今回のバックトラックのロジックは前回の配置フラグの拡張版です。<br>
+配置フラグは上下の利き筋までしかチェックしていませんでしたが今回のバックトラックは左右斜めの対角線上の利き筋もチェックします。<br>
+上下の配置フラグの他に右斜め、左斜めの配置フラグを作ってチェックします。<br>
+ブルートフォース、配置フラグでは解の候補を出すに止まりましたが、今回で左右、上下、対角線上とクイーンのすべての利き筋をチェックすることができるますので、プログラム独力で解を出せるようになります。<br>
+出力は解の数となっております。</p>
+<p>ブルートフォース、配置フラグ、バックトラックの関係は以下の通りです。</p>
+<p>・ブルートフォース<br>
+1行に1個のクイーンを置く 左右の利き筋をみる<br>
+・配置フラグ<br>
+1行に1個のクイーンを置く 左右の利き筋をみる<br>
+配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
+・バックトラック<br>
+1行に1個のクイーンを置く 左右の利き筋をみる<br>
+配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
+配置フラグを拡張し左右斜めにクイーンを置けないようにする 対角線上の利き筋をみる</p>
+<p>プログラムソースは以下のURLにあります。</p>
+<p><a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py</a></p>
+<h2 id=グローバル変数>グローバル変数</h2>
+<p>432,433行目でTOTAL,UNIQUEというグローバル変数が追加されています。<br>
+ブルートフォース、配置フラグは解の候補を列挙するにとどまっていましたが、今回からはプログラム内で正解数を出力するようになります。<br>
+TOTALは正解数の総数です。<br>
+UNIQUEですが、NQueenの解は左右ミラー反転、90度、180度、270度と左右反転していくと同じ形のものが結構あります。左右反転して同じ形のものを同一解としてカウントした数がUNIQUEとなります。</p>
+<p>436,437行目にFB,FC配列が追加されています。<br>
+FBが左斜め、FCが右斜めの対角線の利き筋を配置フラグでチェックします。</p>
+<h2 id=対角線上の配置フラグ>対角線上の配置フラグ</h2>
+<p>対角線の利き筋ですが１次元配列でチェックすることができます。<br>
+図で見てみましょう。</p>
+<p>上下の利き筋について簡単です。<br>
+例えば、1行目の右から2列目にクイーンを置いた場合は2、3、4行目の2列目にクイーンを置けなくなります。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/d1.png>
+<img src=https://suzukiiichiro.github.io/d1.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>2、3、4行目の右から2列目にクイーンを置いた場合はその他の行の2列目にクイーンを置けなくなります。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/d2.png>
+<img src=https://suzukiiichiro.github.io/d2.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+<figure>
+<a href=https://suzukiiichiro.github.io/d3.png>
+<img src=https://suzukiiichiro.github.io/d3.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+<figure>
+<a href=https://suzukiiichiro.github.io/d4.png>
+<img src=https://suzukiiichiro.github.io/d4.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>ですのでフラグはクイーンを置いた列番号に立てれば良いことになります。<br>
+2列目だったらFA[1]=1です。</p>
+<p>対角線の利き筋についても計算が必要ではあるのですが法則性があり1次元配列で表現することが可能です。</p>
+<p>FB 左斜め対角線の利き筋について見てみましょう</p>
+<p>左斜め対角線のフラグの位置の計算法則は<br>
+行数-クイーンを置いた列数+(サイズ-1)<br>
+row-i+(size-1)<br>
+で1次元配列で表現できます。</p>
+<p>図で見てみましょう。<br>
+1行目の1列目にクイーンを置いた場合<br>
+左斜め対角線の利き筋は以下の通りになります。</p>
+<pre tabindex=0><code>1行目1列目 [0,0]
+2行目2列目 [1,1]
+3行目3列目 [2,2]
+4行目4列目 [3,3]
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/l1.png>
+<img src=https://suzukiiichiro.github.io/l1.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>row-i+(size-1) で計算してみましょう</p>
+<pre tabindex=0><code>1行目1列目 [0,0] 0-0+(4-1)=3
+2行目2列目 [1,1] 1-1+(4-1)=3
+3行目3列目 [2,2] 2-2+(4-1)=3
+4行目4列目 [3,3] 3-3+(4-1)=3
+</code></pre><p>FB[4] にフラグをたてれば左対角線の利き筋をチェックすることができます。</p>
+<p>2行目3列目にクイーンを置いた場合はどうなるでしょう</p>
+<p>左斜め対角線の利き筋は以下の通りになります。</p>
+<pre tabindex=0><code>1行目2列目 [0,1]
+2行目3列目 [1,2]
+3行目4列目 [2,3]
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/l5.png>
+<img src=https://suzukiiichiro.github.io/l5.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>row-i+(size-1) で計算してみましょう</p>
+<pre tabindex=0><code>1行目2列目 [0,1] 0-1+(4-1)=2
+2行目3列目 [1,2] 1-2+(4-1)=2
+3行目4列目 [2,3] 2-3+(4-1)=2
+</code></pre><p>FB[3] にフラグをたてれば左対角線の利き筋をチェックすることができます。</p>
+<p>FC 右斜め対角線の利き筋について見てみましょう</p>
+<p>右斜め対角線のフラグの位置の計算法則は<br>
+行数+クイーンを置いた列数<br>
+row+i<br>
+で1次元配列で表現できます。</p>
+<p>図で見てみましょう。<br>
+1行目の4列目にクイーンを置いた場合<br>
+右斜め対角線の利き筋は以下の通りになります。</p>
+<pre tabindex=0><code>1行目1列目 [0,3]
+2行目2列目 [1,2]
+3行目3列目 [2,1]
+4行目4列目 [3,0]
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/r1.png>
+<img src=https://suzukiiichiro.github.io/r1.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>row+iで計算してみましょう</p>
+<pre tabindex=0><code>1行目1列目 [0,3] 0+3=3
+2行目2列目 [1,2] 1+2=3
+3行目3列目 [2,1] 2+1=3
+4行目4列目 [3,0] 3+0=3
+</code></pre><p>FC[4] にフラグをたてれば右対角線の利き筋をチェックすることができます。</p>
+<p>2行目の2列目にクイーンを置いた場合<br>
+右斜め対角線の利き筋は以下の通りになります。</p>
+<pre tabindex=0><code>1行目1列目 [0,2]
+2行目2列目 [1,1]
+3行目3列目 [2,0]
+4行目4列目 [3,0]
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/r5.png>
+<img src=https://suzukiiichiro.github.io/r5.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>row+iで計算してみましょう</p>
+<pre tabindex=0><code>1行目1列目 [0,2] 0+2=2
+2行目2列目 [1,1] 1+1=2
+3行目3列目 [2,0] 2+0=2
+</code></pre><p>FC[3] にフラグをたてれば右対角線の利き筋をチェックすることができます。</p>
+<p>長くなりましたので今回はグローバル変数の説明だけで終わります。<br>
+次回は、新しく追加されたmainメソッドからプログラムの概要を説明したいと思います。</p>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.02.04>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_0x400_resize_q75_box.jpg 1600w" width=667 height=200 loading=lazy alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話">
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -122,35 +301,204 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【wLu】Bashで便利なコマンドを作ってみようって話</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.23</time>
-</div><p class=article-subtitle>今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です</p>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.04</time>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第4回目。今回は配置フラグ（制約テスト高速化）について図で示しながら詳細な動きを説明します。再帰とfor文が絡み合っている時にどうやって動くのかを中心に説明します。</p>
 </div>
 </a>
 </article>
+<article class="has-image article-item" data-date=2022.02.03>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.03</time>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第３回目。今回は配置フラグ（制約テスト高速化）について説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.02.01>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-31-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.01</time>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第２回目。再帰の挙動などアルゴリズムを使わないブルートフォース力任せ探索についてプログラムの詳細部分を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第一回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat hampelで時系列データの異常値検知">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat hampelで時系列データの異常値検知</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>e-Statの統計データhampelを使って時系列データの異常値検知試みます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.21>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（４）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.21</time>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（３）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（３）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果をjqでパースする方法を説明します。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x200_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_0x400_resize_q75_box.jpg 1600w" width=300 height=200 loading=lazy alt="Featured image of post e-Stat でGoogle Custom Search APIを使おう（２）">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（２）</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>Google Custom Search APIで10件目以降の取得方法、newsなど検索対象の絞り込み方法について説明します。検索エンジンの設定にあるschema.orgを使用します。</p>
+</div>
+</a>
+</article>
+</div>
 </section>
-<nav class=pagination-area>
-<ul class="pagination pagination-default">
-<li class="page-item smp-nav--show">
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ aria-label=First class=page-link role=button><span aria-hidden=true>&#171;</span></a>
-</li>
-<li class="page-item smp-nav--show">
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ aria-label=Previous class=page-link role=button><span aria-hidden=true>&#8249;</span></a>
-</li>
-<li class=page-item>
-<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ aria-label="Page 1" class=page-link role=button>1</a>
-</li>
-<li class="page-item active">
-<a aria-current=page aria-label="Page 2" class=page-link role=button>2</a>
-</li>
-<li class="page-item disabled smp-nav--show">
-<a aria-disabled=true aria-label=Next class=page-link role=button tabindex=-1><span aria-hidden=true>&#8250;</span></a>
-</li>
-<li class="page-item disabled smp-nav--show">
-<a aria-disabled=true aria-label=Last class=page-link role=button tabindex=-1><span aria-hidden=true>&#187;</span></a>
-</li>
-</ul>
-</nav>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/nqueen/>nQueen</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+</section>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch.fee2ece5d66fa2c37e646dffc2c48f74_hub5e89b620d2afe5c10cf3894738f1203_83896_160x100_fill_q75_box_smart1.jpg width=160 height=100 loading=lazy alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法" data-hash="md5-/uLs5dZvosN+ZG3/wsSPdA==">
+</div>
+<div class=article-details>
+<h2 class=article-title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
 </main>
 <div class="sidebar right-sidebar sticky">
 <aside class=widget>
