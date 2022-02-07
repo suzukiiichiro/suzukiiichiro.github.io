@@ -1122,10 +1122,10 @@ $
 
 
 
-<!--
 ## 数値計算処理
 
-このトピックでは、スクリプトを使用してさまざまな数値演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
+このトピックでは、スクリプトを使用してさまざまな数値演算を実行する方法を学習します。
+最初の方法では、２つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を出力します。
 
 
 ``` bash:numberCalc.sh
@@ -1136,172 +1136,349 @@ n2=20;
 echo $(( n1 + n2 ));
 ```
 
+```
+$ bash numberCalc.sh
+24
+$
+```
+
+### 四則演算
 加算、減算、乗算、除算などの複数の操作を実行するための単一のスクリプトを書くこともできます。
 
 
 ``` bash:numberCalc2.sh
 #!/bin/bash
 
-n1=20
-n2=4
+n1=20;
+n2=4;
 
-echo $(( n1 + n2 )) 
-echo $(( n1 - n2 )) 
-echo $(( n1 * n2 )) 
-echo $(( n1 / n2 )) 
-echo $(( n1 % n2 ))
+echo $(( n1 + n2 )); 
+echo $(( n1 - n2 )); 
+echo $(( n1 * n2 )); 
+echo $(( n1 / n2 )); 
+echo $(( n1 % n2 ));
 ```
 
 
-算術演算を実行する2番目の方法は、「expr」を使用することです。この「expr」は、これらのn1とn2を他の変数とみなし、操作を実行することです。
+```
+$ bash numberCalc2.sh
+24
+16
+80
+5
+0
+$
+```
+
+
+### 算術演算 exprコマンド
+
+算術演算を実行する他の方法は、「expr」コマンドを使用することです。
+この「expr」は、これらのn1とn2を他の変数とみなし、操作を実行することです。
 
 
 ``` bash:numberCalc3.sh
 #!/bin/bash
 
-n1=20
-n2=4
+n1=20;
+n2=4;
 
-echo $(expr $n1 + $n2 )
+echo $(expr $n1 + $n2 );
 ```
 
-1つのファイルを使用して、「expr」を使用して複数の操作を実行することもできます。以下は、そのサンプルスクリプトです。
+
+```
+$ bash numberCalc3.sh
+24
+$
+```
+
+
+「expr」を使用して四則演算を処理してみます。
 
 
 ``` bash:numberCalc4.sh
 #!/bin/bash
 
-n1=20
-n2=4
+n1=20;
+n2=4;
 
-echo $(expr $n1 + $n2 )
-echo $(expr $n1 - $n2 )
-echo $(expr $n1 \* $n2 )
-echo $(expr $n1 / $n2 )
-echo $(expr $n1 % $n2 )
+echo $(expr $n1 + $n2 );
+echo $(expr $n1 - $n2 );
+echo $(expr $n1 \* $n2 );
+echo $(expr $n1 / $n2 );
+echo $(expr $n1 % $n2 );
 ```
 
-### 16進数を10進数に変換する
-16進数を小数に変換するには、ユーザーから16進数を取るスクリプトを書いて、数字を読みます。この目的のために「bc計算機」を使用します。「obase」を10、「ibase」を16と定義します。この手順をよりよく理解するために、以下のスクリプトコードを使用できます。
+```
+$ bash numberCalc4.sh
+24
+16
+80
+5
+0
+$
+```
 
+### 小数点の扱い bcコマンド
+exprコマンドなどは小数演算できません。
+echoコマンドで数式を作成し、それをbcコマンドに渡して計算します。
 
-``` bash:numberCalc5.sh
+``` bc:bc.sh
 #!/bin/bash
 
-echo "Enter Hex number of your choice"
-read Hex
-echo -n "The decimal value of $Hex is : "
-echo "obase=10; ibase=16; $Hex" | bc
+RESULT=`echo "scale=5; 10.0 / 3.0" | bc`;
+echo "$RESULT";
 ```
 
 
-
-## [declare] コマンド
-
-このコマンドの背後にある考え方は、bash自体に強力な型システムがないため、bashで変数を制限することはできません。ただし、型のような動作を許可するには、'declare' コマンドであるコマンドで設定できる属性を使用します。'declare' は、シェルの範囲内の変数に適用される属性を更新できる bash 組み込みコマンドです。変数を宣言して覗くことができます。
-
-以下に示すコマンドを書くと、システムにすでに存在する変数のリストが表示されます。
-
 ```
-$ declare -p
+$ bash bc.sh
+3.33333
+$
 ```
 
-独自の変数を宣言することもできます。そのためには、変数の名前で宣言コマンドを使用する必要があります。
-
-$はmyvariableを宣言します
-その後、「$ declare -p」コマンドを使用して、リスト内の変数を確認します。
+## bcコマンドでの小数点以下の指定桁数出力
+演算の精度を保つため、上記のように計算は小数点以下5桁で行うけれど、表示は小数点以下2桁とかにしたい場合（桁数を指定したい場合）
 
 
-値を持つ変数を定義するには、以下に示すコマンドを使用します。
+``` bash:bc_f.sh
+#!/bin/bash
 
-```
-$ declare myvariable=11
-$ declare -p
+RESULT=`echo "scale=5; 10.0 / 3.0" | bc`
+printf "%.2f" $RESULT
 ```
 
-それでは、ファイルを制限してみましょう。「-r」を使用して、ファイルに読み取り専用制限を適用し、変数の名前をパスで書き込みます。
+```
+$ bash bc_f.sh
+3.33
+$
+```
 
+printf で桁数を指定します。
+実は、bcコマンドでも桁数を指定できます。
+
+``` bash:bc_f.sh
+#!/bin/bash
+
+# 先に紹介した方法
+RESULT=`echo "scale=5; 10.0 / 3.0" | bc`;
+echo "$RESULT";
+
+# printfコマンドで２桁にする
+RESULT=`echo "scale=5; 10.0 / 3.0" | bc`;
+printf "%.2f\n" "$RESULT";
+
+# bcコマンドで２桁にする
+RESULT=`echo "scale=2; 10.0 / 3.0" | bc`;
+echo "$RESULT";
+```
+
+
+```
+$ bash bc_f.sh
+3.33333
+3.33
+3.33
+$
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: bcコマンドで小数点以下の桁数を指定するためには、scale= で指定します。
+: ';'セミコロンを忘れずに。
+{{% /tips-list %}}
+
+
+
+## declareコマンド
+
+bashには変数の型(int char stringなど）がないため、bashで変数の型を制限することはできません。
+ただし、型のような動作を許可することができます。
+
+```
+declare [オプション] [変数名]=[値]
+```
+
+### グローバル変数とローカル変数
+関数内で declare コマンドを使用すると、オプションがなければローカル変数として定義されます。-g オプションを使用すればスクリプト内のグローバルに変数を定義されます。スコープを明示しないと狭いスコープとなります。
 
 ``` bash:declare.sh
 #!/bin/bash
 
-declare -r pwdfile=/etc/passwd
-echo $pwdfile
+function set_my_value() {
+  declare -x my_env_value='ENV';
+  declare -g my_global_value='GLOBAL';
+  declare my_local_value='LOCAL';
+  my_value='XXX';
+}
+
+set_my_value;
+echo $my_env_value;
+echo $my_global_value;
+echo $my_local_value;
+echo $my_value;
 ```
 
-それでは、ファイルにいくつかの変更を加えてみましょう。
+結果は以下の通りです。
+
+```
+$ bash declare.sh
+
+GLOBAL
+
+XXX
+$
+```
 
 
-``` bash:declare2.sh
+### 整数として変数定義する
+-i を付ければ整数として変数を定義できます。
+
+
+``` bash:declare_i.sh
 #!/bin/bash
 
-declare -r pwdfile=/etc/passwd
-echo $pwdfile
-pwdfile=/etc/abc.txt
+# -i で整数として変数を定義
+$ declare -i num=001
+$ echo $num
 ```
 
-「pwdfile」は読み取り専用ファイルとして制限されているためです。スクリプトの実行後にエラーメッセージが表示されるはずです。
+```
+$ bash declare_i.sh
+1
+$
+```
+
+``` bash:declare_no_i.sh
+# -i がないと文字列となるのでそのまま
+$ declare str=001
+$ decho $str
+$ echo $str
+```
+
+```
+$ bash declare_no_i.sh
+001
+$
+```
+
+
+{{% tips-list tips %}}
+オプションまとめ
+: delcare -a: 配列を定義
+: delcare -i: 整数として定義
+: delcare -r: 読み取り専用変数として定義
+: delcare -g: 関数内で使用時、グローバル変数として定義
+{{% /tips-list %}}
+
+
 
 
 ## 配列
 
-まず、配列を宣言し、その中に値を格納する方法を学びます。好きなだけ値を保存できます。配列の名前を書き、その値を「( )」括弧で定義します。以下のコードを検索して、その仕組みを確認することができます。
+配列を宣言し、その中に値を格納する方法を学びます。
+好きなだけ値を保存できます。
+配列の名前を書き、その値を「( )」括弧で定義します。
 
 
 ``` bash:array.sh
 #!/bin/bash
 
-car=('BMW' 'TOYOTA' 'HONDA')
-echo "${car[@]}"
+car=('BMW' 'TOYOTA' 'HONDA');
+echo "${car[@]}";
+```
+
+```
+$ bash array.sh
+BMW TOYOTA HONDA
+$
 ```
 
 
-また、以下の例では「BMW」が「0」番目のインデックスに格納され、「TOYOTA」が「1」stインデックスに格納され、「HONDA」が「2」番目のインデックスに格納されるなど、配列要素のインデックスを使用して印刷することもできます。「BMW」を印刷する場合は、${car[0]}と書き、その逆も同様です。
+「BMW」が「0」番目のインデックスに格納され、「TOYOTA」が「1」番目のインデックスに格納され、「HONDA」が「2」番目のインデックスに格納されます。
+「BMW」を出力する場合は、${car[0]}と書きます。
 
 
 ``` bash:array2.sh
 #!/bin/bash
 
-car=('BMW' 'TOYOTA' 'HONDA')
-echo "${car[@]}"
+car=('BMW' 'TOYOTA' 'HONDA');
+echo "${car[@]}";
+
 #printing value by using index
-echo "printing value using index"
-echo "${car[0]}"
-echo "${car[1]}"
-echo "${car[2]}"
+echo "printing value using index";
+echo "${car[0]}";
+echo "${car[1]}";
+echo "${car[2]}";
 ```
 
-配列のインデックスを印刷することもできます。このためには、「${!車[@]}”、ここ’!’インデックスを表すために使用され、「@」は配列全体を表します。
+
+```
+$ bash array2.sh
+BMW TOYOTA HONDA
+printing value using index
+BMW
+TOYOTA
+HONDA
+$
+```
+
+
+配列のインデックスを印刷することもできます。
+
 
 ``` bash:array3.sh
 #!/bin/bash
 
-car=('BMW' 'TOYOTA' 'HONDA')
-echo "${car[@]}"
-echo "printing the indexes"
-echo "${!car[@]}"
+car=('BMW' 'TOYOTA' 'HONDA');
+echo "${car[@]}";
+echo "printing the indexes";
+echo "${!car[@]}";
 ```
 
+```
+$ bash array3.sh
+BMW TOYOTA HONDA
+printing the indexes
+0 1 2
+$
+```
 配列内の値の合計数を印刷する場合は、ここに「${#car[@]}」と書くだけで、要素の総数を表します。
 
 
-``` bash:array3.sh
+``` bash:array4.sh
 #!/bin/bash
 
-car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
-echo "${car[@]}"
-echo "printing  the indexes"
-echo "${!car[@]}"
-echo "printing number of values"
-echo "${#car[@]}"
+car=('BMW' 'TOYOTA' 'HONDA' 'ROVER');
+echo "${car[@]}";
+echo "printing  the indexes";
+echo "${!car[@]}";
+echo "printing number of values";
+echo "${#car[@]}";
 ```
 
 
-配列を宣言し、任意の要素を削除したいとします。要素を削除するには、配列名と削除する要素のインデックスを含む「unset」コマンドを使用します。「car」配列の2番目のインデックスに格納されている値を削除する場合は、スクリプトに「unset car[2]」と書くだけです。Unsetコマンドは、配列からインデックスを持つ配列要素を削除します。理解を深めるために、次のコードをチェックしてください。
+```
+$ bash array4.sh
+BMW TOYOTA HONDA ROVER
+printing  the indexes
+0 1 2 3
+printing number of values
+4
+$
+```
+
+
+配列内にある任意の要素を削除したいとします。
+要素を削除するには、配列名と削除する要素のインデックスを含む「unset」コマンドを使用します。
+「car」配列の2番目のインデックスに格納されている値を削除する場合は、スクリプトに「unset car[2]」と書くだけです。
+
 
 ``` bash:array4.sh
-
 #!/bin/bash
+
 car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
 unset car[2]
 echo "${car[@]}"
@@ -1313,15 +1490,20 @@ echo "${#car[@]}"
 
 次のコードを「helloScript.sh」に保存します。「./helloScript.sh」を使用してファイルを実行します。
 
-これで配列要素を削除することがわかっていますが、「MERCEDES」などの他の値をインデックス2に格納する場合はどうなりますか。unsetコマンドを使用した後、次の行に「car[2]='MERCEDES」と書きます。それでおしまい。
+配列要素を削除することはわかりました。
+では「MERCEDES」などの他の値をインデックス2に格納する場合はどうしましょう。
+unsetコマンドを使用した後、次の行に「car[2]='MERCEDES」と書きます。
 
 
 ``` bash:array5.sh
 #!/bin/bash
 
 car=('BMW' 'TOYOTA' 'HONDA' 'ROVER')
+# 2のHONDAを削除
 unset car[2]
+# 2に値をセット
 car[2]='MERCEDES'
+
 echo "${car[@]}"
 echo "printing  the indexes"
 echo "${!car[@]}"
@@ -1329,91 +1511,128 @@ echo "printing number of values"
 echo "${#car[@]}"
 ```
 
+```
+$ bash array5.sh
+BMW TOYOTA MERCEDES ROVER
+printing  the indexes
+0 1 2 3
+printing number of values
+4
+$
+```
+
 
 ## 関数
 
-関数は基本的に再利用可能なコード行であり、何度も呼び出すことができます。特定の操作を何度も実行する場合、または何かを繰り返し実行する場合は、コードで関数を使用するための記号です。関数は、何度も何度もたくさんの行を書くための時間と労力を節約します。
+関数は基本的に再利用可能なコード行です。何度も呼び出すことができます。
+特定の操作を何度も実行する場合、または特定の処理を何度も実行する場合、関数は、何度も何度も同じコードを書くための時間と労力を軽減します。
 
-以下は、関数の構文を示す例です。覚えておくべき最も重要なことの1つは、関数を呼び出す前にコーディングのどこかで最初に関数を定義または宣言する必要があることです。コードで関数を定義するには、ステップ1は、指定する関数名で「関数」コマンドを使用し、次に「( )」を使用することです。ステップ2は、「{ }」内に関数コードを書くことです。ステップ3は、実行したい関数名を使用して関数を呼び出すことです。
+以下は関数の構文を示す例です。
+覚えておくべき最も重要なことの1つは、関数を呼び出す前にコーディングのどこかで最初に関数を定義または宣言する必要があることです。
+
+コードで関数を定義するには、３つのステップが必要です。
+ステップ1は、指定する関数名の前に「function」コマンドを書き関数名を宣言し、後ろに「()」を書きます。
+ステップ2は、処理ブロックは「{」ではじまり、「 }」で閉じられた内側ににコードを書くことです。
+ステップ3は、function 関数名() で宣言した下の行で実行したい関数名を使用して関数を呼び出すことです。
 
 
 ``` bash:method.sh
 #!/bin/bash
 
-function funcName()
-{
-    echo "this is new function"
+# 関数の宣言
+function funcName(){
+  echo "this is new function";
 }
 
-funcName
+# 関数呼び出し
+funcName;
 ```
 
 
-関数にパラメータを与えることもできます。たとえば、関数呼び出し時に与えられる任意の単語を引数として指定します。このためには、上記の構文を使用して関数を作成するだけで、関数の本文に「エコー$ 1」と書き込むと、この行は関数呼び出し時に割り当てられた最初のパラメータを出力します。本文から出てきて、関数名を使用して関数を呼び出し、端末に表示したい単語を「パラメータ」として呼び出します。
+```
+$ bash method.sh
+this is new function
+$
+```
+
+関数にパラメータを与えることもできます。
+たとえば、関数呼び出し時に与えられる任意の単語を引数として指定します。
+関数呼び出しの関数名の後ろに、文字列を指定して関数に渡します。
+渡された関数は、一つ目のパラメータを $1 として処理を続ける事ができます。
 
 
 ``` bash:method2.sh
 #!/bin/bash
 
-function funcPrint()
-{
-    echo $1
+function funcPrint(){
+  echo "$1";
 }
 
-funcPrint HI
+funcPrint "BashScript";
 ```
 
-プログラムに応じて複数のパラメータまたは引数を使用し、関数呼び出し時にそれらのパラメータ値に言及することができます。
+
+```
+$ bash method2.sh
+BashScript
+$
+```
 
 
-``` bash:method3.sh
+複数のパラメータを扱う場合、$1, $2などの変数名は区別がつきにくく、コードが混乱する場合が多いので、変数に代入すると、扱いやすくなります。
+
+
+``` bash:method2.sh
 #!/bin/bash
 
-function funcPrint()
-{
-    echo $1 $2 $3 $4 $5
+function funcPrint(){
+  name="$1";
+  age="$2";
+
+  echo "$name is $age years old.";
 }
 
-funcPrint Hi This is Bash programming
+funcPrint "BashScript" 24 ;
 ```
 
-また、機能が完全に機能しているかどうかを確認することもできます。
+
+```
+$ bash method2.sh
+BashScript is 24 years old.
+$
 
 
-``` bash:funcCheck.sh
+関数内で宣言される変数はローカル変数です。
+というのは一般的なプログラム言語ですが、シェルスクリプトBashはグローバル変数しかありません。関数の中で宣言しても、関数の外で宣言しても、いずれもグローバル変数です。
+先に紹介した declare -g を使うことにより、グローバル変数とローカル変数を明確に区別することができます。
+
+例えば、以下のソースでは、関数実行前に「I love Mac」を変数に格納し、出力します。
+その後、関数を呼び出し、同変数に「I love Linux」を変数に代入すると、Ｃ言語やＪａｖａなどは、ローカル変数に格納した値は、グローバル変数に影響しない訳ですが、シェルスクリプトBashは、もろに影響します。理由は全てグローバル扱いだからです。
+
+``` bash:global_local.sh
 #!/bin/bash
 
-function funcCheck()
-{
-    returningValue="using function right now"
-    echo "$returningValue"
+function funcCheck(){
+  returningValue="I love Linux";
 }
+returningValue="I love MAC";
+echo $returningValue;
+#> I love Mac
+
+funcCheck;
+
+echo $returningValue;
+#> I love Linux
 ```
 
-### 関数の動作確認
-コードを「funcCheck.sh」に保存し、ターミナルを介して実行します。
-
-
-関数内で宣言される変数はローカル変数です。たとえば、以下に示すコードでは、「returningValue」はローカル変数です。ローカル変数という用語では、その値はこの関数の範囲内で「Linuxが大好きです」であり、関数本体の外部でこの変数にアクセスすることはできません。この関数を呼び出すと、変数「returningValue」に「I love Linux」という値が割り当てられます。
-
-
-``` bash:funcCheck2.sh
-#!/bin/bash
-
-function funcCheck()
-{
-    returningValue="I love Linux"
-
-}
-returningValue="I love MAC"
-echo $returningValue
-funcCheck
-echo $returningValue
+```
+$ bash global_local.sh
+I love MAC
+I love Linux
+$
 ```
 
-このスクリプトでは、「funcCheck()」という名前のローカル関数があります。この関数には、「I love Linux」という値を持つローカル変数「returningValue」があります。この「returningValue」はローカル変数です。関数を定義すると、「returningValue = "I love MAC」という別のステートメントがあることがわかりますが、今回は関数で定義されている変数ではなく、別の変数です。スクリプトを保存して実行すると、違いがわかります。
-
-
+<!--
 
 ## ファイルとディレクトリ
 
@@ -1552,6 +1771,7 @@ if [ -f "$fileName" ]; then
 else
     echo "$fileName doesn't exist"
 fi
+
 
 
 
