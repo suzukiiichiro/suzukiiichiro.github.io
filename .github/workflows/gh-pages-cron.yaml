@@ -1,17 +1,32 @@
-name: post-articles
+name: Cron Actioins
 
 on:
-  push:
-     branches:
-      - gh-pages
+  schedule:
+    - cron: '*/30 * * * *'
 
 jobs:
-  update-sitemap:
+  gh-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping to Google and Bing
-        run: |
-          curl -X GET "https://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/google_sitemap.xml"
-          curl -X GET "https://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/google_sitemap.xml"
-          curl -X GET "https://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/index.xml"
-          curl -X GET "https://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/index.xml"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      # https://github.com/marketplace/actions/github-pages-action
+      - name: Setup
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
