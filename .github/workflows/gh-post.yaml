@@ -1,8 +1,9 @@
-name: update-sitemap
+name: post-articles
 
 on:
-  schedule:
-    - cron: '0 15 * * *'
+  push:
+     branches:
+      - gh-pages
 
 jobs:
   update-sitemap:
