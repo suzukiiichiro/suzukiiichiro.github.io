@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T17:24:51+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T18:00:46+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T17:24:51+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T18:00:46+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 39分
+読了時間: 41分
 </time>
 </div>
 </header>
@@ -189,6 +189,11 @@ Web開発
 <li><a href=#grepコマンド>grepコマンド</a></li>
 <li><a href=#awkコマンド>awkコマンド</a></li>
 <li><a href=#sedコマンド>sedコマンド</a></li>
+<li><a href=#sortコマンド>sortコマンド</a></li>
+<li><a href=#uniqコマンド>uniqコマンド</a></li>
+<li><a href=#sort--r-逆順>sort -r 逆順</a></li>
+<li><a href=#cutコマンド>cutコマンド</a></li>
+<li><a href=#headコマンド>headコマンド</a></li>
 <li><a href=#スクリプトのデバッグ>スクリプトのデバッグ</a></li>
 </ol>
 </nav>
@@ -1664,7 +1669,86 @@ This is Unix
 This is Windows
 This is MAC
 $
-</code></pre><h2 id=スクリプトのデバッグ>スクリプトのデバッグ</h2>
+</code></pre><h2 id=sortコマンド>sortコマンド</h2>
+<p>テキストファイルを行単位で並べ替える<br>
+sort 並べ替える<br>
+sort -n 数値扱いで並べ替える<br>
+sort -r 逆順で出力</p>
+<p>まずは以下の読み込み用サンプルファイルを準備します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:sample.txt data-lang=bash:sample.txt>name:ヤムチャ   skill:狼牙風風拳
+name:孫悟空  skill:かめはめ波
+name:ピッコロ   skill:魔貫光殺砲
+name:ヤムチャ   skill:繰気弾
+name:孫悟空  skill:元気玉
+name:クリリン   skill:気円斬
+name:ヤムチャ   skill:かめはめ波
+name:クリリン   skill:かめはめ波
+name:孫悟空  skill:ジャン拳
+name:ヤムチャ   skill:新狼牙風風拳
+</code></pre></div><pre tabindex=0><code>$ cat sample.txt | grep -o &quot;name:\S*&quot; | sort
+name:孫悟空
+name:孫悟空
+name:孫悟空
+name:クリリン
+name:クリリン
+name:ピッコロ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+</code></pre><p>解説<br>
+grep -E<br>
+検索に「拡張正規表現」を使えるようにする。<br>
+^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} でIPアドレスに一致させる。</p>
+<p>grep -o<br>
+通常の grep では一致した行全体が表示されるが、-o を指定することにより一致した文字のみを表示させることができる。</p>
+<p>sort<br>
+次の uniq で重複行のカウントを行うため、並び替える。</p>
+<h2 id=uniqコマンド>uniqコマンド</h2>
+<p>uniq -c<br>
+重複行のカウントを表示する。</p>
+<pre tabindex=0><code>$ cat sample.txt | grep -o &quot;name:\S*&quot; | sort | uniq -c
+   3 name:孫悟空
+   2 name:クリリン
+   1 name:ピッコロ
+   4 name:ヤムチャ
+$
+</code></pre><h2 id=sort--r-逆順>sort -r 逆順</h2>
+<p>sort -r<br>
+カウントの降順で並べ替える。</p>
+<pre tabindex=0><code>$ cat sample.txt | grep -o &quot;name:\S*&quot; | sort | uniq -c | sort -r
+ 4 name:ヤムチャ
+ 3 name:孫悟空
+ 2 name:クリリン
+ 1 name:ピッコロ
+</code></pre><h2 id=cutコマンド>cutコマンド</h2>
+<p>cut:タブ区切りでフィールドを選択して出力する<br>
+cut -d:デリミタを指定。いわゆる区切り文字<br>
+cut -f:抽出するフィールドの番号を指定する。上記コマンドで1を指定した場合は二つ目の"name"が抽出される。</p>
+<pre tabindex=0><code>$ cat sample.txt | grep -o &quot;name:\S*&quot; | sort | uniq -c | sort -r |  cut -d &quot;:&quot; -f2
+ヤムチャ
+孫悟空
+クリリン
+ピッコロ
+$
+</code></pre><h2 id=headコマンド>headコマンド</h2>
+<p>長いメッセージやテキストファイルの先頭だけ／末尾だけを表示する</p>
+<p>head -n<br>
+n: 出力する行数を指定する。</p>
+<pre tabindex=0><code>$ cat sample.txt | grep -o &quot;name:\S*&quot; | sort | uniq -c | sort -r |  cut -d &quot;:&quot; -f2 | head -n2
+ヤムチャ
+孫悟空
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>だいたい解ってきたのではないかと思います。</dd>
+<dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。</dd>
+<dd>関数を使って、より長く複雑なことも実行可能です。</dd>
+<dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。</dd>
+</dl>
+</div>
+<h2 id=スクリプトのデバッグ>スクリプトのデバッグ</h2>
 <p>Bashは広範なデバッグ機能を提供しています。</p>
 <p>デバッグの方法は３種類あります</p>
 <p>１．ターミナルの実行時に -x オプションを付与する</p>
@@ -2128,22 +2212,22 @@ $
 </a>
 </article>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
-</div>
-<div class=article-details>
-<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
 <h2 class=article-title>pythonでNQueen（エイトクイーン）バックトラック（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.39535f4bd9442fc5d3c78ffa242281dc_huef76518ee7cf864704fb7239ce854747_84707_320x0_resize_q75_box.jpg 1600w" width=160 height=98 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2>
 </div>
 </a>
 </article>
