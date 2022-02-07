@@ -1,4 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 04 Feb 2022 12:03:03 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Googleにインデックスされないときの対応方法は？</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</link><pubDate>Fri, 04 Feb 2022 12:03:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg" alt="Featured image of post Googleにインデックスされないときの対応方法は？" />&lt;p>近年、ブログやWEBサイトを作って公開している人が増えてきました。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 11:28:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</link><pubDate>Mon, 07 Feb 2022 11:28:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch.jpg" alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法" />&lt;p>Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探っていこうと思います。&lt;/p>
+&lt;p>Hugoの導入や記事の投稿についての情報は&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21-01/" target="_blank" rel="noopener"
+>Hugoで記事の投稿の仕方&lt;/a>や&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/" target="_blank" rel="noopener"
+>デザイナーでもできる初めてのHUGO #01&lt;/a>を確認してください。&lt;/p>
+&lt;h2 id="gitから更新情報を取得するようにしている">Gitから更新情報を取得するようにしている&lt;/h2>
+&lt;p>Hugoは非常に強力な機能をたくさん持っています。その一つがGitにある情報にアクセスできるという点です。&lt;br>
+この機能を使えば、Gitに登録した人を投稿者としたり、push した日付を更新日とすることができます。&lt;br>
+つまり、自分で投稿者や更新日を記述する必要がないということになります。&lt;/p>
+&lt;p>このブログでもHugoとGitの連携を行っております。その連携自体は簡単です。&lt;br>
+設定ファイルに&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">enableGitInfo&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>と記述するだけで、Gitの情報にアクセスできます。&lt;/p>
+&lt;h2 id="frontmatterの記述">frontmatterの記述&lt;/h2>
+&lt;p>Hugoには日付を制御できる設定があります。Hugoがコンテンツ・ページに日付を割り当てる方法を設定することができます。これは、config に frontmatter セクションを追加することで行うことが可能です。&lt;br>
+私の環境では下記のようになっておりました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>:fileModTime&lt;/code>はコンテンツファイルの最終更新タイムスタンプから日付を取得します。&lt;br>
+&lt;code>:git&lt;/code>ではコンテンツファイルの最終リビジョンのGit作成日となります。&lt;br>
+この設定を使うには、&lt;code>--enableGitInfo&lt;/code> が設定されているか、サイト構成で &lt;code>enableGitInfo = true &lt;/code>が設定されている必要があります。つまり、先程の設定ファイルに記述した設定となります。&lt;br>
+そして、&lt;code>lastmod&lt;/code>です。&lt;/p>
+&lt;p>この設定は上から順に評価されていきます。&lt;/p>
+&lt;p>詳細は&lt;a class="link" href="https://gohugo.io/getting-started/configuration/#configure-front-matter" target="_blank" rel="noopener"
+>Hugoのfrontmatter&lt;/a>を確認してください。&lt;/p>
+&lt;h2 id="git-actioinsで設定したxmlの更新日がすべて同じになった">Git Actioinsで設定したXMLの更新日がすべて同じになった&lt;/h2>
+&lt;p>今回は&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/" target="_blank" rel="noopener"
+>XMLの作成&lt;/a>の際にGitのデータを使用するようにしていました。&lt;br>
+ローカルで確認したところ、&lt;code>hugo server&lt;/code>での動作も、&lt;code>hugo&lt;/code>にて書き出したファイルも更新日である&lt;code>lastmod&lt;/code>が正常に表示されていたので問題ないと判断して、Gitにアップしました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 147;
+flex-basis: 354px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png" data-size="980x663">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png"
+width="980"
+height="663"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>しかし、Gitではローカルと動作が異なっており、すべて同じ日付となってしまいました。&lt;br>
+一体なぜでしょうか？&lt;/p>
+&lt;h3 id="ランキングや最新記事の反映で日付が更新された可能性">ランキングや最新記事の反映で日付が更新された可能性&lt;/h3>
+&lt;p>このサイトでは最新記事やランキングを掲載しております。それらは時間や投稿のタイミングで変化します。そういた変化を検知してしまって日付が変わってしまった可能性が考えられます。&lt;br>
+しかし、そうだとしたら、ローカルでも同様の問題になるかと思うので、この可能性は低そうです。&lt;/p>
+&lt;h3 id="github-pagesで別ブランチで管理している">GitHub Pagesで別ブランチで管理している&lt;/h3>
+&lt;p>このサイトはGitHub Pagesを使って別ブランチで管理しています。つまり、公開ディレクトリにあたる public 部分は前の考察のランキングや最新記事によって全てのページが変更されています。&lt;br>
+そして、別ブランチにアップする。つまり、すべてが書き換わるといったことが起こったのではないでしょうか。&lt;/p>
+&lt;h2 id="解決策">解決策&lt;/h2>
+&lt;p>解決策はすごくと簡単です。&lt;br>
+Git と連携して lastmod の日付を自動で設定するために、&lt;code>enableGitInfo: true&lt;/code> としていました。そして、この設定と同時に、下記のような設定もHugoの設定ファイル（yaml形式）に記述していました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここの frontmatter の記述をすべてコメントアウトにします。&lt;br>
+それか、優先度のファイルのタイムスタンプから&lt;code>:git&lt;/code>に変更します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これでlastmodが正しく表示されるようになりました。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 169;
+flex-basis: 406px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png" data-size="980x578">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png"
+width="980"
+height="578"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>lastmod はSEOとしてあまり必要とされていないといった声も聞かれますが、正しく表示しておくことでサイトとしての信頼性は格段に上がると思います。&lt;br>
+HugoとGitの連携を行った際に、更新日など正しく反映されない箇所があった場合は設定などを見直してみましょう。&lt;br>
+簡単なことで問題が解決するかもしれません。&lt;/p>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/GitHub%e5%ae%9f%e8%b7%b5%e5%85%a5%e9%96%80-Pull-Request%e3%81%ab%e3%82%88%e3%82%8b%e9%96%8b%e7%99%ba%e3%81%ae%e5%a4%89%e9%9d%a9-PRESS-plus/dp/477416366X/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51PjpAUHZBL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> GitHub実践入門 ~Pull Requestによる開発の変革 (WEB&amp;#43;DB PRESS plus) &lt;/h2>
+&lt;p> GitHubの実践的な使い方を、実際に手を動かす形で解説する書籍です。初学者の方にもわかりやすいよう、基本的なGitやGitHubの使い方から、「ソーシャルコーディング」の目玉機能であるPull Requestの送り方・受け方まで解説します。また、外部ツールとの連携、GitHub FlowやGit Flowなど、GitHubを中心とした開発手法についてもしっかり解説しているので、中・上級者の方にも参考になるはずです。 目次 第1章:GitHubの世界へようこそ 第2章:Gitの導入 第3章:GitHubを利用するための準備 第4章:Gitを操作しながら学ぶ 第5章:GitHubの機能を徹底解説 第6章:はじめてのPull Request 第7章:Pull Requestが送られてきたら 第8章:GitHubと連携するツールとサービス 第9章:GitHubを利用した開発フロー 第10章:会社でGitHubを使おう Appendix A:GitHubをサポートするGUIクライアント Appendix B:Gistで手軽にコードを共有 続きを読む 。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51ITQMzMG2L.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> 改訂2版 わかばちゃんと学ぶ Git使い方入門〈GitHub、SourceTree、コマンド操作対応〉 &lt;/h2>
+&lt;p> マンガと実践で学ぶGitの入門書が最新情報に対応して改訂しました! Gitの概念はもちろん、GitHubについても丁寧に解説しています。これからGitを使い始める人にオススメの1冊です。 本書ではクリック操作でGitを使えるSourceTreeを中心に解説しているので、初心者でも安心です。 はじめにより抜粋 ■せっかく学ぶなら、やっぱり楽しい方がいい 「Gitって難しそう」 「勉強しようとは思っているけど、なかなか一歩が踏み出せない」 そんな方のために、楽しくGitを理解できる本を作りました。 ・個性的なキャラクターたちが登場するマンガ ・感覚的にわかる図解 ・丁寧な実践パート 上記3つの特長で、Gitを無理なく学べます。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>Googleにインデックスされないときの対応方法は？</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</link><pubDate>Fri, 04 Feb 2022 12:03:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg" alt="Featured image of post Googleにインデックスされないときの対応方法は？" />&lt;p>近年、ブログやWEBサイトを作って公開している人が増えてきました。&lt;br>
 そうした中で、Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事もGoogleにインデックスされないと検索結果に表示されません。&lt;/p>
 &lt;p>Googleにインデックスされないとき、どうしたら良いのでしょうか？&lt;/p>
 &lt;h2 id="ブログを公開">ブログを公開&lt;/h2>
@@ -3164,117 +3277,4 @@ alt="図">
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
 &lt;p>この例だと2行目に1行目と同じ列にクイーンを配置しているので、2行目の段階で1行目の下の効き筋に引っかかっているので解にはなりません。&lt;/p>
-&lt;p>次回はプログラム詳細について説明していきたいと思います。&lt;/p></description></item><item><title>Amazon EC2でもGo言語とHugoを使えるようにする方法</title><link>https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/</link><pubDate>Thu, 27 Jan 2022 13:31:52 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.jpg" alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法" />&lt;p>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールしてみたいと思います。&lt;/p>
-&lt;h2 id="go言語をcentos7にインストール">GO言語をCentOS7にインストール&lt;/h2>
-&lt;p>Hugoを利用するためにGo言語をインストールするのですが、yumでインストールすると様々ななエラーが出る場合があるので、今回はtarファイルを解凍して配置します。&lt;/p>
-&lt;p>brewがすでにインストールされている場合はbrewでのインストールが早いです。&lt;/p>
-&lt;h3 id="go言語をインストール">GO言語をインストール&lt;/h3>
-&lt;p>まずは、GO言語のファイルをダウンロードして、解凍、インストールする場所に配置してやりましょう。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ wget https://golang.org/dl/go1.16.linux-amd64.tar.gz
-$ sudo tar zxf go1.16.linux-amd64.tar.gz -C /usr/local/
-$ export PATH=$PATH:/usr/local/go/bin
-&lt;/code>&lt;/pre>&lt;p>インストールされたGoのバージョンを確認します&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ go version
-&lt;/code>&lt;/pre>&lt;p>インストールが成功していれば、下記のようなバージョンが表示されます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>go version go1.15.14 linux/amd64
-&lt;/code>&lt;/pre>&lt;p>GOROOTも確認しておきます&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ go env|grep GOROOT
-GOROOT=&amp;quot;/usr/local/go&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>Hugoをインストールする上で、GOPATHが必要なので設定しましょう。&lt;br>
-GOPATHとGOROOTが同じ場所にならないようにすることに注意してください。&lt;br>
-同じ場所に設定してしまうと、&lt;/p>
-&lt;pre tabindex="0">&lt;code>warning: GOPATH set to GOROOT (/usr/local/go) has no effect
-&lt;/code>&lt;/pre>&lt;p>といったワーニングが表示されてしまいます。&lt;br>
-なので、GOPATHとGOROOTを別にしてやりましょう。&lt;/p>
-&lt;p>それではGOPATHを設定していきます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>vi ~/.bash_profile
-&lt;/code>&lt;/pre>&lt;p>上記のコマンドで、.bash_profileをひらいて、下記のコマンドを追加します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-:~/.bash_profile" data-lang=":~/.bash_profile">&lt;span class="nb">export&lt;/span> &lt;span class="nv">GOPATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$HOME&lt;/span>/go
-&lt;span class="nb">export&lt;/span> &lt;span class="nv">PATH&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$GOPATH&lt;/span>/bin:&lt;span class="nv">$PATH&lt;/span>:&lt;span class="nv">$HOME&lt;/span>/bin
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定を反映させて、確認します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ source ~/.bash_profile
-$ echo $GOPATH
-/home/[user]/go
-$ echo $PATH
-/home/[user]/go/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin:/root/bin:/root/bin
-&lt;/code>&lt;/pre>&lt;p>無事追加できました。&lt;br>
-以上がGo言語の設定になります。&lt;/p>
-&lt;h2 id="hugoをcentos7にインストール">HugoをCentOS7にインストール&lt;/h2>
-&lt;p>それでは、いよいよHugoをインストールしましょう。&lt;br>
-GitHubからHugoを取得します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">mkdir &lt;span class="nv">$HOME&lt;/span>/src
-&lt;span class="nb">cd&lt;/span> &lt;span class="nv">$HOME&lt;/span>/src
-git clone https://github.com/gohugoio/hugo.git
-&lt;span class="nb">cd&lt;/span> hugo
-go install --tags extended
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>インストールできたら hugo してみましょう&lt;/p>
-&lt;h2 id="gitinfoを使っているとエラーになる場合がある">GitInfoを使っているとエラーになる場合がある&lt;/h2>
-&lt;p>Gitのバージョンが古いと、&lt;code>hugo&lt;/code>した際に、情報を取得できないくてエラーになってしまうようです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>hugo v0.93.0-DEV+extended linux/amd64 BuildDate=unknown
-ERROR 2022/01/27 Failed to read Git log: Unknown option: -C
-usage: git [--version] [--help] [-c name=value]
-[--exec-path[=&amp;lt;path&amp;gt;]] [--html-path] [--man-path] [--info-path]
-[-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
-[--git-dir=&amp;lt;path&amp;gt;] [--work-tree=&amp;lt;path&amp;gt;] [--namespace=&amp;lt;name&amp;gt;]
-&amp;lt;command&amp;gt; [&amp;lt;args&amp;gt;]
-&lt;/code>&lt;/pre>&lt;p>私の環境ではGitのバージョンが&lt;code>git version 1.8.3.1&lt;/code> となっていたため、これをアップデートして正しく動作するようにします。&lt;/p>
-&lt;p>まずはすでにインストールされているGitを削除します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ sudo yum -y remove git
-&lt;/code>&lt;/pre>&lt;p>次に、2系の配布がされているiusリポジトリを追加します。&lt;br>
-私の環境はCentOS7だったので下記のコマンドでyumからインストールします。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ sudo yum -y install https://repo.ius.io/ius-release-el7.rpm
-&lt;/code>&lt;/pre>&lt;p>iusはサードパーティのリポジトリのため、常に有効にならないように設定ファイルを確認しておきます。&lt;code>enabled = 0&lt;/code> となっていたら、常に有効にならない設定です。&lt;/p>
-&lt;pre tabindex="0">&lt;code>[ius-debuginfo]
-name = IUS for Enterprise Linux 7 - $basearch - Debug
-baseurl = https://repo.ius.io/7/$basearch/debug/
-enabled = 0
-repo_gpgcheck = 0
-gpgcheck = 1
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
-[ius-source]
-name = IUS for Enterprise Linux 7 - Source
-baseurl = https://repo.ius.io/7/src/
-enabled = 0
-repo_gpgcheck = 0
-gpgcheck = 1
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
-&lt;/code>&lt;/pre>&lt;p>それでは。インストール可能なGitを調べます。&lt;br>
-yumでiusを使うときは、yumコマンドの際に、&lt;code>--enablerepo=ius&lt;/code>オプションをつけます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ sudo yum list --enablerepo=ius | grep git2
-…
-git224.x86_64 2.24.4-1.el7.ius ius
-…
-&lt;/code>&lt;/pre>&lt;p>インストール可能なGitがあったので、インストールをします。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ sudo yum -y install --enablerepo=ius git224
-&lt;/code>&lt;/pre>&lt;p>インストールが無事完了したことを確認しましょう&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ git --version
-git version 2.24.3
-&lt;/code>&lt;/pre>&lt;p>バージョンが表示されていたら、正常にインストールが完了してます。&lt;br>
-これで GitInfo 使ったhugoのサーバでも&lt;code>hugo&lt;/code>コマンドが実行できるようになりました。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51ITQMzMG2L.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 改訂2版 わかばちゃんと学ぶ Git使い方入門〈GitHub、SourceTree、コマンド操作対応〉 &lt;/h2>
-&lt;p> マンガと実践で学ぶGitの入門書が最新情報に対応して改訂しました! Gitの概念はもちろん、GitHubについても丁寧に解説しています。これからGitを使い始める人にオススメの1冊です。 本書ではクリック操作でGitを使えるSourceTreeを中心に解説しているので、初心者でも安心です。 せっかく学ぶなら、やっぱり楽しい方がいい 「Gitって難しそう」 「勉強しようとは思っているけど、なかなか一歩が踏み出せない」 そんな方のために、楽しくGitを理解できる本を作りました。 ・個性的なキャラクターたちが登場するマンガ ・感覚的にわかる図解 ・丁寧な実践パート 上記3つの特長で、Gitを無理なく学べます。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/Markdown%e3%83%a9%e3%82%a4%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e5%85%a5%e9%96%80-%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%a7%e6%b0%97%e6%a5%bd%e3%81%ab%e6%9b%b8%e3%81%93%e3%81%86%ef%bc%81-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-%e8%97%a4%e5%8e%9f-%e6%83%9f/dp/4844398369/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/514KHlwilvL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> Markdownライティング入門　プレーンテキストで気楽に書こう！ (技術の泉シリーズ（NextPublishing）) &lt;/h2>
-&lt;p> 【プレーンテキストでらくらくライティング! Markdownを使いこなそう! 】 本書は、文章を書く=ライティングを「気楽に」行うための道具としての「Markdown」形式を紹介し、その使い方を詳しく解説しています。Wordなどのワープロソフトに限定されることなく、テキストエディタやMarkdown専用エディタ、ポメラなどの文書入力専用機、さらにはスマートホン上でも「見出し」や「強調」といった文章執筆に必要な情報を共有するための書式であるMarkdownの書き方やその定義や起源を、初心者でもわかりやすく紹介しています。 〈本書の対象読者〉 執筆のストレスを減らして集中したい人 PCが古くて軽いアプリで執筆したい人 いろいろなアプリで原稿を使いまわしたい人 思いついた時にスマホでメモ書きして原稿にまとめたい人 続きを読む 。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item></channel></rss>
+&lt;p>次回はプログラム詳細について説明していきたいと思います。&lt;/p></description></item></channel></rss>
