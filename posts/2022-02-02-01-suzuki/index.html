@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T11:58:14+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T12:27:46+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T11:58:14+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T12:27:46+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 21分
+読了時間: 23分
 </time>
 </div>
 </header>
@@ -153,6 +153,12 @@ Web開発
 </ol>
 </li>
 <li><a href=#スクリプトへの値渡し実行パラメータ>スクリプトへの値渡し「実行パラメータ」</a></li>
+<li><a href=#文字列処理>文字列処理</a>
+<ol>
+<li><a href=#文字列の比較>文字列の比較</a></li>
+</ol>
+</li>
+<li><a href=#連結>連結</a></li>
 </ol>
 </nav>
 </div>
@@ -772,7 +778,88 @@ $ bash args3.sh BMW MERCEDES TOYOTA HONDA
 BMW MERCEDES TOYOTA HONDA
 4
 $
-</code></pre>
+</code></pre><h2 id=文字列処理>文字列処理</h2>
+<h3 id=文字列の比較>文字列の比較</h3>
+<p>このトピックでは、文字列の比較を紹介します。<br>
+プログラムは、ユーザーから2つの文字列入力を受け取ります。<br>
+プログラムはそれぞれの値を読みこみ、２つの異なる変数 &lsquo;st1&rsquo; &lsquo;st2&rsquo; に格納します。<br>
+両方の変数の値を比較するには、「if」ステートメントを使用し、条件文に「==」演算子で、二つの文字列が等価であるかを判定します。<br>
+「else」ステートメントは、「文字列が一致しない」場合の処理を記述し、&lsquo;if&rsquo; ステートメントを閉じます。</p>
+<p>以下は、この手順全体のスクリプトコードです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:string.sh data-lang=bash:string.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter Ist string&#34;</span><span class=p>;</span>
+<span class=nb>read</span> st1<span class=p>;</span>
+
+<span class=nb>echo</span> <span class=s2>&#34;enter 2nd string&#34;</span><span class=p>;</span>
+<span class=nb>read</span> st2<span class=p>;</span>
+
+<span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$st1</span><span class=s2>&#34;</span> <span class=o>==</span> <span class=s2>&#34;</span><span class=nv>$st2</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;strings match&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;strings don&#39;t match&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。異なる入力を使用してコードをテストすることもできます。</p>
+<pre tabindex=0><code>$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+BMW
+strings match
+$
+$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+HONDA
+strings don't match
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>文字列の比較は == です。</dd>
+<dd>数値の比較は -eq -gt -lt -ge です。</dd>
+<dd>-eq は[ == ] equals</dd>
+<dd>-gt は[ > ]greater than</dd>
+<dd>-lt は[ &lt; ] less than</dd>
+<dd>-ge は[ >= ] greater equals です。</dd>
+</dl>
+</div>
+<h2 id=連結>連結</h2>
+<p>2つの文字列を連結することもできます。<br>
+プルグラムはユーザーへ入力を促し、２つの変数を &lsquo;st1&rsquo; &lsquo;st2&rsquo; 変数に格納します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:connect.sh data-lang=bash:connect.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter 1st string&#34;</span><span class=p>;</span>
+<span class=nb>read</span> st1<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;enter 2nd string&#34;</span><span class=p>;</span>
+<span class=nb>read</span> st2<span class=p>;</span>
+
+<span class=nv>st3</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$st1</span><span class=s2> </span><span class=nv>$st2</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$st3</span><span class=p>;</span>
+</code></pre></div><p>このコードを「connect.sh」に保存し、端末を使用してファイルを実行し、結果を確認します。</p>
+<pre tabindex=0><code>$ bash connect.sh
+enter 1st string
+BMW
+enter 2nd string
+HONDA
+BMW HONDA
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>文字列の結合時にそれぞれの変数の間に空白を起きたい場合は、以下のように二つの変数を「" &ldquo;」ダブるクォーテーションで囲みます。</dd>
+<dd>st3="$st1 $st2&rdquo;;</dd>
+<dd>
+<p>文字列を扱う場合、日頃から変数はダブルクォーテーションで囲む癖をつけておくべきです。</p>
+</dd>
+<dd>変数への代入が「空（くうはく）」だった場合に、プログラムがバグにより停止します。</dd>
+<dd>
+<p>これは、文字列を扱う変数に限らず、次章で紹介する数値を格納する変数でも同じです。</p>
+</dd>
+<dd>変数はつねに " " ダブルクオーテーションで囲みましょう。</dd>
+</dl>
+</div>
 <h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>

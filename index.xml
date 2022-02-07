@@ -866,7 +866,7 @@ FA[i]=0で明示的にフラグを落としてあげています。&lt;/p>
 ループ
 スクリプトへの値渡し「実行パラメータ」
 文字列処理
-数値計算
+数値計算処理
 declareコマンドで宣言する
 配列
 関数
@@ -1484,74 +1484,87 @@ $ bash args3.sh BMW MERCEDES TOYOTA HONDA
 BMW MERCEDES TOYOTA HONDA
 4
 $
-&lt;/code>&lt;/pre>&lt;!--
-## 文字列処理
-このトピックで最初に学ぶ操作は、文字列の比較です。文字列の形でユーザーから2つの入力を取ります。ターミナルからその値を読み、2つの異なる変数に格納します。「==」演算子を使用して両方の変数の値を比較するには、「if」ステートメントを使用します。ステートメントをコード化して、「文字列が一致する」が同じかどうかを表示し、「else」ステートメントに「文字列が一致しない」と書き、'if」ステートメントを閉じます。以下は、この手順全体のスクリプトコードです。
-``` bash:String.sh
-#!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-if [ "$st1" == "$st2" ]
-then
-echo "strings match"
-else
-echo "strings don't match"
-fi
-```
-スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。
-異なる入力を使用してコードをテストすることもできます。
-また、プログラムが実際に文字列を比較しているかどうか、または文字列の長さをチェックしているかどうかを確認することもできます。
-### 文字列の確認(小さいかどうか)
-文字列が小さいかどうかを確認することもできます。ユーザーから入力を取得し、端末から値を読みます。その後、最初の文字列かどうかを使用して文字列を比較します。
-``` bash:stringSmaller.sh
-#!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-if [ "$st1" \ "$st2" ]; then
-echo "Second string $st2 is smaller than $st1"
-else
-echo "strings are equal"
-fi
-```
-## 連結
-2つの文字列を連結することもできます。2つの変数を取り、端末から文字列を読み取って、これらの変数に格納します。次のステップは、スクリプトに「c=$st1$st2」と書いて印刷するだけで、別の変数を作成し、両方の変数を連結することです。
-``` bash:connect.sh
-#!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-c=$st1$st2
-echo $c
-```
-このコードを「connect.sh」に保存し、端末を使用してファイルを実行し、結果を確認します。
-### 入力を小文字と大文字に変換する
-入力を小文字と大文字に変換することもできます。このためには、端末から値を読み取るスクリプトを作成し、変数名の「^」記号を使用して小文字で印刷し、「^^」を使用して大文字で印刷する必要があります。このスクリプトを保存し、ターミナルを使用してファイルを実行します。
-``` bash:connect.sh
-#!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-echo ${st1^} #for lowercase
-echo ${st2^^} #for uppercase
-```
-### 最初の文字を大文字に変換
-変数を「$[st1^l}」と書くだけで、文字列の最初の文字のみを変換することもできます。
-``` bash:turnFirstLetterCapital.sh
-#!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-echo ${st1^l} #for capitalizing the first letter
-```
+&lt;/code>&lt;/pre>&lt;h2 id="文字列処理">文字列処理&lt;/h2>
+&lt;h3 id="文字列の比較">文字列の比較&lt;/h3>
+&lt;p>このトピックでは、文字列の比較を紹介します。&lt;br>
+プログラムは、ユーザーから2つの文字列入力を受け取ります。&lt;br>
+プログラムはそれぞれの値を読みこみ、２つの異なる変数 &amp;lsquo;st1&amp;rsquo; &amp;lsquo;st2&amp;rsquo; に格納します。&lt;br>
+両方の変数の値を比較するには、「if」ステートメントを使用し、条件文に「==」演算子で、二つの文字列が等価であるかを判定します。&lt;br>
+「else」ステートメントは、「文字列が一致しない」場合の処理を記述し、&amp;lsquo;if&amp;rsquo; ステートメントを閉じます。&lt;/p>
+&lt;p>以下は、この手順全体のスクリプトコードです。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:string.sh" data-lang="bash:string.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter Ist string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> st1&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 2nd string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> st2&lt;span class="p">;&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;strings match&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">else&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;strings don&amp;#39;t match&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。異なる入力を使用してコードをテストすることもできます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+BMW
+strings match
+$
+$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+HONDA
+strings don't match
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>文字列の比較は == です。&lt;/dd>
+&lt;dd>数値の比較は -eq -gt -lt -ge です。&lt;/dd>
+&lt;dd>-eq は[ == ] equals&lt;/dd>
+&lt;dd>-gt は[ &amp;gt; ]greater than&lt;/dd>
+&lt;dd>-lt は[ &amp;lt; ] less than&lt;/dd>
+&lt;dd>-ge は[ &amp;gt;= ] greater equals です。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="連結">連結&lt;/h2>
+&lt;p>2つの文字列を連結することもできます。&lt;br>
+プルグラムはユーザーへ入力を促し、２つの変数を &amp;lsquo;st1&amp;rsquo; &amp;lsquo;st2&amp;rsquo; 変数に格納します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:connect.sh" data-lang="bash:connect.sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 1st string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> st1&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 2nd string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">read&lt;/span> st2&lt;span class="p">;&lt;/span>
+&lt;span class="nv">st3&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st1&lt;/span>&lt;span class="s2"> &lt;/span>&lt;span class="nv">$st2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$st3&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードを「connect.sh」に保存し、端末を使用してファイルを実行し、結果を確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ bash connect.sh
+enter 1st string
+BMW
+enter 2nd string
+HONDA
+BMW HONDA
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>文字列の結合時にそれぞれの変数の間に空白を起きたい場合は、以下のように二つの変数を「&amp;quot; &amp;ldquo;」ダブるクォーテーションで囲みます。&lt;/dd>
+&lt;dd>st3=&amp;quot;$st1 $st2&amp;rdquo;;&lt;/dd>
+&lt;dd>
+&lt;p>文字列を扱う場合、日頃から変数はダブルクォーテーションで囲む癖をつけておくべきです。&lt;/p>
+&lt;/dd>
+&lt;dd>変数への代入が「空（くうはく）」だった場合に、プログラムがバグにより停止します。&lt;/dd>
+&lt;dd>
+&lt;p>これは、文字列を扱う変数に限らず、次章で紹介する数値を格納する変数でも同じです。&lt;/p>
+&lt;/dd>
+&lt;dd>変数はつねに &amp;quot; &amp;quot; ダブルクオーテーションで囲みましょう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;!--
-## 数値処理
+## 数値計算処理
 このトピックでは、スクリプトを使用してさまざまな算術演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
 ``` bash:numberCalc.sh
 #!/bin/bash
