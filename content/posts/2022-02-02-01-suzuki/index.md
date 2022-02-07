@@ -31,7 +31,7 @@ tags:
 ループ
 スクリプトへの値渡し「実行パラメータ」
 文字列処理
-数値計算
+数値計算処理
 declareコマンドで宣言する
 配列
 関数
@@ -1016,111 +1016,113 @@ BMW MERCEDES TOYOTA HONDA
 $
 ```
 
-<!--
 ## 文字列処理
 
-このトピックで最初に学ぶ操作は、文字列の比較です。文字列の形でユーザーから2つの入力を取ります。ターミナルからその値を読み、2つの異なる変数に格納します。「==」演算子を使用して両方の変数の値を比較するには、「if」ステートメントを使用します。ステートメントをコード化して、「文字列が一致する」が同じかどうかを表示し、「else」ステートメントに「文字列が一致しない」と書き、'if」ステートメントを閉じます。以下は、この手順全体のスクリプトコードです。
+### 文字列の比較
+このトピックでは、文字列の比較を紹介します。
+プログラムは、ユーザーから2つの文字列入力を受け取ります。
+プログラムはそれぞれの値を読みこみ、２つの異なる変数 'st1' 'st2' に格納します。
+両方の変数の値を比較するには、「if」ステートメントを使用し、条件文に「==」演算子で、二つの文字列が等価であるかを判定します。
+「else」ステートメントは、「文字列が一致しない」場合の処理を記述し、'if' ステートメントを閉じます。
+
+以下は、この手順全体のスクリプトコードです。
 
 
-``` bash:String.sh
-
+``` bash:string.sh
 #!/bin/bash
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
 
-if [ "$st1" == "$st2" ]
-then
-    echo "strings match"
+echo "enter Ist string";
+read st1;
+
+echo "enter 2nd string";
+read st2;
+
+if [ "$st1" == "$st2" ]; then
+  echo "strings match";
 else
-    echo "strings don't match"
+  echo "strings don't match";
 fi
 ```
 
-スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。
+スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。異なる入力を使用してコードをテストすることもできます。
 
 
-異なる入力を使用してコードをテストすることもできます。
-
-
-また、プログラムが実際に文字列を比較しているかどうか、または文字列の長さをチェックしているかどうかを確認することもできます。
-
-
-### 文字列の確認(小さいかどうか)
-文字列が小さいかどうかを確認することもできます。ユーザーから入力を取得し、端末から値を読みます。その後、最初の文字列かどうかを使用して文字列を比較します。
-
-
-``` bash:stringSmaller.sh
-#!/bin/bash
-
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-
-if [ "$st1" \ "$st2" ]; then
-    echo "Second string $st2 is smaller than $st1"
-else
-    echo "strings are equal"    
-fi
 ```
+$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+BMW
+strings match
+$
+$ bash string.sh
+enter Ist string
+BMW
+enter 2nd string
+HONDA
+strings don't match
+$
+```
+
+{{% tips-list tips %}}
+ヒント
+: 文字列の比較は == です。
+: 数値の比較は -eq -gt -lt -ge です。
+: -eq は[ == ] equals
+: -gt は[ > ]greater than
+: -lt は[ < ] less than
+: -ge は[ >= ] greater equals です。
+{{% /tips-list %}}
+
 
 
 ## 連結
-2つの文字列を連結することもできます。2つの変数を取り、端末から文字列を読み取って、これらの変数に格納します。次のステップは、スクリプトに「c=$st1$st2」と書いて印刷するだけで、別の変数を作成し、両方の変数を連結することです。
+2つの文字列を連結することもできます。
+プルグラムはユーザーへ入力を促し、２つの変数を 'st1' 'st2' 変数に格納します。
 
 
 ``` bash:connect.sh
 #!/bin/bash
 
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
+echo "enter 1st string";
+read st1;
+echo "enter 2nd string";
+read st2;
 
-c=$st1$st2
-echo $c
+st3="$st1 $st2";
+echo $st3;
 ```
 
 このコードを「connect.sh」に保存し、端末を使用してファイルを実行し、結果を確認します。
 
 
-
-### 入力を小文字と大文字に変換する
-入力を小文字と大文字に変換することもできます。このためには、端末から値を読み取るスクリプトを作成し、変数名の「^」記号を使用して小文字で印刷し、「^^」を使用して大文字で印刷する必要があります。このスクリプトを保存し、ターミナルを使用してファイルを実行します。
-
-
-``` bash:connect.sh
-#!/bin/bash
-
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-
-echo ${st1^} #for lowercase
-echo ${st2^^} #for uppercase
+```
+$ bash connect.sh
+enter 1st string
+BMW
+enter 2nd string
+HONDA
+BMW HONDA
+$
 ```
 
-### 最初の文字を大文字に変換
-変数を「$[st1^l}」と書くだけで、文字列の最初の文字のみを変換することもできます。
+{{% tips-list tips %}}
+ヒント
+: 文字列の結合時にそれぞれの変数の間に空白を起きたい場合は、以下のように二つの変数を「" "」ダブるクォーテーションで囲みます。
+: st3="$st1 $st2";
+
+: 文字列を扱う場合、日頃から変数はダブルクォーテーションで囲む癖をつけておくべきです。
+: 変数への代入が「空（くうはく）」だった場合に、プログラムがバグにより停止します。
+
+: これは、文字列を扱う変数に限らず、次章で紹介する数値を格納する変数でも同じです。
+: 変数はつねに " " ダブルクオーテーションで囲みましょう。
+{{% /tips-list %}}
 
 
-``` bash:turnFirstLetterCapital.sh
-#!/bin/bash
 
-echo "enter Ist string"
-read st1
-echo "enter 2nd string"
-read st2
-
-echo ${st1^l} #for capitalizing the first letter
-```
 
 <!--
-
-## 数値処理
+## 数値計算処理
 
 このトピックでは、スクリプトを使用してさまざまな算術演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
 
