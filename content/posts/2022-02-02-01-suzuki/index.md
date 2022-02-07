@@ -2271,6 +2271,120 @@ $
 
 
 
+
+## sortコマンド
+テキストファイルを行単位で並べ替える
+sort 並べ替える
+sort -n 数値扱いで並べ替える
+sort -r 逆順で出力
+
+まずは以下の読み込み用サンプルファイルを準備します。
+
+``` bash:sample.txt
+name:ヤムチャ   skill:狼牙風風拳
+name:孫悟空  skill:かめはめ波
+name:ピッコロ   skill:魔貫光殺砲
+name:ヤムチャ   skill:繰気弾
+name:孫悟空  skill:元気玉
+name:クリリン   skill:気円斬
+name:ヤムチャ   skill:かめはめ波
+name:クリリン   skill:かめはめ波
+name:孫悟空  skill:ジャン拳
+name:ヤムチャ   skill:新狼牙風風拳
+```
+
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort
+name:孫悟空
+name:孫悟空
+name:孫悟空
+name:クリリン
+name:クリリン
+name:ピッコロ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+```
+
+解説
+grep -E
+検索に「拡張正規表現」を使えるようにする。
+^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} でIPアドレスに一致させる。
+
+grep -o
+通常の grep では一致した行全体が表示されるが、-o を指定することにより一致した文字のみを表示させることができる。
+
+sort
+次の uniq で重複行のカウントを行うため、並び替える。
+
+
+## uniqコマンド
+uniq -c
+重複行のカウントを表示する。
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c
+   3 name:孫悟空
+   2 name:クリリン
+   1 name:ピッコロ
+   4 name:ヤムチャ
+$
+```
+
+## sort -r 逆順
+sort -r
+カウントの降順で並べ替える。
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r
+ 4 name:ヤムチャ
+ 3 name:孫悟空
+ 2 name:クリリン
+ 1 name:ピッコロ
+```
+
+## cutコマンド
+cut:タブ区切りでフィールドを選択して出力する
+cut -d:デリミタを指定。いわゆる区切り文字
+cut -f:抽出するフィールドの番号を指定する。上記コマンドで1を指定した場合は二つ目の"name"が抽出される。
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r |  cut -d ":" -f2
+ヤムチャ
+孫悟空
+クリリン
+ピッコロ
+$
+```
+
+## headコマンド
+長いメッセージやテキストファイルの先頭だけ／末尾だけを表示する
+
+head -n
+n: 出力する行数を指定する。
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r |  cut -d ":" -f2 | head -n2
+ヤムチャ
+孫悟空
+$
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: だいたい解ってきたのではないかと思います。
+: 要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。
+: 関数を使って、より長く複雑なことも実行可能です。
+: Linux(CUI)でできることはすべてシェルスクリプトでできます。
+{{% /tips-list %}}
+
+
 ## スクリプトのデバッグ
 
 Bashは広範なデバッグ機能を提供しています。
@@ -2358,7 +2472,6 @@ $ bash debug3.sh
 + set +x
 $
 ```
-
 
 
 # 関連記事
