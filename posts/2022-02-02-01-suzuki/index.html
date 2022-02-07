@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-04T19:13:29+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T11:58:14+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-04T19:13:29+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T11:58:14+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -117,10 +117,10 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2022.02.02</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.04
+2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 27分
+読了時間: 21分
 </time>
 </div>
 </header>
@@ -144,6 +144,15 @@ Web開発
 <li><a href=#or演算子>OR演算子</a></li>
 </ol>
 </li>
+<li><a href=#ループ>ループ</a>
+<ol>
+<li><a href=#whileループ>Whileループ:</a></li>
+<li><a href=#until-ループ>until ループ:</a></li>
+<li><a href=#for-ループ>for ループ:</a></li>
+<li><a href=#breakとcontinue>breakとcontinue</a></li>
+</ol>
+</li>
+<li><a href=#スクリプトへの値渡し実行パラメータ>スクリプトへの値渡し「実行パラメータ」</a></li>
 </ol>
 </nav>
 </div>
@@ -152,7 +161,8 @@ Web開発
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
 <p>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。<br>
-では次のトピックについて説明します。</p>
+過去、bashの経験があり、久しぶりにbashを各必要に迫られた人、他の言語でプログラム経験があり、bash独自の書き方をざっくりと思い出したい人は、このトピックを長め読むだけで、充分 bashを思い出せるはずです。</p>
+<p>では次のトピックについて説明します。</p>
 <h2 id=はじめてのシェルスクリプト>はじめてのシェルスクリプト</h2>
 <p>このトピックでは、catコマンドでシェルの場所を確認後、スクリプトファイルの作成、echoコマンドを使用して「Hello,shellscript.」記述し、スクリプトファイルを実行可能にします。</p>
 <p>ではまず、ターミナルに次のコマンドを入力します。</p>
@@ -181,7 +191,7 @@ $
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#!/usr/bin/bash
 </span><span class=cp></span>
 </code></pre></div><p>ではさっそく「helloScript.sh」ファイルに「Hello,shellscript.」を記述しましょう。内容は以下の通りです。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:helloScript.sh data-lang=bash:helloScript.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span><span class=p>;</span>
 
@@ -274,7 +284,7 @@ $
 複数行のコメント<br>
 HereDoc Delimeter</p>
 <p>1行のコメントの場合、コメントステートメントの前に「#」記号を半角で書きます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:lineComment.sh data-lang=bash:lineComment.sh><span class=cp>#! /bin/bash 
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:lineComment.sh data-lang=bash:lineComment.sh><span class=cp>#!/bin/bash 
 </span><span class=cp></span>
 <span class=c1># this is a 1st comment</span>
 <span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span> &gt; file.txt<span class=p>;</span>
@@ -282,7 +292,7 @@ HereDoc Delimeter</p>
 C 言語やJava、HTMLですらも複数行コメントがあるのに。。。<br>
 シェルスクリプトにもあります。あるんです。みんな知らないだけです。<br>
 最初のコメントの先頭の前に「:'」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 :<span class=s1>&#39;
 </span><span class=s1>This is the segment of multi-line comments
@@ -294,7 +304,7 @@ C 言語やJava、HTMLですらも複数行コメントがあるのに。。。<
 <span class=nb>echo</span> <span class=s2>&#34;Hello,shellscript.&#34;</span> &gt; file.txt
 </code></pre></div><p>仰々しいマルチラインコメントもあります。<br>
 こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:multiComment.sh data-lang=bash:multiComment.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=c1># 仰々しいマルチラインコメント</span>
 <span class=s>&lt;&lt;COMMENT
@@ -369,7 +379,7 @@ AND演算子とOR演算子</p>
 「if」と 「[」の間には半角スペースが必要です。<br>
 また、「[」と条件文、条件文と「]」の間にも半角スペースが必要です。<br>
 ifの終わりには、「fi」で閉じる必要があります。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if-statements.sh data-lang=bash:if-statements.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:if-statements.sh data-lang=bash:if-statements.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>count</span><span class=o>=</span>10<span class=p>;</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span> -eq <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span> 
@@ -381,7 +391,7 @@ ifの終わりには、「fi」で閉じる必要があります。</p>
 最後の「fi」は、このif-statementブロックの終了を示すキーワードです。</p>
 <p>条件が成立しない場合、このプログラムには「else」ブロックがないため、何もしません。</p>
 <p>次のプログラムは条件が成立しない場合の処理となります。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelse-statements.sh data-lang=bash:ifelse-statements.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelse-statements.sh data-lang=bash:ifelse-statements.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>count</span><span class=o>=</span>11<span class=p>;</span> <span class=c1># COUNT は 11とする</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$count</span><span class=s2>&#34;</span> -eq <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span> 
@@ -396,7 +406,7 @@ ifの終わりには、「fi」で閉じる必要があります。</p>
 「[ ]」を「(( ))」括弧に置き換え、それらの間に条件を書き込むだけです。<br>
 C言語、Javaに慣れている人は、この記述方法のほうが直観的かもしれません。<br>
 この形式の例を次に示します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bracketIfelse-statements.sh data-lang=bash:bracketIfelse-statements.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bracketIfelse-statements.sh data-lang=bash:bracketIfelse-statements.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>count</span><span class=o>=</span>11<span class=p>;</span> <span class=c1># COUNT は 11とする</span>
 <span class=k>if</span> <span class=o>((</span><span class=nv>count</span><span class=o>==</span>10<span class=o>))</span><span class=p>;</span> <span class=k>then</span> 
@@ -406,7 +416,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <span class=k>fi</span>
 </code></pre></div><h3 id=if-else-ifステートメント>if-else ifステートメント</h3>
 <p>スクリプトでif-else ifをステートメントのブロックとして使用すると、プログラムは条件を再チェックします。同様に、以下のサンプルコードを「helloScript.sh」に記述すると、プログラムは最初に「if」条件をチェックすることがわかります。「カウント」変数には「10」の値が割り当てられます。最初の「if」条件では、プログラムは「カウント」が9より大きい値を持っていることを確認します。その後、「if」ブロックに書かれたステートメントが実行され、そこから出てきます。たとえば、「elif」で書かれた条件がtrueの場合、プログラムは「elif」ブロックで書かれたステートメントのみを実行し、ステートメントの「if」および「else」ブロックを無視します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelseif-statements.sh data-lang=bash:ifelseif-statements.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:ifelseif-statements.sh data-lang=bash:ifelseif-statements.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>count</span><span class=o>=</span>8<span class=p>;</span>
 <span class=k>if</span> <span class=o>((</span>count&gt;9<span class=o>))</span><span class=p>;</span> <span class=k>then</span> 
@@ -419,7 +429,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 </code></pre></div><h3 id=and演算子>AND演算子</h3>
 <p>条件で「AND」演算子を使用するには、条件間で記号「&&」を使用します。<br>
 たとえば、「[ &ldquo;$age&rdquo; -gt 18 ] と [ &ldquo;$age&rdquo; -lt 40 ]をチェックし、年齢が18より大きく、年齢が40未満の場合、これはfalseであることがわかります。プログラムは「その後」の後に書かれたステートメントを無視し、端末に「年齢は正しくない」と印刷して「else」ブロックに向かって移動します</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator.sh data-lang=bash:andOperator.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator.sh data-lang=bash:andOperator.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>10</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> <span class=o>]</span> <span class=o>&amp;&amp;</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -428,7 +438,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
 </code></pre></div><p>条件を次の形式で書くこともできます。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator2.sh data-lang=bash:andOperator2.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator2.sh data-lang=bash:andOperator2.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> <span class=o>&amp;&amp;</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]]</span>
@@ -438,7 +448,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
 </code></pre></div><p>「&&」の代わりに「-a」を使用して、プログラムの条件でAND演算子を使用することもできます。それは同じように動作します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator3.sh data-lang=bash:andOperator3.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:andOperator3.sh data-lang=bash:andOperator3.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> -a <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span>
@@ -451,7 +461,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <h3 id=or演算子>OR演算子</h3>
 <p>2つの条件があり、それらのいずれかまたは両方がtrueの場合、前述のステートメントを実行する場合、OR演算子が使用されます。 「-o」はOR演算子を表すために使用されます。「||」記号を使用することもできます。<br>
 次のサンプルコードを「helloScript.sh」に書き、ターミナルから実行して動作を確認します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator.sh data-lang=bash:orOperator.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator.sh data-lang=bash:orOperator.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -460,7 +470,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
 </code></pre></div><p>OR演算子をよりよく理解するために、さまざまな条件を試すこともできます。以下に４つのサンプルを記します。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator1.sh data-lang=bash:orOperator1.sh><span class=cp>#! /bin/bash
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator1.sh data-lang=bash:orOperator1.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -468,7 +478,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <span class=k>else</span>
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
-</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator2.sh data-lang=bash:orOperator2.sh><span class=cp>#! /bin/bash
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator2.sh data-lang=bash:orOperator2.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> -o <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -476,7 +486,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <span class=k>else</span>
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
-</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator3.sh data-lang=bash:orOperator3.sh><span class=cp>#! /bin/bash
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator3.sh data-lang=bash:orOperator3.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> <span class=o>||</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
@@ -484,7 +494,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <span class=k>else</span>
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
-</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator4.sh data-lang=bash:orOperator4.sh><span class=cp>#! /bin/bash
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:orOperator4.sh data-lang=bash:orOperator4.sh><span class=cp>#!/bin/bash
 </span><span class=cp></span>
 <span class=nv>age</span><span class=o>=</span><span class=m>30</span>
 <span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -lt <span class=m>18</span> <span class=o>]</span> <span class=o>||</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$age</span><span class=s2>&#34;</span> -gt <span class=m>40</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -492,7 +502,277 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 <span class=k>else</span>
     <span class=nb>echo</span> <span class=s2>&#34;age is not correct&#34;</span>
 <span class=k>fi</span>
-</code></pre></div>
+</code></pre></div><h2 id=ループ>ループ</h2>
+<p>このトピックでは、以下の説明をします。</p>
+<p>whileループ<br>
+until ループ<br>
+for ループ<br>
+break と continue</p>
+<h3 id=whileループ>Whileループ:</h3>
+<p>ループは条件がtrueの場合にコードブロック(do&mldr;doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。</p>
+<p>条件がfalseになると、whileループは終了します。<br>
+whileループは、キーワード「while」から始まり、そのうしろに条件文を書きます。<br>
+条件文を閉じたらキーワード「do」を使用し、プログラムの条件がtrueの場合に実行する処理ステートメントの束を書きます。<br>
+処理ステートメントの終了後、キーワード「done」を書いてwhileループを閉じます。</p>
+<p>以下、スクリプトを「helloScript.sh」として保存します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:whileLoop.sh data-lang=bash:whileLoop.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>number</span><span class=o>=</span>1<span class=p>;</span>
+<span class=k>while</span> <span class=o>[</span> <span class=nv>$number</span> -lt <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=nv>number</span><span class=o>=</span><span class=k>$((</span> number+1 <span class=k>))</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>ターミナルで「$ ./whileLoop.sh」コマンドを使用してスクリプトを実行ます。</p>
+<pre tabindex=0><code>$ bash whileLoop.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+$
+</code></pre><p>Whileループでは、まず、条件が真かどうかをチェックします。<br>
+条件がfalseの場合、ループから出てプログラムを終了します。</p>
+<p>条件が true の場合、実行シーケンスはキーワード &lsquo;do&rsquo; の後に書かれたステートメントに移動します。<br>
+上記サンプルのは、「echo」により１から９までが出力されます。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ループ自体をループさせるincrementステートメントについて</dd>
+<dd>$(( )) は、括弧内で計算された値が引き出されます。</dd>
+<dd>(( )) 内は、変数の冒頭に $ は必要ありません。</dd>
+<dd>(( )) 内は、四則演算が可能です。スペースを空ける必要もありません。</dd>
+</dl>
+</div>
+<h3 id=until-ループ>until ループ:</h3>
+<p>loopが条件がfalseのときにコードブロック(do&mldr;doneで囲まれている)を実行し、条件がtrueになるまで実行し続けるまでループし続け、条件が true になると、until ループは終了します。<br>
+untilループの構文はwhileループの構文と同じで、「while」の代わりに「until」という言葉を使用します。</p>
+<p>ターミナルで「$ ./untilLoop.sh」コマンドを使用してスクリプトを実行ます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:untilLoop.sh data-lang=bash:untilLoop.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>number</span><span class=o>=</span>1<span class=p>;</span>
+<span class=k>until</span> <span class=o>[</span> <span class=nv>$number</span> -ge <span class=m>10</span> <span class=o>]</span><span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$number</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=nv>number</span><span class=o>=</span><span class=k>$((</span> number+1 <span class=k>))</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>上記のコードを「untilLoop.sh」ファイルに保存します。コマンドを使って実行する</p>
+<pre tabindex=0><code>$ bash untilLoop.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>whileループは、条件が true の時に( do &mldr;done) ブロックを実行し、条件が false になるとループを終了します。</dd>
+<dd>untilループは、条件が false の時に( do &mldr;done) ブロックを実行し、条件が true になるとループを終了します。</dd>
+</dl>
+</div>
+<h3 id=for-ループ>for ループ:</h3>
+<p>forループは、繰り返し実行される条件を指定するループのタイプです。<br>
+forループには、いくつかの記述方法があります。<br>
+最初の方法として、反復用の数字を書きます。<br>
+以下に示すコードでは、反復用の数字反復を制御する変数 &lsquo;i&rsquo; にさせます。<br>
+以下のfor ループは 5 回実行されます。<br>
+スクリプトファイル「helloScript.sh」にコードを保存します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:forLoop.sh data-lang=bash:forLoop.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> i in <span class=m>1</span> <span class=m>2</span> <span class=m>3</span> <span class=m>4</span> <span class=m>5</span> <span class=p>;</span> <span class=k>do</span> 
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>ターミナルで次のコマンドを入力して、「forLoop.sh」ファイルを実行します。</p>
+<pre tabindex=0><code>$ bash forLoop.sh
+1
+2
+3
+4
+5
+$
+</code></pre><p>この方法はシンプルに見えますが、1000回実行したい場合は、実行したい数値を列挙する必要があるため大変です。<br>
+実は、1から1000までの反復回数を書く必要はなく、ループに他の書き方を使用します。<br>
+以下のサンプルコード「for i in {0..10}」のように、反復の開始点と終了点を宣言します。<br>
+この書き方によってforループは10回実行されます。 &lsquo;0&rsquo; は開始点として定義され、&lsquo;10&rsquo; は反復の終了点として定義されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:forLoop2.sh data-lang=bash:forLoop2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> i in <span class=o>{</span>0..10<span class=o>}</span><span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>ファイル「forLoop2.sh」にコードを保存します。ファイルを実行すると、次の出力が表示されます。</p>
+<pre tabindex=0><code>$ bash forLoop2.sh
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+$
+</code></pre><p>ループを制御する変数の増分値を定義することもできます。<br>
+たとえば、「for i in {0..10..2}」では、&lsquo;0&rsquo; をループの開始点、&lsquo;10&rsquo; は終点、&lsquo;2&rsquo; はループは &lsquo;i&rsquo; 2の増分で、echo $i ステートメントを実行します。<br>
+したがって、以下に示す例では、プログラムはループの最初の実行で0を出力し、その後、「i」の値を２つずつインクリメントします。<br>
+このコードは、「i」の値を0,2,4,6,8,10として出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> i in <span class=o>{</span>0..10..2<span class=o>}</span><span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><pre tabindex=0><code>$ bash forLoop3.sh
+0
+2
+4
+6
+8
+10
+$
+</code></pre><p>多くのプログラミング言語でおなじみ「for loop」書式の記述も可能です。<br>
+以下のサンプルコードは、このメソッドを使用して「forループ」を書いています。<br>
+&lsquo;for (( i=0; i&lt;5; i++ ))’ では、&lsquo;i’ はループ全体を制御する変数です。<br>
+まず、値 &lsquo;i&rsquo; は 値 &lsquo;0&rsquo; で初期化され、次にループ &lsquo;i&lt;5&rsquo; の制御ステートメント、&lsquo;i++&rsquo; はループのたびに１つずつインクリメントする事をあわらします。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:increments.sh data-lang=bash:increments.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> <span class=o>((</span> <span class=nv>i</span><span class=o>=</span>0<span class=p>;</span> i&lt;5<span class=p>;</span> i++ <span class=o>))</span><span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>&lsquo;i&rsquo;は0で初期化され、&lsquo;i&rsquo;の値が5未満の条件をチェックします。<br>
+最初条件の結果は &lsquo;true&rsquo; です。<br>
+処理ステートメントに進み、、echo コマンドにより端末に「i」の値を「0」として出力します。<br>
+処理が進むにつれ、値「i」が一つずつ増加します。<br>
+プログラムは処理の中で、「i」の値が5未満であるかどうかを再度確認し、再び「i」の値(&lsquo;1」を出力します。<br>
+この実行フローは、「i」の値が「5」の値に達するまで続き、「５」に達した段階ではforループをぬけてプログラムは終了します。</p>
+<pre tabindex=0><code>$ bash increments.sh
+0
+1
+2
+3
+4
+$
+</code></pre><h3 id=breakとcontinue>breakとcontinue</h3>
+<p>breakステートメントは、指定された条件でループを終了するために使用されます。<br>
+以下に示すコードでは、for loopは if ステートメントの条件により、「i」の値が &lsquo;5&rsquo; になるまで通常の実行を行い、「i」が &lsquo;5以上&rsquo; ループを停止します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:break.sh data-lang=bash:break.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> <span class=o>((</span> <span class=nv>i</span><span class=o>=</span>0<span class=p>;</span> i&lt;<span class=o>=</span>10<span class=p>;</span> i++ <span class=o>))</span><span class=p>;</span> <span class=k>do</span>
+  <span class=k>if</span> <span class=o>[</span> <span class=nv>$i</span> -gt <span class=m>5</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    break<span class=p>;</span>
+  <span class=k>fi</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><p>スクリプトを保存し、ファイルを実行します。次の出力が得られます。</p>
+<pre tabindex=0><code>$ bash break.sh
+0
+1
+2
+3
+4
+5
+$
+</code></pre><p>Continueステートメントは、breakステートメントとは対照的に機能します。<br>
+条件が真である場合は反復をスキップ( continue )し、次の反復に向かって処理を進めます。<br>
+以下のループは、&lsquo;3&rsquo; と &lsquo;7&rsquo; を除いて、&lsquo;0&rsquo; から &lsquo;20&rsquo; までの端末に &lsquo;i&rsquo; 変数の値を出力します。<br>
+ifステートメント &lsquo;if [ $i -eq 3 ] || [ $i -eq 7 ]&rsquo; は、&lsquo;i&rsquo; の値が 3 または 7 に等しいときは反復をスキップし、echoせずにforループの処理を進めます。</p>
+<p>この概念をよりよく理解するために、次のコードを実行します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:continue.sh data-lang=bash:continue.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>for</span> <span class=o>((</span> <span class=nv>i</span><span class=o>=</span>0<span class=p>;</span> i&lt;<span class=o>=</span>10<span class=p>;</span> i++ <span class=o>))</span><span class=p>;</span> <span class=k>do</span>
+  <span class=k>if</span> <span class=o>[</span> <span class=nv>$i</span> -eq <span class=m>3</span> <span class=o>]</span> <span class=o>||</span> <span class=o>[</span>  <span class=nv>$i</span> -eq <span class=m>7</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=k>continue</span><span class=p>;</span>
+  <span class=k>fi</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><pre tabindex=0><code>$ bash continue.sh
+0
+1
+2
+4
+5
+6
+8
+9
+10
+$
+</code></pre><p>以下のように書くこともできます。こちらの記述のほうがすっきりしていて、Ｃ言語やＪａｖａに慣れ親しんでいる人は、直感的に理解できるかもしれません。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=k>for</span> <span class=o>((</span> <span class=nv>i</span><span class=o>=</span>0<span class=p>;</span> i&lt;<span class=o>=</span>10<span class=p>;</span> i++ <span class=o>))</span><span class=p>;</span> <span class=k>do</span>
+	<span class=k>if</span> <span class=o>((</span> <span class=nv>i</span><span class=o>==</span><span class=m>3</span> <span class=o>||</span> <span class=nv>i</span><span class=o>==</span><span class=m>7</span> <span class=o>))</span><span class=p>;</span><span class=k>then</span>
+    <span class=k>continue</span><span class=p>;</span>
+  <span class=k>fi</span>
+  <span class=nb>echo</span> <span class=nv>$i</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>(( )) で囲む記述で書いていく方が良いかもしれません。</dd>
+<dd>他の言語で慣れ親しんでいる書き方を踏襲することで、bash独特の書き方に振り回される事がないからです。</dd>
+<dd>なにより、(( )) 内は、変数の冒頭に &lsquo;$&rsquo; が不要になるだけでも、コードが見やすくなります。</dd>
+</dl>
+</div>
+<h2 id=スクリプトへの値渡し実行パラメータ>スクリプトへの値渡し「実行パラメータ」</h2>
+<p>このトピックの最初の例は、スクリプトを実行する際に、スクリプトへの入力として値を与えるための説明をします。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:input.sh data-lang=bash:input.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=nv>$1</span> <span class=nv>$2</span> <span class=nv>$3</span><span class=p>;</span>
+</code></pre></div><p>このコードは、端末に3つの値を出力します。<br>
+上記のコードをスクリプト「input.sh」に保存します。実行時に実行ファイル名に続き、三つの値を指定して、スクリプトに値を渡します。</p>
+<pre tabindex=0><code>$ bash input.sh BMW MERCEDES TOYOTA
+$ BMW MERCEDES TOYOTA
+$ 
+</code></pre><p>スクリプト実行時に渡した３つの値はそれぞれコードの中で、「BMW」は「$1」、「MERCEDES」は「$2」、「TOYOTA」は「$3」に値は入力されます。</p>
+<p>echoステートメントに「$0」を指定すると、スクリプト名も出力されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:input2.sh data-lang=bash:input2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=nv>$0</span> <span class=nv>$1</span> <span class=nv>$2</span> <span class=nv>$3</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash input2.sh BMW MERCEDES TOYOTA
+$ input2.sh BMW MERCEDES TOYOTA
+$ 
+</code></pre><p>この目的のために配列を使用することもできます。<br>
+配列を宣言するには、コード &lsquo;args=("$@")&rsquo; を使用します。<br>
+このコード &lsquo;args&rsquo; は配列の名前であり、'@&rsquo; は無限の数の値を持つ可能性があることを表します。<br>
+このタイプの配列宣言は、入力のサイズがわからない場合に便利です。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:args.sh data-lang=bash:args.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>args</span><span class=o>=(</span><span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=si>${</span><span class=nv>args</span><span class=p>[0]</span><span class=si>}</span> <span class=si>${</span><span class=nv>args</span><span class=p>[1]</span><span class=si>}</span> <span class=si>${</span><span class=nv>args</span><span class=p>[2]</span><span class=si>}</span><span class=p>;</span>
+</code></pre></div><p>BMW&rsquo;は${args[0]}、「MERCEDES」は${args[1]}、「HONDA」は${args[2]}を表します。</p>
+<pre tabindex=0><code>$ bash args.sh BMW MERCEDES TOYOTA
+$ BMW MERCEDES TOYOTA
+$ 
+</code></pre><p>以下に示すコードは、無限の数の値を持つ配列の値を出力できます。<br>
+前の例では、使用されるコマンド &lsquo;echo ${args[0]} ${args[1]} ${args[2]}は配列の最初の3つの値のみを出力しますが、今回のコードは、出力を指定することなく、渡された値の全てを出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:args2.sh data-lang=bash:args2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>args</span><span class=o>=(</span><span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span><span class=o>)</span> <span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$@</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash args2.sh BMW MERCEDES TOYOTA
+BMW MERCEDES TOYOTA
+$ bash args2.sh BMW MERCEDES TOYOTA HONDA
+BMW MERCEDES TOYOTA HONDA
+$
+</code></pre><p>&lsquo;echo $#&rsquo; と書いて配列サイズを出力することもできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:args3.sh data-lang=bash:args3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>args</span><span class=o>=(</span><span class=s2>&#34;</span><span class=nv>$@</span><span class=s2>&#34;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$@</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$#</span><span class=p>;</span>  
+</code></pre></div><pre tabindex=0><code>$ bash args3.sh BMW MERCEDES TOYOTA
+BMW MERCEDES TOYOTA
+3
+$ bash args3.sh BMW MERCEDES TOYOTA HONDA
+BMW MERCEDES TOYOTA HONDA
+4
+$
+</code></pre>
 <h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>
