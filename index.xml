@@ -2586,13 +2586,28 @@ n: 出力する行数を指定する。&lt;/p>
 ヤムチャ
 孫悟空
 $
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;/code>&lt;/pre>&lt;h2 id="trコマンド">trコマンド&lt;/h2>
+&lt;p>テキストファイルの文字を置換する／削除する&lt;/p>
+&lt;p>「-d」オプションで、指定した文字を削除することができます。例えば、Windows環境で作成したテキストファイルの改行コードを、Linux環境向けに置き換えるといった用途に使用できます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat sample.txt
+name:ヤムチャ skill:狼牙風風拳
+name:孫悟空 skill:かめはめ波
+name:ピッコロ skill:魔貫光殺砲
+name:ヤムチャ skill:繰気弾
+name:孫悟空 skill:元気玉
+name:クリリン skill:気円斬
+name:ヤムチャ skill:かめはめ波
+name:クリリン skill:かめはめ波
+name:孫悟空 skill:ジャン拳
+name:ヤムチャ skill:新狼牙風風拳
+$ cat sample.txt | tr -d '\n'
+name:ヤムチャ skill:狼牙風風拳name:孫悟空 skill:かめはめ波name:ピッコロ skill:魔貫光殺砲name:ヤムチャ skill:繰気弾name:孫悟空 skill:元気玉name:クリリン skill:気円斬name:ヤムチャ skill:かめはめ波name:クリリン skill:かめはめ波name:孫悟空 skill:ジャン拳name:ヤムチャ skill:新狼牙風風拳 $
+&lt;/code>&lt;/pre>&lt;p>Windows環境では、改行を「CR」（16進数0D）と「LF」（16進数0A）の2バイトで表しますが、Linux環境では「LF」のみです。trコマンドでは「CR」を「\r」で表すことができるので、「tr -d \r」としてテキストファイルから「CR」を除去することで、Linux環境用の改行コードに変換できます。&lt;/p>
+&lt;p>「-s」オプションでは、指定した文字が連続している場合には1つにまとめることができます。例えば、「tr -s &amp;ldquo;\r&amp;rdquo;」では、連続した改行を1つにします。catコマンドの「-s」オプションと同じ働きになります。&lt;/p>
+&lt;div class="tips-area tips">
 &lt;dl>
 &lt;dt>ヒント&lt;/dt>
-&lt;dd>だいたい解ってきたのではないかと思います。&lt;/dd>
-&lt;dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。&lt;/dd>
-&lt;dd>関数を使って、より長く複雑なことも実行可能です。&lt;/dd>
-&lt;dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。&lt;/dd>
+&lt;dd>trコマンドの &amp;lsquo;\n&amp;rsquo; はシングルクォーテーションで囲む必要があります。&lt;/dd>
 &lt;/dl>
 &lt;/div>
 &lt;h2 id="スクリプトのデバッグ">スクリプトのデバッグ&lt;/h2>
@@ -2651,7 +2666,16 @@ $
 + var1=56
 + set +x
 $
-&lt;/code>&lt;/pre>&lt;h1 id="関連記事">関連記事&lt;/h1>
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>だいたい解ってきたのではないかと思います。&lt;/dd>
+&lt;dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。&lt;/dd>
+&lt;dd>関数を使って、より長く複雑なことも実行可能です。&lt;/dd>
+&lt;dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="関連記事">関連記事&lt;/h1>
 &lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
 >【はじめから】「ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"

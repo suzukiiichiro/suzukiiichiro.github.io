@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T18:00:46+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T18:39:45+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T18:00:46+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T18:39:45+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 41分
+読了時間: 42分
 </time>
 </div>
 </header>
@@ -194,6 +194,7 @@ Web開発
 <li><a href=#sort--r-逆順>sort -r 逆順</a></li>
 <li><a href=#cutコマンド>cutコマンド</a></li>
 <li><a href=#headコマンド>headコマンド</a></li>
+<li><a href=#trコマンド>trコマンド</a></li>
 <li><a href=#スクリプトのデバッグ>スクリプトのデバッグ</a></li>
 </ol>
 </nav>
@@ -1739,13 +1740,28 @@ n: 出力する行数を指定する。</p>
 ヤムチャ
 孫悟空
 $
-</code></pre><div class="tips-area tips">
+</code></pre><h2 id=trコマンド>trコマンド</h2>
+<p>テキストファイルの文字を置換する／削除する</p>
+<p>「-d」オプションで、指定した文字を削除することができます。例えば、Windows環境で作成したテキストファイルの改行コードを、Linux環境向けに置き換えるといった用途に使用できます。</p>
+<pre tabindex=0><code>$ cat sample.txt
+name:ヤムチャ   skill:狼牙風風拳
+name:孫悟空  skill:かめはめ波
+name:ピッコロ   skill:魔貫光殺砲
+name:ヤムチャ   skill:繰気弾
+name:孫悟空  skill:元気玉
+name:クリリン   skill:気円斬
+name:ヤムチャ   skill:かめはめ波
+name:クリリン   skill:かめはめ波
+name:孫悟空  skill:ジャン拳
+name:ヤムチャ   skill:新狼牙風風拳
+$ cat sample.txt | tr -d '\n'
+name:ヤムチャ   skill:狼牙風風拳name:孫悟空  skill:かめはめ波name:ピッコロ   skill:魔貫光殺砲name:ヤムチャ   skill:繰気弾name:孫悟空  skill:元気玉name:クリリン   skill:気円斬name:ヤムチャ   skill:かめはめ波name:クリリン   skill:かめはめ波name:孫悟空  skill:ジャン拳name:ヤムチャ   skill:新狼牙風風拳 $
+</code></pre><p>Windows環境では、改行を「CR」（16進数0D）と「LF」（16進数0A）の2バイトで表しますが、Linux環境では「LF」のみです。trコマンドでは「CR」を「\r」で表すことができるので、「tr -d \r」としてテキストファイルから「CR」を除去することで、Linux環境用の改行コードに変換できます。</p>
+<p>「-s」オプションでは、指定した文字が連続している場合には1つにまとめることができます。例えば、「tr -s &ldquo;\r&rdquo;」では、連続した改行を1つにします。catコマンドの「-s」オプションと同じ働きになります。</p>
+<div class="tips-area tips">
 <dl>
 <dt>ヒント</dt>
-<dd>だいたい解ってきたのではないかと思います。</dd>
-<dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。</dd>
-<dd>関数を使って、より長く複雑なことも実行可能です。</dd>
-<dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。</dd>
+<dd>trコマンドの &lsquo;\n&rsquo; はシングルクォーテーションで囲む必要があります。</dd>
 </dl>
 </div>
 <h2 id=スクリプトのデバッグ>スクリプトのデバッグ</h2>
@@ -1809,7 +1825,16 @@ $
 + var1=56
 + set +x
 $
-</code></pre><h1 id=関連記事>関連記事</h1>
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>だいたい解ってきたのではないかと思います。</dd>
+<dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。</dd>
+<dd>関数を使って、より長く複雑なことも実行可能です。</dd>
+<dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。</dd>
+</dl>
+</div>
+<h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト３」</a><br>
