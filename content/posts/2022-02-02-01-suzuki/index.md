@@ -595,7 +595,7 @@ for ループ
 break と continue
 
 
-### Whileループ:
+### whileループ:
 ループは条件がtrueの場合にコードブロック(do...doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。
 
 条件がfalseになると、whileループは終了します。
