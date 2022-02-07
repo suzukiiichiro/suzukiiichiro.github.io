@@ -677,7 +677,7 @@ $
 [【はじめから】「ざっくりわかるシェルスクリプト２」](https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/)
 [【はじめから】「ざっくりわかるシェルスクリプト３」](https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/)
 [【 grep 特集】「ざっくりわかるシェルスクリプト４」](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
-[【ちょい広め】「ざっくりわかるシェルスクリプト５」](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
+[【grep/sed/awkも】「ざっくりわかるシェルスクリプト５」](https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/)
 
 
 
