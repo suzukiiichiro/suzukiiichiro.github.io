@@ -3,7 +3,7 @@ title: "Hugoでテーマが反映されない（画面が真っ白のまま）"
 date: 2021-12-21T18:08:57+09:00
 draft: false
 image: "2021-12-21.jpg"
-authors: suzuki
+authors: wyoshi
 categories:
   - Web開発
 tags:
