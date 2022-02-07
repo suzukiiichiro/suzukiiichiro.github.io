@@ -1529,7 +1529,7 @@ $
 &lt;dd>-ge は[ &amp;gt;= ] greater equals です。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h2 id="連結">連結&lt;/h2>
+&lt;h3 id="連結">連結&lt;/h3>
 &lt;p>2つの文字列を連結することもできます。&lt;br>
 プルグラムはユーザーへ入力を促し、２つの変数を &amp;lsquo;st1&amp;rsquo; &amp;lsquo;st2&amp;rsquo; 変数に格納します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:connect.sh" data-lang="bash:connect.sh">&lt;span class="cp">#!/bin/bash
@@ -1565,12 +1565,12 @@ $
 &lt;/div>
 &lt;!--
 ## 数値計算処理
-このトピックでは、スクリプトを使用してさまざまな算術演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
+このトピックでは、スクリプトを使用してさまざまな数値演算を実行する方法を学習します。ここでは、そのためのさまざまな方法も表示されます。最初の方法では、ステップ1は2つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を端末に印刷することです。スクリプトを保存し、実行し、結果をチェックアウトします。
 ``` bash:numberCalc.sh
 #!/bin/bash
-n1=4
-n2=20
-echo $(( n1 + n2 ))
+n1=4;
+n2=20;
+echo $(( n1 + n2 ));
 ```
 加算、減算、乗算、除算などの複数の操作を実行するための単一のスクリプトを書くこともできます。
 ``` bash:numberCalc2.sh
@@ -2132,7 +2132,7 @@ fi
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/" target="_blank" rel="noopener"
 >【 grep 特集】「ざっくりわかるシェルスクリプト４」&lt;/a>&lt;br>
 &lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/" target="_blank" rel="noopener"
->【ちょい広め】「ざっくりわかるシェルスクリプト５」&lt;/a>&lt;/p>
+>【grep/sed/awkも】「ざっくりわかるシェルスクリプト５」&lt;/a>&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
