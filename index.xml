@@ -1220,7 +1220,7 @@ C言語、Javaに慣れている人は、この記述方法のほうが直観的
 until ループ&lt;br>
 for ループ&lt;br>
 break と continue&lt;/p>
-&lt;h3 id="whileループ">Whileループ:&lt;/h3>
+&lt;h3 id="whileループ">whileループ:&lt;/h3>
 &lt;p>ループは条件がtrueの場合にコードブロック(do&amp;hellip;doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。&lt;/p>
 &lt;p>条件がfalseになると、whileループは終了します。&lt;br>
 whileループは、キーワード「while」から始まり、そのうしろに条件文を書きます。&lt;br>
