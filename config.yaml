@@ -28,11 +28,11 @@ summaryLength: 70
 
 # Git と連携して lastmod の日付を自動で設定する
 enableGitInfo: true
-# frontmatter:
-#   lastmod:
-#     - :fileModTime
-#     - :git
-#     - lastmod
+frontmatter:
+  lastmod:
+    - :git
+    - :fileModTime
+    - lastmod
 
 # Robots.txtを作成
 enableRobotsTXT: true
