@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T15:18:24+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T17:24:51+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T15:18:24+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T17:24:51+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 28分
+読了時間: 39分
 </time>
 </div>
 </header>
@@ -175,6 +175,21 @@ Web開発
 </li>
 <li><a href=#配列>配列</a></li>
 <li><a href=#関数>関数</a></li>
+<li><a href=#ファイルとディレクトリ>ファイルとディレクトリ</a>
+<ol>
+<li><a href=#ディレクトリ操作>ディレクトリ操作</a></li>
+<li><a href=#ファイル操作>ファイル操作</a></li>
+<li><a href=#テキストへのファイル出力>テキストへのファイル出力</a></li>
+<li><a href=#ファイルの読み込み>ファイルの読み込み</a></li>
+</ol>
+</li>
+<li><a href=#curlコマンド>curlコマンド</a></li>
+<li><a href=#selectコマンド>selectコマンド</a></li>
+<li><a href=#inotifyコマンド-ファイルの変更を監視する>inotifyコマンド ファイルの変更を監視する</a></li>
+<li><a href=#grepコマンド>grepコマンド</a></li>
+<li><a href=#awkコマンド>awkコマンド</a></li>
+<li><a href=#sedコマンド>sedコマンド</a></li>
+<li><a href=#スクリプトのデバッグ>スクリプトのデバッグ</a></li>
 </ol>
 </nav>
 </div>
@@ -1206,8 +1221,511 @@ echo $returningValue;
 I love MAC
 I love Linux
 $
-</code></pre>
-<h1 id=関連記事>関連記事</h1>
+</code></pre><h2 id=ファイルとディレクトリ>ファイルとディレクトリ</h2>
+<p>このトピックでは、<br>
+１．ファイルとディレクトリを作成する方法、<br>
+２．スクリプトを使用してこれらのファイルとディレクトリの存在を確認する方法、<br>
+３．ファイルからテキストを1行ずつ読み取る方法、<br>
+４．ファイルにテキストを追加する方法、<br>
+５．ファイルを削除する方法、</p>
+<p>を紹介します。</p>
+<h3 id=ディレクトリ操作>ディレクトリ操作</h3>
+<p>最初のスクリプトは、「Directory2」という名前のディレクトリを作成します。<br>
+&lsquo;mkdir&rsquo; コマンドでディレクトリを作成します。<br>
+すでに同じディレクトリに「Directory2」フォルダーがある場合はエラーとなります。<br>
+エラーに対処するためには、'-p&rsquo; オプションを使います。<br>
+&lsquo;-p&rsquo; オプションは、作成しようとするその場所に、作成したいディレクトリ名が既に存在している場合は、なにもしません。ディレクトリが存在しない場合のみ、新しいディレクトリを作成します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mkdir.sh data-lang=bash:mkdir.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+mkdir -p Directory2
+</code></pre></div><p>現在の場所にディレクトリが存在するかどうかをif文で確認することもできます。<br>
+「if」ステートメントでディレクトリが存在するかどうかをチェックするためにはif文の条件式で「-d」フラグを使用します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:mkdir-p.sh data-lang=bash:mkdir-p.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter directory name to check&#34;</span><span class=p>;</span>
+<span class=nb>read</span> direct<span class=p>;</span>
+
+<span class=k>if</span> <span class=o>[</span> -d <span class=s2>&#34;</span><span class=nv>$direct</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$direct</span><span class=s2> exists&#34;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$direct</span><span class=s2> doesn&#39;t exist&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><h3 id=ファイル操作>ファイル操作</h3>
+<p>ファイルの作成には「touch」コマンドを使います。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>ディレクトリの作成には &lsquo;mkdir&rsquo; コマンド、</dd>
+<dd>ファイルの作成には &lsquo;touch&rsquo; コマンドを使います。</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:touch.sh data-lang=bash:touch.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter file name to create&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileName<span class=p>;</span>
+
+touch <span class=nv>$fileName</span><span class=p>;</span>
+</code></pre></div><p>touchコマンドはmkdirコマンド同様、ファイルを作成しようとするその場所に、既に作成しようとするファイル明度同名のファイルが存在した場合、何もしません。</p>
+<p>mkdir は、ディレクトリを作成する。同名のディレクトリがあればエラーとなります。</p>
+<pre tabindex=0><code>ls 
+directory2/
+$ mkdir directory2
+mkdir: directory2: File exists
+$
+</code></pre><p>そこで、mkdir -p コマンドは、同名のディレクトリが既にあればエラーを返さず何もしない。なければディレクトリを作成。<br>
+touchコマンドも同様で、同名のファイルが既にあればエラーを返さず何もせず、なければファイルを作成します。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>touchコマンドは既に同名のファイルがあれば、エラーを返さない代わりに何もしませんが、「:>」コマンドでファイルを作成した場合、既に作成しようとするその場所に同名のファイルがあった場合、空の新規ファイルで上書きします。（ですので、ファイルは強制的に作成されますが、データ内容は消滅します。</dd>
+</dl>
+</div>
+<p>if文で -d フラグでディレクトリの存在を確認する事ができました。<br>
+ファイルも同様に -f フラグでファイルの存在を確認する事ができます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:checkFile.sh data-lang=bash:checkFile.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter file name to check&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileName<span class=p>;</span>
+
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span><span class=p>;</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> exists&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> doesn&#39;t exist&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><h3 id=テキストへのファイル出力>テキストへのファイル出力</h3>
+<p>ファイルにテキストを追加するには、「>」リダイレクト、または「&#187;」アペンドを使います。<br>
+「>」リダイレクトは、ファイルを新規に作成し直してから出力します。<br>
+「&#187;」アペンドは、既にファイルが存在しているときに限定して出力します。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>「>」リダイレクトは、既にファイルが存在している場合も、ファイルを新規作成します。ですので、元々あったファイルの内容は空になります。からになってもらっては困ると言う場合は、「touch」コマンドを使います。</dd>
+<dd>
+<p>また、「&#187;」アペンドは、追記する場合に、ファイルがない場合はエラーとなります。こうした事にならないように、次の例文で、ファイルの存在を確認して処理を進めます。</p>
+</dd>
+</dl>
+</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:appendFile.sh data-lang=bash:appendFile.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;入力ファイル名を指定して下さい&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileName<span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;ファイルに追記したい文字列を入力して下さい&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileText<span class=p>;</span>
+
+<span class=c1># ファイルがあれば</span>
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=c1># アペンド</span>
+    <span class=nb>echo</span> <span class=s2>&#34;アペンドします&#34;</span><span class=p>;</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileText</span><span class=s2>&#34;</span> &gt;&gt; <span class=nv>$fileName</span>
+<span class=k>else</span>
+    <span class=c1># リダイレクト</span>
+    <span class=nb>echo</span> <span class=s2>&#34;リダイレクトします&#34;</span><span class=p>;</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileText</span><span class=s2>&#34;</span> &gt; <span class=nv>$fileName</span>
+<span class=k>fi</span>
+</code></pre></div><h3 id=ファイルの読み込み>ファイルの読み込み</h3>
+<p>スクリプトを使用して任意のファイルを読み取ることもできます。上記の方法に従ってファイルを見つけます。その後、while条件を使用して「read -r line」を使用してファイルを読み取る。ファイルを読み取るので、このシンボル「&lt;」を使用します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:whileRead.sh data-lang=bash:whileRead.sh><span class=nb>echo</span> <span class=s2>&#34;読み込みたいファイル名を指定して下さい&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileName<span class=p>;</span>
+
+<span class=c1># ファイルがあれば</span>
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=c1># 読み込む</span>
+  <span class=k>while</span> <span class=nb>read</span> line<span class=p>;</span> <span class=k>do</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$line</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=k>done</span>&lt;<span class=nv>$fileName</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> は存在しません&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><p>ファイルを削除するには、まずファイルが存在するかどうかを調べることです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:rm.sh data-lang=bash:rm.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;enter file name from which you want to delete&#34;</span><span class=p>;</span>
+<span class=nb>read</span> fileName<span class=p>;</span>
+
+<span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    rm <span class=nv>$fileName</span><span class=p>;</span>
+<span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> doesn&#39;t exist&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>rmコマンドは非常に危険なコマンドです。</dd>
+<dd>ファイルの削除の都度確認を促す -i オプションをつけるなどをするとよいでしょう。</dd>
+<dd>rmコマンドは、ファイルだけではなくディレクトリも削除できます。</dd>
+<dd>再帰的に行いたい場合は、-r オプションをつけると良いです。</dd>
+</dl>
+</div>
+<h2 id=curlコマンド>curlコマンド</h2>
+<p>カールは、URL構文を持つデータファイルを取得、または送信するためのコマンドです。<br>
+まず最初にしなければならないことはcurlをインストールすることです。</p>
+<pre tabindex=0><code># 確認
+which curl
+/usr/bin/curl
+$
+</code></pre><p>ない場合、</p>
+<pre tabindex=0><code># macの場合
+$ sudo brew install curl
+</code></pre><pre tabindex=0><code># linuxの場合
+$ yum install curl
+</code></pre><p>curlをインストールした後、URLを使ってファイルをダウンロードするためのコードを記述します。<br>
+curlを使用してデータファイルをダウンロードするには２つのステップが必要です。</p>
+<p>１つ目は、そのファイルの完全なリンクアドレスを持つことです。<br>
+２つ目は、そのアドレスをスクリプトの「url」変数に保存し、そのURLでcurlコマンドを使用してダウンロードすることです。ここで「-O」は、ダウンロードするファイル名は、実在のファイル名を継承すると言う意味となります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:curl.sh data-lang=bash:curl.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>url</span><span class=o>=</span><span class=s2>&#34;http://www.ovh.net/files/1Mb.dat&#34;</span><span class=p>;</span>
+curl <span class=si>${</span><span class=nv>url</span><span class=si>}</span> -O<span class=p>;</span>
+</code></pre></div><p>ダウンロードしたファイルに新しい名前を与えるには、「-o」オプションでファイル名を指定します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:curl2.sh data-lang=bash:curl2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>url</span><span class=o>=</span><span class=s2>&#34;http://www.ovh.net/files/1Mb.dat&#34;</span><span class=p>;</span>
+curl <span class=si>${</span><span class=nv>url</span><span class=si>}</span> -o NewFileDownload<span class=p>;</span>
+</code></pre></div><p>数百ギガバイトのサイズのファイルをダウンロードしたい場合はどうでしょう。<br>
+適切なファイルをダウンロードしているかどうかを確認するためにヘッダーファイルをダウンロードすることができます。<br>
+ファイルのURLの前に「-I」と書くだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:curl3.sh data-lang=bash:curl3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>url</span><span class=o>=</span><span class=s2>&#34;http://www.ovh.net/files/1Mb.dat&#34;</span><span class=p>;</span>
+curl -I <span class=si>${</span><span class=nv>url</span><span class=si>}</span><span class=p>;</span>
+</code></pre></div><h2 id=selectコマンド>selectコマンド</h2>
+<p>selectコマンドは、列挙したリストを表示させ、ユーザーに入力を促します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:select.sh data-lang=bash:select.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>select</span> car in BMW MERCEDES TESLA ROVER TOYOTA<span class=p>;</span> <span class=k>do</span>
+  <span class=nb>echo</span> <span class=s2>&#34;you have selected </span><span class=nv>$car</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>done</span>
+</code></pre></div><pre tabindex=0><code>$ bash select.sh
+1) BMW	     3) TESLA	  5) TOYOTA
+2) MERCEDES  4) ROVER
+#? 3
+you have selected TESLA
+#? 4
+you have selected ROVER
+#?
+</code></pre><p>この場合、選択した車のオプションが表示されますが、オプション以外の番号を入力すると何もしません。<br>
+以下の例では、swich-caseを使用して、ユーザーが他の車のオプションを入力した場合、「1から5の間で選択してください」というエラーメッセージが表示されます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:select.sh data-lang=bash:select.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>select</span> car in BMW MERCEDES TESLA ROVER TOYOTA<span class=p>;</span> <span class=k>do</span>
+  <span class=k>case</span> <span class=nv>$car</span> in
+    BMW<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;BMW SELECTED&#34;</span><span class=p>;;</span>
+    MERCEDES<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;MERCEDES SELECTED&#34;</span><span class=p>;;</span>
+    TESLA<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;TESLA SELECTED&#34;</span><span class=p>;;</span>
+    ROVER<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;ROVER SELECTED&#34;</span><span class=p>;;</span>
+    TOYOTA<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;TOYOTA SELECTED&#34;</span><span class=p>;;</span>
+    *<span class=o>)</span>
+      <span class=nb>echo</span> <span class=s2>&#34;ERROR! Please select between 1 to 5&#34;</span><span class=p>;;</span>
+  <span class=k>esac</span>
+<span class=k>done</span>
+</code></pre></div><p>プロのメニューでは、プログラムはユーザーの入力を待つ必要があります。<br>
+このスクリプトでは、ユーザーに「続行するには任意のキーを押して」ように依頼し、「read -t 3 -n 1」コマンドを使用して3秒ごとにユーザーに「キーSirを押すのを待っています」というリマインダーを送信します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:select.sh data-lang=bash:select.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;press any key to continue&#34;</span><span class=p>;</span>
+<span class=k>while</span> <span class=o>[</span> <span class=nb>true</span> <span class=o>]</span><span class=p>;</span> <span class=k>do</span>
+  <span class=c1># ３秒ごとに入力を促す</span>
+  <span class=nb>read</span> -t <span class=m>3</span> -n 1<span class=p>;</span>
+  <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> <span class=o>=</span> <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+    <span class=nb>echo</span> <span class=s2>&#34;you have terminated the script&#34;</span><span class=p>;</span>
+    exit<span class=p>;</span>
+  <span class=k>else</span>
+    <span class=nb>echo</span> <span class=s2>&#34;waiting for you to press the key Sir&#34;</span>
+  <span class=k>fi</span>
+<span class=k>done</span>
+</code></pre></div><h2 id=inotifyコマンド-ファイルの変更を監視する>inotifyコマンド ファイルの変更を監視する</h2>
+<p>inotifyを使用してファイルを変更を監視するする方法を説明します。<br>
+inotifyの正式名称は「inode notify」です。<br>
+inotifyは、ファイルシステムの変更を監視し、、変更をアプリケーションに報告するLinuxカーネルサブシステムです。inotifyを操作するには、まずターミナルからinotifyをインストールする必要があります。</p>
+<p>Linuxの場合</p>
+<pre tabindex=0><code>$ yum install inotify-tools
+</code></pre><p>inotifyがどのように反応するかを確認します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:inotify.sh data-lang=bash:inotify.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+mkdir -p iNotifyTest
+inotifywait -m iNotifyTest
+</code></pre></div><p>では、ターミナルの出力を確認します。<br>
+ターミナルをもう一つ起動して上記スクリプトを実行しているターミナルと並べて開きます。</p>
+<p>モニターとしてのinotify.shの動作を見ながら別のターミナルウィンドウを開き、「$ touch file1.txt」でファイルを作成すると、inotifyが反応し、ファイルシステムで現在起こっているすべてのアクションを監視していることがわかります。</p>
+<p>次に「file1.txt」に何かを書き、inotifyで動作するターミナルウィンドウからの応答を確認してください。</p>
+<h2 id=grepコマンド>grepコマンド</h2>
+<p>grepコマンドについてはここで詳しく書きました。<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/ target=_blank rel=noopener>【 grep 特集】「ざっくりわかるシェルスクリプト４」</a></p>
+<p>それはそれとして、ここではざっくりと説明します。</p>
+<p>grepは ‘global regular expression print’ の略です。<br>
+このコマンドは、テキストを1行ずつ処理してファイル内のパターンを検索するために使用されます。<br>
+まず、touchコマンドを使用してfilegrep.txtという名前のファイルを作成します。ターミナルに次のコードを入力します。</p>
+<pre tabindex=0><code>$ touch filegrep.txt
+$ vim filegrep.txt
+</code></pre><p>filegrep.txtを開き、ファイルに次のコンテンツを書き込みます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:grepfile.txt data-lang=bash:grepfile.txt>This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:grep.sh data-lang=bash:grep.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;検索したいファイル名を指定して下さい。&#34;</span>
+
+<span class=c1># 入力を grepfile.txt</span>
+<span class=nb>read</span> fileName
+
+<span class=k>if</span> <span class=o>[[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;検索したい語句を入力して下さい。&#34;</span><span class=p>;</span>
+  <span class=nb>read</span> grepvar<span class=p>;</span>
+  grep <span class=s2>&#34;</span><span class=nv>$grepvar</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> はありません。&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><pre tabindex=0><code>$ bash test
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+$
+</code></pre><p>入力は「linux」（小文字のエル）ですが、ファイル内のテキストは「Linux」（大文字のエル）で書かれているため、検索結果には何も表示されません。ここでは、grepコマンドに「-i」のフラグを追加するだけで、この大文字と小文字を区別する問題に対処する必要があります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:grep2.sh data-lang=bash:grep2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;検索したいファイル名を指定して下さい。&#34;</span>
+
+<span class=c1># 入力を grepfile.txt</span>
+<span class=nb>read</span> fileName
+
+<span class=k>if</span> <span class=o>[[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;検索したい語句を入力して下さい。&#34;</span><span class=p>;</span>
+  <span class=nb>read</span> grepvar<span class=p>;</span>
+  <span class=c1># 大文字小文字の区別をしないオプション -i</span>
+  grep -i <span class=s2>&#34;</span><span class=nv>$grepvar</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> はありません。&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><pre tabindex=0><code>$ bash grep2.sh
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+This is Linux
+This is Linux
+This is Linux
+This is Linux
+$
+</code></pre><p>出力で行番号を抽出することもできます。このためには、grepコマンドに「-n」の別のフラグを追加するだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:grep3.sh data-lang=bash:grep3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;検索したいファイル名を指定して下さい。&#34;</span>
+
+<span class=c1># 入力を grepfile.txt</span>
+<span class=nb>read</span> fileName
+
+<span class=k>if</span> <span class=o>[[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;検索したい語句を入力して下さい。&#34;</span><span class=p>;</span>
+  <span class=nb>read</span> grepvar<span class=p>;</span>
+  <span class=c1># 大文字小文字の区別をしないオプション -i</span>
+  grep -in <span class=s2>&#34;</span><span class=nv>$grepvar</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> はありません。&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><pre tabindex=0><code>$ bash grep3.sh
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+1:This is Linux
+4:This is Linux
+7:This is Linux
+10:This is Linux
+$
+</code></pre><p>ドキュメント内の特定の単語の発生回数を取得することもできます。grepコマンド「grep -i -c $grepvar $fileName」に「-c」フラグを追加し、スクリプトを保存し、端末を使用して実行します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:grep4.sh data-lang=bash:grep4.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> <span class=s2>&#34;検索したいファイル名を指定して下さい。&#34;</span>
+
+<span class=c1># 入力を grepfile.txt</span>
+<span class=nb>read</span> fileName
+
+<span class=k>if</span> <span class=o>[[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;検索したい語句を入力して下さい。&#34;</span><span class=p>;</span>
+  <span class=nb>read</span> grepvar<span class=p>;</span>
+  <span class=c1># 大文字小文字の区別をしないオプション -i</span>
+  grep -inc <span class=s2>&#34;</span><span class=nv>$grepvar</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> はありません。&#34;</span>
+<span class=k>fi</span>
+</code></pre></div><pre tabindex=0><code>$ bash test
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+4
+$
+</code></pre><h2 id=awkコマンド>awkコマンド</h2>
+<p>awkは、データの操作やレポートの作成に使用されるスクリプト言語です。<br>
+コンパイルを必要とせず、変数、数値関数、文字列関数、論理演算子が使用できます。<br>
+何より処理が高速です。bashよりも高速である場合が多いです。<br>
+このトピックでは、シェルスクリプトで多く多用されるawkコマンドの一例を紹介します。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | awk '{ print; }';
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+$
+</code></pre><p>「awk」を使用して特定のパターンを検索することもできます。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | awk '/Linux/ { print; }';
+This is Linux
+This is Linux
+This is Linux
+This is Linux
+$
+</code></pre><p>次の例では、プログラムがターゲットワードを見つけた行からコンテンツを抽出する方法を見ていきます。 「$1」はその行の最初の単語を表し、同様に「$2」は2番目を表し、「$3」は3番目の単語を表し、「$4」はこの場合最後の単語を表します。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | awk '/Linux/ { print $3; }';
+Linux
+Linux
+Linux
+Linux
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>awkはとても優れたプログラミング言語で、シェル薬婦とを学ぶことと同じほどのボリュームのある言語です。ただ、シェルスクリプトで使われる多くのbashコマンドを使いこなすことで、awkでないとできないことは限られます。まずはこのトピックで使われるawkコマンドの利用例を身につければオッケーです。すこしずつ覚えていくことを増やしていけばよいのです。</dd>
+</dl>
+</div>
+<h2 id=sedコマンド>sedコマンド</h2>
+<p>sedコマンドはストリームエディタの略で、標準入力またはファイルからのテキストの編集操作を実行します。<br>
+このトピックでは「i」を「I」に置き換えます。<br>
+そのためには、次の sed コマンド &lsquo;cat grepfile.txt | sed -e &rsquo;s/i/I/&rsquo; と書くだけで、cat コマンドを使用してファイルの内容を取得し、パイプ &lsquo;|&rsquo; 記号の後に、&lsquo;sed&rsquo; キーワードを使用して、このケースを置き換える操作を指定します。<br>
+「s」はスラッシュと置き換えると言う意味です。<br>
+「-e」はsed コマンドを連続してフィルタリングすることを可能とするオプションです。<br>
+/置き換え前/置き換え後/<br>
+となります。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | sed -e &quot;s/i/I/&quot;
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+$
+</code></pre><p>最初に出てくる &lsquo;This is Linux&rsquo; が &lsquo;ThIs is Linux&rsquo; となったことが解ります。<br>
+-g オプションを末尾につけることで、複数回の処理で置き換えます。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | sed -e &quot;s/i/I/g&quot;
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+$
+</code></pre><p>以下のコマンドで、処理結果を簡単にファイルに出力して、エディターなどで開いて確認する事ができます。</p>
+<pre tabindex=0><code>cat filegrep.txt | sed -e 's/i/I/g' &gt; newfile.txt
+</code></pre><p>単語全体を別の単語に置き換えることもできます。たとえば、以下に示すスクリプトでは、「Linux」のすべてのインスタンスが端末に表示中に「Unix」に置き換えられます。</p>
+<pre tabindex=0><code>$ cat grepfile.txt | sed -e &quot;s/Linux/Unix/g&quot;
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+$
+</code></pre><h2 id=スクリプトのデバッグ>スクリプトのデバッグ</h2>
+<p>Bashは広範なデバッグ機能を提供しています。</p>
+<p>デバッグの方法は３種類あります</p>
+<p>１．ターミナルの実行時に -x オプションを付与する</p>
+<pre tabindex=0><code>$ bash -x helloScript.sh
+</code></pre><p>２．ソースコードの冒頭のシェバンに -x オプションを付与する</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:debug.sh data-lang=bash:debug.sh><span class=cp>#!/bin/bash -x
+</span><span class=cp></span>:
+:
+</code></pre></div><p>３．デバッグの開始点と終了点を決めてデバッグ<br>
+デバッグの開始点にコマンド &lsquo;set -x&rsquo;終了点には &lsquo;set +x&rsquo; と書きます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:debug2.sh data-lang=bash:debug2.sh><span class=cp>#!/bin/bash 
+</span><span class=cp></span>
+<span class=nb>set</span> -x
+<span class=nb>echo</span> <span class=s2>&#34;置き換えたいファイル名を入寮して下さい。&#34;</span>
+<span class=nb>read</span> fileName
+<span class=nb>set</span> +x
+
+<span class=k>if</span> <span class=o>[[</span> -f <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+  sed -e <span class=s2>&#34;s/Linux/Unix/g&#34;</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=k>else</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$fileName</span><span class=s2> はありません。&#34;</span><span class=p>;</span>
+<span class=k>fi</span>
+</code></pre></div><pre tabindex=0><code>$ bash test
++ echo 置き換えたいファイル名を入寮して下さい。
+置き換えたいファイル名を入寮して下さい。
++ read fileName
+grepfile.txt
++ set +x
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+$
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:debug3.sh data-lang=bash:debug3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># デバッグ開始</span>
+<span class=nb>set</span> -x
+
+<span class=nv>var1</span><span class=o>=</span><span class=sb>`</span>date +%M<span class=sb>`</span>
+
+<span class=c1># デバッグ終了</span>
+<span class=nb>set</span> +x
+
+<span class=nv>var2</span><span class=o>=</span><span class=sb>`</span>ls -1 <span class=p>|</span> wc -l<span class=sb>`</span>
+<span class=nv>var3</span><span class=o>=</span><span class=s2>&#34;DEBUG TEST&#34;</span>
+
+<span class=nb>exit</span> <span class=m>0</span>
+</code></pre></div><pre tabindex=0><code>$ bash debug3.sh
+++ date +%M
++ var1=56
++ set +x
+$
+</code></pre><h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト３」</a><br>
