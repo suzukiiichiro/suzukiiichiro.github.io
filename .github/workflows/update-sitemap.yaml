@@ -1,6 +1,7 @@
 name: update-sitemap
 
 on:
+  push:
   schedule:
     - cron: '0 15 * * *'
 
