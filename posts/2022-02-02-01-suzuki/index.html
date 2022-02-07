@@ -15,14 +15,14 @@
 <meta property="og:description" content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T12:53:55+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="grep"><meta property="article:tag" content="sed"><meta property="article:tag" content="awk"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-02T15:55:47+09:00"><meta property="article:modified_time" content="2022-02-07T15:18:24+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg">
 <meta name=twitter:title content="【grep/sed/awkも】ざっくりわかるシェルスクリプト５」 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-02-01-suzuki/shellscript.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T12:53:55+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【grep/sed/awkも】ざっくりわかるシェルスクリプト５」","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg"],"datePublished":"2022-02-02T15:55:47+09:00","dateModified":"2022-02-07T15:18:24+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -120,7 +120,7 @@ Web開発
 2022.02.07
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 23分
+読了時間: 28分
 </time>
 </div>
 </header>
@@ -159,6 +159,22 @@ Web開発
 <li><a href=#連結>連結</a></li>
 </ol>
 </li>
+<li><a href=#数値計算処理>数値計算処理</a>
+<ol>
+<li><a href=#四則演算>四則演算</a></li>
+<li><a href=#算術演算-exprコマンド>算術演算 exprコマンド</a></li>
+<li><a href=#小数点の扱い-bcコマンド>小数点の扱い bcコマンド</a></li>
+</ol>
+</li>
+<li><a href=#bcコマンドでの小数点以下の指定桁数出力>bcコマンドでの小数点以下の指定桁数出力</a></li>
+<li><a href=#declareコマンド>declareコマンド</a>
+<ol>
+<li><a href=#グローバル変数とローカル変数>グローバル変数とローカル変数</a></li>
+<li><a href=#整数として変数定義する>整数として変数定義する</a></li>
+</ol>
+</li>
+<li><a href=#配列>配列</a></li>
+<li><a href=#関数>関数</a></li>
 </ol>
 </nav>
 </div>
@@ -861,6 +877,336 @@ $
 <dd>変数はつねに " " ダブルクオーテーションで囲みましょう。</dd>
 </dl>
 </div>
+<h2 id=数値計算処理>数値計算処理</h2>
+<p>このトピックでは、スクリプトを使用してさまざまな数値演算を実行する方法を学習します。<br>
+最初の方法では、２つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を出力します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:numberCalc.sh data-lang=bash:numberCalc.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>n1</span><span class=o>=</span>4<span class=p>;</span>
+<span class=nv>n2</span><span class=o>=</span>20<span class=p>;</span>
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>+</span> n2 <span class=k>))</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash numberCalc.sh
+24
+$
+</code></pre><h3 id=四則演算>四則演算</h3>
+<p>加算、減算、乗算、除算などの複数の操作を実行するための単一のスクリプトを書くこともできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:numberCalc2.sh data-lang=bash:numberCalc2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>n1</span><span class=o>=</span>20<span class=p>;</span>
+<span class=nv>n2</span><span class=o>=</span>4<span class=p>;</span>
+
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>+</span> n2 <span class=k>))</span><span class=p>;</span> 
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>-</span> n2 <span class=k>))</span><span class=p>;</span> 
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>*</span> n2 <span class=k>))</span><span class=p>;</span> 
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>/</span> n2 <span class=k>))</span><span class=p>;</span> 
+<span class=nb>echo</span> <span class=k>$((</span> n1 <span class=o>%</span> n2 <span class=k>))</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash numberCalc2.sh
+24
+16
+80
+5
+0
+$
+</code></pre><h3 id=算術演算-exprコマンド>算術演算 exprコマンド</h3>
+<p>算術演算を実行する他の方法は、「expr」コマンドを使用することです。<br>
+この「expr」は、これらのn1とn2を他の変数とみなし、操作を実行することです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:numberCalc3.sh data-lang=bash:numberCalc3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>n1</span><span class=o>=</span>20<span class=p>;</span>
+<span class=nv>n2</span><span class=o>=</span>4<span class=p>;</span>
+
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> + <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash numberCalc3.sh
+24
+$
+</code></pre><p>「expr」を使用して四則演算を処理してみます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:numberCalc4.sh data-lang=bash:numberCalc4.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>n1</span><span class=o>=</span>20<span class=p>;</span>
+<span class=nv>n2</span><span class=o>=</span>4<span class=p>;</span>
+
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> + <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> - <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> <span class=se>\*</span> <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> / <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=k>$(</span>expr <span class=nv>$n1</span> % <span class=nv>$n2</span> <span class=k>)</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash numberCalc4.sh
+24
+16
+80
+5
+0
+$
+</code></pre><h3 id=小数点の扱い-bcコマンド>小数点の扱い bcコマンド</h3>
+<p>exprコマンドなどは小数演算できません。<br>
+echoコマンドで数式を作成し、それをbcコマンドに渡して計算します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bc:bc.sh data-lang=bc:bc.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>RESULT</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=s2>&#34;scale=5; 10.0 / 3.0&#34;</span> <span class=p>|</span> bc<span class=sb>`</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$RESULT</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash bc.sh
+3.33333
+$
+</code></pre><h2 id=bcコマンドでの小数点以下の指定桁数出力>bcコマンドでの小数点以下の指定桁数出力</h2>
+<p>演算の精度を保つため、上記のように計算は小数点以下5桁で行うけれど、表示は小数点以下2桁とかにしたい場合（桁数を指定したい場合）</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bc_f.sh data-lang=bash:bc_f.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>RESULT</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=s2>&#34;scale=5; 10.0 / 3.0&#34;</span> <span class=p>|</span> bc<span class=sb>`</span>
+<span class=nb>printf</span> <span class=s2>&#34;%.2f&#34;</span> <span class=nv>$RESULT</span>
+</code></pre></div><pre tabindex=0><code>$ bash bc_f.sh
+3.33
+$
+</code></pre><p>printf で桁数を指定します。<br>
+実は、bcコマンドでも桁数を指定できます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bc_f.sh data-lang=bash:bc_f.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># 先に紹介した方法</span>
+<span class=nv>RESULT</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=s2>&#34;scale=5; 10.0 / 3.0&#34;</span> <span class=p>|</span> bc<span class=sb>`</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$RESULT</span><span class=s2>&#34;</span><span class=p>;</span>
+
+<span class=c1># printfコマンドで２桁にする</span>
+<span class=nv>RESULT</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=s2>&#34;scale=5; 10.0 / 3.0&#34;</span> <span class=p>|</span> bc<span class=sb>`</span><span class=p>;</span>
+<span class=nb>printf</span> <span class=s2>&#34;%.2f\n&#34;</span> <span class=s2>&#34;</span><span class=nv>$RESULT</span><span class=s2>&#34;</span><span class=p>;</span>
+
+<span class=c1># bcコマンドで２桁にする</span>
+<span class=nv>RESULT</span><span class=o>=</span><span class=sb>`</span><span class=nb>echo</span> <span class=s2>&#34;scale=2; 10.0 / 3.0&#34;</span> <span class=p>|</span> bc<span class=sb>`</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$RESULT</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash bc_f.sh
+3.33333
+3.33
+3.33
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>bcコマンドで小数点以下の桁数を指定するためには、scale= で指定します。</dd>
+<dd>&lsquo;;&lsquo;セミコロンを忘れずに。</dd>
+</dl>
+</div>
+<h2 id=declareコマンド>declareコマンド</h2>
+<p>bashには変数の型(int char stringなど）がないため、bashで変数の型を制限することはできません。<br>
+ただし、型のような動作を許可することができます。</p>
+<pre tabindex=0><code>declare [オプション] [変数名]=[値]
+</code></pre><h3 id=グローバル変数とローカル変数>グローバル変数とローカル変数</h3>
+<p>関数内で declare コマンドを使用すると、オプションがなければローカル変数として定義されます。-g オプションを使用すればスクリプト内のグローバルに変数を定義されます。スコープを明示しないと狭いスコープとなります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:declare.sh data-lang=bash:declare.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>function</span> set_my_value<span class=o>()</span> <span class=o>{</span>
+  <span class=nb>declare</span> -x <span class=nv>my_env_value</span><span class=o>=</span><span class=s1>&#39;ENV&#39;</span><span class=p>;</span>
+  <span class=nb>declare</span> -g <span class=nv>my_global_value</span><span class=o>=</span><span class=s1>&#39;GLOBAL&#39;</span><span class=p>;</span>
+  <span class=nb>declare</span> <span class=nv>my_local_value</span><span class=o>=</span><span class=s1>&#39;LOCAL&#39;</span><span class=p>;</span>
+  <span class=nv>my_value</span><span class=o>=</span><span class=s1>&#39;XXX&#39;</span><span class=p>;</span>
+<span class=o>}</span>
+
+set_my_value<span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$my_env_value</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$my_global_value</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$my_local_value</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=nv>$my_value</span><span class=p>;</span>
+</code></pre></div><p>結果は以下の通りです。</p>
+<pre tabindex=0><code>$ bash declare.sh
+
+GLOBAL
+
+XXX
+$
+</code></pre><h3 id=整数として変数定義する>整数として変数定義する</h3>
+<p>-i を付ければ整数として変数を定義できます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:declare_i.sh data-lang=bash:declare_i.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># -i で整数として変数を定義</span>
+$ <span class=nb>declare</span> -i <span class=nv>num</span><span class=o>=</span><span class=m>001</span>
+$ <span class=nb>echo</span> <span class=nv>$num</span>
+</code></pre></div><pre tabindex=0><code>$ bash declare_i.sh
+1
+$
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:declare_no_i.sh data-lang=bash:declare_no_i.sh><span class=c1># -i がないと文字列となるのでそのまま</span>
+$ <span class=nb>declare</span> <span class=nv>str</span><span class=o>=</span><span class=m>001</span>
+$ decho <span class=nv>$str</span>
+$ <span class=nb>echo</span> <span class=nv>$str</span>
+</code></pre></div><pre tabindex=0><code>$ bash declare_no_i.sh
+001
+$
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>オプションまとめ</dt>
+<dd>delcare -a: 配列を定義</dd>
+<dd>delcare -i: 整数として定義</dd>
+<dd>delcare -r: 読み取り専用変数として定義</dd>
+<dd>delcare -g: 関数内で使用時、グローバル変数として定義</dd>
+</dl>
+</div>
+<h2 id=配列>配列</h2>
+<p>配列を宣言し、その中に値を格納する方法を学びます。<br>
+好きなだけ値を保存できます。<br>
+配列の名前を書き、その値を「( )」括弧で定義します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array.sh data-lang=bash:array.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash array.sh
+BMW TOYOTA HONDA
+$
+</code></pre><p>「BMW」が「0」番目のインデックスに格納され、「TOYOTA」が「1」番目のインデックスに格納され、「HONDA」が「2」番目のインデックスに格納されます。<br>
+「BMW」を出力する場合は、${car[0]}と書きます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array2.sh data-lang=bash:array2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+
+<span class=c1>#printing value by using index</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing value using index&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[0]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[1]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[2]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash array2.sh
+BMW TOYOTA HONDA
+printing value using index
+BMW
+TOYOTA
+HONDA
+$
+</code></pre><p>配列のインデックスを印刷することもできます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array3.sh data-lang=bash:array3.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing the indexes&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=p>!car[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash array3.sh
+BMW TOYOTA HONDA
+printing the indexes
+0 1 2
+$
+</code></pre><p>配列内の値の合計数を印刷する場合は、ここに「${#car[@]}」と書くだけで、要素の総数を表します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array4.sh data-lang=bash:array4.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span> <span class=s1>&#39;ROVER&#39;</span><span class=o>)</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing  the indexes&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=p>!car[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing number of values&#34;</span><span class=p>;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${#</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash array4.sh
+BMW TOYOTA HONDA ROVER
+printing  the indexes
+0 1 2 3
+printing number of values
+4
+$
+</code></pre><p>配列内にある任意の要素を削除したいとします。<br>
+要素を削除するには、配列名と削除する要素のインデックスを含む「unset」コマンドを使用します。<br>
+「car」配列の2番目のインデックスに格納されている値を削除する場合は、スクリプトに「unset car[2]」と書くだけです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array4.sh data-lang=bash:array4.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span> <span class=s1>&#39;ROVER&#39;</span><span class=o>)</span>
+<span class=nb>unset</span> car<span class=o>[</span>2<span class=o>]</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing  the indexes&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=p>!car[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing number of values&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${#</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+</code></pre></div><p>次のコードを「helloScript.sh」に保存します。「./helloScript.sh」を使用してファイルを実行します。</p>
+<p>配列要素を削除することはわかりました。<br>
+では「MERCEDES」などの他の値をインデックス2に格納する場合はどうしましょう。<br>
+unsetコマンドを使用した後、次の行に「car[2]=&lsquo;MERCEDES」と書きます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:array5.sh data-lang=bash:array5.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nv>car</span><span class=o>=(</span><span class=s1>&#39;BMW&#39;</span> <span class=s1>&#39;TOYOTA&#39;</span> <span class=s1>&#39;HONDA&#39;</span> <span class=s1>&#39;ROVER&#39;</span><span class=o>)</span>
+<span class=c1># 2のHONDAを削除</span>
+<span class=nb>unset</span> car<span class=o>[</span>2<span class=o>]</span>
+<span class=c1># 2に値をセット</span>
+car<span class=o>[</span>2<span class=o>]=</span><span class=s1>&#39;MERCEDES&#39;</span>
+
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing  the indexes&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=p>!car[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;printing number of values&#34;</span>
+<span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${#</span><span class=nv>car</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span>
+</code></pre></div><pre tabindex=0><code>$ bash array5.sh
+BMW TOYOTA MERCEDES ROVER
+printing  the indexes
+0 1 2 3
+printing number of values
+4
+$
+</code></pre><h2 id=関数>関数</h2>
+<p>関数は基本的に再利用可能なコード行です。何度も呼び出すことができます。<br>
+特定の操作を何度も実行する場合、または特定の処理を何度も実行する場合、関数は、何度も何度も同じコードを書くための時間と労力を軽減します。</p>
+<p>以下は関数の構文を示す例です。<br>
+覚えておくべき最も重要なことの1つは、関数を呼び出す前にコーディングのどこかで最初に関数を定義または宣言する必要があることです。</p>
+<p>コードで関数を定義するには、３つのステップが必要です。<br>
+ステップ1は、指定する関数名の前に「function」コマンドを書き関数名を宣言し、後ろに「()」を書きます。<br>
+ステップ2は、処理ブロックは「{」ではじまり、「 }」で閉じられた内側ににコードを書くことです。<br>
+ステップ3は、function 関数名() で宣言した下の行で実行したい関数名を使用して関数を呼び出すことです。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:method.sh data-lang=bash:method.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=c1># 関数の宣言</span>
+<span class=k>function</span> funcName<span class=o>(){</span>
+  <span class=nb>echo</span> <span class=s2>&#34;this is new function&#34;</span><span class=p>;</span>
+<span class=o>}</span>
+
+<span class=c1># 関数呼び出し</span>
+funcName<span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash method.sh
+this is new function
+$
+</code></pre><p>関数にパラメータを与えることもできます。<br>
+たとえば、関数呼び出し時に与えられる任意の単語を引数として指定します。<br>
+関数呼び出しの関数名の後ろに、文字列を指定して関数に渡します。<br>
+渡された関数は、一つ目のパラメータを $1 として処理を続ける事ができます。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:method2.sh data-lang=bash:method2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>function</span> funcPrint<span class=o>(){</span>
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
+<span class=o>}</span>
+
+funcPrint <span class=s2>&#34;BashScript&#34;</span><span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash method2.sh
+BashScript
+$
+</code></pre><p>複数のパラメータを扱う場合、$1, $2などの変数名は区別がつきにくく、コードが混乱する場合が多いので、変数に代入すると、扱いやすくなります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:method2.sh data-lang=bash:method2.sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=k>function</span> funcPrint<span class=o>(){</span>
+  <span class=nv>name</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
+  <span class=nv>age</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+
+  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$name</span><span class=s2> is </span><span class=nv>$age</span><span class=s2> years old.&#34;</span><span class=p>;</span>
+<span class=o>}</span>
+
+funcPrint <span class=s2>&#34;BashScript&#34;</span> <span class=m>24</span> <span class=p>;</span>
+</code></pre></div><pre tabindex=0><code>$ bash method2.sh
+BashScript is 24 years old.
+$
+
+
+関数内で宣言される変数はローカル変数です。
+というのは一般的なプログラム言語ですが、シェルスクリプトBashはグローバル変数しかありません。関数の中で宣言しても、関数の外で宣言しても、いずれもグローバル変数です。
+先に紹介した declare -g を使うことにより、グローバル変数とローカル変数を明確に区別することができます。
+
+例えば、以下のソースでは、関数実行前に「I love Mac」を変数に格納し、出力します。
+その後、関数を呼び出し、同変数に「I love Linux」を変数に代入すると、Ｃ言語やＪａｖａなどは、ローカル変数に格納した値は、グローバル変数に影響しない訳ですが、シェルスクリプトBashは、もろに影響します。理由は全てグローバル扱いだからです。
+
+``` bash:global_local.sh
+#!/bin/bash
+
+function funcCheck(){
+  returningValue=&quot;I love Linux&quot;;
+}
+returningValue=&quot;I love MAC&quot;;
+echo $returningValue;
+#&gt; I love Mac
+
+funcCheck;
+
+echo $returningValue;
+#&gt; I love Linux
+</code></pre><pre tabindex=0><code>$ bash global_local.sh
+I love MAC
+I love Linux
+$
+</code></pre>
 <h1 id=関連記事>関連記事</h1>
 <p><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト１」</a><br>
 <a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>【はじめから】「ざっくりわかるシェルスクリプト２」</a><br>
