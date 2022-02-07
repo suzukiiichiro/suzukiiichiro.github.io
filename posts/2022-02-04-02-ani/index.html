@@ -15,14 +15,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-07T16:55:55+09:00"><meta property="article:modified_time" content="2022-02-07T17:23:33+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-07T16:55:55+09:00"><meta property="article:modified_time" content="2022-02-07T17:32:47+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg">
 <meta name=twitter:title content="pythonでNQueen（エイトクイーン）バックトラック（１） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-04-02-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）バックトラック（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg"],"datePublished":"2022-02-07T16:55:55+09:00","dateModified":"2022-02-07T17:23:33+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"pythonでNQueen（エイトクイーン）バックトラック（１）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg"],"datePublished":"2022-02-07T16:55:55+09:00","dateModified":"2022-02-07T17:32:47+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -147,16 +147,17 @@ pythonでNQueen（エイトクイーン）バックトラック（１）
 上下の配置フラグの他に右斜め、左斜めの配置フラグを作ってチェックします。<br>
 ブルートフォース、配置フラグでは解の候補を出すに止まりましたが、今回で左右、上下、対角線上とクイーンのすべての利き筋をチェックすることができるますので、プログラム独力で解を出せるようになります。<br>
 出力は解の数となっております。</p>
-<p>ブルートフォース、配置フラグ、バックトラックの関係は以下の通りです。</p>
+<p>ブルートフォース、配置フラグ、バックトラックの関係は以下の通りです。<br>
+制約が1個、2個、3個と追加されていくような感じです。</p>
 <p>・ブルートフォース<br>
-1行に1個のクイーンを置く 左右の利き筋をみる<br>
+制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる<br>
 ・配置フラグ<br>
-1行に1個のクイーンを置く 左右の利き筋をみる<br>
-配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
+制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる<br>
+制約2個目 配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
 ・バックトラック<br>
-1行に1個のクイーンを置く 左右の利き筋をみる<br>
-配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
-配置フラグを拡張し左右斜めにクイーンを置けないようにする 対角線上の利き筋をみる</p>
+制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる<br>
+制約2個目 配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる<br>
+制約3個目 配置フラグを拡張し左右斜めにクイーンを置けないようにする 対角線上の利き筋をみる</p>
 <p>プログラムソースは以下のURLにあります。</p>
 <p><a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py</a></p>
 <h2 id=グローバル変数>グローバル変数</h2>
@@ -635,22 +636,22 @@ row+i<br>
 </a>
 </article>
 <article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.c8b5d1373c513386278a5f7d5e06b919_hub5f46a8b8fc9e255d0122f98accfe16c_94129_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
+</div>
+<div class=article-details>
+<h2 class=article-title>pythonでNQueen（エイトクイーン）バックトラック（１）</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-21/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.974993dea971578f817f2ab8c23b6e54_hud06831bf5e2aede9b7d29f34463c4a46_63839_320x0_resize_q75_box.jpg 1600w" width=160 height=107 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
 <h2 class=article-title>Hugoでテーマが反映されない（画面が真っ白のまま）</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_160x0_resize_q75_box.jpg 800w, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.46655bf13cf4752549c8a01cb303649a_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_320x0_resize_q75_box.jpg 1600w" width=160 height=48 loading=lazy alt="Featured image of post ">
-</div>
-<div class=article-details>
-<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
 </div>
 </a>
 </article>
