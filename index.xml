@@ -1,142 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 08 Feb 2022 09:39:37 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応</title><link>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</link><pubDate>Tue, 08 Feb 2022 09:39:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg" alt="Featured image of post すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応" />&lt;p>みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。&lt;br>
-そのAWSからある日、下記のようなメールが届きました。&lt;/p>
-&lt;blockquote>
-&lt;p>Hello,&lt;/p>
-&lt;p>EC2 has detected degradation of the underlying hardware hosting your Amazon EC2 instance (instance-ID: [インスタンスのID]) associated with your AWS account (AWS Account ID: 539275324144) in the us-west-2 region.&lt;br>
-Due to this degradation your instance could already be unreachable.&lt;br>
-We will stop your instance after 日付 UTC.&lt;br>
-Please take appropriate action before this time.&lt;/p>
-&lt;p>The affected instances are listed below:&lt;/p>
-&lt;p>[インスタンスのID]&lt;/p>
-&lt;/blockquote>
-&lt;p>翻訳してみると、どうやらAWSの老朽化に伴うインスタンスの更新が必要なようです。&lt;/p>
-&lt;blockquote>
-&lt;p>こんにちは。&lt;/p>
-&lt;p>EC2は、us-west-2リージョンにあるお客様のAWSアカウント（AWSアカウントID：[インスタンスのID]）に関連するAmazon EC2インスタンス（インスタンスID：Instance-ID）をホストする基礎ハードウェアの劣化を検出しました。&lt;br>
-この劣化により、お客様のインスタンスはすでに到達不能になっている可能性があります。日付 UTC以降にお客様のインスタンスを停止します。&lt;br>
-それまでに適切な対処をお願いいたします。&lt;/p>
-&lt;p>影響を受けるインスタンスは以下の通りです。&lt;br>
-[インスタンスのID]&lt;/p>
-&lt;/blockquote>
-&lt;p>老朽化の通知をしてくれるのは非常にありがたいですが、EC2の適切な対処ってなんだ？と焦ってしまう方もいるかと思います。&lt;br>
-今回は「Amazon EC2 Instance Retirement」というタイトルのメールが来た際の対処法について説明いたします。&lt;/p>
-&lt;h2 id="ec2のイベントを確認">EC2のイベントを確認&lt;/h2>
-&lt;p>まずはAWSにログインして、EC2の項目に移動します。&lt;br>
-左袖に、「&lt;strong>イベント&lt;/strong>」という項目があるので、クリックして内容を確認しましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 148;
-flex-basis: 356px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png" data-size="980x660">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png"
-width="980"
-height="660"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>今回は「イベントステータス」部分に「Scheduled」と記述され、「イベントタイプ」が「instance-stop」となっている項目がありました。&lt;br>
-リソースIDをAWSのメールと照らし合わせて、該当のインスタンスということがわかります。&lt;/p>
-&lt;p>「説明」の部分にも見切れていますが、「The instance is running on degraded hardware（インスタンスが劣化したハードウェアで動作している）」と記述されていました。&lt;br>
-進行状況から14日以内にインスタンスが停止してしまうので、「Amazon EC2 Instance Retirement」というメールが来たら、早めにAWSへログインして状況を確認するようにしましょう。&lt;/p>
-&lt;h2 id="ec2のルートを確認">EC2のルートを確認&lt;/h2>
-&lt;p>次に、該当のインスタンスの&lt;strong>ルートデバイスタイプ&lt;/strong>を確認します。&lt;br>
-前回のリソースID部分をクリックして、「インスタンスの概要」へ移動します。そして、「ストレージ」をクリックして「ルートデバイスタイプ」を確認しましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 535;
-flex-basis: 1285px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png" data-size="980x183">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png"
-width="980"
-height="183"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>この部分が「&lt;strong>EBS&lt;/strong>」となっている場合は、対応が非常に簡単です。&lt;br>
-その対応を方法は次のようになります。&lt;/p>
-&lt;h2 id="ec2を停止そして起動">EC2を停止、そして起動&lt;/h2>
-&lt;p>「Amazon EC2 Instance Retirement」の対応はルートデバイスがEBSの場合は、対象のインスタンスを一度「&lt;strong>インスタンスを停止&lt;/strong>」させてから「&lt;strong>インスタンスを開始&lt;/strong>」するだけで対応できてしまいます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 250;
-flex-basis: 601px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png" data-size="980x391">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png"
-width="980"
-height="391"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>「インスタンスを停止」して「インスタンスを開始」だから、要するに「インスタンスを再起動」ってことでしょ？と考えてしまうかもしれません。&lt;br>
-しかし、「インスタンスを再起動」の場合はEC2のハードウェアが変わらないため、今回のハードウェアのアップデートが行われません。&lt;br>
-ですので、「インスタンスを停止」させてから「インスタンスを開始」するようにして、EC2を実行するハードウェアをAWS側が自動的に変更するようにしましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 335;
-flex-basis: 805px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png" data-size="980x292">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png"
-width="980"
-height="292"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ルートデバイスタイプが「instant store」の場合&lt;/dt>
-&lt;dd>ルートデバイスが「instant store」の場合はEBSと対応が変わります。
-&lt;ol>
-&lt;li>まず、EC2インスタンスからイメージを作成します。&lt;/li>
-&lt;li>次に、さきほど作成したイメージを利用し、別のEC2インスタンスを立ち上げます。&lt;/li>
-&lt;li>そして、元のEC2インスタンスを削除します&lt;/li>
-&lt;/ol>
-&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>「Amazon EC2 Instance Retirement」というメールが来た場合、焦らずに対応できるようにしておきましょう。&lt;br>
-EBSの場合は「&lt;strong>インスタンスを停止&lt;/strong>」させてから「&lt;strong>インスタンスを開始&lt;/strong>」。&lt;br>
-instant storeの場合は、イメージを作成して、立ち上げて該当インスタンスを削除。&lt;br>
-これさえ覚えておけば、大丈夫です。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e5%9b%b3%e8%a7%a3%e5%8d%b3%e6%88%a6%e5%8a%9b-Amazon-Web-Services%e3%81%ae%e3%81%97%e3%81%8f%e3%81%bf%e3%81%a8%e6%8a%80%e8%a1%93%e3%81%8c%e3%81%93%e3%82%8c1%e5%86%8a%e3%81%a7%e3%81%97%e3%81%a3%e3%81%8b%e3%82%8a%e3%82%8f%e3%81%8b%e3%82%8b%e6%95%99%e7%a7%91%e6%9b%b8-%e5%b0%8f%e7%ac%a0%e5%8e%9f/dp/4297108895/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51AEyJOSYaL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 図解即戦力 Amazon Web Servicesのしくみと技術がこれ1冊でしっかりわかる教科書 &lt;/h2>
-&lt;p> 【「ITエンジニア本大賞2021」技術書部門 入賞! 】 Amazon Web Servicesのしくみがすぐにわかる! Amazon Web Services(AWS)のしくみや関連技術についてわかりやすく解説する図解本です。エンジニア1年生、IT業界などへの転職・就職を目指す人が、AWS関連の用語、しくみ、クラウドとネットワークの基礎技術などを一通り学ぶことのできる、1冊目の入門書としてふさわしい内容を目指します。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e8%a6%81%e7%82%b9%e6%95%b4%e7%90%86%e3%81%8b%e3%82%89%e6%94%bb%e7%95%a5%e3%81%99%e3%82%8b%e3%80%8eAWS%e8%aa%8d%e5%ae%9a-%e3%83%87%e3%83%bc%e3%82%bf%e3%83%99%e3%83%bc%e3%82%b9-%e5%b0%82%e9%96%80%e7%9f%a5%e8%ad%98%e3%80%8f-Compass-Books%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba-NRI%e3%83%8d%e3%83%83%e3%83%88%e3%82%b3%e3%83%a0%e6%a0%aa%e5%bc%8f%e4%bc%9a%e7%a4%be/dp/4839975078/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51svKeJL9KS.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 要点整理から攻略する『AWS認定 データベース-専門知識』 (Compass Booksシリーズ) &lt;/h2>
-&lt;p> 「AWS 認定 データベース」に頻出する内容を1冊にまとめました! ■AWS認定とは AWS 認定試験は、AWSに関する知識・スキルを測るための試験です。レベル別・カテゴリー別に認定され、基礎コース・アソシエイト・プロフェッショナルの3つのレベルと、ネットワークやセキュリティなど分野ごとの専門知識(スペシャリティ)があります。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Feb 2022 16:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
 &lt;p>今回はバックトラックを説明していきたいと思います。 &lt;br>
 今回のバックトラックのロジックは前回の配置フラグの拡張版です。&lt;br>
 配置フラグは上下の利き筋までしかチェックしていませんでしたが今回のバックトラックは左右斜めの対角線上の利き筋もチェックします。&lt;br>
@@ -3575,4 +3437,310 @@ loading="lazy"
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item></channel></rss>
+&lt;/aside></description></item><item><title>iPadに開発環境を構築してみるテスト</title><link>https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/</link><pubDate>Fri, 28 Jan 2022 14:02:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg" alt="Featured image of post iPadに開発環境を構築してみるテスト" />&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;ul>
+&lt;li>まずはこちらをやりましょう。&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/" target="_blank" rel="noopener"
+>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="必要なもの">必要なもの&lt;/h2>
+&lt;ul>
+&lt;li>iPad&lt;/li>
+&lt;li>Termiusというアプリ&lt;br>
+&lt;a class="link" href="https://apps.apple.com/jp/app/termius-ssh-client/id549039908" target="_blank" rel="noopener"
+>Termius: Terminal &amp;amp; SSH client&lt;/a>&lt;/li>
+&lt;li>AWSのサーバーインスタンス&lt;br>
+&lt;a class="link" href="https://qiita.com/kanegoon/items/4bcdf5184cf1752eb44f" target="_blank" rel="noopener"
+>AWS EC2 インスタンスの作成&lt;/a>&lt;/li>
+&lt;li>AWSインスタンスにログインするために必要なpemファイル（キーチェイン）&lt;br>
+&lt;a class="link" href="https://qiita.com/takuma-jpn/items/b2c04b7a271a4472a900" target="_blank" rel="noopener"
+>AWS EC2にSSHでアクセスする方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="awsインスタンスへの接続">AWSインスタンスへの接続&lt;/h2>
+&lt;p>pemファイルをスマホに送る&lt;br>
+インスタンスを作るときにpemファイルをダウンロードしたと思います&lt;br>
+（してなかったら、pemファイルは一回しかダウンロードさせてくれないのでインスタンスを作り直しましょう）&lt;br>
+このpemファイルをＰＣのエディターで開き、内容をテキストファイルにペーストします。&lt;br>
+このファイルをＬＩＮＥなりメールなりGoogleドライブなりでスマホに送ります。&lt;/p>
+&lt;p>pemファイルをTermiusで読み込みます&lt;/p>
+&lt;ul>
+&lt;li>ＰＣ上で鍵ファイル(.pem)をテキスト化してiPadで内容をコピーして貼り付けられるようにしておくことが重要です。&lt;br>
+&lt;a class="link" href="https://tomikyblog.com/termius%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" target="_blank" rel="noopener"
+>iPad Proでsshクライアント「Termius」を使ってみた&lt;br>
+&lt;/a>&lt;br>
+&lt;a class="link" href="https://pkunallnet.com/pcinfo/apple/ipad-aws-linuxconnection/" target="_blank" rel="noopener"
+>iPadからAWSのEC2インスタンス(LINUX)にSSH接続する方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="アカウントの作成">アカウントの作成&lt;/h2>
+&lt;p>rootでの作業でも良いのですが、一般論としてここではアカウントの作成から説明します。&lt;/p>
+&lt;p>まずは、サーバーに接続します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$
+&lt;/code>&lt;/pre>&lt;p>いわゆるrootでログインした訳です。&lt;br>
+ここでユーザー名 suzuki を追加します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ useradd suzuki
+&lt;/code>&lt;/pre>&lt;p>さらに suzuki のパスワードも設定します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ passwd suzuki
+&lt;/code>&lt;/pre>&lt;p>パスワードは２回同じ入力を求められます&lt;br>
+では rootからsuzukiにアカウントを切り換えます。&lt;br>
+ユーザーの切り替えは su コマンドを使います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ su suzuki
+パスワード：
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>suzukiに切り替わりました。&lt;br>
+自分自身がどこにいるのかを確認します。&lt;br>
+カレントディレクトリの確認は pwd コマンドを使います。&lt;br>
+ディレクトリの移動は cd コマンド&lt;br>
+ホームディレクトリは ~ で表します。&lt;br>
+ホームディレクトリへの移動は cd ~ となります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>centos$ pwd
+/home/centos
+$ cd ~
+$ pwd
+$ /home/suzuki
+$
+&lt;/code>&lt;/pre>&lt;h2 id="bashrc-の修正">~/.bashrc の修正&lt;/h2>
+&lt;p>ここでは ~/.basrcファイルを修正します。&lt;br>
+まず、~/.basrc ファイルのバックアップをとります。&lt;br>
+ここではファイル名先頭のピリオドを落として ls コマンドで見えるようにしておきます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cp ~/.bashrc ~/bashrc.bak
+&lt;/code>&lt;/pre>&lt;p>では、~/.bashrc を vimで開いて編集します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ vim ~/.bashrc
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:~/.bashrc" data-lang="bash:~/.bashrc">&lt;span class="c1"># .bashrc&lt;/span>
+&lt;span class="c1"># Source global definitions&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f /etc/bashrc &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+. /etc/bashrc
+&lt;span class="k">fi&lt;/span>
+&lt;span class="c1"># ターミナルの表示&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">PS1&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;bash-\v&lt;/span>$&lt;span class="s2"> &amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># 基本言語フォーマットをUTF-8へ&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">LANG&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;ja_JP.UTF-8&amp;#34;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># User specific environment and startup programs&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">rm&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;rm -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">cp&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;cp -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">mv&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;mv -i&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># grepとls のカラー表示&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">grep&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;grep --color=auto&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">ls&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ls --color=auto&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># screen&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">s&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;screen -RR&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;span class="c1"># Github ディレクトリへ移動&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">g&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;cd ~/GitHub&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>編集が終わったら ~/.bashrc を再読込します。&lt;br>
+Linux での再読込は . です&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ . ~/.bashrc
+$
+&lt;/code>&lt;/pre>&lt;p>では GitHub にある様々なディレクトリを格納する Githubディレクトリを作成します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ mkdir GitHub
+$
+&lt;/code>&lt;/pre>&lt;p>以降の github プロジェクトは今作成した GitHub ディレクトリ以下に作成します。&lt;/p>
+&lt;h2 id="ターミナルの入力で大文字と小文字を区別せずに補完する">ターミナルの入力で大文字と小文字を区別せずに補完する&lt;/h2>
+&lt;pre tabindex="0">&lt;code class="language-bash:~/.inputrc" data-lang="bash:~/.inputrc">
+# 大文字小文字を区別しない
+set completion-ignore-case on
+# 以下日本語入力の必要がある場合に必要(なくてもよい）
+set input-meta on
+set output-meta on
+set convert-meta off
+set meta-flag on
+&lt;/code>&lt;/pre>&lt;p>編集が終わったら ~/.inputrc を再読込します。&lt;br>
+Linux での再読込は . です&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ . ~/.inputrc
+$ cd ~
+$ pwd
+/home/suzuki
+$ g
+$ pwd
+/home/suzuki/GitHub
+$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>~/.inputrc を root ユーザーになって /etc/inputrc に追記するとすべてのユーザーが大文字小文字を区別することなくターミナルで補完することができます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="screen-のインストール">screen のインストール&lt;/h2>
+&lt;p>screen はターミナル内で複数の仮想ターミナルを起動して使うことができる画面管理ソフトです。&lt;br>
+メリットは、&lt;/p>
+&lt;ul>
+&lt;li>ターミナルウインドウのタブを複数作成し、ここのタブでサーバーにログインする必要がないので、不要なセッションを作らなくてすむ。&lt;/li>
+&lt;li>開いていた端末の状態を保持しておける。&lt;/li>
+&lt;li>回線が切れる、スタンバイなどのセッション切れでもレジュームされる。&lt;/li>
+&lt;li>一つの画面をさらに分割できるので、複数端末でログ監視したいときなどに超便利。&lt;/li>
+&lt;/ul>
+&lt;p>まずはscreen がインストールされているのかの確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ screen -v
+Screen version 4.08.00 (GNU) 05-Feb-20
+$
+&lt;/code>&lt;/pre>&lt;p>インストールされていれば以下の作業はする必要がありません。&lt;br>
+インストールされていなければ、yum コマンドでインストールして下さい。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo ＜sudo で rootになります＞
+# ＜rootになると # になります&amp;gt;
+# yum -y install screen
+読み込んだプラグイン:fastestmirror
+base | 3.6 kB 00:00:00
+extras | 3.4 kB 00:00:00
+updates | 3.4 kB 00:00:00
+(1/2): extras/7/x86_64/primary_db | 115 kB 00:00:00
+(2/2): updates/7/x86_64/primary_db | 2.2 MB 00:00:00
+Loading mirror speeds from cached hostfile
+* base: ftp.iij.ad.jp
+* extras: ftp.iij.ad.jp
+* updates: www.ftp.ne.jp
+依存性の解決をしています
+--&amp;gt; トランザクションの確認を実行しています。
+---&amp;gt; パッケージ screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2 を インストール
+--&amp;gt; 依存性解決を終了しました。
+依存性を解決しました
+======================================================================================================================================================
+Package アーキテクチャー バージョン リポジトリー 容量
+======================================================================================================================================================
+インストール中:
+screen x86_64 4.1.0-0.23.20120314git3c2946.el7_2 base 552 k
+トランザクションの要約
+======================================================================================================================================================
+インストール 1 パッケージ
+総ダウンロード容量: 552 k
+インストール容量: 914 k
+Downloading packages:
+screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64.rpm | 552 kB 00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+インストール中 : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64 1/1
+検証中 : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64 1/1
+インストール:
+screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2
+完了しました!
+$
+# rootからsuzukiにアカウントを切り換えます
+$ su suzuki
+# screenコマンドがどこにインストールされているのかを確認します。
+$ which screen
+/usr/bin/screen
+$
+&lt;/code>&lt;/pre>&lt;h2 id="screenrc-の修正">screenrc の修正&lt;/h2>
+&lt;p>screenコマンドをさらに便利にするために screenrc ファイルを修正します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># ユーザーをroot から suzuki に変えます。
+$ su suzuki
+$
+&lt;/code>&lt;/pre>&lt;p>以下を ~/.screenrc として作成して保存します。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:~/.screenrc" data-lang="bash:~/.screenrc">
+# Ctrl + z で screenの操作モードへの切り換え
+escape ^Zz
+# スクロールバッファを大きくする
+defscrollback 10000
+# ステータスバーをカスタマイズ
+hardstatus on
+hardstatus alwayslastline '%{= kw}%02c:%s %{= .y}%H %L=%{= .b}%-w%46&amp;gt;%{= .r}%n %t*%{= .b}%+w%-16=%{= .y}[%l]'
+# スタートメッセージを表示させない
+startup_message off
+# ビープを鳴らさない
+vbell off
+#termの設定
+term ansi
+bind r
+bind ^r
+#
+&lt;/code>&lt;/pre>&lt;p>上記 ~/.bashrc の修正で、screenコマンドの呼び出しを s にしています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:~/.bashrc" data-lang="bash:~/.bashrc">
+&lt;span class="c1"># screen&lt;/span>
+&lt;span class="nb">alias&lt;/span> &lt;span class="nv">s&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;screen -RR&amp;#39;&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ですので、ターミナルからは s だけで screen -RR コマンドを実行したことと同じになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code># screenの起動
+$ screen
+# screenの終了
+$ exit
+$
+# screenの起動
+$ s
+# screenの終了
+$ exit
+&lt;/code>&lt;/pre>&lt;p>~/.bashrc にエイリアスを作成していなければ screen で起動しますし、~/.bashrcにエイリアスを作成していれば（ここでは「s」） $ s で一発起動します。screenを抜けるときは「exit」です。&lt;/p>
+&lt;h2 id="screen-を使ってみます">screen を使ってみます&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>screen の起動(screen)&lt;br>
+まず screen を起動しなくては始まりません。 ログインしたターミナルで「screen」と打てば screen が起動します。 screen から抜けるには普通にログアウトするように 「exit」 や [Ctrl+d]で抜けられます。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>新しいウィンドウを開始する([Ctrl+c])&lt;br>
+「[Ctrl+c]」で新しいウィンドウを開始できます。 幾つでも作れます。 不要になったウィンドウは 「exit」 や [Ctrl+d] で消せます。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>次のウィンドウに移動する([Ctrl+n])&lt;br>
+開いている隣のウインドウに移動します。カスタマイズした~/.screenrcを使っている人はステータスバーで確認できて便利です。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>詳しくはこちら&lt;br>
+&lt;a class="link" href="https://qiita.com/hnishi/items/3190f2901f88e2594a5f" target="_blank" rel="noopener"
+>Linux screenコマンド使い方&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>screen は王者のコマンドです。プログラマーの多くはローカルのターミナルでタブを作成します。screen はサーバー上で仮想端末を作成します。screenはvim同様、プログラマーを選びます。Linuxを語るなら vim と screen そして bash の習熟が必須なのです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="sudoユーザーを追加する方法">sudoユーザーを追加する方法&lt;/h2>
+&lt;p>sudoユーザーに追加していないユーザーでsudoコマンドを実行すると、&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo less /etc/passwd
+[sudo] password for suzuki:
+suzuki is not in the sudoers file. This incident will be reported.
+&lt;/code>&lt;/pre>&lt;p>こんな事を言われます。&lt;br>
+ということで、ここでは特定のユーザー（ここでは「suzuki」）がsudoコマンドを実行できるようにします。&lt;/p>
+&lt;p>/etc/sudoers ファイルにユーザーを追加します。&lt;/p>
+&lt;p>まずはrootユーザーになります。&lt;/p>
+&lt;p>ユーザーsuzuki をぬけてrootになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ exit
+&lt;/code>&lt;/pre>&lt;p>現在のグループを確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># sudo vim /etc/sudoers
+&lt;/code>&lt;/pre>&lt;p>以下の記述があれば wheelグループに suzukiを追加すればよいです。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-bash:/etc/sudoersの抜粋" data-lang="bash:/etc/sudoersの抜粋">
+## Allow members of group sudo to execute any command
+%wheel ALL=(ALL:ALL) ALL
+&lt;/code>&lt;/pre>&lt;p>ではまず現状を確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># cat /etc/group | grep suzuki
+&lt;/code>&lt;/pre>&lt;p>sudoのグループ（centosなら wheel) に suzuki を追加します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># sudo usermod -G wheel suzuki
+&lt;/code>&lt;/pre>&lt;p>確認します。&lt;/p>
+&lt;pre tabindex="0">&lt;code># cat /etc/group | grep suzuki
+wheel:x:10:suzuki
+suzuki:x:1001:
+#
+&lt;/code>&lt;/pre>&lt;p>これで、ローカルアカウント suzuki で、必要に応じて sudoコマンドをつかって安全に作業することができるようになりました。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>当たり前の話ではありますが、root で作業するのはやめましょう。必要に応じて $ su すればよいのです。Linux/Unixとはそういうものなのです。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) &lt;/h2>
+&lt;p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 &lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 &lt;/h2>
+&lt;p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&amp;amp;サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;!-- EOL --></description></item></channel></rss>
