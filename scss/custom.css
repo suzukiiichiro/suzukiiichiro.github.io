@@ -379,6 +379,10 @@ footer.site-footer {
 
 .article-page .main-article {
   box-shadow: none; }
+  .article-page .main-article blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%; }
   .article-page .main-article figcaption {
     display: none; }
   @media screen and (max-width: 640px) {
