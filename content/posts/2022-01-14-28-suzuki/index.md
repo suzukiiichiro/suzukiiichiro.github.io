@@ -3,7 +3,7 @@ authors: suzuki
 title: "【２８．dateコマンド】ざっくりわかる「シェルスクリプト」"
 description: "dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。"
 date: 2022-01-13T11:26:13+09:00
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング
