@@ -3,7 +3,7 @@ authors: suzuki
 title: "【６．for ループ】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "基本的なforループ宣言を示します。'for_example.sh'という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。ここでは、forループは10回繰り返され、変数のすべての値、counterを1行で出力します。"
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング
