@@ -34,40 +34,38 @@
 
 <script type="application/ld+json">
 {{- if eq "posts" .Type }}
-[
-//{
-//  "@context": "https://schema.org",
-//  "@type": "BlogPosting",
-//  "headline": {{- .Title -}},
-//  "mainEntityOfPage":{
-//    "@type": "WebPage",
-//    {{- with .Params.categories -}}
-//    "@id": {{- $cat.Permalink }}
-//    {{- else }}
-//    "@id": {{- .Site.BaseURL }}
-//    {{- end }}
-//  },
-//  {{- if .Params.image }}
-//  {{$image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
-//  "image": [{{-  $image.permalink | absURL  -}}],
-//  {{- end }}
-//  "datePublished": {{- .Date -}},
-//  "dateModified": {{- .Lastmod -}},
-//  "publisher": {
-//    "@type": "Organization",
-//    "name": {{- printf "%s - %s" .Site.Title .Site.Params.sidebar.subtitle -}},
-//    "logo": {
-//      "@type": "ImageObject",
-//      "url": {{- printf "%s%s" .Site.BaseURL .Site.Params.sidebar.avatar.src -}}
-//    }
-//  },
-//  "author": {
-//    "@type": "Person",
-//    "name": {{- (partial "data/author" .).name }},
-//    "url": {{- (partial "data/author" .).url }}
-//  }
-//},
-{
+[{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{- .Title -}},
+  "mainEntityOfPage":{
+    "@type": "WebPage",
+    {{- with .Params.categories -}}
+    "@id": {{- $cat.Permalink }}
+    {{- else }}
+    "@id": {{- .Site.BaseURL }}
+    {{- end }}
+  },
+  {{- if .Params.image }}
+  {{$image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
+  "image": [{{-  $image.permalink | absURL  -}}],
+  {{- end }}
+  "datePublished": {{- .Date -}},
+  "dateModified": {{- .Lastmod -}},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{- printf "%s - %s" .Site.Title .Site.Params.sidebar.subtitle -}},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{- printf "%s%s" .Site.BaseURL .Site.Params.sidebar.avatar.src -}}
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": {{- (partial "data/author" .).name }},
+    "url": {{- (partial "data/author" .).url }}
+  }
+},{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [{
