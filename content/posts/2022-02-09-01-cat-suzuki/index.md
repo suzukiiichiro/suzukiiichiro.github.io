@@ -3,7 +3,7 @@ title: "（２）【cat】シェルスクリプトコマンド活用紹介"
 description: "「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。"
 
 date: 2022-02-09T12:59:39+09:00
-draft: true
+draft: false
 authors: suzuki
 image: bash.jpg
 categories:

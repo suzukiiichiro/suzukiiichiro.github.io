@@ -2,7 +2,7 @@
 title: "（１）【echo】シェルスクリプトコマンド活用紹介"
 description: "「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。"
 date: 2022-02-09T11:32:07+09:00
-draft: true
+draft: false
 authors: suzuki
 image: bash.jpg
 categories:
