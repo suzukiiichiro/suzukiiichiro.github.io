@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 08 Feb 2022 09:39:37 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応</title><link>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</link><pubDate>Tue, 08 Feb 2022 09:39:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg" alt="Featured image of post すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応" />&lt;p>みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 09 Feb 2022 12:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>pythonでNQueen（エイトクイーン）バックトラック（２）</title><link>https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/</link><pubDate>Wed, 09 Feb 2022 12:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess.jpg" alt="Featured image of post pythonでNQueen（エイトクイーン）バックトラック（２）" />&lt;h2 id="mainメソッド概要">mainメソッド概要&lt;/h2>
+&lt;p>今回は前回から引き続きバックトラックを説明していきたいと思います。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py&lt;/a>&lt;/p>
+&lt;p>429-437行目でグローバル変数を宣言した後に呼び出されるのは486行目のmainメソッドです。&lt;br>
+467-484行目のmainメソッドの内容を見てみましょう。 &lt;br>
+nmin=4からMAX=15まで複数のNについて探索し、解の数と実行時間を出力します。&lt;br>
+以下が出力結果です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>N: Total Unique hh:mm:ss.ms
+4: 2 0 0:00:00.000
+5: 10 0 0:00:00.000
+6: 4 0 0:00:00.000
+7: 40 0 0:00:00.001
+8: 92 0 0:00:00.004
+9: 352 0 0:00:00.019
+10: 724 0 0:00:00.088
+11: 2680 0 0:00:00.439
+12: 14200 0 0:00:02.345
+13: 73712 0 0:00:13.412
+14: 365596 0 0:01:21.331
+&lt;/code>&lt;/pre>&lt;p>NがNQueenのN数、Totalが解の総数、Uniqueは左右反転ミラー、回転で同じ形のものを同一解として計算した場合の数、&lt;br>
+hh:mm:ss.msは各Nごとに処理にかかった時間です。&lt;br>
+Uniqueは今回は全て0ですがロジックが進んでいくとまずUnique数を算出してそこからTotalを求めるようになりますので今の所は流しておいてください。&lt;br>
+エイトクイーン(N=8)の解の数は8: の92、実行時間は4msとなります。&lt;br>
+ブルートフォースが3m7.321s、配置フラグが0m0.554sでしたから格段に高速になったことがわかると思います。&lt;/p>
+&lt;h2 id="mainメソッド詳細">mainメソッド詳細&lt;/h2>
+&lt;p>メソッドの中身を見ていきましょう。&lt;br>
+459行目 nmin=4 でスタートするNの数を指定しています。&lt;/p>
+&lt;p>461行目 for i in range(nmin,MAX): でnmin=4からMAX=15まで1ずつインクリメントしてnqueenを実行していきます。&lt;/p>
+&lt;p>462,463行目でfor文の冒頭でTOTAL,UNIQUEを0で初期化しています。 &lt;br>
+これをしとかないと出力されるTotal,Uniqueの数が累計数になってしまいますので注意しましょう。&lt;/p>
+&lt;p>464,465行目でABOARD配列を初期化しています。ABOARD配列は各行のどこにクイーンを置いたかを記憶するための配列です。ロジックが進んでいくと必須の配列になるのですが、今回のロジックでは使用しませんので読み飛ばしてください。&lt;/p>
+&lt;p>467行目でnqueenメソッドを呼び出しています。&lt;br>
+今までは引数はrow=0の行情報1つだけでしたが、今回から複数のNについてNqueenを実行するようになるので第2引数にsizeが追加されています。&lt;br>
+sizeは461行目のfor i in range(nmin,MAX)のiで渡します。&lt;/p>
+&lt;p>466行目,468-470行目でnqueenメソッドの前後時間を計測してメソッドの実行にかかった時間を算出しています。&lt;/p>
+&lt;p>datetime.now()で現在時刻が取得できます。&lt;br>
+466行目でstart_timeにnqueenメソッド呼び出し直前の時間を取得しておき、&lt;br>
+468行目でメソッド終了直後の現在時刻とstart_timeを引くことによってメソッドの実行にかかった時間をtime_elapsedとして算出しています。&lt;/p>
+&lt;p>469行目で'{}'.format としていますがこれはtime_elapsedがdatetimeオブジェクトなのでstringにキャストしています。&lt;br>
+format関数は、文字列中の{ }の場所に、引数をにstringキャストして埋め込むことができるみたいです。&lt;/p>
+&lt;p>470行目で下３桁を切り捨てています。&lt;br>
+stringは配列の扱いなのでスライスできるみたいです&lt;br>
+[:-3]&lt;br>
+ですと、0文字目から後ろから3文字除いた範囲を取り出しています。&lt;br>
+例えば以下のようになります。&lt;br>
+0:00:00.005309&lt;br>
+0:00:00.005&lt;/p>
+&lt;p>基本的にformat関数は、文字列中の「{ }」の場所に、引数をstringにキャストして埋め込む&lt;br>
+text = _text[:-3] スライス機能　先頭から末尾3文字を除いた文字列を切り取る&lt;/p>
+&lt;h2 id="nqueenメソッドについて">nqueenメソッドについて&lt;/h2>
+&lt;p>プログラムの内容は基本的に前回の配置フラグと同じです。&lt;br>
+違うのは以下の2点です。&lt;/p>
+&lt;p>1つ目は450,451,453行目です。&lt;br>
+前回は配置フラグとして上下の利き筋だけチェックするFAだけ使っていました。&lt;br>
+今回は、FAの他に左対角線の利き筋をチェックするFB、右対角線の利き筋をチェックするFCも使用しています。&lt;/p>
+&lt;p>2つ目445行目です。&lt;br>
+前回までは最終行まで行ったらprintOutメソッドでCOUNT数と各行のクイーンの配置場所を出力していました。&lt;br>
+今回はTOTAL +=1 として正解数に1加算しています。&lt;br>
+FA,FB,FCの配置フラグのチェックを通過して最終行まで辿り着ければ正解としてカウントして良いと言えるからです。&lt;/p>
+&lt;p>次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item><item><title>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応</title><link>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</link><pubDate>Tue, 08 Feb 2022 09:39:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg" alt="Featured image of post すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応" />&lt;p>みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。&lt;br>
 そのAWSからある日、下記のようなメールが届きました。&lt;/p>
 &lt;blockquote>
 &lt;p>Hello,&lt;/p>
@@ -3319,258 +3380,6 @@ Worker を使って、処理を別タスクとしてやることで正しくロ�
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name"> 確かな力が身につくJavaScript「超」入門 第2版 &lt;/h2>
 &lt;p> ◎ 3万部突破のベストセラーが充実のアップデート! JavaScriptをこれから始める人にも、前に挫折したことのある人にも。 手を動かしてサンプルをひとつずつ作っていくことで、知識だけでなく、 現場で活きる、応用・実践につながる基礎力が「この一冊で」身につきます。 ポイント1「サンプルが楽しい。」 よくある“勉強のためのサンプル&amp;#34;を可能な限り排除し、「こういうの見たことある! 」「こういうのが作ってみたかった! 」というような、実際に仕事に使えそうなサンプルを集めました。なので、最初の「やるぞ! 」というモチベーションを維持したまま、最後のページまで読み進めることができます。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</title><link>https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/</link><pubDate>Fri, 28 Jan 2022 15:35:18 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg" alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿" />&lt;p>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。&lt;br>
-そうした端末を使って記事が投稿できたら、スタバやドトールなどのカフェでコーヒーを飲みながら記事を書くことができてしまいます。&lt;/p>
-&lt;p>今回は、AmazonのEC2上にあるHugoのブログをiPadを使って更新して見たいと思います。&lt;/p>
-&lt;h2 id="iphoneやipadでターミナルを使う">iPhoneやiPadでターミナルを使う&lt;/h2>
-&lt;p>iPhoneやiPadにも数多くの素晴らしいターミナルアプリがあります。&lt;br>
-その中でも私が使っているのは&lt;a class="link" href="https://apps.apple.com/jp/app/termius-ssh-client/id549039908" target="_blank" rel="noopener"
->Termius: Terminal &amp;amp; SSH client&lt;/a>というアプリです。&lt;/p>
-&lt;p>このアプリはターミナルの機能を持っており、SSHでのサーバ接続も可能です。もちろんログインの際にpemファイルなどを使用することも可能です。&lt;/p>
-&lt;p>基本的な機能は無料で使用できるので、まずはインストールをしてみましょう。&lt;/p>
-&lt;h2 id="初期設定">初期設定&lt;/h2>
-&lt;p>起動すると、アカウントの登録が必要かと思いますが、必要ありません。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img01.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>下にある「Learn more」を押して、「Continue without account」にてログイン無しで使えます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img02.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>課金すると様々な機能を使えるようになるので、そういった機能でより便利に使いたい人は是非、課金してください。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img03.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>インストールが終わったら「New Hosts」をタプして、ログインしたいサーバを追加するか、「Hosts」メニューの右上にある「＋」ボタンを押してサーバを追加します。&lt;/p>
-&lt;p>Alias には自分がわかりやすい名前をつけます。&lt;br>
-Hostname にはサーバのドメイン名やIPアドレスを入力します。&lt;br>
-Port はSSHを使うときのポートです。&lt;br>
-そして、ユーザー名とパスワードを使っている人はパスワードを入力します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img04.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>pemファイルを使っている人は、pemの内容をコピーして貼り付けるか、パソコンからpemを送信します。&lt;br>
-送信はパソコンでiPadなどを接続して、ファイルタブから贈りたいpemファイルをドラッグ・アンド・ドロップします。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 180;
-flex-basis: 433px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg" data-size="980x543">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img05.jpg"
-width="980"
-height="543"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>pemファイルをiPadに送り終わったら、Keyを押して、左上の「+」「Import Key」にて先程送ったファイルを選択します。&lt;br>
-これでキーが設定されました。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img06.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>ここまで設定できたら、左上の「Save」にて保存しましょう。&lt;br>
-以上でサーバに接続する準備ができました。&lt;/p>
-&lt;h2 id="サーバに接続">サーバに接続&lt;/h2>
-&lt;p>Alias に設定した名前でアイコンが作成されているかと思います。&lt;br>
-そのアイコンを押すと、know hostsに登録するかどうか聞かれるので、「Continue」を押して追加します。&lt;br>
-うまく設定できていたらサーバに接続できると思います。&lt;br>
-できない場合は、アイコンを長押しして、「Edit」にて情報を正しいものに修正しましょう。&lt;/p>
-&lt;h2 id="tabはどうするの">Tabはどうするの？&lt;/h2>
-&lt;p>SSHではtabコマンドで入力の補完を設定しているケースがあるともいます。&lt;br>
-iPadにはタブというキーがありません。さて……どうしたものでしょうか。Termius はそこもよく考えられていて、通常であれば画面をタブルタップすると「Tab」と一瞬表示されてタブキーを押したときと同様のことが行なえます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img07.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>その他にも、キーボードの上にある「…」マークを押して、「ギアーアイコン」を押すと初期のキーボード上部のボタンを変更することが可能です。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img08.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>Tabキーやコントロールキーが使えるとiPadでも十分使えますね。&lt;/p>
-&lt;h2 id="hugoで記事を書いて確認する">hugoで記事を書いて確認する&lt;/h2>
-&lt;p>hugoで記事を書くやり方は&lt;a class="link" href="http://localhost:1313/posts/2021-12-22-hugo-01-ywat/" target="_blank" rel="noopener"
->デザイナーでもできる初めてのHUGO #01&lt;/a>を参照してください。&lt;/p>
-&lt;p>EC2で記事を書いて、確認しようとするとある疑問を持ってしまいます。それは確認用のサーバはどうしたら良いのかということです。&lt;br>
-通常であれば「localhost:1313」などのURLで確認できます。しかし、EC2ではlocalhostとしてもEC2本体のアドレスではないので、確認できません。&lt;/p>
-&lt;p>hugoにはIPを指定してサーバを起動する機能があります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server --baseURL&lt;span class="o">=[&lt;/span>URL&lt;span class="o">]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>上記のコマンドでアクセスできるかというと、まだ駄目です。&lt;/p>
-&lt;p>最終的なコマンドは&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
-&lt;/code>&lt;/pre>&lt;p>となります。&lt;/p>
-&lt;p>ここで重要なのが&lt;code>--bind=0.0.0.0&lt;/code>になります。&lt;/p>
-&lt;p>ここまできたら、ほぼほぼ確認できるようになっています。&lt;/p>
-&lt;h3 id="ec2でファイヤーウォールを設定している場合">EC2でファイヤーウォールを設定している場合&lt;/h3>
-&lt;p>EC2を使用している場合、ALBやELBを設定していることが多いと思います。&lt;br>
-先程指定したポートが空いているか確認して、空いていない場合は、EC2の設定で開けましょう。&lt;/p>
-&lt;p>EC2のインバウンドルールに開けたいポートを追加します。&lt;br>
-セキュリティーグループを使用している場合は、「インバウンドのルールを編集」をクリックして追加します。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 164;
-flex-basis: 395px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png" data-size="980x594">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img09.png"
-width="980"
-height="594"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>下にある「ルールを追加」を押して、「カスタムTCP」にします。&lt;br>
-次に、ポート範囲に開けたいポートを入力して、CIDR ブロックにインターネットゲートウェイを指すすべての IPv4 トラフィック (0.0.0.0/0) のルートを追加します。&lt;br>
-IPv6の場合も追加したいので、もう一度「ルールを追加」を押して、ポートを入力し、IPv6 トラフィック (::/0) のルートを入力します。&lt;br>
-設定が終わったら、保存しましょう。&lt;br>
-これでポートの設定が完了しました。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 411;
-flex-basis: 988px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png" data-size="980x238">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img10.png"
-width="980"
-height="238"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;h2 id="ipadで確認しながら更新をする">iPadで確認しながら更新をする&lt;/h2>
-&lt;p>サーバにログインして、先程の&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート]
-&lt;/code>&lt;/pre>&lt;p>でサーバを立ち上げます。&lt;br>
-このとき、下書きの記事を表示したいときは&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ hugo server --baseURL=http://[EC2のURL] --bind=0.0.0.0 --port=[ポート] -D
-&lt;/code>&lt;/pre>&lt;p>として下書きも表示するようにしましょう。&lt;/p>
-&lt;p>また、サーバのアドレスがわからない場合は&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ curl -s ifconfig.me
-&lt;/code>&lt;/pre>&lt;p>とすればIPアドレスがわかります。&lt;/p>
-&lt;p>iPadにはSplitビューがついているので、片方でブログを書きながら、　もう片方でSafariなどを立ち上げて立ち上げて記事を確認しながら記述することが可能です。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 152;
-flex-basis: 365px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg" data-size="980x644">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg"
-width="980"
-height="644"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>構築が終わったら&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/" target="_blank" rel="noopener"
->iPadに開発環境を構築してみるテスト&lt;/a>を参考にして、EC2内での詳細な設定をしてみましょう。&lt;/p>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>iPadを使うとどこでも、重いパソコンを持たなくても簡単にブログを更新することができるようになります。是非オススメなので、みなさんも試してみてください。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) &lt;/h2>
-&lt;p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 &lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 &lt;/h2>
-&lt;p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&amp;amp;サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
