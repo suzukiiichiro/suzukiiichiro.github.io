@@ -1,5 +1,5 @@
 ---
-title: "pythonでNQueen（エイトクイーン）バックトラック（１）"
+title: "第5回 pythonでNQueen（エイトクイーン）バックトラック（１）"
 description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。" 
 date: 2022-02-07T16:55:55+09:00
 draft: false 
