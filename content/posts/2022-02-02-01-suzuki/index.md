@@ -19,7 +19,7 @@ tags:
 
 
 この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。
-過去、bashの経験があり、久しぶりにbashを各必要に迫られた人、他の言語でプログラム経験があり、bash独自の書き方をざっくりと思い出したい人は、このトピックを長め読むだけで、充分 bashを思い出せるはずです。
+過去、bashの経験があり、久しぶりにbashを書く必要に迫られた人、他の言語でプログラム経験があり、bash独自の書き方をざっくりと思い出したい人は、このトピックを長め読むだけで、充分 bashを思い出せるはずです。
 このトピックをざっくり読み流すとおよそ４５分でbashの構文を網羅的に理解することができます。
 
 では次のトピックについて説明します。
@@ -1632,15 +1632,24 @@ I love Linux
 $
 ```
 
-<!--
 
 ## ファイルとディレクトリ
 
-このトピックでは、ファイルとディレクトリを作成する方法、スクリプトを使用してこれらのファイルとディレクトリの存在を確認する方法、ファイルからテキストを1行ずつ読み取る方法、ファイルにテキストを追加する方法、最後にファイルを削除する方法を学習します。
+このトピックでは、
+１．ファイルとディレクトリを作成する方法、
+２．スクリプトを使用してこれらのファイルとディレクトリの存在を確認する方法、
+３．ファイルからテキストを1行ずつ読み取る方法、
+４．ファイルにテキストを追加する方法、
+５．ファイルを削除する方法、
 
-最初のスクリプトの例は、「Directory2」という名前のディレクトリを作成することです。ディレクトリ 'mkdir' コマンドの作成は、同じディレクトリまたはフォルダーをある場所で作成するエラーに対処するフラグ '-p' で使用されます。
+を紹介します。
 
-この「mkdir.sh」を保存します。ターミナルを開き、ファイルを実行します。次に、「ls -la」を使用してその存在を確認します。
+### ディレクトリ操作
+最初のスクリプトは、「Directory2」という名前のディレクトリを作成します。
+'mkdir' コマンドでディレクトリを作成します。
+すでに同じディレクトリに「Directory2」フォルダーがある場合はエラーとなります。
+エラーに対処するためには、'-p' オプションを使います。
+'-p' オプションは、作成しようとするその場所に、作成したいディレクトリ名が既に存在している場合は、なにもしません。ディレクトリが存在しない場合のみ、新しいディレクトリを作成します。
 
 
 ``` bash:mkdir.sh
@@ -1649,242 +1658,307 @@ $
 mkdir -p Directory2
 ```
 
-現在の場所にディレクトリが存在するかどうかを確認することもできます。以下は、このアイデアを実行するためのサンプルスクリプトです。最初に行う必要があるのは、端末からディレクトリ名を取得することです。ターミナルラインまたはディレクトリ名を読み、任意の変数に格納します。その後、「if」ステートメントとディレクトリが存在するかどうかをチェックする「-d」フラグを使用します。
+現在の場所にディレクトリが存在するかどうかをif文で確認することもできます。
+「if」ステートメントでディレクトリが存在するかどうかをチェックするためにはif文の条件式で「-d」フラグを使用します。
 
 
 ``` bash:mkdir-p.sh
 #!/bin/bash
 
-echo "enter directory name to check"
-read direct
+echo "enter directory name to check";
+read direct;
 
 if [ -d "$direct" ]; then
-    echo "$direct exists"
+  echo "$direct exists"
 else
-    echo "$direct doesn't exist"
+  echo "$direct doesn't exist"
 fi
 ```
 
+### ファイル操作
+ファイルの作成には「touch」コマンドを使います。
 
-この「mkdir-p.sh」ファイルを保存します。ターミナルから実行し、検索するディレクトリ名を入力します。
+{{% tips-list tips %}}
+ヒント
+: ディレクトリの作成には 'mkdir' コマンド、
+: ファイルの作成には 'touch' コマンドを使います。
+{{% /tips-list %}}
 
-
-ファイルの作成に進みます。ファイルの作成には「タッチ」コマンドが使用されます。名前を取得し、端末から読み取る手順全体は、ディレクトリを作成する場合と同じですが、ファイルを作成するには、「mkdir」ではなく「タッチ」コマンドを使用する必要があります。
 
 
 ``` bash:touch.sh
 #!/bin/bash
 
-echo "enter file name to create"
-read fileName
+echo "enter file name to create";
+read fileName;
 
-touch $fileName
+touch $fileName;
 ```
 
-スクリプトを保存し、実行し、'ls -la'コマンドを使用してターミナルを介してその存在を確認します。
+touchコマンドはmkdirコマンド同様、ファイルを作成しようとするその場所に、既に作成しようとするファイル明度同名のファイルが存在した場合、何もしません。
+
+mkdir は、ディレクトリを作成する。同名のディレクトリがあればエラーとなります。
+
+```
+ls 
+directory2/
+$ mkdir directory2
+mkdir: directory2: File exists
+$
+```
+
+そこで、mkdir -p コマンドは、同名のディレクトリが既にあればエラーを返さず何もしない。なければディレクトリを作成。
+touchコマンドも同様で、同名のファイルが既にあればエラーを返さず何もせず、なければファイルを作成します。
+
+{{% tips-list tips %}}
+ヒント
+: touchコマンドは既に同名のファイルがあれば、エラーを返さない代わりに何もしませんが、「:>」コマンドでファイルを作成した場合、既に作成しようとするその場所に同名のファイルがあった場合、空の新規ファイルで上書きします。（ですので、ファイルは強制的に作成されますが、データ内容は消滅します。
+{{% /tips-list %}}
 
 
-スクリプトに従って、スクリプトを介してディレクトリを検索することもできます。「-f」フラグがファイルを検索し、ディレクトリが「-d」を検索するため、「-d」フラグを「-f」に置き換えるだけです。
+if文で -d フラグでディレクトリの存在を確認する事ができました。
+ファイルも同様に -f フラグでファイルの存在を確認する事ができます。
+
 
 ``` bash:checkFile.sh
 #!/bin/bash
 
-echo "enter file name to check"
-read fileName
+echo "enter file name to check";
+read fileName;
 
-if [ -f "$fileName" ]; then
-    echo "$fileName exists"
+if [ -f "$fileName" ]; then;
+    echo "$fileName exists";
 else
-    echo "$fileName doesn't exist"
+    echo "$fileName doesn't exist";
 fi
 ```
 
-ファイルにテキストを追加するには、同じプロセスに従う必要があります。ステップ1は、端末からファイル名を取得することです。ステップ2は、プログラムがファイルを見つけて追加するテキストの入力を求めた場合、そのファイルを検索することです。それ以外の場合は、そのファイルが端末に存在しないことを印刷します。プログラムがファイルを見つけた場合、tは次のステップに進みます。ステップ3は、そのテキストを読み、検索されたファイルにテキストを書き込むことです。ご覧のとおり、テキスト追加行を除き、これらの手順はすべてそれまたはファイル検索手順と同じです。ファイルにテキストを追加するには、「appendFile.sh」に次のコマンド「echo '$fileText」>> $fileName'を書くだけです。
+### テキストへのファイル出力
+ファイルにテキストを追加するには、「>」リダイレクト、または「>>」アペンドを使います。
+「>」リダイレクトは、ファイルを新規に作成し直してから出力します。
+「>>」アペンドは、既にファイルが存在しているときに限定して出力します。
+
+{{% tips-list tips %}}
+ヒント
+: 「>」リダイレクトは、既にファイルが存在している場合も、ファイルを新規作成します。ですので、元々あったファイルの内容は空になります。からになってもらっては困ると言う場合は、「touch」コマンドを使います。
+
+: また、「>>」アペンドは、追記する場合に、ファイルがない場合はエラーとなります。こうした事にならないように、次の例文で、ファイルの存在を確認して処理を進めます。
+{{% /tips-list %}}
+
 
 
 ``` bash:appendFile.sh
 #!/bin/bash
 
-echo "enter file name in which you want to append text"
-read fileName
+echo "入力ファイル名を指定して下さい";
+read fileName;
+echo "ファイルに追記したい文字列を入力して下さい";
+read fileText;
 
+# ファイルがあれば
 if [ -f "$fileName" ]; then
-    echo "enter the text you want to append"
-    read fileText
+    # アペンド
+    echo "アペンドします";
     echo "$fileText" >> $fileName
 else
-    echo "$fileName doesn't exist"
-fi
-```
-
-ファイルの内容を実行時に指定したいテキストに置き換えるには、同じスクリプトで「>>」ではなくシンボル「>」を使用するだけです。
-
-
-``` bash:redirect.sh
-#!/bin/bash
-
-echo "enter file name in which you want to append text"
-read fileName
-
-if [ -f "$fileName" ]; then
-    echo "enter the text you want to append"
-    read fileText
+    # リダイレクト
+    echo "リダイレクトします";
     echo "$fileText" > $fileName
-else
-    echo "$fileName doesn't exist"
 fi
 ```
 
-ファイルを開くと、変更が表示されます。
 
-
+### ファイルの読み込み
 スクリプトを使用して任意のファイルを読み取ることもできます。上記の方法に従ってファイルを見つけます。その後、while条件を使用して「read -r line」を使用してファイルを読み取る。ファイルを読み取るので、このシンボル「<」を使用します。
 
 
-``` bash:IFS.sh
-#!/bin/bash
+``` bash:whileRead.sh
+echo "読み込みたいファイル名を指定して下さい";
+read fileName;
 
-echo "enter file name from which you want to read"
-read fileName
-
+# ファイルがあれば
 if [ -f "$fileName" ]; then
-    while IFS= read -r line; do
-        echo "$line"
-    done < $fileName
+  # 読み込む
+  while read line; do
+    echo "$line";
+  done<$fileName
 else
-    echo "$fileName doesn't exist"
+  echo "$fileName は存在しません";
 fi
 ```
 
-ファイルを削除するには、まずファイルが存在するかどうかを調べることです。ファイル名変数を含む「rm」コマンドを使用してファイルを検索した後、削除します。削除を確認するには、「ls -la」を使用してファイルシステムを表示します。
 
 
-``` bash: rm.sh
+ファイルを削除するには、まずファイルが存在するかどうかを調べることです。
+
+
+``` bash:rm.sh
 #!/bin/bash
 
-echo "enter file name from which you want to delete"
-
-read fileName
+echo "enter file name from which you want to delete";
+read fileName;
 
 if [ -f "$fileName" ]; then
-    rm $fileName
+    rm $fileName;
 else
-    echo "$fileName doesn't exist"
+    echo "$fileName doesn't exist";
 fi
-
-
-
-
-## スクリプトのカール
-
-カールは、URL構文を持つことができるデータファイルを取得または送信するために使用されます。カールに対処するには、最初にしなければならないことは、端末を使用してカールをインストールすることです。
-
-
-```
-sudo brew install curl
 ```
 
-curlをインストールした後、URLを使用してテストファイルをダウンロードするためのコードを記述します。curlを使用してデータファイルをダウンロードするには、2つのステップが必要です。1つ目は、そのファイルの完全なリンクアドレスを持つことです。次に、そのアドレスをスクリプトの「url」変数に保存し、そのURLでcurlコマンドを使用してダウンロードすることです。ここで「-O」は、ソースからファイル名を継承することを示しました。
+{{% tips-list tips %}}
+ヒント
+: rmコマンドは非常に危険なコマンドです。
+: ファイルの削除の都度確認を促す -i オプションをつけるなどをするとよいでしょう。
+: rmコマンドは、ファイルだけではなくディレクトリも削除できます。
+: 再帰的に行いたい場合は、-r オプションをつけると良いです。
+{{% /tips-list %}}
+
+
+
+
+## curlコマンド
+
+カールは、URL構文を持つデータファイルを取得、または送信するためのコマンドです。
+まず最初にしなければならないことはcurlをインストールすることです。
+
+```
+# 確認
+which curl
+/usr/bin/curl
+$
+```
+
+ない場合、
+
+```
+# macの場合
+$ sudo brew install curl
+```
+
+```
+# linuxの場合
+$ yum install curl
+```
+
+curlをインストールした後、URLを使ってファイルをダウンロードするためのコードを記述します。
+curlを使用してデータファイルをダウンロードするには２つのステップが必要です。
+
+１つ目は、そのファイルの完全なリンクアドレスを持つことです。
+２つ目は、そのアドレスをスクリプトの「url」変数に保存し、そのURLでcurlコマンドを使用してダウンロードすることです。ここで「-O」は、ダウンロードするファイル名は、実在のファイル名を継承すると言う意味となります。
 
 
 ``` bash:curl.sh
 #!/bin/bash
 
-url="http://www.ovh.net/files/1Mb.dat"
-curl ${url} -O
+url="http://www.ovh.net/files/1Mb.dat";
+curl ${url} -O;
 ```
 
-ダウンロードしたファイルに新しい名前を与えるには、「-o」フラグを使用し、その後、以下のスクリプトに示すように新しいファイル名を書き込むだけです。
+ダウンロードしたファイルに新しい名前を与えるには、「-o」オプションでファイル名を指定します。
 
 
 ``` bash:curl2.sh
 #!/bin/bash
 
-url="http://www.ovh.net/files/1Mb.dat"
-curl ${url} -o NewFileDownload
+url="http://www.ovh.net/files/1Mb.dat";
+curl ${url} -o NewFileDownload;
 ```
 
-数百ギガバイトのサイズのファイルをダウンロードしたい場合はどうなりますか?適切なファイルをダウンロードしているかどうかを知っていれば、より簡単だと思わないで。この場合、確認のためにヘッダーファイルをダウンロードすることができます。ファイルのURLの前に「-I」と書くだけです。ファイルをダウンロードするかどうかを決定できるファイルのヘッダーを取得します。
+数百ギガバイトのサイズのファイルをダウンロードしたい場合はどうでしょう。
+適切なファイルをダウンロードしているかどうかを確認するためにヘッダーファイルをダウンロードすることができます。
+ファイルのURLの前に「-I」と書くだけです。
 
 
-``` bash:curl4.sh
+``` bash:curl3.sh
 #!/bin/bash
 
-url="http://www.ovh.net/files/1Mb.dat"
-curl -I ${url}
+url="http://www.ovh.net/files/1Mb.dat";
+curl -I ${url};
 ```
 
 
-## プロフェッショナルメニュー
+## selectコマンド
 
-このトピックでは、2つの基本的なことを学びます。1つ目は選択ループに対処する方法と、もう1つは入力を待つ方法です。
+selectコマンドは、列挙したリストを表示させ、ユーザーに入力を促します。
 
-最初の例では、selectループを使用してスクリプトにカーメニューを作成し、使用可能なオプションから任意のオプションを選択すると、「選択した」と入力として指定したオプションを表示して、そのオプションが出力されます。
-
-
-``` bash:professionalMenu.sh
+``` bash:select.sh
 #!/bin/bash
 
 select car in BMW MERCEDES TESLA ROVER TOYOTA; do
-    echo "you have selected $car"
+  echo "you have selected $car";
 done
 ```
 
+```
+$ bash select.sh
+1) BMW	     3) TESLA	  5) TOYOTA
+2) MERCEDES  4) ROVER
+#? 3
+you have selected TESLA
+#? 4
+you have selected ROVER
+#?
+```
 
-この場合、選択した車のオプションが表示されますが、オプションを除いて別の番号を付けると何もしません。スイッチケースを使用して、この状況を制御できます。各ケースは単一のメニューオプションに使用され、ユーザーが他の車のオプションを入力した場合、「1から5の間で選択してください」というエラーメッセージが表示されます。
+この場合、選択した車のオプションが表示されますが、オプション以外の番号を入力すると何もしません。
+以下の例では、swich-caseを使用して、ユーザーが他の車のオプションを入力した場合、「1から5の間で選択してください」というエラーメッセージが表示されます。
 
 
-``` bash:ProfessionalManu2.sh
+``` bash:select.sh
 #!/bin/bash
-select car in BMW MERCEDES TESLA ROVER TOYOTA
-do
-    case $car in
+
+select car in BMW MERCEDES TESLA ROVER TOYOTA; do
+  case $car in
     BMW)
-    echo "BMW SELECTED";;
+      echo "BMW SELECTED";;
     MERCEDES)
-    echo "MERCEDES SELECTED";;
+      echo "MERCEDES SELECTED";;
     TESLA)
-    echo "TESLA SELECTED";;
+      echo "TESLA SELECTED";;
     ROVER)
-    echo "ROVER SELECTED";;
+      echo "ROVER SELECTED";;
     TOYOTA)
-    echo "TOYOTA SELECTED";;
+      echo "TOYOTA SELECTED";;
     *)
-    echo "ERROR! Please select between 1 to 5";;
-    esac
+      echo "ERROR! Please select between 1 to 5";;
+  esac
 done
 ```
 
+プロのメニューでは、プログラムはユーザーの入力を待つ必要があります。
+このスクリプトでは、ユーザーに「続行するには任意のキーを押して」ように依頼し、「read -t 3 -n 1」コマンドを使用して3秒ごとにユーザーに「キーSirを押すのを待っています」というリマインダーを送信します。
 
-プロのメニューでは、プログラムはユーザーの入力を待つ必要があります。そのスクリプトを書くこともできます。このスクリプトでは、ユーザーに「続行するには任意のキーを押して」ように依頼し、「read -t 3 -n 1」コマンドを使用して3秒ごとにユーザーに「キーSirを押すのを待っています」というリマインダーを送信します。他の条件では、ユーザーがキーを押したかどうかを確認します。この手順全体は、例の形で以下に示されています。この「helloScript.sh」ファイルを保存し、ターミナルを開き、ファイルを実行します。
 
-
-``` bash:professionalManu3.sh
+``` bash:select.sh
 #!/bin/bash
 
-echo "press any key to continue"
+echo "press any key to continue";
 while [ true ]; do
-    read -t 3 -n 1
-    if [ $? = 0 ]; then
-        echo "you have terminated the script"
-        exit;
-    else
-        echo "waiting for you to press the key Sir"
-    fi
+  # ３秒ごとに入力を促す
+  read -t 3 -n 1;
+  if [ $? = 0 ]; then
+    echo "you have terminated the script";
+    exit;
+  else
+    echo "waiting for you to press the key Sir"
+  fi
 done
 ```
 
 
-## inotifyを使用してファイルシステムを待つ
+## inotifyコマンド ファイルの変更を監視する
 
-このトピックでは、ファイルを待って、inotifyを使用してそのファイルを変更する方法を説明します。inotifyは基本的に「inode notify」です。inotifyは、ファイルシステムの変更に気づき、それらの変更をアプリケーションに報告するためにファイルシステムを拡張するLinuxカーネルサブシステムです。inotifyを操作するには、まずターミナルからinotifyをインストールする必要があります。
+inotifyを使用してファイルを変更を監視するする方法を説明します。
+inotifyの正式名称は「inode notify」です。
+inotifyは、ファイルシステムの変更を監視し、、変更をアプリケーションに報告するLinuxカーネルサブシステムです。inotifyを操作するには、まずターミナルからinotifyをインストールする必要があります。
 
-
+Linuxの場合
 ```
 $ yum install inotify-tools
 ```
 
-虚数ディレクトリでinotifyを試して、それがどのように反応するかを確認できます。
+
+inotifyがどのように反応するかを確認します。
 
 ``` bash:inotify.sh
 #!/bin/bash
@@ -1894,19 +1968,27 @@ inotifywait -m iNotifyTest
 ```
 
 
-では、ターミナルの出力を確認します。ターミナルをもう一つ起動して上記スクリプトを実行しているターミナルと並べて開きます。
+では、ターミナルの出力を確認します。
+ターミナルをもう一つ起動して上記スクリプトを実行しているターミナルと並べて開きます。
 
 
-モニターとしてのinotify.shの動作を見ながら別のターミナルウィンドウを開き、「$ touch file1.txt」コマンドを使用してそのディレクトリにファイルを作成すると、inotifyが反応し、ファイルシステムで現在起こっているすべてのアクションを監視していることがわかります。
+モニターとしてのinotify.shの動作を見ながら別のターミナルウィンドウを開き、「$ touch file1.txt」でファイルを作成すると、inotifyが反応し、ファイルシステムで現在起こっているすべてのアクションを監視していることがわかります。
 
 
 次に「file1.txt」に何かを書き、inotifyで動作するターミナルウィンドウからの応答を確認してください。
 
 
 
-## grepの紹介
+## grepコマンド
 
-Grepは ‘global regular expression print’ の略です。このコマンドは、テキストを1行ずつ処理してファイル内のパターンを検索するために使用されます。まず、touchコマンドを使用してfilegrep.txtという名前のファイルを作成します。ターミナルに次のコードを入力します。
+grepコマンドについてはここで詳しく書きました。
+[【 grep 特集】「ざっくりわかるシェルスクリプト４」](https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/)
+
+それはそれとして、ここではざっくりと説明します。
+
+grepは ‘global regular expression print’ の略です。
+このコマンドは、テキストを1行ずつ処理してファイル内のパターンを検索するために使用されます。
+まず、touchコマンドを使用してfilegrep.txtという名前のファイルを作成します。ターミナルに次のコードを入力します。
 
 ```
 $ touch filegrep.txt
@@ -1915,7 +1997,7 @@ $ vim filegrep.txt
 
 filegrep.txtを開き、ファイルに次のコンテンツを書き込みます。
 
-``` bash:filegrep.txt
+``` bash:grepfile.txt
 This is Linux
 This is Windows
 This is MAC
@@ -1930,271 +2012,498 @@ This is Windows
 This is MAC
 ```
 
-次に、現在のプログラムの要件に応じていくつかの変更を加えたファイル検索コードを再活用します。ファイル検索の基本的な方法は、「ファイルとディレクトリ」のトピックで上記で説明されています。まず、スクリプトはユーザーからファイル名を取得し、入力を読み取り、変数に保存し、検索するテキストを入力するようにユーザーに依頼します。その後、ファイル内で検索するテキストである端末からの入力を読み取ります。値を「grepvar」という名前の別の変数に格納します。次に、grep変数とファイル名を使用してgrepコマンドを使用する主なことを行う必要があります。Irは文書全体の単語を検索します。
 
 
-```
+``` bash:grep.sh
 #!/bin/bash
 
-echo "enter a filename to search text from"
+echo "検索したいファイル名を指定して下さい。"
+
+# 入力を grepfile.txt
 read fileName
-if [[ -f $fileName ]]; then
-    echo "enter the text to search"
-    read grepvar
-    grep $grepvar $fileName
+
+if [[ -f "$fileName" ]]; then
+  echo "検索したい語句を入力して下さい。";
+  read grepvar;
+  grep "$grepvar" "$fileName";
 else
-    echo "$fileName doesn't exist"
+  echo "$fileName はありません。"
 fi
 ```
 
+```
+$ bash test
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+$
+```
 
-入力は「Linux」で、ファイル内のテキストは「Linux」と書かれているため、検索手順の後には何も表示されません。ここでは、grepコマンドに「-i」のフラグを追加するだけで、この大文字と小文字を区別する問題に対処する必要があります。
+入力は「linux」（小文字のエル）ですが、ファイル内のテキストは「Linux」（大文字のエル）で書かれているため、検索結果には何も表示されません。ここでは、grepコマンドに「-i」のフラグを追加するだけで、この大文字と小文字を区別する問題に対処する必要があります。
 
+``` bash:grep2.sh
+#!/bin/bash
 
-``` 
-grep -i $grepvar $ファイル名
+echo "検索したいファイル名を指定して下さい。"
+
+# 入力を grepfile.txt
+read fileName
+
+if [[ -f "$fileName" ]]; then
+  echo "検索したい語句を入力して下さい。";
+  read grepvar;
+  # 大文字小文字の区別をしないオプション -i
+  grep -i "$grepvar" "$fileName";
+else
+  echo "$fileName はありません。"
+fi
+```
+
+```
+$ bash grep2.sh
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+This is Linux
+This is Linux
+This is Linux
+This is Linux
+$
 ```
 
 出力で行番号を抽出することもできます。このためには、grepコマンドに「-n」の別のフラグを追加するだけです。
 
+``` bash:grep3.sh
+#!/bin/bash
+
+echo "検索したいファイル名を指定して下さい。"
+
+# 入力を grepfile.txt
+read fileName
+
+if [[ -f "$fileName" ]]; then
+  echo "検索したい語句を入力して下さい。";
+  read grepvar;
+  # 大文字小文字の区別をしないオプション -i
+  grep -in "$grepvar" "$fileName";
+else
+  echo "$fileName はありません。"
+fi
+```
 
 ```
-grep -i -n $grepvar $ファイル名
+$ bash grep3.sh
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+1:This is Linux
+4:This is Linux
+7:This is Linux
+10:This is Linux
+$
 ```
 
 ドキュメント内の特定の単語の発生回数を取得することもできます。grepコマンド「grep -i -c $grepvar $fileName」に「-c」フラグを追加し、スクリプトを保存し、端末を使用して実行します。
 
 
-```
-grep -i -n -c $grepvar $ファイル名
-```
-
-
-ターミナルに「man grep」と入力するだけで、さまざまなgrepコマンドをチェックすることもできます。
-
-
-
-## awkの紹介
-
-Awkは、データの操作やレポートの作成に使用されるスクリプト言語です。コンパイルを必要とせず、他のユーザーも変数、数値関数、文字列関数、論理演算子を使用できます。プログラマーがドキュメントの各行で検索されるテキストパターンを定義するステートメントの形で小さくても効果的なプログラムを書くことを可能にするユーティリティであり、一致が行内に見つかったときに実行されるアクションであるため、それを取ることができます。
-
-awkはデータファイルを変換し、フォーマットされたレポートも生成するという考えです。また、算術演算と文字列演算を実行し、条件文とループを使用する機能も提供します。
-
-まず、awkコマンドを使用してファイルを1行ずつスキャンします。この例では、必要なファイルを取得するために不可欠であるため、ファイル検索コードも表示されます。その後、print '{print}'とファイル名変数の操作で「awk」コマンドを使用します。
-
-
-``` bash:arktest1.sh
+``` bash:grep4.sh
 #!/bin/bash
 
-echo "enter a filename to print from awk"
+echo "検索したいファイル名を指定して下さい。"
+
+# 入力を grepfile.txt
 read fileName
-if [[ -f $fileName ]]; then
-    awk '{print}' $fileName
+
+if [[ -f "$fileName" ]]; then
+  echo "検索したい語句を入力して下さい。";
+  read grepvar;
+  # 大文字小文字の区別をしないオプション -i
+  grep -inc "$grepvar" "$fileName";
 else
-    echo "$fileName doesn't exist"
+  echo "$fileName はありません。"
 fi
 ```
 
-「awk」を使用して特定のパターンを検索することもできます。このためには、上記のawkコマンドをこの「awk '/Linux/ {print}' $fileName」に置き換えるだけです。このスクリプトは、ファイル内の「Linux」を検索し、それを含む行を表示します。
-
-
-``` bash:awktest2.sh
-#!/bin/bash
-
-echo "enter filename to print from awk"
-read fileName
-if [[ -f $fileName ]]; then
-    
-    awk '/Linux/ {print}' $fileName
-else
-    echo "$fileName doesn't exist"
-fi
+```
+$ bash test
+検索したいファイル名を指定して下さい。
+grepfile.txt
+検索したい語句を入力して下さい。
+linux
+4
+$
 ```
 
-次に、さらなる実験のために、「filegrep.txt」の内容を以下に示すテキストに置き換えます。
 
-```bash filegrep.txt
-This is Linux 2000
-This is Windows 3000
-This is MAC 4000
-This is Linux 2000
-This is Windows 3000
-This is MAC 4000
-This is Linux 2000
-This is Windows 3000
-This is MAC 4000
-This is Linux 2000
-This is Windows 3000
-This is MAC 4000
+
+## awkコマンド
+
+awkは、データの操作やレポートの作成に使用されるスクリプト言語です。
+コンパイルを必要とせず、変数、数値関数、文字列関数、論理演算子が使用できます。
+何より処理が高速です。bashよりも高速である場合が多いです。
+このトピックでは、シェルスクリプトで多く多用されるawkコマンドの一例を紹介します。
+
+``` 
+$ cat grepfile.txt | awk '{ print; }';
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+This is Linux
+This is Windows
+This is MAC
+$
+```
+
+
+「awk」を使用して特定のパターンを検索することもできます。
+
+
+```
+$ cat grepfile.txt | awk '/Linux/ { print; }';
+This is Linux
+This is Linux
+This is Linux
+This is Linux
+$
 ```
 
 次の例では、プログラムがターゲットワードを見つけた行からコンテンツを抽出する方法を見ていきます。 「$1」はその行の最初の単語を表し、同様に「$2」は2番目を表し、「$3」は3番目の単語を表し、「$4」はこの場合最後の単語を表します。
 
 
-``` bash:awktest3.sh
-
-#!/bin/bash
-
-echo "enter a filename to print from awk"
-read fileName
-if [[ -f $fileName ]]; then
-    awk '/Linux/ {print $2}' $fileName
-else
-    echo "$fileName doesn't exist"
-fi
+```
+$ cat grepfile.txt | awk '/Linux/ { print $3; }';
+Linux
+Linux
+Linux
+Linux
+$
 ```
 
-上記のスクリプトを保存し、ファイルを実行して、プログラムが「Linux」という言葉を見つけた行の2番目の単語を印刷するかどうかを確認します。
-「Linux」を見つけた行の最後の単語「$4」を取得するための「awk」コマンドでスクリプトを実行します。
-
-``` bash:awktest4.sh
-#!/bin/bash
-
-echo "enter filename to print from awk"
-read fileName
-if [[ -f $fileName ]]; then
-    awk '/Linux/ {print $4} ' $fileName
-else
-    echo "$fileName doesn't exist"
-fi
-
-```
-
-
-次に、「awk」/Linux/ {print $3,$4} ' $fileName' コマンドを使用して、「Linux」を含む行の2番目の最後と最後の単語を印刷するかどうかを確認します。
-
-
-``` bash:awktest5.sh
-#!/bin/bash
-
-echo "enter filename to print from awk"
-read fileName
-if [[ -f $fileName ]]; then    
-    awk '/Linux/ {print $3,$4} ' $fileName
-else
-    echo "$fileName doesn't exist"
-fi
-```
+{{% tips-list tips %}}
+ヒント
+: awkはとても優れたプログラミング言語で、シェル薬婦とを学ぶことと同じほどのボリュームのある言語です。ただ、シェルスクリプトで使われる多くのbashコマンドを使いこなすことで、awkでないとできないことは限られます。まずはこのトピックで使われるawkコマンドの利用例を身につければオッケーです。すこしずつ覚えていくことを増やしていけばよいのです。
+{{% /tips-list %}}
 
 
 
-## sedの紹介
 
-sedコマンドはストリームエディタの略で、標準入力またはファイルからのテキストの編集操作を実行します。 sedは行ごとに非インタラクティブな方法で編集します。これは、コマンドを呼び出すときにすべての編集決定を行い、sedが自動的に方向を実行することを意味します。ここでは、「sed」の非常に基本的な種類の使用を学ぶつもりです。前のタスクに使用したのと同じスクリプトを使用してください。「i」を「I」に置き換えます。そのためには、次の sed コマンド 'cat filegrep.txt | sed 's/i/I/'' と書くだけで、cat コマンドを使用してファイルの内容を取得し、パイプ '|' 記号の後に、'sed' キーワードを使用して、このケースを置き換える操作を指定します。したがって、「s」はスラッシュと置き換えられる文字でここに書かれ、再びスラッシュし、最後に置き換える文字で書かれています。
+## sedコマンド
 
-
-``` bash:sedtest1.txt
-#!/bin/bash
-
-echo "enter filename to substitute using sed"
-read fileName
-if [[ -f $fileName ]]; then
-    cat filegrep.txt | sed 's/i/I/'
-else
-    echo "$fileName doesn't exist"
-fi
-```
-
-出力から、「i」の最初のインスタンスのみが「I」に置き換えられたことがわかります。ドキュメント全体の「i」インスタンス置換では、最後の「/」スラッシュの後に「g」(グローバルを表す)のみを記述する必要があります。スクリプトを保存して実行すると、コンテンツ全体にこの変更が表示されます。
-
-
-``` bash:sedtest2.txt
-#!/bin/bash
-
-echo "enter filename to substitute using sed"
-read fileName
-if [[ -f $fileName ]]
-then
-    cat filegrep.txt | sed 's/i/I/g'
-    
-else
-    echo "$fileName doesn't exist"
-fi
-```
-
-
-これらの変更は実行時にのみ行われます。「helloScript.sh」に次のコマンドを書くだけで、端末に表示されるファイルのコンテンツを格納するための別のファイルを作成することもできます。
-
+sedコマンドはストリームエディタの略で、標準入力またはファイルからのテキストの編集操作を実行します。
+このトピックでは「i」を「I」に置き換えます。
+そのためには、次の sed コマンド 'cat grepfile.txt | sed -e 's/i/I/' と書くだけで、cat コマンドを使用してファイルの内容を取得し、パイプ '|' 記号の後に、'sed' キーワードを使用して、このケースを置き換える操作を指定します。
+「s」はスラッシュと置き換えると言う意味です。
+「-e」はsed コマンドを連続してフィルタリングすることを可能とするオプションです。
+/置き換え前/置き換え後/
+となります。
 
 ```
-cat filegrep.txt | sed 's/i/I/g' > newfile.txt
+$ cat grepfile.txt | sed -e "s/i/I/"
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+ThIs is Linux
+ThIs is Windows
+ThIs is MAC
+$
+```
+
+最初に出てくる 'This is Linux' が 'ThIs is Linux' となったことが解ります。
+-g オプションを末尾につけることで、複数回の処理で置き換えます。
+
+
+``` 
+$ cat grepfile.txt | sed -e "s/i/I/g"
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+ThIs Is LInux
+ThIs Is WIndows
+ThIs Is MAC
+$
+```
+
+以下のコマンドで、処理結果を簡単にファイルに出力して、エディターなどで開いて確認する事ができます。
+
+```
+cat filegrep.txt | sed -e 's/i/I/g' > newfile.txt
 ```
 
 単語全体を別の単語に置き換えることもできます。たとえば、以下に示すスクリプトでは、「Linux」のすべてのインスタンスが端末に表示中に「Unix」に置き換えられます。
 
-
-``` bash:sedtest3.txt
-#!/bin/bash
-
-echo "enter filename to substitute using sed"
-read fileName
-if [[ -f $fileName ]]; then
-     sed 's/Linux/Unix/g' $fileName    
-else
-    echo "$fileName doesn't exist"
-fi
+```
+$ cat grepfile.txt | sed -e "s/Linux/Unix/g"
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+$
 ```
 
 
-22。バッシュスクリプトのデバッグ
 
-Bashは広範なデバッグ機能を提供しています。bashスクリプトをデバッグすることができ、計画に従って何かがうまくいかない場合は、それを見ることができます。これが私たちが今行っていることです。端末で発生するエラーの種類を確認するために、意図的にエラーを作成しましょう。次のコードを「helloScript.sh」ファイルに保存します。ターミナルを使用してファイルを実行し、結果をチェックアウトします。
+
+## sortコマンド
+テキストファイルを行単位で並べ替える
+sort 並べ替える
+sort -n 数値扱いで並べ替える
+sort -r 逆順で出力
+
+まずは以下の読み込み用サンプルファイルを準備します。
+
+``` bash:sample.txt
+name:ヤムチャ   skill:狼牙風風拳
+name:孫悟空  skill:かめはめ波
+name:ピッコロ   skill:魔貫光殺砲
+name:ヤムチャ   skill:繰気弾
+name:孫悟空  skill:元気玉
+name:クリリン   skill:気円斬
+name:ヤムチャ   skill:かめはめ波
+name:クリリン   skill:かめはめ波
+name:孫悟空  skill:ジャン拳
+name:ヤムチャ   skill:新狼牙風風拳
+```
+
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort
+name:孫悟空
+name:孫悟空
+name:孫悟空
+name:クリリン
+name:クリリン
+name:ピッコロ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+name:ヤムチャ
+```
+
+解説
+grep -E
+検索に「拡張正規表現」を使えるようにする。
+^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3} でIPアドレスに一致させる。
+
+grep -o
+通常の grep では一致した行全体が表示されるが、-o を指定することにより一致した文字のみを表示させることができる。
+
+sort
+次の uniq で重複行のカウントを行うため、並び替える。
+
+
+## uniqコマンド
+uniq -c
+重複行のカウントを表示する。
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c
+   3 name:孫悟空
+   2 name:クリリン
+   1 name:ピッコロ
+   4 name:ヤムチャ
+$
+```
+
+## sort -r 逆順
+sort -r
+カウントの降順で並べ替える。
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r
+ 4 name:ヤムチャ
+ 3 name:孫悟空
+ 2 name:クリリン
+ 1 name:ピッコロ
+```
+
+## cutコマンド
+cut:タブ区切りでフィールドを選択して出力する
+cut -d:デリミタを指定。いわゆる区切り文字
+cut -f:抽出するフィールドの番号を指定する。上記コマンドで1を指定した場合は二つ目の"name"が抽出される。
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r |  cut -d ":" -f2
+ヤムチャ
+孫悟空
+クリリン
+ピッコロ
+$
+```
+
+## headコマンド
+長いメッセージやテキストファイルの先頭だけ／末尾だけを表示する
+
+head -n
+n: 出力する行数を指定する。
+
+
+```
+$ cat sample.txt | grep -o "name:\S*" | sort | uniq -c | sort -r |  cut -d ":" -f2 | head -n2
+ヤムチャ
+孫悟空
+$
+```
+
+## trコマンド
+テキストファイルの文字を置換する／削除する
+
+「-d」オプションで、指定した文字を削除することができます。例えば、Windows環境で作成したテキストファイルの改行コードを、Linux環境向けに置き換えるといった用途に使用できます。
+
+```
+$ cat sample.txt
+name:ヤムチャ   skill:狼牙風風拳
+name:孫悟空  skill:かめはめ波
+name:ピッコロ   skill:魔貫光殺砲
+name:ヤムチャ   skill:繰気弾
+name:孫悟空  skill:元気玉
+name:クリリン   skill:気円斬
+name:ヤムチャ   skill:かめはめ波
+name:クリリン   skill:かめはめ波
+name:孫悟空  skill:ジャン拳
+name:ヤムチャ   skill:新狼牙風風拳
+$ cat sample.txt | tr -d '\n'
+name:ヤムチャ   skill:狼牙風風拳name:孫悟空  skill:かめはめ波name:ピッコロ   skill:魔貫光殺砲name:ヤムチャ   skill:繰気弾name:孫悟空  skill:元気玉name:クリリン   skill:気円斬name:ヤムチャ   skill:かめはめ波name:クリリン   skill:かめはめ波name:孫悟空  skill:ジャン拳name:ヤムチャ   skill:新狼牙風風拳 $
+```
+
+Windows環境では、改行を「CR」（16進数0D）と「LF」（16進数0A）の2バイトで表しますが、Linux環境では「LF」のみです。trコマンドでは「CR」を「\r」で表すことができるので、「tr -d \r」としてテキストファイルから「CR」を除去することで、Linux環境用の改行コードに変換できます。
+
+「-s」オプションでは、指定した文字が連続している場合には1つにまとめることができます。例えば、「tr -s "\r"」では、連続した改行を1つにします。catコマンドの「-s」オプションと同じ働きになります。
+
+
+
+{{% tips-list tips %}}
+ヒント
+: trコマンドの '\n' はシングルクォーテーションで囲む必要があります。
+{{% /tips-list %}}
+
+
+## スクリプトのデバッグ
+
+Bashは広範なデバッグ機能を提供しています。
+
+デバッグの方法は３種類あります
+
+１．ターミナルの実行時に -x オプションを付与する
+
+```
+$ bash -x helloScript.sh
+```
+
+２．ソースコードの冒頭のシェバンに -x オプションを付与する
 
 ``` bash:debug.sh
-#!/bin/bash
-
-echo "enter filename to substitute using sed"
-read fileName
-if [[ -f $fileName ]]; then
-     sed 's/Linux/Unix/g' $fileName    
-else
-    echo "$fileName doesn't exist"
-fi
-```
-エラーから、それが4行目に存在することがわかります。しかし、何千行ものコードがあり、複数の種類のエラーに直面すると、これは識別するのがとても難しくなります。そのために、スクリプトをデバッグすることができます。最初の方法は、bashを使用したステップバイステップのデバッグです。このためには、ターミナルに次のコマンドを書くだけです。
-
-
-```
-$ bash -x ./helloScript.sh
+#!/bin/bash -x
+:
+:
 ```
 
-bashパスの後、スクリプトの最初の行に「-x」フラグを入力するだけです。この方法では、スクリプトを使用してスクリプトをデバッグします。
+
+３．デバッグの開始点と終了点を決めてデバッグ
+デバッグの開始点にコマンド 'set -x'終了点には 'set +x' と書きます。
 
 
 ``` bash:debug2.sh
-#!/bin/bash -x
-
-echo "enter filename to substitute using sed"
-read fileName
-if [[ -f $fileName ]]; then
-     sed 's/Linux/Unix/g' $fileName
-else
-    echo "$fileName doesn't exist"
-fi
-```
-
-
-デバッグの開始点と終了点を選択できます。デバッグの開始点にコマンド 'set -x' を書き留め、終了するには単に 'set +x' と書き、この 'helloScript.sh' を保存し、ターミナルを介して実行し、結果をチェックします。
-
-
-``` bash:debug3.sh
 #!/bin/bash 
 
 set -x
-echo "enter filename to substitute using sed"
+echo "置き換えたいファイル名を入寮して下さい。"
 read fileName
 set +x
 
-if [[ -f $fileName ]]; then
-     sed 's/Linux/Unix/g' $fileName
+if [[ -f "$fileName" ]]; then
+  sed -e "s/Linux/Unix/g" "$fileName";
 else
-    echo "$fileName doesn't exist"
+  echo "$fileName はありません。";
 fi
+```
 
+```
+$ bash test
++ echo 置き換えたいファイル名を入寮して下さい。
+置き換えたいファイル名を入寮して下さい。
++ read fileName
+grepfile.txt
++ set +x
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+This is Unix
+This is Windows
+This is MAC
+$
 ```
 
 
--->
+``` bash:debug3.sh
+#!/bin/bash
+
+# デバッグ開始
+set -x
+
+var1=`date +%M`
+
+# デバッグ終了
+set +x
+
+var2=`ls -1 | wc -l`
+var3="DEBUG TEST"
+
+exit 0
+```
+
+```
+$ bash debug3.sh
+++ date +%M
++ var1=56
++ set +x
+$
+```
+
+
+{{% tips-list tips %}}
+ヒント
+: だいたい解ってきたのではないかと思います。
+: 要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。
+: 関数を使って、より長く複雑なことも実行可能です。
+: Linux(CUI)でできることはすべてシェルスクリプトでできます。
+{{% /tips-list %}}
 
 
 # 関連記事
