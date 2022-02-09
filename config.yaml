@@ -61,9 +61,13 @@ outputFormats:
         MediaType: application/xml
         baseName: "google_sitemap"
         noUgly: true
+    XML:
+        MediaType: application/xml
+        baseName: "sitemap_all"
+        noUgly: true
         
 outputs:
-    home: [HTML, Sitemap, RSS]
+    home: [HTML, Sitemap, RSS, XML]
 
 # キャッシュのコントロール
 # https://gohugo.io/getting-started/configuration/#configure-file-caches
