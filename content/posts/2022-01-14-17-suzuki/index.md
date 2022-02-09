@@ -3,7 +3,7 @@ authors: suzuki
 title: "【１７．変数に2つの数値を追加します】ざっくりわかる「シェルスクリプト」"
 description: "さまざまな方法でbashの算術演算を実行できます。次のスクリプトに、二重角かっこを使用してbashに2つの整数を追加する方法を示します。次のコードを使用して、「add_numbers.sh」という名前のファイルを作成します。2つの整数値がユーザーから取得され、加算の結果が出力されます。"
 date: 2022-01-12T12:30:57+09:00
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング

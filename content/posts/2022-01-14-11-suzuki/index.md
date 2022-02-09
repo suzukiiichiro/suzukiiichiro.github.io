@@ -3,7 +3,7 @@ authors: suzuki
 title: "【１１．else if と else】ざっくりわかる「シェルスクリプト」"
 description: "else if条件の使用は、bashでは「elif」を定義します。'elseif_example.sh'という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。"
 date: 2022-01-12T12:30:57+09:00
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング

@@ -3,7 +3,7 @@ authors: suzuki
 title: "【７．対話型入力】ざっくりわかる「シェルスクリプト」"
 date: 2022-01-07T10:03:12+09:00
 description: "'read'コマンドは、bashでユーザーから入力を受け取るために使用されます。'user_input.sh'という名前のファイルを作成し、ユーザーから入力を取得するための次のスクリプトを追加します。ここでは、1つの文字列値がユーザーから取得され、他の文字列値を組み合わせて値が表示されます。"
-draft: true
+draft: false
 image: shellscript.jpg
 categories:
   - プログラミング

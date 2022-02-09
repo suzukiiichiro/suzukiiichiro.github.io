@@ -1,7 +1,7 @@
 ---
 title: "第6回 pythonでNQueen（エイトクイーン）バックトラック（２）"
 description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第6回目。今回はバックトラックについて説明します。解を出すmainメソッドなどプログラムの概要を説明します。" 
-date: 2022-02-09T16:55:55+09:00
+date: 2022-02-09T12:55:55+09:00
 draft: false 
 image: chess.jpg
 categories:
