@@ -1,4 +1,4 @@
-{{ $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) | first 8 }}
+{{ $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) | first 4 }}
 {{ with $related }}
 <section class="section related-contents--wrapper">
         <h2 class="section-title">{{ T "article.relatedContents" }}</h2>
