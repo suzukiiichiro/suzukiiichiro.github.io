@@ -85,7 +85,9 @@
   ]
 }]
 {{- else }}
-[{
+[
+{{- if .IsHome -}}
+{
   "@context": "http://schema.org",
   "@type": "WebSite",
   "url": {{ .Site.BaseURL }},
@@ -95,9 +97,8 @@
     "query-input": "required name=search_term_string"
   }
 }
-{{- if .IsHome -}}
 {{- else -}}
-  ,{
+{
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [{
