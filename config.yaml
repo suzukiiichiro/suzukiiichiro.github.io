@@ -206,7 +206,7 @@ params:
             limit: 10
 
         populerArticles:
-            limit: 10
+            limit: 5
 
         newpost:
             limit: 5
