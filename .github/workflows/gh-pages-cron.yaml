@@ -2,7 +2,7 @@ name: Cron Actioins
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   gh-pages:

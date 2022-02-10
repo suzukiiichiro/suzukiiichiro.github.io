@@ -11,6 +11,7 @@
     <header class="article-header">
       {{ if $image.exists }}
       <div class="article-image">
+        {{/*
         {{ if $image.resource }}
         {{- $Permalink := $image.resource.RelPermalink -}}
         {{- $Width := $image.resource.Width -}}
@@ -30,6 +31,8 @@
         {{ else }}
         <img src="{{ $image.permalink }}" loading="lazy" alt="Featured image of post {{ .Title }}" />
         {{ end }}
+       */}}
+        <img src="{{ $image.permalink }}" loading="lazy" alt="Featured image of post {{ .Title }}" />
       </div>
       {{ end }}
       {{ if .Params.categories }}

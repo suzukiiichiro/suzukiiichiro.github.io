@@ -20,8 +20,9 @@
         {{ else }}
         {{ $avatar := resources.Get (.src) }}
         {{ if $avatar }}
-        {{ $avatarResized := $avatar.Resize "60x" }}
-        <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        <!-- {{ $avatarResized := $avatar.Resize "60x" }} -->
+        <!-- <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}"> -->
+        <img src="{{ $avatar.RelPermalink }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
         {{ else }}
         {{ errorf "Failed loading avatar from %q" . }}
         {{ end }}
