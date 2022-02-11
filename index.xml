@@ -1,4 +1,148 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 10 Feb 2022 10:23:14 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（３）【head】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</link><pubDate>Thu, 10 Feb 2022 10:23:14 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash.jpg" alt="Featured image of post （３）【head】シェルスクリプトコマンド活用紹介" />&lt;h2 id="headコマンド">headコマンド&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 11 Feb 2022 14:31:57 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
+&lt;p>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。&lt;/p>
+&lt;ul>
+&lt;li>tailコマンドでファイルの末尾部分だけを表示する&lt;/li>
+&lt;li>ログファイルを監視する&lt;/li>
+&lt;li>ファイルの特定の範囲の行を取り出す（headとtail）&lt;/li>
+&lt;/ul>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>ログファイルでは、基本的にファイルの末尾に新たな記録が追加されます。「more」コマンドやテキストエディタで表示しようとすると、末尾まで進むのが面倒だし、ファイルが大きい場合は読み込むのにも時間がかかります。その点、tailコマンドならば、末尾しか見ないので手軽かつ処理も高速です。&lt;br>
+tailコマンドも、headコマンド同様、「-n」オプションで表示する行数を指定することができます。&lt;/p>
+&lt;h2 id="tailコマンドの書式">tailコマンドの書式&lt;/h2>
+&lt;p>tail [オプション] ファイル名&lt;/p>
+&lt;h2 id="tailコマンドの主なオプション">tailコマンドの主なオプション&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">短いオプション&lt;/th>
+&lt;th>長いオプション&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">-c 数字&lt;/td>
+&lt;td>&amp;ndash;bytes 数字&lt;/td>
+&lt;td>末尾の指定したバイト数のみ表示する。「-c 5 b」のように単位を付加することも可能（b=512, KB=1000, K=1024, MB=1000&lt;em>1000, M=1024&lt;/em>1024…）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-n 数字&lt;/td>
+&lt;td>&amp;ndash;lines 数字&lt;/td>
+&lt;td>末尾の指定した行数のみ表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-q&lt;/td>
+&lt;td>&amp;ndash;quiet, &amp;ndash;silent&lt;/td>
+&lt;td>ファイルごとのヘッダ表示を行わない（複数ファイル指定時に使う）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-v&lt;/td>
+&lt;td>&amp;ndash;verbose&lt;/td>
+&lt;td>常にファイルごとのヘッダ出力を行う&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-f&lt;/td>
+&lt;td>&amp;ndash;follow&lt;/td>
+&lt;td>ファイルを監視して内容が追加されるたびに末尾に表示する（ログ監視などに使用する。［Ctrl］＋［C］キーで終了）&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="tailコマンド詳細説明">tailコマンド詳細説明&lt;/h2>
+&lt;h3 id="tailコマンドでファイルの末尾部分だけを表示する">tailコマンドでファイルの末尾部分だけを表示する&lt;/h3>
+&lt;p>ファイルの末尾を表示します。tail -n で表示行数を変更できます。&lt;br>
+tail -n10 と デフォルトの tail は同じ出力となります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | tail -n10
+&lt;/code>&lt;/pre>&lt;h3 id="ログファイルを監視する">ログファイルを監視する&lt;/h3>
+&lt;p>tailコマンドの「-f」オプションを使うと、ログファイルのように、刻々と内容が追加されていくファイル監視ができるようになります。「-f」は、ファイルなどを監視する際、内容が新たに追加されるたびに末尾に表示するオプションです。ログの監視を終了するには、［Ctrl］＋［C］キーを押します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ sudo tail -f /var/log/httpd/error_log
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>tail -f コマンドはとてもよく使います。&lt;/dd>
+&lt;dd>tail -f を実行するtailf コマンドもあります。(Oによりますが)&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h3 id="ファイルの特定の範囲の行を取り出すheadとtail">ファイルの特定の範囲の行を取り出す（headとtail）&lt;/h3>
+&lt;p>ファイル後ろの200行目のところから、ファイル先頭に向かって100行を取り出すにはどうしたらよいか？&lt;/p>
+&lt;pre tabindex="0">&lt;code>cat filename | tail -n200
+&lt;/code>&lt;/pre>&lt;p>これだとファイル末尾から200行を出力するにすぎない。&lt;br>
+tail コマンドのみに頼ろうとすると難しいようだ。&lt;br>
+実は、head コマンドも使えば、「後ろ200行の先頭100行」を取り出せる。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | tail -n200 | head -n 100
+&lt;/code>&lt;/pre>&lt;p>コマンドの実行結果の10001行目から10100行目までが欲しい時は以下の通り。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | head -n10100 | tail -n100
+&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
+&lt;p>すべてのUNIXエンジニア必携!!
+&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
+&lt;p>エキスパートを目指せ!!
+&lt;p>システム管理やソフトウェア開発など、&lt;br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説&lt;/p>
+&lt;p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、&lt;br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。&lt;br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。&lt;br>
+イマドキのエンジニア必携の一冊。&lt;/p>
+&lt;p>▼目次&lt;br>
+CHAPTER01 シェルってなんだろう&lt;br>
+CHAPTER02 シェルスクリプトとは何か&lt;br>
+CHAPTER03 シェルスクリプトの基本&lt;br>
+CHAPTER04 変数&lt;br>
+CHAPTER05 クォーティング&lt;br>
+CHAPTER06 制御構造&lt;br>
+CHAPTER07 リダイレクトとパイプ&lt;br>
+CHAPTER08 関数&lt;br>
+CHAPTER09 組み込みコマンド&lt;br>
+CHAPTER10 正規表現と文字列&lt;br>
+CHAPTER11 シェルスクリプトの実行方法&lt;br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう&lt;br>
+CHAPTER13 シェルスクリプトの実用例&lt;br>
+CHAPTER14 テストとデバッグ&lt;br>
+CHAPTER15 読みやすいシェルスクリプト&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>（３）【head】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</link><pubDate>Thu, 10 Feb 2022 10:23:14 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash.jpg" alt="Featured image of post （３）【head】シェルスクリプトコマンド活用紹介" />&lt;h2 id="headコマンド">headコマンド&lt;/h2>
 &lt;ul>
 &lt;li>headコマンドでファイルの先頭部分だけを表示する&lt;/li>
 &lt;li>パイプを使って実行結果の最初の部分だけを確認する&lt;/li>
@@ -1643,129 +1787,4 @@ alt="図">
 row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
 439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
 &lt;p>細く動作をみていくとこんな感じになります。&lt;br>
-ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item><item><title>第3回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</link><pubDate>Thu, 03 Feb 2022 15:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/chess.jpg" alt="Featured image of post 第3回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（１）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
-&lt;p>前回は全くアルゴリズムを使わないで全パターン１行に１つずつクイーンを設置するブルートフォース　力任せ探索でした。&lt;br>
-エイトクイーン(N=8)ですら凄く時間がかかることが体感できたかと思います。&lt;/p>
-&lt;p>今回も解を出すまでには至りませんが、一つ進んで、配置フラグ（制約テスト高速化）を使いより効率よく解の候補を列挙する方法を説明したいと思います。&lt;/p>
-&lt;p>エイトクイーン問題はクイーンの利き筋上下左右斜め８方向にクイーンを置けないという制約があるのですが、今回は「上下の制約」すなわち、同じ列にはクイーンを置けないという制約を配置フラグを使って追加してみます。&lt;/p>
-&lt;p>例えば、&lt;br>
-1行目で右端にクイーンを置くと以降の行では右端にクイーンを置けなくなります。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 99;
-flex-basis: 238px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png" data-size="322x324">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q2.png"
-width="322"
-height="324"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-上の図だと2行目で1行目ですでにクイーンを置いている右端にクイーンを置こうとしているのでNGです。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 241px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png" data-size="324x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q4.png"
-width="324"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-上の図は2行目は良いのですが3行目で1行目にすでにクイーンを置いている右端にクイーンを置こうとしているのでNGです。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 98;
-flex-basis: 235px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png" data-size="324x330">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q10.png"
-width="324"
-height="330"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png" data-size="322x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png"
-width="322"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>上の２つの図のように同じ列にクイーンを置かないパターンを探索します。&lt;/p>
-&lt;p>配置フラグ（制約テスト高速化）を使って私の端末でエイトクイーン(N=8)を実行すると、0m0.554sかかります。ブルートフォースが3m7.321sかかったので360倍くらい速いですね。&lt;/p>
-&lt;h2 id="グローバル変数について">グローバル変数について&lt;/h2>
-&lt;p>それではプログラムについて説明していきましょう。&lt;/p>
-&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
-&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py&lt;/a>&lt;/p>
-&lt;p>プログラムの作りとしては前回のブルートフォースをベースにしてそこに配置フラグを追加したものとなりますので、ブルートフォースとの差異を説明していきたいと思います。&lt;/p>
-&lt;p>まず、グローバル変数について説明します。&lt;br>
-今回も動作をわかりやすくするため419,420行目のMAXとSIZEを4に変更してみてください。&lt;/p>
-&lt;p>423行目 配列 FA がグローバル変数として新しく追加されています。&lt;br>
-0 for i in range(SIZE) で0に初期化しています。&lt;br>
-どの列にクイーンを置いたかをフラグで管理します。&lt;br>
-FA[0]が右端,FA[1]が右端から2番目,FA[2]が右端から3番目,FA[3]が右端から4番目(左端)になります。&lt;br>
-例えば2列目にクイーンを置くとFA[1]=1にしてフラグを立てます。&lt;/p>
-&lt;h2 id="nqueenメソッドについて">nqueenメソッドについて&lt;/h2>
-&lt;p>nqueenメソッドの作りも基本的に前回のブルートフォースと同じです。&lt;br>
-443行目〜446行目に配置フラグFAの処理が追加されているところが違う部分となります。&lt;/p>
-&lt;p>442行目 ABOARD[row]=i でクイーンを設置します。&lt;br>
-前回のブルートフォースの場合は&lt;br>
-無条件で次の行でnqueen(row+1)で再帰的にnqueenを呼び出していました。 &lt;br>
-今回の配置フラグでは&lt;br>
-443行目 if FA[i] == 0: の条件を満たした場合だけ再帰的にnqueenを呼び出しています。&lt;/p>
-&lt;p>iは今回クイーンを置いた場所を意味します。&lt;/p>
-&lt;p>444行目でクイーンを置いた列の配置フラグをあらかじめ1にしておきます。&lt;/p>
-&lt;p>例えば以下の図の様な場合&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png" data-size="322x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-03-01-ani/q14.png"
-width="322"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-1行目では右端にクイーンを置くので、&lt;br>
-444行目の処理でFA[0]=1となります。&lt;br>
-2行目は右端から2番目にクイーンを置くので、&lt;br>
-FA[1]=1となります。&lt;br>
-3行目は右端にクイーンを置いているのでiは0です。&lt;br>
-443行目の if FA[i]== 0 : の判定で&lt;br>
-FA[0]は1ですので443行目から446行目の処理には入らず次のfor文に移動することになります。&lt;/p>
-&lt;p>この443,444,446行目の処理によってすでに同じ列にクイーンを置いている場合は下の行に行くのをやめるという動きを実現しています。&lt;/p>
-&lt;p>446行目でFA[i]=0 という処理があります。&lt;br>
-この処理は再帰の動きを理解する上で非常に重要な処理になります。&lt;br>
-再帰から戻ってきた時は445行目の下からスタートすることになります。&lt;br>
-再帰から戻ってきた時は変数の状態を再帰に入る直前の状態に戻す必要があります。&lt;br>
-ローカル変数については特別にプログラムしないでも再帰前の状態に戻るのですが、グローバル変数は自分で設定しないと元に戻りません。&lt;br>
-再帰から戻ってきた時はiにクイーンを置かなかったことになるのですから&lt;br>
-FA[i]=0で明示的にフラグを落としてあげています。&lt;/p>
-&lt;p>今回は配置フラグの全体的な流れを説明しました。次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item></channel></rss>
+ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item></channel></rss>
