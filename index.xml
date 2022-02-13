@@ -1,4 +1,305 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 11 Feb 2022 14:31:57 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 13 Feb 2022 16:35:49 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
+&lt;ul>
+&lt;li>テキストを1画面ずつ表示する&lt;/li>
+&lt;li>キー操作のヘルプを表示する&lt;/li>
+&lt;li>長い行を折り返さずに表示する&lt;/li>
+&lt;li>ファイルの末尾まで表示したらすぐに終了する&lt;/li>
+&lt;/ul>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>「less」コマンドは、テキストファイルを1画面ずつ表示するコマンドです。「less ファイル名」で実行する他、「コマンド | less」のように、別のコマンドの実行結果を1画面ずつ表示する場合にも使われます。&lt;/p>
+&lt;p>　［Enter］キーで1行、スペースキーで1画面先に進める他、上下矢印キーによるスクロールも可能です。表示を終了するには［Q］または［q］キーを入力します。&lt;/p>
+&lt;p>　同じ用途のコマンドに「more」があります。lessコマンドはmoreコマンドよりも機能が多く、画面内で検索したり、上にスクロールしたりすることが可能です。&lt;/p>
+&lt;h2 id="lessコマンドの書式">lessコマンドの書式&lt;/h2>
+&lt;p>less [オプション] ファイル名&lt;br>
+コマンド | less [オプション]&lt;/p>
+&lt;h2 id="lessコマンドの主なオプション">lessコマンドの主なオプション&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>短いオプション&lt;/th>
+&lt;th>長いオプション&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>+行数,-行数&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>指定した行から表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>+/文字列&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-p文字列&lt;/td>
+&lt;td>&amp;ndash;pattern=文字列&lt;/td>
+&lt;td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-oファイル&lt;/td>
+&lt;td>&amp;ndash;log-file=ファイル&lt;/td>
+&lt;td>パイプ（｜）などで標準入力から入力した内容を表示する際、指定したファイルにコピーを保存する。既存ファイルを指定した場合は、上書きするか、追加するかを確認するメッセージが表示される&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-Oファイル&lt;/td>
+&lt;td>&amp;ndash;LOG-FILE=ファイル&lt;/td>
+&lt;td>「-o」と同じだが、既存ファイルを指定した場合は、確認せずに上書きする&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-kファイル名&lt;/td>
+&lt;td>&amp;ndash;lesskey-file=ファイル名&lt;/td>
+&lt;td>lesskeyファイル（キー定義ファイル、「lesskey」コマンドで生成）を指定する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-L&lt;/td>
+&lt;td>&amp;ndash;no-lessopen&lt;/td>
+&lt;td>環境変数LESSOPEN（lessコマンド用のオプションを定義した環境変数）を無視する&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="lessコマンド詳細説明">lessコマンド詳細説明&lt;/h2>
+&lt;h3 id="テキストを1画面ずつ表示する">テキストを1画面ずつ表示する&lt;/h3>
+&lt;p>　「less ファイル名」で、指定したファイルを1画面ずつ表示します。次の画面へ進みたい場合はスペースキー、1行ずつ進めたい場合は［Enter］キーを押します。上下の矢印キーや、［y］または［e］キー、［j］または［k］キーで上下にスクロールすることも可能です。［q］キーを押すと終了します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat &amp;lt;filename&amp;gt; | less
+&lt;/code>&lt;/pre>&lt;h3 id="キー操作のヘルプを表示する">キー操作のヘルプを表示する&lt;/h3>
+&lt;p>　lessコマンドで画面を表示中に［h］キーを押すと、キー操作のヘルプが表示されます（画面2）。ヘルプの表示中でもlessコマンドと同様に、上下のスクロールや検索などの操作が可能です。&lt;/p>
+&lt;p>［q］キーを押すとヘルプの表示を終了し、元の画面に戻ります&lt;/p>
+&lt;h3 id="長い行を折り返さずに表示する">長い行を折り返さずに表示する&lt;/h3>
+&lt;p>　lessコマンドでは、画面の横幅より長い行は折り返して表示されます。折り返さずに表示したい場合は、「-S」オプションを使用します。&lt;/p>
+&lt;p>　左右の矢印キーまたは、［ESC］キーに続いて［(］および［)］キーを押すと、左右に半画面分スクロールします。横スクロールの幅は「-#」オプションで指定できます。　&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat filename | less -S
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>［q］キーを押すとヘルプの表示を終了し、元の画面に戻ります。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
+&lt;p>すべてのUNIXエンジニア必携!!
+&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
+&lt;p>エキスパートを目指せ!!
+&lt;p>システム管理やソフトウェア開発など、&lt;br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説&lt;/p>
+&lt;p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、&lt;br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。&lt;br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。&lt;br>
+イマドキのエンジニア必携の一冊。&lt;/p>
+&lt;p>▼目次&lt;br>
+CHAPTER01 シェルってなんだろう&lt;br>
+CHAPTER02 シェルスクリプトとは何か&lt;br>
+CHAPTER03 シェルスクリプトの基本&lt;br>
+CHAPTER04 変数&lt;br>
+CHAPTER05 クォーティング&lt;br>
+CHAPTER06 制御構造&lt;br>
+CHAPTER07 リダイレクトとパイプ&lt;br>
+CHAPTER08 関数&lt;br>
+CHAPTER09 組み込みコマンド&lt;br>
+CHAPTER10 正規表現と文字列&lt;br>
+CHAPTER11 シェルスクリプトの実行方法&lt;br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう&lt;br>
+CHAPTER13 シェルスクリプトの実用例&lt;br>
+CHAPTER14 テストとデバッグ&lt;br>
+CHAPTER15 読みやすいシェルスクリプト&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>（5）【more】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash.jpg" alt="Featured image of post （5）【more】シェルスクリプトコマンド活用紹介" />&lt;h2 id="moreコマンド">moreコマンド&lt;/h2>
+&lt;ul>
+&lt;li>長いメッセージやテキストファイルを1画面ずつ表示する&lt;/li>
+&lt;li>テキストを1画面ずつ止めながら表示する&lt;/li>
+&lt;li>実行結果を止めながら表示したいときにはパイプを使う&lt;/li>
+&lt;li>確認したい箇所がある場合は「+/オプション」でスキップ&lt;/li>
+&lt;li>行番号付きで表示したいときはcatコマンドと組み合わせる&lt;/li>
+&lt;li>moreコマンドで使える主なサブコマンド&lt;/li>
+&lt;/ul>
+&lt;h2 id="moreコマンド概要">moreコマンド概要&lt;/h2>
+&lt;p>moreコマンドは、テキストファイルを1画面ずつ表示するページャコマンドです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ more &amp;lt;ファイル名&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>で実行する他、&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat &amp;lt;ファイル名&amp;gt; | more
+&lt;/code>&lt;/pre>&lt;p>のように他のコマンドの実行結果を1画面ずつ表示する際によく使われます。&lt;/p>
+&lt;p>　また、moreコマンドにサブコマンドがあり、［Enter］キーで1行、［スペース］キーで1画面先に進み、ファイルの末尾まで表示されると終了します。ファイルを表示している途中でも［Q］キーまたは［q］キーで終了できます。&lt;/p>
+&lt;h2 id="moreコマンドの書式">moreコマンドの書式&lt;/h2>
+&lt;p>more [オプション] filename&lt;br>
+cat filename | more [オプション]&lt;/p>
+&lt;h2 id="moreコマンドの主なオプション">moreコマンドの主なオプション&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>オプション&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>+数値&lt;/td>
+&lt;td>数値で指定した行から表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>+/文字列&lt;/td>
+&lt;td>指定した文字列を検索して、見つけた行の2行上から表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-s&lt;/td>
+&lt;td>連続した空行を1行にする&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-l&lt;/td>
+&lt;td>改ページを無視する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-u&lt;/td>
+&lt;td>下線の処理を行わない&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-数値&lt;/td>
+&lt;td>画面の行数を指定する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-f&lt;/td>
+&lt;td>画面での行数ではなく、データの行数を表示する&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-d&lt;/td>
+&lt;td>無効なキーが入力された場合には、ビープ音の代わりに簡単なヘルプを表示する&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="moreコマンド詳細説明">moreコマンド詳細説明&lt;/h2>
+&lt;p>「cat」コマンドでテキストファイルの内容を表示したら、思ったよりも長くコマンドを実行した結果がどんどん上に流れてしまって、テキストファイルのの最初の方が読めない！ そんなときに便利なのが「more」コマンドです。&lt;/p>
+&lt;p>moreコマンドは、「more ファイル名」で指定したファイルを1画面ずつ止めながら表示します。次の画面へ進みたいときは［スペース］キーを、1行ずつ画面を進めたいときは［Enter］キーを押します。&lt;/p>
+&lt;p>ファイルをページャとして読みたい場合&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat &amp;lt;filename&amp;gt; | more
+&lt;/code>&lt;/pre>&lt;p>dmsgなどのシステムファイルをページャとして読みたい&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ dmsg | more
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>検索を行う場合はページャ画面で「/」記号に続けて検索文字列を入力し、［Enter］キーを押すとその位置までスキップします。nで直前の検索を繰り返します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>ファイルを表示している途中でも［Q］キーまたは［q］キーで終了できます。&lt;/dd>
+&lt;/dl>
+&lt;/div>
+&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
+&lt;p>すべてのUNIXエンジニア必携!!
+&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
+&lt;p>エキスパートを目指せ!!
+&lt;p>システム管理やソフトウェア開発など、&lt;br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説&lt;/p>
+&lt;p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、&lt;br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。&lt;br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。&lt;br>
+イマドキのエンジニア必携の一冊。&lt;/p>
+&lt;p>▼目次&lt;br>
+CHAPTER01 シェルってなんだろう&lt;br>
+CHAPTER02 シェルスクリプトとは何か&lt;br>
+CHAPTER03 シェルスクリプトの基本&lt;br>
+CHAPTER04 変数&lt;br>
+CHAPTER05 クォーティング&lt;br>
+CHAPTER06 制御構造&lt;br>
+CHAPTER07 リダイレクトとパイプ&lt;br>
+CHAPTER08 関数&lt;br>
+CHAPTER09 組み込みコマンド&lt;br>
+CHAPTER10 正規表現と文字列&lt;br>
+CHAPTER11 シェルスクリプトの実行方法&lt;br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう&lt;br>
+CHAPTER13 シェルスクリプトの実用例&lt;br>
+CHAPTER14 テストとデバッグ&lt;br>
+CHAPTER15 読みやすいシェルスクリプト&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
 &lt;p>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。&lt;/p>
 &lt;ul>
 &lt;li>tailコマンドでファイルの末尾部分だけを表示する&lt;/li>
@@ -1172,623 +1473,4 @@ HugoとGitの連携を行った際に、更新日など正しく反映されな�
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>Googleにインデックスされないときの対応方法は？</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</link><pubDate>Fri, 04 Feb 2022 12:03:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch.jpg" alt="Featured image of post Googleにインデックスされないときの対応方法は？" />&lt;p>近年、ブログやWEBサイトを作って公開している人が増えてきました。&lt;br>
-そうした中で、Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事もGoogleにインデックスされないと検索結果に表示されません。&lt;/p>
-&lt;p>Googleにインデックスされないとき、どうしたら良いのでしょうか？&lt;/p>
-&lt;h2 id="ブログを公開">ブログを公開&lt;/h2>
-&lt;p>まずはブログを公開する際に、GoogleアナリティクスやSearch Consoleの設定などを行いましょう。&lt;br>
-これによって、どんな人が来ているのかなどを閲覧することができたり、実際にサーバを閲覧することなくGoogleクローラーの状況やインデックスの状況、SEO対策などの機能などが盛りだくさんです。&lt;/p>
-&lt;p>そして、Googleだけでなく Bingの方も登録しておくことをオススメします。Bingのクローラーはかなり早く、以前のGoogleのようにインデックスをしてくれます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 164;
-flex-basis: 395px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png" data-size="980x594">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png"
-width="980"
-height="594"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;h2 id="サイトマップをつくる">サイトマップをつくる&lt;/h2>
-&lt;p>サイトマップと呼ばれるXMLを作成しましょう。&lt;br>
-小規模なサイトやページ同士がしっかりリンクしているサイトであれば不要かもしれませんが、サイトマップは作っているに限ります。&lt;br>
-クローラーはそのサイトマップを見て、サイトの構造を把握していきます。&lt;br>
-もちろん、ページ構成がしっかりしたサイトであればクローラーは内部リンクのみでサイトマップを構築することが可能です。&lt;br>
-クローラーの手助けとなるために、内部リンクをしっかり作り、サイトマップも作っておけばクローラビリティが格段にアップするでしょう。&lt;/p>
-&lt;h2 id="サイト公開から半月">サイト公開から半月&lt;/h2>
-&lt;p>サイトを公開してから半月、クローラーが１回来て、サイトマップをのデータからクローラーを開始したようです。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 203;
-flex-basis: 488px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png" data-size="980x481">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png"
-width="980"
-height="481"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>Googleで検索しても表示されるようになりました。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 115;
-flex-basis: 276px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png" data-size="980x850">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png"
-width="980"
-height="850"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;h2 id="サイト公開から１ヶ月">サイト公開から１ヶ月&lt;/h2>
-&lt;p>クローラーはほぼ仕事をしなくなりました。&lt;br>
-来ていないということはなく、来ても数ページクロールして去っていきます。&lt;br>
-新しいページをクロールすることはありませんでした。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 114;
-flex-basis: 274px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png" data-size="980x857">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png"
-width="980"
-height="857"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>以前の作成したサイトと比較してもクローラーの活動頻度が激減していることは確かです。&lt;br>
-数年前に作成して更新していないサイトのサイトマップのクロール頻度は１週間程度でした。新しく作成したサイトでは1ヶ月過ぎてもサイトマップへのクローラーがきませでした。&lt;/p>
-&lt;h2 id="対応策を試す">対応策を試す&lt;/h2>
-&lt;h3 id="robotstxtを編集する">robots.txtを編集する&lt;/h3>
-&lt;p>クロールの結果を見ると画像やcss、jsなどにアクセスしていたため、htmlへのクロールを促すために、これらをrobots.txtにて許可しない設定にしてみました。&lt;br>
-理由としては、すべてクロールするようにしてますが、cssやjsなどのファイルもクロールされており、そこにリソースが使われてHTMLまでクロールされていないのではないかと考えたためです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>User-agent: Googlebot-Image
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.gif$
-User-agent: *
-Disallow: /*.jpg$
-Disallow: /*.png$
-Disallow: /*.gif$
-Disallow: /assets/
-Disallow: /404.html
-Disallow: /js/
-Disallow: /ts/
-Disallow: /images/
-Disallow: /scss/
-Disallow: /css/
-Allow: /
-&lt;/code>&lt;/pre>&lt;p>後でわかったのですが、これは完全にNGです。&lt;br>
-&lt;a class="link" href="https://developers.google.com/search/blog/2014/10/updating-our-technical-webmaster" target="_blank" rel="noopener"
->Googleの記事&lt;/a>を呼んでいると、従来のテキストベースから実際のブラウザのように動作し、レンダリング速度なども考慮しているとのことでした。結果、現在は404のページ以外はフルオープンにしております。&lt;/p>
-&lt;pre tabindex="0">&lt;code>User-agent: *
-Disallow: /404.html
-Allow: /
-&lt;/code>&lt;/pre>&lt;h3 id="構造体データを追加">構造体データを追加&lt;/h3>
-&lt;p>SEO効果があるということで、構造体データを追加してみました。構造化データの仕組みについては&lt;a class="link" href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=ja" target="_blank" rel="noopener"
->こちら&lt;/a>を確認してください。&lt;br>
-効果があるかはまだわかりませんが、Search Consoleを見てみると、数ページは認識しているようです。&lt;br>
-SEO効果があるかと言われると、重要ではないといった話もあるので余力のある方は実装といったことになるかと思います。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;application/ld+json&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">[{&lt;/span>
-&lt;span class="s2">&amp;#34;@context&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;https://schema.org&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;BlogPosting&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;headline&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;Googleにインデックスされないときの対応方法は？&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;mainEntityOfPage&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="p">{&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;WebPage&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;@id&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;[$URL]&amp;#34;&lt;/span>
-&lt;span class="p">},&lt;/span>
-&lt;span class="s2">&amp;#34;datePublished&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;dateModified&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;publisher&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;Organization&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;logo&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;ImageObject&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;url&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;[$URL]/images/logo.png&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
-&lt;span class="p">},&lt;/span>
-&lt;span class="s2">&amp;#34;author&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;Person&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;nlp&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;url&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;[$URL]/authors/wyoshi/&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">},{&lt;/span>
-&lt;span class="s2">&amp;#34;@context&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;https://schema.org&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;BreadcrumbList&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;itemListElement&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[{&lt;/span>
-&lt;span class="s2">&amp;#34;@type&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;ListItem&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;position&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;span class="s2">&amp;#34;item&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="s2">&amp;#34;[$URL]&amp;#34;&lt;/span>
-&lt;span class="p">}]&lt;/span>
-&lt;span class="p">}]&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 154;
-flex-basis: 369px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png" data-size="980x636">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png"
-width="980"
-height="636"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;h3 id="サイトマップを消す">サイトマップを消す&lt;/h3>
-&lt;p>サイトマップ自体へのアクセスが頻繁に行われていないので、サイトマップを消してみました。&lt;br>
-クロールされないかと思いましたが、Bingで新しい記事をクロールして取得されてました。&lt;br>
-しかし、記事のタイトルを変えてもなかなか変わらないのでやはりサイトマップは必要かもしれません。&lt;/p>
-&lt;h3 id="タイトルを変える">タイトルを変える&lt;/h3>
-&lt;p>タイトルを変えて、ページに更新をかけてみましたが、クロールされませんでした。&lt;br>
-Bingも同様にタイトルを変えただけではクロールされないようでした。&lt;/p>
-&lt;h3 id="サイトマップのhtmlを作成する">サイトマップのHTMLを作成する&lt;/h3>
-&lt;p>クローラーがクロールしやすいように&lt;a class="link" href="https://suzukiiichiro.github.io/sitemap/" >サイトマップのHTML&lt;/a>を作成しました。&lt;br>
-これによって、クローラーが内部リンクを通じて各ページにアクセスできるかなと思いますが、まだ効果の程はわかりません。&lt;/p>
-&lt;h3 id="ランキングを作成する">ランキングを作成する&lt;/h3>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/ranking/" >ランキングページ&lt;/a>の作成も上記の「サイトマップのHTMLを作成する」のようにクローラビリティを上げるためになります。&lt;br>
-あとは、自分たちでもどんな記事を読まれているのかといった指標をすぐ閲覧できるからです。&lt;/p>
-&lt;h3 id="seo対策">SEO対策&lt;/h3>
-&lt;h4 id="画像のサイズの最適化">画像のサイズの最適化&lt;/h4>
-&lt;p>画像のサイズが最適化できていなかったので、画像のサイズの最適化を行いました。&lt;br>
-これによってSEOのスコアを上げることができました。サイトの速度もインデックスされるためには重要な指標になってくるので、きれいな画像を使用したいときは各デバイスに最適化された画像を用意して、サイトの速度を落とさないようにしましょう。&lt;/p>
-&lt;h4 id="asideのdiv化">asideのdiv化&lt;/h4>
-&lt;p>ページに直接関係ない部分をasideタグで書いていたのですが、内部リンクをたどってないのではないかと考えて、asideをdivに変更しました。&lt;br>
-これによって、効果があるかはわかりませんが……。&lt;/p>
-&lt;h4 id="内部リンクを増やす">内部リンクを増やす&lt;/h4>
-&lt;p>カテゴリーだけでなく、著者のページなどを作成して内部リンクするようにしました。&lt;br>
-これは若干の効果があって、サイトマップ&lt;/p>
-&lt;h4 id="h1タグの正規化">h1タグの正規化&lt;/h4>
-&lt;p>以前はロゴに当たる部分が h1 となっていたので、各ページでタイトルになる部分に h1 が当たるように変更しました。&lt;br>
-ロゴに h1 を当てる人が多いかと思いますが、各ページのタイトル部分に当てたほうが、ページのタイトルとh1との整合性が取れます。&lt;/p>
-&lt;p>また、h1は1ページに1つとされていますが、あくまで原則で、何個出てきても大丈夫です。ただし、たくさん使うのはNGになるので注意してください。&lt;/p>
-&lt;h4 id="パンくずを追加">パンくずを追加&lt;/h4>
-&lt;p>孤立ページを出さないように、そして、ページごとの回遊率を上げるためにパンくずを設置しました。&lt;br>
-パンくずはクローラーにとっても内部リンクをたどっていけるようになるのではないかと考えております。&lt;/p>
-&lt;h2 id="url検査を行う">URL検査を行う&lt;/h2>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 165;
-flex-basis: 397px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img06.jpg" data-size="980x591">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img06.jpg"
-width="980"
-height="591"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;br>
-クローラーが活動をしていないので、サイトマップへ自動的にアクセスして追加してくれるという望みを諦めて、「URL検査」を使って、手動でクローラーを呼び寄せます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 104;
-flex-basis: 251px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png" data-size="980x936">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png"
-width="980"
-height="936"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>これによって、以前は除外が22件あったものが2月1日では4件まで減りました。&lt;/p>
-&lt;p>そして、新しく作成したページも2件ほどGoogle検索に出るようになり、すでにインデックスされていたページは変更が検知され、タイトルの表記が変わりました。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 154;
-flex-basis: 370px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png" data-size="980x635">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png"
-width="980"
-height="635"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>&lt;strong>URL検査は非常に効果的&lt;/strong>です。&lt;/p>
-&lt;p>しかし、記事ページへのアクセスはまだないので、これは再度原因を探る必要があります。&lt;br>
-変更されたのは以前サイトマップに登録されていたページなので、クローラーがサイトマップでインデックスしたものを優先している可能性がありそうです。&lt;/p>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>Googleにインデックスされない問題はかなり多いようです。&lt;br>
-Bingでの流入やSNSでの流入はもちろん大事ですが、Googleで検索している人が多い以上対応する必要があります。&lt;br>
-まずは記事の品質を上げて、SEO対策し、そして「URL検査」を行う。そうして、Googleクローラーが来てインデックスされるのを待つほかいまのところありません。&lt;/p>
-&lt;p>また何か動きがあれば掲載してきたいと思います。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e6%b2%88%e9%bb%99%e3%81%aeWeb%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0-%e2%94%80Web%e3%83%9e%e3%83%bc%e3%82%b1%e3%83%83%e3%82%bf%e3%83%bc-%e3%83%9c%e3%83%bc%e3%83%b3%e3%81%ae%e9%80%86%e8%a5%b2%e2%94%80-%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e3%83%bb%e3%82%a8%e3%83%87%e3%82%a3%e3%82%b7%e3%83%a7%e3%83%b3-%e6%9d%be%e5%b0%be-ebook/dp/B08J7GGY6N/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://m.media-amazon.com/images/I/51VoHDbz3qL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 沈黙のWebマーケティング ─Webマーケッター ボーンの逆襲─ アップデート・エディション &lt;/h2>
-&lt;p> この商品は固定レイアウトで作成されており、タブレットなど大きいディスプレイを備えた端末で読むことに適しています。また、文字列のハイライトや検索、辞書の参照、引用などの機能が使用できません。 〈電子書籍版に関する注意事項〉 本書は固定レイアウト型の電子書籍です。リフロー型と異なりビューア機能が制限されるほか、端末によって見え方が異なりますので、ご購入前にお使いの端末にて「無料サンプル」をお試しください。 【Web集客で悩むすべての人へ！ 成果を上げる「極意」を伝える。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e3%81%84%e3%81%a1%e3%81%b0%e3%82%93%e3%82%84%e3%81%95%e3%81%97%e3%81%84%e6%96%b0%e3%81%97%e3%81%84SEO%e3%81%ae%e6%95%99%e6%9c%ac-%e7%ac%ac2%e7%89%88-%e4%ba%ba%e6%b0%97%e8%ac%9b%e5%b8%ab%e3%81%8c%e6%95%99%e3%81%88%e3%82%8b%e6%a4%9c%e7%b4%a2%e3%81%ab%e5%bc%b7%e3%81%84%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e4%bd%9c%e3%82%8a%e6%96%b9-MFI%e5%af%be%e5%bf%9c-%e3%80%8c%e3%81%84%e3%81%a1%e3%81%b0%e3%82%93%e3%82%84%e3%81%95%e3%81%97%e3%81%84%e6%95%99%e6%9c%ac%e3%80%8d%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba/dp/4295004081/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/519qHZi-znL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> いちばんやさしい新しいSEOの教本 第2版 人気講師が教える検索に強いサイトの作り方[MFI対応] (「いちばんやさしい教本」シリーズ) &lt;/h2>
-&lt;p> SEO入門の定番書を最新環境に合わせてリニューアル! 「今まで何冊もSEOの本を読みましたが、正統派のSEOの思想が理解出来る一番良質な内容でした」 「セミナー形式で書かれているので、自社サイトに当てはめて作業することができました」 「こんなに洗いざらいノウハウを体系だてて載せていいのか! ?と心配するくらい満足のいく内容でした。」 「何か困った時にバイブル的に活用できる1冊です。」 (以上、前書のAmazonカスタマーレビューより抜粋) SEO(検索エンジン最適化)とは、 「検索結果の上位にサイトを表示すること」ではありません。 「訪問者の目的に応えるサイトを作ること」です。 そのために、対策すべきキーワードを選定し、 サイトの構造を整えることが大切なのです。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>第4回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/</link><pubDate>Fri, 04 Feb 2022 09:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess.jpg" alt="Featured image of post 第4回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）" />&lt;h2 id="配置フラグ制約テスト高速化">配置フラグ（制約テスト高速化）&lt;/h2>
-&lt;p>今回も引き続き配置フラグ（制約テスト高速化）を説明していきたいと思います。 &lt;br>
-前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの再帰と配置フラグの動きについて図で示しながら説明していきたいとおもいます。&lt;/p>
-&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
-&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py02_nqueen.py&lt;/a>&lt;/p>
-&lt;p>プログラムはエイトクイーン(N=8)ですが説明をしやすくするため4x4のN=4で説明します。実際に動かしてプログラムの動作を確認したい方は419,420行目のMAXとSIZEを4に変更してみてください。&lt;/p>
-&lt;h2 id="おさらい">おさらい&lt;/h2>
-&lt;p>ブルートフォースからのおさらいとして次の点を押さえておきましょう。&lt;br>
-・442行目のABOARD[row]=i はクイーンを配置する動きです。&lt;br>
-・445行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。&lt;br>
-・438,439は最終行(4行目)までクイーンを置ききった後にCOUNT と各行にクイーンを置いた場所を出力します。&lt;br>
-再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭435行目に移動します。&lt;br>
-引数で渡されたrow以外のローカル変数はすべて初期化された状態になります。&lt;/p>
-&lt;p>・再帰から抜ける部分は2箇所あります。&lt;br>
-一つ目は、438,439行目で最終行(4行目)までクイーンを置ききった後にprintoutする時&lt;/p>
-&lt;p>二つ目は、441行目のfor文がSIZE数の数(N=4だと3)だけ回りきったあとです。&lt;/p>
-&lt;p>再帰から抜けたときは再帰を呼び出した445行目のすぐ後ろからスタートします。&lt;br>
-ローカル変数の状態は再帰を呼び出す直前の状態になります。&lt;br>
-1行前に戻るような動きとなります。&lt;/p>
-&lt;p>ちなみに441行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです。&lt;br>
-左端までクイーンを置ききったらfor文を抜けるイメージです。&lt;/p>
-&lt;h2 id="nqueen-メソッドの動き">nqueen メソッドの動き&lt;/h2>
-&lt;p>448行目のnqueen(0)からスタートします。&lt;br>
-メソッドの先頭435行目に移動します。&lt;br>
-row=0なので440行目の else: に移動します。&lt;br>
-441行目のfor文に入りi=0からスタートします。&lt;br>
-442行目のABOARD[0]=0で1行目の右端にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 98;
-flex-basis: 235px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q1.png" data-size="324x330">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q1.png"
-width="324"
-height="330"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-1個目のクイーンなので当然配置フラグはどれもOの状態ですから443行目のif FA[0] == 0 の条件を満たしてif文の中に入ります。&lt;br>
-右端にクイーンを置いたのですから444行目でFA[0]=1 で右端の位置にフラグをたてます。&lt;br>
-445行目でnqueenを引数1を渡して呼び出して2行目に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=1の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=1なので440行目の else: に移動します。&lt;br>
-441行目のfor文に入りi=0からスタートします。&lt;br>
-442行目のABOARD[1]=0で2行目の右端にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 99;
-flex-basis: 238px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q2.png" data-size="322x324">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q2.png"
-width="322"
-height="324"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-1行目で既に右端にクイーンを設置していますのでFA[0]は1になりますので443行目のif FA[i]==0の条件を満たしません。&lt;br>
-if文に入らずに次のfor文に進みます。&lt;/p>
-&lt;p>この部分が今回追加された配置フラグの制御になります。&lt;br>
-この処理のおかげで上下の利き筋に引っかかる場合は次の行に移動するのをやめ探索を効率化することができます。&lt;/p>
-&lt;p>441行目で次のfor文に進みi=1となります。&lt;/p>
-&lt;p>442行目のABOARD[1]=1で2行目の右から2列目にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 241px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q3.png" data-size="324x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q3.png"
-width="324"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>1行目で右端にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==0
-FA[2]==0
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>FA[1]は0なのでif FA[i]==0の条件を満たすのでif 文の中に入ります。&lt;/p>
-&lt;p>右端から2列目にクイーンを置いたのですから444行目でFA[1]=1 で右端から2番目の位置にフラグをたてます。&lt;br>
-445行目でnqueenを引数2を渡して呼び出して3行目に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=2の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=2なので440行目の else: に移動します。&lt;br>
-441行目のfor文に入りi=0からスタートします。&lt;br>
-442行目のABOARD[2]=0で3行目の右端にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 241px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q4.png" data-size="324x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q4.png"
-width="324"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>1行目で右端に、2行目で右から2列目にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==0
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>i=0 FA[0]=1なのでif FA[i]==0の条件を満たさずに次のfor文に進みます。&lt;/p>
-&lt;p>441行目で次のfor文に進みi=1となります。&lt;br>
-442行目のABOARD[2]=1で3行目の右から2列目にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 101;
-flex-basis: 244px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q5.png" data-size="330x324">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q5.png"
-width="330"
-height="324"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>1行目で右端に、2行目で右から2列目にクイーンを置いているのでFAの状態は以下のとおりです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==0
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>i=1 FA[1]=1なのでif FA[i]==0の条件を満たさずに次のfor文に進みます。&lt;/p>
-&lt;p>441行目で次のfor文に進みi=2となります。&lt;br>
-442行目のABOARD[2]=2で3行目の右から3列目にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 241px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q6.png" data-size="328x326">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q6.png"
-width="328"
-height="326"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==0
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>i=2 FA[2]=0なのでif FA[i]==0の条件を満たすのでif文の中に入ります。&lt;br>
-右端から3列目にクイーンを置いたのですから444行目でFA[2]=1 で右から3列目の位置にフラグをたてます。&lt;br>
-445行目でnqueenを引数3を渡して呼び出して4行目に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=3の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=3なので440行目の else: に移動します。&lt;br>
-441行目のfor文に入りi=0からスタートします。&lt;br>
-for文の中で右端から左端へ順番にクイーンを置いていくことになりますが。&lt;br>
-すでに、1行目で右端、2行目で右から2列目、3行目で右から3列目にクイーンを設置しています。&lt;br>
-FAの状態を見てみると以下の通りです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==1
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>そのためiが0,1,2の時は443行目の配置フラグの制約に引っかかりif文の中には入らず次のfor文に進みます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 102;
-flex-basis: 246px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q7.png" data-size="324x316">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q7.png"
-width="324"
-height="316"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 101;
-flex-basis: 242px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q8.png" data-size="328x324">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q8.png"
-width="328"
-height="324"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 104;
-flex-basis: 250px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q9.png" data-size="332x318">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q9.png"
-width="332"
-height="318"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>i=3では&lt;br>
-ABOARD[3]=3で4行目の左端にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 98;
-flex-basis: 235px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q10.png" data-size="324x330">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q10.png"
-width="324"
-height="330"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-やっとフラグの制約に引っかからず443行のif文の中にはいれます。&lt;/p>
-&lt;p>FA[3]=1&lt;br>
-444行目でFA[3]=1 で右から4番目の位置にフラグをたてます。&lt;br>
-445行目でnqueenを引数4を渡して呼び出して先に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=4の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
-439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
-&lt;p>そして、再帰を抜け4行目の処理（row=3）に戻ります。&lt;br>
-戻る場所は445行目のすぐ下です。&lt;br>
-ローカル変数は再帰を呼び出す直前の状態にもどっています。&lt;br>
-row=3 i=3です。&lt;br>
-446行目でFA[3]=0 でフラグを落としています。&lt;br>
-グローバル変数は再帰からもどっても再帰を呼び出す直前の状態に自動的にはもどらないので明示的にフラグを落とす必要があります。&lt;/p>
-&lt;p>446行目でフラグを落としたあと次のfor文に進むのですが、すでにi=3なのでfor文を抜けます。&lt;br>
-for文を抜けると再帰を抜け3行目の処理(row=2)に戻ります。&lt;br>
-ここではrow=4,row=3と立て続けに再帰をぬけrow=2に戻る形となります。&lt;/p>
-&lt;p>戻る場所は445行目のすぐ下です。&lt;br>
-ローカル変数は再帰を呼び出す直前の状態にもどっています。&lt;br>
-3行目はforは0,1,2まで進んでいました。&lt;br>
-row=2 i=2です。&lt;br>
-446行目でFA[2]=0 でフラグを落としています。&lt;br>
-そして次のfor文に進みます。&lt;br>
-i=3で&lt;br>
-ABOARD[2]=3で3行目の左端にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 97;
-flex-basis: 234px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q11.png" data-size="324x332">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q11.png"
-width="324"
-height="332"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-FAの状態を見てみると以下の通りです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==0
-FA[3]==0
-&lt;/code>&lt;/pre>&lt;p>FA[3]=0なのでif FA[i]==0:の条件を満たしてif 文の中に入ります。&lt;br>
-右から4列目にクイーンを置いているので444行目でFA[3]=1 でフラグをたてます。&lt;br>
-445行目でnqueenを引数3を渡して呼び出して先に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=3の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=3なので440行目の else: に移動します。&lt;br>
-441行目のfor文に入りi=0からスタートします。&lt;br>
-for文の中で右端から左端へ順番にクイーンを置いていくことになりますが。&lt;br>
-すでに、1行目で右端、2行目で右から2番目、3行目で右から4番目にクイーンを設置しています。&lt;br>
-FAの状態を見てみると以下の通りです。&lt;/p>
-&lt;pre tabindex="0">&lt;code>FA[0]==1
-FA[1]==1
-FA[2]==0
-FA[3]==1
-&lt;/code>&lt;/pre>&lt;p>そのためiが0,1の時は443行目の配置フラグの制約に引っかかりif文の中には入らず次のfor文に進みます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q12.png" data-size="328x328">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q12.png"
-width="328"
-height="328"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q13.png" data-size="326x326">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q13.png"
-width="326"
-height="326"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>i=2では&lt;br>
-ABOARD[3]=2で4行目の右から3列目にクイーンを設置します。&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q14.png" data-size="322x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/q14.png"
-width="322"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-やっとフラグの制約に引っかからず443行のif文の中にはいれます。&lt;/p>
-&lt;p>FA[2]=1&lt;br>
-444行目でFA[2]=1 で右から3列目の位置にフラグをたてます。&lt;br>
-445行目でnqueenを引数4を渡して呼び出して先に進みます。&lt;/p>
-&lt;p>再帰呼び出しなのでrow=4の状態でメソッドの先頭435行目に移動します。&lt;br>
-row=4なので438行目の if row == SIZE:の条件を満たします。&lt;br>
-439でprintout()メソッドを呼び出してCOUNT と各行のクイーンの設置場所を出力します。&lt;/p>
-&lt;p>細く動作をみていくとこんな感じになります。&lt;br>
-ブルートフォースの時は無条件に再帰的にnqueenメソッドを呼び出し次の行にいっていましたが制約フラグを使うことによって無駄に深い階層にもぐっていくことを大分防止できていることがわかると思います。&lt;/p></description></item></channel></rss>
+&lt;/aside></description></item></channel></rss>
