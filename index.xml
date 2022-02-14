@@ -1,4 +1,161 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 13 Feb 2022 16:35:49 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 14 Feb 2022 11:39:03 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（6）【kill】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</link><pubDate>Mon, 14 Feb 2022 11:39:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg" alt="Featured image of post （6）【kill】シェルスクリプトコマンド活用紹介" />&lt;h2 id="killコマンド">killコマンド&lt;/h2>
+&lt;ul>
+&lt;li>killコマンドでプロセスIDを指定してプロセスを終了させる&lt;/li>
+&lt;li>killallコマンドで名前を指定してプロセスを終了させる&lt;/li>
+&lt;/ul>
+&lt;h2 id="killコマンド概要">killコマンド概要&lt;/h2>
+&lt;p>プロセスを強制終了させます。&lt;br>
+killは実行中のプロセスを終了させる場合に使うコマンドです。&lt;/p>
+&lt;p>killコマンドでプロセスを終了させるには、&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ kill ＜プロセスID＞
+&lt;/code>&lt;/pre>&lt;p>で指定します。&lt;br>
+例えば、100番のプロセスならば&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ kill 100
+&lt;/code>&lt;/pre>&lt;p>と指定します。&lt;br>
+プロセスIDは「ps」コマンドで調べることができます。&lt;/p>
+&lt;h2 id="killコマンドの書式">killコマンドの書式&lt;/h2>
+&lt;p>kill [オプション] プロセスID&lt;/p>
+&lt;h2 id="killコマンドの主なオプション">killコマンドの主なオプション&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>オプション&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-s シグナル&lt;/td>
+&lt;td>プロセスに送るシグナル名または番号。-シグナル名、-番号でも指定可能&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-l&lt;/td>
+&lt;td>シグナル名のリストを表示する&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="killコマンド詳細説明">killコマンド詳細説明&lt;/h2>
+&lt;h3 id="プロセスｉｄでプロセスを終了させる">プロセスＩＤでプロセスを終了させる&lt;/h3>
+&lt;p>「kill プロセスID」で、指定したプロセスを終了させることができます。プロセスIDは「ps」コマンドで確認できます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ kill ＜プロセスＩＤ＞
+&lt;/code>&lt;/pre>&lt;h3 id="killallコマンドで名前を指定してプロセスを終了させる">killallコマンドで名前を指定してプロセスを終了させる&lt;/h3>
+&lt;p>「killall 名前」で、“名前”に指定したプロセスを終了させることができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ killall ＜プロセス名＞
+&lt;/code>&lt;/pre>&lt;h3 id="さまざまなプロセスの調べ方と終了方法">さまざまなプロセスの調べ方と終了方法&lt;/h3>
+&lt;p>ps aux を使う方法&lt;/p>
+&lt;pre tabindex="0">&lt;code>bash-5.1$ ps axu | grep hugo | grep -v grep
+suzukiiichiro 17498 0.0 3.4 5607088 567104 s003 S+ 水11AM 2:58.60 hugo -D server
+suzukiiichiro 20710 0.0 1.7 5328588 286744 s005 S+ 11:38AM 0:13.50 hugo server
+bash-5.1$
+&lt;/code>&lt;/pre>&lt;p>最後の grep -v grep は、grep コマンドでプロセス名を検索したプロセスを除くという意味になります。&lt;/p>
+&lt;p>さらにawkコマンドでプロセスＩＤを抽出します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>bash-5.1$ ps axu | grep hugo | grep -v grep | awk '{ print $2; }'
+17498
+20710
+bash-5.1$
+&lt;/code>&lt;/pre>&lt;p>pgrep を使う方法&lt;br>
+pgrep は、指定したプロセスのプロセスＩＤを抽出する方法です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>bash-5.1$ pgrep hugo
+17498
+20710
+bash-5.1$
+&lt;/code>&lt;/pre>&lt;p>プロセスＩＤが解ったところでプロセスを終了します。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">表記&lt;/th>
+&lt;th style="text-align:center">数値&lt;/th>
+&lt;th>意味&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">KILL&lt;/td>
+&lt;td style="text-align:center">9&lt;/td>
+&lt;td>プロセスの強制終了命令&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;pre tabindex="0">&lt;code>$ kill -9 17498
+$ kill -9 20710
+&lt;/code>&lt;/pre>&lt;p>面倒ですね。プロセスがたくさんある場合はとても煩雑です。&lt;br>
+xargsコマンドを使うと一片にプロセスを終了させることができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>bash-5.1$ ps axu | grep hugo | grep -v grep | awk '{ print $2; }' | xargs kill -9
+&lt;/code>&lt;/pre>&lt;p>終了したいプロセス名が解っている場合は以下のコマンドで一発で全ての同名プロセスを終了させることができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ killall hugo
+&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
+&lt;p>すべてのUNIXエンジニア必携!!
+&lt;p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。&lt;br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
+&lt;p>エキスパートを目指せ!!
+&lt;p>システム管理やソフトウェア開発など、&lt;br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説&lt;/p>
+&lt;p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、&lt;br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。&lt;br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。&lt;br>
+イマドキのエンジニア必携の一冊。&lt;/p>
+&lt;p>▼目次&lt;br>
+CHAPTER01 シェルってなんだろう&lt;br>
+CHAPTER02 シェルスクリプトとは何か&lt;br>
+CHAPTER03 シェルスクリプトの基本&lt;br>
+CHAPTER04 変数&lt;br>
+CHAPTER05 クォーティング&lt;br>
+CHAPTER06 制御構造&lt;br>
+CHAPTER07 リダイレクトとパイプ&lt;br>
+CHAPTER08 関数&lt;br>
+CHAPTER09 組み込みコマンド&lt;br>
+CHAPTER10 正規表現と文字列&lt;br>
+CHAPTER11 シェルスクリプトの実行方法&lt;br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう&lt;br>
+CHAPTER13 シェルスクリプトの実用例&lt;br>
+CHAPTER14 テストとデバッグ&lt;br>
+CHAPTER15 読みやすいシェルスクリプト&lt;/p>
+&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;!-- EOF --></description></item><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
 &lt;ul>
 &lt;li>テキストを1画面ずつ表示する&lt;/li>
 &lt;li>キー操作のヘルプを表示する&lt;/li>
@@ -1389,117 +1546,4 @@ alt="図">
 3行目3列目 [2,0] 2+0=2
 &lt;/code>&lt;/pre>&lt;p>FC[3] にフラグをたてれば右対角線の利き筋をチェックすることができます。&lt;/p>
 &lt;p>長くなりましたので今回はグローバル変数の説明だけで終わります。&lt;br>
-次回は、新しく追加されたmainメソッドからプログラムの概要を説明したいと思います。&lt;/p></description></item><item><title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</link><pubDate>Mon, 07 Feb 2022 11:28:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch.jpg" alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法" />&lt;p>Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探っていこうと思います。&lt;/p>
-&lt;p>Hugoの導入や記事の投稿についての情報は&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21-01/" target="_blank" rel="noopener"
->Hugoで記事の投稿の仕方&lt;/a>や&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/" target="_blank" rel="noopener"
->デザイナーでもできる初めてのHUGO #01&lt;/a>を確認してください。&lt;/p>
-&lt;h2 id="gitから更新情報を取得するようにしている">Gitから更新情報を取得するようにしている&lt;/h2>
-&lt;p>Hugoは非常に強力な機能をたくさん持っています。その一つがGitにある情報にアクセスできるという点です。&lt;br>
-この機能を使えば、Gitに登録した人を投稿者としたり、push した日付を更新日とすることができます。&lt;br>
-つまり、自分で投稿者や更新日を記述する必要がないということになります。&lt;/p>
-&lt;p>このブログでもHugoとGitの連携を行っております。その連携自体は簡単です。&lt;br>
-設定ファイルに&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">enableGitInfo&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>と記述するだけで、Gitの情報にアクセスできます。&lt;/p>
-&lt;h2 id="frontmatterの記述">frontmatterの記述&lt;/h2>
-&lt;p>Hugoには日付を制御できる設定があります。Hugoがコンテンツ・ページに日付を割り当てる方法を設定することができます。これは、config に frontmatter セクションを追加することで行うことが可能です。&lt;br>
-私の環境では下記のようになっておりました。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>:fileModTime&lt;/code>はコンテンツファイルの最終更新タイムスタンプから日付を取得します。&lt;br>
-&lt;code>:git&lt;/code>ではコンテンツファイルの最終リビジョンのGit作成日となります。&lt;br>
-この設定を使うには、&lt;code>--enableGitInfo&lt;/code> が設定されているか、サイト構成で &lt;code>enableGitInfo = true &lt;/code>が設定されている必要があります。つまり、先程の設定ファイルに記述した設定となります。&lt;br>
-そして、&lt;code>lastmod&lt;/code>です。&lt;/p>
-&lt;p>この設定は上から順に評価されていきます。&lt;/p>
-&lt;p>詳細は&lt;a class="link" href="https://gohugo.io/getting-started/configuration/#configure-front-matter" target="_blank" rel="noopener"
->Hugoのfrontmatter&lt;/a>を確認してください。&lt;/p>
-&lt;h2 id="git-actioinsで設定したxmlの更新日がすべて同じになった">Git Actioinsで設定したXMLの更新日がすべて同じになった&lt;/h2>
-&lt;p>今回は&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/" target="_blank" rel="noopener"
->XMLの作成&lt;/a>の際にGitのデータを使用するようにしていました。&lt;br>
-ローカルで確認したところ、&lt;code>hugo server&lt;/code>での動作も、&lt;code>hugo&lt;/code>にて書き出したファイルも更新日である&lt;code>lastmod&lt;/code>が正常に表示されていたので問題ないと判断して、Gitにアップしました。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 147;
-flex-basis: 354px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png" data-size="980x663">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png"
-width="980"
-height="663"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>しかし、Gitではローカルと動作が異なっており、すべて同じ日付となってしまいました。&lt;br>
-一体なぜでしょうか？&lt;/p>
-&lt;h3 id="ランキングや最新記事の反映で日付が更新された可能性">ランキングや最新記事の反映で日付が更新された可能性&lt;/h3>
-&lt;p>このサイトでは最新記事やランキングを掲載しております。それらは時間や投稿のタイミングで変化します。そういた変化を検知してしまって日付が変わってしまった可能性が考えられます。&lt;br>
-しかし、そうだとしたら、ローカルでも同様の問題になるかと思うので、この可能性は低そうです。&lt;/p>
-&lt;h3 id="github-pagesで別ブランチで管理している">GitHub Pagesで別ブランチで管理している&lt;/h3>
-&lt;p>このサイトはGitHub Pagesを使って別ブランチで管理しています。つまり、公開ディレクトリにあたる public 部分は前の考察のランキングや最新記事によって全てのページが変更されています。&lt;br>
-そして、別ブランチにアップする。つまり、すべてが書き換わるといったことが起こったのではないでしょうか。&lt;/p>
-&lt;h2 id="解決策">解決策&lt;/h2>
-&lt;p>解決策はすごくと簡単です。&lt;br>
-Git と連携して lastmod の日付を自動で設定するために、&lt;code>enableGitInfo: true&lt;/code> としていました。そして、この設定と同時に、下記のような設定もHugoの設定ファイル（yaml形式）に記述していました。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここの frontmatter の記述をすべてコメントアウトにします。&lt;br>
-それか、優先度のファイルのタイムスタンプから&lt;code>:git&lt;/code>に変更します。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">frontmatter&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">lastmod&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="p">:&lt;/span>&lt;span class="l">fileModTime&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">lastmod&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これでlastmodが正しく表示されるようになりました。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 169;
-flex-basis: 406px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png" data-size="980x578">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png"
-width="980"
-height="578"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>lastmod はSEOとしてあまり必要とされていないといった声も聞かれますが、正しく表示しておくことでサイトとしての信頼性は格段に上がると思います。&lt;br>
-HugoとGitの連携を行った際に、更新日など正しく反映されない箇所があった場合は設定などを見直してみましょう。&lt;br>
-簡単なことで問題が解決するかもしれません。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/GitHub%e5%ae%9f%e8%b7%b5%e5%85%a5%e9%96%80-Pull-Request%e3%81%ab%e3%82%88%e3%82%8b%e9%96%8b%e7%99%ba%e3%81%ae%e5%a4%89%e9%9d%a9-PRESS-plus/dp/477416366X/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51PjpAUHZBL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> GitHub実践入門 ~Pull Requestによる開発の変革 (WEB&amp;#43;DB PRESS plus) &lt;/h2>
-&lt;p> GitHubの実践的な使い方を、実際に手を動かす形で解説する書籍です。初学者の方にもわかりやすいよう、基本的なGitやGitHubの使い方から、「ソーシャルコーディング」の目玉機能であるPull Requestの送り方・受け方まで解説します。また、外部ツールとの連携、GitHub FlowやGit Flowなど、GitHubを中心とした開発手法についてもしっかり解説しているので、中・上級者の方にも参考になるはずです。 目次 第1章:GitHubの世界へようこそ 第2章:Gitの導入 第3章:GitHubを利用するための準備 第4章:Gitを操作しながら学ぶ 第5章:GitHubの機能を徹底解説 第6章:はじめてのPull Request 第7章:Pull Requestが送られてきたら 第8章:GitHubと連携するツールとサービス 第9章:GitHubを利用した開発フロー 第10章:会社でGitHubを使おう Appendix A:GitHubをサポートするGUIクライアント Appendix B:Gistで手軽にコードを共有 続きを読む 。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51ITQMzMG2L.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 改訂2版 わかばちゃんと学ぶ Git使い方入門〈GitHub、SourceTree、コマンド操作対応〉 &lt;/h2>
-&lt;p> マンガと実践で学ぶGitの入門書が最新情報に対応して改訂しました! Gitの概念はもちろん、GitHubについても丁寧に解説しています。これからGitを使い始める人にオススメの1冊です。 本書ではクリック操作でGitを使えるSourceTreeを中心に解説しているので、初心者でも安心です。 はじめにより抜粋 ■せっかく学ぶなら、やっぱり楽しい方がいい 「Gitって難しそう」 「勉強しようとは思っているけど、なかなか一歩が踏み出せない」 そんな方のために、楽しくGitを理解できる本を作りました。 ・個性的なキャラクターたちが登場するマンガ ・感覚的にわかる図解 ・丁寧な実践パート 上記3つの特長で、Gitを無理なく学べます。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item></channel></rss>
+次回は、新しく追加されたmainメソッドからプログラムの概要を説明したいと思います。&lt;/p></description></item></channel></rss>
