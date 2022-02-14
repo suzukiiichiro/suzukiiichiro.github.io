@@ -31,10 +31,24 @@
   {{- end -}}
 {{- end -}}
 
+{{- $item := . -}}
+{{- $arr := slice -}}
+{{- $arr = $arr | append .}}
+{{- range $val := seq 3 -}}
+  {{- if $item.Parent -}}
+    {{- $item = $item.Parent -}}
+    {{- $arr = $arr | append $item -}}
+  {{- else if not $item.IsHome -}}
+    {{- $item = $item.Site.Home -}}
+    {{- $arr = $arr | append $item -}}
+  {{- end -}}
+{{- end -}}
+
 
 <script type="application/ld+json">
+[
 {{- if eq "posts" .Type }}
-[{
+{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": {{- .Title -}},
@@ -65,28 +79,8 @@
     "name": {{- (partial "data/author" .).name }},
     "url": {{- (partial "data/author" .).url }}
   }
-},{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "name": {{- printf "%s - %s" .Site.Title .Site.Params.sidebar.subtitle -}},
-    "item": {{- .Site.BaseURL }}
-  }
-  {{- with .Params.categories -}}
-  ,{
-    "@type": "ListItem",
-    "position": 2,
-    "name": {{- $cat.LinkTitle }},
-    "item": {{- $cat.Permalink }}
-  }
-  {{- end }}
-  ]
-}]
-{{- else }}
-[
-{{- if .IsHome -}}
+},
+{{- else if .IsHome -}}
 {
   "@context": "http://schema.org",
   "@type": "WebSite",
@@ -96,24 +90,25 @@
     "target": {{- printf "%ssearch/?keyword={search_term_string}" .Site.BaseURL }},
     "query-input": "required name=search_term_string"
   }
-}
-{{- else -}}
+},
+{{- end -}}
 {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": {{- printf "%s - %s" .Site.Title .Site.Params.sidebar.subtitle -}},
-      "item": {{- .Site.BaseURL }}
-    },{
-      "@type": "ListItem",
-      "position": 2,
-      "name": {{- .LinkTitle }},
-      "item": {{- .Permalink }}
-    }]
-}
-  {{- end -}}
+    "itemListElement": [
+    {{ range $i, $item := $arr.Reverse }}
+      {{- $title := $item.LinkTitle -}}
+      {{- if $item.Params.slugTitle -}}
+      {{- $title = $item.Params.slugTitle -}}
+      {{- end -}}
+      {
+        "@type": "ListItem",
+        "position": {{- add $i 1 }},
+        "name": {{- $title -}},
+        "item": {{- $item.Permalink }}
+      }{{- if lt (add $i 1) (len $arr) -}},{{- end -}}
+    {{ end }}
+    ]
+  }
 ]
-{{- end }}
 </script>
