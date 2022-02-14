@@ -6,6 +6,11 @@
   {{ $title = .Params.slugTitle }}
 {{ end }}
 
+{{- if eq .Kind "term" -}}
+  {{- $_title := slice (title .Data.Singular) $title -}}
+  {{- $title = printf "%s: %s" (index $_title 0) (index $_title 1) -}}
+{{- end -}}
+
 {{- if .Description }}
   <!-- Page description exists -->
   {{ $description = .Description }}
@@ -20,5 +25,12 @@
 {{- else }}
   {{ $description = printf "「%s」のページです。%s" $title $description }}
 {{- end }}
+
+{{- if .IsHome -}}
+{{- else -}}
+  {{- if lt (len $description) 140}}
+    {{ $description = printf "%s%s" $description .Site.Params.mergeDescription }}
+  {{- end -}}
+{{- end -}}
 
 {{ return ($description | plainify)}}
