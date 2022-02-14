@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
 {{ $norm := resources.Get "css/normalize.css" }}
-{{ $style_norm := $norm }}
+{{ $style_norm := $norm | resources.Minify  }}
 <link rel="stylesheet" href="{{ $style_norm.RelPermalink }}">
 
 {{- $over := resources.Get "scss/override.scss" }}
