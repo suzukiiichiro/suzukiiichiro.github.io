@@ -472,8 +472,7 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;!-- EOF --></description></item><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
+&lt;/aside></description></item><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
 &lt;ul>
 &lt;li>tailコマンドでファイルの末尾部分だけを表示する&lt;/li>
 &lt;li>ログファイルを監視する&lt;/li>
