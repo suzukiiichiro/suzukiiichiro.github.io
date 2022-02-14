@@ -1546,10 +1546,14 @@ text = _text[:-3] スライス機能　先頭から末尾3文字を除いた文�
 FA,FB,FCの配置フラグのチェックを通過して最終行まで辿り着ければ正解としてカウントして良いと言えるからです。&lt;/p>
 &lt;p>次回は図で説明しながら実際の動きを追ってみましょう。&lt;/p></description></item><item><title>（１）【echo】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/</link><pubDate>Wed, 09 Feb 2022 11:32:07 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg" alt="Featured image of post （１）【echo】シェルスクリプトコマンド活用紹介" />&lt;h2 id="echoコマンド">echoコマンド&lt;/h2>
 &lt;ul>
-&lt;li>メッセージや環境変数を表示する&lt;/li>
+&lt;li>メッセージや環境変数を表示します。&lt;/li>
 &lt;/ul>
 &lt;h2 id="概要">概要&lt;/h2>
-&lt;p>「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。&lt;/p>
+&lt;p>「echo」はメッセージなどを表示するコマンドです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$echo メッセージ
+&lt;/code>&lt;/pre>&lt;p>でメッセージを表示します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ echo $変数名
+&lt;/code>&lt;/pre>&lt;p>で環境変数やシェルスクリプト内の変数を表示する際にも使用います。&lt;/p>
 &lt;h2 id="echoコマンドの書式">echoコマンドの書式&lt;/h2>
 &lt;p>echo [オプション] メッセージ&lt;/p>
 &lt;h2 id="echoの主なオプション">echoの主なオプション&lt;/h2>
@@ -1557,21 +1561,21 @@ FA,FB,FCの配置フラグのチェックを通過して最終行まで辿り着
 &lt;thead>
 &lt;tr>
 &lt;th style="text-align:center">オプション&lt;/th>
-&lt;th style="text-align:left">意味&lt;/th>
+&lt;th>意味&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td style="text-align:center">-n&lt;/td>
-&lt;td style="text-align:left">最後の改行を出力しない&lt;/td>
+&lt;td>最後の改行を出力しない&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td style="text-align:center">-e&lt;/td>
-&lt;td style="text-align:left">エスケープを解釈する&lt;/td>
+&lt;td>エスケープを解釈する&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td style="text-align:center">-E&lt;/td>
-&lt;td style="text-align:left">エスケープを解釈しない（デフォルト）&lt;/td>
+&lt;td>エスケープを解釈しない（デフォルト）&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>

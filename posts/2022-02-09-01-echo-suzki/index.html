@@ -15,14 +15,14 @@
 <meta property="og:description" content="「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="echo"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-09T11:32:07+09:00"><meta property="article:modified_time" content="2022-02-09T13:51:28+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="echo"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-09T11:32:07+09:00"><meta property="article:modified_time" content="2022-02-14T15:42:52+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg">
 <meta name=twitter:title content="（１）【echo】シェルスクリプトコマンド活用紹介 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-09-01-echo-suzki/bash.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（１）【echo】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg"],"datePublished":"2022-02-09T11:32:07+09:00","dateModified":"2022-02-09T13:51:28+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"（１）【echo】シェルスクリプトコマンド活用紹介","item":"https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（１）【echo】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg"],"datePublished":"2022-02-09T11:32:07+09:00","dateModified":"2022-02-14T15:42:52+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"（１）【echo】シェルスクリプトコマンド活用紹介","item":"https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -48,7 +48,7 @@ on-phone--column extended">
 <a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
 <ul class=menu-list>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_49>
+<a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_50>
 programming
 </a>
 </li>
@@ -58,7 +58,7 @@ Web開発
 </a>
 </li>
 <li>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_21>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_20>
 プログラミング
 </a>
 </li>
@@ -113,14 +113,17 @@ Web開発
 <div class="article-details arcile-single">
 <header class=article-header>
 <div class=article-category>
-<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/>
-プログラミング
+<a href=https://suzukiiichiro.github.io/categories/programming/>
+programming
 </a>
 </div>
 <div class=article-info>
 <span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
 <time class="article-time--item article-time--published">2022.02.09</time>
+<time class="article-time--item article-time--updatedate">
+2022.02.14
+</time>
 <time class="article-time--item article-time--reading">
 読了時間: 4分
 </time>
@@ -153,10 +156,14 @@ Web開発
 <section class=article-content>
 <h2 id=echoコマンド>echoコマンド</h2>
 <ul>
-<li>メッセージや環境変数を表示する</li>
+<li>メッセージや環境変数を表示します。</li>
 </ul>
 <h2 id=概要>概要</h2>
-<p>「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。</p>
+<p>「echo」はメッセージなどを表示するコマンドです。</p>
+<pre tabindex=0><code>$echo メッセージ
+</code></pre><p>でメッセージを表示します。</p>
+<pre tabindex=0><code>$ echo $変数名
+</code></pre><p>で環境変数やシェルスクリプト内の変数を表示する際にも使用います。</p>
 <h2 id=echoコマンドの書式>echoコマンドの書式</h2>
 <p>echo [オプション] メッセージ</p>
 <h2 id=echoの主なオプション>echoの主なオプション</h2>
@@ -164,21 +171,21 @@ Web開発
 <thead>
 <tr>
 <th style=text-align:center>オプション</th>
-<th style=text-align:left>意味</th>
+<th>意味</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style=text-align:center>-n</td>
-<td style=text-align:left>最後の改行を出力しない</td>
+<td>最後の改行を出力しない</td>
 </tr>
 <tr>
 <td style=text-align:center>-e</td>
-<td style=text-align:left>エスケープを解釈する</td>
+<td>エスケープを解釈する</td>
 </tr>
 <tr>
 <td style=text-align:center>-E</td>
-<td style=text-align:left>エスケープを解釈しない（デフォルト）</td>
+<td>エスケープを解釈しない（デフォルト）</td>
 </tr>
 </tbody>
 </table>
