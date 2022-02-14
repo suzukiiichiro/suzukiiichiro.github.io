@@ -1189,7 +1189,7 @@ loading="lazy"
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>（6）【kill】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</link><pubDate>Mon, 14 Feb 2022 11:39:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg" alt="Featured image of post （6）【kill】シェルスクリプトコマンド活用紹介" />&lt;h2 id="killコマンド">killコマンド&lt;/h2>
+&lt;/aside></description></item><item><title>（７）【kill】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</link><pubDate>Mon, 14 Feb 2022 11:39:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg" alt="Featured image of post （７）【kill】シェルスクリプトコマンド活用紹介" />&lt;h2 id="killコマンド">killコマンド&lt;/h2>
 &lt;ul>
 &lt;li>killコマンドでプロセスIDを指定してプロセスを終了させる&lt;/li>
 &lt;li>killallコマンドで名前を指定してプロセスを終了させる&lt;/li>
