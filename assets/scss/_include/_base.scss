@@ -38,6 +38,7 @@ body {
 .container {
   width: 100%;
   &.extended {
+    max-width: 100%;
     @include mq(tab) {
       display: grid;
       grid-template-columns: 1fr 330px;
@@ -101,6 +102,7 @@ body {
     }
     .amazon-image {
       width: 30%;
+      max-width: 150px;
       img {
         width: 100%;
       }

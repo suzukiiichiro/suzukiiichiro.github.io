@@ -1,15 +1,15 @@
 {{- $sass := resources.Get "scss/style.scss" }}
-{{- $style := $sass | resources.ToCSS }}
+{{- $style := $sass | resources.ToCSS | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
 {{ $norm := resources.Get "css/normalize.css" }}
-{{ $style_norm := $norm }}
+{{ $style_norm := $norm | resources.Minify  }}
 <link rel="stylesheet" href="{{ $style_norm.RelPermalink }}">
 
 {{- $over := resources.Get "scss/override.scss" }}
-{{- $style_over := $over | resources.ToCSS }}
+{{- $style_over := $over | resources.ToCSS | resources.Minify }}
 <link rel="stylesheet" href="{{ $style_over.RelPermalink }}">
 
 {{- $custom := resources.Get "scss/custom.scss" }}
-{{- $style_custom := $custom | resources.ToCSS }}
+{{- $style_custom := $custom | resources.ToCSS | resources.Minify }}
 <link rel="stylesheet" href="{{ $style_custom.RelPermalink }}">

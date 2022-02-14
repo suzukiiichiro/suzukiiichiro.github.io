@@ -111,16 +111,29 @@
       display: flex;
       flex-direction: column;
       margin: 20px 30px;
-      article {
+      .article-pager-item  {
+        ~ .article-pager-item  {
+          margin-top: 20px;
+        }
+      }
+      .article {
         a {
           display: flex;
           background: no-repeat 0 center;
           padding-left: 30px;
           @include icon("M22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12M14,7L9,12L14,17V7Z", "999999");
           background-size: 0.9em auto;
-          img {
+          .article-image {
             width: 80px;
-            height: auto;
+            height: 45px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+              width: 100%;
+              height: auto;
+            }
           }
           .article-details {
             margin-left: 10px;
@@ -133,7 +146,7 @@
         }
       }
       .article-pager--prev {
-        article {
+        .article {
           a {
             flex-direction: row-reverse;
             background-position: 100% center;
