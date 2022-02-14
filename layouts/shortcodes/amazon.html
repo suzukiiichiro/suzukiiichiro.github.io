@@ -1,7 +1,7 @@
 <aside class="amazon-box">
   <a href="{{ .Get "url" }}" target="_blank">
     <div class="columns amazon-image">
-      <img border="0" src="{{ .Get "imageUrl" }}">
+      <img border="0" src="{{ .Get "imageUrl" }}" alt="{{ .Get "title" }}">
     </div>
     <div class="columns amazon-info">
       <h2 class="amazon-name">{{ .Get "title" }}</h2>
