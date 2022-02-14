@@ -6,7 +6,7 @@ date: 2022-02-02T15:55:47+09:00
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

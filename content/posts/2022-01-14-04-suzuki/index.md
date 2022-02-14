@@ -6,7 +6,7 @@ description: "bashではさまざまな方法で複数行コメントを使用�
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

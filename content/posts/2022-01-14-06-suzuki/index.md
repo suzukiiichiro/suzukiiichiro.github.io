@@ -6,7 +6,7 @@ description: "基本的なforループ宣言を示します。'for_example.sh'�
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

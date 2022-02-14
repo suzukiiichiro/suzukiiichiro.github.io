@@ -6,7 +6,7 @@ description: "UNIX系のOSは世界で広く使われている。UNIX、Linux、
 draft: false
 image: 2021-12-23-bash.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

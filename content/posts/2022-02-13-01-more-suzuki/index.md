@@ -6,7 +6,7 @@ draft: false
 authors: suzuki
 image: bash.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - more
   - シェルスクリプト

@@ -6,6 +6,7 @@ draft: false
 image: linux.jpg
 categories:
   - サーバー構築
+  - programming
 tags:
   - Linux
   - Bash

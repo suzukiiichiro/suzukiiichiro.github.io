@@ -6,7 +6,7 @@ description: "2つ以上の条件を持つifステートメントでは、さま
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

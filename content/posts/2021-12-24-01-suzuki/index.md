@@ -6,7 +6,7 @@ description: "sshでサーバーにログインして、なんらかのコマン
 draft: false
 image: 2021-12-23-bash.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

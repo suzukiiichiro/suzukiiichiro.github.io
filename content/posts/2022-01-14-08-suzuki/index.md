@@ -6,7 +6,7 @@ description: "単数、または複数の条件でif条件を使用できます�
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

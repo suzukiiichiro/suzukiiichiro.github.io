@@ -6,7 +6,7 @@ description: "'read'コマンドは、bashでユーザーから入力を受け�
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

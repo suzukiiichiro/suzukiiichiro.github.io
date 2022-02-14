@@ -6,7 +6,7 @@ description: "whileループの使用法を知るために、「while_example.sh
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト
