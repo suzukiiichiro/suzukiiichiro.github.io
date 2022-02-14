@@ -4,25 +4,25 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="はじめに まずはこちらをやりましょう。 パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 必要なもの iPad Termiu">
-<title>iPadに開発環境を構築してみるテスト - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。">
+<title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
-<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
-<meta property="og:title" content="iPadに開発環境を構築してみるテスト - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="はじめに まずはこちらをやりましょう。 パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 必要なもの iPad Termiu">
-<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/">
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/>
+<meta property="og:title" content="第7回 pythonでNQueen（エイトクイーン）バックトラック（3） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-01-28T14:02:55+09:00"><meta property="article:modified_time" content="2022-02-14T16:11:21+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg">
-<meta name=twitter:title content="iPadに開発環境を構築してみるテスト - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="はじめに まずはこちらをやりましょう。 パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿 必要なもの iPad Termiu"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-14T09:55:55+09:00"><meta property="article:modified_time" content="2022-02-14T17:57:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/chess.jpg">
+<meta name=twitter:title content="第7回 pythonでNQueen（エイトクイーン）バックトラック（3） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-28-01-suzuki/linux.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"iPadに開発環境を構築してみるテスト","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg"],"datePublished":"2022-01-28T14:02:55+09:00","dateModified":"2022-02-14T16:11:21+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"iPadに開発環境を構築してみるテスト","item":"https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/chess.jpg"],"datePublished":"2022-02-14T09:55:55+09:00","dateModified":"2022-02-14T17:57:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","item":"https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -101,34 +101,28 @@ Web開発
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
-<li><span class=breadcrumb-item>iPadに開発環境を構築してみるテスト</span>
+<li><span class=breadcrumb-item>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</span>
 </ol>
 </nav>
 <article class="has-image main-article">
 <div class="article-details arcile-single">
 <header class=article-header>
 <div class=article-category>
-<a href=https://suzukiiichiro.github.io/categories/server/>
-サーバー構築
-</a>
 <a href=https://suzukiiichiro.github.io/categories/programming/>
 プログラミング
 </a>
 </div>
 <div class=article-info>
-<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
+<span class="article-time--item article-time--author"><span class=name>root</span>
 </span>
-<time class="article-time--item article-time--published">2022.01.28</time>
-<time class="article-time--item article-time--updatedate">
-2022.02.14
-</time>
+<time class="article-time--item article-time--published">2022.02.14</time>
 <time class="article-time--item article-time--reading">
-読了時間: 8分
+読了時間: 9分
 </time>
 </div>
 </header>
 <h1 class=article-title>
-iPadに開発環境を構築してみるテスト
+第7回 pythonでNQueen（エイトクイーン）バックトラック（3）
 </h1>
 </div>
 <section class="widget archives tableOfContents">
@@ -136,17 +130,9 @@ iPadに開発環境を構築してみるテスト
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#はじめに>はじめに</a></li>
-<li><a href=#必要なもの>必要なもの</a></li>
-<li><a href=#awsインスタンスへの接続>AWSインスタンスへの接続</a></li>
-<li><a href=#アカウントの作成>アカウントの作成</a></li>
-<li><a href=#bashrc-の修正>~/.bashrc の修正</a></li>
-<li><a href=#ターミナルの入力で大文字と小文字を区別せずに補完する>ターミナルの入力で大文字と小文字を区別せずに補完する</a></li>
-<li><a href=#screen-のインストール>screen のインストール</a></li>
-<li><a href=#screenrc-の修正>screenrc の修正</a></li>
-<li><a href=#screen-を使ってみます>screen を使ってみます</a></li>
-<li><a href=#sudoユーザーを追加する方法>sudoユーザーを追加する方法</a></li>
-<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+<li><a href=#バックトラック>バックトラック</a></li>
+<li><a href=#おさらい>おさらい</a></li>
+<li><a href=#nqueen-メソッドの動き>nqueen メソッドの動き</a></li>
 </ol>
 </nav>
 </div>
@@ -154,327 +140,578 @@ iPadに開発環境を構築してみるテスト
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h2 id=はじめに>はじめに</h2>
-<ul>
-<li>まずはこちらをやりましょう。<br>
-<a class=link href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/ target=_blank rel=noopener>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</a></li>
-</ul>
-<h2 id=必要なもの>必要なもの</h2>
-<ul>
-<li>iPad</li>
-<li>Termiusというアプリ<br>
-<a class=link href=https://apps.apple.com/jp/app/termius-ssh-client/id549039908 target=_blank rel=noopener>Termius: Terminal & SSH client</a></li>
-<li>AWSのサーバーインスタンス<br>
-<a class=link href=https://qiita.com/kanegoon/items/4bcdf5184cf1752eb44f target=_blank rel=noopener>AWS EC2 インスタンスの作成</a></li>
-<li>AWSインスタンスにログインするために必要なpemファイル（キーチェイン）<br>
-<a class=link href=https://qiita.com/takuma-jpn/items/b2c04b7a271a4472a900 target=_blank rel=noopener>AWS EC2にSSHでアクセスする方法</a></li>
-</ul>
-<h2 id=awsインスタンスへの接続>AWSインスタンスへの接続</h2>
-<p>pemファイルをスマホに送る<br>
-インスタンスを作るときにpemファイルをダウンロードしたと思います<br>
-（してなかったら、pemファイルは一回しかダウンロードさせてくれないのでインスタンスを作り直しましょう）<br>
-このpemファイルをＰＣのエディターで開き、内容をテキストファイルにペーストします。<br>
-このファイルをＬＩＮＥなりメールなりGoogleドライブなりでスマホに送ります。</p>
-<p>pemファイルをTermiusで読み込みます</p>
-<ul>
-<li>ＰＣ上で鍵ファイル(.pem)をテキスト化してiPadで内容をコピーして貼り付けられるようにしておくことが重要です。<br>
-<a class=link href=https://tomikyblog.com/termius%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f target=_blank rel=noopener>iPad Proでsshクライアント「Termius」を使ってみた<br>
-</a><br>
-<a class=link href=https://pkunallnet.com/pcinfo/apple/ipad-aws-linuxconnection/ target=_blank rel=noopener>iPadからAWSのEC2インスタンス(LINUX)にSSH接続する方法</a></li>
-</ul>
-<h2 id=アカウントの作成>アカウントの作成</h2>
-<p>rootでの作業でも良いのですが、一般論としてここではアカウントの作成から説明します。</p>
-<p>まずは、サーバーに接続します。</p>
-<pre tabindex=0><code>centos$ 
-</code></pre><p>いわゆるrootでログインした訳です。<br>
-ここでユーザー名 suzuki を追加します。</p>
-<pre tabindex=0><code>centos$ useradd suzuki
-</code></pre><p>さらに suzuki のパスワードも設定します。</p>
-<pre tabindex=0><code>centos$ passwd suzuki
-</code></pre><p>パスワードは２回同じ入力を求められます<br>
-では rootからsuzukiにアカウントを切り換えます。<br>
-ユーザーの切り替えは su コマンドを使います。</p>
-<pre tabindex=0><code>centos$ su suzuki
-パスワード：
-suzuki$ 
-</code></pre><p>suzukiに切り替わりました。<br>
-自分自身がどこにいるのかを確認します。<br>
-カレントディレクトリの確認は pwd コマンドを使います。<br>
-ディレクトリの移動は cd コマンド<br>
-ホームディレクトリは ~ で表します。<br>
-ホームディレクトリへの移動は cd ~ となります。</p>
-<pre tabindex=0><code>centos$ pwd
-/home/centos
-$ cd ~ 
-$ pwd 
-$ /home/suzuki
-$
-</code></pre><h2 id=bashrc-の修正>~/.bashrc の修正</h2>
-<p>ここでは ~/.basrcファイルを修正します。<br>
-まず、~/.basrc ファイルのバックアップをとります。<br>
-ここではファイル名先頭のピリオドを落として ls コマンドで見えるようにしておきます。</p>
-<pre tabindex=0><code>$ cp ~/.bashrc ~/bashrc.bak
-</code></pre><p>では、~/.bashrc を vimで開いて編集します。</p>
-<pre tabindex=0><code>$ vim ~/.bashrc
-</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:~/.bashrc data-lang=bash:~/.bashrc><span class=c1># .bashrc</span>
-
-<span class=c1># Source global definitions</span>
-<span class=k>if</span> <span class=o>[</span> -f /etc/bashrc <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
-	. /etc/bashrc
-<span class=k>fi</span>
-
-<span class=c1># ターミナルの表示</span>
-<span class=nb>export</span> <span class=nv>PS1</span><span class=o>=</span><span class=s2>&#34;bash-\v</span>$<span class=s2> &#34;</span> <span class=p>;</span>
-<span class=c1># 基本言語フォーマットをUTF-8へ</span>
-<span class=nb>export</span> <span class=nv>LANG</span><span class=o>=</span><span class=s2>&#34;ja_JP.UTF-8&#34;</span> <span class=p>;</span>
-
-<span class=c1># User specific environment and startup programs</span>
-<span class=nb>alias</span> <span class=nv>rm</span><span class=o>=</span><span class=s1>&#39;rm -i&#39;</span> <span class=p>;</span>
-<span class=nb>alias</span> <span class=nv>cp</span><span class=o>=</span><span class=s1>&#39;cp -i&#39;</span> <span class=p>;</span>
-<span class=nb>alias</span> <span class=nv>mv</span><span class=o>=</span><span class=s1>&#39;mv -i&#39;</span> <span class=p>;</span>
-<span class=c1># grepとls のカラー表示</span>
-<span class=nb>alias</span> <span class=nv>grep</span><span class=o>=</span><span class=s1>&#39;grep --color=auto&#39;</span> <span class=p>;</span>
-<span class=nb>alias</span> <span class=nv>ls</span><span class=o>=</span><span class=s1>&#39;ls --color=auto&#39;</span> <span class=p>;</span>
-<span class=c1># screen</span>
-<span class=nb>alias</span> <span class=nv>s</span><span class=o>=</span><span class=s1>&#39;screen -RR&#39;</span> <span class=p>;</span>
-<span class=c1># Github ディレクトリへ移動</span>
-<span class=nb>alias</span> <span class=nv>g</span><span class=o>=</span><span class=s1>&#39;cd ~/GitHub&#39;</span> <span class=p>;</span>
-</code></pre></div><p>編集が終わったら ~/.bashrc を再読込します。<br>
-Linux での再読込は . です</p>
-<pre tabindex=0><code>$ . ~/.bashrc
-$ 
-</code></pre><p>では GitHub にある様々なディレクトリを格納する Githubディレクトリを作成します。</p>
-<pre tabindex=0><code>$ mkdir GitHub
-$ 
-</code></pre><p>以降の github プロジェクトは今作成した GitHub ディレクトリ以下に作成します。</p>
-<h2 id=ターミナルの入力で大文字と小文字を区別せずに補完する>ターミナルの入力で大文字と小文字を区別せずに補完する</h2>
-<pre tabindex=0><code class=language-bash:~/.inputrc data-lang=bash:~/.inputrc>
-# 大文字小文字を区別しない
-set completion-ignore-case on
-# 以下日本語入力の必要がある場合に必要(なくてもよい）
-set input-meta on
-set output-meta on
-set convert-meta off
-set meta-flag on
-</code></pre><p>編集が終わったら ~/.inputrc を再読込します。<br>
-Linux での再読込は . です</p>
-<pre tabindex=0><code>$ . ~/.inputrc
-$ cd ~
-$ pwd
-/home/suzuki
-$ g
-$ pwd
-/home/suzuki/GitHub
-$
-</code></pre><div class="tips-area tips">
-<dl>
-<dt>ヒント</dt>
-<dd>~/.inputrc を root ユーザーになって /etc/inputrc に追記するとすべてのユーザーが大文字小文字を区別することなくターミナルで補完することができます。</dd>
-</dl>
-</div>
-<h2 id=screen-のインストール>screen のインストール</h2>
-<p>screen はターミナル内で複数の仮想ターミナルを起動して使うことができる画面管理ソフトです。<br>
-メリットは、</p>
-<ul>
-<li>ターミナルウインドウのタブを複数作成し、ここのタブでサーバーにログインする必要がないので、不要なセッションを作らなくてすむ。</li>
-<li>開いていた端末の状態を保持しておける。</li>
-<li>回線が切れる、スタンバイなどのセッション切れでもレジュームされる。</li>
-<li>一つの画面をさらに分割できるので、複数端末でログ監視したいときなどに超便利。</li>
-</ul>
-<p>まずはscreen がインストールされているのかの確認します。</p>
-<pre tabindex=0><code>$ screen -v
-Screen version 4.08.00 (GNU) 05-Feb-20
-$
-</code></pre><p>インストールされていれば以下の作業はする必要がありません。<br>
-インストールされていなければ、yum コマンドでインストールして下さい。</p>
-<pre tabindex=0><code>$ sudo  ＜sudo で rootになります＞
-#       ＜rootになると # になります&gt;
-# yum -y install screen
-読み込んだプラグイン:fastestmirror
-base                                                                                                                           | 3.6 kB  00:00:00
-extras                                                                                                                         | 3.4 kB  00:00:00
-updates                                                                                                                        | 3.4 kB  00:00:00
-(1/2): extras/7/x86_64/primary_db                                                                                              | 115 kB  00:00:00
-(2/2): updates/7/x86_64/primary_db                                                                                             | 2.2 MB  00:00:00
-Loading mirror speeds from cached hostfile
- * base: ftp.iij.ad.jp
- * extras: ftp.iij.ad.jp
- * updates: www.ftp.ne.jp
-依存性の解決をしています
---&gt; トランザクションの確認を実行しています。
----&gt; パッケージ screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2 を インストール
---&gt; 依存性解決を終了しました。
-
-依存性を解決しました
-
-======================================================================================================================================================
- Package                      アーキテクチャー             バージョン                                                リポジトリー                容量
-======================================================================================================================================================
-インストール中:
- screen                       x86_64                       4.1.0-0.23.20120314git3c2946.el7_2                        base                       552 k
-
-トランザクションの要約
-======================================================================================================================================================
-インストール  1 パッケージ
-
-総ダウンロード容量: 552 k
-インストール容量: 914 k
-Downloading packages:
-screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64.rpm                                                                           | 552 kB  00:00:00
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  インストール中          : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64                                                                      1/1
-  検証中                  : screen-4.1.0-0.23.20120314git3c2946.el7_2.x86_64                                                                      1/1
-
-インストール:
-  screen.x86_64 0:4.1.0-0.23.20120314git3c2946.el7_2
-
-完了しました!
-$
-# rootからsuzukiにアカウントを切り換えます
-$ su suzuki
-# screenコマンドがどこにインストールされているのかを確認します。
-$ which screen
-/usr/bin/screen
-$
-</code></pre><h2 id=screenrc-の修正>screenrc の修正</h2>
-<p>screenコマンドをさらに便利にするために screenrc ファイルを修正します。</p>
-<pre tabindex=0><code># ユーザーをroot から suzuki に変えます。
-$ su suzuki
-$
-</code></pre><p>以下を ~/.screenrc として作成して保存します。</p>
-<pre tabindex=0><code class=language-bash:~/.screenrc data-lang=bash:~/.screenrc>
-# Ctrl + z で screenの操作モードへの切り換え
-escape ^Zz
-# スクロールバッファを大きくする
-defscrollback 10000
-# ステータスバーをカスタマイズ
-hardstatus on
-hardstatus alwayslastline '%{= kw}%02c:%s %{= .y}%H %L=%{= .b}%-w%46&gt;%{= .r}%n %t*%{= .b}%+w%-16=%{= .y}[%l]'
-# スタートメッセージを表示させない
-startup_message off
-# ビープを鳴らさない
-vbell off
-#termの設定
-term ansi
-bind r
-bind ^r
-#
-
-</code></pre><p>上記 ~/.bashrc の修正で、screenコマンドの呼び出しを s にしています。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:~/.bashrc data-lang=bash:~/.bashrc>
-<span class=c1># screen</span>
-<span class=nb>alias</span> <span class=nv>s</span><span class=o>=</span><span class=s1>&#39;screen -RR&#39;</span> <span class=p>;</span>
-
-</code></pre></div><p>ですので、ターミナルからは s だけで screen -RR コマンドを実行したことと同じになります。</p>
-<pre tabindex=0><code># screenの起動
-$ screen 
-# screenの終了
-$ exit
-$
-# screenの起動
-$ s
-# screenの終了
-$ exit
-</code></pre><p>~/.bashrc にエイリアスを作成していなければ screen で起動しますし、~/.bashrcにエイリアスを作成していれば（ここでは「s」） $ s で一発起動します。screenを抜けるときは「exit」です。</p>
-<h2 id=screen-を使ってみます>screen を使ってみます</h2>
-<ul>
-<li>
-<p>screen の起動(screen)<br>
-まず screen を起動しなくては始まりません。 ログインしたターミナルで「screen」と打てば screen が起動します。 screen から抜けるには普通にログアウトするように 「exit」 や [Ctrl+d]で抜けられます。</p>
-</li>
-<li>
-<p>新しいウィンドウを開始する([Ctrl+c])<br>
-「[Ctrl+c]」で新しいウィンドウを開始できます。 幾つでも作れます。 不要になったウィンドウは 「exit」 や [Ctrl+d] で消せます。</p>
-</li>
-<li>
-<p>次のウィンドウに移動する([Ctrl+n])<br>
-開いている隣のウインドウに移動します。カスタマイズした~/.screenrcを使っている人はステータスバーで確認できて便利です。</p>
-</li>
-<li>
-<p>詳しくはこちら<br>
-<a class=link href=https://qiita.com/hnishi/items/3190f2901f88e2594a5f target=_blank rel=noopener>Linux screenコマンド使い方</a></p>
-</li>
-</ul>
-<div class="tips-area tips">
-<dl>
-<dt>ヒント</dt>
-<dd>screen は王者のコマンドです。プログラマーの多くはローカルのターミナルでタブを作成します。screen はサーバー上で仮想端末を作成します。screenはvim同様、プログラマーを選びます。Linuxを語るなら vim と screen そして bash の習熟が必須なのです。</dd>
-</dl>
-</div>
-<h2 id=sudoユーザーを追加する方法>sudoユーザーを追加する方法</h2>
-<p>sudoユーザーに追加していないユーザーでsudoコマンドを実行すると、</p>
-<pre tabindex=0><code>$ sudo less /etc/passwd
-[sudo] password for suzuki: 
-suzuki is not in the sudoers file.  This incident will be reported.
-</code></pre><p>こんな事を言われます。<br>
-ということで、ここでは特定のユーザー（ここでは「suzuki」）がsudoコマンドを実行できるようにします。</p>
-<p>/etc/sudoers ファイルにユーザーを追加します。</p>
-<p>まずはrootユーザーになります。</p>
-<p>ユーザーsuzuki をぬけてrootになります。</p>
-<pre tabindex=0><code>$ exit
-</code></pre><p>現在のグループを確認します。</p>
-<pre tabindex=0><code># sudo vim /etc/sudoers
-</code></pre><p>以下の記述があれば wheelグループに suzukiを追加すればよいです。</p>
-<pre tabindex=0><code class=language-bash:/etc/sudoersの抜粋 data-lang=bash:/etc/sudoersの抜粋>
-## Allow members of group sudo to execute any command
-%wheel   ALL=(ALL:ALL) ALL
-</code></pre><p>ではまず現状を確認します。</p>
-<pre tabindex=0><code># cat /etc/group | grep suzuki
-</code></pre><p>sudoのグループ（centosなら wheel) に suzuki を追加します。</p>
-<pre tabindex=0><code># sudo usermod -G wheel suzuki
-</code></pre><p>確認します。</p>
-<pre tabindex=0><code># cat /etc/group | grep suzuki
-wheel:x:10:suzuki
-suzuki:x:1001:
-#
-</code></pre><p>これで、ローカルアカウント suzuki で、必要に応じて sudoコマンドをつかって安全に作業することができるようになりました。</p>
-<div class="tips-area tips">
-<dl>
-<dt>ヒント</dt>
-<dd>当たり前の話ではありますが、root で作業するのはやめましょう。必要に応じて $ su すればよいのです。Linux/Unixとはそういうものなのです。</dd>
-</dl>
-</div>
-<h2 id=おすすめの書籍>おすすめの書籍</h2>
-<aside class=amazon-box>
-<a href="https://www.amazon.co.jp/iPad%e5%ae%8c%e5%85%a8%e3%83%9e%e3%83%8b%e3%83%a5%e3%82%a2%e3%83%ab2022-%e5%85%a8%e6%a9%9f%e7%a8%ae%e5%af%be%e5%bf%9c-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c%e3%81%8b%e3%82%89%e6%b4%bb%e7%94%a8%e6%8a%80%e3%81%be%e3%81%a7%e8%a9%b3%e7%b4%b0%e8%a7%a3%e8%aa%ac-standards/dp/4866365285/?tag=nlpqueens-22" target=_blank>
-<div class="columns amazon-image">
-<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/51Vmx-LPwGL.jpg>
-</div>
-<div class="columns amazon-info">
-<h2 class=amazon-name> iPad完全マニュアル2022(全機種対応/基本操作から活用技まで詳細解説) </h2>
-<p> iPadをしっかり使いこなすための決定版ガイドブック。 iPadOS 15に対応した最新版です。 2021年発売の最新モデルはもちろん、すべてのiPad Pro、iPad Air、iPad、iPad miniの全モデル ホームボタン搭載/非搭載含めすべての機種に対応します。 </p>
-<span class=link>Amazonで詳細を見る</span>
-</div>
+<h2 id=バックトラック>バックトラック</h2>
+<p>今回も引き続きバックトラックを説明していきたいと思います。 <br>
+前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの再帰とバックトラックの動きについて図で示しながら説明していきたいとおもいます。</p>
+<p>プログラムソースは以下のURLにあります。<br>
+<a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py</a></p>
+<h2 id=おさらい>おさらい</h2>
+<p>ブルートフォース、配置フラグからのおさらいとして次の点を押さえておきましょう。 <br>
+・448行目のABOARD[row]=i はクイーンを配置する動きです。 <br>
+・452行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。 <br>
+・444,445は最終行(4行目)までクイーンを置ききった後にTOTALに1加算しています。フラグチェックを通過して最終行まで到達すれば正解と判断して良いからです。</p>
+<p>再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭439行目に移動します。<br>
+引数で渡されたrow、size以外のローカル変数はすべて初期化された状態になります。</p>
+<p>・再帰から抜ける部分は2箇所あります。<br>
+一つ目は、444,445行目で最終行(4行目)までクイーンを置ききった後にTOTALを加算する時</p>
+<p>二つ目は、447行目のfor文がSIZE数の数(N=4だと3)だけ回りきったあとです。</p>
+<p>再帰から抜けたときは再帰を呼び出した452行目のすぐ後ろからスタートします。<br>
+ローカル変数の状態は再帰を呼び出す直前の状態になります。<br>
+1行前に戻るような動きとなります。</p>
+<p>ちなみに447行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです。<br>
+左端までクイーンを置ききったらfor文を抜けるイメージです。</p>
+<p>450行目のif FA[i] == 0 and FB[row-i+(size-1)] == 0 and FC[row+i] == 0:でFA,FB,FCの配置フラグで利き筋をチェックしています。<br>
+FAが上下の利き筋<br>
+FBが左対角線上の利き筋<br>
+FCが右対角線上の利き筋<br>
+をチェックしています</p>
+<h2 id=nqueen-メソッドの動き>nqueen メソッドの動き</h2>
+<p>467行目のnqueen(0,i)からスタートします。<br>
+メソッドの先頭439行目に移動します。<br>
+row=0なので446行目の else: に移動します。<br>
+447行目のfor文に入りi=0からスタートします。<br>
+448行目のABOARD[0]=0で1行目の右端にクイーンを設置します。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q1.png>
+<img src=https://suzukiiichiro.github.io/q1.png loading=lazy alt=図>
 </a>
-<small>Amazon.co.jpアソシエイトを使用</small>
-</aside>
-<aside class=amazon-box>
-<a href="https://www.amazon.co.jp/AWS%e3%81%a7%e3%81%af%e3%81%98%e3%82%81%e3%82%8b%e3%82%a4%e3%83%b3%e3%83%95%e3%83%a9%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e5%ae%89%e5%85%a8%e3%81%a7%e5%a0%85%e7%89%a2%e3%81%aa%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%81%ae%e3%81%a4%e3%81%8f%e3%82%8a%e6%96%b9-%e4%b8%ad%e5%9e%a3-%e5%81%a5%e5%bf%97/dp/4798163430/?tag=nlpqueens-22" target=_blank>
-<div class="columns amazon-image">
-<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/511vlSp5gZL.jpg>
-</div>
-<div class="columns amazon-info">
-<h2 class=amazon-name> AWSではじめるインフラ構築入門 安全で堅牢な本番環境のつくり方 </h2>
-<p> AWSのネイティブ機能を組み合わせて 安全かつ堅牢なインフラを構築・運用 本書は、AWS(Amazon Web Services)を利用して、 インフラを構築/運用する方法を解説する入門書です。 クラウドでネットワーク&サーバー構築を行うために必要な基礎知識や、 AWSのネイティブ機能を組み合わせて安全かつ堅牢なインフラを構築/運用 するための設定方法やノウハウを解説します。</p>
-<span class=link>Amazonで詳細を見る</span>
-</div>
+<figcaption>図</figcaption>
+</figure><br>
+1個目のクイーンなので当然配置フラグはどれもOの状態ですから450行目のif FA[0] == 0 FB[row-i+(size-1)] == 0 FC[row+i] == 0の条件を満たしてif文の中に入ります。</p>
+<p>451行目でフラグを立てますが以下のようになります。<br>
+配列の個数は2<em>MAX-1 MAX=16なので31個ですが31個必要なのはN=16の時です。<br>
+N=4のときは2</em>4-1で7個あれば足ります。</p>
+<p>row=0,i=0なので<br>
+FA<br>
+FA[0]=1で</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+row-i+(size-1)<br>
+0-0+(4-1)=3<br>
+FB[3]=1</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=0
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+row+i<br>
+0+0=0<br>
+FC[0]=1</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q2.png>
+<img src=https://suzukiiichiro.github.io/q2.png loading=lazy alt=図>
 </a>
-<small>Amazon.co.jpアソシエイトを使用</small>
-</aside>
+<figcaption>図</figcaption>
+</figure></p>
+<p>452行目でnqueenを引数1を渡して呼び出して2行目に進みます。</p>
+<p>図だと2行目でクイーンを置けるのは3,4列目ですがプログラムの動きではどうなるのか見てみましょう。</p>
+<p>再帰呼び出しなのでrow=1の状態でメソッドの先頭439行目に移動します。<br>
+row=1なので446行目の else: に移動します。<br>
+447行目のfor文に入りi=0からスタートします。<br>
+448行目のABOARD[1]=0で2行目の右端にクイーンを設置します。<br>
+1行目で既に右端にクイーンを設置していますのでFA[0]は1になりますので450行目のif FA[i]==0の条件を満たしません。</p>
+<p>if文に入らずに次のfor文に進みます。<br>
+この部分が配置フラグの制御になります。<br>
+この処理のおかげで上下、左右対角線上の利き筋に引っかかる場合は次の行に移動するのをやめ探索を効率化することができます。</p>
+<p>447行目で次のfor文に進みi=1となります。</p>
+<p>448行目のABOARD[1]=1で2行目の右から2列目にクイーンを設置します。</p>
+<p>450行目でフラグをチェックします</p>
+<p>FAのフラグの状態は以下の通りです</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>i=1<br>
+FA[1]==0ですのでFAフラグは通過します。</p>
+<p>FBのフラグの状態は以下の通りです</p>
+<pre tabindex=0><code>FA[0]=0
+FB[1]=0
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+</code></pre><p>row=1,i=1<br>
+row-i+(size-1)<br>
+1-1+(4-1)=3<br>
+FB[3]==1ですのでFBフラグは通過しません<br>
+左対角線上の利き筋に引っかかることになります。</p>
+<p>447行目で次のfor文に進みi=2となります。</p>
+<p>448行目のABOARD[1]=2で2行目の右から3列目にクイーンを設置します。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/q3.png>
+<img src=https://suzukiiichiro.github.io/q3.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>450行目でフラグをチェックします<br>
+row=1,i=2<br>
+FA[2]==0なのでFAのフラグは通過しますFB[row-i+(size-1)->FB[1-2+(4-1)]->FB[2]==0なのでFBフラグは通過します<br>
+FC[row+i]->FC[1+2]->FC[3]==0なのでFCフラグも通過します</p>
+<p>if 文の中に入って451行目でフラグをたてます</p>
+<p>FA<br>
+FA[2]=1で</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=1
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+FB[2]=1</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=0
+FB[2]=1
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+FC[3]=1</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1
+FC[4]=0
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>ビジュアルで利き筋をみてみると以下の通りです。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q4.png>
+<img src=https://suzukiiichiro.github.io/q4.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+3行目にクイーンを置ける場所はなさそうです。</p>
+<p>452行目でnqueenを引数2を渡して呼び出して3行目に進みます。</p>
+<p>row=2,for=0,1,2,3 で450行目のフラグを見てみましょう</p>
+<p>row=2,i=0<br>
+FA[i]->FA[0]==1<br>
+FAフラグに引っかかります</p>
+<p>row=2,i=1<br>
+FA[i]->FA[1]==0<br>
+FB[row-i+(size-1)]->FB[2-1+(4-1)]->FB[4]==0<br>
+FC[row+i]->FC[2+1]->FC[3]==1<br>
+FCフラグに引っかかります</p>
+<p>row=2,i=2<br>
+FA[i]->FA[2]==1<br>
+FAフラグに引っかかります</p>
+<p>row=2,i=3<br>
+FA[i]->FA[3]==0<br>
+FB[row-i+(size-1)]->FB[2-3+(4-1)]->FB[2]==0<br>
+FBフラグに引っかかります</p>
+<p>i=3までだめなのでfor文を抜けます。<br>
+for文を抜けると再帰を抜け2行目の処理(row=1)に戻ります。<br>
+row=1,i=2</p>
+<p>453行目でフラグを落とします<br>
+今の状態のフラグが以下の通りです。</p>
+<p>FA<br>
+FA[2]=1 のフラグを0にします。</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=1--&gt;FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+FB[2]=1 のフラグを0にします。</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=0
+FB[2]=1--&gt;FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+FC[3]=1 のフラグを0にします。</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1--&gt;FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>447行目で次のfor文に進みi=3となります。</p>
+<p>448行目のABOARD[1]=3で2行目の右から4列目にクイーンを設置します。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/q5.png>
+<img src=https://suzukiiichiro.github.io/q5.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>450行目でフラグをチェックします<br>
+row=1,i=3<br>
+フラグをチェックしてみましょう。<br>
+FA[i]->FA[3]==0<br>
+FB[row-i+(size-1)]->FB[1-3+(4-1)]->FB[1]==0<br>
+FC[row+i]->FC[1+3]->FC[4]==0<br>
+FA,FB,FCいずれのフラグチェックもクリアしますので451行目のif文に入ります。</p>
+<p>451行目でフラグをたてると以下のようになります。</p>
+<p>FA<br>
+FA[3]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+FB[1]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+FC[4]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/q6.png>
+<img src=https://suzukiiichiro.github.io/q6.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>452行目でnqueenを引数2を渡して呼び出して3行目に進みます。 <br>
+再帰呼び出しなのでrow=2の状態でメソッドの先頭439行目に移動します。 <br>
+row=2なので446行目の else: に移動します。 <br>
+447行目のfor文に入りi=0からスタートします。 <br>
+448行目のABOARD[2]=0で3行目の右端にクイーンを設置します。</p>
+<p>450行目でフラグをチェックします<br>
+row=2,i=0<br>
+FA[i]->FA[0]==1<br>
+FAフラグに引っかかります</p>
+<p>447行目で次のfor文に進みi=1となります。</p>
+<p>448行目のABOARD[2]=1で3行目の右から2列目にクイーンを設置します。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/q7.png>
+<img src=https://suzukiiichiro.github.io/q7.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>450行目でフラグをチェックします<br>
+row=2,i=1<br>
+フラグをチェックしてみましょう。<br>
+FA[i]->FA[1]==0<br>
+FB[row-i+(size-1)]->FB[2-1+(4-1)]->FB[4]==0<br>
+FC[row+i]->FC[2+1]->FC[3]==0</p>
+<p>FA,FB,FCいずれのフラグチェックもクリアしますので451行目のif文に入ります。</p>
+<p>451行目でフラグをたてると以下のようになります。</p>
+<p>FA<br>
+FA[1]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+FB[4]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=1
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+FC[3]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1
+FC[4]=1
+FC[5]=0
+FC[6]=0
+
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/q8.png>
+<img src=https://suzukiiichiro.github.io/q8.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+ビジュアル的にみると4行目にクイーンを置ける場所はなさそうですね。<br>
+プログラムでの動きを見てみましょう</p>
+<p>452行目でnqueenを引数3を渡して呼び出して3行目に進みます。</p>
+<p>再帰呼び出しなのでrow=3の状態でメソッドの先頭439行目に移動します。 <br>
+row=2なので446行目の else: に移動します。<br>
+447行目のfor文に入りi=0からスタートします。<br>
+i=0,1,2,3での450行目のフラグ判定を見てみましょう</p>
+<p>row=3,i=0<br>
+FA[i]->FA[0]==1<br>
+FAフラグに引っかかります</p>
+<p>row=3,i=1<br>
+FA[i]->FA[1]==1<br>
+FAフラグに引っかかります</p>
+<p>row=3,i=2<br>
+FA[i]->FA[2]==0<br>
+FB[row-i+(size-1)]->FB[3-2+(4-1)]->FB[4]==1<br>
+FBフラグに引っかかります</p>
+<p>row=2,i=3<br>
+FA[i]->FA[3]==0<br>
+FAフラグに引っかかります</p>
+<p>i=3までだめなのでfor文を抜けます。<br>
+for文を抜けると再帰を抜け3行目の処理(row=2)に戻ります。<br>
+row=2,i=1の状態で452行目の直後に移動します。<br>
+453行目でフラグを落とします<br>
+今の状態のフラグが以下の通りです。</p>
+<p>FA<br>
+FA[1]=1 のフラグを0にします。</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+FB[4]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+FC[3]=1 のフラグを1にします。</p>
+<pre tabindex=0><code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>フラグを落としたら447行目次のfor文にいきます。<br>
+row=2,i=2<br>
+row=2,i=3<br>
+いずれも450行目のフラグに引っかかります。<br>
+i=3までだめなのでfor文を抜けます。<br>
+for文を抜けると再帰を抜け2行目の処理(row=1)に戻ります。<br>
+row=1,i=3の状態で452行目の直後に移動します。<br>
+すでにi=3の状態ですからそのままfor文をぬけ再帰を抜けて1行目の処理(row=0)に戻ります。<br>
+row=0,i=0<br>
+453行目でフラグを落としますが1行目ですのでまっさらな状態になります。</p>
+<p>447行目で次のfor文に移動します。<br>
+row=0,i=1ですので448行目のABOARD[0]=1 で1行目の右から2列目にクイーンをおきます。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q9.png>
+<img src=https://suzukiiichiro.github.io/q9.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+1個目のクイーンなので当然配置フラグはどれもOの状態ですから450行目のif FA[0] == 0 FB[row-i+(size-1)] == 0 FC[row+i] == 0の条件を満たしてif文の中に入ります。<br>
+451行目でフラグを立てます<br>
+row=0,i=1なので<br>
+FA<br>
+FA[1]=1で</p>
+<pre tabindex=0><code>FA[0]=0
+FA[1]=1
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+row-i+(size-1)<br>
+0-1+(4-1)=2<br>
+FB[2]=1</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=0
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+row+i<br>
+0+1=0<br>
+FC[1]=1</p>
+<pre tabindex=0><code>FC[0]=0
+FC[1]=1
+FC[2]=0
+FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q10.png>
+<img src=https://suzukiiichiro.github.io/q10.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>452行目でnqueenを引数1を渡して呼び出して2行目に進みます。</p>
+<p>図だと2行目でクイーンを置けるのは4列目だけです。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/q11.png>
+<img src=https://suzukiiichiro.github.io/q11.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>447行目のfor文の中でrow=1 i=0,1,2の時にいずれも450行目の配置フラグの制御に引っかかって次のfor文に進みます。</p>
+<p>row=1,i=3の時に450行目の配置フラグを通り抜けられます。</p>
+<p>FA[i]->FA[3]==0<br>
+FB[row-i+(size-1)]->FB[1-3+(4-1)]->FB[1]==0<br>
+FC[row+i]->FC[1+3]->FC[4]==0</p>
+<p>451行目でフラグを立てると以下の図になります。</p>
+<p><figure>
+<a href=https://suzukiiichiro.github.io/q12.png>
+<img src=https://suzukiiichiro.github.io/q12.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure></p>
+<p>row=1,i=3なので<br>
+FA<br>
+FA[3]=1で</p>
+<pre tabindex=0><code>FA[0]=0
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+row-i+(size-1)<br>
+1-3+(4-1)=1<br>
+FB[1]=1</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=1
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=0
+FB[6]=0
+
+</code></pre><p>FC<br>
+row+i<br>
+1+3=0<br>
+FC[4]=1</p>
+<pre tabindex=0><code>FC[0]=0
+FC[1]=1
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+
+</code></pre><p>452行目でrow=2でnqueenを再帰で呼び出します。<br>
+row=2の時はi=0の時にクイーンを置くことができます。<br>
+<figure>
+<a href=https://suzukiiichiro.github.io/q13.png>
+<img src=https://suzukiiichiro.github.io/q13.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+451行目でフラグを立てると以下の図になります。<br>
+row=2,i=0なので<br>
+FA<br>
+FA[0]=1で</p>
+<pre tabindex=0><code>FA[0]=1
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+</code></pre><p>FB<br>
+row-i+(size-1)<br>
+2-0+(4-1)=5<br>
+FB[5]=1</p>
+<pre tabindex=0><code>FB[0]=0
+FB[1]=1
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=1
+FB[6]=0
+
+</code></pre><p>FC<br>
+row+i<br>
+2+0=2<br>
+FC[2]=1</p>
+<pre tabindex=0><code>FC[0]=0
+FC[1]=1
+FC[2]=1
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+
+</code></pre><p><figure>
+<a href=https://suzukiiichiro.github.io/q14.png>
+<img src=https://suzukiiichiro.github.io/q14.png loading=lazy alt=図>
+</a>
+<figcaption>図</figcaption>
+</figure><br>
+図で見ると最終行で右から3番目にクイーンが置けそうです。</p>
+<p>452行目でrow=3でnqueenを再帰で呼び出します。<br>
+row=3,i=2でフラグをチェックしてみましょう。</p>
+<p>FA[i]->FA[2]==0<br>
+FB[row-i+(size-1)]->FB[3-2+(4-1)]->FB[4]==0<br>
+FC[row+i]->FC[3+2]->FC[5]==0</p>
+<p>450行目のフラグチェックと通過するので<br>
+452行目でrow=4でnqueenを再帰で呼び出すことができます。<br>
+row=4で再帰を呼び出すと<br>
+if row== size : のif文に入り<br>
+TOTAL +=1 で総数がカウントされます。<br>
+445行目の処理が終わると再帰を抜けて上の行に戻ります。</p>
+<p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class="section related-contents--wrapper">
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
-<article class="has-image article-item" data-date=2021.12.25>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<article class="has-image article-item" data-date=2021.12.22>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 「UNIXという考え方―その設計思想と哲学」　メモ">
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error.jpg loading=lazy alt="Featured image of post hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -483,9 +720,28 @@ suzuki:x:1001:
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.25</time>
-</div><p class=article-subtitle>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
+<h2 class=article-title>hugo で failed to unmarshal YAML: yaml: control characters are not allowed エラー</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div><p class=article-subtitle>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.22>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg loading=lazy alt="Featured image of post デザイナーでもできる初めてのHUGO #01">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHUGO #01</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div><p class=article-subtitle>CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。...</p>
 </div>
 </a>
 </article>
@@ -603,25 +859,6 @@ suzuki:x:1001:
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.02.09>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-echo-suzki/bash.jpg loading=lazy alt="Featured image of post （１）【echo】シェルスクリプトコマンド活用紹介">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>（１）【echo】シェルスクリプトコマンド活用紹介</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.09</time>
-</div><p class=article-subtitle>「echo」はメッセージなどを表示するコマンドです。「echo メッセージ」でメッセージを表示します。「echo $変数名」で環境変数やシェル変数を表示する際にも使用います。</p>
-</div>
-</a>
-</article>
 </div>
 </section>
 <footer class=article-footer>
@@ -629,24 +866,24 @@ suzuki:x:1001:
 <div class=article-pager>
 <div class=article-pager--next>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg loading=lazy data-key data-hash=/posts/2022-01-28-01-wyoshi/img11.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-14-01-kill-suzuki/bash.jpg>
 </div>
 <div class=article-details>
-<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2>
+<h2 class=article-title>（6）【kill】シェルスクリプトコマンド活用紹介</h2>
 </div>
 </a>
 </article>
 </div>
 <div class=article-pager--prev>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess.jpg loading=lazy data-key data-hash=/posts/2022-01-27-01-ani/chess.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-13-01-less-suzuki/bash.jpg>
 </div>
 <div class=article-details>
-<h2 class=article-title>第1回 pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2>
+<h2 class=article-title>（6）【less】シェルスクリプトコマンド活用紹介</h2>
 </div>
 </a>
 </article>

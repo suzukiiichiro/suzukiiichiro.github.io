@@ -647,7 +647,592 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
-&lt;!-- EOF --></description></item><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
+&lt;!-- EOF --></description></item><item><title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</link><pubDate>Mon, 14 Feb 2022 09:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/chess.jpg" alt="Featured image of post 第7回 pythonでNQueen（エイトクイーン）バックトラック（3）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
+&lt;p>今回も引き続きバックトラックを説明していきたいと思います。 &lt;br>
+前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの再帰とバックトラックの動きについて図で示しながら説明していきたいとおもいます。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。&lt;br>
+&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py&lt;/a>&lt;/p>
+&lt;h2 id="おさらい">おさらい&lt;/h2>
+&lt;p>ブルートフォース、配置フラグからのおさらいとして次の点を押さえておきましょう。 &lt;br>
+・448行目のABOARD[row]=i はクイーンを配置する動きです。 &lt;br>
+・452行目のnqueen(row+1)は再帰でnqueenメソッドを動かしていますがこれは次の行に進む動きです。 &lt;br>
+・444,445は最終行(4行目)までクイーンを置ききった後にTOTALに1加算しています。フラグチェックを通過して最終行まで到達すれば正解と判断して良いからです。&lt;/p>
+&lt;p>再帰でnqueenメソッドを呼び出したときは、当然のことなのですがメソッドの先頭439行目に移動します。&lt;br>
+引数で渡されたrow、size以外のローカル変数はすべて初期化された状態になります。&lt;/p>
+&lt;p>・再帰から抜ける部分は2箇所あります。&lt;br>
+一つ目は、444,445行目で最終行(4行目)までクイーンを置ききった後にTOTALを加算する時&lt;/p>
+&lt;p>二つ目は、447行目のfor文がSIZE数の数(N=4だと3)だけ回りきったあとです。&lt;/p>
+&lt;p>再帰から抜けたときは再帰を呼び出した452行目のすぐ後ろからスタートします。&lt;br>
+ローカル変数の状態は再帰を呼び出す直前の状態になります。&lt;br>
+1行前に戻るような動きとなります。&lt;/p>
+&lt;p>ちなみに447行目のfor i in range(SIZE)は右端から左端に1個ずつクイーンを置こうとする動きです。&lt;br>
+左端までクイーンを置ききったらfor文を抜けるイメージです。&lt;/p>
+&lt;p>450行目のif FA[i] == 0 and FB[row-i+(size-1)] == 0 and FC[row+i] == 0:でFA,FB,FCの配置フラグで利き筋をチェックしています。&lt;br>
+FAが上下の利き筋&lt;br>
+FBが左対角線上の利き筋&lt;br>
+FCが右対角線上の利き筋&lt;br>
+をチェックしています&lt;/p>
+&lt;h2 id="nqueen-メソッドの動き">nqueen メソッドの動き&lt;/h2>
+&lt;p>467行目のnqueen(0,i)からスタートします。&lt;br>
+メソッドの先頭439行目に移動します。&lt;br>
+row=0なので446行目の else: に移動します。&lt;br>
+447行目のfor文に入りi=0からスタートします。&lt;br>
+448行目のABOARD[0]=0で1行目の右端にクイーンを設置します。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q1.png" >
+&lt;img src="https://suzukiiichiro.github.io/q1.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+1個目のクイーンなので当然配置フラグはどれもOの状態ですから450行目のif FA[0] == 0 FB[row-i+(size-1)] == 0 FC[row+i] == 0の条件を満たしてif文の中に入ります。&lt;/p>
+&lt;p>451行目でフラグを立てますが以下のようになります。&lt;br>
+配列の個数は2&lt;em>MAX-1 MAX=16なので31個ですが31個必要なのはN=16の時です。&lt;br>
+N=4のときは2&lt;/em>4-1で7個あれば足ります。&lt;/p>
+&lt;p>row=0,i=0なので&lt;br>
+FA&lt;br>
+FA[0]=1で&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+row-i+(size-1)&lt;br>
+0-0+(4-1)=3&lt;br>
+FB[3]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=0
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+row+i&lt;br>
+0+0=0&lt;br>
+FC[0]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q2.png" >
+&lt;img src="https://suzukiiichiro.github.io/q2.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>452行目でnqueenを引数1を渡して呼び出して2行目に進みます。&lt;/p>
+&lt;p>図だと2行目でクイーンを置けるのは3,4列目ですがプログラムの動きではどうなるのか見てみましょう。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=1の状態でメソッドの先頭439行目に移動します。&lt;br>
+row=1なので446行目の else: に移動します。&lt;br>
+447行目のfor文に入りi=0からスタートします。&lt;br>
+448行目のABOARD[1]=0で2行目の右端にクイーンを設置します。&lt;br>
+1行目で既に右端にクイーンを設置していますのでFA[0]は1になりますので450行目のif FA[i]==0の条件を満たしません。&lt;/p>
+&lt;p>if文に入らずに次のfor文に進みます。&lt;br>
+この部分が配置フラグの制御になります。&lt;br>
+この処理のおかげで上下、左右対角線上の利き筋に引っかかる場合は次の行に移動するのをやめ探索を効率化することができます。&lt;/p>
+&lt;p>447行目で次のfor文に進みi=1となります。&lt;/p>
+&lt;p>448行目のABOARD[1]=1で2行目の右から2列目にクイーンを設置します。&lt;/p>
+&lt;p>450行目でフラグをチェックします&lt;/p>
+&lt;p>FAのフラグの状態は以下の通りです&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>i=1&lt;br>
+FA[1]==0ですのでFAフラグは通過します。&lt;/p>
+&lt;p>FBのフラグの状態は以下の通りです&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=0
+FB[1]=0
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>row=1,i=1&lt;br>
+row-i+(size-1)&lt;br>
+1-1+(4-1)=3&lt;br>
+FB[3]==1ですのでFBフラグは通過しません&lt;br>
+左対角線上の利き筋に引っかかることになります。&lt;/p>
+&lt;p>447行目で次のfor文に進みi=2となります。&lt;/p>
+&lt;p>448行目のABOARD[1]=2で2行目の右から3列目にクイーンを設置します。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q3.png" >
+&lt;img src="https://suzukiiichiro.github.io/q3.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>450行目でフラグをチェックします&lt;br>
+row=1,i=2&lt;br>
+FA[2]==0なのでFAのフラグは通過しますFB[row-i+(size-1)-&amp;gt;FB[1-2+(4-1)]-&amp;gt;FB[2]==0なのでFBフラグは通過します&lt;br>
+FC[row+i]-&amp;gt;FC[1+2]-&amp;gt;FC[3]==0なのでFCフラグも通過します&lt;/p>
+&lt;p>if 文の中に入って451行目でフラグをたてます&lt;/p>
+&lt;p>FA&lt;br>
+FA[2]=1で&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=1
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+FB[2]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=0
+FB[2]=1
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+FC[3]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1
+FC[4]=0
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>ビジュアルで利き筋をみてみると以下の通りです。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q4.png" >
+&lt;img src="https://suzukiiichiro.github.io/q4.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+3行目にクイーンを置ける場所はなさそうです。&lt;/p>
+&lt;p>452行目でnqueenを引数2を渡して呼び出して3行目に進みます。&lt;/p>
+&lt;p>row=2,for=0,1,2,3 で450行目のフラグを見てみましょう&lt;/p>
+&lt;p>row=2,i=0&lt;br>
+FA[i]-&amp;gt;FA[0]==1&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>row=2,i=1&lt;br>
+FA[i]-&amp;gt;FA[1]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[2-1+(4-1)]-&amp;gt;FB[4]==0&lt;br>
+FC[row+i]-&amp;gt;FC[2+1]-&amp;gt;FC[3]==1&lt;br>
+FCフラグに引っかかります&lt;/p>
+&lt;p>row=2,i=2&lt;br>
+FA[i]-&amp;gt;FA[2]==1&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>row=2,i=3&lt;br>
+FA[i]-&amp;gt;FA[3]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[2-3+(4-1)]-&amp;gt;FB[2]==0&lt;br>
+FBフラグに引っかかります&lt;/p>
+&lt;p>i=3までだめなのでfor文を抜けます。&lt;br>
+for文を抜けると再帰を抜け2行目の処理(row=1)に戻ります。&lt;br>
+row=1,i=2&lt;/p>
+&lt;p>453行目でフラグを落とします&lt;br>
+今の状態のフラグが以下の通りです。&lt;/p>
+&lt;p>FA&lt;br>
+FA[2]=1 のフラグを0にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=1--&amp;gt;FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+FB[2]=1 のフラグを0にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=0
+FB[2]=1--&amp;gt;FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+FC[3]=1 のフラグを0にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1--&amp;gt;FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>447行目で次のfor文に進みi=3となります。&lt;/p>
+&lt;p>448行目のABOARD[1]=3で2行目の右から4列目にクイーンを設置します。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q5.png" >
+&lt;img src="https://suzukiiichiro.github.io/q5.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>450行目でフラグをチェックします&lt;br>
+row=1,i=3&lt;br>
+フラグをチェックしてみましょう。&lt;br>
+FA[i]-&amp;gt;FA[3]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[1-3+(4-1)]-&amp;gt;FB[1]==0&lt;br>
+FC[row+i]-&amp;gt;FC[1+3]-&amp;gt;FC[4]==0&lt;br>
+FA,FB,FCいずれのフラグチェックもクリアしますので451行目のif文に入ります。&lt;/p>
+&lt;p>451行目でフラグをたてると以下のようになります。&lt;/p>
+&lt;p>FA&lt;br>
+FA[3]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+FB[1]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+FC[4]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q6.png" >
+&lt;img src="https://suzukiiichiro.github.io/q6.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>452行目でnqueenを引数2を渡して呼び出して3行目に進みます。 &lt;br>
+再帰呼び出しなのでrow=2の状態でメソッドの先頭439行目に移動します。 &lt;br>
+row=2なので446行目の else: に移動します。 &lt;br>
+447行目のfor文に入りi=0からスタートします。 &lt;br>
+448行目のABOARD[2]=0で3行目の右端にクイーンを設置します。&lt;/p>
+&lt;p>450行目でフラグをチェックします&lt;br>
+row=2,i=0&lt;br>
+FA[i]-&amp;gt;FA[0]==1&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>447行目で次のfor文に進みi=1となります。&lt;/p>
+&lt;p>448行目のABOARD[2]=1で3行目の右から2列目にクイーンを設置します。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q7.png" >
+&lt;img src="https://suzukiiichiro.github.io/q7.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>450行目でフラグをチェックします&lt;br>
+row=2,i=1&lt;br>
+フラグをチェックしてみましょう。&lt;br>
+FA[i]-&amp;gt;FA[1]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[2-1+(4-1)]-&amp;gt;FB[4]==0&lt;br>
+FC[row+i]-&amp;gt;FC[2+1]-&amp;gt;FC[3]==0&lt;/p>
+&lt;p>FA,FB,FCいずれのフラグチェックもクリアしますので451行目のif文に入ります。&lt;/p>
+&lt;p>451行目でフラグをたてると以下のようになります。&lt;/p>
+&lt;p>FA&lt;br>
+FA[1]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+FB[4]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=1
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+FC[3]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=1
+FC[4]=1
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q8.png" >
+&lt;img src="https://suzukiiichiro.github.io/q8.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+ビジュアル的にみると4行目にクイーンを置ける場所はなさそうですね。&lt;br>
+プログラムでの動きを見てみましょう&lt;/p>
+&lt;p>452行目でnqueenを引数3を渡して呼び出して3行目に進みます。&lt;/p>
+&lt;p>再帰呼び出しなのでrow=3の状態でメソッドの先頭439行目に移動します。 &lt;br>
+row=2なので446行目の else: に移動します。&lt;br>
+447行目のfor文に入りi=0からスタートします。&lt;br>
+i=0,1,2,3での450行目のフラグ判定を見てみましょう&lt;/p>
+&lt;p>row=3,i=0&lt;br>
+FA[i]-&amp;gt;FA[0]==1&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>row=3,i=1&lt;br>
+FA[i]-&amp;gt;FA[1]==1&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>row=3,i=2&lt;br>
+FA[i]-&amp;gt;FA[2]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[3-2+(4-1)]-&amp;gt;FB[4]==1&lt;br>
+FBフラグに引っかかります&lt;/p>
+&lt;p>row=2,i=3&lt;br>
+FA[i]-&amp;gt;FA[3]==0&lt;br>
+FAフラグに引っかかります&lt;/p>
+&lt;p>i=3までだめなのでfor文を抜けます。&lt;br>
+for文を抜けると再帰を抜け3行目の処理(row=2)に戻ります。&lt;br>
+row=2,i=1の状態で452行目の直後に移動します。&lt;br>
+453行目でフラグを落とします&lt;br>
+今の状態のフラグが以下の通りです。&lt;/p>
+&lt;p>FA&lt;br>
+FA[1]=1 のフラグを0にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=0
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+FB[4]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=1
+FB[2]=0
+FB[3]=1
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+FC[3]=1 のフラグを1にします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=1
+FC[1]=0
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>フラグを落としたら447行目次のfor文にいきます。&lt;br>
+row=2,i=2&lt;br>
+row=2,i=3&lt;br>
+いずれも450行目のフラグに引っかかります。&lt;br>
+i=3までだめなのでfor文を抜けます。&lt;br>
+for文を抜けると再帰を抜け2行目の処理(row=1)に戻ります。&lt;br>
+row=1,i=3の状態で452行目の直後に移動します。&lt;br>
+すでにi=3の状態ですからそのままfor文をぬけ再帰を抜けて1行目の処理(row=0)に戻ります。&lt;br>
+row=0,i=0&lt;br>
+453行目でフラグを落としますが1行目ですのでまっさらな状態になります。&lt;/p>
+&lt;p>447行目で次のfor文に移動します。&lt;br>
+row=0,i=1ですので448行目のABOARD[0]=1 で1行目の右から2列目にクイーンをおきます。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q9.png" >
+&lt;img src="https://suzukiiichiro.github.io/q9.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+1個目のクイーンなので当然配置フラグはどれもOの状態ですから450行目のif FA[0] == 0 FB[row-i+(size-1)] == 0 FC[row+i] == 0の条件を満たしてif文の中に入ります。&lt;br>
+451行目でフラグを立てます&lt;br>
+row=0,i=1なので&lt;br>
+FA&lt;br>
+FA[1]=1で&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=0
+FA[1]=1
+FA[2]=0
+FA[3]=0
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+row-i+(size-1)&lt;br>
+0-1+(4-1)=2&lt;br>
+FB[2]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=0
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+row+i&lt;br>
+0+1=0&lt;br>
+FC[1]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=0
+FC[1]=1
+FC[2]=0
+FC[3]=0
+FC[4]=0
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q10.png" >
+&lt;img src="https://suzukiiichiro.github.io/q10.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>452行目でnqueenを引数1を渡して呼び出して2行目に進みます。&lt;/p>
+&lt;p>図だと2行目でクイーンを置けるのは4列目だけです。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q11.png" >
+&lt;img src="https://suzukiiichiro.github.io/q11.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>447行目のfor文の中でrow=1 i=0,1,2の時にいずれも450行目の配置フラグの制御に引っかかって次のfor文に進みます。&lt;/p>
+&lt;p>row=1,i=3の時に450行目の配置フラグを通り抜けられます。&lt;/p>
+&lt;p>FA[i]-&amp;gt;FA[3]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[1-3+(4-1)]-&amp;gt;FB[1]==0&lt;br>
+FC[row+i]-&amp;gt;FC[1+3]-&amp;gt;FC[4]==0&lt;/p>
+&lt;p>451行目でフラグを立てると以下の図になります。&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q12.png" >
+&lt;img src="https://suzukiiichiro.github.io/q12.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;/p>
+&lt;p>row=1,i=3なので&lt;br>
+FA&lt;br>
+FA[3]=1で&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=0
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+row-i+(size-1)&lt;br>
+1-3+(4-1)=1&lt;br>
+FB[1]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=1
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=0
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+row+i&lt;br>
+1+3=0&lt;br>
+FC[4]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=0
+FC[1]=1
+FC[2]=0
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>452行目でrow=2でnqueenを再帰で呼び出します。&lt;br>
+row=2の時はi=0の時にクイーンを置くことができます。&lt;br>
+&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q13.png" >
+&lt;img src="https://suzukiiichiro.github.io/q13.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+451行目でフラグを立てると以下の図になります。&lt;br>
+row=2,i=0なので&lt;br>
+FA&lt;br>
+FA[0]=1で&lt;/p>
+&lt;pre tabindex="0">&lt;code>FA[0]=1
+FA[1]=1
+FA[2]=0
+FA[3]=1
+FA[4]=0
+FA[5]=0
+FA[6]=0
+&lt;/code>&lt;/pre>&lt;p>FB&lt;br>
+row-i+(size-1)&lt;br>
+2-0+(4-1)=5&lt;br>
+FB[5]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FB[0]=0
+FB[1]=1
+FB[2]=1
+FB[3]=0
+FB[4]=0
+FB[5]=1
+FB[6]=0
+&lt;/code>&lt;/pre>&lt;p>FC&lt;br>
+row+i&lt;br>
+2+0=2&lt;br>
+FC[2]=1&lt;/p>
+&lt;pre tabindex="0">&lt;code>FC[0]=0
+FC[1]=1
+FC[2]=1
+FC[3]=0
+FC[4]=1
+FC[5]=0
+FC[6]=0
+&lt;/code>&lt;/pre>&lt;p>&lt;figure
+>
+&lt;a href="https://suzukiiichiro.github.io/q14.png" >
+&lt;img src="https://suzukiiichiro.github.io/q14.png"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+図で見ると最終行で右から3番目にクイーンが置けそうです。&lt;/p>
+&lt;p>452行目でrow=3でnqueenを再帰で呼び出します。&lt;br>
+row=3,i=2でフラグをチェックしてみましょう。&lt;/p>
+&lt;p>FA[i]-&amp;gt;FA[2]==0&lt;br>
+FB[row-i+(size-1)]-&amp;gt;FB[3-2+(4-1)]-&amp;gt;FB[4]==0&lt;br>
+FC[row+i]-&amp;gt;FC[3+2]-&amp;gt;FC[5]==0&lt;/p>
+&lt;p>450行目のフラグチェックと通過するので&lt;br>
+452行目でrow=4でnqueenを再帰で呼び出すことができます。&lt;br>
+row=4で再帰を呼び出すと&lt;br>
+if row== size : のif文に入り&lt;br>
+TOTAL +=1 で総数がカウントされます。&lt;br>
+445行目の処理が終わると再帰を抜けて上の行に戻ります。&lt;/p>
+&lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
 &lt;ul>
 &lt;li>テキストを1画面ずつ表示する&lt;/li>
 &lt;li>キー操作のヘルプを表示する&lt;/li>
@@ -1685,144 +2270,6 @@ CHAPTER13 シェルスクリプトの実用例&lt;br>
 CHAPTER14 テストとデバッグ&lt;br>
 CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応</title><link>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</link><pubDate>Tue, 08 Feb 2022 09:39:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg" alt="Featured image of post すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応" />&lt;p>みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。&lt;br>
-そのAWSからある日、下記のようなメールが届きました。&lt;/p>
-&lt;blockquote>
-&lt;p>Hello,&lt;/p>
-&lt;p>EC2 has detected degradation of the underlying hardware hosting your Amazon EC2 instance (instance-ID: [インスタンスのID]) associated with your AWS account (AWS Account ID: [ID]) in the [リージョンの場所] region.&lt;br>
-Due to this degradation your instance could already be unreachable.&lt;br>
-We will stop your instance after 日付 UTC.&lt;br>
-Please take appropriate action before this time.&lt;/p>
-&lt;p>The affected instances are listed below:&lt;/p>
-&lt;p>[インスタンスのID]&lt;/p>
-&lt;/blockquote>
-&lt;p>翻訳してみると、どうやらAWSの老朽化に伴うインスタンスの更新が必要なようです。&lt;/p>
-&lt;blockquote>
-&lt;p>こんにちは。&lt;/p>
-&lt;p>EC2は、[リージョンの場所]リージョンにあるお客様のAWSアカウント（AWSアカウントID：[ID]）に関連するAmazon EC2インスタンス（インスタンスID：Instance-ID）をホストする基礎ハードウェアの劣化を検出しました。&lt;br>
-この劣化により、お客様のインスタンスはすでに到達不能になっている可能性があります。日付 UTC以降にお客様のインスタンスを停止します。&lt;br>
-それまでに適切な対処をお願いいたします。&lt;/p>
-&lt;p>影響を受けるインスタンスは以下の通りです。&lt;br>
-[インスタンスのID]&lt;/p>
-&lt;/blockquote>
-&lt;p>老朽化の通知をしてくれるのは非常にありがたいですが、EC2の適切な対処ってなんだ？と焦ってしまう方もいるかと思います。&lt;br>
-今回は「Amazon EC2 Instance Retirement」というタイトルのメールが来た際の対処法について説明いたします。&lt;/p>
-&lt;h2 id="ec2のイベントを確認">EC2のイベントを確認&lt;/h2>
-&lt;p>まずはAWSにログインして、EC2の項目に移動します。&lt;br>
-左袖に、「&lt;strong>イベント&lt;/strong>」という項目があるので、クリックして内容を確認しましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 148;
-flex-basis: 356px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png" data-size="980x660">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png"
-width="980"
-height="660"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>今回は「イベントステータス」部分に「Scheduled」と記述され、「イベントタイプ」が「instance-stop」となっている項目がありました。&lt;br>
-リソースIDをAWSのメールと照らし合わせて、該当のインスタンスということがわかります。&lt;/p>
-&lt;p>「説明」の部分にも見切れていますが、「The instance is running on degraded hardware（インスタンスが劣化したハードウェアで動作している）」と記述されていました。&lt;br>
-進行状況から14日以内にインスタンスが停止してしまうので、「Amazon EC2 Instance Retirement」というメールが来たら、早めにAWSへログインして状況を確認するようにしましょう。&lt;/p>
-&lt;h2 id="ec2のルートを確認">EC2のルートを確認&lt;/h2>
-&lt;p>次に、該当のインスタンスの&lt;strong>ルートデバイスタイプ&lt;/strong>を確認します。&lt;br>
-前回のリソースID部分をクリックして、「インスタンスの概要」へ移動します。そして、「ストレージ」をクリックして「ルートデバイスタイプ」を確認しましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 535;
-flex-basis: 1285px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png" data-size="980x183">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png"
-width="980"
-height="183"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>この部分が「&lt;strong>EBS&lt;/strong>」となっている場合は、対応が非常に簡単です。&lt;br>
-その対応を方法は次のようになります。&lt;/p>
-&lt;h2 id="ec2を停止そして起動">EC2を停止、そして起動&lt;/h2>
-&lt;p>「Amazon EC2 Instance Retirement」の対応はルートデバイスがEBSの場合は、対象のインスタンスを一度「&lt;strong>インスタンスを停止&lt;/strong>」させてから「&lt;strong>インスタンスを開始&lt;/strong>」するだけで対応できてしまいます。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 250;
-flex-basis: 601px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png" data-size="980x391">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png"
-width="980"
-height="391"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;p>「インスタンスを停止」して「インスタンスを開始」だから、要するに「インスタンスを再起動」ってことでしょ？と考えてしまうかもしれません。&lt;br>
-しかし、「インスタンスを再起動」の場合はEC2のハードウェアが変わらないため、今回のハードウェアのアップデートが行われません。&lt;br>
-ですので、「インスタンスを停止」させてから「インスタンスを開始」するようにして、EC2を実行するハードウェアをAWS側が自動的に変更するようにしましょう。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 335;
-flex-basis: 805px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png" data-size="980x292">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png"
-width="980"
-height="292"
-loading="lazy"
->
-&lt;/a>
-&lt;/figure>&lt;/p>
-&lt;div class="tips-area tips">
-&lt;dl>
-&lt;dt>ルートデバイスタイプが「instant store」の場合&lt;/dt>
-&lt;dd>ルートデバイスが「instant store」の場合はEBSと対応が変わります。
-&lt;ol>
-&lt;li>まず、EC2インスタンスからイメージを作成します。&lt;/li>
-&lt;li>次に、さきほど作成したイメージを利用し、別のEC2インスタンスを立ち上げます。&lt;/li>
-&lt;li>そして、元のEC2インスタンスを削除します&lt;/li>
-&lt;/ol>
-&lt;/dd>
-&lt;/dl>
-&lt;/div>
-&lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>「Amazon EC2 Instance Retirement」というメールが来た場合、焦らずに対応できるようにしておきましょう。&lt;br>
-EBSの場合は「&lt;strong>インスタンスを停止&lt;/strong>」させてから「&lt;strong>インスタンスを開始&lt;/strong>」。&lt;br>
-instant storeの場合は、イメージを作成して、立ち上げて該当インスタンスを削除。&lt;br>
-これさえ覚えておけば、大丈夫です。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e5%9b%b3%e8%a7%a3%e5%8d%b3%e6%88%a6%e5%8a%9b-Amazon-Web-Services%e3%81%ae%e3%81%97%e3%81%8f%e3%81%bf%e3%81%a8%e6%8a%80%e8%a1%93%e3%81%8c%e3%81%93%e3%82%8c1%e5%86%8a%e3%81%a7%e3%81%97%e3%81%a3%e3%81%8b%e3%82%8a%e3%82%8f%e3%81%8b%e3%82%8b%e6%95%99%e7%a7%91%e6%9b%b8-%e5%b0%8f%e7%ac%a0%e5%8e%9f/dp/4297108895/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51AEyJOSYaL.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 図解即戦力 Amazon Web Servicesのしくみと技術がこれ1冊でしっかりわかる教科書 &lt;/h2>
-&lt;p> 【「ITエンジニア本大賞2021」技術書部門 入賞! 】 Amazon Web Servicesのしくみがすぐにわかる! Amazon Web Services(AWS)のしくみや関連技術についてわかりやすく解説する図解本です。エンジニア1年生、IT業界などへの転職・就職を目指す人が、AWS関連の用語、しくみ、クラウドとネットワークの基礎技術などを一通り学ぶことのできる、1冊目の入門書としてふさわしい内容を目指します。&lt;/p>
-&lt;span class="link">Amazonで詳細を見る&lt;/span>
-&lt;/div>
-&lt;/a>
-&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/%e8%a6%81%e7%82%b9%e6%95%b4%e7%90%86%e3%81%8b%e3%82%89%e6%94%bb%e7%95%a5%e3%81%99%e3%82%8b%e3%80%8eAWS%e8%aa%8d%e5%ae%9a-%e3%83%87%e3%83%bc%e3%82%bf%e3%83%99%e3%83%bc%e3%82%b9-%e5%b0%82%e9%96%80%e7%9f%a5%e8%ad%98%e3%80%8f-Compass-Books%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba-NRI%e3%83%8d%e3%83%83%e3%83%88%e3%82%b3%e3%83%a0%e6%a0%aa%e5%bc%8f%e4%bc%9a%e7%a4%be/dp/4839975078/?tag=nlpqueens-22" target="_blank">
-&lt;div class="columns amazon-image">
-&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51svKeJL9KS.jpg">
-&lt;/div>
-&lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name"> 要点整理から攻略する『AWS認定 データベース-専門知識』 (Compass Booksシリーズ) &lt;/h2>
-&lt;p> 「AWS 認定 データベース」に頻出する内容を1冊にまとめました! ■AWS認定とは AWS 認定試験は、AWSに関する知識・スキルを測るための試験です。レベル別・カテゴリー別に認定され、基礎コース・アソシエイト・プロフェッショナルの3つのレベルと、ネットワークやセキュリティなど分野ごとの専門知識(スペシャリティ)があります。&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
