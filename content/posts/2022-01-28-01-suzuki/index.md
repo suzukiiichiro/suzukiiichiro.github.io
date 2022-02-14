@@ -5,7 +5,7 @@ date: 2022-01-28T14:02:55+09:00
 draft: false
 image: linux.jpg
 categories:
-  - サーバー構築
+  - server
   - programming
 tags:
   - Linux
