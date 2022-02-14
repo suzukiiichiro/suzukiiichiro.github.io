@@ -1,4 +1,4 @@
----
+-t-
 authors: suzuki
 title: "iPadに開発環境を構築してみるテスト"
 date: 2022-01-28T14:02:55+09:00
