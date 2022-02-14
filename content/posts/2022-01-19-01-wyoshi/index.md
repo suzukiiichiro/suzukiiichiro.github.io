@@ -8,12 +8,12 @@ authors: wyoshi
 
 description: "今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。"
 categories:
-  - Web開発
+  - web
 tags:
   - プログラム
   - デザイナー
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - HTML
   - CSS

@@ -7,12 +7,12 @@ authors: wyoshi
 image: intro.png
 
 categories:
-  - Web開発
+  - Web
 tags:
   - プログラム
   - デザイナー
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - HTML
   - CSS

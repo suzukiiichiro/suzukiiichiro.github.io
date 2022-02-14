@@ -5,7 +5,7 @@ draft: false
 authors: wyoshi
 image: settings.jpg
 categories:
-  - Web開発
+  - web
 tags:
   - Hugo
   - GitHub

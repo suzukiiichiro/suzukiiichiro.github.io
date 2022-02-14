@@ -8,12 +8,12 @@ authors: wyoshi
 description: "2022年に注目すべきトレンドを紹介します。モバイルアプリ開発の新しいトレンドが数多く出現していますが、ここでは、詳細な事実に基づいた調査の結果、モバイルアプリ開発のトレンドのTOP15を取り上げます。"
 
 categories:
-  - Web開発
+  - web
 tags:
   - プログラム
   - デザイナー
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - HTML
   - CSS

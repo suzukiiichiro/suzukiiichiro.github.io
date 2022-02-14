@@ -5,12 +5,12 @@ draft: false
 image: "2021-12-21.jpg"
 authors: wyoshi
 categories:
-  - Web開発
+  - web
 tags:
   - Hugo
   - Web
   - デザイン
-  - Web開発
+  - web
   - 開発
   - HTML
   - Webデザイナー

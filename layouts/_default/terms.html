@@ -11,22 +11,23 @@
   <div class="archives-group terms-top">
     <h1 class="title">{{- $title -}}</h1>
     {{- $lists := .Data.Terms.Alphabetical -}}
+
     <nav id="terms-nav">
       <ul>
         {{- range $lists }}
-        <li><a href="#{{ .Name }}">{{- .Name -}}</a></li>
+        <li><a href="#{{ .Name }}">{{- .Page.Title  -}}</a></li>
         {{ end }}
       </ul>
     </nav>
     {{- range $lists }}
     <section id="{{ .Name }}">
-      <h1 class="archives-date section-title">{{- .Name -}}</h1>
+      <h2 class="archives-date section-title">{{- .Page.Title  -}}</h2>
       <div class="article-list related-contents--wrapper">
       {{ range first 6 .Pages }}
         {{ partial "article-list/default" . }}
       {{ end }}
       </div>
-      <div class="link-btns"><a href="{{- .Page.Permalink -}}">{{ .Name }}をもっと見る</a></div>
+      <div class="link-btns"><a href="{{- .Page.Permalink -}}">{{ .Page.Title  }}をもっと見る</a></div>
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424"
      crossorigin="anonymous"></script>
         <!-- categories-top -->
