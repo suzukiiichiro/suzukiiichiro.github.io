@@ -1,0 +1,1041 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU">
+<title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
+<link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
+<meta property="og:title" content="CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="Web開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="CSS"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="Webテクニック"><meta property="article:tag" content="最新トレンド"><meta property="article:published_time" content="2022-02-14T12:33:28+09:00"><meta property="article:modified_time" content="2022-02-14T12:34:25+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png">
+<meta name=twitter:title content="CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-14-01-wyoshi/intro.png'})</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png"],"datePublished":"2022-02-14T12:33:28+09:00","dateModified":"2022-02-14T12:34:25+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Web開発","item":"https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/>
+<img src=https://suzukiiichiro.github.io/images/logo.png class=site-logo loading=lazy alt>
+</a></div>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_69>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/ class=font_size_21>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%A7%8B%E7%AF%89/ class=font_size_2>
+サーバー構築
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/>
+<span>Sitemap</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/>
+<span>Ranking</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/>
+<span>Archives</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/>
+<span>Privacy</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/>
+<span>Search</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<div id=btn-mode>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li>
+</div>
+</div>
+<main class="main full-width">
+<nav class=breadcrumb-area>
+<ol class=breadcrumb>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
+<li><span class=breadcrumb-item>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</span>
+</ol>
+</nav>
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/web%E9%96%8B%E7%99%BA/>
+Web開発
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/wYoshi.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/wyoshi/>wYoshi</a></span>
+</span>
+<time class="article-time--item article-time--published">2022.02.14</time>
+<time class="article-time--item article-time--reading">
+読了時間: 11分
+</time>
+</div>
+</header>
+<h1 class=article-title>
+CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法
+</h1>
+</div>
+<section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#scroll-snapを使用する理由>scroll-snapを使用する理由</a></li>
+<li><a href=#スクロールコンテナーの基本>スクロールコンテナーの基本</a></li>
+<li><a href=#従来の問題>従来の問題</a></li>
+<li><a href=#cssスクロールスナップの紹介>CSSスクロールスナップの紹介</a>
+<ol>
+<li><a href=#scroll-snap-type>scroll-snap-type</a>
+<ol>
+<li><a href=#スクロールスナップコンテナーの軸について>スクロールスナップコンテナーの軸について</a></li>
+<li><a href=#スクロールスナップコンテナーの精密さ>スクロールスナップコンテナーの精密さ</a></li>
+</ol>
+</li>
+<li><a href=#スクロールスナップの方向>スクロールスナップの方向</a>
+<ol>
+<li><a href=#スクロールコンテナーの-start>スクロールコンテナーの <code>start</code></a></li>
+<li><a href=#スクロールコンテナーの-center>スクロールコンテナーの <code>center</code></a></li>
+<li><a href=#スクロールコンテナーの-end>スクロールコンテナーの <code>end</code></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#scroll-snap-stopを使う>scroll-snap-stopを使う</a></li>
+<li><a href=#スクロールスナップのpadding>スクロールスナップのpadding</a></li>
+<li><a href=#-スクロールスナップのmargin>## スクロールスナップのmargin</a></li>
+<li><a href=#cssスクロールスナップの使用例>CSSスクロールスナップの使用例</a>
+<ol>
+<li><a href=#画像リスト>画像リスト</a></li>
+<li><a href=#友達リスト>友達リスト</a></li>
+<li><a href=#アバターリスト>アバターリスト</a></li>
+<li><a href=#全画面を覆うような要素>全画面を覆うような要素</a></li>
+</ol>
+</li>
+<li><a href=#ブロックおよびインラインの値>ブロックおよびインラインの値</a></li>
+<li><a href=#アクセシビリティ>アクセシビリティ</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#オススメの書籍>オススメの書籍</a></li>
+</ol>
+</nav>
+</div>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class=article-content>
+<p><strong>出典元</strong>：<a class=link href=https://ishadeed.com/article/css-scroll-snap/ target=_blank rel=noopener> CSS Scroll Snap - Ahmad Shadeed </a></p>
+<p>アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを作成しようとすると、専用のjavascriptやライブラリを使用する必要があったりと実装が大変です。<br>
+しかし、CSSスクロールスナップは横スクロールしてスナップするといった動作を行うことができます。</p>
+<p>この記事では、CSSスクロールスナップ（scroll-snap）の基本について説明します。</p>
+<h2 id=scroll-snapを使用する理由>scroll-snapを使用する理由</h2>
+<p>スマホやタブレットの普及で、タッチでスワイプできる画面を設計、構築する必要があるかと思います。<br>
+たとえば、ギャラリー風のデザインを考えてみましょう。ユーザーは、階層構造ではなく、左または右に簡単にスワイプして、より多くの画像を表示できます。</p>
+<p><figure class=gallery-image style=flex-grow:197;flex-basis:473px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png data-size=980x497>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png width=980 height=497 loading=lazy>
+</a>
+</figure></p>
+<p><a class=link href=https://drafts.csswg.org/css-scroll-snap-1/#intro target=_blank rel=noopener>CSSの仕様</a>によると、CSSスクロールスナップを導入することでユーザーエクスペリエンスが向上し、スクロールの実装が容易になり、ユーザーと開発者、双方にメリットがあるということです。</p>
+<h2 id=スクロールコンテナーの基本>スクロールコンテナーの基本</h2>
+<p>スクロールコンテナーを作成するために必要な基本的なものは次のとおりです。</p>
+<ul>
+<li>overflowをvisible以外の値で使用</li>
+<li>項目を隣同士（インライン）に表示す</li>
+</ul>
+<p>例を見てみましょう。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 1<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 2<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 3<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 4<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 5<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>white-space</span><span class=p>:</span> <span class=kc>nowrap</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>以前までは<code>white-space: nowrap</code>を使用することで要素を横並びで表示するようにしていました。<br>
+近年では、この方法の代わりに<code>Flexbox</code>を使用することで表現可能です。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:420;flex-basis:1009px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png data-size=980x233>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png width=980 height=233 loading=lazy>
+</a>
+</figure></p>
+<p>これは、スクロールコンテナーを作成するための基本的な構成です。<br>
+しかし、これだけではスクロールコンテナーの機能としては不十分です。</p>
+<h2 id=従来の問題>従来の問題</h2>
+<p>従来の問題は、スワイプの仕組みと比較して、優れたUXが提供されないことです。タッチスクリーンでのスワイプジェスチャの主な利点は、1本の指で水平または垂直にスクロールできることです。<br>
+以前のソリューションでは、ただスクロールするだけです。文字通り、各アイテムをそれぞれの場所に移動する必要があります。これはスワイプではなく、ユーザーにとって非常にストレスを与える結果になってしまします。<br>
+CSSスクロールスナップを使用すると、ユーザーが水平方向または垂直方向にスクロールしやすくなるスナップポイントを定義するだけで、この問題を解決できます。</p>
+<p>CSSスクロールスナップの使用方法を見てみましょう。</p>
+<h2 id=cssスクロールスナップの紹介>CSSスクロールスナップの紹介</h2>
+<p>コンテナーでスクロールスナップを使用するには、その子アイテムをinlineで表示する必要があります。これは、上記で説明した方法の1つで実行できます。 CSSフレックスボックスを使用します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 1<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 2<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 3<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 4<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section__item&#34;</span><span class=p>&gt;</span>Item 5<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>さらに、スクロールスナップを機能させるために2つのプロパティを追加します。<br>
+まず、スクロールコンテナーに<code>scroll-snap-type</code>を追加します。この例では、これは<code>.section</code>要素です。<br>
+次に、子アイテム（<code>.section__item</code>）に<code>scroll-snap-align</code>を追加します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>mandatory</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>section__item</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><code>x mandatory</code>と<code>start</code>の値についてはじめて見たと思われるかもしれませんが、この部分が今回の記事のメインになる部分です。</p>
+<p>これらのプロパティにより、スクロールコンテナーの開始位置にスナップすることが可能になって、スクロールがより自然になりました。<br>
+それでは、スクロールスナップのプロパティについて詳しく見ていきましょう。</p>
+<h3 id=scroll-snap-type>scroll-snap-type</h3>
+<p><a class=link href=https://drafts.csswg.org/css-scroll-snap-1/#@40@ target=_blank rel=noopener>CSSの仕様</a> によると、<code>scroll-snap-type</code>は、ある要素がスクロールスナップコンテナーであるかどうか、どの程度厳密にスナップするか、どの軸を考慮するかを指定するものです。</p>
+<p>それを解析してみましょう。</p>
+<h4 id=スクロールスナップコンテナーの軸について>スクロールスナップコンテナーの軸について</h4>
+<p>スクロールスナップコンテナーの軸は、スクロールの方向を表します。水平または垂直にできます。<br>
+xの値は水平方向のスクロールを、yの値は垂直方向のスクロールを表します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=c>/* Horizontal */</span>
+<span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=c>/* Vertical */</span>
+<span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>250</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>overflow-y</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>y</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:262;flex-basis:628px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png data-size=980x374>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png width=980 height=374 loading=lazy>
+</a>
+</figure></p>
+<h4 id=スクロールスナップコンテナーの精密さ>スクロールスナップコンテナーの精密さ</h4>
+<p>スクロールスナップの方向だけでなく、その精密さも定義できます。<br>
+これは、<code>scroll-snap-type</code>値に<code>mandatory | proximity</code>のいずれかの値を使用することで可能です。</p>
+<p><code>mandatory</code>は、ブラウザが各スクロールポイントにスナップする必要があることを意味します。<code>scroll-snap-align</code>プロパティの値が<code>start</code>であると仮定してみましょう。つまり、スクロールはスクロールコンテナーの開始点にスナップする必要があります。</p>
+<p>下図では、ユーザーが右方向にスクロールするたび、ブラウザはコンテナーの開始点にアイテムをスナップさせます。</p>
+<p><figure class=gallery-image style=flex-grow:185;flex-basis:444px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png data-size=980x529>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png width=980 height=529 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>mandatory</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>section__item</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>下のデモで右方向にスクロールしてみてください。スクロールバーを右に移動させるか、スマートフォンやタブレットの場合はタッチ操作で行ってください。各アイテムがコンテナーの始まりにスナップする様子が感じられるはずです。</p>
+<script async src=//jsfiddle.net/wyoshi/uzo5ag2q/1/embed/result,html,css/></script>
+<p>しかし、値が<code>proximity</code>の場合は、ブラウザが作業を行います。定義された点（この例では<code>start</code>）にスナップするかもしれません<code>。proximity</code>はデフォルトの値ですが、わかりやすくするために追加しておきます。</p>
+<p><figure class=gallery-image style=flex-grow:185;flex-basis:444px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png data-size=980x529>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png width=980 height=529 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=c>/* proximityはデフォルト値です。 */</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>proximity</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><h3 id=スクロールスナップの方向>スクロールスナップの方向</h3>
+<p>スクロールコンテナーの子アイテムには、スナップできるアライメントポイントが必要です。<br>
+<code>start</code>、<code>center</code>、<code>end</code>のいずれかを使用します。</p>
+<p><figure class=gallery-image style=flex-grow:188;flex-basis:452px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png data-size=980x520>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png width=980 height=520 loading=lazy>
+</a>
+</figure></p>
+<p>スクロールコンテナーに磁石があり、スナップポイントを制御するのに役立つと想像してみてください。<br>
+<code>scroll-snap-type</code>が垂直の場合、スナップの配置は垂直になります。次の図を参照してください。</p>
+<p><figure class=gallery-image style=flex-grow:188;flex-basis:452px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png data-size=980x520>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png width=980 height=520 loading=lazy>
+</a>
+</figure></p>
+<p>これをより明確にするため、 <code>start</code> 、<code>center</code>、および<code>end</code>の以下のアニメーションを参照してください。</p>
+<h4 id=スクロールコンテナーの-start>スクロールコンテナーの <code>start</code></h4>
+<script async src=//jsfiddle.net/wyoshi/csnuyvg8/7/embed/result/></script>
+<p>子アイテムは、水平スクロールコンテナーの先頭にスナップします。</p>
+<h4 id=スクロールコンテナーの-center>スクロールコンテナーの <code>center</code></h4>
+<script async src=//jsfiddle.net/wyoshi/csnuyvg8/8/embed/result/></script>
+<p>子アイテムは、スクロールコンテナーの中央にスナップします。</p>
+<h4 id=スクロールコンテナーの-end>スクロールコンテナーの <code>end</code></h4>
+<script async src=//jsfiddle.net/wyoshi/csnuyvg8/9/embed/result/></script>
+<p>子アイテムは、スクロールコンテナーの最後にスナップします。</p>
+<h2 id=scroll-snap-stopを使う>scroll-snap-stopを使う</h2>
+<p>ユーザーがあまりに速くスクロールするなど、スクロール中にユーザーが誤って重要な項目をスキップしてしまうのを防ぐ方法が必要な場合もあります。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section__item</span> <span class=p>{</span>
+  <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+  <span class=n>scroll-snap-stop</span><span class=p>:</span> <span class=kc>normal</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><script async src=//jsfiddle.net/wyoshi/csnuyvg8/11/embed/result/></script>
+<p>スクロールのスピードが速すぎる（勢いよくスクロールする）と、3つも4つも項目が飛ばされることもあります。</p>
+<p><code>scroll-snap-stop</code> のデフォルト値は<code>normal</code>です。スクロールを強制的にすべての可能なポイントにスナップするには、<code>always</code>を使用する必要があります。 <code>scroll-snap-stop: always</code>を使用すると、ブラウザは各スナップポイントで停止します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section__item</span> <span class=p>{</span>
+  <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+  <span class=n>scroll-snap-stop</span><span class=p>:</span> <span class=kc>always</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>そうすれば、ユーザーは1つずつスナップポイントをスクロールしていくことができ、重要な項目をスキップすることを避けることができます。<br>
+各ストップポイントにストップサインがあることを想像してください。</p>
+<script async src=//jsfiddle.net/wyoshi/csnuyvg8/51/embed/result/></script>
+<p>デモで下のスクロールを試して、オプションを切り替えてみてください。</p>
+<script async src=//jsfiddle.net/wyoshi/7b95e0xj/2/embed/result/></script>
+<h2 id=スクロールスナップのpadding>スクロールスナップのpadding</h2>
+<p><code>scroll-padding</code>短縮形プロパティは、<code>padding</code>プロパティの動作と同様に、すべての側面にスクロールパディングを設定します。<br>
+下図では、スクロールコンテナーの左側に50pxのパディングが設定されています。その結果、子要素は左端から50pxずれた位置にスナップします。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>mandatory</span><span class=p>;</span>
+  <span class=n>scroll-padding</span><span class=p>:</span> <span class=mi>0</span> <span class=mi>0</span> <span class=mi>0</span> <span class=mi>50</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:298;flex-basis:717px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png data-size=980x328>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png width=980 height=328 loading=lazy>
+</a>
+</figure></p>
+<p>同じことが垂直スクロールでも機能します。以下の例を参照してください。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>overflow-y</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>y</span> <span class=kc>mandatory</span><span class=p>;</span>
+  <span class=n>scroll-padding</span><span class=p>:</span> <span class=mi>50</span><span class=kt>px</span> <span class=mi>0</span> <span class=mi>0</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:288;flex-basis:691px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png data-size=980x340>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png width=980 height=340 loading=lazy>
+</a>
+</figure></p>
+<h2 id=-スクロールスナップのmargin>## スクロールスナップのmargin</h2>
+<p><code>scroll-margin</code>ショートハンドプロパティは、スクロールコンテナーの子アイテム間の間隔を設定します。要素にマージンが追加されると、マージンに応じてスクロールがスナップします。下図を参照してください。</p>
+<p><figure class=gallery-image style=flex-grow:232;flex-basis:557px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png data-size=980x422>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png width=980 height=422 loading=lazy>
+</a>
+</figure></p>
+<p><code>.item-2</code>は<code>scroll-margin-left: 20px</code>となっています。その結果、スクロールコンテナーはそのアイテムの手前20pxにスナップします。ユーザーが再び右にスクロールしたとき、<code>.item-3</code>はスクロールコンテナーの開始位置にスナップすることに注意してください。つまり、マージンを持つ要素のみが影響を受けることになります。</p>
+<h2 id=cssスクロールスナップの使用例>CSSスクロールスナップの使用例</h2>
+<h3 id=画像リスト>画像リスト</h3>
+<p>CSSスクロールスナップの優れた使用例として、画像のリストが挙げられます。スクロールスナップを使用することで、より良いスクロール体験を提供します。</p>
+<p><figure class=gallery-image style=flex-grow:309;flex-basis:741px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png data-size=980x317>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png width=980 height=317 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>images-list</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span><span class=p>;</span>
+  <span class=n>gap</span><span class=p>:</span> <span class=mi>1</span><span class=kt>rem</span><span class=p>;</span>
+  <span class=kp>-webkit-</span><span class=n>overflow-scrolling</span><span class=p>:</span> <span class=n>touch</span><span class=p>;</span> <span class=c>/* Important for iOS devices */</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>images-list</span> <span class=nt>img</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><code>scroll-snap-type</code>の値として<code>x</code>を使用したことに注意してください。スナップの厳密さは、デフォルトでは<code>proximity</code>になります。</p>
+<script async src=//jsfiddle.net/wyoshi/d3azwnjr/embed/result,html,css/></script>
+<h3 id=友達リスト>友達リスト</h3>
+<p>スクロールスナップのもう1つの優れた使用例として、友達のリストがあります。以下の例は、Facebookから引用したものです（実例）。</p>
+<p><figure class=gallery-image style=flex-grow:224;flex-basis:538px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png data-size=980x437>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png width=980 height=437 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>list</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>mandatory</span><span class=p>;</span>
+  <span class=n>gap</span><span class=p>:</span> <span class=mi>1</span><span class=kt>rem</span><span class=p>;</span>
+  <span class=n>scroll-padding</span><span class=p>:</span> <span class=mi>48</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>padding-bottom</span><span class=p>:</span> <span class=mi>32</span><span class=kt>px</span><span class=p>;</span>
+  <span class=kp>-webkit-</span><span class=n>overflow-scrolling</span><span class=p>:</span> <span class=n>touch</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>list-item</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>スクロールするコンテナーにはpadding-bottomがあることに注意してください。32pxです。この目的は、ボックスシャドウが期待どおりに表示されるように余分なスペースを提供することです。</p>
+<p><figure class=gallery-image style=flex-grow:224;flex-basis:538px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png data-size=980x437>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png width=980 height=437 loading=lazy>
+</a>
+</figure></p>
+<h3 id=アバターリスト>アバターリスト</h3>
+<p>今回の使用例では、子アイテムの<code>scroll-snap-align</code>の値として<code>center</code>を使用しています。</p>
+<p><figure class=gallery-image style=flex-grow:148;flex-basis:355px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png data-size=980x661>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png width=980 height=661 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>list</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>overflow-x</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>x</span> <span class=kc>mandatory</span><span class=p>;</span>
+  <span class=kp>-webkit-</span><span class=n>overflow-scrolling</span><span class=p>:</span> <span class=n>touch</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>list-item</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>これはアバターのリストで、アバターがスクロールするコンテナーの中央にあることが重要な場合に便利です。</p>
+<script async src=//jsfiddle.net/wyoshi/d3azwnjr/2/embed/result,html,css/></script>
+<h3 id=全画面を覆うような要素>全画面を覆うような要素</h3>
+<p>スクロールスナップの使用は、縦スクロールの場合にも有効です。この例として、フルハイトのセクションがあります。</p>
+<p><figure class=gallery-image style=flex-grow:157;flex-basis:378px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png data-size=980x621>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png width=980 height=621 loading=lazy>
+</a>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section section-1&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section section-2&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section section-3&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section section-4&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;section section-5&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>main</span><span class=p>&gt;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>main</span> <span class=p>{</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>vh</span><span class=p>;</span>
+  <span class=k>overflow-y</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>y</span> <span class=kc>mandatory</span><span class=p>;</span>
+  <span class=kp>-webkit-</span><span class=n>overflow-scrolling</span><span class=p>:</span> <span class=n>touch</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>.</span><span class=nc>section</span> <span class=p>{</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>vh</span><span class=p>;</span>
+  <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><script async src=//jsfiddle.net/wyoshi/d3azwnjr/4/embed/result,html,css/></script>
+<h2 id=ブロックおよびインラインの値>ブロックおよびインラインの値</h2>
+<p>特筆すべきは、<code>scroll-snap-type</code>に<code>inline</code>と<code>block</code>という論理値を使用できることです。以下の例を参照してください。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>main</span> <span class=p>{</span>
+  <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=kc>inline</span> <span class=kc>mandatory</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p>この例では、英語のような横書きモードでは、<code>inline</code>が横方向の寸法を表します。日本語のような言語では、<code>inline</code>は縦方向の寸法を表すことになります。<br>
+CSSの論理プロパティについてもっと知りたい方は、<a class=link href=https://adrianroselli.com/2019/11/css-logical-properties.html target=_blank rel=noopener>Adrian Roselliの記事</a> をご覧ください。</p>
+<h2 id=アクセシビリティ>アクセシビリティ</h2>
+<p>CSSスクロールスナップを使用する際は、アクセシビリティを確保すること。ここでは、ユーザーがコンテンツを自由にスクロールして読むことを妨げる、スクロールスナップの悪い使い方を紹介します。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>wrapper</span> <span class=p>{</span>
+ <span class=k>scroll-snap-type</span><span class=p>:</span> <span class=n>y</span> <span class=kc>mandatory</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h2</span> <span class=p>{</span>
+ <span class=n>scroll-snap-align</span><span class=p>:</span> <span class=kc>start</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></div><p><figure class=gallery-image style=flex-grow:181;flex-basis:434px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png data-size=980x541>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png width=980 height=541 loading=lazy>
+</a>
+</figure></p>
+<p>デモのような実装は絶対にしないでください。</p>
+<script async src=//jsfiddle.net/wyoshi/d3azwnjr/6/embed/result/></script>
+<h2 id=まとめ>まとめ</h2>
+<p>以上が<code>scroll-snap</code>機能についてになります。今までスナップするスクロールを実装する場合はjsを使用していましたが、cssのみで実装可能となると簡単になりますね。</p>
+<h2 id=オススメの書籍>オススメの書籍</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/HTML5-CSS3-%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%ac%e3%82%b7%e3%83%94%e9%9b%86-%e7%8b%a9%e9%87%8e-%e7%a5%90%e6%9d%b1/dp/4774187801/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://images-fe.ssl-images-amazon.com/images/I/51Xd7nz7WbL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> HTML5 & CSS3 デザインレシピ集 </h2>
+<p> 本書は、HTML5とCSS3によるWebサイト制作のための"おいしい"レシピ集です。 制作の現場で使われる定番テクニックから、プロ技まで余すところなく集めました。 テキスト/リスト/リンク/画像/ボックス/ テーブル/フォーム/ナビゲーション/ レイアウト/レスポンシブWebデザイン… テーマ別にレシピを整理しているので、引きやすくなっています。 「あのデザインはどう作るんだろう?」が、スグにわかります。 デザイナーからWebプログラマーまで、Web制作に携わるすべての方にお届けします。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/HTML5%ef%bc%8bCSS3%e3%81%ae%e6%96%b0%e3%81%97%e3%81%84%e6%95%99%e7%a7%91%e6%9b%b8-%e6%94%b9%e8%a8%82%e6%96%b0%e7%89%88-%e5%9f%ba%e7%a4%8e%e3%81%8b%e3%82%89%e8%a6%9a%e3%81%88%e3%82%8b%e3%80%81%e6%b7%b1%e3%81%8f%e7%90%86%e8%a7%a3%e3%81%a7%e3%81%8d%e3%82%8b%e3%80%82-%e8%b5%a4%e9%96%93-%e5%85%ac%e5%a4%aa%e9%83%8e-ebook/dp/B07GPH7R3Y/?tag=nlpqueens-22" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://m.media-amazon.com/images/I/41eG3HJF4pL.jpg>
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name> HTML5＋CSS3の新しい教科書　改訂新版　基礎から覚える、深く理解できる。 </h2>
+<p> この商品は固定レイアウトで作成されており、タブレットなど大きいディスプレイを備えた端末で読むことに適しています。また、文字列のハイライトや検索、辞書の参照、引用などの機能が使用できません。 〈電子書籍版に関する注意事項〉 本書は固定レイアウト型の電子書籍です。リフロー型と異なりビューア機能が制限されるほか、端末によって見え方が異なりますので、ご購入前にお使いの端末にて「無料サンプル」をお試しください。 【技術の進化に左右されないWebサイトの作り方がわかる！】 Web制作のプロを目指す方に向けて、HTML5+CSS3を使ったWebサイトの作り方を解説した入門書の改訂版。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</section>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<section class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch.jpg loading=lazy alt="Featured image of post 2022年のウェブデザインのトレンドとレイアウト">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のウェブデザインのトレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年のトレンドは、より大胆で、よりクリエイティブで、よりインタラクティブなデザインに移行しています。2022年に期待されるトレンドを取り入れ、新しい年のクリエイティビティを高めてください。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch.jpg loading=lazy alt="Featured image of post Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Javascriptを使わないで、CSSでもできる。開発者が知っておくべき重要なCSSのヒントとコツ 8選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>今までJavascriptを用いていたことがCSSでできるようになっているかもしれません。プロジェクトを迅速かつ効率的に開発するために、これらのCSSのトリックを知っている必要があります。あなたの生産性を次のレベルに確実に向上させます。それでは始めてみましょう。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch.jpg loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch.png loading=lazy alt="Featured image of post 第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回「Webデザイナー、コーダーってなに？」〜 未経験でもWebデザイナー、コーダーになろう</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回は「Webデザイナー、コーダーってなに？」です。「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コーダーができるだけわかりやすく、Webサイトをデザインしたり、作ったりする方法は情報を伝える講座です。 初心者の方、そうでない方など、いろいろな方大歓迎です。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.18>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch.jpg loading=lazy alt="Featured image of post ファビコンは1サイズのみでいい。さらにダークモード対応させる">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>ファビコンは1サイズのみでいい。さらにダークモード対応させる</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.18</time>
+</div><p class=article-subtitle>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりまし...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.28>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11.jpg loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.28</time>
+</div><p class=article-subtitle>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch.jpg loading=lazy alt="Featured image of post Amazon EC2でもGo言語とHugoを使えるようにする方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.27</time>
+</div><p class=article-subtitle>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして...</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch.jpg loading=lazy alt="Featured image of post HUGOでxmlやファイルを複数出力する方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で...</p>
+</div>
+</a>
+</article>
+</div>
+</section>
+<footer class=article-footer>
+</footer>
+<div class=article-pager>
+<div class=article-pager--prev>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-14-01-kill-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（6）【kill】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<div class="sidebar right-sidebar sticky">
+<aside class=widget>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png loading=lazy data-key data-hash=/posts/2022-02-14-01-wyoshi/intro.png>
+</div>
+<div class=article-details>
+<h2 class=article-title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-14-01-kill-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（6）【kill】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-13-01-less-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（6）【less】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-13-01-more-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（5）【more】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-11-01-tail-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（４）【tail】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-13-01-more-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（5）【more】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-13-01-less-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（6）【less】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-11-01-tail-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（４）【tail】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg loading=lazy data-key data-hash=/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg loading=lazy data-key data-hash=/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>「UNIXという考え方―その設計思想と哲学」　メモ</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-25-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-14-25-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【２５．ファイルに追加】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-09-01-cat-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（２）【cat】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+2022年02月（18）
+</option><option value=/archives/#2022年01月>
+2022年01月（59）
+</option><option value=/archives/#2021年12月>
+2021年12月（15）
+</option></select>
+</section>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-14-08-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-02-02-01-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep.jpg loading=lazy data-key data-hash=/posts/2022-01-24-01-suzuki/grep.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-13-01-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト３</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-14-02-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【２．echo コマンド】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-07-01-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト１」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-12-01-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト２</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript.jpg loading=lazy data-key data-hash=/posts/2022-01-14-10-suzuki/shellscript.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux.jpg loading=lazy data-key data-hash=/posts/2022-01-28-01-suzuki/linux.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>iPadに開発環境を構築してみるテスト</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash.jpg loading=lazy data-key data-hash=/posts/2022-02-10-01-head-suzuki/bash.jpg>
+</div>
+<div class=article-details>
+<h2 class=article-title>（３）【head】シェルスクリプトコマンド活用紹介</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</section>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  
+  
+
+  
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>

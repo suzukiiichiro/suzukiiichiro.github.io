@@ -1,4 +1,496 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 14 Feb 2022 11:39:03 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>（6）【kill】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</link><pubDate>Mon, 14 Feb 2022 11:39:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg" alt="Featured image of post （6）【kill】シェルスクリプトコマンド活用紹介" />&lt;h2 id="killコマンド">killコマンド&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 14 Feb 2022 12:33:28 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" alt="Featured image of post CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
+> CSS Scroll Snap - Ahmad Shadeed &lt;/a>&lt;/p>
+&lt;p>アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを作成しようとすると、専用のjavascriptやライブラリを使用する必要があったりと実装が大変です。&lt;br>
+しかし、CSSスクロールスナップは横スクロールしてスナップするといった動作を行うことができます。&lt;/p>
+&lt;p>この記事では、CSSスクロールスナップ（scroll-snap）の基本について説明します。&lt;/p>
+&lt;h2 id="scroll-snapを使用する理由">scroll-snapを使用する理由&lt;/h2>
+&lt;p>スマホやタブレットの普及で、タッチでスワイプできる画面を設計、構築する必要があるかと思います。&lt;br>
+たとえば、ギャラリー風のデザインを考えてみましょう。ユーザーは、階層構造ではなく、左または右に簡単にスワイプして、より多くの画像を表示できます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 197;
+flex-basis: 473px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" data-size="980x497">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png"
+width="980"
+height="497"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>&lt;a class="link" href="https://drafts.csswg.org/css-scroll-snap-1/#intro" target="_blank" rel="noopener"
+>CSSの仕様&lt;/a>によると、CSSスクロールスナップを導入することでユーザーエクスペリエンスが向上し、スクロールの実装が容易になり、ユーザーと開発者、双方にメリットがあるということです。&lt;/p>
+&lt;h2 id="スクロールコンテナーの基本">スクロールコンテナーの基本&lt;/h2>
+&lt;p>スクロールコンテナーを作成するために必要な基本的なものは次のとおりです。&lt;/p>
+&lt;ul>
+&lt;li>overflowをvisible以外の値で使用&lt;/li>
+&lt;li>項目を隣同士（インライン）に表示す&lt;/li>
+&lt;/ul>
+&lt;p>例を見てみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 2&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 3&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 4&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 5&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">white-space&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">nowrap&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以前までは&lt;code>white-space: nowrap&lt;/code>を使用することで要素を横並びで表示するようにしていました。&lt;br>
+近年では、この方法の代わりに&lt;code>Flexbox&lt;/code>を使用することで表現可能です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 420;
+flex-basis: 1009px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png" data-size="980x233">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png"
+width="980"
+height="233"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これは、スクロールコンテナーを作成するための基本的な構成です。&lt;br>
+しかし、これだけではスクロールコンテナーの機能としては不十分です。&lt;/p>
+&lt;h2 id="従来の問題">従来の問題&lt;/h2>
+&lt;p>従来の問題は、スワイプの仕組みと比較して、優れたUXが提供されないことです。タッチスクリーンでのスワイプジェスチャの主な利点は、1本の指で水平または垂直にスクロールできることです。&lt;br>
+以前のソリューションでは、ただスクロールするだけです。文字通り、各アイテムをそれぞれの場所に移動する必要があります。これはスワイプではなく、ユーザーにとって非常にストレスを与える結果になってしまします。&lt;br>
+CSSスクロールスナップを使用すると、ユーザーが水平方向または垂直方向にスクロールしやすくなるスナップポイントを定義するだけで、この問題を解決できます。&lt;/p>
+&lt;p>CSSスクロールスナップの使用方法を見てみましょう。&lt;/p>
+&lt;h2 id="cssスクロールスナップの紹介">CSSスクロールスナップの紹介&lt;/h2>
+&lt;p>コンテナーでスクロールスナップを使用するには、その子アイテムをinlineで表示する必要があります。これは、上記で説明した方法の1つで実行できます。 CSSフレックスボックスを使用します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 2&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 3&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 4&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section__item&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Item 5&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>さらに、スクロールスナップを機能させるために2つのプロパティを追加します。&lt;br>
+まず、スクロールコンテナーに&lt;code>scroll-snap-type&lt;/code>を追加します。この例では、これは&lt;code>.section&lt;/code>要素です。&lt;br>
+次に、子アイテム（&lt;code>.section__item&lt;/code>）に&lt;code>scroll-snap-align&lt;/code>を追加します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">section__item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>x mandatory&lt;/code>と&lt;code>start&lt;/code>の値についてはじめて見たと思われるかもしれませんが、この部分が今回の記事のメインになる部分です。&lt;/p>
+&lt;p>これらのプロパティにより、スクロールコンテナーの開始位置にスナップすることが可能になって、スクロールがより自然になりました。&lt;br>
+それでは、スクロールスナップのプロパティについて詳しく見ていきましょう。&lt;/p>
+&lt;h3 id="scroll-snap-type">scroll-snap-type&lt;/h3>
+&lt;p>&lt;a class="link" href="https://drafts.csswg.org/css-scroll-snap-1/#@40@" target="_blank" rel="noopener"
+>CSSの仕様&lt;/a> によると、&lt;code>scroll-snap-type&lt;/code>は、ある要素がスクロールスナップコンテナーであるかどうか、どの程度厳密にスナップするか、どの軸を考慮するかを指定するものです。&lt;/p>
+&lt;p>それを解析してみましょう。&lt;/p>
+&lt;h4 id="スクロールスナップコンテナーの軸について">スクロールスナップコンテナーの軸について&lt;/h4>
+&lt;p>スクロールスナップコンテナーの軸は、スクロールの方向を表します。水平または垂直にできます。&lt;br>
+xの値は水平方向のスクロールを、yの値は垂直方向のスクロールを表します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="c">/* Horizontal */&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c">/* Vertical */&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">250&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 262;
+flex-basis: 628px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png" data-size="980x374">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png"
+width="980"
+height="374"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h4 id="スクロールスナップコンテナーの精密さ">スクロールスナップコンテナーの精密さ&lt;/h4>
+&lt;p>スクロールスナップの方向だけでなく、その精密さも定義できます。&lt;br>
+これは、&lt;code>scroll-snap-type&lt;/code>値に&lt;code>mandatory | proximity&lt;/code>のいずれかの値を使用することで可能です。&lt;/p>
+&lt;p>&lt;code>mandatory&lt;/code>は、ブラウザが各スクロールポイントにスナップする必要があることを意味します。&lt;code>scroll-snap-align&lt;/code>プロパティの値が&lt;code>start&lt;/code>であると仮定してみましょう。つまり、スクロールはスクロールコンテナーの開始点にスナップする必要があります。&lt;/p>
+&lt;p>下図では、ユーザーが右方向にスクロールするたび、ブラウザはコンテナーの開始点にアイテムをスナップさせます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 185;
+flex-basis: 444px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png" data-size="980x529">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png"
+width="980"
+height="529"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">section__item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>下のデモで右方向にスクロールしてみてください。スクロールバーを右に移動させるか、スマートフォンやタブレットの場合はタッチ操作で行ってください。各アイテムがコンテナーの始まりにスナップする様子が感じられるはずです。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/uzo5ag2q/1/embed/result,html,css/">&lt;/script>
+&lt;p>しかし、値が&lt;code>proximity&lt;/code>の場合は、ブラウザが作業を行います。定義された点（この例では&lt;code>start&lt;/code>）にスナップするかもしれません&lt;code>。proximity&lt;/code>はデフォルトの値ですが、わかりやすくするために追加しておきます。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 185;
+flex-basis: 444px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png" data-size="980x529">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png"
+width="980"
+height="529"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c">/* proximityはデフォルト値です。 */&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">proximity&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="スクロールスナップの方向">スクロールスナップの方向&lt;/h3>
+&lt;p>スクロールコンテナーの子アイテムには、スナップできるアライメントポイントが必要です。&lt;br>
+&lt;code>start&lt;/code>、&lt;code>center&lt;/code>、&lt;code>end&lt;/code>のいずれかを使用します。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 188;
+flex-basis: 452px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png" data-size="980x520">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png"
+width="980"
+height="520"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>スクロールコンテナーに磁石があり、スナップポイントを制御するのに役立つと想像してみてください。&lt;br>
+&lt;code>scroll-snap-type&lt;/code>が垂直の場合、スナップの配置は垂直になります。次の図を参照してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 188;
+flex-basis: 452px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png" data-size="980x520">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png"
+width="980"
+height="520"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>これをより明確にするため、 &lt;code>start&lt;/code> 、&lt;code>center&lt;/code>、および&lt;code>end&lt;/code>の以下のアニメーションを参照してください。&lt;/p>
+&lt;h4 id="スクロールコンテナーの-start">スクロールコンテナーの &lt;code>start&lt;/code>&lt;/h4>
+&lt;script async src="//jsfiddle.net/wyoshi/csnuyvg8/7/embed/result/">&lt;/script>
+&lt;p>子アイテムは、水平スクロールコンテナーの先頭にスナップします。&lt;/p>
+&lt;h4 id="スクロールコンテナーの-center">スクロールコンテナーの &lt;code>center&lt;/code>&lt;/h4>
+&lt;script async src="//jsfiddle.net/wyoshi/csnuyvg8/8/embed/result/">&lt;/script>
+&lt;p>子アイテムは、スクロールコンテナーの中央にスナップします。&lt;/p>
+&lt;h4 id="スクロールコンテナーの-end">スクロールコンテナーの &lt;code>end&lt;/code>&lt;/h4>
+&lt;script async src="//jsfiddle.net/wyoshi/csnuyvg8/9/embed/result/">&lt;/script>
+&lt;p>子アイテムは、スクロールコンテナーの最後にスナップします。&lt;/p>
+&lt;h2 id="scroll-snap-stopを使う">scroll-snap-stopを使う&lt;/h2>
+&lt;p>ユーザーがあまりに速くスクロールするなど、スクロール中にユーザーが誤って重要な項目をスキップしてしまうのを防ぐ方法が必要な場合もあります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section__item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-snap-stop&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">normal&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;script async src="//jsfiddle.net/wyoshi/csnuyvg8/11/embed/result/">&lt;/script>
+&lt;p>スクロールのスピードが速すぎる（勢いよくスクロールする）と、3つも4つも項目が飛ばされることもあります。&lt;/p>
+&lt;p>&lt;code>scroll-snap-stop&lt;/code> のデフォルト値は&lt;code>normal&lt;/code>です。スクロールを強制的にすべての可能なポイントにスナップするには、&lt;code>always&lt;/code>を使用する必要があります。 &lt;code>scroll-snap-stop: always&lt;/code>を使用すると、ブラウザは各スナップポイントで停止します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section__item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-snap-stop&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">always&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>そうすれば、ユーザーは1つずつスナップポイントをスクロールしていくことができ、重要な項目をスキップすることを避けることができます。&lt;br>
+各ストップポイントにストップサインがあることを想像してください。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/csnuyvg8/51/embed/result/">&lt;/script>
+&lt;p>デモで下のスクロールを試して、オプションを切り替えてみてください。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/7b95e0xj/2/embed/result/">&lt;/script>
+&lt;h2 id="スクロールスナップのpadding">スクロールスナップのpadding&lt;/h2>
+&lt;p>&lt;code>scroll-padding&lt;/code>短縮形プロパティは、&lt;code>padding&lt;/code>プロパティの動作と同様に、すべての側面にスクロールパディングを設定します。&lt;br>
+下図では、スクロールコンテナーの左側に50pxのパディングが設定されています。その結果、子要素は左端から50pxずれた位置にスナップします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 298;
+flex-basis: 717px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png" data-size="980x328">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png"
+width="980"
+height="328"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>同じことが垂直スクロールでも機能します。以下の例を参照してください。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">overflow-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 288;
+flex-basis: 691px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png" data-size="980x340">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png"
+width="980"
+height="340"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h2 id="-スクロールスナップのmargin">## スクロールスナップのmargin&lt;/h2>
+&lt;p>&lt;code>scroll-margin&lt;/code>ショートハンドプロパティは、スクロールコンテナーの子アイテム間の間隔を設定します。要素にマージンが追加されると、マージンに応じてスクロールがスナップします。下図を参照してください。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 232;
+flex-basis: 557px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png" data-size="980x422">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png"
+width="980"
+height="422"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>&lt;code>.item-2&lt;/code>は&lt;code>scroll-margin-left: 20px&lt;/code>となっています。その結果、スクロールコンテナーはそのアイテムの手前20pxにスナップします。ユーザーが再び右にスクロールしたとき、&lt;code>.item-3&lt;/code>はスクロールコンテナーの開始位置にスナップすることに注意してください。つまり、マージンを持つ要素のみが影響を受けることになります。&lt;/p>
+&lt;h2 id="cssスクロールスナップの使用例">CSSスクロールスナップの使用例&lt;/h2>
+&lt;h3 id="画像リスト">画像リスト&lt;/h3>
+&lt;p>CSSスクロールスナップの優れた使用例として、画像のリストが挙げられます。スクロールスナップを使用することで、より良いスクロール体験を提供します。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 309;
+flex-basis: 741px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png" data-size="980x317">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png"
+width="980"
+height="317"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">images-list&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">gap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">rem&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">overflow-scrolling&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">touch&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c">/* Important for iOS devices */&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">images-list&lt;/span> &lt;span class="nt">img&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>scroll-snap-type&lt;/code>の値として&lt;code>x&lt;/code>を使用したことに注意してください。スナップの厳密さは、デフォルトでは&lt;code>proximity&lt;/code>になります。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/d3azwnjr/embed/result,html,css/">&lt;/script>
+&lt;h3 id="友達リスト">友達リスト&lt;/h3>
+&lt;p>スクロールスナップのもう1つの優れた使用例として、友達のリストがあります。以下の例は、Facebookから引用したものです（実例）。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 224;
+flex-basis: 538px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png" data-size="980x437">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png"
+width="980"
+height="437"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">gap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">rem&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">48&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">padding-bottom&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">overflow-scrolling&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">touch&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">list-item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクロールするコンテナーにはpadding-bottomがあることに注意してください。32pxです。この目的は、ボックスシャドウが期待どおりに表示されるように余分なスペースを提供することです。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 224;
+flex-basis: 538px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png" data-size="980x437">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png"
+width="980"
+height="437"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;h3 id="アバターリスト">アバターリスト&lt;/h3>
+&lt;p>今回の使用例では、子アイテムの&lt;code>scroll-snap-align&lt;/code>の値として&lt;code>center&lt;/code>を使用しています。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 148;
+flex-basis: 355px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png" data-size="980x661">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png"
+width="980"
+height="661"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">overflow-scrolling&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">touch&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">list-item&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>これはアバターのリストで、アバターがスクロールするコンテナーの中央にあることが重要な場合に便利です。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/d3azwnjr/2/embed/result,html,css/">&lt;/script>
+&lt;h3 id="全画面を覆うような要素">全画面を覆うような要素&lt;/h3>
+&lt;p>スクロールスナップの使用は、縦スクロールの場合にも有効です。この例として、フルハイトのセクションがあります。&lt;/p>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 157;
+flex-basis: 378px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png" data-size="980x621">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png"
+width="980"
+height="621"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">main&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section section-1&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section section-2&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section section-3&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section section-4&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;section section-5&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">main&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="nt">main&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">vh&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">overflow-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">auto&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">overflow-scrolling&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">touch&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">vh&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;script async src="//jsfiddle.net/wyoshi/d3azwnjr/4/embed/result,html,css/">&lt;/script>
+&lt;h2 id="ブロックおよびインラインの値">ブロックおよびインラインの値&lt;/h2>
+&lt;p>特筆すべきは、&lt;code>scroll-snap-type&lt;/code>に&lt;code>inline&lt;/code>と&lt;code>block&lt;/code>という論理値を使用できることです。以下の例を参照してください。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="nt">main&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">inline&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>この例では、英語のような横書きモードでは、&lt;code>inline&lt;/code>が横方向の寸法を表します。日本語のような言語では、&lt;code>inline&lt;/code>は縦方向の寸法を表すことになります。&lt;br>
+CSSの論理プロパティについてもっと知りたい方は、&lt;a class="link" href="https://adrianroselli.com/2019/11/css-logical-properties.html" target="_blank" rel="noopener"
+>Adrian Roselliの記事&lt;/a> をご覧ください。&lt;/p>
+&lt;h2 id="アクセシビリティ">アクセシビリティ&lt;/h2>
+&lt;p>CSSスクロールスナップを使用する際は、アクセシビリティを確保すること。ここでは、ユーザーがコンテンツを自由にスクロールして読むことを妨げる、スクロールスナップの悪い使い方を紹介します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">wrapper&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">scroll-snap-type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="kc">mandatory&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nt">h2&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">scroll-snap-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">start&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 181;
+flex-basis: 434px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png" data-size="980x541">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png"
+width="980"
+height="541"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
+&lt;p>デモのような実装は絶対にしないでください。&lt;/p>
+&lt;script async src="//jsfiddle.net/wyoshi/d3azwnjr/6/embed/result/">&lt;/script>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>以上が&lt;code>scroll-snap&lt;/code>機能についてになります。今までスナップするスクロールを実装する場合はjsを使用していましたが、cssのみで実装可能となると簡単になりますね。&lt;/p>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/HTML5-CSS3-%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%ac%e3%82%b7%e3%83%94%e9%9b%86-%e7%8b%a9%e9%87%8e-%e7%a5%90%e6%9d%b1/dp/4774187801/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://images-fe.ssl-images-amazon.com/images/I/51Xd7nz7WbL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> HTML5 &amp;amp; CSS3 デザインレシピ集 &lt;/h2>
+&lt;p> 本書は、HTML5とCSS3によるWebサイト制作のための&amp;#34;おいしい&amp;#34;レシピ集です。 制作の現場で使われる定番テクニックから、プロ技まで余すところなく集めました。 テキスト/リスト/リンク/画像/ボックス/ テーブル/フォーム/ナビゲーション/ レイアウト/レスポンシブWebデザイン… テーマ別にレシピを整理しているので、引きやすくなっています。 「あのデザインはどう作るんだろう?」が、スグにわかります。 デザイナーからWebプログラマーまで、Web制作に携わるすべての方にお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/HTML5%ef%bc%8bCSS3%e3%81%ae%e6%96%b0%e3%81%97%e3%81%84%e6%95%99%e7%a7%91%e6%9b%b8-%e6%94%b9%e8%a8%82%e6%96%b0%e7%89%88-%e5%9f%ba%e7%a4%8e%e3%81%8b%e3%82%89%e8%a6%9a%e3%81%88%e3%82%8b%e3%80%81%e6%b7%b1%e3%81%8f%e7%90%86%e8%a7%a3%e3%81%a7%e3%81%8d%e3%82%8b%e3%80%82-%e8%b5%a4%e9%96%93-%e5%85%ac%e5%a4%aa%e9%83%8e-ebook/dp/B07GPH7R3Y/?tag=nlpqueens-22" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41eG3HJF4pL.jpg">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name"> HTML5＋CSS3の新しい教科書　改訂新版　基礎から覚える、深く理解できる。 &lt;/h2>
+&lt;p> この商品は固定レイアウトで作成されており、タブレットなど大きいディスプレイを備えた端末で読むことに適しています。また、文字列のハイライトや検索、辞書の参照、引用などの機能が使用できません。 〈電子書籍版に関する注意事項〉 本書は固定レイアウト型の電子書籍です。リフロー型と異なりビューア機能が制限されるほか、端末によって見え方が異なりますので、ご購入前にお使いの端末にて「無料サンプル」をお試しください。 【技術の進化に左右されないWebサイトの作り方がわかる！】 Web制作のプロを目指す方に向けて、HTML5&amp;#43;CSS3を使ったWebサイトの作り方を解説した入門書の改訂版。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside></description></item><item><title>（6）【kill】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</link><pubDate>Mon, 14 Feb 2022 11:39:03 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash.jpg" alt="Featured image of post （6）【kill】シェルスクリプトコマンド活用紹介" />&lt;h2 id="killコマンド">killコマンド&lt;/h2>
 &lt;ul>
 &lt;li>killコマンドでプロセスIDを指定してプロセスを終了させる&lt;/li>
 &lt;li>killallコマンドで名前を指定してプロセスを終了させる&lt;/li>
@@ -1331,218 +1823,4 @@ instant storeの場合は、イメージを作成して、立ち上げて該当�
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>第5回 pythonでNQueen（エイトクイーン）バックトラック（１）</title><link>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</link><pubDate>Mon, 07 Feb 2022 16:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess.jpg" alt="Featured image of post 第5回 pythonでNQueen（エイトクイーン）バックトラック（１）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
-&lt;p>今回はバックトラックを説明していきたいと思います。 &lt;br>
-今回のバックトラックのロジックは前回の配置フラグの拡張版です。&lt;br>
-配置フラグは上下の利き筋までしかチェックしていませんでしたが今回のバックトラックは左右斜めの対角線上の利き筋もチェックします。&lt;br>
-上下の配置フラグの他に右斜め、左斜めの配置フラグを作ってチェックします。&lt;br>
-ブルートフォース、配置フラグでは解の候補を出すに止まりましたが、今回で左右、上下、対角線上とクイーンのすべての利き筋をチェックすることができるますので、プログラム独力で解を出せるようになります。&lt;br>
-出力は解の数となっております。&lt;/p>
-&lt;p>ブルートフォース、配置フラグ、バックトラックの関係は以下の通りです。&lt;br>
-制約が1個、2個、3個と追加されていくような感じです。&lt;/p>
-&lt;p>・ブルートフォース&lt;br>
-制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
-・配置フラグ&lt;br>
-制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
-制約2個目 配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる&lt;br>
-・バックトラック&lt;br>
-制約1個目 1行に1個のクイーンを置く 左右の利き筋をみる&lt;br>
-制約2個目 配置フラグで同じ列にクイーンを置けないようにする 上下の利き筋をみる&lt;br>
-制約3個目 配置フラグを拡張し左右斜めにクイーンを置けないようにする 対角線上の利き筋をみる&lt;/p>
-&lt;p>プログラムソースは以下のURLにあります。&lt;/p>
-&lt;p>&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py&lt;/a>&lt;/p>
-&lt;h2 id="グローバル変数">グローバル変数&lt;/h2>
-&lt;p>432,433行目でTOTAL,UNIQUEというグローバル変数が追加されています。&lt;br>
-ブルートフォース、配置フラグは解の候補を列挙するにとどまっていましたが、今回からはプログラム内で正解数を出力するようになります。&lt;br>
-TOTALは正解数の総数です。&lt;br>
-UNIQUEですが、NQueenの解は左右ミラー反転、90度、180度、270度と左右反転していくと同じ形のものが結構あります。左右反転して同じ形のものを同一解としてカウントした数がUNIQUEとなります。&lt;/p>
-&lt;p>436,437行目にFB,FC配列が追加されています。&lt;br>
-FBが左斜め、FCが右斜めの対角線の利き筋を配置フラグでチェックします。&lt;/p>
-&lt;h2 id="対角線上の配置フラグ">対角線上の配置フラグ&lt;/h2>
-&lt;p>対角線の利き筋ですが１次元配列でチェックすることができます。&lt;br>
-図で見てみましょう。&lt;/p>
-&lt;p>上下の利き筋について簡単です。&lt;br>
-例えば、1行目の右から2列目にクイーンを置いた場合は2、3、4行目の2列目にクイーンを置けなくなります。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 101;
-flex-basis: 242px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png" data-size="330x326">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d1.png"
-width="330"
-height="326"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>2、3、4行目の右から2列目にクイーンを置いた場合はその他の行の2列目にクイーンを置けなくなります。&lt;/p>
-&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 101;
-flex-basis: 242px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png" data-size="326x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d2.png"
-width="326"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png" data-size="330x330">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d3.png"
-width="330"
-height="330"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;br>
-&lt;figure
-class="gallery-image"
-style="
-flex-grow: 99;
-flex-basis: 238px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png" data-size="322x324">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/d4.png"
-width="322"
-height="324"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>ですのでフラグはクイーンを置いた列番号に立てれば良いことになります。&lt;br>
-2列目だったらFA[1]=1です。&lt;/p>
-&lt;p>対角線の利き筋についても計算が必要ではあるのですが法則性があり1次元配列で表現することが可能です。&lt;/p>
-&lt;p>FB 左斜め対角線の利き筋について見てみましょう&lt;/p>
-&lt;p>左斜め対角線のフラグの位置の計算法則は&lt;br>
-行数-クイーンを置いた列数+(サイズ-1)&lt;br>
-row-i+(size-1)&lt;br>
-で1次元配列で表現できます。&lt;/p>
-&lt;p>図で見てみましょう。&lt;br>
-1行目の1列目にクイーンを置いた場合&lt;br>
-左斜め対角線の利き筋は以下の通りになります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,0]
-2行目2列目 [1,1]
-3行目3列目 [2,2]
-4行目4列目 [3,3]
-&lt;/code>&lt;/pre>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 100;
-flex-basis: 240px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png" data-size="326x326">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l1.png"
-width="326"
-height="326"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>row-i+(size-1) で計算してみましょう&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,0] 0-0+(4-1)=3
-2行目2列目 [1,1] 1-1+(4-1)=3
-3行目3列目 [2,2] 2-2+(4-1)=3
-4行目4列目 [3,3] 3-3+(4-1)=3
-&lt;/code>&lt;/pre>&lt;p>FB[4] にフラグをたてれば左対角線の利き筋をチェックすることができます。&lt;/p>
-&lt;p>2行目3列目にクイーンを置いた場合はどうなるでしょう&lt;/p>
-&lt;p>左斜め対角線の利き筋は以下の通りになります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目2列目 [0,1]
-2行目3列目 [1,2]
-3行目4列目 [2,3]
-&lt;/code>&lt;/pre>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 99;
-flex-basis: 238px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png" data-size="330x332">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/l5.png"
-width="330"
-height="332"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>row-i+(size-1) で計算してみましょう&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目2列目 [0,1] 0-1+(4-1)=2
-2行目3列目 [1,2] 1-2+(4-1)=2
-3行目4列目 [2,3] 2-3+(4-1)=2
-&lt;/code>&lt;/pre>&lt;p>FB[3] にフラグをたてれば左対角線の利き筋をチェックすることができます。&lt;/p>
-&lt;p>FC 右斜め対角線の利き筋について見てみましょう&lt;/p>
-&lt;p>右斜め対角線のフラグの位置の計算法則は&lt;br>
-行数+クイーンを置いた列数&lt;br>
-row+i&lt;br>
-で1次元配列で表現できます。&lt;/p>
-&lt;p>図で見てみましょう。&lt;br>
-1行目の4列目にクイーンを置いた場合&lt;br>
-右斜め対角線の利き筋は以下の通りになります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,3]
-2行目2列目 [1,2]
-3行目3列目 [2,1]
-4行目4列目 [3,0]
-&lt;/code>&lt;/pre>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 102;
-flex-basis: 245px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png" data-size="330x322">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r1.png"
-width="330"
-height="322"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>row+iで計算してみましょう&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,3] 0+3=3
-2行目2列目 [1,2] 1+2=3
-3行目3列目 [2,1] 2+1=3
-4行目4列目 [3,0] 3+0=3
-&lt;/code>&lt;/pre>&lt;p>FC[4] にフラグをたてれば右対角線の利き筋をチェックすることができます。&lt;/p>
-&lt;p>2行目の2列目にクイーンを置いた場合&lt;br>
-右斜め対角線の利き筋は以下の通りになります。&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,2]
-2行目2列目 [1,1]
-3行目3列目 [2,0]
-&lt;/code>&lt;/pre>&lt;p>&lt;figure
-class="gallery-image"
-style="
-flex-grow: 99;
-flex-basis: 238px"
->
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png" data-size="334x336">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/r5.png"
-width="334"
-height="336"
-loading="lazy"
-alt="図">
-&lt;/a>
-&lt;figcaption>図&lt;/figcaption>
-&lt;/figure>&lt;/p>
-&lt;p>row+iで計算してみましょう&lt;/p>
-&lt;pre tabindex="0">&lt;code>1行目1列目 [0,2] 0+2=2
-2行目2列目 [1,1] 1+1=2
-3行目3列目 [2,0] 2+0=2
-&lt;/code>&lt;/pre>&lt;p>FC[3] にフラグをたてれば右対角線の利き筋をチェックすることができます。&lt;/p>
-&lt;p>長くなりましたので今回はグローバル変数の説明だけで終わります。&lt;br>
-次回は、新しく追加されたmainメソッドからプログラムの概要を説明したいと思います。&lt;/p></description></item></channel></rss>
+&lt;/aside></description></item></channel></rss>
