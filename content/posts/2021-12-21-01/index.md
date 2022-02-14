@@ -6,11 +6,11 @@ description: "hugoで記事を作成して、投稿するためには専用の�
 image: 2021-12-21-1.jpg
 authors: wyoshi
 categories:
-  - Web開発
+  - web
 tags:
   - Hugo
   - Web
-  - Web開発
+  - web
   - wyoshi
 # ファイル名を変える場合
 # slug: "example-post"
