@@ -15,14 +15,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-14T09:55:55+09:00"><meta property="article:modified_time" content="2022-02-14T17:57:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-14T09:55:55+09:00"><meta property="article:modified_time" content="2022-02-14T17:57:56+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg">
 <meta name=twitter:title content="第7回 pythonでNQueen（エイトクイーン）バックトラック（3） - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://suzukiiichiro.github.io/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/chess.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-09-01-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/chess.jpg"],"datePublished":"2022-02-14T09:55:55+09:00","dateModified":"2022-02-14T17:57:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","item":"https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg"],"datePublished":"2022-02-14T09:55:55+09:00","dateModified":"2022-02-14T17:57:56+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"第7回 pythonでNQueen（エイトクイーン）バックトラック（3）","item":"https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -171,9 +171,9 @@ FCが右対角線上の利き筋<br>
 row=0なので446行目の else: に移動します。<br>
 447行目のfor文に入りi=0からスタートします。<br>
 448行目のABOARD[0]=0で1行目の右端にクイーンを設置します。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q1.png>
-<img src=https://suzukiiichiro.github.io/q1.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:98;flex-basis:237px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q1.png data-size=324x328>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q1.png width=324 height=328 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -216,9 +216,9 @@ FC[5]=0
 FC[6]=0
 
 </code></pre><p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q2.png>
-<img src=https://suzukiiichiro.github.io/q2.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:101;flex-basis:244px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q2.png data-size=326x320>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q2.png width=326 height=320 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -260,9 +260,9 @@ FB[3]==1ですのでFBフラグは通過しません<br>
 左対角線上の利き筋に引っかかることになります。</p>
 <p>447行目で次のfor文に進みi=2となります。</p>
 <p>448行目のABOARD[1]=2で2行目の右から3列目にクイーンを設置します。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q3.png>
-<img src=https://suzukiiichiro.github.io/q3.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:98;flex-basis:237px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q3.png data-size=322x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q3.png width=322 height=326 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -301,9 +301,9 @@ FC[5]=0
 FC[6]=0
 
 </code></pre><p>ビジュアルで利き筋をみてみると以下の通りです。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q4.png>
-<img src=https://suzukiiichiro.github.io/q4.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:100;flex-basis:241px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q4.png data-size=328x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q4.png width=328 height=326 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -361,9 +361,9 @@ FC[6]=0
 
 </code></pre><p>447行目で次のfor文に進みi=3となります。</p>
 <p>448行目のABOARD[1]=3で2行目の右から4列目にクイーンを設置します。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q5.png>
-<img src=https://suzukiiichiro.github.io/q5.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:99;flex-basis:238px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q5.png data-size=328x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q5.png width=328 height=330 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -404,9 +404,9 @@ FC[4]=1
 FC[5]=0
 FC[6]=0
 
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/q6.png>
-<img src=https://suzukiiichiro.github.io/q6.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:98;flex-basis:235px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q6.png data-size=326x332>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q6.png width=326 height=332 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -421,9 +421,9 @@ FA[i]->FA[0]==1<br>
 FAフラグに引っかかります</p>
 <p>447行目で次のfor文に進みi=1となります。</p>
 <p>448行目のABOARD[2]=1で3行目の右から2列目にクイーンを設置します。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q7.png>
-<img src=https://suzukiiichiro.github.io/q7.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:98;flex-basis:235px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q7.png data-size=322x328>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q7.png width=322 height=328 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -464,9 +464,9 @@ FC[4]=1
 FC[5]=0
 FC[6]=0
 
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/q8.png>
-<img src=https://suzukiiichiro.github.io/q8.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:101;flex-basis:244px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q8.png data-size=332x326>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q8.png width=332 height=326 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -536,9 +536,9 @@ row=0,i=0<br>
 453行目でフラグを落としますが1行目ですのでまっさらな状態になります。</p>
 <p>447行目で次のfor文に移動します。<br>
 row=0,i=1ですので448行目のABOARD[0]=1 で1行目の右から2列目にクイーンをおきます。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q9.png>
-<img src=https://suzukiiichiro.github.io/q9.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:98;flex-basis:235px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q9.png data-size=324x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q9.png width=324 height=330 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -579,17 +579,17 @@ FC[5]=0
 FC[6]=0
 
 </code></pre><p>利き筋をビジュアルで表示すると以下の通りです。黒いクイーンの部分は置けません。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q10.png>
-<img src=https://suzukiiichiro.github.io/q10.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q10.png data-size=328x328>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q10.png width=328 height=328 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
 <p>452行目でnqueenを引数1を渡して呼び出して2行目に進みます。</p>
 <p>図だと2行目でクイーンを置けるのは4列目だけです。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q11.png>
-<img src=https://suzukiiichiro.github.io/q11.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:101;flex-basis:244px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q11.png data-size=328x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q11.png width=328 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -599,9 +599,9 @@ FC[6]=0
 FB[row-i+(size-1)]->FB[1-3+(4-1)]->FB[1]==0<br>
 FC[row+i]->FC[1+3]->FC[4]==0</p>
 <p>451行目でフラグを立てると以下の図になります。</p>
-<p><figure>
-<a href=https://suzukiiichiro.github.io/q12.png>
-<img src=https://suzukiiichiro.github.io/q12.png loading=lazy alt=図>
+<p><figure class=gallery-image style=flex-grow:101;flex-basis:242px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q12.png data-size=326x322>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q12.png width=326 height=322 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure></p>
@@ -641,9 +641,9 @@ FC[6]=0
 
 </code></pre><p>452行目でrow=2でnqueenを再帰で呼び出します。<br>
 row=2の時はi=0の時にクイーンを置くことができます。<br>
-<figure>
-<a href=https://suzukiiichiro.github.io/q13.png>
-<img src=https://suzukiiichiro.github.io/q13.png loading=lazy alt=図>
+<figure class=gallery-image style=flex-grow:98;flex-basis:237px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q13.png data-size=326x330>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q13.png width=326 height=330 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -682,9 +682,9 @@ FC[4]=1
 FC[5]=0
 FC[6]=0
 
-</code></pre><p><figure>
-<a href=https://suzukiiichiro.github.io/q14.png>
-<img src=https://suzukiiichiro.github.io/q14.png loading=lazy alt=図>
+</code></pre><p><figure class=gallery-image style=flex-grow:100;flex-basis:240px>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q14.png data-size=324x324>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q14.png width=324 height=324 loading=lazy alt=図>
 </a>
 <figcaption>図</figcaption>
 </figure><br>
@@ -960,7 +960,7 @@ TOTAL +=1 で総数がカウントされます。<br>
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/chess.jpg loading=lazy data-key data-hash=/chess.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg loading=lazy data-key data-hash=/posts/2022-02-09-01-ani/chess.jpg>
 </div>
 <div class=article-details>
 <h2 class=article-title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</h2>
