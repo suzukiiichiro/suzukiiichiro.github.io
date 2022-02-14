@@ -82,8 +82,8 @@ params:
     paginate:
         slots: 5
     sitemap:
-      exclude: ["authors", "tags", "categories"]
-      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/", "/ranking/"]
+      exclude: ["authors", "tags", "categories", "ranking", "sitemap"]
+      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/", "/ranking/","/ranking/daily/","/ranking/monthly/","/ranking/yearly/", "/sitemap/"]
     mainSections:
         - posts
 #     featuredImageField: image
