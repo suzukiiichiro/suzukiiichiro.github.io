@@ -6,8 +6,16 @@
 &lt;li>ファイルの末尾まで表示したらすぐに終了する&lt;/li>
 &lt;/ul>
 &lt;h2 id="概要">概要&lt;/h2>
-&lt;p>「less」コマンドは、テキストファイルを1画面ずつ表示するコマンドです。「less ファイル名」で実行する他、「コマンド | less」のように、別のコマンドの実行結果を1画面ずつ表示する場合にも使われます。&lt;/p>
-&lt;p>　［Enter］キーで1行、スペースキーで1画面先に進める他、上下矢印キーによるスクロールも可能です。表示を終了するには［Q］または［q］キーを入力します。&lt;/p>
+&lt;p>「less」コマンドは、テキストファイルを1画面ずつ表示するコマンドです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat ＜ファイル名＞ | less
+&lt;/code>&lt;/pre>&lt;p>「less ファイル名」で実行する他、「コマンド | less」のように、別のコマンドの実行結果を1画面ずつ表示する場合にも使われます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ dmesg | less
+&lt;/code>&lt;/pre>&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>［Enter］キーで1行、スペースキーで1画面先に進める他、上下矢印キーによるスクロールも可能です。表示を終了するには［Q］または［q］キーを入力します。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;p>　同じ用途のコマンドに「more」があります。lessコマンドはmoreコマンドよりも機能が多く、画面内で検索したり、上にスクロールしたりすることが可能です。&lt;/p>
 &lt;h2 id="lessコマンドの書式">lessコマンドの書式&lt;/h2>
 &lt;p>less [オプション] ファイル名&lt;br>
@@ -16,44 +24,44 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>短いオプション&lt;/th>
+&lt;th style="text-align:center">短いオプション&lt;/th>
 &lt;th>長いオプション&lt;/th>
 &lt;th>意味&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>+行数,-行数&lt;/td>
+&lt;td style="text-align:center">+行数,-行数&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>指定した行から表示する&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>+/文字列&lt;/td>
+&lt;td style="text-align:center">+/文字列&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-p文字列&lt;/td>
+&lt;td style="text-align:center">-p文字列&lt;/td>
 &lt;td>&amp;ndash;pattern=文字列&lt;/td>
 &lt;td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-oファイル&lt;/td>
+&lt;td style="text-align:center">-oファイル&lt;/td>
 &lt;td>&amp;ndash;log-file=ファイル&lt;/td>
 &lt;td>パイプ（｜）などで標準入力から入力した内容を表示する際、指定したファイルにコピーを保存する。既存ファイルを指定した場合は、上書きするか、追加するかを確認するメッセージが表示される&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-Oファイル&lt;/td>
+&lt;td style="text-align:center">-Oファイル&lt;/td>
 &lt;td>&amp;ndash;LOG-FILE=ファイル&lt;/td>
 &lt;td>「-o」と同じだが、既存ファイルを指定した場合は、確認せずに上書きする&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-kファイル名&lt;/td>
+&lt;td style="text-align:center">-kファイル名&lt;/td>
 &lt;td>&amp;ndash;lesskey-file=ファイル名&lt;/td>
 &lt;td>lesskeyファイル（キー定義ファイル、「lesskey」コマンドで生成）を指定する&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-L&lt;/td>
+&lt;td style="text-align:center">-L&lt;/td>
 &lt;td>&amp;ndash;no-lessopen&lt;/td>
 &lt;td>環境変数LESSOPEN（lessコマンド用のオプションを定義した環境変数）を無視する&lt;/td>
 &lt;/tr>
@@ -61,14 +69,22 @@
 &lt;/table>
 &lt;h2 id="lessコマンド詳細説明">lessコマンド詳細説明&lt;/h2>
 &lt;h3 id="テキストを1画面ずつ表示する">テキストを1画面ずつ表示する&lt;/h3>
-&lt;p>　「less ファイル名」で、指定したファイルを1画面ずつ表示します。次の画面へ進みたい場合はスペースキー、1行ずつ進めたい場合は［Enter］キーを押します。上下の矢印キーや、［y］または［e］キー、［j］または［k］キーで上下にスクロールすることも可能です。［q］キーを押すと終了します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ less ＜ファイル名＞
+&lt;/code>&lt;/pre>&lt;p>で、指定したファイルを1画面ずつ表示します。&lt;br>
+次の画面へ進みたい場合はスペースキー、1行ずつ進めたい場合は［Enter］キーを押します。&lt;br>
+上下の矢印キーや、［y］または［e］キー、［j］または［k］キーで上下にスクロールすることも可能です。&lt;br>
+［q］キーを押すと終了します。&lt;/p>
+&lt;p>以下のような使い方もできます。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ cat &amp;lt;filename&amp;gt; | less
 &lt;/code>&lt;/pre>&lt;h3 id="キー操作のヘルプを表示する">キー操作のヘルプを表示する&lt;/h3>
-&lt;p>　lessコマンドで画面を表示中に［h］キーを押すと、キー操作のヘルプが表示されます（画面2）。ヘルプの表示中でもlessコマンドと同様に、上下のスクロールや検索などの操作が可能です。&lt;/p>
+&lt;p>lessコマンドで画面を表示中に［h］キーを押すと、キー操作のヘルプが表示されます。&lt;br>
+ヘルプの表示中でもlessコマンドと同様に、上下のスクロールや検索などの操作が可能です。&lt;/p>
 &lt;p>［q］キーを押すとヘルプの表示を終了し、元の画面に戻ります&lt;/p>
 &lt;h3 id="長い行を折り返さずに表示する">長い行を折り返さずに表示する&lt;/h3>
-&lt;p>　lessコマンドでは、画面の横幅より長い行は折り返して表示されます。折り返さずに表示したい場合は、「-S」オプションを使用します。&lt;/p>
-&lt;p>　左右の矢印キーまたは、［ESC］キーに続いて［(］および［)］キーを押すと、左右に半画面分スクロールします。横スクロールの幅は「-#」オプションで指定できます。　&lt;/p>
+&lt;p>lessコマンドでは、画面の横幅より長い行は折り返して表示されます。&lt;br>
+折り返さずに表示したい場合は、「-S」オプションを使用します。&lt;/p>
+&lt;p>左右の矢印キーまたは、［ESC］キーに続いて［(］および［)］キーを押すと、左右に半画面分スクロールします。&lt;br>
+横スクロールの幅は「-#」オプションで指定できます。　&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ cat filename | less -S
 &lt;/code>&lt;/pre>&lt;div class="tips-area tips">
 &lt;dl>
@@ -301,20 +317,23 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;!-- EOF --></description></item><item><title>（４）【tail】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</link><pubDate>Fri, 11 Feb 2022 14:31:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash.jpg" alt="Featured image of post （４）【tail】シェルスクリプトコマンド活用紹介" />&lt;h2 id="tailコマンド">tailコマンド&lt;/h2>
-&lt;p>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。&lt;/p>
 &lt;ul>
 &lt;li>tailコマンドでファイルの末尾部分だけを表示する&lt;/li>
 &lt;li>ログファイルを監視する&lt;/li>
 &lt;li>ファイルの特定の範囲の行を取り出す（headとtail）&lt;/li>
 &lt;/ul>
 &lt;h2 id="概要">概要&lt;/h2>
+&lt;p>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。&lt;/p>
 &lt;p>ログファイルは、基本ファイルの末尾に新たな記録が追加されます。&lt;br>
 「more」コマンドや「less」コマンドで表示しようとすると、末尾まで進むのが面倒だし、ファイルが大きい場合は読み込むのにも時間がかかります。&lt;br>
-「tail」コマンドは、ファイルの末尾開かないので手軽で処理も高速です。&lt;br>
-tailコマンドも、headコマンド同様、「-n」オプションで表示する行数を指定することができます。&lt;br>
-また、tailコマンド最大の魅力は リアルタイムに出力を追記する tail -fです。&lt;br>
+「tail」コマンドは、ファイルの末尾開かないので手軽で処理も高速です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat ＜ファイル名＞ | tail
+&lt;/code>&lt;/pre>&lt;p>tailコマンドも、headコマンド同様、「-n」オプションで表示する行数を指定することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat ＜ファイル名＞ | tail -n10
+&lt;/code>&lt;/pre>&lt;p>また、tailコマンド最大の魅力は リアルタイムに出力を追記する tail -fです。&lt;br>
 ログ監視などに多用されるこの具体例も以下に示します。&lt;/p>
-&lt;h2 id="tailコマンドの書式">tailコマンドの書式&lt;/h2>
+&lt;pre tabindex="0">&lt;code>$ sudo tail -f /var/log/httpd/access_log
+&lt;/code>&lt;/pre>&lt;h2 id="tailコマンドの書式">tailコマンドの書式&lt;/h2>
 &lt;p>tail [オプション] ファイル名&lt;/p>
 &lt;h2 id="tailコマンドの主なオプション">tailコマンドの主なオプション&lt;/h2>
 &lt;table>
@@ -456,37 +475,39 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;li>ログファイルを監視する&lt;/li>
 &lt;/ul>
 &lt;h2 id="概要">概要&lt;/h2>
-&lt;p>headはテキストファイルの最初の10行を、tailは最後の10行を表示するコマンドです。表示する行数は、オプションで変更することができます。&lt;/p>
-&lt;p>headコマンドは「コマンド | head」のように、別のコマンドの実行結果の先頭部分を表示する際によく使われます。&lt;/p>
+&lt;p>headはテキストファイルの最初の10行を、tailは最後の10行を表示するコマンドです。&lt;br>
+表示する行数は、オプションで変更することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cat ＜ファイル名＞ | head -n10
+&lt;/code>&lt;/pre>&lt;p>headコマンドは「コマンド | head」のように、別のコマンドの実行結果の先頭部分を表示する際によく使われます。&lt;/p>
 &lt;h2 id="headコマンドの書式">headコマンドの書式&lt;/h2>
 &lt;p>head [オプション] ファイル名&lt;/p>
 &lt;h2 id="headコマンドの主なオプション">headコマンドの主なオプション&lt;/h2>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>オプション&lt;/th>
+&lt;th style="text-align:center">オプション&lt;/th>
 &lt;th>長いオプション&lt;/th>
 &lt;th>意味&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>-c 数字&lt;/td>
+&lt;td style="text-align:center">-c 数字&lt;/td>
 &lt;td>&amp;ndash;bytes 数字&lt;/td>
 &lt;td>先頭から指定したバイト数のみ表示する。「-c 5 b」のように単位を付加することも可能（b=512, KB=1000, K=1024, MB=1000&lt;em>1000, M=1024&lt;/em>1024…）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-n 数字&lt;/td>
+&lt;td style="text-align:center">-n 数字&lt;/td>
 &lt;td>&amp;ndash;lines 数字&lt;/td>
 &lt;td>先頭から指定した行数のみ表示する&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-q&lt;/td>
+&lt;td style="text-align:center">-q&lt;/td>
 &lt;td>&amp;ndash;quiet, &amp;ndash;silent&lt;/td>
 &lt;td>ファイルごとのヘッダ表示を行わない（複数ファイル指定時に使う）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-v&lt;/td>
+&lt;td style="text-align:center">-v&lt;/td>
 &lt;td>&amp;ndash;verbose&lt;/td>
 &lt;td>常にファイルごとのヘッダ出力を行う&lt;/td>
 &lt;/tr>
@@ -688,7 +709,8 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/ul>
 &lt;h2 id="概要">概要&lt;/h2>
 &lt;p>「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。&lt;/p>
-&lt;h2 id="catコマンドの書式">catコマンドの書式&lt;/h2>
+&lt;pre tabindex="0">&lt;code>$ cat ＜ファイル名＞
+&lt;/code>&lt;/pre>&lt;h2 id="catコマンドの書式">catコマンドの書式&lt;/h2>
 &lt;p>cat [オプション] ファイル1 ファイル2……&lt;/p>
 &lt;h2 id="catコマンドの主なオプション">catコマンドの主なオプション&lt;/h2>
 &lt;p>catコマンドの主なオプションは次の通りです。&lt;/p>
@@ -718,6 +740,12 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
+&lt;div class="tips-area tips">
+&lt;dl>
+&lt;dt>ヒント&lt;/dt>
+&lt;dd>一画面に収まらない長いファイルの場合は、lessコマンドを使うと便利です。&lt;/dd>
+&lt;/dl>
+&lt;/div>
 &lt;h2 id="catコマンド詳細説明">catコマンド詳細説明&lt;/h2>
 &lt;h3 id="ファイルの内容を出力">ファイルの内容を出力&lt;/h3>
 &lt;p>filenameの内容をターミナルに出力します。&lt;/p>

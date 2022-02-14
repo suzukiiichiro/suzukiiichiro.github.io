@@ -15,14 +15,14 @@
 <meta property="og:description" content="「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="cat"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-09T12:59:39+09:00"><meta property="article:modified_time" content="2022-02-09T13:51:28+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="cat"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-09T12:59:39+09:00"><meta property="article:modified_time" content="2022-02-14T10:39:05+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg">
 <meta name=twitter:title content="（２）【cat】シェルスクリプトコマンド活用紹介 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-09-01-cat-suzuki/bash.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（２）【cat】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg"],"datePublished":"2022-02-09T12:59:39+09:00","dateModified":"2022-02-09T13:51:28+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（２）【cat】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash.jpg"],"datePublished":"2022-02-09T12:59:39+09:00","dateModified":"2022-02-14T10:39:05+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -100,7 +100,7 @@ Web開発
 <nav class=breadcrumb-area>
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
-<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a>
 <li><span class=breadcrumb-item>（２）【cat】シェルスクリプトコマンド活用紹介</span>
 </ol>
 </nav>
@@ -116,8 +116,11 @@ Web開発
 <span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
 <time class="article-time--item article-time--published">2022.02.09</time>
+<time class="article-time--item article-time--updatedate">
+2022.02.14
+</time>
 <time class="article-time--item article-time--reading">
-読了時間: 3分
+読了時間: 4分
 </time>
 </div>
 </header>
@@ -155,7 +158,8 @@ Web開発
 </ul>
 <h2 id=概要>概要</h2>
 <p>「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。</p>
-<h2 id=catコマンドの書式>catコマンドの書式</h2>
+<pre tabindex=0><code>$ cat ＜ファイル名＞
+</code></pre><h2 id=catコマンドの書式>catコマンドの書式</h2>
 <p>cat [オプション] ファイル1 ファイル2……</p>
 <h2 id=catコマンドの主なオプション>catコマンドの主なオプション</h2>
 <p>catコマンドの主なオプションは次の通りです。</p>
@@ -185,6 +189,12 @@ Web開発
 </tr>
 </tbody>
 </table>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>一画面に収まらない長いファイルの場合は、lessコマンドを使うと便利です。</dd>
+</dl>
+</div>
 <h2 id=catコマンド詳細説明>catコマンド詳細説明</h2>
 <h3 id=ファイルの内容を出力>ファイルの内容を出力</h3>
 <p>filenameの内容をターミナルに出力します。</p>
@@ -415,10 +425,10 @@ CHAPTER15 読みやすいシェルスクリプト</p>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【はじめから】ざっくりわかるシェルスクリプト３">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -427,9 +437,9 @@ CHAPTER15 読みやすいシェルスクリプト</p>
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【はじめから】ざっくりわかるシェルスクリプト３</h2><div class=article-time>
+<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。</p>
+</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
 </div>
 </a>
 </article>

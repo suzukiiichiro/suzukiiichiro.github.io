@@ -15,14 +15,14 @@
 <meta property="og:description" content="メッセージやテキストファイルを1画面ずつ表示する">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="less"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-13T16:35:49+09:00"><meta property="article:modified_time" content="2022-02-13T16:49:51+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="less"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-02-13T16:35:49+09:00"><meta property="article:modified_time" content="2022-02-14T10:39:05+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg">
 <meta name=twitter:title content="（6）【less】シェルスクリプトコマンド活用紹介 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="メッセージやテキストファイルを1画面ずつ表示する"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-13-01-less-suzuki/bash.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（6）【less】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg"],"datePublished":"2022-02-13T16:35:49+09:00","dateModified":"2022-02-13T16:49:51+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"root","url":["https://github.com/root","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（6）【less】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg"],"datePublished":"2022-02-13T16:35:49+09:00","dateModified":"2022-02-14T10:39:05+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"プログラミング","item":"https://suzukiiichiro.github.io/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -100,7 +100,7 @@ Web開発
 <nav class=breadcrumb-area>
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
-<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a>
 <li><span class=breadcrumb-item>（6）【less】シェルスクリプトコマンド活用紹介</span>
 </ol>
 </nav>
@@ -113,9 +113,12 @@ Web開発
 </a>
 </div>
 <div class=article-info>
-<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/root.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>root</a></span>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
 <time class="article-time--item article-time--published">2022.02.13</time>
+<time class="article-time--item article-time--updatedate">
+2022.02.14
+</time>
 <time class="article-time--item article-time--reading">
 読了時間: 5分
 </time>
@@ -156,8 +159,16 @@ Web開発
 <li>ファイルの末尾まで表示したらすぐに終了する</li>
 </ul>
 <h2 id=概要>概要</h2>
-<p>「less」コマンドは、テキストファイルを1画面ずつ表示するコマンドです。「less ファイル名」で実行する他、「コマンド | less」のように、別のコマンドの実行結果を1画面ずつ表示する場合にも使われます。</p>
-<p>　［Enter］キーで1行、スペースキーで1画面先に進める他、上下矢印キーによるスクロールも可能です。表示を終了するには［Q］または［q］キーを入力します。</p>
+<p>「less」コマンドは、テキストファイルを1画面ずつ表示するコマンドです。</p>
+<pre tabindex=0><code>$ cat ＜ファイル名＞ | less
+</code></pre><p>「less ファイル名」で実行する他、「コマンド | less」のように、別のコマンドの実行結果を1画面ずつ表示する場合にも使われます。</p>
+<pre tabindex=0><code>$ dmesg | less 
+</code></pre><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>［Enter］キーで1行、スペースキーで1画面先に進める他、上下矢印キーによるスクロールも可能です。表示を終了するには［Q］または［q］キーを入力します。</dd>
+</dl>
+</div>
 <p>　同じ用途のコマンドに「more」があります。lessコマンドはmoreコマンドよりも機能が多く、画面内で検索したり、上にスクロールしたりすることが可能です。</p>
 <h2 id=lessコマンドの書式>lessコマンドの書式</h2>
 <p>less [オプション] ファイル名<br>
@@ -166,44 +177,44 @@ Web開発
 <table>
 <thead>
 <tr>
-<th>短いオプション</th>
+<th style=text-align:center>短いオプション</th>
 <th>長いオプション</th>
 <th>意味</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>+行数,-行数</td>
+<td style=text-align:center>+行数,-行数</td>
 <td></td>
 <td>指定した行から表示する</td>
 </tr>
 <tr>
-<td>+/文字列</td>
+<td style=text-align:center>+/文字列</td>
 <td></td>
 <td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）</td>
 </tr>
 <tr>
-<td>-p文字列</td>
+<td style=text-align:center>-p文字列</td>
 <td>&ndash;pattern=文字列</td>
 <td>指定文字列を検索し、見つけた行から表示する（正規表現によるパターン指定が可能）</td>
 </tr>
 <tr>
-<td>-oファイル</td>
+<td style=text-align:center>-oファイル</td>
 <td>&ndash;log-file=ファイル</td>
 <td>パイプ（｜）などで標準入力から入力した内容を表示する際、指定したファイルにコピーを保存する。既存ファイルを指定した場合は、上書きするか、追加するかを確認するメッセージが表示される</td>
 </tr>
 <tr>
-<td>-Oファイル</td>
+<td style=text-align:center>-Oファイル</td>
 <td>&ndash;LOG-FILE=ファイル</td>
 <td>「-o」と同じだが、既存ファイルを指定した場合は、確認せずに上書きする</td>
 </tr>
 <tr>
-<td>-kファイル名</td>
+<td style=text-align:center>-kファイル名</td>
 <td>&ndash;lesskey-file=ファイル名</td>
 <td>lesskeyファイル（キー定義ファイル、「lesskey」コマンドで生成）を指定する</td>
 </tr>
 <tr>
-<td>-L</td>
+<td style=text-align:center>-L</td>
 <td>&ndash;no-lessopen</td>
 <td>環境変数LESSOPEN（lessコマンド用のオプションを定義した環境変数）を無視する</td>
 </tr>
@@ -211,14 +222,22 @@ Web開発
 </table>
 <h2 id=lessコマンド詳細説明>lessコマンド詳細説明</h2>
 <h3 id=テキストを1画面ずつ表示する>テキストを1画面ずつ表示する</h3>
-<p>　「less ファイル名」で、指定したファイルを1画面ずつ表示します。次の画面へ進みたい場合はスペースキー、1行ずつ進めたい場合は［Enter］キーを押します。上下の矢印キーや、［y］または［e］キー、［j］または［k］キーで上下にスクロールすることも可能です。［q］キーを押すと終了します。</p>
+<pre tabindex=0><code>$ less ＜ファイル名＞
+</code></pre><p>で、指定したファイルを1画面ずつ表示します。<br>
+次の画面へ進みたい場合はスペースキー、1行ずつ進めたい場合は［Enter］キーを押します。<br>
+上下の矢印キーや、［y］または［e］キー、［j］または［k］キーで上下にスクロールすることも可能です。<br>
+［q］キーを押すと終了します。</p>
+<p>以下のような使い方もできます。</p>
 <pre tabindex=0><code>$ cat &lt;filename&gt; | less
 </code></pre><h3 id=キー操作のヘルプを表示する>キー操作のヘルプを表示する</h3>
-<p>　lessコマンドで画面を表示中に［h］キーを押すと、キー操作のヘルプが表示されます（画面2）。ヘルプの表示中でもlessコマンドと同様に、上下のスクロールや検索などの操作が可能です。</p>
+<p>lessコマンドで画面を表示中に［h］キーを押すと、キー操作のヘルプが表示されます。<br>
+ヘルプの表示中でもlessコマンドと同様に、上下のスクロールや検索などの操作が可能です。</p>
 <p>［q］キーを押すとヘルプの表示を終了し、元の画面に戻ります</p>
 <h3 id=長い行を折り返さずに表示する>長い行を折り返さずに表示する</h3>
-<p>　lessコマンドでは、画面の横幅より長い行は折り返して表示されます。折り返さずに表示したい場合は、「-S」オプションを使用します。</p>
-<p>　左右の矢印キーまたは、［ESC］キーに続いて［(］および［)］キーを押すと、左右に半画面分スクロールします。横スクロールの幅は「-#」オプションで指定できます。　</p>
+<p>lessコマンドでは、画面の横幅より長い行は折り返して表示されます。<br>
+折り返さずに表示したい場合は、「-S」オプションを使用します。</p>
+<p>左右の矢印キーまたは、［ESC］キーに続いて［(］および［)］キーを押すと、左右に半画面分スクロールします。<br>
+横スクロールの幅は「-#」オプションで指定できます。　</p>
 <pre tabindex=0><code>$ cat filename | less -S
 </code></pre><div class="tips-area tips">
 <dl>
@@ -438,10 +457,10 @@ CHAPTER15 読みやすいシェルスクリプト</p>
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-23-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -450,9 +469,9 @@ CHAPTER15 読みやすいシェルスクリプト</p>
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>【２３．ファイルを読む】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
+<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>whileループでreadコマンドを使用すると、bashで任意のファイルを1行ずつ読み取ることができます。'read_file.sh'という名前のファイルを作成し、次のコードを追加してください。 別途作成する'book.txt'の内容を読み取ります。</p>
+</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
 </div>
 </a>
 </article>
