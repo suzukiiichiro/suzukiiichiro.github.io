@@ -3,7 +3,7 @@ title: "第3回 pythonでNQueen（エイトクイーン）配置フラグ（制�
 description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第３回目。今回は配置フラグ（制約テスト高速化）について説明します。" 
 date: 2022-02-03T15:55:55+09:00
 draft: false 
-image: chess.jpg
+image: programming 
 categories:
   - プログラミング
 tags:

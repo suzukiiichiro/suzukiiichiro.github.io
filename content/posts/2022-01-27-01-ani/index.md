@@ -5,7 +5,7 @@ date: 2022-01-27T15:55:55+09:00
 draft: false
 image: chess.jpg
 categories:
-  - プログラミング
+  - programming 
 tags:
   - e-Stat 
   - データマイニング
