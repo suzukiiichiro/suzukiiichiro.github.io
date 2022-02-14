@@ -1276,28 +1276,30 @@ xargsコマンドを使うと一片にプロセスを終了させることがで
 &lt;pre tabindex="0">&lt;code>$ killall hugo
 &lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -1311,9 +1313,28 @@ xargsコマンドを使うと一片にプロセスを終了させることがで
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
@@ -1345,8 +1366,7 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside>
-&lt;!-- EOF --></description></item><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
+&lt;/aside></description></item><item><title>（6）【less】シェルスクリプトコマンド活用紹介</title><link>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</link><pubDate>Sun, 13 Feb 2022 16:35:49 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash.jpg" alt="Featured image of post （6）【less】シェルスクリプトコマンド活用紹介" />&lt;h2 id="lessコマンド">lessコマンド&lt;/h2>
 &lt;ul>
 &lt;li>テキストを1画面ずつ表示する&lt;/li>
 &lt;li>キー操作のヘルプを表示する&lt;/li>
@@ -1442,28 +1462,30 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -1477,9 +1499,28 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
@@ -1594,28 +1635,30 @@ cat filename | more [オプション]&lt;/p>
 &lt;/div>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -1629,9 +1672,28 @@ cat filename | more [オプション]&lt;/p>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
@@ -1745,28 +1807,30 @@ tail コマンドのみに頼ろうとすると難しいようだ。&lt;br>
 &lt;pre tabindex="0">&lt;code>$ cat filename | head -n10100 | tail -n100
 &lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -1780,9 +1844,28 @@ tail コマンドのみに頼ろうとすると難しいようだ。&lt;br>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
@@ -1979,28 +2062,30 @@ suzuki$
 &lt;p>head コマンドの紹介の割には長くなりました。&lt;/p>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -2014,9 +2099,28 @@ suzuki$
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
@@ -2113,28 +2217,30 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4774186945&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg" alt="詳解 シェルスクリプト 大型本 – 2006/1/16">
 &lt;/div>
 &lt;div class="columns amazon-info">
-&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） 2017/1/20&lt;/h2>
-&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
-シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
-本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
-基本から丁寧に解説。
-第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
-合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
-ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;h2 class="amazon-name">詳解 シェルスクリプト 大型本 – 2006/1/16&lt;/h2>
+&lt;p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+&lt;/p>
 &lt;span class="link">Amazonで詳細を見る&lt;/span>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
-&lt;a href="https://www.amazon.co.jp/gp/product/B00QJINS1A/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00QJINS1A&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=36dff1cf8fa7d4852b5a4a3cf874304b" target="_blank">
+&lt;a href="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797377623&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=3c8d4566263ae99374221c4f8f469154" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=B00QJINS1A&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="UNIXシェルスクリプト マスターピース132">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg" alt="UNIXシェルスクリプト マスターピース132">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">UNIXシェルスクリプト マスターピース132&lt;/h2>
@@ -2148,9 +2254,28 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
 &lt;/aside>
 &lt;aside class="amazon-box">
+&lt;a href="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774186945&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target="_blank">
+&lt;div class="columns amazon-image">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg" alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20">
+&lt;/div>
+&lt;div class="columns amazon-info">
+&lt;h2 class="amazon-name">[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB&amp;#43;DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20&lt;/h2>
+&lt;p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。&lt;/p>
+&lt;span class="link">Amazonで詳細を見る&lt;/span>
+&lt;/div>
+&lt;/a>
+&lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
+&lt;/aside>
+&lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797393106&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f514a6378c1c10e59ab16275745c2439" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;amp;MarketPlace=JP&amp;amp;ASIN=4797393106&amp;amp;ServiceVersion=20070822&amp;amp;ID=AsinImage&amp;amp;WS=1&amp;amp;Format=_SL250_&amp;amp;tag=nlpqueens-22" alt="新しいシェルプログラミングの教科書 単行本">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg" alt="新しいシェルプログラミングの教科書 単行本">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">新しいシェルプログラミングの教科書 単行本&lt;/h2>
