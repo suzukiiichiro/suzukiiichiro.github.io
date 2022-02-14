@@ -656,7 +656,22 @@ alt="図">
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
 図で見ると最終行で右から3番目にクイーンが置けそうです。&lt;/p>
-&lt;p>452行目でrow=3でnqueenを再帰で呼び出します。&lt;br>
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 101;
+flex-basis: 244px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q15.jpg" data-size="326x320">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q15.jpg"
+width="326"
+height="320"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
+452行目でrow=3でnqueenを再帰で呼び出します。&lt;br>
 row=3,i=2でフラグをチェックしてみましょう。&lt;/p>
 &lt;p>FA[i]-&amp;gt;FA[2]==0&lt;br>
 FB[row-i+(size-1)]-&amp;gt;FB[3-2+(4-1)]-&amp;gt;FB[4]==0&lt;br>
@@ -666,6 +681,21 @@ FC[row+i]-&amp;gt;FC[3+2]-&amp;gt;FC[5]==0&lt;/p>
 row=4で再帰を呼び出すと&lt;br>
 if row== size : のif文に入り&lt;br>
 TOTAL +=1 で総数がカウントされます。&lt;br>
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 95;
+flex-basis: 229px"
+>
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q16.jpg" data-size="316x330">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/q16.jpg"
+width="316"
+height="330"
+loading="lazy"
+alt="図">
+&lt;/a>
+&lt;figcaption>図&lt;/figcaption>
+&lt;/figure>&lt;br>
 445行目の処理が終わると再帰を抜けて上の行に戻ります。&lt;/p>
 &lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" alt="Featured image of post CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
 > CSS Scroll Snap - Ahmad Shadeed &lt;/a>&lt;/p>
