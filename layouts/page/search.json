@@ -10,15 +10,15 @@
     {{- $image := partialCached "helper/image" (dict "Context" . "Type" "articleList") .RelPermalink "articleList" -}}
     {{- if $image.exists -}}
         {{- $imagePermalink := "" -}}
-        {{/*
         {{- if and $image.resource (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
-            {{- $thumbnail := $image.resource.Resize "x400" -}}
+            {{- $thumbnail := $image.resource.Resize "200x" -}}
             {{- $imagePermalink = (absURL $thumbnail.Permalink) -}}
         {{- else -}}
             {{- $imagePermalink = $image.permalink -}}
         {{- end -}}
-        */}}
+        {{/*
             {{- $imagePermalink = $image.permalink -}}
+        */}}
         
         {{- $data = merge $data (dict "image" (absURL $imagePermalink)) -}}
     {{- end -}}

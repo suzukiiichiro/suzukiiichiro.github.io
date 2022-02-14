@@ -12,7 +12,7 @@
         {{ range first .Site.Params.widgets.populerArticles.limit $json }}
           {{ $article := index (where $page ".RelPermalink" "eq" .link ) 0  }}
           {{ if $article }}
-            {{ partial "article-list/side" (dict "context" $article "size" "160x" "Type" "articleList") }}
+            {{ partial "article-list/side" (dict "context" $article "size" "200x" "Type" "articleList") }}
           {{ end }}
         {{ end }}
       </div>

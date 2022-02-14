@@ -11,7 +11,7 @@
     <header class="article-header">
       {{ if $image.exists }}
       <div class="article-image">
-        {{/*
+
         {{ if $image.resource }}
         {{- $Permalink := $image.resource.RelPermalink -}}
         {{- $Width := $image.resource.Width -}}
@@ -19,9 +19,9 @@
         {{- $Srcset := "" -}}
         {{- if (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
         
-        {{- $thumbnail := $image.resource.Resize "x200" -}}
-        {{- $thumbnailRetina := $image.resource.Resize "x400" -}}
-        {{- $Srcset = printf "%s 800w, %s 1600w" $thumbnail.RelPermalink $thumbnailRetina.RelPermalink -}}
+        {{- $thumbnail := $image.resource.Resize "200x" -}}
+        {{- $thumbnailRetina := $image.resource.Resize "400x" -}}
+        {{- $Srcset = printf "%s 1x, %s 2x" $thumbnail.RelPermalink $thumbnailRetina.RelPermalink -}}
 
         {{- $Permalink = $thumbnail.RelPermalink -}}
         {{- $Width = $thumbnail.Width -}}
@@ -31,8 +31,10 @@
         {{ else }}
         <img src="{{ $image.permalink }}" loading="lazy" alt="Featured image of post {{ .Title }}" />
         {{ end }}
-       */}}
+
+        {{/*
         <img src="{{ $image.permalink }}" loading="lazy" alt="Featured image of post {{ .Title }}" />
+       */}}
       </div>
       {{ end }}
       {{ if .Params.categories }}

@@ -1,12 +1,12 @@
 <div class="article-pager">
    {{ if .NextInSection }}
-    <div class="article-pager--next">
+    <div class="article-pager-item article-pager--next">
     {{ partial "article-list/tile" (dict "context" .NextInSection "size" "160x100" "Type" "articleList") }}
     </div>
   {{ end }}
 
   {{ if .PrevInSection }}
-  <div class="article-pager--prev">
+  <div class="article-pager-item article-pager--prev">
     {{ partial "article-list/tile" (dict "context" .PrevInSection "size" "160x100" "Type" "articleList") }}
   </div>
   {{ end }}

@@ -38,6 +38,7 @@ body {
 .container {
   width: 100%;
   &.extended {
+    max-width: 100%;
     @include mq(tab) {
       display: grid;
       grid-template-columns: 1fr 330px;
