@@ -4,25 +4,25 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。">
-<title>「UNIXという考え方―その設計思想と哲学」　メモ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です">
+<title>【unComp】Bashで便利なコマンドを作ってみようって話 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
-<meta property="og:title" content="「UNIXという考え方―その設計思想と哲学」　メモ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。">
+<meta property="og:title" content="【unComp】Bashで便利なコマンドを作ってみようって話 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Linux"><meta property="article:tag" content="UNIX"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-25T09:25:50+09:00"><meta property="article:modified_time" content="2022-02-14T15:37:44+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg">
-<meta name=twitter:title content="「UNIXという考え方―その設計思想と哲学」　メモ - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。"><meta name=twitter:card content="summary_large_image">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="ユーティリティ"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2021-12-23T13:11:13+09:00"><meta property="article:modified_time" content="2022-02-14T18:17:59+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg">
+<meta name=twitter:title content="【unComp】Bashで便利なコマンドを作ってみようって話 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"「UNIXという考え方―その設計思想と哲学」　メモ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg"],"datePublished":"2021-12-25T09:25:50+09:00","dateModified":"2022-02-14T15:37:44+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"「UNIXという考え方―その設計思想と哲学」　メモ","item":"https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【unComp】Bashで便利なコマンドを作ってみようって話","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash.jpg"],"datePublished":"2021-12-23T13:11:13+09:00","dateModified":"2022-02-14T18:17:59+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"【unComp】Bashで便利なコマンドを作ってみようって話","item":"https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -101,7 +101,7 @@ Web開発
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
-<li><span class=breadcrumb-item>「UNIXという考え方―その設計思想と哲学」　メモ</span>
+<li><span class=breadcrumb-item>【unComp】Bashで便利なコマンドを作ってみようって話</span>
 </ol>
 </nav>
 <article class="has-image main-article">
@@ -115,17 +115,17 @@ Web開発
 <div class=article-info>
 <span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
-<time class="article-time--item article-time--published">2021.12.25</time>
+<time class="article-time--item article-time--published">2021.12.23</time>
 <time class="article-time--item article-time--updatedate">
 2022.02.14
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 10分
+読了時間: 2分
 </time>
 </div>
 </header>
 <h1 class=article-title>
-「UNIXという考え方―その設計思想と哲学」　メモ
+【unComp】Bashで便利なコマンドを作ってみようって話
 </h1>
 </div>
 <section class="widget archives tableOfContents">
@@ -133,67 +133,13 @@ Web開発
 <div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#書籍の紹介>書籍の紹介</a></li>
-<li><a href=#あらすじ>あらすじ</a></li>
-<li><a href=#このページはなんだ>このページはなんだ？</a></li>
-<li><a href=#１小さいものは美しい>■１．小さいものは美しい</a>
+<li><a href=#関連記事>関連記事</a></li>
+<li><a href=#できること>できること</a></li>
+<li><a href=#圧縮ファイルと実行コマンドパラメータ一覧>圧縮ファイルと実行コマンド、パラメータ一覧</a></li>
+<li><a href=#実行例>実行例</a></li>
+<li><a href=#作成>作成</a>
 <ol>
-<li><a href=#抜粋>抜粋</a></li>
-<li><a href=#エッセンス>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#２一つのプログラムには一つの事をうまくやらせる>■２．一つのプログラムには一つの事をうまくやらせる</a>
-<ol>
-<li><a href=#抜粋-1>抜粋</a></li>
-<li><a href=#エッセンス-1>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#３出来るだけ早く試作する>■３．出来るだけ早く試作する</a>
-<ol>
-<li><a href=#抜粋-2>抜粋</a></li>
-<li><a href=#エッセンス-2>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#４効率より移植性>■４．効率より移植性</a>
-<ol>
-<li><a href=#抜粋-3>抜粋</a></li>
-<li><a href=#エッセンス-3>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#５出力結果はasciiフラットファイルに保存する>■５．出力結果はASCIIフラットファイルに保存する</a>
-<ol>
-<li><a href=#抜粋-4>抜粋</a></li>
-<li><a href=#エッセンス-4>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#６ソフトウェアを梃子として使う>■６．ソフトウェアを梃子として使う　</a>
-<ol>
-<li><a href=#抜粋-5>抜粋</a></li>
-<li><a href=#エッセンス-5>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#７シェルスクリプトによって梃子の効果と移植性を高めるパイプ>■７．シェルスクリプトによって梃子の効果と移植性を高める　パイプ</a>
-<ol>
-<li><a href=#抜粋-6>抜粋</a></li>
-<li><a href=#エッセンス-6>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#８全てのプログラムをフィルタとして設計する>■８．全てのプログラムをフィルタとして設計する</a>
-<ol>
-<li><a href=#抜粋-7>抜粋</a></li>
-<li><a href=#エッセンス-7>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#９並行して考える>■９．並行して考える</a>
-<ol>
-<li><a href=#抜粋-8>抜粋</a></li>
-<li><a href=#エッセンス-8>エッセンス</a></li>
-</ol>
-</li>
-<li><a href=#１０木を守る>■１０．木を守る</a>
-<ol>
-<li><a href=#抜粋-9>抜粋</a></li>
-<li><a href=#エッセンス-9>エッセンス</a></li>
+<li><a href=#使い方>使い方</a></li>
 </ol>
 </li>
 </ol>
@@ -203,267 +149,188 @@ Web開発
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h2 id=書籍の紹介>書籍の紹介</h2>
-<aside class=amazon-box>
-<a href="https://www.amazon.co.jp/gp/product/4274064069/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4274064069&linkCode=as2&tag=nlpqueens-22&linkId=d045d50d407b75e179a1c786ee85e152" target=_blank>
-<div class="columns amazon-image">
-<img border=0 src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4274064069&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22">
-</div>
-<div class="columns amazon-info">
-<h2 class=amazon-name>UNIXという考え方―その設計思想と哲学</h2>
-<p>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
-<span class=link>Amazonで詳細を見る</span>
-</div>
-</a>
-<small>Amazon.co.jpアソシエイトを使用</small>
-</aside>
-<h2 id=あらすじ>あらすじ</h2>
-<p>UNIX系のOSは世界で広く使われている。UNIX、Linux、FreeBSD、Solarisなど、商用、非商用を問わず最も普及したOSのひとつであろう。そしてこのOSは30年にわたって使用され続けているものでもある。なぜこれほど長い間使われてきたのか？ その秘密はUNIXに込められた数々の哲学や思想が握っている。</p>
-<p>そもそもUNIXはMulticsという巨大なOSの開発から生まれたものだ。あまりに巨大なMulticsはその複雑さゆえに開発は遅々として進まず、その反省からケン・トンプソンが作ったのがUNIXの初めとされる。その後デニス・リッチーら多数の開発者が携わり、UNIXは発展した。本書はこのUNIXに込められた「思想と哲学」を抽出し、数々のエピソードとともにUNIXの特徴を浮き彫りにしていく。</p>
-<p>たとえば本書で述べられているUNIXの発想のひとつとして「過度の対話式インタフェースを避ける」というものがある。UNIXのシステムは初心者には「不親切」なつくり、つまり親切な対話式のインタフェースはほとんどなく、ユーザーがコマンドを実行しようとするときはオプションをつける形をとっている。この形式はオプションをいちいち覚えねばならず、初心者に決してやさしくない。しかしこれはプログラムを小さく単純なものにし、他のプログラムとの結合性を高くする。そして結果としてUNIXのスケーラビリティと移植性の高さを支えることになっているのだ。このような形式で本書では9つの定理と10の小定理を掲げ、UNIXが何を重視し、何を犠牲にしてきたのかを明快に解説している。</p>
-<h2 id=このページはなんだ>このページはなんだ？</h2>
-<p>　という前置きはよいとして、心に余裕があれば、ぜひ本書を読んでいただきたい。全てのLinux初心者必携の書だ。そして、このページは何かというと、この本のエッセンスを抜粋した「メモ」という位置づけとしてとらえて欲しい。</p>
-<p>　一度、本を読んで頂ければ、このメモを見ればいつでもほんの情景がフィードバックされるはずだ。とうぜん、本を読まずしてこのメモを見てもいまいちちんぷんかんぷんかとは思う。</p>
-<p>　ただ、エッセンスからでも読み取れることも多い。</p>
-<p>　解決方法は皆さんにお任せする。</p>
-<h2 id=１小さいものは美しい>■１．小さいものは美しい</h2>
-<h3 id=抜粋>抜粋</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　　小さなプログラムはわかりやすい
-　　小さなプログラムは保守しやすい
-　　小さなプログラムはシステムリソースに易しい
-　　小さなプログラムは他のツールと組み合わせやすい
+<h2 id=関連記事>関連記事</h2>
+<ul>
+<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ target=_blank rel=noopener>【wLu】Bashで便利なコマンドを作ってみようって話</a></li>
+<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/ target=_blank rel=noopener>【unComp】Bashで便利なコマンドを作ってみようって話</a></li>
+<li><a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/ target=_blank rel=noopener>【プログレスバー】Bashでプログレスバーを作ってみようって話</a></li>
+</ul>
+<h2 id=できること>できること</h2>
+<p>圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。</p>
+<h2 id=圧縮ファイルと実行コマンドパラメータ一覧>圧縮ファイルと実行コマンド、パラメータ一覧</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>
+  拡張子           パラメータ
+  tgz <span class=p>|</span> tar.gz     tar zxvf  
+  tar.Z            gunzip 
+  tar.bz2          tar xvfj 
+  tar              tar xvfz 
+  gz               gunzip 
+  Z                gunzip 
+  bz2              bunzip2 
+  zip              unzip 
+</code></pre></div><p>こうしたコマンドやパラメータを覚えておくことは大切ですが、頭の経年劣化とともに、つい思い出すことができず、Googleで検索して調べると言ったことは、往々にしてあることです。</p>
+<h2 id=実行例>実行例</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 圧縮ファイルを解凍する便利な unCompコマンド</span>
+$ unComp comp.tar.gz2
+</code></pre></div><h2 id=作成>作成</h2>
+<p>まずファイルを作ります。ファイル名は unComp とします</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># unComp というファイルを作成</span>
+$ :&gt; unComp 
 
-　　「伝統的なプログラマは、巨大なアメリカンプログラムによって、
-　　　　世界中の全ての問題を一つのプログラムで解決しようとする。」
-　　「プログラムの９０％はクズである。
-　　　　ただしあらゆるものの９０％はクズである。」
+<span class=c1># vim で unComp を開く</span>
+$ vim unComp
+</code></pre></div><p>unCompファイルに以下の内容を貼り付ける</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=c1>#</span>
+<span class=c1>#圧縮されているファイルを解凍する</span>
+<span class=c1># unComp を /usr/local/bin/にコピーすると</span>
+<span class=c1># 通常のコマンドとして本実行ファイルを利用する事が出来ます。</span>
+<span class=c1>#</span>
+<span class=c1># cp unComp /usr/local/bin/unComp</span>
+<span class=c1>#</span>
+<span class=c1># 実行例</span>
+<span class=c1># $ unComp filename(圧縮ファイル)</span>
+<span class=c1>#</span>
+<span class=k>if</span> <span class=o>[</span> <span class=nv>$#</span> -ne <span class=m>1</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+  <span class=nb>echo</span> <span class=s2>&#34;&#34;</span>
+  <span class=nb>exit</span> <span class=p>;</span>
+<span class=k>fi</span>
+<span class=c1>#</span>
+<span class=k>case</span> <span class=nv>$1</span> in
+  *.tgz <span class=p>|</span> *.tar.gz<span class=o>)</span>   tar zxvf <span class=nv>$1</span> <span class=p>;;</span>
+  *.tar.Z<span class=o>)</span>            gunzip <span class=nv>$1</span>
+                      tar xvf <span class=k>$(</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> <span class=p>|</span> sed <span class=s1>&#39;s/\.Z$//&#39;</span><span class=k>)</span>
+                      <span class=p>;;</span>
+  *.tar.bz2<span class=o>)</span>          tar xvfj <span class=nv>$1</span><span class=p>;;</span>
+  *.tar<span class=o>)</span>              tar xvfz <span class=nv>$1</span><span class=p>;;</span>
+  *.gz<span class=o>)</span>               gunzip <span class=nv>$1</span><span class=p>;;</span>
+  *.Z<span class=o>)</span>                gunzip <span class=nv>$1</span><span class=p>;;</span>
+  *.bz2<span class=o>)</span>              bunzip2 <span class=nv>$1</span><span class=p>;;</span>
+  *.zip<span class=o>)</span>              unzip <span class=nv>$1</span><span class=p>;;</span>
+  *<span class=o>)</span>                  <span class=nb>echo</span> <span class=s2>&#34;ファイルの拡張子が対応していません:</span><span class=nv>$1</span><span class=s2>&#34;</span>
+<span class=k>esac</span>
+<span class=nb>exit</span> <span class=p>;</span>
+</code></pre></div><p>作成したファイルには日本語が含まれているため、unCompファイルを UTF-8に変換しておきます。<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/ title=wLu target=_blank rel=noopener>wLu</a>をつかってUTF-8に変換するとさらに便利です。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># unComp ファイルをnkf -wLu でUTF-8に変換</span>
+$ nkf -wLu unComp &gt; unComp.txt
 
-　　パラメータが一行に収まらない
-　　メソッドが画面に収まらない
-　　コメントを読まないと何をやっているのか思い出せない
-　　lsでモジュール名が多すぎて画面の端から消えていってしまう
-　　まだ開発中なのにエラーメッセージの意味を思い出せない
-　　整理するためにソースコードを印刷している自分に気がついた
-</code></pre></div><h3 id=エッセンス>エッセンス</h3>
-<pre tabindex=0><code>　「スモールイズビューティフル」
-　　「伝統的なプログラマは、巨大なアメリカンプログラムによって、
-　　　　世界中の全ての問題を一つのプログラムで解決しようとする。」
-　　「プログラムの９０％はクズである。
-　　　　ただしあらゆるものの９０％はクズである。」
-</code></pre><h2 id=２一つのプログラムには一つの事をうまくやらせる>■２．一つのプログラムには一つの事をうまくやらせる</h2>
-<h3 id=抜粋-1>抜粋</h3>
-<pre tabindex=0><code class=language-　　a)ユーザーとの対話が必要か。パラメータではだめか data-lang=　　a)ユーザーとの対話が必要か。パラメータではだめか>　　b)入力データは特殊フォーマットが必要か。フォーマット変換プログラムがすでにシステム上にないか。
-　　c)出力データは特殊フォーマットが必要か。通常のASCIIファイルではだめか。
-　　d)新しいプログラムを書かずとも似たような機能を持つ他のプログラムがあるのではないか。
+<span class=c1># unComp.txtをunCompにリネームします</span>
+$ mv unComp.txt unComp
 
-　　「一つの事をうまくやるようにプログラムを作れないのであれば、
-　　　　おそらく問題をまだ完全に理解していない。」
-　　「しのびよる多機能主義。
-　　　　プログラマはいつだってプログラムを遅くする方法を見つける。」
+<span class=c1># 作成したunCompコマンドファイルを/usr/local/bin にコピーします</span>
+$ sudo unComp /usr/local/bin/
 
-　　一つの事をうまくやるようにアプリケーションを書けば、それは必然的に小さなプログラムになる。
-　　小さなプログラムは単一機能になる傾向があり、単一機能のプログラムは小さくなる傾向がある。
-</code></pre><h3 id=エッセンス-1>エッセンス</h3>
-<pre tabindex=0><code>　「わかることは分けること」
-　　「UNIXユーザーは、自分が何をしているのかをわかっている。
-　　　　何をしているのかわからないのなら、ここにいるべきではない」
-　　「一つの事をうまくやるようにプログラムを作れないのであれば、
-　　　　おそらく問題をまだ完全に理解していない。」
-</code></pre><h2 id=３出来るだけ早く試作する>■３．出来るだけ早く試作する</h2>
-<h3 id=抜粋-2>抜粋</h3>
-<pre tabindex=0><code>　　「試作によって学ぶ。早い試作はリスクを減らす。
-　　　「正しく」やっている時間などない」
-　　「なにができるか」
-　　　　むしろ重要な事は、「なにができないか」を知る事だ。」
-
-　　三つのシステム
-　　１．第一のシステム
-　　　第一のシステムは正しくやっている時間などない。
-　　　第一のシステムは追い詰められた人間が作る。
-　　　第一のシステムのコンセプトは人々の想像力を刺激する。
-　　　第一のシステムは一人かせいぜい数人からなる小さなグループで作られる。
-　　　第一のシステムは高い情熱によって推進され開発は急速に進む。
-　　　第一のシステムは実に性能がよい。
-
-　　２．第二のシステム
-　　　第二のシステムは第一のシステムで証明されたアイデアを継承する。
-　　　第二のシステムは委員会が設計する。
-　　　第二のシステムは委員会によりものごとを全て公開の場で自分自身の正当化のために議論を進める。
-　　　第二のシステムは第一のシステムの成功に便乗し分け前にあずかろうとする自称専門家で作られる。
-　　　第二のシステムは自称専門家によりリポジトリ、進捗管理ツールが導入され計画は遅延する。
-　　　第二のシステムは自称専門家のプログラムにおきかえられ贅肉がつき像のようにゆっくり動く。
-　　　第二のシステムは「最初の設計のひどい欠点を見違えるように改善」され多機能となり無知が使う。
-　　　第二のシステムは三つのシステムの中で最悪のシステムである。
-
-　　３．第三のシステム
-　　　第三のシステムはこれまでのシステムへの反抗から生まれる。
-　　　第三のシステムの名前が変わり、オリジナルのアイデアはもはや常識となる。
-　　　第三のシステムは第一と第二のシステムの最良の特徴を組み合わせる。
-　　　第三のシステムは設計者にとってようやく「正しく」やる事が出来る。
-　　　第三のシステムはユーザーが実際に使用する機能しか含まれない。
-　　　第三のシステムはディスク、メモリ、CPUサイクルなど最適なバランスが実現されている。
-　　　第三のシステムは提供される性能レベルも良くバランスがとれている。
-
-　　第一のシステムとして「試作」を１ナノ秒でも早く作り、
-　　　第一のシステムと第二のシステムのサイクルを反復と協調し、
-　　　　第三のシステムに向かって協力しながら進んでいく。
-</code></pre><h3 id=エッセンス-2>エッセンス</h3>
-<pre tabindex=0><code>　「反復と協調」
-　　「試作によって学ぶ。早い試作はリスクを減らす。
-　　　「正しく」やっている時間などない」
-　　「なにができるか」
-　　　　むしろ重要な事は、「なにができないか」を知る事だ。」
-</code></pre><h2 id=４効率より移植性>■４．効率より移植性</h2>
-<h3 id=抜粋-3>抜粋</h3>
-<pre tabindex=0><code>　　UNIXにおいてそれはシェルスクリプトしかない。
-　　次のハードウェアはもっと速く走る。だからプログラムを速くするという誘惑に負けない。
-　　わずかな速度を求めてCで書き直さない。それは時間の無駄だ。
-
-　　シェルスクリプトをあれこれいじる余裕が一瞬でも生じればほとんどのプログラマは
-          a) 新しい機能をいくつか付け加えようとする
-　　　b) スクリプトそのものを洗練し、実行速度を高めようとする
-　　　c) その一部、または大部分をCで書き直してパフォーマンスの向上を図ろうとする。
-
-　　「最も効率の良い方法は、
-　　　　ほとんどの場合「移植性」に欠ける。」
-　　「移植か死か。優れたソフトウェアは移植され成長し、
-　　　　それ以外は取り残され捨てられる。」
-
-　　DQ1カートリッジ(64kb)用のコード
-　　　自分のプログラマ人生で最も効率の良い、そして移植の難しいコード」を書いた。
-　　　命令をデータとして扱い、データを命令として扱った。
-　　　走査線が画面の右端から左端に引き返すまでの間を狙って命令を実行した。
-　　　メモリ節約のためありとあらゆる技を駆使した。
-　　　こうしてできあがったコードは芸術品と言えるほど見事なものだった。
-　　　フォルクスワーゲンのビートルに２０人ほど詰め込むようなものだった。
-　　　そして保守担当者にとっては究極の悪夢でもあった。
-</code></pre><h3 id=エッセンス-3>エッセンス</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　bashとawkとsed
-　　「最も効率の良い方法は、
-　　　　ほとんどの場合「移植性」に欠ける。」
-　　「移植か死か。優れたソフトウェアは移植され成長し、
-　　　　それ以外は取り残され捨てられる。」
-</code></pre></div><h2 id=５出力結果はasciiフラットファイルに保存する>■５．出力結果はASCIIフラットファイルに保存する</h2>
-<h3 id=抜粋-4>抜粋</h3>
-<pre tabindex=0><code>　　「動かせないデータは死んだデータだ。」
-
-　　出力結果はASCIIフラットファイルに保存する。
-　　RDBを使わない。
-　　中間ファイルをはき出さない。
-</code></pre><h3 id=エッセンス-4>エッセンス</h3>
-<pre tabindex=0><code>　中間ファイルは作らない　RDBは使わない
-　　「動かせないデータは死んだデータだ。」
-</code></pre><h2 id=６ソフトウェアを梃子として使う>■６．ソフトウェアを梃子として使う　</h2>
-<h3 id=抜粋-5>抜粋</h3>
-<pre tabindex=0><code>　　梃子の支点をいかに自分のほうに近づける事が出来るか
-　　独自技術症候群を避け、すでにあるものにクリエイティブな付加価値をつける
-　　独自技術症候群は創造性を伸ばさない。
-
-　　「良いプログラマはよいコードを書く。
-　　　　偉大なプログラマは良いコードを借りてくる。」
-</code></pre><h3 id=エッセンス-5>エッセンス</h3>
-<pre tabindex=0><code>　　「良いプログラマはよいコードを書く。
-　　　　偉大なプログラマは良いコードを借りてくる。」
-</code></pre><h2 id=７シェルスクリプトによって梃子の効果と移植性を高めるパイプ>■７．シェルスクリプトによって梃子の効果と移植性を高める　パイプ</h2>
-<h3 id=抜粋-6>抜粋</h3>
-<pre tabindex=0><code>　　シェルスクリプトには恐ろしいほどの梃子の効果がある
-　　シェルスクリプトは梃子の降下で時間も節約する
-　　シェルスクリプトはCより移植性が高い
-
-　　「熟練プログラマはシェルスクリプトを熱心に使う。
-　　　　あなたもまたそうするべきだ。」
-　　「UNIXの源流は高水準の抽象化モデル「シェルスクリプト」であり、
-　　　　それは今も普遍である。」
-　　「私は人生で二度しか奇跡を見た事がない。
-　　　　一つは核融合、もう一つは複利だ
-　　　少量のものを繰り返し掛け合わせていく事で、
-　　　　やがて奇跡的な規模に達する。」アインシュタイン
-
-　　シェルスクリプト一行はおよそ１万倍の複利を生む
-```bash
-　　echo who | awk '{ print $1 ; }' | sort | uniq | sed -e &quot;s/  /,  /g&quot; ;
-
-　　echo   177
-　　who    755
-　　awk   3411
-　　sort  2614
-　　uniq    302
-　　sed   2093
--------------------------
-　　　　  9.353
-　　処理をパイプでつなぎ処理全体を一行で完結させる。
-　　「ひとつのことをうまくやる」の良い事例だ。
-</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　　<span class=k>function</span> sh_func_getTitle<span class=o>()</span> <span class=o>{</span>
-　　  <span class=nv>TITLE</span><span class=o>=</span><span class=k>$(</span><span class=nb>echo</span> <span class=si>${</span><span class=nv>URLGETOPT</span><span class=si>}</span> <span class=p>|</span> <span class=se>\
-</span><span class=se></span>　　    <span class=k>while</span> <span class=nb>read</span> line <span class=p>;</span><span class=k>do</span>
-　　      <span class=k>if</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$line</span><span class=s2>&#34;</span> <span class=p>|</span> grep -i <span class=s2>&#34;title=&#34;</span> &gt; /dev/null<span class=p>;</span> <span class=k>then</span>
-　　        <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$line</span><span class=s2>&#34;</span> <span class=p>|</span> <span class=se>\
-</span><span class=se></span>　　          sed -e <span class=s2>&#34;s/^.*title=\x27//g&#34;</span> <span class=se>\
-</span><span class=se></span>　　              -e <span class=s2>&#34;s/\x27.*</span>$<span class=s2>//g&#34;</span> <span class=se>\
-</span><span class=se></span>　　              -e <span class=s2>&#34;s/\r//g&#34;</span> <span class=se>\
-</span><span class=se></span>　　              -e <span class=s2>&#34;s/&lt;[^&gt;]*&gt;//g&#34;</span> <span class=se>\
-</span><span class=se></span>　　              -e <span class=s2>&#34;s/^[●○■□△▽]//g&#34;</span><span class=p>;</span> 
-　　      <span class=k>fi</span>
-　　    <span class=k>done)</span><span class=p>;</span>
-　　<span class=o>}</span>
-</code></pre></div><h3 id=エッセンス-6>エッセンス</h3>
-<pre tabindex=0><code>　　「私は人生で二度しか奇跡を見た事がない。
-　　　　一つは核融合、もう一つは複利だ
-　　　　　少量のものを繰り返し掛け合わせていく事で、
-　　　　　　やがて奇跡的な規模に達する。」
-</code></pre><h2 id=８全てのプログラムをフィルタとして設計する>■８．全てのプログラムをフィルタとして設計する</h2>
-<h3 id=抜粋-7>抜粋</h3>
-<p>　　メソッド間の入力をstdin、出力はstdoutを使用する<br>
-　　オンメモリでコマンドフィルタとして稼働する。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　<span class=k>function</span> trim<span class=o>(){</span>
-　　<span class=k>if</span> <span class=o>[</span> -p /dev/stdin <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
- 　   cat - <span class=p>;</span>
-　　<span class=k>else</span>
-      <span class=nb>echo</span> -n <span class=p>;</span>
-　　<span class=k>fi</span> <span class=p>|</span> sed -e <span class=s1>&#39;s/^ *//g&#39;</span> -e <span class=s1>&#39;s/ *$//g&#39;</span>
-　<span class=o>}</span>
-
-　　実行結果
-      <span class=nb>echo</span> <span class=s2>&#34;      ほげ      &#34;</span> <span class=p>|</span> trim <span class=p>;</span>
-      ほげ
-</code></pre></div><p>　　以下でも良い。　　</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　<span class=k>function</span> trim<span class=o>(){</span>
-　　awk <span class=s1>&#39;{ print $1; }&#39;</span> <span class=p>|</span> sed -e <span class=s1>&#39;s/^ *//g&#39;</span> -e <span class=s1>&#39;s/ *$//g&#39;</span>  &lt;/dev/stdin
-　<span class=o>}</span>
-
-　　実行結果
-      <span class=nb>echo</span> <span class=s2>&#34;      ほげ      &#34;</span> <span class=p>|</span> trim <span class=p>;</span>
-      ほげ
-</code></pre></div><h3 id=エッセンス-7>エッセンス</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>　　　メソッド間の入力をstdin、出力はstdoutを使用する
-</code></pre></div><h2 id=９並行して考える>■９．並行して考える</h2>
-<h3 id=抜粋-8>抜粋</h3>
-<p>　　並列処理が可能なメソッドを積極的に書く</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash> 　　 メソッドの並列処理
- 　　  <span class=m>1</span> <span class=c1>#!/bin/bash</span>
- 　　  <span class=m>2</span> cmd<span class=o>()</span> <span class=o>{</span> 
- 　　  <span class=m>3</span>    <span class=nb>echo</span> <span class=s2>&#34;Hello, </span><span class=nv>$1</span><span class=s2>!&#34;</span><span class=p>;</span> 
- 　　  <span class=m>4</span> <span class=o>}</span>
- 　　  <span class=m>5</span> <span class=k>function</span> sh_xargs<span class=o>(){</span>
- 　　  <span class=m>6</span> 　<span class=nb>export</span> -f cmd
- 　　  <span class=m>7</span> 　yes <span class=p>|</span> head -1000 <span class=p>|</span> xargs -n1 -P4 -I % bash -c <span class=s2>&#34;cmd %&#34;</span>
- 　　  <span class=m>8</span> <span class=o>}</span>
- 　　  <span class=m>9</span> sh_xargs <span class=p>;</span>
-</code></pre></div><h3 id=エッセンス-8>エッセンス</h3>
-<pre tabindex=0><code>　　　並列処理が可能なメソッドを積極的に書く
-</code></pre><h2 id=１０木を守る>■１０．木を守る</h2>
-<h3 id=抜粋-9>抜粋</h3>
-<pre tabindex=0><code>　　UNIXユーザーは紙のドキュメントを忌み嫌う。不要なドキュメントを印刷して整理する事はしない。
-　　ソースコードが実体であり、高水準のドキュメントとなるようプログラムする。
-</code></pre><h3 id=エッセンス-9>エッセンス</h3>
-<pre tabindex=0><code>　　　UNIXはドキュメントを忌み嫌う
-</code></pre>
+<span class=c1># コマンドが配置されたかを確認</span>
+$ which unComp
+$ /usr/local/bin/unComp
+</code></pre></div><h3 id=使い方>使い方</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 圧縮ファイルの拡張子を気にせずをコマンド一発で解凍する</span>
+<span class=c1># 実行</span>
+$ unComp sample.zip
+</code></pre></div><p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。<br>
+便利ですね。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class="section related-contents--wrapper">
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
+<article class="has-image article-item" data-date=2022.01.06>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>シェルスクリプトをつかって、hugoで楽ちんにファイルを作成して編集できないかっていうはなし</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.06</time>
+</div><p class=article-subtitle>ここでは、hugoコマンドでnewする時に指定するファイル名を、シェルスクリプトを使ってなるべく簡便にあてはめてファイル生成しようというものです。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div><p class=article-subtitle>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.23>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div><p class=article-subtitle>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.23>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【unComp】Bashで便利なコマンドを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div><p class=article-subtitle>今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.23>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg loading=lazy alt="Featured image of post 【wLu】Bashで便利なコマンドを作ってみようって話">
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>【wLu】Bashで便利なコマンドを作ってみようって話</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.23</time>
+</div><p class=article-subtitle>今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です</p>
+</div>
+</a>
+</article>
 <article class="has-image article-item" data-date=2022.02.02>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
 <header class=article-header>
@@ -503,25 +370,6 @@ Web開発
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２９．waitコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/>
 <header class=article-header>
 <div class=article-image>
@@ -540,82 +388,6 @@ Web開発
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２８．dateコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-22-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【２２．存在を確認してディレクトリを作成する】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>'mkdir'コマンドを実行する前に、現在の場所にディレクトリが存在することを確認する事ができます。mkdir コマンドの' -d 'オプションは、特定のディレクトリが存在するかどうかをテストするためのオプションです。'directory_exist.sh'という名前のファイルを作成し、次のコードを追加してください。ディレクトリの存在を確認してディレクトリを作成します。</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.13>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/>
-<header class=article-header>
-<div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-14-30-suzuki/shellscript.jpg loading=lazy alt="Featured image of post 【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」">
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>【３０．sleepコマンド】ざっくりわかる「シェルスクリプト」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.13</time>
-</div><p class=article-subtitle>コマンドの実行を特定の期間一時停止する場合は、sleepコマンドを使用できます。遅延量は、 秒（s）、分（m）、時間（h）、および日（d）で設定できます。'sleep_example.sh' という名前のファイルを作成し、次のスクリプトを追加します。このスクリプトは、実行後5秒間待機します。</p>
-</div>
-</a>
-</article>
 </div>
 </section>
 <footer class=article-footer>
@@ -623,24 +395,24 @@ Web開発
 <div class=article-pager>
 <div class=article-pager--next>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-ani/anal.jpg loading=lazy data-key data-hash=/posts/2021-12-25-01-ani/anal.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg loading=lazy data-key data-hash=/posts/2021-12-23-02-suzuki/2021-12-23-bash.jpg>
 </div>
 <div class=article-details>
-<h2 class=article-title>e-Statのデータの見方</h2>
+<h2 class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</h2>
 </div>
 </a>
 </article>
 </div>
 <div class=article-pager--prev>
 <article class=has-image>
-<a href=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-23-10-ani/anal.jpg loading=lazy data-key data-hash=/posts/2021-12-23-10-ani/anal.jpg>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/2021-12-23-bash.jpg loading=lazy data-key data-hash=/posts/2021-12-23-suzuki/2021-12-23-bash.jpg>
 </div>
 <div class=article-details>
-<h2 class=article-title>知識ゼロからのe-Statマイニング</h2>
+<h2 class=article-title>【wLu】Bashで便利なコマンドを作ってみようって話</h2>
 </div>
 </a>
 </article>
