@@ -7,12 +7,12 @@ authors: wYoshi
 image: catch.jpg
 
 categories:
-  - Web開発
+  - web
 tags:
   - プログラム
   - デザイナー
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - HTML
   - Webデザイナー

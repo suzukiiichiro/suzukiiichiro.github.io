@@ -6,7 +6,7 @@ draft: false
 authors: suzuki
 image: bash.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - more
   - シェルスクリプト
@@ -156,5 +156,3 @@ CHAPTER15 読みやすいシェルスクリプト
 imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797393106&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=nlpqueens-22"
 %}}
 
-
-<!-- EOF -->

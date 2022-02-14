@@ -6,7 +6,7 @@ draft: false
 authors: wyoshi
 image: image.jpg
 categories:
-  - Web開発
+  - web
 tags:
   - プログラム
   - デザイナー

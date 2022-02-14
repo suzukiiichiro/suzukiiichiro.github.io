@@ -6,7 +6,7 @@ draft: false
 image: analytics.jpg
 authors: wyoshi
 categories:
-  - Web開発
+  - web
 tags:
   - Hugo
   - GitHub

@@ -6,7 +6,7 @@ date: 2022-01-06T14:21:51+09:00
 draft: false
 image: 2021-12-23-bash.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

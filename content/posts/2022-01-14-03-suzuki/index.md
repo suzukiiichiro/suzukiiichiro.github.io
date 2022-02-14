@@ -6,7 +6,7 @@ description: "「#」記号は、bashスクリプトに1行コメントを追加
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

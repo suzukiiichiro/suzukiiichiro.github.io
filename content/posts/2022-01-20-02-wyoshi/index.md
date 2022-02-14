@@ -8,12 +8,12 @@ description: "2022年のトレンドは、より大胆で、よりクリエイ�
 image: catch.jpg
 
 categories:
-  - Web開発
+  - web
 tags:
   - プログラム
   - デザイナー
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - HTML
   - CSS

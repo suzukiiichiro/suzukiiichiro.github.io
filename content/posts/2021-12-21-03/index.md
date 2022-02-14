@@ -3,7 +3,7 @@ title: "hugo で failed to unmarshal YAML: yaml: control characters are not allo
 date: 2021-12-22T21:22:23+09:00
 draft: false
 categories:
-  - プログラミング
+  - programming
 tags:
   - error 
   - hugo

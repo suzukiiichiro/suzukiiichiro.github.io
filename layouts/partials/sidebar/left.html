@@ -5,6 +5,7 @@
     </span>
   </button>
   <header class="site-info">
+    {{- $logoTitle := .Site.Title -}}
     {{ $ishome := .IsHome }}
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
@@ -13,16 +14,15 @@
     {{- else -}}
     <div class="site-name site-avatar">
     {{- end -}}
-
       <a href="{{ .Site.BaseURL | relLangURL }}">
         {{ if not .local }}
-        <img src="{{ .src }}" width="60" height="60" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        <img src="{{ .src }}" width="60" height="60" class="site-logo" loading="lazy" alt="{{ $logoTitle }}">
         {{ else }}
         {{ $avatar := resources.Get (.src) }}
         {{ if $avatar }}
         <!-- {{ $avatarResized := $avatar.Resize "60x" }} -->
-        <!-- <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}"> -->
-        <img src="{{ $avatar.RelPermalink }}" class="site-logo" loading="lazy" alt="{{ .Site.Title }}">
+        <!-- <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}"> -->
+        <img src="{{ $avatar.RelPermalink }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}">
         {{ else }}
         {{ errorf "Failed loading avatar from %q" . }}
         {{ end }}
@@ -83,12 +83,16 @@
             {{- end -}}
           {{- end -}}
           {{- range (sort $menu ".Params.menu.main.weight" "asc") -}}
-          {{- $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) -}}
-          <li {{ if $active }} class='current' {{ end }}>
-            <a href='{{- .URL | relLangURL -}}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
-              <span>{{- .Name -}}</span>
-            </a>
-          </li>
+            {{- $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) -}}
+            <li {{ if $active }} class='current' {{ end }}>
+              <a href='{{- .URL | relLangURL -}}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
+                {{- $title := .Name -}}
+                {{- if .Page.Params.slugTitle -}}
+                {{- $title = .Page.Params.slugTitle -}}
+                {{- end -}}
+                <span>{{- $title -}}</span>
+              </a>
+            </li>
           {{- end -}}
         </ol>
       </nav>

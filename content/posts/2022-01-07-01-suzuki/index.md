@@ -6,7 +6,7 @@ description: "ここではbashプログラミングの基本的な考え方、ba
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

@@ -6,10 +6,10 @@ draft: fales
 authors: wyoshi
 image: "catch.jpg"
 categories:
-  - サーバー構築
+  - server
 tags:
   - 開発
-  - Web開発
+  - web
   - wyoshi
   - EC2
   - AWS

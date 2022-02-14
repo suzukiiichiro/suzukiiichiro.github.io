@@ -7,7 +7,7 @@ description: "ターミナルで非常に単純なbashステートメントを�
 draft: false
 image: shellscript.jpg
 categories:
-  - プログラミング
+  - programming
 tags:
   - プログラミング
   - シェルスクリプト

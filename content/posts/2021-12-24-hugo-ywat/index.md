@@ -4,7 +4,7 @@ date: 2021-12-24T09:43:41+09:00
 draft: false
 
 categories:
-  - プログラミング
+  - programming
 tags:
   - Hugo
   - エラー

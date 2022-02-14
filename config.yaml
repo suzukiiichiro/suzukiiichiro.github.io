@@ -20,7 +20,6 @@ DefaultContentLanguage: ja
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
-hasCJKLanguage: false
 
 # descripptionがない場合のリストに表示される文字数を制限
 hasCJKLanguage: true
@@ -79,11 +78,12 @@ caches:
 # disableKinds: ["sitemap"]
 
 params:
+    mergeDescription: "｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"
     paginate:
         slots: 5
     sitemap:
-      exclude: ["authors", "tags", "categories"]
-      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/", "/ranking/"]
+      exclude: ["authors", "tags", "categories", "ranking", "sitemap"]
+      exclude_url: ["/authors/", "/posts/", "/archives/", "/search/", "/page/", "/privacy/", "/ranking/","/ranking/daily/","/ranking/monthly/","/ranking/yearly/", "/sitemap/"]
     mainSections:
         - posts
 #     featuredImageField: image
