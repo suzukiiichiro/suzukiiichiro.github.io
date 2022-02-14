@@ -7,7 +7,7 @@
 <meta name=description content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って">
 <title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
@@ -15,14 +15,14 @@
 <meta property="og:description" content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="web"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="Javascript"><meta property="article:published_time" content="2022-02-01T14:19:43+09:00"><meta property="article:modified_time" content="2022-02-14T15:53:11+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="デザイナー"><meta property="article:tag" content="開発"><meta property="article:tag" content="web"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Webデザイナー"><meta property="article:tag" content="フロントエンジニア"><meta property="article:tag" content="コーダー"><meta property="article:tag" content="Javascript"><meta property="article:published_time" content="2022-02-01T14:19:43+09:00"><meta property="article:modified_time" content="2022-02-14T19:06:53+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg">
 <meta name=twitter:title content="Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=twitter:description content="Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-01-01-wyoshi/catch.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"],"datePublished":"2022-02-01T14:19:43+09:00","dateModified":"2022-02-14T15:53:11+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。","item":"https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"],"datePublished":"2022-02-01T14:19:43+09:00","dateModified":"2022-02-14T19:06:53+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。","item":"https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -204,11 +204,14 @@ Javascriptで画面ロックが発生する場合は、Workerを使ってみよ�
 iの値をcounterに反映していくだけのものです。<br>
 まずはiの最大値を 100000 くらいで実行してみましょう。</p>
 <p>実行したところ、999999 と表示され、time部分の処理は 569 ミリ秒ということになります。</p>
-<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
-<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif data-size=980x809>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img01.gif width=980 height=809 loading=lazy>
-</a>
-</figure></p>
+<div class=video-wrapper>
+<video controls src=img01.mp4 autoplay>
+<p>
+Your browser doesn't support HTML5 video. Here is a
+<a href=img01.mp4>link to the video</a> instead.
+</p>
+</video>
+</div>
 <p>ここで注目してほしいのが、counter の文字を変化させているにも関わらず、その文字が反映されていないという点です。<br>
 Chrome の Developper tool で確認しても、変化しているようではありますが、画面上では反映されていません。</p>
 <p>重い処理を行う場合をフロントで行うと、 UX の低下につながってしまいます。<br>
@@ -266,11 +269,14 @@ worker部分ではフロントの worker_main.js から実行されたタイミ�
   <span class=c1>//処理結果を送信
 </span><span class=c1></span><span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
 </code></pre></div><p>それでは実行してみましょう。</p>
-<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
-<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif data-size=980x809>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img02.gif width=980 height=809 loading=lazy>
-</a>
-</figure></p>
+<div class=video-wrapper>
+<video controls src=img02.mp4 autoplay>
+<p>
+Your browser doesn't support HTML5 video. Here is a
+<a href=img02.mp4>link to the video</a> instead.
+</p>
+</video>
+</div>
 <p>実行すると、先ほどと全く違うUIになっているかと思います。<br>
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。<br>
 Workerなしの処理ではJavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。</p>
@@ -292,11 +298,14 @@ Workerなしの処理ではJavascriptの処理が詰まってしまい、その�
 <span class=p>};</span>
 </code></pre></div><p>数字部分は変化しますが、先程のようにアニメーションは行われません。<br>
 forの処理が先に終了してしまうため、cssのアニメーションが一瞬で終了してしまうのです。</p>
-<p><figure class=gallery-image style=flex-grow:121;flex-basis:290px>
-<a href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif data-size=980x809>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/img03.gif width=980 height=809 loading=lazy>
-</a>
-</figure></p>
+<div class=video-wrapper>
+<video controls src=img03.mp4 autoplay>
+<p>
+Your browser doesn't support HTML5 video. Here is a
+<a href=img03.mp4>link to the video</a> instead.
+</p>
+</video>
+</div>
 <h2 id=まとめ>まとめ</h2>
 <p>Javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。<br>
 Worker を使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。</p>
