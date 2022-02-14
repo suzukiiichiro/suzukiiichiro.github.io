@@ -6,9 +6,6 @@
   </button>
   <header class="site-info">
     {{- $logoTitle := .Site.Title -}}
-    {{- if .Site.Params.sidebar.subtitle -}}
-      {{- $logoTitle = printf "%s | %s" .Site.Title .Site.Params.sidebar.subtitle -}}
-    {{- end -}}
     {{ $ishome := .IsHome }}
     {{ with .Site.Params.sidebar.avatar }}
     {{ if (default true .enabled) }}
