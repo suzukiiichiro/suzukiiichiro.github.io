@@ -5,7 +5,7 @@ date: 2022-02-07T16:55:55+09:00
 draft: false 
 image: chess.jpg
 categories:
-  - プログラミング
+  - programming 
 tags:
   - nQueen 
   - プログラム

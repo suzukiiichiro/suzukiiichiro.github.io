@@ -5,7 +5,7 @@ date: 2022-01-19T18:31:13+09:00
 draft: false
 image: anal.jpg
 categories:
-  - プログラミング
+  - programming 
 tags:
   - e-Stat 
   - データマイニング
