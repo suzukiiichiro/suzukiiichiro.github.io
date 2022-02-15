@@ -25,7 +25,7 @@
         <picture class="picture">
           <source src="{{ $thumbnail.RelPermalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} media="(min-width: 769px)" width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}" />
           <source src="{{ $thumbnailSP.RelPermalink }}" {{ with $SrcsetSP }} srcset="{{ . }}" {{ end }} media="(max-width: 768px)" width="{{ $thumbnailSP.Width }}" height="{{ $thumbnailSP.Height }}" />
-          <img src="{{ $Permalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} width="{{ $Width }}" height="{{ $Height }}" loading="lazy" alt="{{ .Title }}" />
+          <img src="{{ $Permalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} width="{{ $Width }}" height="{{ $Height }}" loading="lazy" alt="{{ .context.Title }}" />
         </picture>
         <!-- <img src="{{ $Permalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} width="{{ $Width }}" height="{{ $Height }}" loading="lazy" alt="Featured image of post {{ .Title }}" /> -->
       {{- end -}}

@@ -38,7 +38,13 @@
 			{{ with $Height }}height="{{ . }}"{{ end }}
 			{{ with $Srcset }}srcset="{{ . }}"{{ end }}
 			loading="lazy"
-			alt="{{ $alt }}">
+			{{ if $alt }}
+			alt="{{ $alt }}"
+			{{ else if .Page }}
+			alt="{{ .Page.Title }}の画像"
+			{{ end }}
+			>
+		</a>
 	</a>
 	{{ with $alt }}
 	<figcaption>{{ . | markdownify }}</figcaption>
