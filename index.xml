@@ -41,7 +41,9 @@ flex-basis: 237px"
 width="324"
 height="328"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -93,7 +95,9 @@ flex-basis: 244px"
 width="326"
 height="320"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -146,7 +150,9 @@ flex-basis: 237px"
 width="322"
 height="326"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -194,7 +200,9 @@ flex-basis: 241px"
 width="328"
 height="326"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -261,7 +269,9 @@ flex-basis: 238px"
 width="328"
 height="330"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -311,7 +321,9 @@ flex-basis: 235px"
 width="326"
 height="332"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -337,7 +349,9 @@ flex-basis: 235px"
 width="322"
 height="328"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -387,7 +401,9 @@ flex-basis: 244px"
 width="332"
 height="326"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -466,7 +482,9 @@ flex-basis: 235px"
 width="324"
 height="330"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -516,7 +534,9 @@ flex-basis: 240px"
 width="328"
 height="328"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -533,7 +553,9 @@ flex-basis: 244px"
 width="328"
 height="322"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -554,7 +576,9 @@ flex-basis: 242px"
 width="326"
 height="322"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;/p>
@@ -603,7 +627,9 @@ flex-basis: 237px"
 width="326"
 height="330"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -651,7 +677,9 @@ flex-basis: 240px"
 width="324"
 height="324"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -667,7 +695,9 @@ flex-basis: 244px"
 width="326"
 height="320"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -692,7 +722,9 @@ flex-basis: 229px"
 width="316"
 height="330"
 loading="lazy"
-alt="図">
+alt="図"
+>
+&lt;/a>
 &lt;/a>
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
@@ -716,7 +748,9 @@ flex-basis: 473px"
 width="980"
 height="497"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>&lt;a class="link" href="https://drafts.csswg.org/css-scroll-snap-1/#intro" target="_blank" rel="noopener"
@@ -756,7 +790,9 @@ flex-basis: 1009px"
 width="980"
 height="233"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>これは、スクロールコンテナーを作成するための基本的な構成です。&lt;br>
@@ -823,7 +859,9 @@ flex-basis: 628px"
 width="980"
 height="374"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;h4 id="スクロールスナップコンテナーの精密さ">スクロールスナップコンテナーの精密さ&lt;/h4>
@@ -842,7 +880,9 @@ flex-basis: 444px"
 width="980"
 height="529"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
@@ -867,7 +907,9 @@ flex-basis: 444px"
 width="980"
 height="529"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">section&lt;/span> &lt;span class="p">{&lt;/span>
@@ -890,7 +932,9 @@ flex-basis: 452px"
 width="980"
 height="520"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>スクロールコンテナーに磁石があり、スナップポイントを制御するのに役立つと想像してみてください。&lt;br>
@@ -906,7 +950,9 @@ flex-basis: 452px"
 width="980"
 height="520"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>これをより明確にするため、 &lt;code>start&lt;/code> 、&lt;code>center&lt;/code>、および&lt;code>end&lt;/code>の以下のアニメーションを参照してください。&lt;/p>
@@ -956,7 +1002,9 @@ flex-basis: 717px"
 width="980"
 height="328"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>同じことが垂直スクロールでも機能します。以下の例を参照してください。&lt;/p>
@@ -976,7 +1024,9 @@ flex-basis: 691px"
 width="980"
 height="340"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;h2 id="スクロールスナップのmargin">スクロールスナップのmargin&lt;/h2>
@@ -992,7 +1042,9 @@ flex-basis: 557px"
 width="980"
 height="422"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>&lt;code>.item-2&lt;/code>は&lt;code>scroll-margin-left: 20px&lt;/code>となっています。その結果、スクロールコンテナーはそのアイテムの手前20pxにスナップします。ユーザーが再び右にスクロールしたとき、&lt;code>.item-3&lt;/code>はスクロールコンテナーの開始位置にスナップすることに注意してください。つまり、マージンを持つ要素のみが影響を受けることになります。&lt;/p>
@@ -1010,7 +1062,9 @@ flex-basis: 741px"
 width="980"
 height="317"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">images-list&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1038,7 +1092,9 @@ flex-basis: 538px"
 width="980"
 height="437"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1065,7 +1121,9 @@ flex-basis: 538px"
 width="980"
 height="437"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;h3 id="アバターリスト">アバターリスト&lt;/h3>
@@ -1081,7 +1139,9 @@ flex-basis: 355px"
 width="980"
 height="661"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">list&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1108,7 +1168,9 @@ flex-basis: 378px"
 width="980"
 height="621"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">main&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -1156,7 +1218,9 @@ flex-basis: 434px"
 width="980"
 height="541"
 loading="lazy"
-alt="">
+alt="CSSでアプリのようにピタッとスナップするスクロールを作成の画像"
+>
+&lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
 &lt;p>デモのような実装は絶対にしないでください。&lt;/p>
