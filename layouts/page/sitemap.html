@@ -7,7 +7,7 @@
     {{- if .Params.slugTitle -}}
       {{- $title = .Params.slugTitle -}}
     {{- end -}}
-    <h2 class="title">{{ $title }}</h2>
+    <h1 class="title">{{ $title }}</h1>
       <section class="sitemap-items">
         <h2 class="title"><a href="{{ .Site.BaseURL | relLangURL }}">TOP</a></h2>
       </section>
@@ -27,7 +27,7 @@
               {{- if .Params.slugTitle -}}
                 {{- $title = .Params.slugTitle -}}
               {{- end -}}
-              <h1 class="title"><a href="{{- .Permalink -}}">{{- $title -}}</a></h1>
+              <h2 class="title"><a href="{{- .Permalink -}}">{{- $title -}}</a></h2>
               <ul>
           {{- if ne $part "" -}}
             {{- $show = 1 -}}
