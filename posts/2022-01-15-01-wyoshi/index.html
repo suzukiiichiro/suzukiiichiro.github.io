@@ -162,13 +162,13 @@ overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スク
 <p>非常に一般的な問題を取り上げましょう。ビューポートの中央に配置されたモーダルダイアログがあります。そのモーダルの下に、実際のWebページのコンテンツがあります。</p>
 <p><figure class=gallery-image style=flex-grow:173;flex-basis:416px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg data-size=980x565>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg width=980 height=565 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro.jpg width=980 height=565 loading=lazy alt>
 </a>
 </figure></p>
 <p>モーダルコンテンツの最後に到達すると、ブラウザは代わりにメインページのコンテンツをスクロールし続けます。これはスクロールチェーンと呼ばれます。これはデフォルトの動作であり、<code>overscroll-behavior</code>という新しいCSSプロパティでオーバーライドできるようになりました。</p>
 <p><figure class=gallery-image style=flex-grow:208;flex-basis:501px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2.jpg data-size=980x469>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2.jpg width=980 height=469 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro-2.jpg width=980 height=469 loading=lazy alt>
 </a>
 </figure></p>
 <p>多くの場合、この動作は不要であり、ユーザーがモーダルコンテンツに集中できなくなる可能性があります。上の図では、モーダルの最後に到達したときに、ページがスクロールし続けていることに注目してください。</p>
@@ -214,7 +214,7 @@ overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スク
 <p>デフォルト値は <code>auto</code> で、これによりスクロールチェーンが可能になります。スクロール要素があり、その境界に達すると、ブラウザは<code>&lt;body></code>コンテンツをスクロールし続けます。</p>
 <p><figure class=gallery-image style=flex-grow:189;flex-basis:454px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto.jpg data-size=980x518>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto.jpg width=980 height=518 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-auto.jpg width=980 height=518 loading=lazy alt>
 </a>
 </figure></p>
 <div class=video-wrapper>
@@ -229,7 +229,7 @@ Your browser doesn't support HTML5 video. Here is a
 <p>その名前から、値<code>contain</code>には、要素の境界内にスクロールが含まれます。次の図では、スクロールは青い輪郭のラッパー内に含まれています。</p>
 <p><figure class=gallery-image style=flex-grow:189;flex-basis:454px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain.jpg data-size=980x518>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain.jpg width=980 height=518 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/overscroll-behaviour-contain.jpg width=980 height=518 loading=lazy alt>
 </a>
 </figure></p>
 <div class=video-wrapper>
@@ -249,7 +249,7 @@ Your browser doesn't support HTML5 video. Here is a
 <p>次の図には、スクロール可能な長いナビゲーションリストがあります。<br>
 <figure class=gallery-image style=flex-grow:189;flex-basis:454px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1.jpg data-size=980x518>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1.jpg width=980 height=518 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-1.jpg width=980 height=518 loading=lazy alt>
 </a>
 </figure></p>
 <p>スクロールが含まれていない場合は、本文のコンテンツもスクロールします。それを避けることができます</p>
@@ -283,7 +283,7 @@ Your browser doesn't support HTML5 video. Here is a
 <p><code>overscroll-behavior</code> のもう1つの便利な使用法は、サイドバーとメインがある場合です。その場合、サイドバーは固定されており、コンテンツが長すぎるとスクロール可能になる可能性があります。</p>
 <p><figure class=gallery-image style=flex-grow:166;flex-basis:399px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2.jpg data-size=980x589>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2.jpg width=980 height=589 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-2.jpg width=980 height=589 loading=lazy alt>
 </a>
 </figure></p>
 <p>サイドバーの端の境界に達したときにメインセクションがスクロールしないようにするには、次を追加する必要があります。</p>
@@ -293,7 +293,7 @@ Your browser doesn't support HTML5 video. Here is a
 </code></pre></div><h3 id=チャットコンポーネント>チャットコンポーネント</h3>
 <p><figure class=gallery-image style=flex-grow:166;flex-basis:399px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3.jpg data-size=980x589>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3.jpg width=980 height=589 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-3.jpg width=980 height=589 loading=lazy alt>
 </a>
 </figure></p>
 <p>Facebookに触発されたチャットコンポーネントは、 <code>overscroll-behavior</code> の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにすることができます。</p>
@@ -304,7 +304,7 @@ Your browser doesn't support HTML5 video. Here is a
 <p>記事内で最初に行った例はモーダルなので、繰り返しません。ただし、モーダル内にリストが必要な場合があり、そのリストがスクロール可能である場合は、スクロールチェーンを発生させたくありません。</p>
 <p><figure class=gallery-image style=flex-grow:166;flex-basis:399px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4.jpg data-size=980x589>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4.jpg width=980 height=589 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-4.jpg width=980 height=589 loading=lazy alt>
 </a>
 </figure></p>
 <p>モーダルのオプションのリストに注意してください。これはスクロール可能なリストです。その境界に達すると、モーダルコンテンツがスクロールします。これを回避するには、 <code>overscroll-behavior</code> を使用します。</p>
@@ -317,7 +317,7 @@ Your browser doesn't support HTML5 video. Here is a
 <p>Facebookのホームページでこのユースケースを見つけました。ユーザーのリストがあるセクションがあり、次の図に示すように水平方向にスクロールします。</p>
 <p><figure class=gallery-image style=flex-grow:269;flex-basis:646px>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5.jpg data-size=980x364>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5.jpg width=980 height=364 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/use-case-5.jpg width=980 height=364 loading=lazy alt>
 </a>
 </figure></p>
 <p>これは<code>overscroll-behavior-x</code>のベストな使い方です。</p>

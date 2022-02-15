@@ -168,7 +168,7 @@ Please take appropriate action before this time.</p>
 左袖に、「<strong>イベント</strong>」という項目があるので、クリックして内容を確認しましょう。</p>
 <p><figure class=gallery-image style=flex-grow:148;flex-basis:356px>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png data-size=980x660>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png width=980 height=660 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png width=980 height=660 loading=lazy alt>
 </a>
 </figure></p>
 <p>今回は「イベントステータス」部分に「Scheduled」と記述され、「イベントタイプ」が「instance-stop」となっている項目がありました。<br>
@@ -180,7 +180,7 @@ Please take appropriate action before this time.</p>
 前回のリソースID部分をクリックして、「インスタンスの概要」へ移動します。そして、「ストレージ」をクリックして「ルートデバイスタイプ」を確認しましょう。</p>
 <p><figure class=gallery-image style=flex-grow:535;flex-basis:1285px>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png data-size=980x183>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png width=980 height=183 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png width=980 height=183 loading=lazy alt>
 </a>
 </figure></p>
 <p>この部分が「<strong>EBS</strong>」となっている場合は、対応が非常に簡単です。<br>
@@ -189,7 +189,7 @@ Please take appropriate action before this time.</p>
 <p>「Amazon EC2 Instance Retirement」の対応はルートデバイスがEBSの場合は、対象のインスタンスを一度「<strong>インスタンスを停止</strong>」させてから「<strong>インスタンスを開始</strong>」するだけで対応できてしまいます。</p>
 <p><figure class=gallery-image style=flex-grow:250;flex-basis:601px>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png data-size=980x391>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png width=980 height=391 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png width=980 height=391 loading=lazy alt>
 </a>
 </figure></p>
 <p>「インスタンスを停止」して「インスタンスを開始」だから、要するに「インスタンスを再起動」ってことでしょ？と考えてしまうかもしれません。<br>
@@ -197,7 +197,7 @@ Please take appropriate action before this time.</p>
 ですので、「インスタンスを停止」させてから「インスタンスを開始」するようにして、EC2を実行するハードウェアをAWS側が自動的に変更するようにしましょう。</p>
 <p><figure class=gallery-image style=flex-grow:335;flex-basis:805px>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png data-size=980x292>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png width=980 height=292 loading=lazy>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png width=980 height=292 loading=lazy alt>
 </a>
 </figure></p>
 <div class="tips-area tips">
