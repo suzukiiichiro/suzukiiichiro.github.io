@@ -4,25 +4,26 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。 そのAWSからある日、下記のようなメールが届きました。 Hello, EC2 has detected degradation of the underlying hardware">
-<title>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
+<meta name=description content="AWSのEC2からhas detected degradation of the underlying hardware…と来たときでも簡単に対応できます。その対応方法を詳細に説明します。">
+<meta name=keywords content="開発,web,wyoshi,EC2,AWS,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<title>Amazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/>
-<meta property="og:title" content="すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta property="og:description" content="みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。 そのAWSからある日、下記のようなメールが届きました。 Hello, EC2 has detected degradation of the underlying hardware">
+<meta property="og:title" content="Amazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta property="og:description" content="AWSのEC2からhas detected degradation of the underlying hardware…と来たときでも簡単に対応できます。その対応方法を詳細に説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="開発"><meta property="article:tag" content="web"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="EC2"><meta property="article:tag" content="AWS"><meta property="article:published_time" content="2022-02-08T09:39:37+09:00"><meta property="article:modified_time" content="2022-02-14T15:53:11+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg">
-<meta name=twitter:title content="すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
-<meta name=twitter:description content="みなさんの中にもAWSのEC2を使った事がある人もいるかと思います。 そのAWSからある日、下記のようなメールが届きました。 Hello, EC2 has detected degradation of the underlying hardware"><meta name=twitter:card content="summary_large_image">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="開発"><meta property="article:tag" content="web"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="EC2"><meta property="article:tag" content="AWS"><meta property="article:published_time" content="2022-02-08T09:39:37+09:00"><meta property="article:modified_time" content="2022-02-15T09:57:48+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg">
+<meta name=twitter:title content="Amazon EC2 Instance Retirementとメールが来たときの対応 - NLP | 最新技術やプログラム、デザインなど様々な情報を提供するサイト">
+<meta name=twitter:description content="AWSのEC2からhas detected degradation of the underlying hardware…と来たときでも簡単に対応できます。その対応方法を詳細に説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-08-01-wyoshi/catch.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/server/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg"],"datePublished":"2022-02-08T09:39:37+09:00","dateModified":"2022-02-14T15:53:11+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応","item":"https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Amazon EC2 Instance Retirementとメールが来たときの対応","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/server/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/catch.jpg"],"datePublished":"2022-02-08T09:39:37+09:00","dateModified":"2022-02-15T09:57:48+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Amazon EC2 Instance Retirementとメールが来たときの対応","item":"https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -96,7 +97,7 @@ Web開発
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
-<li><span class=breadcrumb-item>すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応</span>
+<li><span class=breadcrumb-item>Amazon EC2 Instance Retirementとメールが来たときの対応</span>
 </ol>
 </nav>
 <article class="has-image main-article">
@@ -112,7 +113,7 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2022.02.08</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.14
+2022.02.15
 </time>
 <time class="article-time--item article-time--reading">
 読了時間: 5分
@@ -120,7 +121,7 @@ Web開発
 </div>
 </header>
 <h1 class=article-title>
-すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応
+Amazon EC2 Instance Retirementとメールが来たときの対応
 </h1>
 </div>
 <section class="widget archives tableOfContents">
@@ -253,7 +254,7 @@ instant storeの場合は、イメージを作成して、立ち上げて該当�
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_400x0_resize_q75_box.jpg 2x" width=200 height=131 loading=lazy alt="Featured image of post パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-28-01-wyoshi/img11_hu8396314a3cdd13cc5226bcfe8e9969d2_456825_400x0_resize_q75_box.jpg 2x" width=200 height=131 loading=lazy alt="Featured image of post パソコンは不要。スマホ、タブレットでできるブログ投稿">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -262,9 +263,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>パソコンは不要。iPhoneやiPadなどのスマホ、タブレットでできるブログ投稿</h2><div class=article-time>
+<h2 class=article-title>パソコンは不要。スマホ、タブレットでできるブログ投稿</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.28</time>
-</div><p class=article-subtitle>iPhoneやiPadなどのスマホ、タブレットは持ち運びに非常に便利です。パソコンよりも軽く、パソコンと同等の機能を備えてます。 そうした端末...</p>
+</div><p class=article-subtitle>スマホ、タブレットを使って記事が投稿できたら、おしゃれなカフェで記事を書けます。そんなブログの投稿や更新方法を説明していきます。簡単に導入可能。</p>
 </div>
 </a>
 </article>
@@ -283,7 +284,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.27</time>
-</div><p class=article-subtitle>HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして...</p>
+</div><p class=article-subtitle>AWSのEC2にGo言語とHugoをインストールして、Webサイトを簡単に、最速で作成する手順を詳細に解説してます。Github Pagesからの移行も可能になります</p>
 </div>
 </a>
 </article>
@@ -291,7 +292,7 @@ Web開発
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_400x0_resize_box_3.png 2x" width=200 height=101 loading=lazy alt="Featured image of post CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法">
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_400x0_resize_box_3.png 2x" width=200 height=101 loading=lazy alt="Featured image of post CSSでアプリのようにピタッとスナップするスクロールを作成">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -300,9 +301,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</h2><div class=article-time>
+<h2 class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.14</time>
-</div><p class=article-subtitle>出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU...</p>
+</div><p class=article-subtitle>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。</p>
 </div>
 </a>
 </article>
@@ -310,7 +311,7 @@ Web開発
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt="Featured image of post SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法">
+<img src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt="Featured image of post SEO対策にXMLの更新日（lastmod）を正しく表示する方法">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -319,9 +320,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>SEO対策のためにGitとHugoで連携したXMLの更新日（lastmod）を正しく表示する方法</h2><div class=article-time>
+<h2 class=article-title>SEO対策にXMLの更新日（lastmod）を正しく表示する方法</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.07</time>
-</div><p class=article-subtitle>Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探...</p>
+</div><p class=article-subtitle>SEO対策必見。Hugoのサイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決 方法を詳細に説明しています。</p>
 </div>
 </a>
 </article>
@@ -340,7 +341,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.04</time>
-</div><p class=article-subtitle>近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで...</p>
+</div><p class=article-subtitle>Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事が検索結果に表示されないとき、どうしたら良いのでしょうか？</p>
 </div>
 </a>
 </article>
@@ -348,7 +349,7 @@ Web開発
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="Featured image of post Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。">
+<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="Featured image of post Javascriptで画面ロックする場合は、Workerを使ってみよう">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -357,9 +358,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。</h2><div class=article-time>
+<h2 class=article-title>Javascriptで画面ロックする場合は、Workerを使ってみよう</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.01</time>
-</div><p class=article-subtitle>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って...</p>
+</div><p class=article-subtitle>UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。</p>
 </div>
 </a>
 </article>
@@ -378,7 +379,7 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>HUGOでxmlやファイルを複数出力する方法</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.26</time>
-</div><p class=article-subtitle>HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で...</p>
+</div><p class=article-subtitle>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 </p>
 </div>
 </a>
 </article>
@@ -386,7 +387,7 @@ Web開発
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_400x0_resize_q75_box.jpg 2x" width=200 height=150 loading=lazy alt="Featured image of post SVGとCSSを使用したUIコンポーネントの構築">
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_400x0_resize_q75_box.jpg 2x" width=200 height=150 loading=lazy alt="Featured image of post SVGとCSSでおしゃれでクールな最新のデザインにする">
 </div>
 <div class=article-category>
 <span class=article-category-item>
@@ -395,9 +396,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>SVGとCSSを使用したUIコンポーネントの構築</h2><div class=article-time>
+<h2 class=article-title>SVGとCSSでおしゃれでクールな最新のデザインにする</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.24</time>
-</div><p class=article-subtitle>出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS...</p>
+</div><p class=article-subtitle>SVGとCSSのみでマルチデバイスの最新トレンドデザインを実装。マスク処理も可能で時間と労力を節約できて、サイトのパフォーマンスも向上します。</p>
 </div>
 </a>
 </article>
@@ -495,7 +496,7 @@ Web開発
 <img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 2x" width=200 height=101 loading=lazy alt="Featured image of post ">
 </div>
 <div class=article-details>
-<h2 class=article-title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</h2>
+<h2 class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</h2>
 </div>
 </a>
 </article>

@@ -697,7 +697,7 @@ alt="図">
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
 445行目の処理が終わると再帰を抜けて上の行に戻ります。&lt;/p>
-&lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" alt="Featured image of post CSSのみでアプリのようにピタッと止まってスナップするスクロールを作成する方法" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
+&lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>CSSでアプリのようにピタッとスナップするスクロールを作成</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" alt="Featured image of post CSSでアプリのようにピタッとスナップするスクロールを作成" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
 > CSS Scroll Snap - Ahmad Shadeed &lt;/a>&lt;/p>
 &lt;p>アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを作成しようとすると、専用のjavascriptやライブラリを使用する必要があったりと実装が大変です。&lt;br>
 しかし、CSSスクロールスナップは横スクロールしてスナップするといった動作を行うことができます。&lt;/p>
