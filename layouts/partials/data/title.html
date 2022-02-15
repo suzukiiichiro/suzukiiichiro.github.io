@@ -42,7 +42,7 @@
   {{ end }} 
 {{- else -}}
   {{- if and (eq .Type "posts") (.IsPage) -}}
-    {{- $title = printf "%s"  $title -}}
+    {{- $title = printf "%s｜%s"  $title .Site.Title -}}
   {{- else -}}
     {{ $title = printf "%s - %s"  $title $siteTitle }}
   {{- end -}}
