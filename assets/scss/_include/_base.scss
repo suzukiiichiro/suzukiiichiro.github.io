@@ -200,6 +200,10 @@ body {
 
 .section-card {
   box-shadow: none;
+  @include mq(smp) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .breadcrumb-area {

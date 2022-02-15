@@ -300,13 +300,14 @@
         @include mq(tab) {
           margin: 10px 0 0;
         }
+        @include mq(smp) {
+          margin: 0 5px 0;
+        }
         .article-title {
           font-size: 1rem;
           line-height: 1.4;
           margin: 0 0 15px;
           @include mq(smp) {
-            font-size: 0.8rem;
-            line-height: 1.2;
             margin-bottom: 5px;
           }
         }
@@ -323,7 +324,7 @@
             font-size: 0.6rem;
             color: var(--card-text-color-tertiary);
             @include mq(smp) {
-              -webkit-line-clamp: 4;
+              -webkit-line-clamp: 5;
             }
           }
         }

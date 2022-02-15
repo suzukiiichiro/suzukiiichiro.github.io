@@ -32,13 +32,11 @@
     list-style: none;
     display: flex;
     margin: 0;
-    // background-color: var(--card-background);
-    // box-shadow: var(--shadow-l1);
-    // border-radius: var(--card-border-radius);
     overflow: hidden;
     padding: 0;
-    // flex-wrap: wrap;
-    // margin: var(--section-separation) auto;
+    align-items: center;
+    @include mq(smp) {
+    }
     li {
       ~ li {
         margin-left: 6px;
@@ -58,8 +56,6 @@
       &.page-item {
         &.active {
           font-weight: bold;
-          // background-color: var(--card-background-selected);
-          // color: var(--card-text-color-main);
           a {
             color: #FFF;
             background-color: var(--pagenation-current);
@@ -72,6 +68,11 @@
           display: inline-flex;
           color: var(--card-text-color-secondary);
           border: 1px solid var(--pagenation-border);
+          @include mq(smp) {
+            font-size: 0.8rem;
+            padding: 5px 8px;
+            border: 1px solid #DDD;
+          }
           &:hover {
             cursor: pointer
           }
@@ -79,19 +80,16 @@
       }
       &.smp-nav--show {
         a {
-          border: none;
+          // border: none;
         }
       }
       @include mq(smp) {
-        display: none;
         ~ li {
-          margin-left: 15px;
+          margin-left: 5px;
         }
         &.smp-nav--show {
           display: inherit !important;
           a {
-            padding: 4px 18px;
-            font-size: 1em;
             border: 1px solid #DDD;
           }
         }
