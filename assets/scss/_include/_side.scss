@@ -14,6 +14,7 @@
 .menu-section {
   border-top: 2px solid var(--accent-color);
   padding: 10px 0;
+  font-size: 0.9rem;
   ~ .menu-section {
   }
   .menu {
@@ -48,10 +49,13 @@
     padding: 0;
   }
 }
-#btn-mode {
+#dark-mode-toggle {
   margin: 10px;
   display: flex;
   justify-content: flex-end;
+  border: none;
+  padding: 0;
+  background-color: transparent;
   @include mq(smp) {
     position: absolute;
     right: 0;
@@ -67,15 +71,13 @@
   .icon-tabler-toggle-left {
     fill: #999999;
   }
-  #dark-mode-toggle {
-    svg {
-      width: 0.9rem;
-      @include mq(smp) {
-        width: 1.1rem;
-      }
-      @include mq(tab) {
-        width: 1.1rem;
-      }
+  svg {
+    width: 0.9rem;
+    @include mq(smp) {
+      width: 1.1rem;
+    }
+    @include mq(tab) {
+      width: 1.1rem;
     }
   }
 }
@@ -121,6 +123,7 @@
         border-radius: 8px;
         width: 100%;
         height: auto;
+        margin-bottom: 10px;
       }
     }
     .site-description {
@@ -155,7 +158,7 @@
   overflow: hidden;
   .menu-list {
     font-weight: normal;
-    font-size: 0.9em;
+    font-size: 1em;
   }
 }
 

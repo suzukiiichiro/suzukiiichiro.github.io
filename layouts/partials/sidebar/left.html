@@ -6,9 +6,9 @@
   </button>
   <header class="site-info">
     {{- $logoTitle := .Site.Title -}}
-    {{ $ishome := .IsHome }}
-    {{ with .Site.Params.sidebar.avatar }}
-    {{ if (default true .enabled) }}
+    {{- $ishome := .IsHome -}}
+    {{- with .Site.Params.sidebar.avatar -}}
+    {{- if (default true .enabled) -}}
     {{- if $ishome -}}
     <h1 class="site-name site-avatar">
     {{- else -}}
@@ -24,7 +24,6 @@
           {{ $avatarResized := $avatar.Resize "60x" }}
           {{ $avatarResized_2x := $avatar.Resize "120x" }}
           {{ $avatarResized_sp := $avatar.Resize "30x" }}
-
           <source src="{{ $avatarResized.RelPermalink }}" srcset="{{ $avatarResized.RelPermalink }} 1x,
                {{ $avatarResized_2x.RelPermalink }} 2x" media="(min-width: 769px)" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" />
           <source src="{{ $avatarResized_sp.RelPermalink }}" srcset="{{ $avatarResized_sp.RelPermalink }} 1x,
@@ -111,12 +110,10 @@
       </div>
     </div>
     {{ if (default false .Site.Params.colorScheme.toggle) }}
-    <div id="btn-mode">
-      <li id="dark-mode-toggle">
-        {{ partial "helper/icon" "toggle-left" }}
-        {{ partial "helper/icon" "toggle-right" }}
-        <!-- <span>{{ T "darkMode" }}</span> -->
-      </li>
-    </div>
+    <button type="button" id="dark-mode-toggle">
+      {{ partial "helper/icon" "toggle-left" }}
+      {{ partial "helper/icon" "toggle-right" }}
+      <!-- <span>{{ T "darkMode" }}</span> -->
+    </button>
     {{ end }}
 </div>
