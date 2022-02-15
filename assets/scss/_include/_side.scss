@@ -114,10 +114,6 @@
       @include mq(smp) {
         width: 30px;
         font-size: 1rem;
-        .site-description {
-          margin: 0;
-          font-size: 0.6em;
-        }
       }
       .site-logo {
         border-radius: 8px;
@@ -127,12 +123,13 @@
       }
     }
     .site-description {
-      margin: 0;
+      margin: 0 0 10px;
       padding: 0;
       line-height: 1;
       opacity: 0.6;
       @include mq(smp) {
-        font-size: 0.7rem;
+          margin: 0;
+          font-size: 0.6em;
       }
     }
   }
@@ -184,7 +181,8 @@
       padding: 0;
       display: flex;
       a {
-        padding: 5px 15px;
+        font-size: 0.7rem;
+        padding: 5px 8px;
         font-weight: bold;
         scroll-snap-align: start;
         scroll-snap-stop: always;

@@ -16,8 +16,12 @@
   </div>
   {{- end -}}
   {{- if .Params.description -}}
+    {{ $sum := .Summary }}
     {{- with .Params.description -}}
-      <p class="article-subtitle">{{- substr . 0 70 -}}…</p>
+      {{- if eq (substr $sum 0 40) (substr . 0 40) -}}
+        {{ $sum = "" }}
+      {{- end -}}
+      <p class="article-subtitle">{{- substr (printf "%s %s" . $sum ) 0 280 -}}…</p>
     {{- end -}}
   {{- else -}}
     <p class="article-subtitle">{{- substr .Summary 0 70 -}}…</p>
