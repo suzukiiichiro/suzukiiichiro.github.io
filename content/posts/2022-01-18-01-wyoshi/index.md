@@ -11,15 +11,15 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - Webテクニック
+  - Web designer
+  - Front engineer
+  - Web Technic
 ---
 
 最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりました。

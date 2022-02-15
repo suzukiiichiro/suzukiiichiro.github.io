@@ -13,15 +13,15 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - コーダー
+  - Web designer
+  - Front engineer
+  - Corder
   - Hugo
 ---
 HUGOは非常に強力な静的HTMLジェネレーターです。

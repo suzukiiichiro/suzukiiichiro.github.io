@@ -11,7 +11,7 @@ tags:
   - GitHub
   - GitHub Pages
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - wyoshi
   - SSL

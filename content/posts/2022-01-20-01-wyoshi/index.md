@@ -11,16 +11,16 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - コーダー
-  - Webテクニック
+  - Web designer
+  - Front engineer
+  - Corder
+  - Web Technic
   # - 未経験でもWebデザイナー、コーダーになろう
 
 ---

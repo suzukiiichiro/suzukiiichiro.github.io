@@ -12,15 +12,15 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - コーダー
+  - Web designer
+  - Front engineer
+  - Corder
   - Hugo
   - EC2
   - AWS

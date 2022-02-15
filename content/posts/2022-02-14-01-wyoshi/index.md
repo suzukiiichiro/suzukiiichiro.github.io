@@ -12,16 +12,16 @@ categories:
   - Web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - Webテクニック
-  - 最新トレンド
+  - Web designer
+  - Front engineer
+  - Web Technic
+  - Trends
 
 ---
 

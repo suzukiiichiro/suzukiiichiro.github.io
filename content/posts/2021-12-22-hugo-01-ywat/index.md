@@ -9,7 +9,7 @@ tags:
   - Mac
   - brew
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
 image: 2021-12-22-hugo-01.jpg
 ---

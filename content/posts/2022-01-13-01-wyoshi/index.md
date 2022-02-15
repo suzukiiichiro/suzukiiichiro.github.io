@@ -11,13 +11,13 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
+  - Web designer
+  - Front engineer
 ---
 
 ## はじめに

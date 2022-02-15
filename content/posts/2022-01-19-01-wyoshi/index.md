@@ -12,16 +12,16 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - Webテクニック
-  - 最新トレンド
+  - Web designer
+  - Front engineer
+  - Web Technic
+  - Trends
 ---
 
 **出典元**：[8 Essential CSS Tips and Tricks Every Developer Should Know](https://www.makeuseof.com/css-tips-and-tricks-you-must-know/)

@@ -9,13 +9,13 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
+  - Web designer
+  - Front engineer
 ---
 
 **出典元**：[ Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed ](https://ishadeed.com/article/prevent-scroll-chaining-overscroll-behavior/)

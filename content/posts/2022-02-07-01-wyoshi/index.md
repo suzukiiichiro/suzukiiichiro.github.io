@@ -12,12 +12,12 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
-  - Webデザイナー
-  - フロントエンジニア
+  - Web designer
+  - Front engineer
   - GitHub
   - Hugo
   - GitHub Pages

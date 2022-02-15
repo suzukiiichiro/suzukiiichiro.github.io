@@ -11,16 +11,16 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - コーダー
-  - Webテクニック
+  - Web designer
+  - Front engineer
+  - Corder
+  - Web Technic
   - svg
 ---
 **出典元**：[ Building UI Components With SVG and CSS - Ahmad Shadeed ](https://ishadeed.com/article/building-components-svg-css/)

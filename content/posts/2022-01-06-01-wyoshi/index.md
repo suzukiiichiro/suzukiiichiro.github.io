@@ -13,10 +13,9 @@ tags:
   - GitHub
   - GitHub Pages
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - wyoshi
-  - Google アナリティクス
   - Google Analytics
   - GAS
   - Google App Script

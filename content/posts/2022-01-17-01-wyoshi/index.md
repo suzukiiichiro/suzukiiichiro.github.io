@@ -11,17 +11,15 @@ categories:
   - web
 tags:
   - プログラム
-  - デザイナー
+  - Designer
   - 開発
   - web
   - wyoshi
   - HTML
   - CSS
-  - Webデザイナー
-  - フロントエンジニア
-  - Webの動向
-  - トレンド
-  - Web業界
+  - Web designer
+  - Front engineer
+  - Trends
 ---
 
 **出典元**：[Top 15 Mobile App Development Trends to Watch for in 2022](https://www.netsolutions.com/insights/12-mobile-app-development-trends-to-watch-out-for-in-2019/)
