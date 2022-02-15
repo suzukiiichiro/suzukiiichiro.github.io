@@ -371,7 +371,7 @@ url="https://www.amazon.co.jp/Google%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A
 summary=`ウェブ制作者から、マーケター、ウェブアナリストまで必携の1冊
 「Googleアナリティクスはどこへ向かうのか?進化し続けるツールのポテンシャルを最大限に引き出したときに、新しい分析や施策のアイディアが生まれる」`
 
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4297112612&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP"
+imageUrl="//m.media-amazon.com/images/I/51PXFiYP7aL._SL250_.jpg"
 %}}
 
 {{% amazon
@@ -382,5 +382,5 @@ url="https://www.amazon.co.jp/Google-Apps-Script%E7%9B%AE%E7%9A%84%E5%88%A5%E3%8
 
 summary=`Excelのマクロに似た「スクリプト」を書けば、Gmailや「スプレッドシート」などのGoogleサービスを更に効率的に、思うように使えます。そのスクリプトを書いて実行するプログラミング環境が、Google Apps Script(GAS)。`
 
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4798062405&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP"
+imageUrl="//m.media-amazon.com/images/I/41OIKEUEOIL._SL250_.jpg"
 %}}
