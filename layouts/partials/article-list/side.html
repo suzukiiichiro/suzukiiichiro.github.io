@@ -47,7 +47,7 @@
           {{- if eq (substr $sum 0 40) (substr . 0 40) -}}
             {{ $sum = "" }}
           {{- end -}}
-          {{- substr (printf "%s %s" . $sum ) 0 140 -}}
+          {{- substr (printf "%s %s" . $sum ) 0 200 -}}
         {{- end -}}
       {{- else -}}
         {{- substr .context.Summary 0 45 -}}
