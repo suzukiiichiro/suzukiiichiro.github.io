@@ -103,6 +103,9 @@
     .site-avatar {
       width: 60px;
       height: inherit;
+      picture {
+        display: flex;
+      }
       @include mq(tab) {
         width: 40px;
       }
@@ -122,6 +125,9 @@
     }
     .site-description {
       margin: 0 0 10px;
+      @include mq(smp) {
+          display: none;
+      }
     }
   }
 }
@@ -154,8 +160,12 @@
 }
 
 @mixin menu() {
+  nav {
+    display: contents;
+  }
   .menu {
-    display: flex !important;
+    // display: flex !important;
+    display: contents;
     flex-direction: row;
     border: none;
     background-color: transparent;
@@ -170,6 +180,8 @@
       a {
         padding: 5px 15px;
         font-weight: bold;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
     }
   }
@@ -179,6 +191,7 @@
     -ms-overflow-style: none; 
     font-size: 0.8rem;
     width: 100%;
+    scroll-snap-type: x mandatory;
     &::-webkit-scrollbar {
       display:none;
     }
@@ -201,6 +214,7 @@
     justify-content: flex-start;
     align-items: center;
     font-size: 1em !important;
+    display: contents;
   }
 }
 

@@ -18,16 +18,25 @@
         {{ if not .local }}
         <img src="{{ .src }}" width="60" height="60" class="site-logo" loading="lazy" alt="{{ $logoTitle }}">
         {{ else }}
+        <picture>
         {{ $avatar := resources.Get (.src) }}
         {{ if $avatar }}
-        {{ $avatarResized := $avatar.Resize "60x" }}
-        {{ $avatarResized_2x := $avatar.Resize "120x" }}
-        <img src="{{ $avatarResized.RelPermalink }}" srcset="{{ $avatarResized.RelPermalink }} 1x,
-             {{ $avatarResized_2x.RelPermalink }} 2x"
-              width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}">
-        <!-- <img src="{{ $avatar.RelPermalink }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}"> -->
+          {{ $avatarResized := $avatar.Resize "60x" }}
+          {{ $avatarResized_2x := $avatar.Resize "120x" }}
+          {{ $avatarResized_sp := $avatar.Resize "30x" }}
+
+          <source src="{{ $avatarResized.RelPermalink }}" srcset="{{ $avatarResized.RelPermalink }} 1x,
+               {{ $avatarResized_2x.RelPermalink }} 2x" media="(min-width: 769px)" width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" />
+          <source src="{{ $avatarResized_sp.RelPermalink }}" srcset="{{ $avatarResized_sp.RelPermalink }} 1x,
+               {{ $avatarResized.RelPermalink }} 2x" media="(max-width: 768px)" width="{{ $avatarResized_sp.Width }}" height="{{ $avatarResized_sp.Height }}" />
+
+          <img src="{{ $avatarResized.RelPermalink }}" srcset="{{ $avatarResized.RelPermalink }} 1x,
+               {{ $avatarResized_2x.RelPermalink }} 2x"
+                width="{{ $avatarResized.Width }}" height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}">
+          <!-- <img src="{{ $avatar.RelPermalink }}" class="site-logo" loading="lazy" alt="{{ $logoTitle }}"> -->
+        </picture>
         {{ else }}
-        {{ errorf "Failed loading avatar from %q" . }}
+          {{ errorf "Failed loading avatar from %q" . }}
         {{ end }}
         {{ end }}
       </a>

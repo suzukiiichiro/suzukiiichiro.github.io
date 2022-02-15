@@ -41,7 +41,11 @@
     {{ $title = printf "%s: %sの記事一覧 - %s" (index $title 0) (index $title 1) $siteTitle }}
   {{ end }} 
 {{- else -}}
-  {{ $title = printf "%s - %s"  $title $siteTitle }}
+  {{- if and (eq .Type "posts") (.IsPage) -}}
+    {{- $title = printf "%s"  $title -}}
+  {{- else -}}
+    {{ $title = printf "%s - %s"  $title $siteTitle }}
+  {{- end -}}
 {{- end -}}
 
 {{ return $title }}

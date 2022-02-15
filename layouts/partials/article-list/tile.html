@@ -9,13 +9,17 @@
         {{- $Width := $image.Width -}}
         {{- $Height := $image.Height -}}
         
-        {{- $thumbnail := $image.resource.Resize "200x" -}}
-        {{- $thumbnailRetina := $image.resource.Resize "200x" -}}
+        {{- $thumbnail := $image.resource.Resize "50x" -}}
+        {{- $thumbnailRetina := $image.resource.Resize "100x" -}}
+
+        {{- $Srcset := printf "%s 1x, %s 2x" $thumbnail.RelPermalink $thumbnailRetina.RelPermalink -}}
 
         {{- $Permalink = $thumbnail.RelPermalink -}}
         {{- $Width = $thumbnail.Width -}}
         {{- $Height = $thumbnail.Height -}}
-        <img src="{{ $Permalink }}" width="{{ $Width }}" height="{{ $Height }}" loading="lazy" alt="Featured image of post {{ .context.Title }}" {{ with .context.Slug }} data-key="{{ . }}" {{ end }}>
+
+        <img src="{{ $Permalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} width="{{ $Width }}" height="{{ $Height }}"  alt="{{ .context.Title }}" />
+
       {{ else }}
         <img src="{{ $image.permalink }}" loading="lazy" data-key="{{ .context.Slug }}" data-hash="{{ $image.permalink }}" />
       {{ end }}
