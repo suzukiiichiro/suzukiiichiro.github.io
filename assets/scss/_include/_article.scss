@@ -314,6 +314,9 @@
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            @include mq(smp) {
+              -webkit-line-clamp: 3;
+            }
           }
         }
         .article-time {
@@ -698,6 +701,20 @@
     .article-list {
       article {
         width: calc(100% / 3);
+      }
+    }
+  }
+}
+
+
+.article-list--tile {
+  .has-image {
+    .article-image {
+      .picture {
+        width: 100%;
+      }
+      img{
+        height: inherit;
       }
     }
   }

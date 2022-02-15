@@ -22,6 +22,9 @@
         align-items: center;
         display: flex;
         justify-content: center;
+        @include mq(smp) {
+          padding: 10px 0;
+        }
         .article-image {
           width: 80px;
           height: calc(80px / 4 * 3);
