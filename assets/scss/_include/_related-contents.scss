@@ -1,5 +1,12 @@
 .sidearticle-contents--wrapper {
   padding: 0;
+  .link-btns {
+    margin: 10px;
+    font-size: 0.8rem;
+    a {
+      padding: 8px;
+    }
+  }
   .section-title {
       margin-bottom: 0;
   }
