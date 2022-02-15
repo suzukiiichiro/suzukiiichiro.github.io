@@ -209,7 +209,7 @@ params:
             limit: 10
 
         newpost:
-            limit: 5
+            limit: 10
 
 #     opengraph:
 #         twitter:
