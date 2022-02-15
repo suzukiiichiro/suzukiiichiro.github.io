@@ -102,6 +102,9 @@
         .article-header {
           box-shadow: none;
           padding: 0;
+          @include mq(smp) {
+            width: 100%;
+          }
         }
         .article-image {
           width: 100%;
@@ -119,7 +122,7 @@
             padding: 0;
             .article-category-item {
               padding: 4px 8px;
-              font-size: 0.8rem;
+              font-size: 0.6rem;
             }
           }
         }

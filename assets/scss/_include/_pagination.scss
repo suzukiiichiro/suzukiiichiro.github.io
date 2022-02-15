@@ -22,6 +22,9 @@
 
 .pagination-area {
   margin: 20px auto 40px;
+  @include mq(smp) {
+    display: block;
+  }
   .pagination {
     justify-content: center;
     box-shadow: none;
