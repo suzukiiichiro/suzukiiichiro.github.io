@@ -143,6 +143,9 @@
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            @include mq(smp) {
+              -webkit-line-clamp: 3;
+            }
           }
           .article-time {
             position: absolute;
@@ -158,6 +161,9 @@
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            @include mq(smp) {
+              -webkit-line-clamp: 3;
+            }
           }
         }
       }
