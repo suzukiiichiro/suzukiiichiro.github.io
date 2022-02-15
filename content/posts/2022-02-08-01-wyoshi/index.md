@@ -1,7 +1,9 @@
 ---
-title: "すぐにできる！EC2からAmazon EC2 Instance Retirementとメールが来たときの対応"
+title: "Amazon EC2 Instance Retirementとメールが来たときの対応"
 date: 2022-02-08T09:39:37+09:00
 draft: fales
+
+description: "AWSのEC2からhas detected degradation of the underlying hardware…と来たときでも簡単に対応できます。その対応方法を詳細に説明します。"
 
 authors: wyoshi
 image: "catch.jpg"

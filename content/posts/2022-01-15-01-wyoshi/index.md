@@ -4,7 +4,7 @@ date: 2022-01-15T12:16:02+09:00
 draft: false
 authors: wyoshi
 image: intro.jpg
-description: "overflow: scroll で後ろの要素がスクロールすることがありますが、この記事では、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。"
+description: "overflow: scroll で後ろの要素がスクロールすることがありますが、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。"
 categories:
   - web
 tags:
@@ -98,17 +98,17 @@ body.modal-open {
 ### overscroll-behavior: auto
 デフォルト値は `auto` で、これによりスクロールチェーンが可能になります。スクロール要素があり、その境界に達すると、ブラウザは`<body>`コンテンツをスクロールし続けます。
 
+
 ![](overscroll-behaviour-auto.jpg) 
 
-![](overscroll-auto.gif)
-
+{{< video autoplay="false" src="overscroll-auto.mp4" >}}
 
 ### overscroll-behavior: contain
 その名前から、値`contain`には、要素の境界内にスクロールが含まれます。次の図では、スクロールは青い輪郭のラッパー内に含まれています。
 
 ![](overscroll-behaviour-contain.jpg)
 
-![](overscroll-contain.gif)
+{{< video autoplay="false" src="overscroll-contain.mp4" >}}
 
 
 ### overscroll-behavior: none
@@ -134,7 +134,8 @@ body.modal-open {
 }
 ```
 動画で見てみましょう。
-![](mobile-nav.gif)
+{{< video autoplay="false" src="mobile-nav.mp4" >}}
+
 
 ナビゲーションの下に表示される半透明の背景を追加しました。 `overscroll-behavior-y`プロパティをオフに切り替えたときの動作に注意してください。 
 
@@ -142,7 +143,7 @@ body.modal-open {
 
 ただし、ナビゲーションが短く（つまり、スクロールできない）、ユーザーが理由もなくスクロールしようとすると、`overscroll-behavior-y: contain`であっても、本文がスクロールすることに注意してください。
 
-![](mobile-nav-2.gif)
+{{< video autoplay="false" src="mobile-nav-2.mp4" >}}
 
 残念ながら、記事の冒頭で紹介した「無理やり対応」以外の修正方法はわかりません。
 

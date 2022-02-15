@@ -3,6 +3,8 @@ title: "Googleにインデックスされないときの対応方法は？"
 date: 2022-02-04T12:03:03+09:00
 draft: false
 
+description: "Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事が検索結果に表示されないとき、どうしたら良いのでしょうか？"
+
 authors: wYoshi
 image: catch.jpg
 
