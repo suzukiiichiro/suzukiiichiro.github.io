@@ -1,7 +1,7 @@
 ---
 authors: suzuki
 title: "【はじめから】ざっくりわかるシェルスクリプト３"
-description: "ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。"
+description: "前２回目の説明に続き、bashプログラミングの基本的な考え方３として最終章を説明します。bashスクリプトの一般的な操作を、ざっくりと説明します。"
 date: 2022-01-13T11:26:13+09:00
 draft: false
 image: shellscript.jpg
