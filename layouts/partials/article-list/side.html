@@ -42,13 +42,17 @@
       <h4 class="article-title">{{- .context.Title -}}</h4>
       <p class="text">
       {{- if .context.Params.description -}}
+        {{ $sum := .context.Summary }}
         {{- with .context.Params.description -}}
-          {{- substr . 0 45 -}}
+          {{- if eq (substr $sum 0 40) (substr . 0 40) -}}
+            {{ $sum = "" }}
+          {{- end -}}
+          {{- substr (printf "%s %s" . $sum ) 0 140 -}}
         {{- end -}}
       {{- else -}}
         {{- substr .context.Summary 0 45 -}}
       {{- end -}}
-      ...</p>
+      …</p>
     </div>
   </a>
 </article>
