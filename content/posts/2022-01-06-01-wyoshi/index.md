@@ -277,7 +277,7 @@ url="https://www.amazon.co.jp/1%E9%80%B1%E9%96%93%E3%81%A7Google%E3%82%A2%E3%83%
 summary=`大幅に改訂されたWebマーケティングツール「Googleアナリティクス4」の基礎と活用法を最前線のWebマーケッターたちがやさしく解説!
 本書は、WebマーケターのためにGoogleアナリティクス4（GA4・ジーエーフォー）の基礎知識を解説した入門書です。`
 
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B09HGQH66R&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP"
+imageUrl="//m.media-amazon.com/images/I/51bQyK5wvGL._SL160_.jpg"
 %}}
 
 {{% amazon
@@ -288,5 +288,5 @@ url="https://www.amazon.co.jp/Google-Apps-Script%E5%AE%8C%E5%85%A8%E5%85%A5%E9%9
 
 summary=`今や私たちの仕事や生活に無くてはならない存在になったGoogleサービス。これらGoogleサービスの自動化や連携を行うことで、大幅な効率化が図れます。そして、それを可能にするのがGoogle Apps Script(GAS)です。`
 
-imageUrl="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4798063339&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=nlpqueens-22&language=ja_JP"
+imageUrl="//m.media-amazon.com/images/I/51ZGWOZiUNL._SL250_.jpg"
 %}}
