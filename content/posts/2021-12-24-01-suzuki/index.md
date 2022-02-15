@@ -14,11 +14,7 @@ tags:
   - ユーティリティ
   - 鈴木維一郎
 ---
-## 関連記事
-- [【wLu】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/)
-- [【unComp】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/)
-- [【プログレスバー】Bashでプログレスバーを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/)
-- [【ssh/bash】ssh/Bashでサーバーへログイン・実行・ログアウトの一連自動化処理を作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-21-01-suzuki/)
+
 
 ## やりたいこと
 
