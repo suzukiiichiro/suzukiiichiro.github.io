@@ -213,12 +213,17 @@
         flex-direction: column;
       }
       @include mq(smp) {
+        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
       .article-header {
         margin: 0;
         position: relative;
+        @include mq(smp) {
+          width: 100%;
+          margin-bottom: 10px;
+        }
         .article-image {
           width: 200px;
           height: calc(200px / 1.68);
@@ -237,8 +242,8 @@
             height: calc(100% / 1.68);
           }
           @include mq(smp) {
-            width: 100px;
-            height: calc(35vw / 1.68);
+            width: 100%;
+            height: calc(100% / 1.68);
           }
           .picture {
             display: flex;
@@ -250,6 +255,9 @@
           }
           img {
             object-fit: contain;
+            @include mq(smp) {
+              object-fit: cover;
+            }
           }
         }
         .article-category {
@@ -315,7 +323,7 @@
             font-size: 0.6rem;
             color: var(--card-text-color-tertiary);
             @include mq(smp) {
-              -webkit-line-clamp: 3;
+              -webkit-line-clamp: 4;
             }
           }
         }
