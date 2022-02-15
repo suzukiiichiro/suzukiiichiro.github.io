@@ -5,7 +5,7 @@ theme: hugo-theme-stack
 # theme: ananke
 # publishDir: "docs"
 canonifyurls: true
-paginate: 10
+paginate: 15
 timeout: 60000
 
 # Change it to your Disqus shortname before using
@@ -40,9 +40,9 @@ sitemap:
   filename: sitemap.xml
   priority: 0.5
 
-Services:
-    RSS:
-        Limit: 10
+# Services:
+    # RSS:
+        # Limit: 10
 
 permalinks:
     # /: /:year/:month/:filename/
