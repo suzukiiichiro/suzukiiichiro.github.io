@@ -1,5 +1,5 @@
 ---
-title: "HUGOでxmlやファイルを複数出力する方法"
+title: "HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説"
 date: 2022-01-26T14:37:51+09:00
 draft: false
 

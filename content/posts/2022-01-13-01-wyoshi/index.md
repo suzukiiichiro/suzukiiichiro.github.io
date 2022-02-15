@@ -1,5 +1,5 @@
 ---
-title: "現役Webデザイナーが教える初めてのHTML"
+title: "現役Webデザイナーが解説する初めてのHTML初心者講座"
 date: 2022-01-13T14:14:30+09:00
 draft: false
 
