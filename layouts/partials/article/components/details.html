@@ -17,10 +17,9 @@
   {{- end -}}
   {{- if .Params.description -}}
     {{- with .Params.description -}}
-      <p class="article-subtitle">{{- . -}}</p>
+      <p class="article-subtitle">{{- substr . 0 70 -}}…</p>
     {{- end -}}
   {{- else -}}
-    <p class="article-subtitle">{{- .Summary -}} ...</p>
+    <p class="article-subtitle">{{- substr .Summary 0 70 -}}…</p>
   {{- end }}
-
 </div>

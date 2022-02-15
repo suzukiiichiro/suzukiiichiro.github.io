@@ -39,9 +39,16 @@
     </div>
     {{ end }}
     <div class="article-details">
-      <h2 class="article-title">
-        {{- .context.Title -}}
-      </h2>
+      <h4 class="article-title">{{- .context.Title -}}</h4>
+      <p class="text">
+      {{- if .context.Params.description -}}
+        {{- with .context.Params.description -}}
+          {{- substr . 0 45 -}}
+        {{- end -}}
+      {{- else -}}
+        {{- substr .context.Summary 0 45 -}}
+      {{- end -}}
+      ...</p>
     </div>
   </a>
 </article>

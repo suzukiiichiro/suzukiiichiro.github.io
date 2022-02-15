@@ -19,10 +19,10 @@
           {{- $Srcset := "" -}}
 
           {{- if (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
-        
+
             {{- $thumbnail := $image.resource.Resize "200x" -}}
             {{- $thumbnailRetina := $image.resource.Resize "400x" -}}
-          
+
             {{- $thumbnailSP := $image.resource.Resize "100x" -}}
 
             {{- $Srcset = printf "%s 1x, %s 2x" $thumbnail.RelPermalink $thumbnailRetina.RelPermalink -}}

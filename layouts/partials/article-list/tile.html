@@ -8,7 +8,7 @@
         {{- $Permalink := $image.RelPermalink -}}
         {{- $Width := $image.Width -}}
         {{- $Height := $image.Height -}}
-        
+
         {{- $thumbnail := $image.resource.Resize "50x" -}}
         {{- $thumbnailRetina := $image.resource.Resize "100x" -}}
 
@@ -29,9 +29,7 @@
     </div>
     {{ end }}
     <div class="article-details">
-      <h2 class="article-title">
-        {{- .context.Title -}}
-      </h2>
+      <h4 class="article-title">{{- .context.Title -}}</h4>
     </div>
   </a>
 </div>
