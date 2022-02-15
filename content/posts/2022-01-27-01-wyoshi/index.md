@@ -3,6 +3,8 @@ title: "Amazon EC2でもGo言語とHugoを使えるようにする方法"
 date: 2022-01-27T13:31:52+09:00
 draft: false
 
+description: "AWSのEC2にGo言語とHugoをインストールして、Webサイトを簡単に、最速で作成する手順を詳細に解説してます。Github Pagesからの移行も可能になります"
+
 authors: wYoshi
 image: catch.jpg
 

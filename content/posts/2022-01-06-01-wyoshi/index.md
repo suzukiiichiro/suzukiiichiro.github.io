@@ -1,7 +1,9 @@
 ---
-title: "簡単にできるHugoで人気の記事を表示する方法 #1"
+title: "簡単にできるHugoで人気の記事を表示する方法"
 date: 2022-01-06T16:50:50+09:00
 draft: false
+description: "データベースもサーバーも不要。Hugoでも簡単に人気の記事を表示する方法を紹介いたします。あなたのサイトにもPVランキングを簡単に設置できます。"
+
 image: analytics.jpg
 authors: wyoshi
 categories:

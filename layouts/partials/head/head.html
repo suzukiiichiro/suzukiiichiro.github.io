@@ -8,6 +8,12 @@
 {{- $description := partialCached "data/description" . .RelPermalink }}
 <meta name='description' content='{{ $description }}'>
 
+{{- $keywords := "" -}}
+{{ if .Params.Tags }}
+{{ $keywords = printf "%s," (delimit .Params.tags ", ") }}
+{{ end }}
+<meta name="keywords" content="{{$keywords}}Webデザイン,Webサイト開発,bash,CSS,サーバ">
+
 {{- $title := partial "data/title" . .RelPermalink}}
 <title>{{- $title -}}</title>
 

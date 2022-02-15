@@ -3,6 +3,9 @@ title: "HUGOでxmlやファイルを複数出力する方法"
 date: 2022-01-26T14:37:51+09:00
 draft: false
 
+description: "Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。
+"
+
 authors: wYoshi
 image: catch.jpg
 

@@ -1,8 +1,9 @@
 ---
-title: "Javascriptで画面ロックが発生する場合は、Workerを使ってみよう。"
+title: "Javascriptで画面ロックする場合は、Workerを使ってみよう"
 date: 2022-02-01T14:19:43+09:00
 draft: false
 
+description: "UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。"
 authors: wyoshi
 image: catch.jpg
 

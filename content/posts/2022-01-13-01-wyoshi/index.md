@@ -1,7 +1,9 @@
 ---
-title: "現役Webデザイナーが教えるHTML初心者講座 - 初めてのHTML"
+title: "現役Webデザイナーが教える初めてのHTML"
 date: 2022-01-13T14:14:30+09:00
 draft: false
+
+description: "「現役Webデザイナーが教えるHTML初心者講座」では、HTMLを始める人、難しそうと思っている人、挫折してしまった人でもHTMLがわかる講座です。"
 
 authors: wyoshi
 image: image.jpg

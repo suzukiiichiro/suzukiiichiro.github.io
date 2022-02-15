@@ -1,7 +1,9 @@
 ---
-title: "GASとアナリティクスを使って、Hugoに人気記事を表示させる - 簡単にできるHugoで人気の記事を表示する方法 #2"
+title: "GASとアナリティクスで、Hugoに人気記事を表示させる"
 date: 2022-01-07T11:54:15+09:00
 draft: false
+
+description: "「簡単にできるHugoで人気の記事を表示する方法」の第2回です。スプレッドシートからデータを取得して、PVランキングをHugoと連携する方法を解説します"
 
 image: analytics.jpg
 authors: wyoshi
