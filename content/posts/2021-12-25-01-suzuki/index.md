@@ -15,10 +15,6 @@ tags:
   - 鈴木維一郎
 ---
 
-## 関連記事
-- [【wLu】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/)
-- [【unComp】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/)
-- [【プログレスバー】Bashでプログレスバーを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/)
 
 ## できること
 圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断して自動的に解凍するシェルスクリプトを作成してみます。

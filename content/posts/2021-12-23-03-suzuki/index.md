@@ -14,10 +14,6 @@ tags:
   - ユーティリティ
   - 鈴木維一郎
 ---
-## 関連記事
-- [【wLu】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-suzuki/)
-- [【unComp】Bashで便利なコマンドを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/)
-- [【プログレスバー】Bashでプログレスバーを作ってみようって話](https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/)
 
 ## プログレスバー
 ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
