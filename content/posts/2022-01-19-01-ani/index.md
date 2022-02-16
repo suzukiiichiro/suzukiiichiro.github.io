@@ -38,7 +38,11 @@ APIキーが作成されますのでコピーしておきましょう
 APIの制限もとりあえすCustom Search API １個にしときます。  
 保存ボタンをクリックします  
 ・Custom Search API を有効にする  
+
+```
 https://console.cloud.google.com/apis/library/customsearch.googleapis.com  
+```
+
 「有効にする」ボタンをクリックします。  
 ・検索エンジンIDの取得  
 https://cse.google.com/create/new  
@@ -53,11 +57,16 @@ https://cse.google.com/create/new
 試しに検索してみましょう。  
 curlを利用します。  
 curlでAPIキー、検索エンジンID、キーワードを指定して検索します。  
-curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&cx=検索エンジン  ID&q=検索キーワード'  
+
+```
+$ curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&cx=検索エンジン  ID&q=検索キーワード'  
+```
 
 「木材流通統計調査」で検索してみました。  
 
-curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&cx=検索エンジンID&q=木材流通統計調査'  
+```
+$ curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&cx=検索エンジンID&q=木材流通統計調査'  
+```
 
 結果はjsonで返ってきます。  
 見た感じ、ブラウザのgoogle検索の結果と同じ感じなので良さそうですね。  
