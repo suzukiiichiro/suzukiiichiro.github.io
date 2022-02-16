@@ -2,6 +2,7 @@
 title: "SCSS/CSSを含んだファイルがGitHubActionsでビルドできない"
 date: 2021-12-24T09:43:41+09:00
 draft: false
+authors: wYoshi
 
 description: "Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。"
 

@@ -1,7 +1,10 @@
 {{- $author := "nlp" -}}
+{{- $git_author := "" -}}
+
 {{- $url := slice -}}
 {{- if .GitInfo -}}
   {{- $author = .GitInfo.AuthorName -}}
+  {{- $git_author = .GitInfo.AuthorName -}}
   {{ $result := findRE "[亜-熙ぁ-んァ-ヶ]" $author }}
   {{ if $result }}
     {{- $author = "anikotaro" -}}
@@ -11,7 +14,18 @@
 
 {{- if .Params.authors -}}
   {{- range (.GetTerms "authors") -}}
+
     {{- $url = $url | append .Permalink -}}
+    
+    {{ if in "suzuki" .Name }}
+      {{- $author = "suzukiiichiro" -}}
+    {{- end -}}
+    {{ if or (eq "wyoshi" .Name) (eq "wYoshi" .Name) }}
+      {{- $author = "wYoshi" -}}
+    {{- end -}}
+
   {{- end -}}
+{{- else if ne $author "nlp" -}}
+  {{- $author = "anikotaro" -}}
 {{- end -}}
 {{ return (dict "name" $author "url" $url) }}
