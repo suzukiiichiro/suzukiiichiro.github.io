@@ -13628,7 +13628,7 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/</link><pubDate>Wed, 12 Jan 2022 12:30:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/shellscript.jpg" alt="Featured image of post 【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」" />&lt;h1 id="コマンドラインから引数を取得">コマンドラインから引数を取得&lt;/h1>
+&lt;/aside></description></item><item><title>【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/</link><pubDate>Wed, 12 Jan 2022 12:30:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-13-suzuki/shellscript.jpg" alt="Featured image of post 【１３．コマンドラインから引数を取得】ざっくりわかる「シェルスクリプト」" />&lt;h2 id="コマンドラインから引数を取得">コマンドラインから引数を取得&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>コマンドラインから引数を取得：&lt;/b>&lt;/font>&lt;br>
 Bashスクリプトは、他のプログラミング言語と同様に、コマンドライン引数から入力を読み取ることができます。たとえば、$1と$2の変数は、最初と2番目のコマンドライン引数を読み取るために使用されます。「command_line.sh」という名前のファイルを作成し、次のスクリプトを追加します。次のスクリプトによって読み取られた2つの引数値は、引数の総数と引数値を出力として出力します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:command_line.sh" data-lang="bash:command_line.sh">&lt;span class="cp">#!/bin/bash
