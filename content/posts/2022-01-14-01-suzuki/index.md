@@ -15,7 +15,7 @@ tags:
   - 鈴木維一郎
 ---
 
-# Hello World
+## Hello World
 <font color=orange><b>はじめてのbashコマンド「echo」</b></font>
 ターミナルで非常に単純なbashステートメントを実行します。 コマンドの出力は「Hello, World」になります。
 

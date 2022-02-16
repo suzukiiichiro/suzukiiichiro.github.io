@@ -15,7 +15,7 @@ tags:
 ---
 
 
-# else if と else
+## else if と else
 <font color=orange><b>else ifステートメントの使用：</b></font>
 else if条件の使用は、bashでは「elif」を定義します。'elseif_example.sh'という名前のファイルを作成し、次のスクリプトを追加して、bashスクリプトでelseifがどのように定義されているかを確認します。
 

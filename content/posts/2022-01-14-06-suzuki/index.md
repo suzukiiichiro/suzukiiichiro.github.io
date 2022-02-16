@@ -16,7 +16,7 @@ tags:
 
 
 
-# for ループ
+## for ループ
 <font color=orange><b> forループの使用</b></font>
 基本的なforループ宣言を示します。
 'for_example.sh'という名前のファイルを作成し、forループを使用して、次のスクリプトを追加します。

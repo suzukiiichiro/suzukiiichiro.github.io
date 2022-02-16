@@ -48,8 +48,6 @@ Could not symlink share/man/ja/man1/nkf.1
 sudo chmod 775 /usr/local/share/man/ja/man1
 sudo chown <ユーザ名>:admin /usr/local/share/man/ja/man1
 ```
-下記のページを参考にさせていただきました
-<p><iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fblog.kozakana.net%2F2018%2F09%2Fhomebrew_link_error%2F" title="Homebrewでインストール時にlinkが出来ないエラー | Simple is Beautiful." class="embed-card embed-webcard" scrolling="no" frameborder="0" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;"></iframe></p>
 
 コマンドを確認します。
 ```bash

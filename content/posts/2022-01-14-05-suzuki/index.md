@@ -15,7 +15,7 @@ tags:
 ---
 
 
-# while ループ
+## while ループ
 <font color=orange><b> whileループの使用</b></font>
 whileループの使用法を知るために、「while_example.sh」という名前のbashファイルを作成します。
 この例では、whileループが5回繰り返されます。
