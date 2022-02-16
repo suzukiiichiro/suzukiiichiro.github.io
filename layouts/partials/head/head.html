@@ -1,6 +1,14 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 
+{{ if .Data.Singular }}
+<meta name="robots" content="noindex">
+{{ else if in .Site.Params.sitemap.exclude (index (split .URL "/") 1) }} 
+<meta name="robots" content="noindex">
+{{ else if in .Site.Params.sitemap.exclude_url .URL }} 
+<meta name="robots" content="noindex">
+{{ end }}
+
 <link rel="icon" href="/assets/images/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" type="image/png" href="/assets/images/favicon/apple-touch-icon-180x180.png">
 <link rel="icon" type="image/png" href="/assets/images/favicon/icon-192x192.png">
