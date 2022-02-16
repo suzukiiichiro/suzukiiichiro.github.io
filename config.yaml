@@ -64,7 +64,7 @@ outputFormats:
         MediaType: application/xml
         baseName: "sitemap_all"
         noUgly: true
-        
+
 outputs:
     home: [HTML, Sitemap, RSS, XML]
 
@@ -78,6 +78,7 @@ caches:
 # disableKinds: ["sitemap"]
 
 params:
+    topDescription: "最新技術やプログラム、Webデザインなど様々な情報を提供するサイト。ITエンジニアやプログラマ、Webデザインやサーバー構築に携わるすべての方へ情報を紹介"
     mergeDescription: "｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"
     paginate:
         slots: 5
@@ -179,15 +180,15 @@ params:
 #             emitMetadata: 0
 
 #         gitalk:
-#             owner: 
-#             admin:  
-#             repo: 
-#             clientID: 
-#             clientSecret: 
-        
+#             owner:
+#             admin:
+#             repo:
+#             clientID:
+#             clientSecret:
+
 #         cusdis:
-#             host: 
-#             id: 
+#             host:
+#             id:
 
     widgets:
         enabled:
@@ -251,14 +252,14 @@ params:
 #               ### For demonstration purpose, the home link will be open in a new tab
 #               newTab: true
 #               icon: home
-    
+
 #     social:
 #         - identifier: github
 #           name: GitHub
 #           url: https://github.com/CaiJimmy/hugo-theme-stack
 #           params:
 #             icon: brand-github
-            
+
 #         - identifier: twitter
 #           name: Twitter
 #           url: https://twitter.com

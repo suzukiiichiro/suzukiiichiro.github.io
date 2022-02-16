@@ -27,6 +27,9 @@
 {{- end }}
 
 {{- if .IsHome -}}
+  {{- if .Site.Params.topDescription -}}
+  {{- $description = .Site.Params.topDescription -}}
+  {{- end -}}
 {{- else -}}
   {{- if lt (len $description) 140}}
     {{ $description = printf "%s%s" $description .Site.Params.mergeDescription }}
