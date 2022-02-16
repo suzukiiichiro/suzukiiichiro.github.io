@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 14 Feb 2022 17:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</link><pubDate>Mon, 14 Feb 2022 17:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg" alt="Featured image of post 第7回 pythonでNQueen（エイトクイーン）バックトラック（3）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 16 Feb 2022 18:55:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第8回 pythonでNQueen（エイトクイーン）対象解除法（1）</title><link>https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/</link><pubDate>Wed, 16 Feb 2022 18:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg" alt="Featured image of post 第8回 pythonでNQueen（エイトクイーン）対象解除法（1）" />&lt;h2 id="対象解除法">対象解除法&lt;/h2>
+&lt;p>今回から対象解除法を取り扱います。 &lt;br>
+解を見てみると左右反転だったり90度、180度回転すると同じものがあります。この性質を利用して探索回数を減らそうというアルゴリズムです。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。 &lt;br>
+&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py&lt;/a>&lt;/p>
+&lt;p>まずプログラムを実行してみましょう。&lt;br>
+python py04_nqueen.py で実行できます。&lt;br>
+n4からn15までnqueenを実行し解の数とかかった時間を出力します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>N: Total Unique hh:mm:ss.ms
+4: 2 1 0:00:00.000
+5: 10 2 0:00:00.000
+6: 4 1 0:00:00.000
+7: 40 6 0:00:00.001
+8: 92 12 0:00:00.004
+9: 352 46 0:00:00.018
+10: 724 92 0:00:00.080
+11: 2680 341 0:00:00.372
+&lt;/code>&lt;/pre>&lt;p>Total が解の総数になります。Uniqueが左右反転、90度、180度回転させて同じものを同一解として取り扱ったものです。&lt;br>
+UniqueはTotalに比べるとかなり少なくN8ですとTotal 92に対してUnique が12です。&lt;br>
+Unique解からTotalの数を一定の法則で計算が可能です。&lt;br>
+まず全ての解は左右反転できます。&lt;br>
+さらに90度回転して同じであればその4倍 180度回転で同じあればその2倍となります。&lt;/p>
+&lt;p>すなわち&lt;br>
+90度回転して同じであれば 8倍&lt;br>
+180度回転して同じであれば 4倍&lt;br>
+それ以外は 2倍&lt;br>
+となります。&lt;/p>
+&lt;p>本当にそうなのでしょうか？&lt;br>
+py04_nqueen.pyは実行結果は正解数だけしか出力していません。&lt;br>
+プログラムを改造してクイーンの位置も出力するようにしてみましょう。&lt;br>
+プログラムのどの部分を改造すれば良いかプログラムを眺めてみましょう。&lt;/p>
+&lt;h2 id="グローバル変数">グローバル変数&lt;/h2>
+&lt;p>py03_nqueen.py と違う部分は&lt;br>
+221,222行目のAT,AS配列です。&lt;br>
+AT,ASは321行目のsymmetryopsメソッド内で左右反転、90度、180度回転して同じかチェックする箇所があるのですが。そこで使用します。&lt;br>
+それ以外は同じです。&lt;/p>
+&lt;p>314行目のABOARD配列はpy03_nqueen.pyでは宣言するだけで使用していませんでしたが今回からは使用します。&lt;br>
+ABOARD配列は各行のどこにクイーンを設置したかを記憶しておく配列です。&lt;br>
+symmetryopsメソッドで反転回転チェックをする際に使用します。&lt;br>
+各行のクイーンの場所を記憶しているのででプログラムを改造する時はこの配列を使ってクイーンの位置を出力すれば良さそうですね。&lt;/p>
+&lt;h2 id="mainメソッド">mainメソッド&lt;/h2>
+&lt;p>py03_nquenn.pyと違う部分は337行目でABOARDをglobal宣言しているだけでそれ以外は同じです。&lt;br>
+py03ではABOARDを宣言しただけでプログラム中使用していなかったのですが今回からは本格的に使用するためちゃんとglobal宣言しています。&lt;/p>
+&lt;p>mainメソッドはn4からn15まで346行目でnqueenメソッドを呼び出して解を求め&lt;br>
+nごとにTOTAL,UNIQUE,かかった時間を出力力します&lt;/p>
+&lt;h2 id="nqueen">nqueen&lt;/h2>
+&lt;p>py03_nqueen.pyとほとんど一緒です。&lt;br>
+FA,FB,FCフラグで上下、左右対角線をチェックしながら再帰を利用しながら1行に1個ずつクイーンを置いていきます。&lt;br>
+違う部分はどこでしょう。&lt;br>
+まず、ABOARDを使うので314行目でABOARDをglobal宣言しています。&lt;br>
+次に、if row == size :で全行クイーンを置き終わった時の処理が違います。&lt;br>
+py03ではTOTALに1を加算していただけですが、py04はsymmetryopsメソッドを呼び出しています。&lt;br>
+symmetryopsでは左右反転、90度、180度回転して同じものがあるかどうかチェックします。&lt;br>
+symmetryopsの詳細な説明は後に譲りますが、同じものの中で優先順位の最も高いものだけが8(90度回転して同じ),4(180度回転して同じ),2(左右反転のみ)のスコアを返し、その他は0のスコアを返します。&lt;/p>
+&lt;p>322行目でstotalが0以外の時のみUNIQUEを1加算し、stotal 2,4,8いずれかのスコアをTOTALに加算します。&lt;/p>
+&lt;h2 id="改造を加える部分は">改造を加える部分は？&lt;/h2>
+&lt;p>ざっとプログラムの概要を説明しましたが、それではどの部分に改造を加えてクイーンの設置場所を出力すると良いでしょうか？&lt;/p>
+&lt;p>全行クイーンを置き終わった時が良いですよね。&lt;br>
+とすると 320行目の if row==size の後が良いでしょう。&lt;/p>
+&lt;p>ユニークなのか90,180度回転して同じものがあるのかも知りたいですから、&lt;br>
+321行目のsymmetryopsを実行した後が良いですね。&lt;/p>
+&lt;p>そして、stotalが0の時優先順位で負けたもののクイーンの配置を出力したいですから322行目より前の方が良いですね。&lt;/p>
+&lt;p>ですので、321行目と322行目の間でクイーンの設置場所を出力するように改造しましょう。&lt;/p>
+&lt;p>長くなったので今回はここまでで次回プログラムを改造しましょう。&lt;/p></description></item><item><title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</title><link>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</link><pubDate>Mon, 14 Feb 2022 17:55:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess.jpg" alt="Featured image of post 第7回 pythonでNQueen（エイトクイーン）バックトラック（3）" />&lt;h2 id="バックトラック">バックトラック&lt;/h2>
 &lt;p>今回も引き続きバックトラックを説明していきたいと思います。 &lt;br>
 前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの再帰とバックトラックの動きについて図で示しながら説明していきたいとおもいます。&lt;/p>
 &lt;p>プログラムソースは以下のURLにあります。&lt;br>
