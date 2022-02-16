@@ -1338,7 +1338,7 @@ xargsコマンドを使うと一片にプロセスを終了させることがで
 &lt;pre tabindex="0">&lt;code>bash-5.1$ ps axu | grep hugo | grep -v grep | awk '{ print $2; }' | xargs kill -9
 &lt;/code>&lt;/pre>&lt;p>終了したいプロセス名が解っている場合は以下のコマンドで一発で全ての同名プロセスを終了させることができます。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ killall hugo
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -1524,7 +1524,7 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;dd>［q］キーを押すとヘルプの表示を終了し、元の画面に戻ります。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -1697,7 +1697,7 @@ cat filename | more [オプション]&lt;/p>
 &lt;dd>ファイルを表示している途中でも［Q］キーまたは［q］キーで終了できます。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -1869,7 +1869,7 @@ tail コマンドのみに頼ろうとすると難しいようだ。&lt;br>
 &lt;pre tabindex="0">&lt;code>$ cat filename | tail -n200 | head -n 100
 &lt;/code>&lt;/pre>&lt;p>コマンドの実行結果の10001行目から10100行目までが欲しい時は以下の通り。&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ cat filename | head -n10100 | tail -n100
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -2124,7 +2124,7 @@ suzuki$
 &lt;/dl>
 &lt;/div>
 &lt;p>head コマンドの紹介の割には長くなりました。&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -2279,7 +2279,7 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;dd>「&amp;gt;」は、内容があってもファイルの内容を空にして出力することに注意しなくてはなりません。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -2506,7 +2506,7 @@ $
 &lt;dd>行末の「;」（セミコロン）も忘れずに。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -5474,18 +5474,7 @@ $
 &lt;dd>Linux(CUI)でできることはすべてシェルスクリプトでできます。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="関連記事">関連記事&lt;/h1>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト３」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/" target="_blank" rel="noopener"
->【 grep 特集】「ざっくりわかるシェルスクリプト４」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/" target="_blank" rel="noopener"
->【grep/sed/awkも】「ざっくりわかるシェルスクリプト５」&lt;/a>&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -6605,7 +6594,7 @@ suzuki:x:1001:
 &lt;dd>当たり前の話ではありますが、root で作業するのはやめましょう。必要に応じて $ su すればよいのです。Linux/Unixとはそういうものなのです。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -8151,18 +8140,7 @@ $
 &lt;dd>customers.txtファイルには「R」と「M 」で始まり「 k 」で終わる2行が存在します。したがって、ファイルの3行目と6行目が出力に出力されています。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="関連記事">関連記事&lt;/h1>
-&lt;p>&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト１」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト２」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/" target="_blank" rel="noopener"
->【はじめから】「ざっくりわかるシェルスクリプト３」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/" target="_blank" rel="noopener"
->【 grep 特集】「ざっくりわかるシェルスクリプト４」&lt;/a>&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/" target="_blank" rel="noopener"
->【grep/sed/awkも】「ざっくりわかるシェルスクリプト５」&lt;/a>&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11020,7 +10998,7 @@ array&lt;span class="o">[&lt;/span>i&lt;span class="o">]=&lt;/span>&lt;span clas
 &lt;dd>waitはプロセスやジョブの終了を待つ&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11141,7 +11119,7 @@ $
 &lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11296,7 +11274,7 @@ mkdir: /tmp/work: File exists
 1
 0
 bash-5.1$
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11447,7 +11425,7 @@ mkdir: /tmp/work: File exists
 1
 0
 $
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11610,7 +11588,7 @@ $
 &lt;/div>
 &lt;pre tabindex="0">&lt;code>instance_id=$(echo $line | awk -F, '{print $1;}');
 tag_value=$(echo $line | awk -F, '{print $2;}');
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11755,7 +11733,7 @@ $
 &lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -11883,7 +11861,7 @@ $
 &lt;dd>ファイルの存在を確認するための方法を次の章で説明します。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -12043,7 +12021,7 @@ Shell Scripting
 Shell Scripting
 Bash Programming
 $
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -12165,7 +12143,7 @@ $
 &lt;dd>くれぐれもおかしな事をかんがえるのはやめましょう。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -12320,7 +12298,7 @@ $ date -d '1 minute ago'
 # 1秒前
 $ date -d '1 second ago'
 &lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code class="language-:直近5分以内にあるerrorログを表示" data-lang=":直近5分以内にあるerrorログを表示">$ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $(( $(date +&amp;quot;%s&amp;quot;) - 300 )) -lt $(echo ${record} | cut -d&amp;quot; &amp;quot; -f 1,2,3 | date --date=&amp;quot;$(cat -)&amp;quot; +&amp;quot;%s&amp;quot;) ] ; then echo ${record} ; fi ; done | grep error ; IFS=${IFSBK}
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -12463,7 +12441,7 @@ command3
 &lt;dd>waitコマンドと似ているsleepコマンドについて、次の章で説明します。またsleepコマンドとwaitコマンドを組み合わせて並列処理を行うサンプルも次の章で示します。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -12589,7 +12567,7 @@ array&lt;span class="o">[&lt;/span>i&lt;span class="o">]=&lt;/span>&lt;span clas
 &lt;dd>waitはプロセスやジョブの終了を待つ&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13164,7 +13142,7 @@ bash-5.1$
 ## ２９．waitコマンド
 ## ３０．sleepコマンド
 -->
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13292,7 +13270,7 @@ bash-5.1$
 &lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13429,7 +13407,7 @@ $
 &lt;dd>また、比較する変数を「ダブルクォーテーション」で囲まないと、変数が空のときに構文エラーとなってしましますので注意してください。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13561,7 +13539,7 @@ bash$ bash case_example.sh
 &lt;dd>case文の終わりには esac を指定します。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13675,7 +13653,7 @@ $
 &lt;dd>シェルスクリプトの変数はほとんどの場合は &amp;ldquo;$value&amp;rdquo; と囲みます。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13807,7 +13785,7 @@ $
 *&lt;span class="o">)&lt;/span>
 &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;undefined&amp;#34;&lt;/span>&lt;span class="p">;;&lt;/span>
 &lt;span class="k">esac&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -13932,7 +13910,7 @@ $
 &lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>$ bash string_example2.sh
 $ Shell script is interesting!!
 $
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -14089,7 +14067,7 @@ echo ${HOGE#*/}
 # 最長除外
 echo ${HOGE##*/}
 # -&amp;gt; hoge
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -14227,7 +14205,7 @@ $ echo $((0&amp;lt;1)) # 未満、結果: 1
 $ echo $((0&amp;lt;=1)) # 以下、結果: 1
 $ echo $((0&amp;gt;1)) # 大なり、結果: 0
 $ echo $((0&amp;gt;=1)) # 以上、結果: 0
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -14371,7 +14349,7 @@ say_hello &lt;span class="s2">&amp;#34;Hello&amp;#34;&lt;/span>&lt;span class="p
 &lt;pre tabindex="0">&lt;code>$ bash function_example.sh
 Hello, world!
 $
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -14487,7 +14465,7 @@ bash-5.1$
 &lt;dd>「return」コマンドは存在するが、あくまで終了ステータスを返しているだけで、関数の戻り値を返す機能ではないので注意しよう。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -15423,7 +15401,7 @@ $
 ## ２９．waitコマンド
 ## ３０．sleepコマンド
 -->
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -15649,7 +15627,7 @@ $ ls -l
 &lt;p>詳しくはこちら&lt;br>
 &lt;a class="link" href="https://qiita.com/shisama/items/5f4c4fa768642aad9e06" target="_blank" rel="noopener"
 >https://qiita.com/shisama/items/5f4c4fa768642aad9e06&lt;/a>&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -15785,7 +15763,7 @@ $
 &lt;dd>\ バックスラッシュ&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -15897,7 +15875,7 @@ $
 &lt;dd>複数行コメントに関しては次の章で説明します。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16031,7 +16009,7 @@ $
 &lt;dd>マルチラインコメントも同じ「:」から始まり、何もしないことを示している。&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16174,7 +16152,7 @@ $
 &lt;dd>(( )) でよい。(( )) の中の変数を表す「$」は記述の必要はない&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16300,7 +16278,7 @@ done
 for((i=0;i&amp;lt;10;i++));do
 echo &amp;quot;test&amp;quot;
 done
-&lt;/code>&lt;/pre>&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16419,7 +16397,7 @@ $
 &lt;dd>echo $str1&lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16548,7 +16526,7 @@ $
 &lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16682,7 +16660,7 @@ $
 &lt;/dd>
 &lt;/dl>
 &lt;/div>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -17246,7 +17224,7 @@ exit&lt;span class="p">;&lt;/span>
 &lt;span class="c1">#&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="おわりに">おわりに&lt;/h2>
 &lt;p>日頃、手間を掛けてコマンドを入力している場合は、シェルスクリプトを使って簡便にできる事に加え、さらにカスタマイズを加え、便利に記事投稿ができるとブログも気分もがぜん盛り上がりますね。&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -17969,7 +17947,7 @@ ssh &lt;span class="nv">$SERVER&lt;/span> -t &lt;span class="nv">$COMMAND&lt;/sp
 exit&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>たったこれだけですが、この工夫により多くのサーバーを&lt;br>
 スクリプトで一括回遊することができます。 お試しあれ。&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18196,7 +18174,7 @@ alt="【プログレスバー】Bashでプログレスバーを作ってみよ�
 &lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18361,7 +18339,7 @@ $ /usr/local/bin/unComp
 $ unComp sample.zip
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>圧縮ファイルの拡張子に併せたコマンドを思い出したり、さらにはコマンドのパラメータをGoogleで調べたりする必要が減ります。必要に応じて、ソースにコマンドやパラメータを追加すれば、さらに拡張できます。&lt;br>
 便利ですね。&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18562,7 +18540,7 @@ $ cat moto.txt
 $ wLu moto.txt
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>変換結果を一時ファイルにし、リネームする手間が省けます。&lt;br>
 便利ですね。&lt;/p>
-&lt;h1 id="書籍の紹介">書籍の紹介&lt;/h1>
+&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873112672&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18945,7 +18923,7 @@ configの&lt;em>publicDir&lt;/em>に任意のディレクトリを設定する�
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>Hugoでテーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.jpg" alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）" />&lt;p>Hugoではテーマ（themes）を使って簡単にブログやサイトを作成することが可能です。テーマはGitHubなどにたくさん公開されて簡単に導入することが可能です。&lt;br>
+&lt;/aside></description></item><item><title>Hugoでテーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.jpg" alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）" />&lt;p>Hugoではテーマ（theme）を使って簡単にブログやサイトを作成することが可能です。テーマはGitHubなどにたくさん公開されて簡単に導入することが可能です。&lt;br>
 しかし、テーマををインストールするのを忘れてしまうと、不具合の原因につながってしまうので注意が必要です。&lt;/p>
 &lt;p>今回はHugoを使って構築したサイトで、テーマが反映されずに画面が真っ白のまま担ってしまった場合の対処法を説明してきます。&lt;/p>
 &lt;h2 id="テーマはサブモジュールでインストール">テーマはサブモジュールでインストール&lt;/h2>
@@ -18956,16 +18934,16 @@ Hugoでテーマをインストールする際はサブモジュール（submodu
 &lt;p>インストールされていない場合は、サブモジュール化されたテーマを再度インストールすることで画面が真っ白い状態から正常な表示に変わるかと思います。&lt;/p>
 &lt;p>サブモジュールのインストールコマンドは下記のようになります。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git submodule update --init --recursive
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugoのサイトを&lt;code>git clone&lt;/code>したら、テーマが反映されない。こうしたケース多いので、サブモジュールのインストールも忘れず行うようにしましょう。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugoのサイトを&lt;code>git clone&lt;/code>する際は、テーマが反映されない場合が多いので、サブモジュールのインストールも忘れずに行うようにしましょう。&lt;/p>
 &lt;h2 id="クローンするときに一緒にサブモジュールもインストール">クローンするときに一緒にサブモジュールもインストール&lt;/h2>
 &lt;p>そうは言っても、サブモジュールのインストールを忘れることが多いです。&lt;br>
-その場合は、初回git cloneする際にsubmodule（サブモジュール）も一緒にcloneすることで不具合を起こすことなく、表示できます。&lt;/p>
+その場合は、初回git cloneする際にsubmodule（サブモジュール）も一緒にcloneすることで不具合を起こすことなく、表示することができます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git clone --recursive &lt;span class="o">{&lt;/span>クローンしたいリポジトリ&lt;span class="o">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>Hugoでテーマが反映されない（画面が真っ白のまま）のときの対応はいかがだったでしょうか。&lt;br>
 サブモジュールで管理できるのは便利であると同時に、忘れてしまうとサイトの不具合につながってしまい、別端末で正常に動作していると解決が難しくなってしまうことも多いと思います。&lt;br>
 Hugoのサイトをgit cloneする際はサブモジュールでテーマの反映も忘れないようにしておきましょう。&lt;/p>
-&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
+&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
