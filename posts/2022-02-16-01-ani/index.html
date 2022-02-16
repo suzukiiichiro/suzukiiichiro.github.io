@@ -16,14 +16,14 @@
 <meta property="og:description" content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第8回目。今回から対象解除法が登場します。解を見てみると左右反転だったり90度、180度回転すると同じものがあります。この性質を利用して探索回数を減らそうというアルゴリズムです。今回は対象解除法の概要を説明します。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-16T18:55:55+09:00"><meta property="article:modified_time" content="2022-02-16T19:12:50+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="nQueen"><meta property="article:tag" content="プログラム"><meta property="article:published_time" content="2022-02-16T18:55:55+09:00"><meta property="article:modified_time" content="2022-02-16T19:31:13+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg">
 <meta name=twitter:title content="第8回 pythonでNQueen（エイトクイーン）対象解除法（1）｜NLP">
 <meta name=twitter:description content="pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第8回目。今回から対象解除法が登場します。解を見てみると左右反転だったり90度、180度回転すると同じものがあります。この性質を利用して探索回数を減らそうというアルゴリズムです。今回は対象解除法の概要を説明します。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-16-01-ani/chess.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"第8回 pythonでNQueen（エイトクイーン）対象解除法（1）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg"],"datePublished":"2022-02-16T18:55:55+09:00","dateModified":"2022-02-16T19:12:50+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"第8回 pythonでNQueen（エイトクイーン）対象解除法（1）","item":"https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"第8回 pythonでNQueen（エイトクイーン）対象解除法（1）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess.jpg"],"datePublished":"2022-02-16T18:55:55+09:00","dateModified":"2022-02-16T19:31:13+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"第8回 pythonでNQueen（エイトクイーン）対象解除法（1）","item":"https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -166,10 +166,12 @@ Unique解からTotalの数を一定の法則で計算が可能です。<br>
 180度回転して同じであれば 4倍<br>
 それ以外は 2倍<br>
 となります。</p>
+<p>もしこれが本当であれば、全てのTotalのルートを探索する必要はなく、全てのUniqueのルートを探索しさえすればあとは単純な掛け算で解の総数を出すことができます。大幅な探索コストの削減が期待できそうです。</p>
 <p>本当にそうなのでしょうか？<br>
 py04_nqueen.pyは実行結果は正解数だけしか出力していません。<br>
-プログラムを改造してクイーンの位置も出力するようにしてみましょう。<br>
-プログラムのどの部分を改造すれば良いかプログラムを眺めてみましょう。</p>
+そこで、プログラムを改造してクイーンの位置も出力するようにして目で見て確かめてみましょう。</p>
+<p>プログラムのどの部分を改造すれば良いでしょうか？<br>
+それでは、プログラムを眺めてみましょう。</p>
 <h2 id=グローバル変数>グローバル変数</h2>
 <p>py03_nqueen.py と違う部分は<br>
 221,222行目のAT,AS配列です。<br>
@@ -181,9 +183,9 @@ symmetryopsメソッドで反転回転チェックをする際に使用します
 各行のクイーンの場所を記憶しているのででプログラムを改造する時はこの配列を使ってクイーンの位置を出力すれば良さそうですね。</p>
 <h2 id=mainメソッド>mainメソッド</h2>
 <p>py03_nquenn.pyと違う部分は337行目でABOARDをglobal宣言しているだけでそれ以外は同じです。<br>
-py03ではABOARDを宣言しただけでプログラム中使用していなかったのですが今回からは本格的に使用するためちゃんとglobal宣言しています。</p>
+py03ではABOARDを宣言しただけでプログラムのなかで使用していなかったのですが今回からは本格的に使用するためちゃんとglobal宣言しています。</p>
 <p>mainメソッドはn4からn15まで346行目でnqueenメソッドを呼び出して解を求め<br>
-nごとにTOTAL,UNIQUE,かかった時間を出力力します</p>
+nごとにTOTAL,UNIQUE,かかった時間を出力します</p>
 <h2 id=nqueen>nqueen</h2>
 <p>py03_nqueen.pyとほとんど一緒です。<br>
 FA,FB,FCフラグで上下、左右対角線をチェックしながら再帰を利用しながら1行に1個ずつクイーンを置いていきます。<br>
