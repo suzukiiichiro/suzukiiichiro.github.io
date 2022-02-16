@@ -9439,10 +9439,9 @@ APIキーが作成されますのでコピーしておきましょう&lt;br>
 接続元が固定のIPアドレスを持っているなら「アプリケーションの制限」でIPアドレスを設定しましょう。&lt;br>
 APIの制限もとりあえすCustom Search API １個にしときます。&lt;br>
 保存ボタンをクリックします&lt;br>
-・Custom Search API を有効にする&lt;br>
-&lt;a class="link" href="https://console.cloud.google.com/apis/library/customsearch.googleapis.com" target="_blank" rel="noopener"
->https://console.cloud.google.com/apis/library/customsearch.googleapis.com&lt;/a>&lt;br>
-「有効にする」ボタンをクリックします。&lt;br>
+・Custom Search API を有効にする&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://console.cloud.google.com/apis/library/customsearch.googleapis.com
+&lt;/code>&lt;/pre>&lt;p>「有効にする」ボタンをクリックします。&lt;br>
 ・検索エンジンIDの取得&lt;br>
 &lt;a class="link" href="https://cse.google.com/create/new" target="_blank" rel="noopener"
 >https://cse.google.com/create/new&lt;/a>&lt;br>
@@ -9455,13 +9454,11 @@ APIの制限もとりあえすCustom Search API １個にしときます。&lt;b
 &lt;h2 id="curlでgoogle-custom-search-api検索する">CurlでGoogle Custom Search API検索する&lt;/h2>
 &lt;p>試しに検索してみましょう。&lt;br>
 curlを利用します。&lt;br>
-curlでAPIキー、検索エンジンID、キーワードを指定して検索します。&lt;br>
-curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
->https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジン ID&amp;amp;q=検索キーワード&amp;rsquo;&lt;/p>
-&lt;p>「木材流通統計調査」で検索してみました。&lt;/p>
-&lt;p>curl &amp;lsquo;&lt;a class="link" href="https://www.googleapis.com/customsearch/v1?key=google" target="_blank" rel="noopener"
->https://www.googleapis.com/customsearch/v1?key=google&lt;/a> apiキー&amp;amp;cx=検索エンジンID&amp;amp;q=木材流通統計調査&amp;rsquo;&lt;/p>
-&lt;p>結果はjsonで返ってきます。&lt;br>
+curlでAPIキー、検索エンジンID、キーワードを指定して検索します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&amp;amp;cx=検索エンジン ID&amp;amp;q=検索キーワード'
+&lt;/code>&lt;/pre>&lt;p>「木材流通統計調査」で検索してみました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ curl 'https://www.googleapis.com/customsearch/v1?key=google apiキー&amp;amp;cx=検索エンジンID&amp;amp;q=木材流通統計調査'
+&lt;/code>&lt;/pre>&lt;p>結果はjsonで返ってきます。&lt;br>
 見た感じ、ブラウザのgoogle検索の結果と同じ感じなので良さそうですね。&lt;/p>
 &lt;pre tabindex="0">&lt;code> &amp;quot;items&amp;quot;: [
 {
