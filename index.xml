@@ -729,7 +729,7 @@ alt="図"
 &lt;figcaption>図&lt;/figcaption>
 &lt;/figure>&lt;br>
 445行目の処理が終わると再帰を抜けて上の行に戻ります。&lt;/p>
-&lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>CSSでアプリのようにピタッとスナップするスクロールを作成</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" alt="Featured image of post CSSでアプリのようにピタッとスナップするスクロールを作成" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
+&lt;p>そんな感じで再帰呼び出し、再帰を抜けるを繰り返して総数を出します。&lt;/p></description></item><item><title>CSSでアプリのようにピタッとスナップするスクロールを作成</title><link>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</link><pubDate>Mon, 14 Feb 2022 12:33:28 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.jpg" alt="Featured image of post CSSでアプリのようにピタッとスナップするスクロールを作成" />&lt;p>&lt;strong>出典元&lt;/strong>：&lt;a class="link" href="https://ishadeed.com/article/css-scroll-snap/" target="_blank" rel="noopener"
 > CSS Scroll Snap - Ahmad Shadeed &lt;/a>&lt;/p>
 &lt;p>アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを作成しようとすると、専用のjavascriptやライブラリを使用する必要があったりと実装が大変です。&lt;br>
 しかし、CSSスクロールスナップは横スクロールしてスナップするといった動作を行うことができます。&lt;/p>
@@ -743,8 +743,8 @@ style="
 flex-grow: 197;
 flex-basis: 473px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png" data-size="980x497">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.jpg" data-size="980x497">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro.jpg"
 width="980"
 height="497"
 loading="lazy"
@@ -785,8 +785,8 @@ style="
 flex-grow: 420;
 flex-basis: 1009px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png" data-size="980x233">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.jpg" data-size="980x233">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro-2.jpg"
 width="980"
 height="233"
 loading="lazy"
@@ -854,8 +854,8 @@ style="
 flex-grow: 262;
 flex-basis: 628px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png" data-size="980x374">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.jpg" data-size="980x374">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/x-vs-y.jpg"
 width="980"
 height="374"
 loading="lazy"
@@ -875,8 +875,8 @@ style="
 flex-grow: 185;
 flex-basis: 444px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png" data-size="980x529">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.jpg" data-size="980x529">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-mandatory.jpg"
 width="980"
 height="529"
 loading="lazy"
@@ -902,8 +902,8 @@ style="
 flex-grow: 185;
 flex-basis: 444px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png" data-size="980x529">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.jpg" data-size="980x529">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-proximity.jpg"
 width="980"
 height="529"
 loading="lazy"
@@ -927,8 +927,8 @@ style="
 flex-grow: 188;
 flex-basis: 452px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png" data-size="980x520">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.jpg" data-size="980x520">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align.jpg"
 width="980"
 height="520"
 loading="lazy"
@@ -945,8 +945,8 @@ style="
 flex-grow: 188;
 flex-basis: 452px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png" data-size="980x520">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.jpg" data-size="980x520">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-snap-align-y.jpg"
 width="980"
 height="520"
 loading="lazy"
@@ -997,8 +997,8 @@ style="
 flex-grow: 298;
 flex-basis: 717px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png" data-size="980x328">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.jpg" data-size="980x328">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding.jpg"
 width="980"
 height="328"
 loading="lazy"
@@ -1019,8 +1019,8 @@ style="
 flex-grow: 288;
 flex-basis: 691px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png" data-size="980x340">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.jpg" data-size="980x340">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-padding-2.jpg"
 width="980"
 height="340"
 loading="lazy"
@@ -1037,8 +1037,8 @@ style="
 flex-grow: 232;
 flex-basis: 557px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png" data-size="980x422">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.jpg" data-size="980x422">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/scroll-margin.jpg"
 width="980"
 height="422"
 loading="lazy"
@@ -1057,8 +1057,8 @@ style="
 flex-grow: 309;
 flex-basis: 741px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png" data-size="980x317">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.jpg" data-size="980x317">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-1.jpg"
 width="980"
 height="317"
 loading="lazy"
@@ -1087,8 +1087,8 @@ style="
 flex-grow: 224;
 flex-basis: 538px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png" data-size="980x437">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.jpg" data-size="980x437">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2.jpg"
 width="980"
 height="437"
 loading="lazy"
@@ -1116,8 +1116,8 @@ style="
 flex-grow: 224;
 flex-basis: 538px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png" data-size="980x437">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.jpg" data-size="980x437">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-2-2.jpg"
 width="980"
 height="437"
 loading="lazy"
@@ -1134,8 +1134,8 @@ style="
 flex-grow: 148;
 flex-basis: 355px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png" data-size="980x661">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.jpg" data-size="980x661">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-4.jpg"
 width="980"
 height="661"
 loading="lazy"
@@ -1163,8 +1163,8 @@ style="
 flex-grow: 157;
 flex-basis: 378px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png" data-size="980x621">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.jpg" data-size="980x621">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-3.jpg"
 width="980"
 height="621"
 loading="lazy"
@@ -1213,8 +1213,8 @@ style="
 flex-grow: 181;
 flex-basis: 434px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png" data-size="980x541">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.jpg" data-size="980x541">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/use-case-5.jpg"
 width="980"
 height="541"
 loading="lazy"
@@ -2629,8 +2629,8 @@ style="
 flex-grow: 148;
 flex-basis: 356px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png" data-size="980x660">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.jpg" data-size="980x660">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img01.jpg"
 width="980"
 height="660"
 loading="lazy"
@@ -2652,8 +2652,8 @@ style="
 flex-grow: 535;
 flex-basis: 1285px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png" data-size="980x183">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.jpg" data-size="980x183">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img02.jpg"
 width="980"
 height="183"
 loading="lazy"
@@ -2672,8 +2672,8 @@ style="
 flex-grow: 250;
 flex-basis: 601px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png" data-size="980x391">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.jpg" data-size="980x391">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img03.jpg"
 width="980"
 height="391"
 loading="lazy"
@@ -2691,8 +2691,8 @@ style="
 flex-grow: 335;
 flex-basis: 805px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png" data-size="980x292">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.jpg" data-size="980x292">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-08-01-wyoshi/img04.jpg"
 width="980"
 height="292"
 loading="lazy"
@@ -3011,10 +3011,10 @@ style="
 flex-grow: 147;
 flex-basis: 354px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png" data-size="980x663">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.png"
-width="980"
-height="663"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.jpg" data-size="780x528">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img01.jpg"
+width="780"
+height="528"
 loading="lazy"
 alt="SEO対策にXMLの更新日（lastmod）を正しく表示する方法の画像"
 >
@@ -3051,10 +3051,10 @@ style="
 flex-grow: 169;
 flex-basis: 406px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png" data-size="980x578">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.png"
-width="980"
-height="578"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.jpg" data-size="780x460">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/img02.jpg"
+width="780"
+height="460"
 loading="lazy"
 alt="SEO対策にXMLの更新日（lastmod）を正しく表示する方法の画像"
 >
@@ -3104,8 +3104,8 @@ style="
 flex-grow: 164;
 flex-basis: 395px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png" data-size="980x594">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.jpg" data-size="980x594">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img02.jpg"
 width="980"
 height="594"
 loading="lazy"
@@ -3128,8 +3128,8 @@ style="
 flex-grow: 203;
 flex-basis: 488px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png" data-size="980x481">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.jpg" data-size="980x481">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img01.jpg"
 width="980"
 height="481"
 loading="lazy"
@@ -3145,10 +3145,10 @@ style="
 flex-grow: 115;
 flex-basis: 276px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png" data-size="980x850">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.png"
-width="980"
-height="850"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.jpg" data-size="680x590">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img04.jpg"
+width="680"
+height="590"
 loading="lazy"
 alt="Googleにインデックスされないときの対応方法は？の画像"
 >
@@ -3165,8 +3165,8 @@ style="
 flex-grow: 114;
 flex-basis: 274px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png" data-size="980x857">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.jpg" data-size="980x857">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img05.jpg"
 width="980"
 height="857"
 loading="lazy"
@@ -3248,8 +3248,8 @@ style="
 flex-grow: 154;
 flex-basis: 369px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png" data-size="980x636">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.jpg" data-size="980x636">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img07.jpg"
 width="980"
 height="636"
 loading="lazy"
@@ -3312,8 +3312,8 @@ style="
 flex-grow: 104;
 flex-basis: 251px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png" data-size="980x936">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.jpg" data-size="980x936">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img03.jpg"
 width="980"
 height="936"
 loading="lazy"
@@ -3330,8 +3330,8 @@ style="
 flex-grow: 154;
 flex-basis: 370px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png" data-size="980x635">
-&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.png"
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.jpg" data-size="980x635">
+&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/img08.jpg"
 width="980"
 height="635"
 loading="lazy"
@@ -9612,10 +9612,10 @@ style="
 flex-grow: 127;
 flex-basis: 305px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g.jpg" data-size="980x769">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g.jpg" data-size="780x612">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/rise-of-5g.jpg"
-width="980"
-height="769"
+width="780"
+height="612"
 loading="lazy"
 alt="rise of 5g"
 >
@@ -9649,12 +9649,12 @@ alt="rise of 5g"
 class="gallery-image"
 style="
 flex-grow: 165;
-flex-basis: 397px"
+flex-basis: 398px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming.jpg" data-size="980x591">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming.jpg" data-size="780x470">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/video-streaming.jpg"
-width="980"
-height="591"
+width="780"
+height="470"
 loading="lazy"
 alt="ストリーミング"
 >
@@ -9681,10 +9681,10 @@ style="
 flex-grow: 121;
 flex-basis: 291px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr.jpg" data-size="980x808">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr.jpg" data-size="780x643">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/ar-and-vr.jpg"
-width="980"
-height="808"
+width="780"
+height="643"
 loading="lazy"
 alt="ar and vr"
 >
@@ -9710,10 +9710,10 @@ style="
 flex-grow: 121;
 flex-basis: 292px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps.jpg" data-size="980x804">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps.jpg" data-size="780x640">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/food-grocery-delivery-apps.jpg"
-width="980"
-height="804"
+width="780"
+height="640"
 loading="lazy"
 alt="food grocery delivery apps"
 >
@@ -9736,10 +9736,10 @@ style="
 flex-grow: 127;
 flex-basis: 305px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment.jpg" data-size="980x770">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment.jpg" data-size="780x613">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/mobile-entertainment.jpg"
-width="980"
-height="770"
+width="780"
+height="613"
 loading="lazy"
 alt="mobile entertainment"
 >
@@ -9776,10 +9776,10 @@ style="
 flex-grow: 150;
 flex-basis: 360px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security.jpg" data-size="980x652">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security.jpg" data-size="780x519">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/nobile-app-security.jpg"
-width="980"
-height="652"
+width="780"
+height="519"
 loading="lazy"
 alt="nobile app security"
 >
@@ -9797,10 +9797,10 @@ style="
 flex-grow: 156;
 flex-basis: 375px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps.jpg" data-size="980x627">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps.jpg" data-size="780x499">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/super-apps.jpg"
-width="980"
-height="627"
+width="780"
+height="499"
 loading="lazy"
 alt="super apps"
 >
@@ -9824,10 +9824,10 @@ style="
 flex-grow: 108;
 flex-basis: 260px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps.jpg" data-size="980x903">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps.jpg" data-size="780x719">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/p2p-mobile-apps.jpg"
-width="980"
-height="903"
+width="780"
+height="719"
 loading="lazy"
 alt="p2p mobile apps"
 >
@@ -9854,10 +9854,10 @@ style="
 flex-grow: 123;
 flex-basis: 295px"
 >
-&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain.jpg" data-size="980x796">
+&lt;a href="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain.jpg" data-size="780x634">
 &lt;img src="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/blockchain.jpg"
-width="980"
-height="796"
+width="780"
+height="634"
 loading="lazy"
 alt="blockchain"
 >
@@ -14914,7 +14914,7 @@ alt="GASとアナリティクスで、Hugoに人気記事を表示させるの�
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/Google%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%EF%BD%9E%E5%88%86%E6%9E%90%E3%83%BB%E6%96%BD%E7%AD%96%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%82%92%E7%94%9F%E3%82%80%E6%9C%80%E5%BC%B7%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E5%B1%B1%E6%B5%A6-%E7%9B%B4%E5%AE%8F/dp/4297112612?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;amp;crid=JWVEKDNY44QV&amp;amp;keywords=google&amp;#43;%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9&amp;amp;qid=1641514280&amp;amp;s=books&amp;amp;sprefix=google&amp;#43;%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B9%2Cstripbooks%2C197&amp;amp;sr=1-17-spons&amp;amp;psc=1&amp;amp;spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFEVkxWVEZDSTdSQzQmZW5jcnlwdGVkSWQ9QTA1MDMwNDYyUTRGU1dQUEFQOTdTJmVuY3J5cHRlZEFkSWQ9QTNDR0ZTNUlLTUJHNUsmd2lkZ2V0TmFtZT1zcF9idGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl&amp;amp;linkCode=ll1&amp;amp;tag=nlpqueens-22&amp;amp;linkId=5dfbf1278031207773d96916ecce46dd&amp;amp;language=ja_JP&amp;amp;ref_=as_li_ss_tl" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//m.media-amazon.com/images/I/51PXFiYP7aL._SL250_.jpg" alt="Googleアナリティクス プロフェッショナル　～分析・施策のアイデアを生む最強リファレンス ">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/51PXFiYP7aL._SL250_.jpg" alt="Googleアナリティクス プロフェッショナル　～分析・施策のアイデアを生む最強リファレンス ">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">Googleアナリティクス プロフェッショナル　～分析・施策のアイデアを生む最強リファレンス &lt;/h2>
@@ -14928,7 +14928,7 @@ alt="GASとアナリティクスで、Hugoに人気記事を表示させるの�
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/Google-Apps-Script%E7%9B%AE%E7%9A%84%E5%88%A5%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9-%E5%AE%9F%E8%B7%B5%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89%E4%BB%98%E3%81%8D-%E6%B8%85%E6%B0%B4/dp/4798062405?pd_rd_w=BsqYY&amp;amp;pf_rd_p=d8f6e0ab-48ef-4eca-99d5-60d97e927468&amp;amp;pf_rd_r=ADPJ0069C04W5M44N6YQ&amp;amp;pd_rd_r=16303d6e-b3f9-4aa6-9f06-d3e66775e8f4&amp;amp;pd_rd_wg=joLm1&amp;amp;pd_rd_i=4798062405&amp;amp;psc=1&amp;amp;linkCode=ll1&amp;amp;tag=nlpqueens-22&amp;amp;linkId=f78c47c375494f0b51c423506367a868&amp;amp;language=ja_JP&amp;amp;ref_=as_li_ss_tl" target="_blank">
 &lt;div class="columns amazon-image">
-&lt;img border="0" src="//m.media-amazon.com/images/I/41OIKEUEOIL._SL250_.jpg" alt="Google Apps Script目的別リファレンス 実践サンプルコード付き">
+&lt;img border="0" src="https://m.media-amazon.com/images/I/41OIKEUEOIL._SL250_.jpg" alt="Google Apps Script目的別リファレンス 実践サンプルコード付き">
 &lt;/div>
 &lt;div class="columns amazon-info">
 &lt;h2 class="amazon-name">Google Apps Script目的別リファレンス 実践サンプルコード付き&lt;/h2>
