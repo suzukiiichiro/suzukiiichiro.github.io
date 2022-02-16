@@ -12113,17 +12113,17 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/aside></description></item><item><title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</title><link>https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/</link><pubDate>Thu, 13 Jan 2022 11:26:13 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript.jpg" alt="Featured image of post 【２７．mailコマンド】ざっくりわかる「シェルスクリプト」" />&lt;h2 id="mailコマンド">mailコマンド&lt;/h2>
 &lt;p>&lt;font color=orange>&lt;b>メールを送る：&lt;/b>&lt;/font>&lt;br>
 ' mail &amp;lsquo;または ' sendmail &amp;lsquo;コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。&amp;rsquo; mail_example.sh &amp;lsquo;という名前のファイルを作成し、次のコードを追加して電子メールを送信します。&lt;/p>
-&lt;h1 id="mailコマンドインストール">mailコマンドインストール&lt;/h1>
+&lt;h2 id="mailコマンドインストール">mailコマンドインストール&lt;/h2>
 &lt;p>まずはここを参考に&lt;br>
 &lt;a class="link" href="https://qiita.com/TanukiTam/items/abff82573c0f544b3b27" target="_blank" rel="noopener"
 >Macでコマンドからメールを送る Gmail&lt;/a>&lt;/p>
 &lt;p>linuxの場合は&lt;/p>
 &lt;pre tabindex="0">&lt;code>$ yum install mailx
-&lt;/code>&lt;/pre>&lt;h1 id="実際にメールを送ってみます">実際にメールを送ってみます。&lt;/h1>
+&lt;/code>&lt;/pre>&lt;h2 id="実際にメールを送ってみます">実際にメールを送ってみます。&lt;/h2>
 &lt;pre tabindex="0">&lt;code>$ echo &amp;quot;本文&amp;quot; | mail -s &amp;quot;タイトル&amp;quot; -r from@example.com -c cc1@example.com -c cc2@example.com to1@example.com to2@example.com
 &lt;/code>&lt;/pre>&lt;p>恐ろしいほどに簡単ですね。&lt;br>
 おかしな事をかんがえるのはやめましょう。&lt;/p>
-&lt;h1 id="シェルスクリプトでサンプルを作る">シェルスクリプトでサンプルを作る&lt;/h1>
+&lt;h2 id="シェルスクリプトでサンプルを作る">シェルスクリプトでサンプルを作る&lt;/h2>
 &lt;p>&lt;a class="link" href="mailto:admin@sample.com" >admin@sample.com&lt;/a> の部分を自分のメールアドレスに置き換えて実行して下さい。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash:mail_example.sh" data-lang="bash:mail_example.sh">&lt;span class="cp">#!/bin/bash
 &lt;/span>&lt;span class="cp">&lt;/span>
