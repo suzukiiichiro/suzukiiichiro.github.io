@@ -1,7 +1,10 @@
 ---
-title: "GitHub Pagesを使って無料でSSL付きのサイトを公開"
+title: "GitHub Pagesを使って無料でSSL付きのサイトを公開する"
 date: 2021-12-28T12:07:19+09:00
 draft: false
+
+description: "GitHub Pagesを使ってSSL付きのサイトを無料で公開する方法を解説しています。Hugoと連携することですぐにWebサイトを公開することが可能です。"
+
 authors: wyoshi
 image: settings.jpg
 categories:
@@ -9,15 +12,11 @@ categories:
 tags:
   - Hugo
   - GitHub
-  - GitHub Pages
-  - プログラム
   - Designer
-  - 開発
-  - wyoshi
-  - SSL
+  - Develop
 ---
-デザイナーでもできる初めてのHugoの2回目になります。
-[前回（デザイナーでもできる初めてのHugo #01）](/posts/2021-12-21/)はHugoのインストールから公開の方法までを説明しました。
+デザイナーでもできるはじめてのHugoの2回目になります。
+[前回（デザイナーでもできるはじめてのHugo #01）](/posts/2021-12-21/)はHugoのインストールから公開の方法までを説明しました。
 今回は前回作成したページをGitHub Pagesを使って公開してみたいと思います。
 
 ## GitHub Pages用の設定ファイルを作成
@@ -62,8 +61,8 @@ jobs:
           publish_branch: gh-pages
 ```
 
-**name**はGitHubでのActionsに表示される名前になります。
-今回は公開用として**gh-pages**というブランチにわけています。ここおらへんはお好みで設定して下さい。
+**name**はGitHubでのActionsに表示される名前です。
+今回は公開用として**gh-pages**というブランチにわけています。ここおらへんはお好みで設定してください。
 hugoでテーマを使っている場合は**submodules: true**とする必要があります。
 また、Hugoで更新日をGitの日付と合わせたい場合は**fetch-depth: 0**として、Gitの履歴を取得するようにしましょう。
 
@@ -71,8 +70,8 @@ hugoでテーマを使っている場合は**submodules: true**とする必要�
 GitHub PagesのURLは`https://ユーザまたは組織名.github.io/リポジトリ名`となります。
 GitHubでリポジトリを作成する際に「ユーザまたは組織名.github.io」とすると「https://ユーザまたは組織名.github.io」とすることができます。
 
-まずは先程のファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。
-その後に、setings > Pages にでGitHub Pagesの設定を行います。
+まずはさきほどのファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。
+その後に、setings > PagesにでGitHub Pagesの設定を行います。
 
 ![GitHub Pagesの設定](settings.jpg "")
 
@@ -88,15 +87,15 @@ Hugoの初期設定であれば`publishDir: public`となっているので、Gi
 /resources
 ```
 
-最後に設定したURLにアクセスするとサイトが確認できるはずです。
+最後に設定したURLへアクセスするとサイトが確認できると思います。
 
 ## まとめ
 GitHub Pagesを使えば、難しいサーバの設定などをすることなく、無料でSSL付きのサイトを公開することが可能です。
 いくつかの制限はありますが、すごく便利な機能なのでみなさんもぜひ使ってみてはいかがでしょうか。
 
-公開する際はパスワードなどの情報も一緒にアップしないようにしてください。
+公開する際はパスワードなどの情報も一緒にアップしないよう、気をつけてください。
 
-## 書籍の紹介
+## オススメの書籍
 {{% amazon
 
 title="いちばんやさしいGit&GitHubの教本 人気講師が教えるバージョン管理＆共有入門 「いちばんやさしい教本」シリーズ"

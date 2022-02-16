@@ -12,13 +12,9 @@ categories:
 tags:
   - Hugo
   - GitHub
-  - GitHub Pages
-  - プログラム
   - Designer
-  - 開発
-  - wyoshi
+  - Develop
   - Google Analytics
-  - GAS
   - Google App Script
 ---
 簡単にできるHugoで人気の記事を表示する方法の2回目になります。
@@ -214,13 +210,13 @@ Hugoにはjsonを取得する機能がついているので、その機能を使
 ```javascript
 function setMonth() {
   getGoogleAnalytics('month');
-} 
+}
 function setDay() {
   getGoogleAnalytics('day');
-} 
+}
 function setYear() {
   getGoogleAnalytics('year');
-} 
+}
 
 function all() {
   setDay();
@@ -304,7 +300,7 @@ function getGoogleAnalytics(name) {
       ],
       dimensions: [
         {name: 'ga:pagePath'}
-      ], 
+      ],
       orderBys: [{
         fieldName: 'ga:pageviews',
         sortOrder: "DESCENDING",
@@ -323,13 +319,13 @@ function getGoogleAnalytics(name) {
 
 function setMonth() {
   getGoogleAnalytics('month');
-} 
+}
 function setDay() {
   getGoogleAnalytics('day');
-} 
+}
 function setYear() {
   getGoogleAnalytics('year');
-} 
+}
 
 function all() {
   setDay();

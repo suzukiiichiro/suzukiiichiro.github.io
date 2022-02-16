@@ -10,18 +10,15 @@ description: "SVGとCSSのみでマルチデバイスの最新トレンドデザ
 categories:
   - web
 tags:
-  - プログラム
+  - Program
   - Designer
-  - 開発
-  - web
-  - wyoshi
+  - Develop
   - HTML
   - CSS
   - Web designer
   - Front engineer
   - Corder
   - Web Technic
-  - svg
 ---
 **出典元**：[ Building UI Components With SVG and CSS - Ahmad Shadeed ](https://ishadeed.com/article/building-components-svg-css/)
 
@@ -83,7 +80,7 @@ SVGを使用すると、バッジの下の領域をカットすることで、�
 
 次の図を見てください。
 
-![](cut-out-avatar-1-3.png) 
+![](cut-out-avatar-1-3.png)
 
 アバターを含めるためにSVG `<image>`要素を使用しています。バッジ領域を切り取るには、2つの`<circle>`要素を作成する必要があります。1つは白で、もう1つは黒です。
 マスクでは、黒で塗りつぶされた要素はすべて非表示になります、白の要素は表示されます。黒い円は、半径18の右下隅に配置されています。
@@ -106,7 +103,7 @@ SVGを使用すると、バッジの下の領域をカットすることで、�
 - CSSを使用して、タイトルの下に行を作成しました。また、行の最初と最後にある小さな円にも使用。
 - 不要なポジショニングを使用しないように、flexboxを使用してコンポーネントレイアウトを作成。
 
-![](cut-out-avatar-2-2.png) 
+![](cut-out-avatar-2-2.png)
 
 それでは基本的なHTMLとCSSから始めましょう。
 
@@ -208,7 +205,7 @@ SVGを使って、ワクワクするようなカスタムリンクのアンダ�
 
 次の図で、プレビューの前と後を考えてみてください。
 
-![](custom-underline-1-1.png) 
+![](custom-underline-1-1.png)
 
 アイデアは、各リンクにSVGを挿入することであり、次のようになります。
 
@@ -242,7 +239,7 @@ Adobe Illustratorで、テープをレイヤーに分割しました。
 - 透明な白：明るい領域を示します
 
 
-![](svg-tape-1-2.png) 
+![](svg-tape-1-2.png)
 
 SVGコードを見てみましょう。
 
@@ -261,7 +258,7 @@ SVGコードを見てみましょう。
 `currentColor`キーワードは、CSS `color` プロパティから値を継承するため、1つのプロパティのみを使用して色を動的に変更できます。
 単色のベースと、明るい領域と暗い領域に他の2つのレイヤーがあることを考えると、色を変更すると、テープの外観が異なります。
 
-![](svg-tape-1-3.png) 
+![](svg-tape-1-3.png)
 
 さらに良いことに、SVGをテンプレートに変換し、`<use>` SVG要素の助けを借りて、SVGを複製せずにテープを再利用することができます。
 

@@ -10,11 +10,10 @@ description: "第0回「Webデザイナー、コーダーってなに？」に�
 categories:
   - web
 tags:
-  - プログラム
+  - Program
   - Designer
-  - 開発
+  - Develop
   - web
-  - wyoshi
   - HTML
   - CSS
   - Web designer
@@ -152,11 +151,11 @@ UXとは？
 Web界隈やデザイナーに大人気! Web関連の情報やデザインについて記事が学べる『Webクリエイターボックス』の管理人、 Manaによる渾身のHTML & CSSとWebデザインが学べる本です。
 著者は、カナダやオーストラリア、イギリスの企業でWebデザイナーとして働き、現在は全国各地でWeb関連のセミナーに登壇し、Webサイト制作のインストラクターとして教育に携わっている。ブログ「Webクリエイターボックス」は2010年日本のアルファブロガーアワードを受賞。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51xAu2jeqrL.jpg" %}}
 
-{{% amazon title=" これだけで基本がしっかり身につく HTML/CSS&Webデザイン1冊目の本 " url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens-22" summary=` Webサイト制作をこれから学ぶ人へ送る “1冊目"に最適の入門書! 
+{{% amazon title=" これだけで基本がしっかり身につく HTML/CSS&Webデザイン1冊目の本 " url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens-22" summary=` Webサイト制作をこれから学ぶ人へ送る “1冊目"に最適の入門書!
 
-【学びをサポートする4大特典つき】 
+【学びをサポートする4大特典つき】
 
-本書は手を動かしてWebサイトを作りながら HTML/CSSとWebデザインの基本を楽しく学べる入門書です。 
+本書は手を動かしてWebサイトを作りながら HTML/CSSとWebデザインの基本を楽しく学べる入門書です。
 
 初学者が1冊目に読む本としてふさわしい内容を盛り込んでいるため、これを読めば必要な基礎知識がひととおり身につきます。 ` imageUrl="https://images-na.ssl-images-amazon.com/images/I/51iJCT7O+YL.jpg" %}}
 

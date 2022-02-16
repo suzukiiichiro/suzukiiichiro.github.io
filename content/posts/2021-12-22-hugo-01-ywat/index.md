@@ -2,15 +2,17 @@
 title: "デザイナーでもできる初めてのHUGOでのサイト作成 #01"
 date: 2021-12-22T13:07:49+09:00
 draft: false
+
+description: "サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。"
+
 categories:
   - programming
 tags:
-  - hugo
+  - Hugo
   - Mac
   - brew
-  - プログラム
   - Designer
-  - 開発
+  - Develop
 image: 2021-12-22-hugo-01.jpg
 ---
 CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。
@@ -258,8 +260,7 @@ publicDir = 'docs'
 大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。
 みなさんもぜひ、hugoを試してみてください。
 
-
-## 書籍の紹介
+## オススメの書籍
 {{% amazon title=" Hugoで始める静的サイト構築入門　静的サイトジェネレーターで作る自作サイト (技術の泉シリーズ（NextPublishing）) " url="https://www.amazon.co.jp/Hugoで始める静的サイト構築入門-静的サイトジェネレーターで作る自作サイト-技術の泉シリーズ（NextPublishing）-meganii/dp/4844379208/?tag=nlpqueens-22" summary=` 本書は静的サイトジェネレーターの一つであるHugoの解説書です。できるだけ低コストでサイトを運用したい、WordPressなどの各種CMSから移行したい、というケースに合わせて構築方法などを解説します。Hugoを利用してオリジナリティーのあるサイトを自分で構築、管理したい方に向けての一冊です。 ` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51DRDYXF0CL.jpg" %}}
 
 {{% amazon title=" 【特典付き! 】Webサイト高速化のための 静的サイトジェネレーター活用入門 (Compass Booksシリーズ) " url="https://www.amazon.co.jp/【特典付き-】Webサイト高速化のための-静的サイトジェネレーター活用入門-Compass-Booksシリーズ/dp/4839973008/?tag=nlpqueens-22" summary=` GatsbyJSで実現する、高速&実用的なサイト構築 「高速化&最適化」「メタデータ対応」「SPAやPWAへの対応」など、これからのWebサイトに求められる要素に対応するための、静的サイトジェネレーターの活用書。 本書は「GatsbyJS(Gatsby)」を使って、「ReactやJavaScript(ECMAScript)に自信が無くても、実用レベルのWebサイトを構築できるようになる」ことを目標にしています。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51vWxSWEAxL.jpg" %}}

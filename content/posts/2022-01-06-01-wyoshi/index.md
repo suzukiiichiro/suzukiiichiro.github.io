@@ -11,21 +11,17 @@ categories:
 tags:
   - Hugo
   - GitHub
-  - GitHub Pages
-  - プログラム
   - Designer
-  - 開発
-  - wyoshi
+  - Develop
   - Google Analytics
-  - GAS
   - Google App Script
 ---
-Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。
-関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。
+Hugoにはさまざまな機能があり、ブログを作るにはもってこいの静的サイトジェネレーターです。
+関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレーターだと思います。
 
 しかし、1点だけどうしても重要な機能がありません。
 それは人気記事の表示です。
-人気記事を表示させるとなると、データベースを用意したりサーバのアクセスカウントを行う必要があります。
+人気記事を表示させようとすると、データベースを用意したりサーバのアクセスカウントを行う必要があります。
 そんな面倒なことはしたくありませんよね？
 
 今回はHugoでも簡単に人気の記事を表示する方法を紹介いたします。
@@ -40,10 +36,10 @@ Hugoで人気記事を出すために必要なものは、
 
 ## Googleアナリティクスの設定
 Googleアナリティクスをサイトに設定します。
-設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在)
+設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在）
 v4を設定している場合は、同時にv2も設定する必要があります。
 
-「アカウントを作成」「アカウントの設定」をした後に、「 **プロパティの設定** 」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定することができます。
+「アカウントを作成」「アカウントの設定」をした後に、「**プロパティの設定**」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定できます。
 ![ユニバーサル アナリティクス プロパティの作成](setting.png "")
 
 あとはv4とv2のコードをサイトに貼り付けるだけです。
@@ -51,7 +47,7 @@ v4を設定している場合は、同時にv2も設定する必要がありま�
 
 ## スプレッドシートの設定
 次にスプレッドシートを設定します。
-Googleドライブで「新規」「Googleスプレッドシート」でシートを作成します。
+Googleドライブで「新規」「Googleスプレッドシート」を選択してシートを作成します。
 作成したシートに適当な名前をつけます。
 
 その後に、「拡張機能」の「App Script」を押して、GoogleAppScript（GAS）に移動します。
@@ -74,7 +70,7 @@ Googleドライブで「新規」「Googleスプレッドシート」でシー�
 
 今日から1日、1月、1年前なのかという切り替えが可能です。
 - year: 今日から1年間の範囲
-- month: 今日から1ヶ月の範囲
+- month: 今日から1か月の範囲
 - day: 今日から1日の範囲
 
 
@@ -110,7 +106,7 @@ GASとアナリティクスの連携にはビューIDが必要です。
 GASのプログラムにGoogleアナリティクスの「アカウント」「プロパティ」「ビュー」「ビューの設定」にあるビューIDを設定します。
 設定する際は「ga:ビューID」と ```ga:``` を付ける必要があります。
 
-先程のプログラムの下に、下記のプログラムを記述します。
+さきほどのプログラムの下に、下記のプログラムを記述します。
 
 ```javascript
 function getGoogleAnalytics(name) {
@@ -128,7 +124,7 @@ function getGoogleAnalytics(name) {
       ],
       dimensions: [
         {name: 'ga:pagePath'}
-      ], 
+      ],
       orderBys: [{
         fieldName: 'ga:pageviews',
         sortOrder: "DESCENDING",
@@ -147,20 +143,20 @@ function getGoogleAnalytics(name) {
 
 function setMonth() {
   getGoogleAnalytics('month');
-} 
+}
 ```
 
 ここでは、ページのパスをキーとしてページビューとセッション、ユーザー数を集計するようにしています。
 並び順はpageviewsの数の降順です。
 
-必要なデータがあれば各自で編集することをおすすめいたします。
+必要なデータがあれば各自で編集することをオススメいたします。
 
 そして、各項目のラベルを出力するために、
 ```javascript
 rows.unshift(["link", "pv", 'session', 'users']);
 ```
 として、先頭行のデータにラベル行を追加しています。
-この部分も各自のデータに合うようにしてください。
+この部分も各自のデータに合うよう、調整してください。
 
 アナリティクスから取得したデータはスプレッドシートのシート名に紐付けるので、
 ```javascript
@@ -181,7 +177,7 @@ GASとアナリティクスを連携させるために、サービスを読み�
 ![](sheet.png "")
 シートができたら、再度コードエディターに戻ります。
 
-先程のデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。
+さきほどのデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。
 承認を求められるので、「権限を確認」を押します。
 ![](perm1.png "")
 使用するアカウントをクリクで選んで、「詳細」をクリックして、「〜（安全ではないページ）に移動」をクリックします。
@@ -197,7 +193,7 @@ GASとアナリティクスを連携させるために、サービスを読み�
 ```javascript
 function setDay() {
   getGoogleAnalytics('day');
-} 
+}
 function setYear() {
   getGoogleAnalytics('year');
 }
@@ -227,7 +223,7 @@ function getGoogleAnalytics(name) {
   const response = AnalyticsReporting.Reports.batchGet({
     reportRequests: [{
       viewId: id,
-      dateRanges: [{startDate:date.start,endDate: date.end}], 
+      dateRanges: [{startDate:date.start,endDate: date.end}],
       samplingLevel: 'LARGE',
       metrics: [
         {expression: 'ga:pageviews'},
@@ -236,7 +232,7 @@ function getGoogleAnalytics(name) {
       ],
       dimensions: [
         {name: 'ga:pagePath'}
-      ], 
+      ],
       orderBys: [{
         fieldName: 'ga:pageviews',
         sortOrder: "DESCENDING",

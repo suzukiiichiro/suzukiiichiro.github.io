@@ -10,7 +10,6 @@ categories:
 tags:
   - Hugo
   - Web
-  - web
   - wyoshi
 # ファイル名を変える場合
 # slug: "example-post"

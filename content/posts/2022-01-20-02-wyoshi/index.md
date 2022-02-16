@@ -10,11 +10,10 @@ image: catch.jpg
 categories:
   - web
 tags:
-  - プログラム
+  - Program
   - Designer
-  - 開発
+  - Develop
   - web
-  - wyoshi
   - HTML
   - CSS
   - Web designer

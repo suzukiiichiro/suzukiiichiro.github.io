@@ -8,10 +8,8 @@ description: "overflow: scroll で後ろの要素がスクロールすること�
 categories:
   - web
 tags:
-  - プログラム
   - Designer
-  - 開発
-  - wyoshi
+  - Develop
   - HTML
   - CSS
   - Web designer
@@ -38,7 +36,7 @@ tags:
 
 
 ## 無理やり対応する
-以前は、Javascriptを介してbody要素に`overflow: hidden`を適用することでこれを修正していました。モーダルが開かれると、オーバーフローの適用を担当するクラスが本体に追加されます。
+以前は、javascriptを介してbody要素に`overflow: hidden`を適用することでこれを修正していました。モーダルが開かれると、オーバーフローの適用を担当するクラスが本体に追加されます。
 
 ```css
 body.modal-open {
@@ -99,7 +97,7 @@ body.modal-open {
 デフォルト値は `auto` で、これによりスクロールチェーンが可能になります。スクロール要素があり、その境界に達すると、ブラウザは`<body>`コンテンツをスクロールし続けます。
 
 
-![](overscroll-behaviour-auto.jpg) 
+![](overscroll-behaviour-auto.jpg)
 
 {{< video autoplay="false" src="overscroll-auto.mp4" >}}
 
@@ -112,7 +110,7 @@ body.modal-open {
 
 
 ### overscroll-behavior: none
-`none` を設定すると、 `contains` と同様の効果があり、 **さらに** ページの上部または下部に達したときのバウンス効果を防ぎます。
+`none`を設定すると、 `contains` と同様の効果があり、 **さらに** ページの上部または下部に達したときのバウンス効果を防ぎます。
 
 
 ## ユースケースと例
@@ -137,7 +135,7 @@ body.modal-open {
 {{< video autoplay="false" src="mobile-nav.mp4" >}}
 
 
-ナビゲーションの下に表示される半透明の背景を追加しました。 `overscroll-behavior-y`プロパティをオフに切り替えたときの動作に注意してください。 
+ナビゲーションの下に表示される半透明の背景を追加しました。 `overscroll-behavior-y`プロパティをオフに切り替えたときの動作に注意してください。
 
 オフに切り替えると、ボディスクロールが発生します。
 
@@ -165,7 +163,7 @@ body.modal-open {
 ### チャットコンポーネント
 ![](use-case-3.jpg)
 
-Facebookに触発されたチャットコンポーネントは、 `overscroll-behavior` の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにすることができます。
+Facebookに触発されたチャットコンポーネントは、 `overscroll-behavior` の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにできます。
 
 ```css
 .aside {
@@ -208,7 +206,7 @@ Facebookのホームページでこのユースケースを見つけました。
 CSS `overscroll-behavior` は、何年も前に無理やり対応していた問題を解決する便利なプロパティです。
 
 
-## おすすめ書籍
+## オススメの書籍
 {{% amazon
 title=" ざっくりつかむ　CSS設計[リフロー版] "
 url="https://www.amazon.co.jp/ざっくりつかむ-CSS設計-リフロー版-高津戸-壮-ebook/dp/B09NKTJL73/?tag=nlpqueens-22"

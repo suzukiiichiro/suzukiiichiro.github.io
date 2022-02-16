@@ -11,11 +11,10 @@ description: "わずか数行のコードでCSSで洗練されたデザインを
 categories:
   - web
 tags:
-  - プログラム
+  - Program
   - Designer
-  - 開発
+  - Develop
   - web
-  - wyoshi
   - HTML
   - CSS
   - Web designer
@@ -71,7 +70,7 @@ height、width、およびobject-fitプロパティを使用して、divコン�
   <img class="random-image" src="画像ファイル" />
 ```
 ```css
-.random-image { 
+.random-image {
   eight: 100%;
   width: 100%;
   object-fit: contain;
@@ -196,7 +195,7 @@ body {
   position: absolute;
   z-index: 1;
   top: -5px;
-  left: 105%; 
+  left: 105%;
 }
 .tooltip_div:hover .tooltip {
   visibility: visible;
@@ -220,7 +219,7 @@ body {
 }
 .tooltip_div .tooltip {
   visibility: hidden;
-  width: 170px; 
+  width: 170px;
   background-color: blue;
   color: #fff;
   text-align: center;
@@ -254,7 +253,7 @@ body {
 }
 .tooltip_div .tooltip {
   visibility: hidden;
-  width: 170px; 
+  width: 170px;
   background-color: blue;
   color: #fff;
   text-align: center;
@@ -289,7 +288,7 @@ body {
 }
 .tooltip_div .tooltip {
   visibility: hidden;
-  width: 170px; 
+  width: 170px;
   background-color: blue;
   color: #fff;
   text-align: center;
@@ -346,7 +345,7 @@ box-shadowの構文は下記になります。
 box-shadow: [横方向のオフセット] [縦方向のオフセット] [ぼかしの量] [影の広がり（オプション）] [色];
 ```
 
-ぼかし、広がり、色のパラメーターはオプションです。 
+ぼかし、広がり、色のパラメーターはオプションです。
 実際の記述は次のようになります。
 
 ```css
@@ -360,11 +359,11 @@ WebサイトにCSSのテキストシャドウを追加することは、ユー�
 
 ## まとめ
 いかがだったでしょうか。いままでJSを使ってやっていたことが実はCSSでも可能になっているケースが多いです。
-Javascript記述するよりも、cssのほうが軽量です。
+javascript記述するよりも、cssのほうが軽量です。
 ぜひ皆さんのサイトにも導入してUI、UXの向上につなげてみてください。
 
 
-## おすすめの書籍
+## オススメの書籍
 
 {{% amazon title=" HTML5 & CSS3 デザインレシピ集 " url="https://www.amazon.co.jp/HTML5-CSS3-デザインレシピ集-狩野-祐東/dp/4774187801/?tag=nlpqueens-22" summary=` 本書は、HTML5とCSS3によるWebサイト制作のための"おいしい"レシピ集です。 制作の現場で使われる定番テクニックから、プロ技まで余すところなく集めました。 テキスト/リスト/リンク/画像/ボックス/ テーブル/フォーム/ナビゲーション/ レイアウト/レスポンシブWebデザイン… テーマ別にレシピを整理しているので、引きやすくなっています。 「あのデザインはどう作るんだろう?」が、スグにわかります。 デザイナーからWebプログラマーまで、Web制作に携わるすべての方にお届けします。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51Xd7nz7WbL.jpg" %}}
 

@@ -12,10 +12,8 @@ image: catch.jpg
 categories:
   - web
 tags:
-  - プログラム
   - Designer
-  - 開発
-  - web
+  - Develop
   - wyoshi
   - HTML
   - CSS
@@ -70,7 +68,7 @@ mediaTypes:
 ```yaml
 mediaTypes:
     application/rss+xml:
-        suffixes: 
+        suffixes:
           - xml
           - rss
 ```
