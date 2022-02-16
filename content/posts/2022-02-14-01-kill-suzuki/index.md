@@ -120,7 +120,7 @@ bash-5.1$ ps axu | grep hugo | grep -v grep | awk '{ print $2; }' | xargs kill -
 $ killall hugo
 ```
 
-# 書籍の紹介
+## 書籍の紹介
 
 {{% amazon
 

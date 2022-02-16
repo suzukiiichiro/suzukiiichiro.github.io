@@ -83,7 +83,7 @@ $ cat filename1 filname2 >> filename3
 {{% /tips-list %}}
 
 
-# 書籍の紹介
+## 書籍の紹介
 
 {{% amazon
 

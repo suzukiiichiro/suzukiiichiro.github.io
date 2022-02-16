@@ -111,7 +111,7 @@ $ IFSBK=${IFS} ; IFS=$'\n' ; for record in $(cat /var/log/messages ) ; do if [ $
 
 
 
-# 書籍の紹介
+## 書籍の紹介
 
 {{% amazon
 

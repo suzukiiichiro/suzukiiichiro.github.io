@@ -106,7 +106,7 @@ $ cat filename | less -S
 {{% /tips-list %}}
 
 
-# 書籍の紹介
+## 書籍の紹介
 
 {{% amazon
 

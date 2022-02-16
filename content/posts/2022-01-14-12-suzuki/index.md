@@ -67,7 +67,7 @@ bash$ bash case_example.sh
 
 
 
-# 書籍の紹介
+## 書籍の紹介
 
 {{% amazon
 
