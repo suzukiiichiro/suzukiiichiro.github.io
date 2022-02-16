@@ -5,7 +5,7 @@
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
 <meta name=description content="「簡単にできるHugoで人気の記事を表示する方法」の第2回です。スプレッドシートからデータを取得して、PVランキングをHugoと連携する方法を解説します">
-<meta name=keywords content="Hugo,GitHub,GitHub Pages,プログラム,Designer,開発,wyoshi,Google Analytics,GAS,Google App Script,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<meta name=keywords content="Hugo,GitHub,Designer,Develop,Google Analytics,Google App Script,Webデザイン,Webサイト開発,bash,CSS,サーバ">
 <title>GASとアナリティクスで、Hugoに人気記事を表示させる｜NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
@@ -16,14 +16,14 @@
 <meta property="og:description" content="「簡単にできるHugoで人気の記事を表示する方法」の第2回です。スプレッドシートからデータを取得して、PVランキングをHugoと連携する方法を解説します">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="GitHub Pages"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="Designer"><meta property="article:tag" content="開発"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="Google Analytics"><meta property="article:tag" content="GAS"><meta property="article:tag" content="Google App Script"><meta property="article:published_time" content="2022-01-07T11:54:15+09:00"><meta property="article:modified_time" content="2022-02-15T17:31:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="Designer"><meta property="article:tag" content="Develop"><meta property="article:tag" content="Google Analytics"><meta property="article:tag" content="Google App Script"><meta property="article:published_time" content="2022-01-07T11:54:15+09:00"><meta property="article:modified_time" content="2022-02-16T12:40:42+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg">
 <meta name=twitter:title content="GASとアナリティクスで、Hugoに人気記事を表示させる｜NLP">
 <meta name=twitter:description content="「簡単にできるHugoで人気の記事を表示する方法」の第2回です。スプレッドシートからデータを取得して、PVランキングをHugoと連携する方法を解説します"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-07-01-wyoshi/analytics.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"GASとアナリティクスで、Hugoに人気記事を表示させる","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg"],"datePublished":"2022-01-07T11:54:15+09:00","dateModified":"2022-02-15T17:31:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"GASとアナリティクスで、Hugoに人気記事を表示させる","item":"https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"GASとアナリティクスで、Hugoに人気記事を表示させる","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics.jpg"],"datePublished":"2022-01-07T11:54:15+09:00","dateModified":"2022-02-16T12:40:42+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"GASとアナリティクスで、Hugoに人気記事を表示させる","item":"https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -114,7 +114,7 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2022.01.07</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.15
+2022.02.16
 </time>
 <time class="article-time--item article-time--reading">
 読了時間: 10分
@@ -334,13 +334,13 @@ Hugoにはjsonを取得する機能がついているので、その機能を使
 今の設定だと人気の記事が更新されないので、GASの「トリガー」を使って定期的にアナリティクスのデータをjsonに反映するようにしておきます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 <span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 <span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 
 <span class=kd>function</span> <span class=nx>all</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>setDay</span><span class=p>();</span>
@@ -427,7 +427,7 @@ Hugoにはjsonを取得する機能がついているので、その機能を使
       <span class=p>],</span>
       <span class=nx>dimensions</span><span class=o>:</span> <span class=p>[</span>
         <span class=p>{</span><span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;ga:pagePath&#39;</span><span class=p>}</span>
-      <span class=p>],</span> 
+      <span class=p>],</span>
       <span class=nx>orderBys</span><span class=o>:</span> <span class=p>[{</span>
         <span class=nx>fieldName</span><span class=o>:</span> <span class=s1>&#39;ga:pageviews&#39;</span><span class=p>,</span>
         <span class=nx>sortOrder</span><span class=o>:</span> <span class=s2>&#34;DESCENDING&#34;</span><span class=p>,</span>
@@ -446,13 +446,13 @@ Hugoにはjsonを取得する機能がついているので、その機能を使
 
 <span class=kd>function</span> <span class=nx>setMonth</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;month&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 <span class=kd>function</span> <span class=nx>setDay</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;day&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 <span class=kd>function</span> <span class=nx>setYear</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>getGoogleAnalytics</span><span class=p>(</span><span class=s1>&#39;year&#39;</span><span class=p>);</span>
-<span class=p>}</span> 
+<span class=p>}</span>
 
 <span class=kd>function</span> <span class=nx>all</span><span class=p>()</span> <span class=p>{</span>
   <span class=nx>setDay</span><span class=p>();</span>
@@ -531,7 +531,30 @@ Web開発
 <div class=article-details>
 <h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法を詳しく解説</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.06</time>
-</div><p class=article-subtitle>データベースもサーバーも不要。Hugoでも簡単に人気の記事を表示する方法を紹介いたします。あなたのサイトにもPVランキングを簡単に設置できます。 Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。 関連記事も取得できて、検索機能もある「至れり尽くせり」…</p>
+</div><p class=article-subtitle>データベースもサーバーも不要。Hugoでも簡単に人気の記事を表示する方法を紹介いたします。あなたのサイトにもPVランキングを簡単に設置できます。 Hugoにはさまざまな機能があり、ブログを作るにはもってこいの静的サイトジェネレーターです。 関連記事も取得できて、検索機能もある「至れり尽く…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.28>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=123>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=62>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" width=200 height=123 loading=lazy alt="GitHub Pagesを使って無料でSSL付きのサイトを公開する">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開する</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.28</time>
+</div><p class=article-subtitle>GitHub Pagesを使ってSSL付きのサイトを無料で公開する方法を解説しています。Hugoと連携することですぐにWebサイトを公開することが可能です。 デザイナーでもできるはじめてのHugoの2回目になります。 前回（デザイナーでもできるはじめてのHugo #01）はHugoのインストールから公…</p>
 </div>
 </a>
 </article>
@@ -558,14 +581,14 @@ Web開発
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2021.12.28>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=123>
-<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=62>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" width=200 height=123 loading=lazy alt="GitHub Pagesを使って無料でSSL付きのサイトを公開">
+<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説>
 </picture>
 </div>
 <div class=article-category>
@@ -575,9 +598,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.28</time>
-</div><p class=article-subtitle>デザイナーでもできる初めてのHugoの2回目になります。 前回（デザイナーでもできる初めてのHugo #01）はHugoのインストールから公…</p>
+<h2 class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p>
 </div>
 </a>
 </article>
@@ -627,14 +650,14 @@ Web開発
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.01.26>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=150>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=75>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_huca2437bae218f92182b398b39750fa47_117863_400x0_resize_q75_box.jpg 2x" width=200 height=150 loading=lazy alt=SVGとCSSでおしゃれでクールな最新のデザインにする>
 </picture>
 </div>
 <div class=article-category>
@@ -644,20 +667,20 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.26</time>
-</div><p class=article-subtitle>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p>
+<h2 class=article-title>SVGとCSSでおしゃれでクールな最新のデザインにする</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>SVGとCSSのみでマルチデバイスの最新トレンドデザインを実装。マスク処理も可能で時間と労力を節約できて、サイトのパフォーマンスも向上します。 出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS…</p>
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.02.04>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=122>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=61>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_400x0_resize_q75_box.jpg 2x" width=200 height=122 loading=lazy alt=Googleにインデックスされないときの対応方法は？>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=135>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=68>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua4378086a6141903b68a22e47c9014eb_24823_400x0_resize_q75_box.jpg 2x" width=200 height=135 loading=lazy alt=2022年のWebデザインの最新トレンドとレイアウト>
 </picture>
 </div>
 <div class=article-category>
@@ -667,32 +690,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.04</time>
-</div><p class=article-subtitle>Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事が検索結果に表示されないとき、どうしたら良いのでしょうか？ 近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.01>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch_hu76eecea6b0108d716a0248cfde205ca5_73592_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt=Javascriptで画面ロックする場合は、Workerを使ってみよう>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>Javascriptで画面ロックする場合は、Workerを使ってみよう</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.01</time>
-</div><p class=article-subtitle>UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。 Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。 特に重い処理を行うと、js の処理に力を使って…</p>
+<h2 class=article-title>2022年のWebデザインの最新トレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年に期待されるトレンドは？クリエイターは、より「良い」ウェブデザインとされるものの境界を押し広げています。最新トレンドを取り入れましょう。 出典元：Web design trends for 2022 | Layout この2年間で学んだことは、私たちは常に新しいものに適応し続けなければならないということです。2022年に向けて、デ…</p>
 </div>
 </a>
 </article>

@@ -4,8 +4,8 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。">
-<meta name=keywords content="hugo,Mac,brew,プログラム,Designer,開発,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<meta name=description content="サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。">
+<meta name=keywords content="Hugo,Mac,brew,Designer,Develop,Webデザイン,Webサイト開発,bash,CSS,サーバ">
 <title>デザイナーでもできる初めてのHUGOでのサイト作成 #01｜NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
@@ -13,17 +13,17 @@
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
 <meta property="og:title" content="デザイナーでもできる初めてのHUGOでのサイト作成 #01｜NLP">
-<meta property="og:description" content="CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。">
+<meta property="og:description" content="サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="Designer"><meta property="article:tag" content="開発"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2022-02-15T17:31:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="Mac"><meta property="article:tag" content="brew"><meta property="article:tag" content="Designer"><meta property="article:tag" content="Develop"><meta property="article:published_time" content="2021-12-22T13:07:49+09:00"><meta property="article:modified_time" content="2022-02-16T12:40:42+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg">
 <meta name=twitter:title content="デザイナーでもできる初めてのHUGOでのサイト作成 #01｜NLP">
-<meta name=twitter:description content="CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"デザイナーでもできる初めてのHUGOでのサイト作成 #01","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg"],"datePublished":"2021-12-22T13:07:49+09:00","dateModified":"2022-02-15T17:31:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"デザイナーでもできる初めてのHUGOでのサイト作成 #01","item":"https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"デザイナーでもできる初めてのHUGOでのサイト作成 #01","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01.jpg"],"datePublished":"2021-12-22T13:07:49+09:00","dateModified":"2022-02-16T12:40:42+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"デザイナーでもできる初めてのHUGOでのサイト作成 #01","item":"https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -114,7 +114,7 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2021.12.22</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.15
+2022.02.16
 </time>
 <time class="article-time--item article-time--reading">
 読了時間: 9分
@@ -162,7 +162,7 @@ Web開発
 <li><a href=#確認>確認</a></li>
 <li><a href=#公開>公開</a></li>
 <li><a href=#終わりに>終わりに</a></li>
-<li><a href=#書籍の紹介>書籍の紹介</a></li>
+<li><a href=#オススメの書籍>オススメの書籍</a></li>
 </ol>
 </nav>
 </div>
@@ -361,7 +361,7 @@ configの<em>publicDir</em>に任意のディレクトリを設定すること�
 <p>駆け足でしたが、hugoの簡単な使い方になります。<br>
 大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。<br>
 みなさんもぜひ、hugoを試してみてください。</p>
-<h2 id=書籍の紹介>書籍の紹介</h2>
+<h2 id=オススメの書籍>オススメの書籍</h2>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/Hugo%e3%81%a7%e5%a7%8b%e3%82%81%e3%82%8b%e9%9d%99%e7%9a%84%e3%82%b5%e3%82%a4%e3%83%88%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e9%9d%99%e7%9a%84%e3%82%b5%e3%82%a4%e3%83%88%e3%82%b8%e3%82%a7%e3%83%8d%e3%83%ac%e3%83%bc%e3%82%bf%e3%83%bc%e3%81%a7%e4%bd%9c%e3%82%8b%e8%87%aa%e4%bd%9c%e3%82%b5%e3%82%a4%e3%83%88-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-meganii/dp/4844379208/?tag=nlpqueens-22" target=_blank>
 <div class="columns amazon-image">
@@ -407,14 +407,106 @@ configの<em>publicDir</em>に任意のディレクトリを設定すること�
 <section class="section related-contents--wrapper">
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
-<article class="has-image article-item" data-date=2021.12.22>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<article class="has-image article-item" data-date=2022.01.26>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=150>
-<source src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=75>
-<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_400x0_resize_q75_box.jpg 2x" width=200 height=150 loading=lazy alt="hugoで[failed to unmarshal YAML]エラーが出た場合の対処法">
+<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.26</time>
+</div><p class=article-subtitle>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.07>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=122>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=61>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-07-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_400x0_resize_q75_box.jpg 2x" width=200 height=122 loading=lazy alt=GASとアナリティクスで、Hugoに人気記事を表示させる>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>GASとアナリティクスで、Hugoに人気記事を表示させる</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.07</time>
+</div><p class=article-subtitle>「簡単にできるHugoで人気の記事を表示する方法」の第2回です。スプレッドシートからデータを取得して、PVランキングをHugoと連携する方法を解説します 簡単にできるHugoで人気の記事を表示する方法の2回目になります。 前回（簡単にできるHugoで人気の記事を表示する方法 #01）ではGAS（G…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.06>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=122>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=61>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics_huc3037b2e6dc6703167c8466692625b0d_86753_400x0_resize_q75_box.jpg 2x" width=200 height=122 loading=lazy alt=簡単にできるHugoで人気の記事を表示する方法を詳しく解説>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>簡単にできるHugoで人気の記事を表示する方法を詳しく解説</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.06</time>
+</div><p class=article-subtitle>データベースもサーバーも不要。Hugoでも簡単に人気の記事を表示する方法を紹介いたします。あなたのサイトにもPVランキングを簡単に設置できます。 Hugoにはさまざまな機能があり、ブログを作るにはもってこいの静的サイトジェネレーターです。 関連記事も取得できて、検索機能もある「至れり尽く…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.28>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=123>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=62>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings_hub5e89b620d2afe5c10cf3894738f1203_124480_400x0_resize_q75_box.jpg 2x" width=200 height=123 loading=lazy alt="GitHub Pagesを使って無料でSSL付きのサイトを公開する">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>GitHub Pagesを使って無料でSSL付きのサイトを公開する</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.28</time>
+</div><p class=article-subtitle>GitHub Pagesを使ってSSL付きのサイトを無料で公開する方法を解説しています。Hugoと連携することですぐにWebサイトを公開することが可能です。 デザイナーでもできるはじめてのHugoの2回目になります。 前回（デザイナーでもできるはじめてのHugo #01）はHugoのインストールから公…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2021.12.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=135>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_400x0_resize_q75_box.jpg 2x" width=200 height=135 loading=lazy alt=SCSS/CSSを含んだファイルがGitHubActionsでビルドできない>
 </picture>
 </div>
 <div class=article-category>
@@ -424,9 +516,9 @@ configの<em>publicDir</em>に任意のディレクトリを設定すること�
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>hugoで[failed to unmarshal YAML]エラーが出た場合の対処法</h2><div class=article-time>
-<time class="article-time--item article-time--published">2021.12.22</time>
-</div><p class=article-subtitle>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について hugo new ファイル名 で…</p>
+<h2 class=article-title>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.24</time>
+</div><p class=article-subtitle>Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。 scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。 GitHub Pagesで公開しているHug…</p>
 </div>
 </a>
 </article>
@@ -454,36 +546,36 @@ configの<em>publicDir</em>に任意のディレクトリを設定すること�
 </a>
 </article>
 <article class="has-image article-item" data-date=2022.02.14>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_400x0_resize_box_3.png 2x" media="(min-width: 769px)" width=200 height=101>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_100x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_100x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 2x" media="(max-width: 768px)" width=100 height=51>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hucb5745616e2c5856e2bfbd37ec1987bb_43894_400x0_resize_box_3.png 2x" width=200 height=101 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成>
+<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=257>
+<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=129>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_400x0_resize_q75_box.jpg 2x" width=200 height=257 loading=lazy alt=（７）【kill】シェルスクリプトコマンド活用紹介>
 </picture>
 </div>
 <div class=article-category>
 <span class=article-category-item>
-Web開発
+プログラミング
 </span>
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</h2><div class=article-time>
+<h2 class=article-title>（７）【kill】シェルスクリプトコマンド活用紹介</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.14</time>
-</div><p class=article-subtitle>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU…</p>
+</div><p class=article-subtitle>プロセスを強制終了させます。killは実行中のプロセスを終了させる場合に使うコマンドです。 killコマンド killコマンドでプロセスIDを指定してプロセスを終了させる killallコマンドで名前を指定してプロセスを終了させる kil…</p>
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.02.09>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/>
+<article class="has-image article-item" data-date=2022.02.13>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/>
 <header class=article-header>
 <div class=article-image>
 <picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="第6回 pythonでNQueen（エイトクイーン）バックトラック（２）">
+<source src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=257>
+<source src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=129>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_400x0_resize_q75_box.jpg 2x" width=200 height=257 loading=lazy alt=（6）【less】シェルスクリプトコマンド活用紹介>
 </picture>
 </div>
 <div class=article-category>
@@ -493,101 +585,9 @@ Web開発
 </div>
 </header>
 <div class=article-details>
-<h2 class=article-title>第6回 pythonでNQueen（エイトクイーン）バックトラック（２）</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.09</time>
-</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第6回目。今回はバックトラックについて説明します。解を出すmainメソッドなどプログラムの概要を説明します。 mainメソッド概要 今回は前回から引き続きバックトラックを説明していきたいと思います。 プログラムソースは以下のURLにあります。 https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py 429-4…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.07>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-02-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="第5回 pythonでNQueen（エイトクイーン）バックトラック（１）">
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>第5回 pythonでNQueen（エイトクイーン）バックトラック（１）</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.07</time>
-</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第5回目。今回はバックトラックについて説明します。 バックトラック 今回はバックトラックを説明していきたいと思います。 今回のバックトラックのロジックは前回の配置フラグの拡張版です。 配置フラグは上…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.07>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=SEO対策にXMLの更新日（lastmod）を正しく表示する方法>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>SEO対策にXMLの更新日（lastmod）を正しく表示する方法</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.07</time>
-</div><p class=article-subtitle>SEO対策必見。Hugoのサイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決 方法を詳細に説明しています。 Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.04>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=122>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=61>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/catch_huef76518ee7cf864704fb7239ce854747_84707_400x0_resize_q75_box.jpg 2x" width=200 height=122 loading=lazy alt=Googleにインデックスされないときの対応方法は？>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>Googleにインデックスされないときの対応方法は？</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.04</time>
-</div><p class=article-subtitle>Googleにインデックスされるというのは非常に重大なことです。せっかく書いた記事が検索結果に表示されないとき、どうしたら良いのでしょうか？ 近年、ブログやWEBサイトを作って公開している人が増えてきました。 そうした中で、Googleにインデックスされるというのは非常に重大なことで…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.04>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-04-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="第4回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）">
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>第4回 pythonでNQueen（エイトクイーン）配置フラグ（制約テスト高速化）（２）</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.04</time>
-</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第4回目。今回は配置フラグ（制約テスト高速化）について図で示しながら詳細な動きを説明します。再帰とfor文が絡み合っている時にどうやって動くのかを中心に説明します。 配置フラグ（制約テスト高速化） 今回も引き続き配置フラグ（制約テスト高速化）を説明していきたいと思います。 前回はプログラムの概要を説明しました…</p>
+<h2 class=article-title>（6）【less】シェルスクリプトコマンド活用紹介</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.13</time>
+</div><p class=article-subtitle>メッセージやテキストファイルを1画面ずつ表示する lessコマンド テキストを1画面ずつ表示する キー操作のヘルプを表示する 長い行を折り返さずに表示する ファイルの末尾まで表示したらすぐに終了する…</p>
 </div>
 </a>
 </article>

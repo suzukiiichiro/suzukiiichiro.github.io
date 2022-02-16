@@ -9404,9 +9404,9 @@ Bottom Tooltip
 &lt;p>WebサイトにCSSのテキストシャドウを追加することは、ユーザーの注意を引くのに最適な方法です。Webサイトにある種のエレガンスとユニークな雰囲気を与えることができます。あなたのサイトのテーマに合うようなテキストシャドウの例を、創造力を働かせて試してみてください。&lt;/p>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>いかがだったでしょうか。いままでJSを使ってやっていたことが実はCSSでも可能になっているケースが多いです。&lt;br>
-Javascript記述するよりも、cssのほうが軽量です。&lt;br>
+javascript記述するよりも、cssのほうが軽量です。&lt;br>
 ぜひ皆さんのサイトにも導入してUI、UXの向上につなげてみてください。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/HTML5-CSS3-%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%ac%e3%82%b7%e3%83%94%e9%9b%86-%e7%8b%a9%e9%87%8e-%e7%a5%90%e6%9d%b1/dp/4774187801/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
@@ -9537,9 +9537,9 @@ alt="検索結果"
 &lt;/figure>&lt;/p></description></item><item><title>ファビコンは1サイズのみ！さらにダークモード対応させる</title><link>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</link><pubDate>Tue, 18 Jan 2022 17:17:37 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch.jpg" alt="Featured image of post ファビコンは1サイズのみ！さらにダークモード対応させる" />&lt;p>最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりました。&lt;/p>
 &lt;p>今回はWebサイトの中でファビコンを1サイズで用意して、さらにそのファビコンをダークモードに対応させてみたいと思います。&lt;/p>
 &lt;h2 id="ダークモードって何">ダークモードって何？&lt;/h2>
-&lt;p>ダークモードとは画面の色を反転して表示するスマホやタブレットに追加された機能になります。&lt;br>
+&lt;p>ダークモードとは画面の色を反転して表示するスマホやタブレットに追加された機能となります。&lt;br>
 iPhoneやiPadなどが先行iOS13のリリースの際に実装しました。&lt;br>
-例えば、一般的なアプリの背景は白だったかと思いますが、ダークモードをオンにしているときは背景の色が暗めの配色となり、文字色が反対に明るめの配色になったりします。&lt;br>
+たとえば、一般的なアプリの背景は白だったかと思いますが、ダークモードをオンにしているときは背景の色が暗めの配色となり、文字色が反対に明るめの配色になったりします。&lt;br>
 この機能は光が抑えられるため、目に優しかったりすると言われてます。さらに、画面の発光を抑えられるため、バッテリーの持ちも良くなるとのことでした。&lt;/p>
 &lt;p>このダークモード機能がMacやWindowsなどのパソコンでも使用可能となり、それに伴ってブラウザでも使えるようになりました。&lt;/p>
 &lt;h3 id="webサイトをダークモードに対応">WEBサイトをダークモードに対応&lt;/h3>
@@ -9577,7 +9577,7 @@ iPhoneやiPadなどが先行iOS13のリリースの際に実装しました。&l
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>head部分に上記の&lt;code>link&lt;/code>タグを記述します。hrefの部分は適宜変更してください。&lt;br>
 これでファビコンをSVG化することができました。&lt;/p>
 &lt;h3 id="ファビコンをダークモードに対応させる">ファビコンをダークモードに対応させる&lt;/h3>
-&lt;p>ダークモードに対応させるためにはもうひと工夫必要です。先程作成したファイルを開いて、CSSのスタイルを追加します。&lt;br>
+&lt;p>ダークモードに対応させるためにはもうひと工夫必要です。さきほど作成したファイルを開いて、CSSのスタイルを追加します。&lt;br>
 Illustratorで色を塗っていた場合、styleタグに色情報が記述されているかと思います。&lt;br>
 そこに、&lt;code>@media (prefers-color-scheme: dark)&lt;/code> でダークモードの際の色を指定します。&lt;br>
 &lt;code>fill&lt;/code>はSVGの塗りつぶしを意味してます。&lt;/p>
@@ -9590,11 +9590,11 @@ Illustratorで色を塗っていた場合、styleタグに色情報が記述さ�
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>これでfaviconもダークモード対応できました。&lt;br>
 実際にブウラウザでアクセスして、ダークモードを切り替えると確認できるかと思います。&lt;/p>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>今まで大量のfaviconを用意して、metaタグに記述していましたが、モダンブラウザになると、SVGファイル1つで様々なサイズに対応可能です。しかも画質がきれいなので、高画素端末で見ても安心です。&lt;br>
+&lt;p>今まで大量のfaviconを用意して、metaタグに記述していましたが、モダンブラウザになると、SVGファイル1つでさまざまなサイズに対応可能です。しかも画質がきれいなので、高画素端末で見ても安心です。&lt;br>
 さらに、SVGファイルのファビコンであればファイル自体にcssのスタイルを記述できるので、&lt;code>@media (prefers-color-scheme: dark)&lt;/code> を使ってダークモードに対応することもできます。&lt;br>
 こうした小さなUI、UXの改善がウェブサイトの大きな改善につながるのではないかと思います。&lt;br>
 みなさんも、ぜひダークモードに対応したおしゃれなファビコンを設置してみませんか？&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e3%83%96%e3%83%a9%e3%83%b3%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8-%e8%a5%bf%e6%be%a4-%e6%98%8e%e6%b4%8b/dp/4756252524/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
@@ -10047,7 +10047,7 @@ alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - �
 &lt;/figure>&lt;/p>
 &lt;p>多くの場合、この動作は不要であり、ユーザーがモーダルコンテンツに集中できなくなる可能性があります。上の図では、モーダルの最後に到達したときに、ページがスクロールし続けていることに注目してください。&lt;/p>
 &lt;h2 id="無理やり対応する">無理やり対応する&lt;/h2>
-&lt;p>以前は、Javascriptを介してbody要素に&lt;code>overflow: hidden&lt;/code>を適用することでこれを修正していました。モーダルが開かれると、オーバーフローの適用を担当するクラスが本体に追加されます。&lt;/p>
+&lt;p>以前は、javascriptを介してbody要素に&lt;code>overflow: hidden&lt;/code>を適用することでこれを修正していました。モーダルが開かれると、オーバーフローの適用を担当するクラスが本体に追加されます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="nt">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">modal-open&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">overflow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">hidden&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -10145,7 +10145,7 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;/video>
 &lt;/div>
 &lt;h3 id="overscroll-behavior-none">overscroll-behavior: none&lt;/h3>
-&lt;p>&lt;code>none&lt;/code> を設定すると、 &lt;code>contains&lt;/code> と同様の効果があり、 &lt;strong>さらに&lt;/strong> ページの上部または下部に達したときのバウンス効果を防ぎます。&lt;/p>
+&lt;p>&lt;code>none&lt;/code>を設定すると、 &lt;code>contains&lt;/code> と同様の効果があり、 &lt;strong>さらに&lt;/strong> ページの上部または下部に達したときのバウンス効果を防ぎます。&lt;/p>
 &lt;h2 id="ユースケースと例">ユースケースと例&lt;/h2>
 &lt;p>&lt;code>overscroll-behavior&lt;/code> がどのように機能するかがわかったところで、いくつかの便利なユースケースを見てみましょう。&lt;/p>
 &lt;h3 id="モバイルナビゲーション">モバイルナビゲーション&lt;/h3>
@@ -10241,7 +10241,7 @@ alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - �
 &lt;/a>
 &lt;/a>
 &lt;/figure>&lt;/p>
-&lt;p>Facebookに触発されたチャットコンポーネントは、 &lt;code>overscroll-behavior&lt;/code> の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにすることができます。&lt;/p>
+&lt;p>Facebookに触発されたチャットコンポーネントは、 &lt;code>overscroll-behavior&lt;/code> の完璧なユースケースです。これを使用して、最後に到達したときにボディがスクロールしないようにできます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">aside&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="n">overscroll-behavior-y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">contain&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -10293,7 +10293,7 @@ alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - �
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>CSS &lt;code>overscroll-behavior&lt;/code> は、何年も前に無理やり対応していた問題を解決する便利なプロパティです。&lt;/p>
-&lt;h2 id="おすすめ書籍">おすすめ書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e3%81%96%e3%81%a3%e3%81%8f%e3%82%8a%e3%81%a4%e3%81%8b%e3%82%80-CSS%e8%a8%ad%e8%a8%88-%e3%83%aa%e3%83%95%e3%83%ad%e3%83%bc%e7%89%88-%e9%ab%98%e6%b4%a5%e6%88%b8-%e5%a3%ae-ebook/dp/B09NKTJL73/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
@@ -10366,15 +10366,15 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 &lt;p>まずは簡単にタグを覚える方法を紹介します。&lt;/p>
 &lt;h2 id="htmlってなに">HTMLってなに？&lt;/h2>
 &lt;p>HTMLとは（Hypertext Markup Language、ハイパーテキスト・マークアップ・ランゲージ）と呼ばれる言語のことで、書き方でタイトルや文章、箇条書き、画像の挿入ができたりします。&lt;/p>
-&lt;p>例えば&lt;/p>
+&lt;p>たとえば&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>タイトル&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>文章&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>リンク&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>という内容であればヘッドラインと文章とリンクになります。&lt;/p>
-&lt;p>他のプログラムのようにHTML自体で何かを動かすということはできませんが、Web上でなにか公開するとなると、HTMLを使う必要が出てきます。&lt;/p>
+&lt;p>他のプログラムのようにHTML自体で何かを動かすということはできませんが、Web上でなにか公開すると、HTMLを使う必要が出てきます。&lt;/p>
 &lt;h2 id="タグを覚えよう">タグを覚えよう&lt;/h2>
 &lt;p>HTMLにはタグと呼ばれるものがあり、それぞれ意味を持っています。&lt;br>
-「たくさんあって覚えられないよ」という人もいるかと思います。HTMLは覚えたらそれが全てというわけではなく、年々更新されて、知らないようなタグが出てきたりします。&lt;br>
+「たくさんあって覚えられないよ」という人もいるかと思います。HTMLは覚えたらそれがすべてというわけではなく、年々更新されて、知らないようなタグが出てきたりします。&lt;br>
 とはいっても、基本的なタグは変わりません。&lt;br>
 ここでは基本的なタグを覚えてみましょう。&lt;/p>
 &lt;p>覚え方はすごく簡単です。英語にしたときの頭文字だと思っておけば9割は覚えられました。&lt;br>
@@ -10393,13 +10393,13 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 &lt;h3 id="文章-p">文章 &lt;code>&amp;lt;p&amp;gt;&lt;/code>&lt;/h3>
 &lt;p>Paragraph（文章）の頭文字で、文章を表すタグが&lt;code>&amp;lt;p&amp;gt;&lt;/code>です。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日はいい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすることで、一つの文章になります。&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすることで、1つの文章になります。&lt;br>
 段落を構成したい場合は、&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日はいい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>洗濯物もよく乾く。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>と&lt;code>&amp;lt;p&amp;gt;&lt;/code>を続けて書いてやれば大丈夫です。&lt;/p>
 &lt;h3 id="改行-br">改行 &lt;code>&amp;lt;br&amp;gt;&lt;/code>&lt;/h3>
-&lt;p>先程の文章内で改行したいとなったときは Break（壊す）の&lt;code>&amp;lt;br&amp;gt;&lt;/code>を使ってみましょう。&lt;br>
+&lt;p>さきほどの文章内で改行したいとなったときはBreak（壊す）の&lt;code>&amp;lt;br&amp;gt;&lt;/code>を使ってみましょう。&lt;br>
 「いい天気だ」の「いい」という部分で改行したい場合は&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>今日は&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">br&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>いい天気だ。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>洗濯物もよく乾く。&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -10419,12 +10419,12 @@ csvの読み込み方はいろんなサイトに書かれているのですが�
 このタグも前回のリンクと同じように属性が必要です。&lt;br>
 画像に必要な属性は&lt;code>src&lt;/code>と&lt;code>alt&lt;/code>になります。&lt;br>
 &lt;code>src&lt;/code>は「source（元）」の略で、画像のURLを入力します。&lt;br>
-&lt;code>alt&lt;/code>は「alternate」の略です。日本語では「代替」となります。つまり、画像が何らかの原因で表示できなかったり、目の不自由な方に対して、その画像がどういったものなのかを記述することで、画像を表現することができます。&lt;/p>
+&lt;code>alt&lt;/code>は「alternate」の略です。日本語では「代替」となります。画像が何らかの原因で表示できなかったり、目の不自由な方に対して、その画像がどういったものなのかを記述することで、画像を表現できます。&lt;/p>
 &lt;h3 id="箱的なもの-div">箱的なもの &lt;code>&amp;lt;div&amp;gt;&lt;/code>&lt;/h3>
 &lt;p>&lt;code>div&lt;/code>はちょっと厄介で、今まで出てきたタグのように意味を持っていません。&lt;br>
 しかし、このタグで囲ったものをグループとして機能させるようにできます。&lt;br>
 divideやdivisionの略で、分割するという意味になります。&lt;/p>
-&lt;p>例えば、サイトを3つの構成に分けたいとしましょう。&lt;br>
+&lt;p>たとえば、サイトを3つの構成に分けたいとしましょう。&lt;br>
 その場合は、&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>コンテンツ1&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -10457,11 +10457,11 @@ olは「order list」の略で、順序があるリストと言う意味です�
 &lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>すごく簡単でしたが、HTMLのタグの説明になります。&lt;br>
 タグが多くて難しいと感じている方は、やりたいことを英語にしたときになんていうのかということを考えれば、HTMLタグに置き換えることができるのではないかと思います。&lt;br>
-例えば、文章を強調したいなと思ったとしたら、強調は強くしたいってことだから「strong」だよな。となります。&lt;br>
+たとえば、文章を強調したいなと思ったとしたら、強調は強くしたいってことだから「strong」だよな。となります。&lt;br>
 そして、HTMLには&lt;code>&amp;lt;strong&amp;gt;&lt;/code>という強調のためのタグが存在しています。&lt;/p>
 &lt;p>また、ここは関係ないところだなというのは、脇に追いやっておきたいので、&lt;code>&amp;lt;aside&amp;gt;&lt;/code>というタグを使うことが可能です。&lt;/p>
 &lt;p>このように、HTMLタグは自分がやりたいとを英語にしたときになんて言うのかさえわかってしまえば簡単に記述することが可能です。&lt;/p>
-&lt;h2 id="おすすめ書籍">おすすめ書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e3%80%90Amazon-co-jp-%e9%99%90%e5%ae%9a%e3%80%911%e5%86%8a%e3%81%a7%e3%81%99%e3%81%b9%e3%81%a6%e8%ba%ab%e3%81%ab%e3%81%a4%e3%81%8fHTML-CSS%e3%81%a8Web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e5%85%a5%e9%96%80%e8%ac%9b%e5%ba%a7-DL%e7%89%b9%e5%85%b8-Flexbox/dp/4797398892/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
@@ -16774,11 +16774,11 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>簡単にできるHugoで人気の記事を表示する方法を詳しく解説</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法を詳しく解説" />&lt;p>Hugoには様々な機能があり、ブログを作るにはもってこいの静的サイトジェネレータです。&lt;br>
-関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレータだと思います。&lt;/p>
+&lt;/aside></description></item><item><title>簡単にできるHugoで人気の記事を表示する方法を詳しく解説</title><link>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</link><pubDate>Thu, 06 Jan 2022 16:50:50 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-01-06-01-wyoshi/analytics.jpg" alt="Featured image of post 簡単にできるHugoで人気の記事を表示する方法を詳しく解説" />&lt;p>Hugoにはさまざまな機能があり、ブログを作るにはもってこいの静的サイトジェネレーターです。&lt;br>
+関連記事も取得できて、検索機能もある「至れり尽くせり」なジェネレーターだと思います。&lt;/p>
 &lt;p>しかし、1点だけどうしても重要な機能がありません。&lt;br>
 それは人気記事の表示です。&lt;br>
-人気記事を表示させるとなると、データベースを用意したりサーバのアクセスカウントを行う必要があります。&lt;br>
+人気記事を表示させようとすると、データベースを用意したりサーバのアクセスカウントを行う必要があります。&lt;br>
 そんな面倒なことはしたくありませんよね？&lt;/p>
 &lt;p>今回はHugoでも簡単に人気の記事を表示する方法を紹介いたします。&lt;/p>
 &lt;h2 id="必要なもの">必要なもの&lt;/h2>
@@ -16791,9 +16791,9 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 それでは実際の設定やプログラムを行っていきましょう。&lt;/p>
 &lt;h2 id="googleアナリティクスの設定">Googleアナリティクスの設定&lt;/h2>
 &lt;p>Googleアナリティクスをサイトに設定します。&lt;br>
-設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在)&lt;br>
+設定の際にはv4ではなく、v2が必要です。(2022年1月6日現在）&lt;br>
 v4を設定している場合は、同時にv2も設定する必要があります。&lt;/p>
-&lt;p>「アカウントを作成」「アカウントの設定」をした後に、「 &lt;strong>プロパティの設定&lt;/strong> 」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定することができます。&lt;br>
+&lt;p>「アカウントを作成」「アカウントの設定」をした後に、「&lt;strong>プロパティの設定&lt;/strong>」で「ユニバーサル アナリティクス プロパティの作成」をONにするとv4とv2の両方でアナリティクスを設定できます。&lt;br>
 &lt;figure
 class="gallery-image"
 style="
@@ -16815,7 +16815,7 @@ alt="ユニバーサル アナリティクス プロパティの作成"
 貼り付け方法はGoogleに書いてある通りです。&lt;/p>
 &lt;h2 id="スプレッドシートの設定">スプレッドシートの設定&lt;/h2>
 &lt;p>次にスプレッドシートを設定します。&lt;br>
-Googleドライブで「新規」「Googleスプレッドシート」でシートを作成します。&lt;br>
+Googleドライブで「新規」「Googleスプレッドシート」を選択してシートを作成します。&lt;br>
 作成したシートに適当な名前をつけます。&lt;/p>
 &lt;p>その後に、「拡張機能」の「App Script」を押して、GoogleAppScript（GAS）に移動します。&lt;br>
 &lt;figure
@@ -16863,7 +16863,7 @@ alt="day.jsライブラリの追加"
 &lt;p>今日から1日、1月、1年前なのかという切り替えが可能です。&lt;/p>
 &lt;ul>
 &lt;li>year: 今日から1年間の範囲&lt;/li>
-&lt;li>month: 今日から1ヶ月の範囲&lt;/li>
+&lt;li>month: 今日から1か月の範囲&lt;/li>
 &lt;li>day: 今日から1日の範囲&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">type&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
@@ -16904,7 +16904,7 @@ alt="簡単にできるHugoで人気の記事を表示する方法を詳しく�
 ビューIDはv2で取得できるので、v4とv2を設定したのはこのビューIDを取得するためになります。&lt;/p>
 &lt;p>GASのプログラムにGoogleアナリティクスの「アカウント」「プロパティ」「ビュー」「ビューの設定」にあるビューIDを設定します。&lt;br>
 設定する際は「ga:ビューID」と &lt;code>ga:&lt;/code> を付ける必要があります。&lt;/p>
-&lt;p>先程のプログラムの下に、下記のプログラムを記述します。&lt;/p>
+&lt;p>さきほどのプログラムの下に、下記のプログラムを記述します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ga:[GAビューID]&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getDate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
@@ -16941,11 +16941,11 @@ alt="簡単にできるHugoで人気の記事を表示する方法を詳しく�
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>ここでは、ページのパスをキーとしてページビューとセッション、ユーザー数を集計するようにしています。&lt;br>
 並び順はpageviewsの数の降順です。&lt;/p>
-&lt;p>必要なデータがあれば各自で編集することをおすすめいたします。&lt;/p>
+&lt;p>必要なデータがあれば各自で編集することをオススメいたします。&lt;/p>
 &lt;p>そして、各項目のラベルを出力するために、&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">rows&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">unshift&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;link&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;pv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;session&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;users&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>として、先頭行のデータにラベル行を追加しています。&lt;br>
-この部分も各自のデータに合うようにしてください。&lt;/p>
+この部分も各自のデータに合うよう、調整してください。&lt;/p>
 &lt;p>アナリティクスから取得したデータはスプレッドシートのシート名に紐付けるので、&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nx">getGoogleAnalytics&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;month&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>の場合は、「month」というシートにデータを反映するということになります。&lt;/p>
@@ -16989,7 +16989,7 @@ alt="簡単にできるHugoで人気の記事を表示する方法を詳しく�
 &lt;/a>
 &lt;/figure>&lt;br>
 シートができたら、再度コードエディターに戻ります。&lt;/p>
-&lt;p>先程のデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。&lt;br>
+&lt;p>さきほどのデバッグの隣りにあるセレクト「test」を「setMonth」にして、実行を押します。&lt;br>
 承認を求められるので、「権限を確認」を押します。&lt;br>
 &lt;figure
 class="gallery-image"
@@ -17338,8 +17338,8 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>GitHub Pagesを使って無料でSSL付きのサイトを公開</title><link>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</link><pubDate>Tue, 28 Dec 2021 12:07:19 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg" alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開" />&lt;p>デザイナーでもできる初めてのHugoの2回目になります。&lt;br>
-&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21/" >前回（デザイナーでもできる初めてのHugo #01）&lt;/a>はHugoのインストールから公開の方法までを説明しました。&lt;br>
+&lt;/aside></description></item><item><title>GitHub Pagesを使って無料でSSL付きのサイトを公開する</title><link>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</link><pubDate>Tue, 28 Dec 2021 12:07:19 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-28-hugo-02-ywat/settings.jpg" alt="Featured image of post GitHub Pagesを使って無料でSSL付きのサイトを公開する" />&lt;p>デザイナーでもできるはじめてのHugoの2回目になります。&lt;br>
+&lt;a class="link" href="https://suzukiiichiro.github.io/posts/2021-12-21/" >前回（デザイナーでもできるはじめてのHugo #01）&lt;/a>はHugoのインストールから公開の方法までを説明しました。&lt;br>
 今回は前回作成したページをGitHub Pagesを使って公開してみたいと思います。&lt;/p>
 &lt;h2 id="github-pages用の設定ファイルを作成">GitHub Pages用の設定ファイルを作成&lt;/h2>
 &lt;p>GitHub PagesはGitHubにあるコンテンツを静的ページを公開する機能です。&lt;br>
@@ -17378,15 +17378,15 @@ SSLまでついているので、非常に便利です。&lt;/p>
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">gh-pages&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>name&lt;/strong>はGitHubでのActionsに表示される名前になります。&lt;br>
-今回は公開用として&lt;strong>gh-pages&lt;/strong>というブランチにわけています。ここおらへんはお好みで設定して下さい。&lt;br>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>name&lt;/strong>はGitHubでのActionsに表示される名前です。&lt;br>
+今回は公開用として&lt;strong>gh-pages&lt;/strong>というブランチにわけています。ここおらへんはお好みで設定してください。&lt;br>
 hugoでテーマを使っている場合は&lt;strong>submodules: true&lt;/strong>とする必要があります。&lt;br>
 また、Hugoで更新日をGitの日付と合わせたい場合は&lt;strong>fetch-depth: 0&lt;/strong>として、Gitの履歴を取得するようにしましょう。&lt;/p>
 &lt;h2 id="github-pagesの設定">GitHub Pagesの設定&lt;/h2>
 &lt;p>GitHub PagesのURLは&lt;code>https://ユーザまたは組織名.github.io/リポジトリ名&lt;/code>となります。&lt;br>
 GitHubでリポジトリを作成する際に「ユーザまたは組織名.github.io」とすると「https://ユーザまたは組織名.github.io」とすることができます。&lt;/p>
-&lt;p>まずは先程のファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。&lt;br>
-その後に、setings &amp;gt; Pages にでGitHub Pagesの設定を行います。&lt;/p>
+&lt;p>まずはさきほどのファイルを含めてサイト全体をGitにアップして、gh-pagesというブランチが作られるのを待ちましょう。&lt;br>
+その後に、setings &amp;gt; PagesにでGitHub Pagesの設定を行います。&lt;/p>
 &lt;p>&lt;figure
 class="gallery-image"
 style="
@@ -17411,12 +17411,12 @@ alt="GitHub Pagesの設定"
 .gitignoreに「public」を除外するようにしておきましょう。&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-:.gitignore" data-lang=":.gitignore">/public
 /resources
-&lt;/code>&lt;/pre>&lt;p>最後に設定したURLにアクセスするとサイトが確認できるはずです。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>最後に設定したURLへアクセスするとサイトが確認できると思います。&lt;/p>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>GitHub Pagesを使えば、難しいサーバの設定などをすることなく、無料でSSL付きのサイトを公開することが可能です。&lt;br>
 いくつかの制限はありますが、すごく便利な機能なのでみなさんもぜひ使ってみてはいかがでしょうか。&lt;/p>
-&lt;p>公開する際はパスワードなどの情報も一緒にアップしないようにしてください。&lt;/p>
-&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
+&lt;p>公開する際はパスワードなどの情報も一緒にアップしないよう、気をつけてください。&lt;/p>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B07LBSWJNP&amp;amp;linkCode=as2&amp;amp;tag=nlpqueens-22&amp;amp;linkId=fd3f2918d16f32f53feccf492263133a" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18061,7 +18061,9 @@ CHAPTER15 読みやすいシェルスクリプト&lt;/p>
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない" />&lt;p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された&lt;/p>
+&lt;/aside></description></item><item><title>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない</title><link>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</link><pubDate>Fri, 24 Dec 2021 09:43:41 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg" alt="Featured image of post SCSS/CSSを含んだファイルがGitHubActionsでビルドできない" />&lt;p>scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。&lt;br>
+GitHub Pagesで公開しているHugoを使ったサイトscss、sassには対応することが可能なので、sassを導入することはメリットがあります。&lt;/p>
+&lt;p>ところが、Hugoでscssやsassを含んだファイルをGitHubに公開して、Git Actionで自動ビルドしようとした際に見慣れないエラーが表示されました。&lt;/p>
 &lt;pre tabindex="0">&lt;code>Run hugo --minify
 Error: Error building site: TOCSS:
 failed to transform &amp;quot;scss/style.scss&amp;quot; (text/x-scss).
@@ -18072,26 +18074,32 @@ see https://goo.gl/YMrWcn for more information
 ...
 Total in 148 ms
 Error: Process completed with exit code 255.
-&lt;/code>&lt;/pre>&lt;p>はて？なにか悪いことでもしたのだろうか。&lt;br>
-それとも変な記述をしてしまったのだろうか。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>なにか悪いことでもしたのでしょうか。&lt;br>
+それとも変な記述をしてしまったのだろうかとか思うところです。&lt;/p>
 &lt;h2 id="エラーの内容">エラーの内容&lt;/h2>
-&lt;p>こういうときは、落ち着いてエラーを見てみよう。&lt;br>
-大抵のことはちゃんと教えてくれているはずだ。&lt;/p>
+&lt;p>こういうときは、落ち着いてエラーを見てみましょう。&lt;br>
+大抵のことはちゃんと教えてくれているはずです。&lt;/p>
+&lt;p>今回のエラーは下記のような内容になります。&lt;/p>
 &lt;pre tabindex="0">&lt;code>Check your Hugo installation; you need the extended version
-&lt;/code>&lt;/pre>&lt;p>なるほど、extended を使えと行っている。&lt;br>
-extended とはなんだろう。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>「Hugoのインストールを確認してください。extendedバージョンが必要です。」と記述されていおります。&lt;br>
+それではこのエラーに表示されている&lt;code>extended&lt;/code>とは一体何なのでしょうか。&lt;/p>
 &lt;h2 id="エラーの対応">エラーの対応&lt;/h2>
-&lt;p>さらに落ち着いて設定ファイルを確認することをおすすめする。&lt;br>
+&lt;p>さらに落ち着いて設定ファイルを確認していくことにしましょう。&lt;br>
+読み進めていくとどうやらworkflowの設定ファイルにヒントがありそうです。&lt;br>
 .github/workflow/gh-pages.yml&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.87.0&amp;#39;&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c">#extended: true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>設定の extended が思いっきりコメントアウトされていました&lt;/p>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>.github/workflow/の設定ファイル確認したところ、原因がわかりました。&lt;br>
+設定の&lt;code>extended&lt;/code>が思いっきりコメントアウトされていることが原因でした。&lt;/p>
+&lt;p>通常のHugoではscss/cssを使用することができません。そうした場合に、Hugo ExtendedをインストールしてHugo自体の機能を拡張してscss/cssを使えるようにするのですが、今回はscssを使っていたにもかかわらず、Hugo Extendedをインストールしていないため発生していたエラーでした。&lt;/p>
 &lt;p>コメントを外して、再度Gitにpushしたところ、正常にビルドされて公開できました。&lt;/p>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>scssやsassを含んだファイルをhugoをgitに公開しようとした際に、ビルドできない場合は設定を確認することをおすすめする。&lt;/p></description></item><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
+&lt;p>scssやsassを含んだファイルをhugoをgitに公開しようとした際に、ビルドできない場合は設定を確認することをオススメします。&lt;br>
+とくに、scssを使用する際は&lt;strong>Hugo Extended&lt;/strong>のインストールが必要と&lt;a class="link" href="https://gohugo.io/getting-started/installing/" target="_blank" rel="noopener"
+>公式&lt;/a>にも書いているので、忘れずに設定しましょう。&lt;/p></description></item><item><title>【プログレスバー】Bashでプログレスバーを作ってみようって話</title><link>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</link><pubDate>Thu, 23 Dec 2021 16:10:20 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash.jpg" alt="Featured image of post 【プログレスバー】Bashでプログレスバーを作ってみようって話" />&lt;h2 id="プログレスバー">プログレスバー&lt;/h2>
 &lt;p>ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。&lt;br>
 処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。&lt;br>
 シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい&lt;/p>
@@ -18898,7 +18906,7 @@ configの&lt;em>publicDir&lt;/em>に任意のディレクトリを設定する�
 &lt;p>駆け足でしたが、hugoの簡単な使い方になります。&lt;br>
 大きな設定も不要で、markdownで記述できるので初心者やデザイナーなどでもとっつきやすいのではないかと思います。&lt;br>
 みなさんもぜひ、hugoを試してみてください。&lt;/p>
-&lt;h2 id="書籍の紹介">書籍の紹介&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/Hugo%e3%81%a7%e5%a7%8b%e3%82%81%e3%82%8b%e9%9d%99%e7%9a%84%e3%82%b5%e3%82%a4%e3%83%88%e6%a7%8b%e7%af%89%e5%85%a5%e9%96%80-%e9%9d%99%e7%9a%84%e3%82%b5%e3%82%a4%e3%83%88%e3%82%b8%e3%82%a7%e3%83%8d%e3%83%ac%e3%83%bc%e3%82%bf%e3%83%bc%e3%81%a7%e4%bd%9c%e3%82%8b%e8%87%aa%e4%bd%9c%e3%82%b5%e3%82%a4%e3%83%88-%e6%8a%80%e8%a1%93%e3%81%ae%e6%b3%89%e3%82%b7%e3%83%aa%e3%83%bc%e3%82%ba%ef%bc%88NextPublishing%ef%bc%89-meganii/dp/4844379208/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">
@@ -18937,7 +18945,7 @@ configの&lt;em>publicDir&lt;/em>に任意のディレクトリを設定する�
 &lt;/div>
 &lt;/a>
 &lt;small>Amazon.co.jpアソシエイトを使用&lt;/small>
-&lt;/aside></description></item><item><title>Hugoでテーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.jpg" alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）" />&lt;p>Hugoではテーマ（theme）を使って簡単にブログやサイトを作成することが可能です。テーマはGitHubなどにたくさん公開されて簡単に導入することが可能です。&lt;br>
+&lt;/aside></description></item><item><title>Hugoでテーマが反映されない（画面が真っ白のまま）</title><link>https://suzukiiichiro.github.io/posts/2021-12-21/</link><pubDate>Tue, 21 Dec 2021 18:08:57 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2021-12-21/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2021-12-21/2021-12-21.jpg" alt="Featured image of post Hugoでテーマが反映されない（画面が真っ白のまま）" />&lt;p>Hugoではテーマ（themes）を使って簡単にブログやサイトを作成することが可能です。テーマはGitHubなどにたくさん公開されて簡単に導入することが可能です。&lt;br>
 しかし、テーマををインストールするのを忘れてしまうと、不具合の原因につながってしまうので注意が必要です。&lt;/p>
 &lt;p>今回はHugoを使って構築したサイトで、テーマが反映されずに画面が真っ白のまま担ってしまった場合の対処法を説明してきます。&lt;/p>
 &lt;h2 id="テーマはサブモジュールでインストール">テーマはサブモジュールでインストール&lt;/h2>
@@ -18948,16 +18956,16 @@ Hugoでテーマをインストールする際はサブモジュール（submodu
 &lt;p>インストールされていない場合は、サブモジュール化されたテーマを再度インストールすることで画面が真っ白い状態から正常な表示に変わるかと思います。&lt;/p>
 &lt;p>サブモジュールのインストールコマンドは下記のようになります。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git submodule update --init --recursive
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugoのサイトを&lt;code>git clone&lt;/code>する際は、テーマが反映されない場合が多いので、サブモジュールのインストールも忘れずに行うようにしましょう。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugoのサイトを&lt;code>git clone&lt;/code>したら、テーマが反映されない。こうしたケース多いので、サブモジュールのインストールも忘れず行うようにしましょう。&lt;/p>
 &lt;h2 id="クローンするときに一緒にサブモジュールもインストール">クローンするときに一緒にサブモジュールもインストール&lt;/h2>
 &lt;p>そうは言っても、サブモジュールのインストールを忘れることが多いです。&lt;br>
-その場合は、初回git cloneする際にsubmodule（サブモジュール）も一緒にcloneすることで不具合を起こすことなく、表示することができます。&lt;/p>
+その場合は、初回git cloneする際にsubmodule（サブモジュール）も一緒にcloneすることで不具合を起こすことなく、表示できます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git clone --recursive &lt;span class="o">{&lt;/span>クローンしたいリポジトリ&lt;span class="o">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
 &lt;p>Hugoでテーマが反映されない（画面が真っ白のまま）のときの対応はいかがだったでしょうか。&lt;br>
 サブモジュールで管理できるのは便利であると同時に、忘れてしまうとサイトの不具合につながってしまい、別端末で正常に動作していると解決が難しくなってしまうことも多いと思います。&lt;br>
 Hugoのサイトをgit cloneする際はサブモジュールでテーマの反映も忘れないようにしておきましょう。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e6%94%b9%e8%a8%822%e7%89%88-%e3%82%8f%e3%81%8b%e3%81%b0%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e5%ad%a6%e3%81%b6-Git%e4%bd%bf%e3%81%84%e6%96%b9%e5%85%a5%e9%96%80%e3%80%88GitHub%e3%80%81SourceTree%e3%80%81%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e6%93%8d%e4%bd%9c%e5%af%be%e5%bf%9c%e3%80%89-%e6%b9%8a%e5%b7%9d-%e3%81%82%e3%81%84/dp/4863543433/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">

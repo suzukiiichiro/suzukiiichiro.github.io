@@ -4,26 +4,26 @@
 <link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
-<meta name=description content="hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示さ">
-<meta name=keywords content="Hugo,エラー,GitHub,GitHub Actions,css,Webデザイン,Webサイト開発,bash,CSS,サーバ">
-<title>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない｜NLP</title>
+<meta name=description content="Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。">
+<meta name=keywords content="Hugo,Error,GitHub,css,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<title>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない｜NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
-<meta property="og:title" content="SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない｜NLP">
-<meta property="og:description" content="hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示さ">
+<meta property="og:title" content="SCSS/CSSを含んだファイルがGitHubActionsでビルドできない｜NLP">
+<meta property="og:description" content="Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="エラー"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="GitHub Actions"><meta property="article:tag" content="css"><meta property="article:published_time" content="2021-12-24T09:43:41+09:00"><meta property="article:modified_time" content="2022-02-14T16:09:32+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg">
-<meta name=twitter:title content="SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない｜NLP">
-<meta name=twitter:description content="hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示さ"><meta name=twitter:card content="summary_large_image">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="Error"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="css"><meta property="article:published_time" content="2021-12-24T09:43:41+09:00"><meta property="article:modified_time" content="2022-02-16T12:40:42+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg">
+<meta name=twitter:title content="SCSS/CSSを含んだファイルがGitHubActionsでビルドできない｜NLP">
+<meta name=twitter:description content="Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg"],"datePublished":"2021-12-24T09:43:41+09:00","dateModified":"2022-02-14T16:09:32+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない","item":"https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"SCSS/CSSを含んだファイルがGitHubActionsでビルドできない","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg"],"datePublished":"2021-12-24T09:43:41+09:00","dateModified":"2022-02-16T12:40:42+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"SCSS/CSSを含んだファイルがGitHubActionsでビルドできない","item":"https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -98,7 +98,7 @@ Web開発
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
-<li><span class=breadcrumb-item>SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない</span>
+<li><span class=breadcrumb-item>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない</span>
 </ol>
 </nav>
 <article class="has-image main-article">
@@ -114,15 +114,15 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2021.12.24</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.14
+2022.02.16
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 1分
+読了時間: 2分
 </time>
 </div>
 </header>
 <h1 class=article-title>
-SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない
+SCSS/CSSを含んだファイルがGitHubActionsでビルドできない
 </h1>
 </div>
 <section class="widget archives tableOfContents">
@@ -140,10 +140,12 @@ SCSS/CSSを含んだファイルがGitHub Actionsでビルドできない
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<p>hugoでscssやsassを含んだファイルををGitHubに公開、Git Actionで自動ビルドしようとした際に、見慣れないエラーが表示された</p>
+<p>scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。<br>
+GitHub Pagesで公開しているHugoを使ったサイトscss、sassには対応することが可能なので、sassを導入することはメリットがあります。</p>
+<p>ところが、Hugoでscssやsassを含んだファイルをGitHubに公開して、Git Actionで自動ビルドしようとした際に見慣れないエラーが表示されました。</p>
 <pre tabindex=0><code>Run hugo --minify
 Error: Error building site: TOCSS:
-failed to transform &quot;scss/style.scss&quot; (text/x-scss). 
+failed to transform &quot;scss/style.scss&quot; (text/x-scss).
 Check your Hugo installation;
 you need the extended version to build SCSS/SASS.
 : this feature is not available in your current Hugo version,
@@ -151,32 +153,60 @@ see https://goo.gl/YMrWcn for more information
 ...
 Total in 148 ms
 Error: Process completed with exit code 255.
-</code></pre><p>はて？なにか悪いことでもしたのだろうか。<br>
-それとも変な記述をしてしまったのだろうか。</p>
+</code></pre><p>なにか悪いことでもしたのでしょうか。<br>
+それとも変な記述をしてしまったのだろうかとか思うところです。</p>
 <h2 id=エラーの内容>エラーの内容</h2>
-<p>こういうときは、落ち着いてエラーを見てみよう。<br>
-大抵のことはちゃんと教えてくれているはずだ。</p>
+<p>こういうときは、落ち着いてエラーを見てみましょう。<br>
+大抵のことはちゃんと教えてくれているはずです。</p>
+<p>今回のエラーは下記のような内容になります。</p>
 <pre tabindex=0><code>Check your Hugo installation; you need the extended version
-</code></pre><p>なるほど、extended を使えと行っている。<br>
-extended とはなんだろう。</p>
+</code></pre><p>「Hugoのインストールを確認してください。extendedバージョンが必要です。」と記述されていおります。<br>
+それではこのエラーに表示されている<code>extended</code>とは一体何なのでしょうか。</p>
 <h2 id=エラーの対応>エラーの対応</h2>
-<p>さらに落ち着いて設定ファイルを確認することをおすすめする。<br>
+<p>さらに落ち着いて設定ファイルを確認していくことにしましょう。<br>
+読み進めていくとどうやらworkflowの設定ファイルにヒントがありそうです。<br>
 .github/workflow/gh-pages.yml</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup</span><span class=w>
 </span><span class=w>  </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
 </span><span class=w>  </span><span class=nt>with</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0.87.0&#39;</span><span class=w>
 </span><span class=w>    </span><span class=c>#extended: true</span><span class=w>
-</span></code></pre></div><p>設定の extended が思いっきりコメントアウトされていました</p>
+</span></code></pre></div><p>.github/workflow/の設定ファイル確認したところ、原因がわかりました。<br>
+設定の<code>extended</code>が思いっきりコメントアウトされていることが原因でした。</p>
+<p>通常のHugoではscss/cssを使用することができません。そうした場合に、Hugo ExtendedをインストールしてHugo自体の機能を拡張してscss/cssを使えるようにするのですが、今回はscssを使っていたにもかかわらず、Hugo Extendedをインストールしていないため発生していたエラーでした。</p>
 <p>コメントを外して、再度Gitにpushしたところ、正常にビルドされて公開できました。</p>
 <h2 id=まとめ>まとめ</h2>
-<p>scssやsassを含んだファイルをhugoをgitに公開しようとした際に、ビルドできない場合は設定を確認することをおすすめする。</p>
+<p>scssやsassを含んだファイルをhugoをgitに公開しようとした際に、ビルドできない場合は設定を確認することをオススメします。<br>
+とくに、scssを使用する際は<strong>Hugo Extended</strong>のインストールが必要と<a class=link href=https://gohugo.io/getting-started/installing/ target=_blank rel=noopener>公式</a>にも書いているので、忘れずに設定しましょう。</p>
 </section>
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class="section related-contents--wrapper">
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
+<article class="has-image article-item" data-date=2021.12.22>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
+<source src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-22-hugo-01-ywat/2021-12-22-hugo-01_hub5e89b620d2afe5c10cf3894738f1203_83896_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt="デザイナーでもできる初めてのHUGOでのサイト作成 #01">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>デザイナーでもできる初めてのHUGOでのサイト作成 #01</h2><div class=article-time>
+<time class="article-time--item article-time--published">2021.12.22</time>
+</div><p class=article-subtitle>サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。 CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。…</p>
+</div>
+</a>
+</article>
 <article class="has-image article-item" data-date=2022.02.14>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/>
 <header class=article-header>
@@ -335,29 +365,6 @@ extended とはなんだろう。</p>
 <h2 class=article-title>（２）【cat】シェルスクリプトコマンド活用紹介</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.02.09</time>
 </div><p class=article-subtitle>「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。 catコマンド ファイルの内容を表示する ファイルの内容を行番号付きで表示する 複数ファイルを連結して1つのファイルにする 概要 「cat」は、「co…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.09>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-08-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="第6回 pythonでNQueen（エイトクイーン）バックトラック（２）">
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-プログラミング
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>第6回 pythonでNQueen（エイトクイーン）バックトラック（２）</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.09</time>
-</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第6回目。今回はバックトラックについて説明します。解を出すmainメソッドなどプログラムの概要を説明します。 mainメソッド概要 今回は前回から引き続きバックトラックを説明していきたいと思います。 プログラムソースは以下のURLにあります。 https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py03_nqueen.py 429-4…</p>
 </div>
 </a>
 </article>
