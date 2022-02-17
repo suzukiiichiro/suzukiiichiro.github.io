@@ -92,7 +92,7 @@ def  printboard(stotal,size):
     printboard(stotal,size)
     if stotal != 0:
 ```
-### 出力結果を見てみよう
+## 出力結果を見てみよう
 それでは出力を見てみましょう。  
 py04はn4からn15まで実行するのでn8だけ実行してみましょう。  
 214行目のMAX を9にして  
