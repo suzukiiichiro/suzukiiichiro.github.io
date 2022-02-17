@@ -62,7 +62,7 @@ print(&amp;quot;########&amp;quot;)
 &lt;pre tabindex="0">&lt;code> stotal = symmetryops(size) # 対称解除法の導入
 printboard(stotal,size)
 if stotal != 0:
-&lt;/code>&lt;/pre>&lt;h3 id="出力結果を見てみよう">出力結果を見てみよう&lt;/h3>
+&lt;/code>&lt;/pre>&lt;h2 id="出力結果を見てみよう">出力結果を見てみよう&lt;/h2>
 &lt;p>それでは出力を見てみましょう。&lt;br>
 py04はn4からn15まで実行するのでn8だけ実行してみましょう。&lt;br>
 214行目のMAX を9にして&lt;br>
