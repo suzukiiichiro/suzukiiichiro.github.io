@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 17 Feb 2022 16:31:05 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>CSSだけで簡単に1行や複数行の3点リーダーを付ける方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/</link><pubDate>Thu, 17 Feb 2022 16:31:05 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01.jpg" alt="Featured image of post CSSだけで簡単に1行や複数行の3点リーダーを付ける方法" />&lt;p>HTMLのレイアウトでは時には文字がはみ出した際に、3点リーダーと呼ばれる「…」をつける場合があります。&lt;br>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 17 Feb 2022 17:25:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</link><pubDate>Thu, 17 Feb 2022 17:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess.jpg" alt="Featured image of post 第9回 pythonでNQueen（エイトクイーン）対象解除法（2）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
+&lt;p>今回は対象解除法が正しいかどうかを検証するためプログラムを改造してクイーンを設置した場所を出力するようにしてみましょう。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。 &lt;br>
+&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py&lt;/a>&lt;/p>
+&lt;h2 id="printoutメソッドを利用しよう">printoutメソッドを利用しよう&lt;/h2>
+&lt;p>クイーンの設置場所を出力するメソッドを作って321行目と322行目の間に設置しましょう。&lt;br>
+ABOARDに各行のクイーンの設置場所を記憶しているのでこれを利用しましょう。&lt;br>
+py01,py02で使っていたprintoutメソッドを修正して利用しましょう。&lt;br>
+printoutメソッドを見てみましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>def printout():
+&amp;quot;&amp;quot;&amp;quot;printout()&amp;quot;&amp;quot;&amp;quot;
+global COUNT # pylint: disable=W0603
+COUNT += 1 #インクリメントはこのように書きます
+print(COUNT, end=&amp;quot;: &amp;quot;) #改行したくないときは, を行末にいれます
+for i in range(SIZE):
+print(ABOARD[i], end=&amp;quot;&amp;quot;)
+print(&amp;quot;&amp;quot;)
+&lt;/code>&lt;/pre>&lt;p>どこを修正すれば良いでしょうか&lt;/p>
+&lt;p>stotalの値を出力したいのでメソッドの引数に追加しましょう。&lt;br>
+引数はメソッドを宣言している()の中に書きます。&lt;br>
+クイーンの設置場所を出力するのでメソッド名はprintboardにしましょう。&lt;br>
+また、py01,py02とは違いpy03以降はSIZEは可変になったため無くなっています。&lt;br>
+グローバル変数にはないためnqueenメソッドから引数でsizeを渡してあげましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>def printboard(stotal,size):
+&lt;/code>&lt;/pre>&lt;p>冒頭でCOUNTとstotalの値を出力するようにしましょう&lt;br>
+改行しても良いので end=&amp;quot;: &amp;ldquo;はいらないです&lt;br>
+py03以降COUNTは使わなくなっているので宣言を追加する必要がありあます。&lt;br>
+グローバル変数宣言の一番下にCOUNT = 0 を追加しましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code> print(COUNT,&amp;quot;:&amp;quot;,stotal)
+&lt;/code>&lt;/pre>&lt;p>ABOARDには各行のクイーンの設置場所が記憶されています。&lt;br>
+ABOARD[2]=4 だったら3行目の右から5番目にクイーンが置かれています。&lt;br>
+ちなみにメソッド内でABOARDをglobal宣言していませんが、参照するだけだったらglobal宣言いらないみたいです。&lt;br>
+各行がクイーンが置かれている場所「o」置かれていない場所が「-」になるようにしてみましょう。&lt;br>
+printoutは各行ごとにfor文を回していましたが各セルごとに出力するためfor文を追加しましょう。&lt;br>
+iで行、jで行の中の各セルごとにみていってクイーンが置かれている場所の時だけ「o」を出力しましょう。&lt;br>
+そして行の終わりに print(&amp;quot;&amp;quot;)で改行を入れましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code> for i in range(size):
+for j in range(size):
+if ABOARD[i]==j:
+print(&amp;quot;o&amp;quot;, end=&amp;quot;&amp;quot;)
+else:
+print(&amp;quot;-&amp;quot;, end=&amp;quot;&amp;quot;)
+print(&amp;quot;&amp;quot;)
+&lt;/code>&lt;/pre>&lt;p>ボードの出力が終わったら見やすいようにセパレータを入れてみましょう&lt;/p>
+&lt;pre tabindex="0">&lt;code>COUNT = 0
+#BOARD出力
+def printboard(stotal,size):
+global COUNT
+COUNT += 1
+print(COUNT,&amp;quot;:&amp;quot;,stotal)
+for i in range(size):
+for j in range(size):
+if ABOARD[i]==j:
+print(&amp;quot;o&amp;quot;, end=&amp;quot;&amp;quot;)
+else:
+print(&amp;quot;-&amp;quot;, end=&amp;quot;&amp;quot;)
+print(&amp;quot;&amp;quot;)
+print(&amp;quot;########&amp;quot;)
+&lt;/code>&lt;/pre>&lt;p>新しく関数を追記するときは決まりは特にないのですがグローバル変数宣言の直下(223行目あたり)に置きましょう。&lt;/p>
+&lt;p>そして、331行目,332行目の間でprintboardメソッドを呼び出しましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code> stotal = symmetryops(size) # 対称解除法の導入
+printboard(stotal,size)
+if stotal != 0:
+&lt;/code>&lt;/pre>&lt;h3 id="出力結果を見てみよう">出力結果を見てみよう&lt;/h3>
+&lt;p>それでは出力を見てみましょう。&lt;br>
+py04はn4からn15まで実行するのでn8だけ実行してみましょう。&lt;br>
+214行目のMAX を9にして&lt;br>
+minを8にして実行してみてください&lt;/p>
+&lt;pre tabindex="0">&lt;code>python py04_nqueen.py
+&lt;/code>&lt;/pre>&lt;p>こんな感じで出力されるかと思います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1 : 8
+o-------
+----o---
+-------o
+-----o--
+--o-----
+------o-
+-o------
+---o----
+########
+2 : 8
+o-------
+-----o--
+-------o
+--o-----
+------o-
+---o----
+-o------
+----o---
+########
+3 : 0
+o-------
+------o-
+---o----
+-----o--
+-------o
+-o------
+----o---
+--o-----
+########
+&lt;/code>&lt;/pre>&lt;p>先頭の1はstotalが8なので90度回転して同じものがあるということです。&lt;br>
+実際に90度回転して同じでstotalが0のものがあるか探してみましょう。&lt;/p>
+&lt;pre tabindex="0">&lt;code>1 : 8
+o-------
+----o---
+-------o
+-----o--
+--o-----
+------o-
+-o------
+---o----
+########
+&lt;/code>&lt;/pre>&lt;p>1を反時計回りに90度回転させると&lt;br>
+以下の形になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>--o-----
+-----o--
+---o----
+-o------
+-------o
+----o---
+------o-
+o-------
+&lt;/code>&lt;/pre>&lt;p>この形のクイーンの配置があるか調べてみると&lt;/p>
+&lt;pre tabindex="0">&lt;code>22 : 0
+--o-----
+-----o--
+---o----
+-o------
+-------o
+----o---
+------o-
+o-------
+&lt;/code>&lt;/pre>&lt;p>22番目のクイーンの配置に同じものがありました。&lt;br>
+またstotalも0ですので正しそうです。&lt;br>
+こんな感じで検証できそうですが手動で全部調べるのはちょっと辛いですよね。。。&lt;br>
+次回はプログラムを使って検証する方法を試してみましょう。&lt;/p></description></item><item><title>CSSだけで簡単に1行や複数行の3点リーダーを付ける方法</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/</link><pubDate>Thu, 17 Feb 2022 16:31:05 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01.jpg" alt="Featured image of post CSSだけで簡単に1行や複数行の3点リーダーを付ける方法" />&lt;p>HTMLのレイアウトでは時には文字がはみ出した際に、3点リーダーと呼ばれる「…」をつける場合があります。&lt;br>
 普通に記述してしまえば対応できますが、それだと文章を切ってしまったり、文が意味のわからないものになってしまい、SEOとしてはNGとなります。&lt;/p>
 &lt;p>また、文章の長さが可変の場合はレイアウトが大きく崩れてしまう原因にも繋がります。&lt;br>
 今回はCSSを使って3点リーダーを付ける方法を紹介します。&lt;/p>
