@@ -6162,13 +6162,15 @@ alt="図"
 &lt;/figure>&lt;/p>
 &lt;p>439行目で再帰的にnqueenを引数4を渡して呼び出します(5階層目)。&lt;br>
 row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後ろに移動します。&lt;br>
-という感じで下の階層からfor文でぐるぐる回転しながらうごいてゆきます。&lt;/p></description></item><item><title>Javascriptで画面ロックする場合は、Workerを使ってみよう</title><link>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</link><pubDate>Tue, 01 Feb 2022 14:19:43 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg" alt="Featured image of post Javascriptで画面ロックする場合は、Workerを使ってみよう" />&lt;p>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。&lt;/p>
-&lt;p>特に重い処理を行うと、js の処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。&lt;/p>
-&lt;p>そういったときは &lt;strong>Worker&lt;/strong> を使って重い処理を別タスクとして実行することで、画面上の処理と、重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。&lt;/p>
-&lt;p>今回はその方法を説明していきます。&lt;/p>
+という感じで下の階層からfor文でぐるぐる回転しながらうごいてゆきます。&lt;/p></description></item><item><title>javascriptで画面ロックする場合は、Workerを使ってみよう</title><link>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</link><pubDate>Tue, 01 Feb 2022 14:19:43 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg" alt="Featured image of post javascriptで画面ロックする場合は、Workerを使ってみよう" />&lt;p>javascriptで重い処理を書く際やforやwhileなどのループを記述する際に気をつけないといけないのがUIロックです。&lt;/p>
+&lt;p>とくに重い処理を行うと、jsの処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。&lt;br>
+画面ロックが発生してしまうと、ユーザーは何もできなくなってしまうのでブラウザを強制終了するしかありません。そうなってしまうと、せっかくサイトに来た訪問者が何もせずに離脱して行くことにつながってしまいます。場合によっては、そのような問題が発生するサイトには二度とこないかもしれません。&lt;/p>
+&lt;p>そうした不具合や不具合やサイトの離脱を防ぐためにもjavascriptを使って重い処理をときは&lt;strong>Worker&lt;/strong>を使って重い処理を別タスクとして実行することをオススメします。&lt;br>
+画面上の処理と重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。&lt;/p>
+&lt;p>今回はその方法を詳しく説明しますので、よろしくおねがいします。&lt;/p>
 &lt;h2 id="uiをロックしてしまうループ処理">UIをロックしてしまうループ処理&lt;/h2>
 &lt;p>まずは画面をロックしてしまうような記述です。&lt;br>
-下記のような HTML があったとしましょう。&lt;/p>
+下記のようなHTMLがあったとしましょう。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html:index.html" data-lang="html:index.html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;ja&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -6203,9 +6205,11 @@ row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h2&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;time&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">h2&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>この HTML は counter 部分 に文字を出力できるようにしてあります。&lt;br>
-そして、実行時間を time 部分に出力できるようにしてあります。&lt;/p>
-&lt;p>それでは、ここに for 文を使って、文字を追加していってみます。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>このHTMLはcounter部分に文字を出力できるようにしてあります。&lt;br>
+そして、実行時間をtime部分に出力します。&lt;br>
+あまり使うことはないですが、今回は重い処理を行った場合を再現するということでこのような形にしました。&lt;/p>
+&lt;p>それでは、ここにfor文を使って文字を追加していってみましょう。今回はfor文が重い処理を行うという部分になります。&lt;br>
+jsonやxml、データの解析や要素でforやwhile、eachなどを使うことは非常に多く、その後に何らかの処理を行うという記述もjavascriptを使っていれば高頻度で使用します。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:for01.js" data-lang="javascript:for01.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
@@ -6218,8 +6222,10 @@ row=4 なのでprintout()して再帰から抜けて4階層目の439行目の後
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>上のようなfor文で記述したスクリプトを作ってみました。&lt;br>
 iの値をcounterに反映していくだけのものです。&lt;br>
-まずはiの最大値を 100000 くらいで実行してみましょう。&lt;/p>
-&lt;p>実行したところ、999999 と表示され、time部分の処理は 569 ミリ秒ということになります。&lt;/p>
+まずはiの最大値を100,000くらいで実行してみましょう。&lt;br>
+10万件のデータをフロントで処理するなと思うかもしれませんが、あくまで重い処理を行うとどうなるかという実験です。&lt;br>
+10万件でなくても、数千件のデータで入れ子のループ処理が記述されている場合などは画面ロックが発生する確率も上がっていきます。&lt;/p>
+&lt;p>実行したところ、999,999と表示され、time部分の処理は569ミリ秒ということになります。&lt;/p>
 &lt;div class="video-wrapper">
 &lt;video
 controls
@@ -6232,19 +6238,19 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;/p>
 &lt;/video>
 &lt;/div>
-&lt;p>ここで注目してほしいのが、counter の文字を変化させているにも関わらず、その文字が反映されていないという点です。&lt;br>
-Chrome の Developper tool で確認しても、変化しているようではありますが、画面上では反映されていません。&lt;/p>
-&lt;p>重い処理を行う場合をフロントで行うと、 UX の低下につながってしまいます。&lt;br>
-そこで使うのが、 Worker 処理ということになります。&lt;/p>
+&lt;p>ここで注目してほしいのが、counterの文字を変化させているにもかかわらず、その文字が反映されていないという点です。&lt;br>
+ChromeのDevelopper tools（macの場合[⌘ + option + i], Windowsの場合[Ctrl + Shift + I]または、F12）で確認しても、変化しているようではありますが、画面上では反映されていません。&lt;/p>
+&lt;p>重い処理を行う場合をフロントで行うと、 UX（ユーザー体験）の低下につながってしまいます。&lt;br>
+そこで使うのが、 javascriptのタスクを別スレッドで実行できるWorker処理ということになります。&lt;/p>
 &lt;h2 id="workerとは">Workerとは&lt;/h2>
-&lt;p>Worker とはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。&lt;/p>
+&lt;p>Workerとはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。&lt;/p>
 &lt;p>フロントで処理を行わないので、画面ロックを発生させることなく重い処理を実行できます。&lt;br>
-Worker を使用するには実行したいファイル名を指定して呼びします。&lt;/p>
-&lt;p>そして、対象のワーカーに値などを &lt;strong>postMessage&lt;/strong> で値を渡します。&lt;br>
-postMessage 部分は配列や連想配列のデータでも構いません。&lt;/p>
+Workerを使用するには実行したいファイル名を指定して呼びします。&lt;/p>
+&lt;p>そして、対象のワーカーに値などを&lt;strong>postMessage&lt;/strong>で値を渡します。&lt;br>
+postMessage部分は配列や連想配列のデータでも構いません。&lt;/p>
 &lt;p>そして、対象のWorker側でpostされたデータを受信するように設定します。&lt;br>
 受信の際はフロントであれば &lt;code>worker.addEventListener('message', (e) =&amp;gt; {})&lt;/code> を、Workerであれば &lt;code>self.addEventListener('message', (e) =&amp;gt; {})&lt;/code> を使用します。&lt;br>
-処理内容を返却する際は、先ほどと同じように postMessage を使います。&lt;/p>
+処理内容を返却する際は、先ほどと同じようにpostMessageを使います。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:main.js" data-lang="javascript:main.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">worker&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Worker&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fileName&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">worker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;run&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -6277,8 +6283,8 @@ postMessage 部分は配列や連想配列のデータでも構いません。&l
 &lt;span class="p">},&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>続いて、Worker部分の処理になります。&lt;br>
-worker部分ではフロントの worker_main.js から実行されたタイミングで動作を開始して、ループの値をフロントに戻すようにしてあります。&lt;br>
-ループが終了すると、mode: end と終わったことを通知するようにしました。&lt;/p>
+worker部分ではフロントのworker_main.jsから実行されたタイミングで動作を開始して、ループの値をフロントに戻すような処理を行います。&lt;br>
+ループが終了すると、&lt;code>mode: end&lt;/code>と終わったことを通知するようにしました。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:worker.js" data-lang="javascript:worker.js">&lt;span class="nx">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;message&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="c1">//処理内容
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
@@ -6301,10 +6307,10 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;/p>
 &lt;/video>
 &lt;/div>
-&lt;p>実行すると、先ほどと全く違うUIになっているかと思います。&lt;br>
+&lt;p>実行すると、先ほどとまったく違うUIになっているかと思います。&lt;br>
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。&lt;br>
-Workerなしの処理ではJavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。&lt;/p>
-&lt;h2 id="settimeoutでもできるけどおすすめはしない">setTimeoutでもできるけど、おすすめはしない&lt;/h2>
+Workerなしの処理ではjavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。&lt;/p>
+&lt;h2 id="settimeoutでもできるけどオススメｓはしない">setTimeoutでもできるけど、オススメｓはしない&lt;/h2>
 &lt;p>UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。&lt;br>
 この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:timer.js" data-lang="javascript:timer.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
@@ -6320,7 +6326,7 @@ Workerなしの処理ではJavascriptの処理が詰まってしまい、その�
 &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#time&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">classList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;run&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">};&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>数字部分は変化しますが、先程のようにアニメーションは行われません。&lt;br>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>数字部分は変化しますが、さきほどのようにアニメーションは行われません。&lt;br>
 forの処理が先に終了してしまうため、cssのアニメーションが一瞬で終了してしまうのです。&lt;/p>
 &lt;div class="video-wrapper">
 &lt;video
@@ -6335,10 +6341,10 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;/video>
 &lt;/div>
 &lt;h2 id="まとめ">まとめ&lt;/h2>
-&lt;p>Javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。&lt;br>
-Worker を使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。&lt;/p>
+&lt;p>javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。&lt;br>
+Workerを使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。&lt;/p>
 &lt;p>重い処理を行う際は、Workerを使って別タスクで行ってユーザーにストレスを与えないサイトを作っていきましょう。&lt;/p>
-&lt;h2 id="おすすめの書籍">おすすめの書籍&lt;/h2>
+&lt;h2 id="オススメの書籍">オススメの書籍&lt;/h2>
 &lt;aside class="amazon-box">
 &lt;a href="https://www.amazon.co.jp/%e3%82%b2%e3%83%bc%e3%83%a0%e3%81%a7%e5%ad%a6%e3%81%b6JavaScript%e5%85%a5%e9%96%80-HTML5-CSS%e3%82%82%e8%ba%ab%e3%81%ab%e4%bb%98%e3%81%8f-%e7%94%b0%e4%b8%ad-%e8%b3%a2%e4%b8%80%e9%83%8e/dp/4844339788/?tag=nlpqueens-22" target="_blank">
 &lt;div class="columns amazon-image">

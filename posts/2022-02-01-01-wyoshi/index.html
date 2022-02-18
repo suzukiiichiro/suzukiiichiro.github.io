@@ -5,25 +5,25 @@
 <link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
 <meta name=description content="UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。">
-<meta name=keywords content="プログラム,Designer,開発,web,wyoshi,HTML,Web designer,Front engineer,Corder,Javascript,Webデザイン,Webサイト開発,bash,CSS,サーバ">
-<title>Javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP</title>
+<meta name=keywords content="Program,Designer,Develop,web,HTML,Web designer,Front engineer,Corder,javascript,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<title>javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP</title>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
 <link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/>
-<meta property="og:title" content="Javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP">
+<meta property="og:title" content="javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP">
 <meta property="og:description" content="UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="プログラム"><meta property="article:tag" content="Designer"><meta property="article:tag" content="開発"><meta property="article:tag" content="web"><meta property="article:tag" content="wyoshi"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Web designer"><meta property="article:tag" content="Front engineer"><meta property="article:tag" content="Corder"><meta property="article:tag" content="Javascript"><meta property="article:published_time" content="2022-02-01T14:19:43+09:00"><meta property="article:modified_time" content="2022-02-15T17:31:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg">
-<meta name=twitter:title content="Javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="Program"><meta property="article:tag" content="Designer"><meta property="article:tag" content="Develop"><meta property="article:tag" content="web"><meta property="article:tag" content="HTML"><meta property="article:tag" content="Web designer"><meta property="article:tag" content="Front engineer"><meta property="article:tag" content="Corder"><meta property="article:tag" content="javascript"><meta property="article:published_time" content="2022-02-01T14:19:43+09:00"><meta property="article:modified_time" content="2022-02-18T10:52:49+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg">
+<meta name=twitter:title content="javascriptで画面ロックする場合は、Workerを使ってみよう｜NLP">
 <meta name=twitter:description content="UIロックが発生する場合は画面上の処理と、重い処理を分けることで表示させることが可能です。早速jsでその処理を実装して軽快なUIを作成しましょう。"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-02-01-01-wyoshi/catch.jpg'})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
-<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Javascriptで画面ロックする場合は、Workerを使ってみよう","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"],"datePublished":"2022-02-01T14:19:43+09:00","dateModified":"2022-02-15T17:31:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Javascriptで画面ロックする場合は、Workerを使ってみよう","item":"https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/"}]}]</script>
+<script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"javascriptで画面ロックする場合は、Workerを使ってみよう","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/web/"},"image":["https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/catch.jpg"],"datePublished":"2022-02-01T14:19:43+09:00","dateModified":"2022-02-18T10:52:49+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"wYoshi","url":["https://github.com/wYoshi","https://suzukiiichiro.github.io/authors/wyoshi/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"javascriptで画面ロックする場合は、Workerを使ってみよう","item":"https://suzukiiichiro.github.io/posts/2022-02-01-01-wyoshi/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -98,7 +98,7 @@ Web開発
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
-<li><span class=breadcrumb-item>Javascriptで画面ロックする場合は、Workerを使ってみよう</span>
+<li><span class=breadcrumb-item>javascriptで画面ロックする場合は、Workerを使ってみよう</span>
 </ol>
 </nav>
 <article class="has-image main-article">
@@ -114,15 +114,15 @@ Web開発
 </span>
 <time class="article-time--item article-time--published">2022.02.01</time>
 <time class="article-time--item article-time--updatedate">
-2022.02.15
+2022.02.18
 </time>
 <time class="article-time--item article-time--reading">
-読了時間: 6分
+読了時間: 7分
 </time>
 </div>
 </header>
 <h1 class=article-title>
-Javascriptで画面ロックする場合は、Workerを使ってみよう
+javascriptで画面ロックする場合は、Workerを使ってみよう
 </h1>
 </div>
 <section class="widget archives tableOfContents">
@@ -133,9 +133,9 @@ Javascriptで画面ロックする場合は、Workerを使ってみよう
 <li><a href=#uiをロックしてしまうループ処理>UIをロックしてしまうループ処理</a></li>
 <li><a href=#workerとは>Workerとは</a></li>
 <li><a href=#uiをロックしないで行えるループ>UIをロックしないで行えるループ</a></li>
-<li><a href=#settimeoutでもできるけどおすすめはしない>setTimeoutでもできるけど、おすすめはしない</a></li>
+<li><a href=#settimeoutでもできるけどオススメｓはしない>setTimeoutでもできるけど、オススメｓはしない</a></li>
 <li><a href=#まとめ>まとめ</a></li>
-<li><a href=#おすすめの書籍>おすすめの書籍</a></li>
+<li><a href=#オススメの書籍>オススメの書籍</a></li>
 </ol>
 </nav>
 </div>
@@ -143,13 +143,15 @@ Javascriptで画面ロックする場合は、Workerを使ってみよう
 <ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<p>Javascript で重い処理を書く際や for や while などのループを記述する際に気をつけないといけないのがUIロックです。</p>
-<p>特に重い処理を行うと、js の処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。</p>
-<p>そういったときは <strong>Worker</strong> を使って重い処理を別タスクとして実行することで、画面上の処理と、重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。</p>
-<p>今回はその方法を説明していきます。</p>
+<p>javascriptで重い処理を書く際やforやwhileなどのループを記述する際に気をつけないといけないのがUIロックです。</p>
+<p>とくに重い処理を行うと、jsの処理に力を使ってしまって画面が固まってUIなどの操作性が格段に落ちてしまい、ブラウザなどからは応答に時間がかかっておりますといったアラートが表示される原因になります。<br>
+画面ロックが発生してしまうと、ユーザーは何もできなくなってしまうのでブラウザを強制終了するしかありません。そうなってしまうと、せっかくサイトに来た訪問者が何もせずに離脱して行くことにつながってしまいます。場合によっては、そのような問題が発生するサイトには二度とこないかもしれません。</p>
+<p>そうした不具合や不具合やサイトの離脱を防ぐためにもjavascriptを使って重い処理をときは<strong>Worker</strong>を使って重い処理を別タスクとして実行することをオススメします。<br>
+画面上の処理と重い処理を分けることができ、その結果画面をロックすることなく表示させることが可能になります。</p>
+<p>今回はその方法を詳しく説明しますので、よろしくおねがいします。</p>
 <h2 id=uiをロックしてしまうループ処理>UIをロックしてしまうループ処理</h2>
 <p>まずは画面をロックしてしまうような記述です。<br>
-下記のような HTML があったとしましょう。</p>
+下記のようなHTMLがあったとしましょう。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-html:index.html data-lang=html:index.html><span class=cp>&lt;!DOCTYPE html&gt;</span>
 <span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;ja&#34;</span><span class=p>&gt;</span>
 <span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
@@ -184,9 +186,11 @@ Javascriptで画面ロックする場合は、Workerを使ってみよう
   <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;time&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
 <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
 <span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
-</code></pre></div><p>この HTML は counter 部分 に文字を出力できるようにしてあります。<br>
-そして、実行時間を time 部分に出力できるようにしてあります。</p>
-<p>それでは、ここに for 文を使って、文字を追加していってみます。</p>
+</code></pre></div><p>このHTMLはcounter部分に文字を出力できるようにしてあります。<br>
+そして、実行時間をtime部分に出力します。<br>
+あまり使うことはないですが、今回は重い処理を行った場合を再現するということでこのような形にしました。</p>
+<p>それでは、ここにfor文を使って文字を追加していってみましょう。今回はfor文が重い処理を行うという部分になります。<br>
+jsonやxml、データの解析や要素でforやwhile、eachなどを使うことは非常に多く、その後に何らかの処理を行うという記述もjavascriptを使っていれば高頻度で使用します。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:for01.js data-lang=javascript:for01.js><span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
   <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>add</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
   <span class=kr>const</span> <span class=nx>start</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span>
@@ -199,8 +203,10 @@ Javascriptで画面ロックする場合は、Workerを使ってみよう
 <span class=p>};</span>
 </code></pre></div><p>上のようなfor文で記述したスクリプトを作ってみました。<br>
 iの値をcounterに反映していくだけのものです。<br>
-まずはiの最大値を 100000 くらいで実行してみましょう。</p>
-<p>実行したところ、999999 と表示され、time部分の処理は 569 ミリ秒ということになります。</p>
+まずはiの最大値を100,000くらいで実行してみましょう。<br>
+10万件のデータをフロントで処理するなと思うかもしれませんが、あくまで重い処理を行うとどうなるかという実験です。<br>
+10万件でなくても、数千件のデータで入れ子のループ処理が記述されている場合などは画面ロックが発生する確率も上がっていきます。</p>
+<p>実行したところ、999,999と表示され、time部分の処理は569ミリ秒ということになります。</p>
 <div class=video-wrapper>
 <video controls src=img01.mp4 autoplay>
 <p>
@@ -209,19 +215,19 @@ Your browser doesn't support HTML5 video. Here is a
 </p>
 </video>
 </div>
-<p>ここで注目してほしいのが、counter の文字を変化させているにも関わらず、その文字が反映されていないという点です。<br>
-Chrome の Developper tool で確認しても、変化しているようではありますが、画面上では反映されていません。</p>
-<p>重い処理を行う場合をフロントで行うと、 UX の低下につながってしまいます。<br>
-そこで使うのが、 Worker 処理ということになります。</p>
+<p>ここで注目してほしいのが、counterの文字を変化させているにもかかわらず、その文字が反映されていないという点です。<br>
+ChromeのDevelopper tools（macの場合[⌘ + option + i], Windowsの場合[Ctrl + Shift + I]または、F12）で確認しても、変化しているようではありますが、画面上では反映されていません。</p>
+<p>重い処理を行う場合をフロントで行うと、 UX（ユーザー体験）の低下につながってしまいます。<br>
+そこで使うのが、 javascriptのタスクを別スレッドで実行できるWorker処理ということになります。</p>
 <h2 id=workerとは>Workerとは</h2>
-<p>Worker とはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。</p>
+<p>Workerとはバックグランド、つまり、裏の方で処理を行ってその結果をフロントに返却するということができる仕組みになります。</p>
 <p>フロントで処理を行わないので、画面ロックを発生させることなく重い処理を実行できます。<br>
-Worker を使用するには実行したいファイル名を指定して呼びします。</p>
-<p>そして、対象のワーカーに値などを <strong>postMessage</strong> で値を渡します。<br>
-postMessage 部分は配列や連想配列のデータでも構いません。</p>
+Workerを使用するには実行したいファイル名を指定して呼びします。</p>
+<p>そして、対象のワーカーに値などを<strong>postMessage</strong>で値を渡します。<br>
+postMessage部分は配列や連想配列のデータでも構いません。</p>
 <p>そして、対象のWorker側でpostされたデータを受信するように設定します。<br>
 受信の際はフロントであれば <code>worker.addEventListener('message', (e) => {})</code> を、Workerであれば <code>self.addEventListener('message', (e) => {})</code> を使用します。<br>
-処理内容を返却する際は、先ほどと同じように postMessage を使います。</p>
+処理内容を返却する際は、先ほどと同じようにpostMessageを使います。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:main.js data-lang=javascript:main.js><span class=kr>const</span> <span class=nx>worker</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Worker</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>fileName</span><span class=p>);</span>
 <span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
   <span class=nx>worker</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=s2>&#34;run&#34;</span><span class=p>);</span>
@@ -254,8 +260,8 @@ postMessage 部分は配列や連想配列のデータでも構いません。</
   <span class=p>},</span> <span class=kc>false</span><span class=p>);</span>
 <span class=p>};</span>
 </code></pre></div><p>続いて、Worker部分の処理になります。<br>
-worker部分ではフロントの worker_main.js から実行されたタイミングで動作を開始して、ループの値をフロントに戻すようにしてあります。<br>
-ループが終了すると、mode: end と終わったことを通知するようにしました。</p>
+worker部分ではフロントのworker_main.jsから実行されたタイミングで動作を開始して、ループの値をフロントに戻すような処理を行います。<br>
+ループが終了すると、<code>mode: end</code>と終わったことを通知するようにしました。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:worker.js data-lang=javascript:worker.js><span class=nx>self</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
   <span class=c1>//処理内容
 </span><span class=c1></span>  <span class=k>for</span><span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=mi>100000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
@@ -274,10 +280,10 @@ Your browser doesn't support HTML5 video. Here is a
 </p>
 </video>
 </div>
-<p>実行すると、先ほどと全く違うUIになっているかと思います。<br>
+<p>実行すると、先ほどとまったく違うUIになっているかと思います。<br>
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。<br>
-Workerなしの処理ではJavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。</p>
-<h2 id=settimeoutでもできるけどおすすめはしない>setTimeoutでもできるけど、おすすめはしない</h2>
+Workerなしの処理ではjavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。</p>
+<h2 id=settimeoutでもできるけどオススメｓはしない>setTimeoutでもできるけど、オススメｓはしない</h2>
 <p>UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。<br>
 この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:timer.js data-lang=javascript:timer.js><span class=kr>const</span> <span class=nx>run</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
@@ -293,7 +299,7 @@ Workerなしの処理ではJavascriptの処理が詰まってしまい、その�
   <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;#time&#34;</span><span class=p>).</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span> <span class=o>-</span> <span class=nx>start</span><span class=p>;</span>
   <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>remove</span><span class=p>(</span><span class=s1>&#39;run&#39;</span><span class=p>);</span>
 <span class=p>};</span>
-</code></pre></div><p>数字部分は変化しますが、先程のようにアニメーションは行われません。<br>
+</code></pre></div><p>数字部分は変化しますが、さきほどのようにアニメーションは行われません。<br>
 forの処理が先に終了してしまうため、cssのアニメーションが一瞬で終了してしまうのです。</p>
 <div class=video-wrapper>
 <video controls src=img03.mp4 autoplay>
@@ -304,10 +310,10 @@ Your browser doesn't support HTML5 video. Here is a
 </video>
 </div>
 <h2 id=まとめ>まとめ</h2>
-<p>Javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。<br>
-Worker を使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。</p>
+<p>javascriptを使っていると思い処理も当然行う場合があります。そうしたときに、フロントで処理をしてしまうとローディングなどのアニメーションが正しく行われなかったりする原因になってしまいます。<br>
+Workerを使って、処理を別タスクとしてやることで正しくローディングなどを表示させることが可能です。</p>
 <p>重い処理を行う際は、Workerを使って別タスクで行ってユーザーにストレスを与えないサイトを作っていきましょう。</p>
-<h2 id=おすすめの書籍>おすすめの書籍</h2>
+<h2 id=オススメの書籍>オススメの書籍</h2>
 <aside class=amazon-box>
 <a href="https://www.amazon.co.jp/%e3%82%b2%e3%83%bc%e3%83%a0%e3%81%a7%e5%ad%a6%e3%81%b6JavaScript%e5%85%a5%e9%96%80-HTML5-CSS%e3%82%82%e8%ba%ab%e3%81%ab%e4%bb%98%e3%81%8f-%e7%94%b0%e4%b8%ad-%e8%b3%a2%e4%b8%80%e9%83%8e/dp/4844339788/?tag=nlpqueens-22" target=_blank>
 <div class="columns amazon-image">
@@ -340,6 +346,144 @@ Worker を使って、処理を別タスクとしてやることで正しくロ�
 <section class="section related-contents--wrapper">
 <h2 class=section-title>関連するコンテンツ</h2>
 <div class=article-list>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_400x0_resize_box_3.png 2x" media="(min-width: 769px)" width=200 height=200>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_100x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_100x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 2x" media="(max-width: 768px)" width=100 height=100>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_400x0_resize_box_3.png 2x" width=200 height=200 loading=lazy alt=第0回のテーマ「Webデザイナー、コーダーってなに？」>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>第0回のテーマ「Webデザイナー、コーダーってなに？」</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>第0回「Webデザイナー、コーダーってなに？」にです。この講座では現役Web開発者がWeb業界を目指す方に様々な情報をわかりやすい解説しています。 はじめに 「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コー…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.02.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=111>
+<source src=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=56>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_400x0_resize_q75_box.jpg 2x" width=200 height=111 loading=lazy alt=CSSだけで簡単に1行や複数行の3点リーダーを付ける方法>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>CSSだけで簡単に1行や複数行の3点リーダーを付ける方法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.02.17</time>
+</div><p class=article-subtitle>この方法を知っていれば、1行でも複数行でも3点リーダーを表示でき、レスポンシブルデザインのようなマルチデバイスでもレイアウトが崩れずに表示可能です HTMLのレイアウトでは時には文字がはみ出した際に、3点リーダーと呼ばれる「…」をつける場合があります。 普通に記述してしまえば対応できますが…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.24>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=150>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=75>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-wyoshi/catch_hu63ed63126958850caf33a21e9ed1b17d_111773_400x0_resize_q75_box.jpg 2x" width=200 height=150 loading=lazy alt=SVGとCSSでおしゃれでクールな最新のデザインにする>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>SVGとCSSでおしゃれでクールな最新のデザインにする</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.24</time>
+</div><p class=article-subtitle>SVGとCSSのみでマルチデバイスの最新トレンドデザインを実装。マスク処理も可能で時間と労力を節約できて、サイトのパフォーマンスも向上します。 出典元：Building UI Components With SVG and CSS - Ahmad Shadeed SVGはアイコンやイラストだけでなく、開発者が時々忘れてしまう隠れた力をたくさん持っています。 CS…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.20>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=135>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=68>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_400x0_resize_q75_box.jpg 2x" width=200 height=135 loading=lazy alt=2022年のWebデザインの最新トレンドとレイアウト>
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年のWebデザインの最新トレンドとレイアウト</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.20</time>
+</div><p class=article-subtitle>2022年に期待されるトレンドは？クリエイターは、より「良い」ウェブデザインとされるものの境界を押し広げています。最新トレンドを取り入れましょう。 出典元：Web design trends for 2022 | Layout この2年間で学んだことは、私たちは常に新しいものに適応し続けなければならないということです。2022年に向けて、デ…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.19>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=67>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-01-wyoshi/catch_huc19f2e42c6c13af74652a676a595a4af_55602_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="CSSでもできる！知っておくべき重要なヒントとコツ 8選 8選">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>CSSでもできる！知っておくべき重要なヒントとコツ 8選 8選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.19</time>
+</div><p class=article-subtitle>わずか数行のコードでCSSで洗練されたデザインを作成可能。jsで実装していたことがCSSでも！？そんな効率的に開発するためのテクニックを紹介しています 出典元：8 Essential CSS Tips and Tricks Every Developer Should Know CSSは、HTMLスケルトンを設定した後、Webページにスタイルを追加するために使用されます。さらに、わずか数行…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2022.01.17>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=135>
+<source src=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=68>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_400x0_resize_q75_box.jpg 2x" width=200 height=135 loading=lazy alt="2022年に注目すべきモバイルアプリ開発トレンド 15選">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+Web開発
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>2022年に注目すべきモバイルアプリ開発トレンド 15選</h2><div class=article-time>
+<time class="article-time--item article-time--published">2022.01.17</time>
+</div><p class=article-subtitle>モバイルアプリ開発の新しいトレンドが数多く出現していますが、今回はモバイルアプリ開発のトレンドのTOP15を取り上げます。注目のトレンド満載です。 出典元：Top 15 Mobile App Development Trends to Watch for in 2022 モバイルアプリ開発業界は、驚異的なスピードで進化しています。このデジタルダーウィン時代に生き残り、繁栄する…</p>
+</div>
+</a>
+</article>
 <article class="has-image article-item" data-date=2022.02.04>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-04-01-wyoshi/>
 <header class=article-header>
@@ -386,158 +530,19 @@ Web開発
 </div>
 </a>
 </article>
-<article class="has-image article-item" data-date=2022.01.27>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=200>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=100>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-27-01-wyoshi/catch_huc49a39ca3161145aca5fe042a7423360_209786_400x0_resize_q75_box.jpg 2x" width=200 height=200 loading=lazy alt="Amazon EC2でもGo言語とHugoを使えるようにする方法">
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>Amazon EC2でもGo言語とHugoを使えるようにする方法</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.27</time>
-</div><p class=article-subtitle>AWSのEC2にGo言語とHugoをインストールして、Webサイトを簡単に、最速で作成する手順を詳細に解説してます。Github Pagesからの移行も可能になります HugoをGitHub Pagesで展開していたのですが、今回はGitHub Pagesではなく、Amazon EC2にHugoをインストールして…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.18>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=107>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=53>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-18-01-wyoshi/catch_hu7b0d7bf6b0518dcefbd34462cf17def3_20503_400x0_resize_q75_box.jpg 2x" width=200 height=107 loading=lazy alt=ファビコンは1サイズのみ！さらにダークモード対応させる>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>ファビコンは1サイズのみ！さらにダークモード対応させる</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.18</time>
-</div><p class=article-subtitle>Webサイトをダークモード化、用意するファイルの数は1サイズでOK。綺麗なファビコン表示と、ファビコンをダークモード化する方法を詳しく説明します。 最近ダークモードと呼ばれる機能に対応したアプリが増え、それと同じようにWebサイトでもダークモードに対応しているものを見かけるようになりまし…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.07>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-07-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=SEO対策にXMLの更新日（lastmod）を正しく表示する方法>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>SEO対策にXMLの更新日（lastmod）を正しく表示する方法</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.07</time>
-</div><p class=article-subtitle>SEO対策必見。Hugoのサイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決 方法を詳細に説明しています。 Hugoを使って記事を作成しているのですが、サイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決策を今回は探…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.02.14>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=101>
-<source src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=51>
-<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_400x0_resize_q75_box.jpg 2x" width=200 height=101 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.02.14</time>
-</div><p class=article-subtitle>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.26>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=139>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=100 height=70>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_400x0_resize_q75_box.jpg 2x" width=200 height=139 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.26</time>
-</div><p class=article-subtitle>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.20>
-<a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/>
-<header class=article-header>
-<div class=article-image>
-<picture class=picture>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_400x0_resize_box_3.png 2x" media="(min-width: 769px)" width=200 height=200>
-<source src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_100x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_100x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 2x" media="(max-width: 768px)" width=100 height=100>
-<img src=https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_200x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/posts/2022-01-20-01-wyoshi/catch_hu3a64f66fd9809c30bb076df824d97a59_1036155_400x0_resize_box_3.png 2x" width=200 height=200 loading=lazy alt=第0回のテーマ「Webデザイナー、コーダーってなに？」>
-</picture>
-</div>
-<div class=article-category>
-<span class=article-category-item>
-Web開発
-</span>
-</div>
-</header>
-<div class=article-details>
-<h2 class=article-title>第0回のテーマ「Webデザイナー、コーダーってなに？」</h2><div class=article-time>
-<time class="article-time--item article-time--published">2022.01.20</time>
-</div><p class=article-subtitle>第0回「Webデザイナー、コーダーってなに？」にです。この講座では現役Web開発者がWeb業界を目指す方に様々な情報をわかりやすい解説しています。 はじめに 「未経験でもWebデザイナー、コーダーになろう」ではWebデザイナーやコーダーなどWeb業界を目指す方に、現役Webデザイナー兼コー…</p>
-</div>
-</a>
-</article>
 </div>
 </section>
 <footer class=article-footer>
 <section class=article-tags>
-<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/program/>Program</a>
 <a href=https://suzukiiichiro.github.io/tags/designer/>Designer</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/develop/>Develop</a>
 <a href=https://suzukiiichiro.github.io/tags/web/>Web</a>
-<a href=https://suzukiiichiro.github.io/tags/wyoshi/>wyoshi</a>
 <a href=https://suzukiiichiro.github.io/tags/html/>HTML</a>
 <a href=https://suzukiiichiro.github.io/tags/web-designer/>Web designer</a>
 <a href=https://suzukiiichiro.github.io/tags/front-engineer/>Front engineer</a>
 <a href=https://suzukiiichiro.github.io/tags/corder/>Corder</a>
-<a href=https://suzukiiichiro.github.io/tags/javascript/>Javascript</a>
+<a href=https://suzukiiichiro.github.io/tags/javascript/>javascript</a>
 </section>
 </footer>
 <div class=article-pager>
