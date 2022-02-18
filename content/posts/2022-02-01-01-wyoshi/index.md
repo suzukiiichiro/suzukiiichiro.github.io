@@ -184,9 +184,23 @@ self.addEventListener('message', (e) => {
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。
 Workerなしの処理ではjavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。
 
+#### Workerは並列で処理を行える
+画面ロックを防ぐ他に、WebWorkerには便利な機能があります。通常、javascriptはシングルスレッドなので並列（マルチスレッド）で処理を行うことができません
+が、WebWorkerを用いることで、複数の処理を同時に行うことが可能になります。
 
+- フロントに関係のないデータの処理
+- 重い処理
 
-## setTimeoutでもできるけど、オススメｓはしない
+上記のような処理をフロントで行うと、画面ロックが発生する原因となるほか、修正なども大変になりますが、webWorkerとして別にjavascriptを用意して実行されるようにしておくことで、メンテナンス性とユーザービリティーが向上します。
+
+並列処理と聞くとpromiseなどを考えるかと思いますが、promiseは非同期処理であり、並列で処理は行いません。
+
+WebWorkerを使用する上で注意すべきなのは、documentなどのフロントにある要素にはアクセスできないので、document.writeやdocument.querySelectorなどを使用できません。どうしても使用する場合は、変数としてworkerに対してpostするようにしましょう。
+
+利用できる関数やAPIなどが下記に一覧で記載されているので参考にしてください。
+[Web Workers が使用できる関数とクラス](https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers)
+
+## setTimeoutでもできるけど、オススメしない
 UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。
 この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。
 
