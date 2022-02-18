@@ -6310,7 +6310,7 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;p>実行すると、先ほどとまったく違うUIになっているかと思います。&lt;br>
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。&lt;br>
 Workerなしの処理ではjavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。&lt;/p>
-&lt;h4 id="workerは並列で処理を行える">Workerは並列で処理を行える&lt;/h4>
+&lt;h3 id="workerは並列で処理を行える">Workerは並列で処理を行える&lt;/h3>
 &lt;p>画面ロックを防ぐ他に、WebWorkerには便利な機能があります。通常、javascriptはシングルスレッドなので並列（マルチスレッド）で処理を行うことができません&lt;br>
 が、WebWorkerを用いることで、複数の処理を同時に行うことが可能になります。&lt;/p>
 &lt;ul>
