@@ -6310,7 +6310,20 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;p>実行すると、先ほどとまったく違うUIになっているかと思います。&lt;br>
 実はRunを押したタイミングで、ボタンを赤くして、上の四角が回転するようにしてありました。&lt;br>
 Workerなしの処理ではjavascriptの処理が詰まってしまい、その部分の処理が正しく表示されていなかったということになります。&lt;/p>
-&lt;h2 id="settimeoutでもできるけどオススメｓはしない">setTimeoutでもできるけど、オススメｓはしない&lt;/h2>
+&lt;h4 id="workerは並列で処理を行える">Workerは並列で処理を行える&lt;/h4>
+&lt;p>画面ロックを防ぐ他に、WebWorkerには便利な機能があります。通常、javascriptはシングルスレッドなので並列（マルチスレッド）で処理を行うことができません&lt;br>
+が、WebWorkerを用いることで、複数の処理を同時に行うことが可能になります。&lt;/p>
+&lt;ul>
+&lt;li>フロントに関係のないデータの処理&lt;/li>
+&lt;li>重い処理&lt;/li>
+&lt;/ul>
+&lt;p>上記のような処理をフロントで行うと、画面ロックが発生する原因となるほか、修正なども大変になりますが、webWorkerとして別にjavascriptを用意して実行されるようにしておくことで、メンテナンス性とユーザービリティーが向上します。&lt;/p>
+&lt;p>並列処理と聞くとpromiseなどを考えるかと思いますが、promiseは非同期処理であり、並列で処理は行いません。&lt;/p>
+&lt;p>WebWorkerを使用する上で注意すべきなのは、documentなどのフロントにある要素にはアクセスできないので、document.writeやdocument.querySelectorなどを使用できません。どうしても使用する場合は、変数としてworkerに対してpostするようにしましょう。&lt;/p>
+&lt;p>利用できる関数やAPIなどが下記に一覧で記載されているので参考にしてください。&lt;br>
+&lt;a class="link" href="https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers" target="_blank" rel="noopener"
+>Web Workers が使用できる関数とクラス&lt;/a>&lt;/p>
+&lt;h2 id="settimeoutでもできるけどオススメしない">setTimeoutでもできるけど、オススメしない&lt;/h2>
 &lt;p>UIのロックを防ぐ方法として、setTimeoutを使う方法もあります。&lt;br>
 この方法はworkerを使っていないのですが、setTimeoutを使用することで別タスクとして処理させることができます。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript:timer.js" data-lang="javascript:timer.js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">run&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
