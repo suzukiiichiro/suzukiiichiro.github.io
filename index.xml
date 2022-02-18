@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 17 Feb 2022 17:25:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</link><pubDate>Thu, 17 Feb 2022 17:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess.jpg" alt="Featured image of post 第9回 pythonでNQueen（エイトクイーン）対象解除法（2）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 18 Feb 2022 18:25:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第10回 pythonでNQueen（エイトクイーン）対象解除法（3）</title><link>https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/</link><pubDate>Fri, 18 Feb 2022 18:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess.jpg" alt="Featured image of post 第10回 pythonでNQueen（エイトクイーン）対象解除法（3）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
+&lt;p>今回も引き続き、対象解除法が正しいかどうかを検証するためプログラムを改造したいと思います。&lt;br>
+前回は出力結果を目視で検証しないとだめでしたが今回はプログラム内で検証できるようにしたいと思います。&lt;/p>
+&lt;p>プログラムソースは以下のURLにあります。 &lt;br>
+&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
+>https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py&lt;/a>&lt;/p>
+&lt;h2 id="プログラム内で検証する方法">プログラム内で検証する方法&lt;/h2>
+&lt;p>前回の試みでABORDを使えばプログラムで全ての解のクイーンの配置の出力はできそうです。&lt;/p>
+&lt;p>stotal が2,4,8のものについて出力結果を回転させてクイーンの配置を作ることができれば、両者を比較して解の数、クイーンの配置が全て同じであれば対象解除法が正しいと言えそうです。&lt;/p>
+&lt;p>プログラムでABOARDを回転させるにはどうすれば良いでしょう。&lt;br>
+symmetryopsはメソッド内でABOARDを回転させてクイーンの配置をチェックしています。&lt;br>
+vmirrorメソッドが左右反転、rotateメソッドが90度回転です。&lt;br>
+これらのメソッドを利用して出力結果を回転させるプログラムを作ってみましょう。&lt;/p>
+&lt;h2 id="vmirror">vmirror&lt;/h2></description></item><item><title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</link><pubDate>Thu, 17 Feb 2022 17:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess.jpg" alt="Featured image of post 第9回 pythonでNQueen（エイトクイーン）対象解除法（2）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
 &lt;p>今回は対象解除法が正しいかどうかを検証するためプログラムを改造してクイーンを設置した場所を出力するようにしてみましょう。&lt;/p>
 &lt;p>プログラムソースは以下のURLにあります。 &lt;br>
 &lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
