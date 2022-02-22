@@ -1,6 +1,5 @@
 {{- $image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
 
-
 {{ $pdate :="" }}
 {{ if not .Date.IsZero }}
   {{$pdate = .Date.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") }}
@@ -23,17 +22,13 @@
             {{- $thumbnail := $image.resource.Resize "200x" -}}
             {{- $thumbnailRetina := $image.resource.Resize "400x" -}}
 
-            {{- $thumbnailSP := $image.resource.Resize "100x" -}}
-
             {{- $Srcset = printf "%s 1x, %s 2x" $thumbnail.RelPermalink $thumbnailRetina.RelPermalink -}}
-            {{- $SrcsetSP := printf "%s 1x, %s 2x" $thumbnailSP.RelPermalink $thumbnail.RelPermalink -}}
 
             {{- $Permalink = $thumbnail.RelPermalink -}}
             {{- $Width = $thumbnail.Width -}}
             {{- $Height = $thumbnail.Height -}}
             <picture class="picture">
-              <source src="{{ $thumbnail.RelPermalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} media="(min-width: 769px)" width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}" />
-              <source src="{{ $thumbnailSP.RelPermalink }}" {{ with $SrcsetSP }} srcset="{{ . }}" {{ end }} media="(max-width: 768px)" width="{{ $thumbnailSP.Width }}" height="{{ $thumbnailSP.Height }}" />
+              <source {{ with $Srcset }} srcset="{{ . }}" {{ end }} media="(min-width: 769px)" width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}" />
               <img src="{{ $Permalink }}" {{ with $Srcset }} srcset="{{ . }}" {{ end }} width="{{ $Width }}" height="{{ $Height }}" loading="lazy" alt="{{ .Title }}" />
             </picture>
           {{- else -}}

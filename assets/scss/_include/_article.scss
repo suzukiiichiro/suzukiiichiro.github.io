@@ -301,6 +301,7 @@
           margin: 10px 0 0;
         }
         @include mq(smp) {
+          font-size: 0.8rem;
           margin: 0 5px 0;
         }
         .article-title {
@@ -308,6 +309,7 @@
           line-height: 1.4;
           margin: 0 0 15px;
           @include mq(smp) {
+            font-size: 1.2em;
             margin-bottom: 5px;
           }
         }
@@ -318,10 +320,10 @@
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           @include mq(smp) {
-            line-height: 1.2;
+            line-height: 1.4;
             margin: 0;
             padding: 0;
-            font-size: 0.6rem;
+            font-size: 0.8em;
             color: var(--card-text-color-tertiary);
             @include mq(smp) {
               -webkit-line-clamp: 5;

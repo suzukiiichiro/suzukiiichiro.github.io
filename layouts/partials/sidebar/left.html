@@ -110,7 +110,7 @@
       </div>
     </div>
     {{ if (default false .Site.Params.colorScheme.toggle) }}
-    <button type="button" id="dark-mode-toggle">
+    <button type="button" id="dark-mode-toggle" aria-label="画面の明るさ切り替え">
       {{ partial "helper/icon" "toggle-left" }}
       {{ partial "helper/icon" "toggle-right" }}
       <!-- <span>{{ T "darkMode" }}</span> -->

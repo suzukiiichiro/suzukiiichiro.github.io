@@ -5,7 +5,7 @@ theme: hugo-theme-stack
 # theme: ananke
 # publishDir: "docs"
 canonifyurls: true
-paginate: 15
+paginate: 10
 timeout: 60000
 
 # Change it to your Disqus shortname before using
