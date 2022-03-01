@@ -3,9 +3,9 @@
 
 {{ if .Data.Singular }}
 <meta name="robots" content="noindex">
-{{ else if in .Site.Params.sitemap.exclude (index (split .URL "/") 1) }} 
+{{ else if in .Site.Params.sitemap.exclude (index (split .RelPermalink "/") 1) }} 
 <meta name="robots" content="noindex">
-{{ else if in .Site.Params.sitemap.exclude_url .URL }} 
+{{ else if in .Site.Params.sitemap.exclude_url .RelPermalink }} 
 <meta name="robots" content="noindex">
 {{ end }}
 
@@ -29,14 +29,18 @@
 {{- partial "head/script.html" . -}}
 
 {{- if .Paginator }}
-{{- if .Paginator.HasPrev }}
-<link rel="prev" href="{{ .Paginator.Prev.URL }}" />
-{{- end }}
-{{- if .Paginator.HasNext }}
-<link rel="next" href="{{ .Paginator.Next.URL }}" />
-{{- end }}
-<link rel='canonical' href='{{ .Paginator.First.URL }}'>
-{{- else }}
+  {{- if .Paginator.HasPrev -}}
+    {{- if eq .Paginator.Prev.PageNumber 1 -}}
+      <link rel="prev" href="{{ .Permalink }}" />
+    {{- else -}}
+      <link rel="prev" href="{{ .Permalink }}page/{{ .Paginator.Prev.PageNumber }}/" />
+    {{- end -}}
+  {{- end -}}
+  {{- if .Paginator.HasNext }}
+  <link rel="next" href="{{ .Permalink }}page/{{ .Paginator.Next.PageNumber }}/" />
+  {{- end }}
+  <link rel='canonical' href='{{ .Permalink }}'>
+  {{- else }}
 <link rel='canonical' href='{{ .Permalink }}'>
 {{- end }}
 

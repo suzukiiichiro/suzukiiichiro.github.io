@@ -19,7 +19,7 @@
     <h1 class="title">{{- $title -}}</h1>
     {{- $ranks := slice -}}
     {{- range where .Site.Pages "Section" "ranking" -}}
-      {{- if ne .URL "/ranking/" -}}
+      {{- if ne .RelPermalink "/ranking/" -}}
       {{- $ranks = $ranks | append .}}
       {{- end -}}
     {{- end -}}

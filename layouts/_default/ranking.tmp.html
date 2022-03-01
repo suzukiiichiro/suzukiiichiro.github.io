@@ -16,12 +16,12 @@
       {{- $currentPage := . -}}
       {{- range where .Site.Pages "Section" "ranking" -}}
         {{- $active := or (eq $currentPage.Title .Name) -}}
-        {{- if ne .URL "/ranking/" -}}
+        {{- if ne .RelPermalink "/ranking/" -}}
          {{- $title := .Title -}}
          {{- if .Params.slugTitle -}}
           {{- $title = .Params.slugTitle -}}
          {{- end -}}
-         <li {{ if $active }} class="current" {{ end }}><a href="{{- .URL | relLangURL -}}">{{- $title -}}</a></li>
+         <li {{ if $active }} class="current" {{ end }}><a href="{{- .Permalink -}}">{{- $title -}}</a></li>
         {{- end -}}
       {{- end -}}
       </ul>

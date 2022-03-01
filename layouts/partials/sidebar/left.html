@@ -52,7 +52,7 @@
     <ol class="social-menu">
       {{ range . }}
       <li>
-        <a href='{{ .URL }}' {{ if eq (default true .Params.newTab) true }} target="_blank" {{ end }} {{ with .Name }} title="{{ . }}" {{ end }}>
+        <a href='{{ .Permalink }}' {{ if eq (default true .Params.newTab) true }} target="_blank" {{ end }} {{ with .Name }} title="{{ . }}" {{ end }}>
           {{ $icon := default "link" .Params.Icon }}
           {{ with $icon }}
           {{ partial "helper/icon" . }}
@@ -70,7 +70,7 @@
           <li><a href="{{ .Site.BaseURL | relLangURL }}" id="link-top">TOP</a></li>
           {{ with .Site.GetPage "/categories" }}
           <li>
-            <a href="{{ .URL | relLangURL }}" id="link-category">カテゴリ</a>
+            <a href="{{ .Page.RelPermalink | relLangURL }}" id="link-category">カテゴリ</a>
             <ul class="menu-list">
               {{ range first .Site.Params.widgets.categories.limit .Site.Taxonomies.categories.ByCount }}
               <li>
@@ -96,7 +96,7 @@
           {{- range (sort $menu ".Params.menu.main.weight" "asc") -}}
             {{- $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) -}}
             <li {{ if $active }} class='current' {{ end }}>
-              <a href='{{- .URL | relLangURL -}}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
+              <a href='{{- .Page.RelPermalink | relLangURL -}}' {{ if eq .Params.newTab true }} target="_blank" {{ end }}>
                 {{- $title := .Name -}}
                 {{- if .Page.Params.slugTitle -}}
                 {{- $title = .Page.Params.slugTitle -}}
