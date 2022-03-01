@@ -6,8 +6,7 @@
 <link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
 <meta name=description content="Google Custom Search APIの検索結果をjqでパースする方法を説明します。｜最新技術やプログラム、デザインなど様々な情報を提供するサイト">
 <meta name=keywords content="e-Stat,データマイニング,プログラム,Webデザイン,Webサイト開発,bash,CSS,サーバ">
-<title>e-Stat でGoogle Custom Search APIを使おう（３）｜NLP</title>
-<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
+<title>e-Stat でGoogle Custom Search APIを使おう（３）｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
 <link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
@@ -21,12 +20,11 @@
 <meta name=twitter:description content="Google Custom Search APIの検索結果をjqでパースする方法を説明します。｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2022-01-20-01-ani/anal.jpg'})</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2022-01-20-01-ani/anal.jpg"})</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"e-Stat でGoogle Custom Search APIを使おう（３）","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/anal.jpg"],"datePublished":"2022-01-20T17:50:13+09:00","dateModified":"2022-02-14T18:12:52+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"anikotaro","url":["https://github.com/anikotaro"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"e-Stat でGoogle Custom Search APIを使おう（３）","item":"https://suzukiiichiro.github.io/posts/2022-01-20-01-ani/"}]}]</script>
-</head>
-<body class=article-page>
-<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+</head><body class=article-page>
+<script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script>
 <div class="container main-container flex
 on-phone--column extended">
 <div class="sidebar left-sidebar sticky">
@@ -41,36 +39,26 @@ on-phone--column extended">
 <source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30>
 <img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP>
 </picture>
-</a></div>
-<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
-<div id=main-menu>
+</a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu>
 <div id=main-menu-area>
 <nav class="menu menu-section" id=categories-menu>
 <ul class=menu-list id=main-cat>
-<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
-<li>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li>
 <a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
 <ul class=menu-list>
 <li>
 <a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_73>
 プログラミング
 </a>
-</li>
-<li>
+</li><li>
 <a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>
 Web開発
 </a>
-</li>
-<li>
+</li><li>
 <a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>
 サーバー構築
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-<nav>
+</li></ul></li></ul></nav><nav>
 <ol class="menu menu-section"><li>
 <a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span>
 </a>
@@ -86,30 +74,22 @@ Web開発
 </li><li>
 <a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span>
 </a>
-</li></ol>
-</nav>
-</div>
-</div>
-<button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
 </button>
-</div>
-<main class="main full-width">
+</div><main class="main full-width">
 <nav class=breadcrumb-area>
 <ol class=breadcrumb>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
 <li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a>
 <li><span class=breadcrumb-item>e-Stat でGoogle Custom Search APIを使おう（３）</span>
-</ol>
-</nav>
-<article class="has-image main-article">
+</ol></nav><article class="has-image main-article">
 <div class="article-details arcile-single">
 <header class=article-header>
 <div class=article-category>
 <a href=https://suzukiiichiro.github.io/categories/programming/>
 プログラミング
 </a>
-</div>
-<div class=article-info>
+</div><div class=article-info>
 <span class="article-time--item article-time--author"><span class=name>anikotaro</span>
 </span>
 <time class="article-time--item article-time--published">2022.01.20</time>
@@ -119,99 +99,73 @@ Web開発
 <time class="article-time--item article-time--reading">
 読了時間: 4分
 </time>
-</div>
-</header>
-<h1 class=article-title>
+</div></header><h1 class=article-title>
 e-Stat でGoogle Custom Search APIを使おう（３）
-</h1>
-</div>
-<section class="widget archives tableOfContents">
-<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
-<div class=widget--toc>
+</h1></div><section class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc>
 <nav id=TableOfContents>
 <ol>
-<li><a href=#google-custom-searchの検索結果をcsvに整形する>google Custom Searchの検索結果をcsvに整形する</a></li>
-<li><a href=#jqのインストール>jqのインストール</a></li>
-<li><a href=#jqを使ってgoogle-custom-searchの検索結果をjsonをパースする>jqを使ってgoogle Custom Searchの検索結果をjsonをパースする</a></li>
-<li><a href=#プログラムの内容出力結果>プログラムの内容、出力結果</a></li>
-</ol>
-</nav>
-</div>
-</section>
-<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<li><a href=#google-custom-searchの検索結果をcsvに整形する>google Custom Searchの検索結果をcsvに整形する</a></li><li><a href=#jqのインストール>jqのインストール</a></li><li><a href=#jqを使ってgoogle-custom-searchの検索結果をjsonをパースする>jqを使ってgoogle Custom Searchの検索結果をjsonをパースする</a></li><li><a href=#プログラムの内容出力結果>プログラムの内容、出力結果</a></li></ol></nav></div></section><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class=article-content>
-<h2 id=google-custom-searchの検索結果をcsvに整形する>google Custom Searchの検索結果をcsvに整形する</h2>
-<p>統計データから列名を取得してgoogle Custom Searchの検索結果に当てに行きマッチする回数の高い列名を社会的関心の高い項目に設定したいと思います。<br>
-全開でgoogle Custom Searchの検索の絞り込みができたのでAPIを叩く回数は統計名ごとに3回にしたいと思います。</p>
-<p>start パラメータを1から開始して10ずつインクリメントしていきます。</p>
-<pre tabindex=0><code>curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=1'
+<h2 id=google-custom-searchの検索結果をcsvに整形する>google Custom Searchの検索結果をcsvに整形する</h2><p>統計データから列名を取得してgoogle Custom Searchの検索結果に当てに行きマッチする回数の高い列名を社会的関心の高い項目に設定したいと思います。<br>
+全開でgoogle Custom Searchの検索の絞り込みができたのでAPIを叩く回数は統計名ごとに3回にしたいと思います。</p><p>start パラメータを1から開始して10ずつインクリメントしていきます。</p><pre tabindex=0><code>curl -s &#39;https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=1&#39;
 
-curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=11'
+curl -s &#39;https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=11&#39;
 
-curl -s 'https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=21'
+curl -s &#39;https://www.googleapis.com/customsearch/v1?key=xxxxxxxxxxx&amp;cx=xxxxxx&amp;q=人権侵犯事件統計&amp;start=21&#39;
 </code></pre><p>3回APIを叩いた結果に対してマッチングをかけていきたいと思うのですが、google Custom Searchの検索結果を見やすくするため前準備としてcsvに整形したいと思います。<br>
-google Custom Searchの検索結果はjsonですがjsonのパースはjqを使います。</p>
-<h2 id=jqのインストール>jqのインストール</h2>
-<p>jqのインストールは簡単です。</p>
-<pre tabindex=0><code>brew install jq
-</code></pre><h2 id=jqを使ってgoogle-custom-searchの検索結果をjsonをパースする>jqを使ってgoogle Custom Searchの検索結果をjsonをパースする</h2>
-<pre tabindex=0><code>  &quot;items&quot;: [
+google Custom Searchの検索結果はjsonですがjsonのパースはjqを使います。</p><h2 id=jqのインストール>jqのインストール</h2><p>jqのインストールは簡単です。</p><pre tabindex=0><code>brew install jq
+</code></pre><h2 id=jqを使ってgoogle-custom-searchの検索結果をjsonをパースする>jqを使ってgoogle Custom Searchの検索結果をjsonをパースする</h2><pre tabindex=0><code>  &#34;items&#34;: [
   ¦ {
-  ¦ ¦ &quot;kind&quot;: &quot;customsearch#result&quot;,
-  ¦ ¦ &quot;title&quot;: &quot;昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞&quot;,
-  ¦ ¦ &quot;htmlTitle&quot;: &quot;昨年の\u003cb\u003e人権侵犯事件\u003c/b\u003e いじめ、教員関係が半減 | 教育新聞&quot;,
-  ¦ ¦ &quot;link&quot;: &quot;https://www.kyobun.co.jp/news/20210323_03/&quot;,
-  ¦ ¦ &quot;displayLink&quot;: &quot;www.kyobun.co.jp&quot;,
-  ¦ ¦ &quot;snippet&quot;: &quot;2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...&quot;,
-  ¦ ¦ &quot;htmlSnippet&quot;: &quot;2021/03/23 \u003cb\u003e...\u003c/b\u003e それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した\u003cb\u003e人権侵犯事件\u003c/b\u003eは9589件で、前年よりも5831件減少。同省の担当者は「他の\u003cb\u003e統計\u003c/b\u003e&amp;nbsp;...&quot;,
+  ¦ ¦ &#34;kind&#34;: &#34;customsearch#result&#34;,
+  ¦ ¦ &#34;title&#34;: &#34;昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞&#34;,
+  ¦ ¦ &#34;htmlTitle&#34;: &#34;昨年の\u003cb\u003e人権侵犯事件\u003c/b\u003e いじめ、教員関係が半減 | 教育新聞&#34;,
+  ¦ ¦ &#34;link&#34;: &#34;https://www.kyobun.co.jp/news/20210323_03/&#34;,
+  ¦ ¦ &#34;displayLink&#34;: &#34;www.kyobun.co.jp&#34;,
+  ¦ ¦ &#34;snippet&#34;: &#34;2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...&#34;,
+  ¦ ¦ &#34;htmlSnippet&#34;: &#34;2021/03/23 \u003cb\u003e...\u003c/b\u003e それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した\u003cb\u003e人権侵犯事件\u003c/b\u003eは9589件で、前年よりも5831件減少。同省の担当者は「他の\u003cb\u003e統計\u003c/b\u003e&amp;nbsp;...&#34;,
 </code></pre><p>items配列の中に検索結果が保存されているみたいです。<br>
-取得する項目は、title、snippet、linkにします。</p>
-<p>jqでカウントを取得する方法は length です。</p>
-<pre tabindex=0><code>jq '.items | length'
-</code></pre><p>配列以下の要素の取り方は</p>
-<pre tabindex=0><code> jq -r .items[0].title
+取得する項目は、title、snippet、linkにします。</p><p>jqでカウントを取得する方法は length です。</p><pre tabindex=0><code>jq &#39;.items | length&#39;
+</code></pre><p>配列以下の要素の取り方は</p><pre tabindex=0><code> jq -r .items[0].title
 </code></pre><p>です。<br>
-返却結果にダブルクォーテーションが入るのが邪魔なのでオプション -r をつけています。</p>
-<h2 id=プログラムの内容出力結果>プログラムの内容、出力結果</h2>
-<p>プログラムは以下となります</p>
-<pre tabindex=0><code>#!/bin/bash
+返却結果にダブルクォーテーションが入るのが邪魔なのでオプション -r をつけています。</p><h2 id=プログラムの内容出力結果>プログラムの内容、出力結果</h2><p>プログラムは以下となります</p><pre tabindex=0><code>#!/bin/bash
 #グーグルカスタムサーチの結果を取得します
-APKEY=&quot;xxxxxxxxxxxxxxxxxxxxxxxxx&quot;;
-EGID=&quot;xxxxxxxxxxxx&quot;;
+APKEY=&#34;xxxxxxxxxxxxxxxxxxxxxxxxx&#34;;
+EGID=&#34;xxxxxxxxxxxx&#34;;
 START=1;
-STATISTICS=&quot;$1&quot;;
+STATISTICS=&#34;$1&#34;;
 AWK=`which gawk`;
 SED=`which gsed`;
-TMP=&quot;gcstmp.json&quot;
-RST=&quot;gcsrst.csv&quot;;
+TMP=&#34;gcstmp.json&#34;
+RST=&#34;gcsrst.csv&#34;;
 cnt=0;
 
 function parse(){
-  items=$(cat &quot;$TMP&quot;|jq .items);
-  length=$(echo &quot;$items&quot;|jq '.| length');
+  items=$(cat &#34;$TMP&#34;|jq .items);
+  length=$(echo &#34;$items&#34;|jq &#39;.| length&#39;);
   pcnt=0;
   while :;do
-    if [ &quot;$pcnt&quot; -ge &quot;$length&quot; ];then
+    if [ &#34;$pcnt&#34; -ge &#34;$length&#34; ];then
        break;
     fi
-    item=$(echo &quot;$items&quot;|jq .[$pcnt]);
-    title=$(echo &quot;$item&quot;|jq -r .title);
-    snippet=$(echo &quot;$item&quot;|jq -r .snippet);
-    link=$(echo &quot;$item&quot;|jq -r .link);
-    echo &quot;$title,$snippet,$link&quot;|tee -a &quot;$RST&quot;;
+    item=$(echo &#34;$items&#34;|jq .[$pcnt]);
+    title=$(echo &#34;$item&#34;|jq -r .title);
+    snippet=$(echo &#34;$item&#34;|jq -r .snippet);
+    link=$(echo &#34;$item&#34;|jq -r .link);
+    echo &#34;$title,$snippet,$link&#34;|tee -a &#34;$RST&#34;;
     pcnt=$((pcnt+1));
   done
 }
 
 function main(){
- :&gt;&quot;$RST&quot;;
+ :&gt;&#34;$RST&#34;;
  while :;do
-   if [ &quot;$cnt&quot; -ge 3 ];then
+   if [ &#34;$cnt&#34; -ge 3 ];then
      break;
    fi
    st=$((cnt*10+1))
-   curl &quot;https://www.googleapis.com/customsearch/v1?key=$APKEY&amp;cx=$EGID&amp;q=$STATISTICS&amp;start=$st&quot; -o $TMP
+   curl &#34;https://www.googleapis.com/customsearch/v1?key=$APKEY&amp;cx=$EGID&amp;q=$STATISTICS&amp;start=$st&#34; -o $TMP
    parse;
    cnt=$((cnt+1));
  done
@@ -220,18 +174,14 @@ function main(){
 
 main;
 exit;
-</code></pre><p>整形した検索結果は以下のようになります</p>
-<pre tabindex=0><code>昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞,2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...,https://www.kyobun.co.jp/news/20210323_03/
+</code></pre><p>整形した検索結果は以下のようになります</p><pre tabindex=0><code>昨年の人権侵犯事件 いじめ、教員関係が半減 | 教育新聞,2021/03/23 ... それによると、昨年1年間に、同省の人権擁護機関が新たに救済手続きを開始した人権侵犯事件は9589件で、前年よりも5831件減少。同省の担当者は「他の統計 ...,https://www.kyobun.co.jp/news/20210323_03/
 難民とLGBT：世界における人権侵害の状況 | 難民研究フォーラム ...,2020/12/24 ... マッピング. 2019年末現在、「LGBTであること」や「同性間の性行為」などを刑法において犯罪としている国をマッピング ...,https://refugeestudies.jp/2020/12/lgbt/
 人権擁護委員 - Wikipedia,全国の人権擁護委員の2011年（平成23年）中の活動実績は、次のとおりである。 人権啓発活動従事回数 - 227,683回; 人権相談事件取扱件数 - 159,157件; 人権侵犯事件関与 ...,https://ja.wikipedia.org/wiki/%E4%BA%BA%E6%A8%A9%E6%93%81%E8%AD%B7%E5%A7%94%E5%93%A1
 法務省：インターネットによる人権侵害をなくしましょう – Gov base,2021/04/30 ... ※プロバイダ責任制限法等については、後述の「参考」をご覧ください。 インターネットに関する人権侵犯事件の新規救済手続開始件数. 法務省の人権擁護機関 ...,https://www.gov-base.info/2021/04/30/112474
-</code></pre>
-</section>
-<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+</code></pre></section><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
 <section class="section related-contents--wrapper">
-<h2 class=section-title>関連するコンテンツ</h2>
-<div class=article-list>
+<h2 class=section-title>関連するコンテンツ</h2><div class=article-list>
 <article class="has-image article-item" data-date=2022.01.27>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/>
 <header class=article-header>
@@ -240,21 +190,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-27-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="第1回 pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>第1回 pythonでNQueen（エイトクイーン）ブルートフォース　力任せ探索（１）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.27</time>
-</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第1回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。 Nクイーン問題とは Nクイーン問題とは、チェスの盤面にクイーンを１行に１個ずつ効き筋に当たらないように置いていこうという問題です。 https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3 Nクイーン…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.24>
+</div><p class=article-subtitle>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第1回目。アルゴリズムを使わないブルートフォース力任せ探索について説明します。 Nクイーン問題とは Nクイーン問題とは、チェスの盤面にクイーンを１行に１個ずつ効き筋に当たらないように置いていこうという問題です。 https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%A4%E3%83%88%E3%83%BB%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3 Nクイーン…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.24>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -262,21 +206,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-25-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="e-Stat hampelで時系列データの異常値検知">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>e-Stat hampelで時系列データの異常値検知</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.24</time>
-</div><p class=article-subtitle>e-Statの統計データhampelを使って時系列データの異常値検知試みます。 hampelによる異常値部分を追加しよう 前回はgoogle custom search の検索結果を利用して社会的に関心の高そうな列の抽出を試みました。 今回は、以前紹…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.21>
+</div><p class=article-subtitle>e-Statの統計データhampelを使って時系列データの異常値検知試みます。 hampelによる異常値部分を追加しよう 前回はgoogle custom search の検索結果を利用して社会的に関心の高そうな列の抽出を試みました。 今回は、以前紹…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.21>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -284,21 +222,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="e-Stat でGoogle Custom Search APIを使おう（４）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.21</time>
-</div><p class=article-subtitle>Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる 今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせ…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.19>
+</div><p class=article-subtitle>Google Custom Search APIの検索結果とe-Statの統計データをマッチングして社会的に関心のある項目を抽出してみます Google Custom Search APIの検索結果と統計名の列名をマッチンングさせる 今回は、前回取得したGoogle Custom Search APIの検索結果と統計名の列名をマッチンングさせ…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.19>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -306,21 +238,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="e-Stat でGoogle Custom Search APIを使おう（２）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（２）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.19</time>
-</div><p class=article-subtitle>Google Custom Search APIで10件目以降の取得方法、newsなど検索対象の絞り込み方法について説明します。検索エンジンの設定にあるschema.orgを使用します。 Google Custom Search API 10件目以降の取得方法について 「木材流通統計調査」をgoogleで検索してみると最初の方は、政府関係の木材流通統計調査の概要説明など…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.19>
+</div><p class=article-subtitle>Google Custom Search APIで10件目以降の取得方法、newsなど検索対象の絞り込み方法について説明します。検索エンジンの設定にあるschema.orgを使用します。 Google Custom Search API 10件目以降の取得方法について 「木材流通統計調査」をgoogleで検索してみると最初の方は、政府関係の木材流通統計調査の概要説明など…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.19>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -328,21 +254,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-19-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="e-Stat でGoogle Custom Search APIを使おう（１）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>e-Stat でGoogle Custom Search APIを使おう（１）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.19</time>
-</div><p class=article-subtitle>2022年1月時点でのGoogle Custom Search APIの設定方法を説明します。APIキーの作成、検索エンジンIDの取得が中心です。 統計名でgoogle検索して関心度の高いキーワードを抽出しよう e-Statの解析の目標として、膨大な統計データの中から一般の人に関心度の高い…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.17>
+</div><p class=article-subtitle>2022年1月時点でのGoogle Custom Search APIの設定方法を説明します。APIキーの作成、検索エンジンIDの取得が中心です。 統計名でgoogle検索して関心度の高いキーワードを抽出しよう e-Statの解析の目標として、膨大な統計データの中から一般の人に関心度の高い…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.17>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -350,21 +270,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="s-Stat 時系列データで異常値を検知しよう（３）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（３）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.17</time>
-</div><p class=article-subtitle>ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。 Pandas DataFrameオブジェクト Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。 DataFr…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.17>
+</div><p class=article-subtitle>ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。 Pandas DataFrameオブジェクト Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。 DataFr…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.17>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -372,21 +286,15 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="s-Stat 時系列データで異常値を検知しよう（２）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（２）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.17</time>
-</div><p class=article-subtitle>ここでは時系列データの異常値検知アルゴリズムであるhampel（ハンペル）のpythonライブラリの利用方法を説明します。インストールから基本的な使い方を説明します。 hampel フィルタとは 時系列データの異常値検知で良いのないかなあと探しました。 最近は機械学習で時系列データの異常値検知をやっているものが結構ある感じ…</p>
-</div>
-</a>
-</article>
-<article class="has-image article-item" data-date=2022.01.14>
+</div><p class=article-subtitle>ここでは時系列データの異常値検知アルゴリズムであるhampel（ハンペル）のpythonライブラリの利用方法を説明します。インストールから基本的な使い方を説明します。 hampel フィルタとは 時系列データの異常値検知で良いのないかなあと探しました。 最近は機械学習で時系列データの異常値検知をやっているものが結構ある感じ…</p></div></a>
+</article><article class="has-image article-item" data-date=2022.01.14>
 <a class=article-link href=https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/>
 <header class=article-header>
 <div class=article-image>
@@ -394,102 +302,60 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=133>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_400x0_resize_q75_box.jpg 2x" width=200 height=133 loading=lazy alt="s-Stat 時系列データで異常値を検知しよう（１）">
 </picture>
-</div>
-<div class=article-category>
+</div><div class=article-category>
 <span class=article-category-item>
 プログラミング
 </span>
-</div>
-</header>
-<div class=article-details>
+</div></header><div class=article-details>
 <h2 class=article-title>s-Stat 時系列データで異常値を検知しよう（１）</h2><div class=article-time>
 <time class="article-time--item article-time--published">2022.01.14</time>
-</div><p class=article-subtitle>ここではe-Statデータで時系列データの異常値検知の必要性を説明し、前提条件としてpythonを利用してcsvの読み込み方を説明します。Pandasを利用します。 s-Stat 時系列データで異常値を検知しよう たくさんあるデータの中から関心の高そうな項目を抽出して表示しようというテーマでe-Statデータを取り扱っ…</p>
-</div>
-</a>
-</article>
-</div>
-</section>
-<footer class=article-footer>
+</div><p class=article-subtitle>ここではe-Statデータで時系列データの異常値検知の必要性を説明し、前提条件としてpythonを利用してcsvの読み込み方を説明します。Pandasを利用します。 s-Stat 時系列データで異常値を検知しよう たくさんあるデータの中から関心の高そうな項目を抽出して表示しようというテーマでe-Statデータを取り扱っ…</p></div></a>
+</article></div></section><footer class=article-footer>
 <section class=article-tags>
 <a href=https://suzukiiichiro.github.io/tags/e-stat/>e-Stat</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/>データマイニング</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/>プログラム</a>
-</section>
-</footer>
-<div class=article-pager>
+</section></footer><div class=article-pager>
 <div class="article-pager-item article-pager--next">
 <div class="article has-image">
 <a href=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_50x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-21-01-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_100x0_resize_q75_box.jpg 2x" width=50 height=33 alt="e-Stat でGoogle Custom Search APIを使おう（４）">
-</div>
-<div class=article-details>
-<h4 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h4>
-</div>
-</a>
-</div>
-</div>
-<div class="article-pager-item article-pager--prev">
+</div><div class=article-details>
+<h4 class=article-title>e-Stat でGoogle Custom Search APIを使おう（４）</h4></div></a>
+</div></div><div class="article-pager-item article-pager--prev">
 <div class="article has-image">
 <a href=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/>
 <div class=article-image>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_50x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-20-02-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg 2x" width=50 height=34 alt=2022年のWebデザインの最新トレンドとレイアウト>
-</div>
-<div class=article-details>
-<h4 class=article-title>2022年のWebデザインの最新トレンドとレイアウト</h4>
-</div>
-</a>
-</div>
-</div>
-</div>
-</article>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
+</div><div class=article-details>
+<h4 class=article-title>2022年のWebデザインの最新トレンドとレイアウト</h4></div></a>
+</div></div></div></article><div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div><div class=pswp__scroll-wrap>
 <div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden">
 <div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 <div class=pswp__preloader>
 <div class=pswp__preloader__icn>
 <div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+<div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
 </button>
 <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
 </button>
 <div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
-</main>
-<div class="sidebar right-sidebar sticky">
+<div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main><div class="sidebar right-sidebar sticky">
 <aside class=widget>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424" crossorigin=anonymous></script>
 <ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
-</aside>
-<section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
-<h2 class=section-title>最新記事</h2>
-<div class=sidearticle-contents>
+</aside><section class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2><div class=sidearticle-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/>
@@ -499,14 +365,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt="第10回 pythonでNQueen（エイトクイーン）対象解除法（3）">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>第10回 pythonでNQueen（エイトクイーン）対象解除法（3）</strong>
-<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第10回目。引き続き対象解除法が正しいことの検証をしてみたいと思います。左右反転、９０度回転などを使ってプログラム内で正しさを検証できるようにします。 対象解除法が正しいか検証してみよう 今回も引き続き、対象解除法が正しいかどうかを検証するためプログラムを改造したいと思います。 前回は出力結果を…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第10回目。引き続き対象解除法が正しいことの検証をしてみたいと思います。左右反転、９０度回転などを使ってプログラム内で正しさを検証できるようにします。 対象解除法が正しいか検証してみよう 今回も引き続き、対象解除法が正しいかどうかを検証するためプログラムを改造したいと思います。 前回は出力結果を…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/>
 <div class=article-image>
 <picture class=picture>
@@ -514,14 +376,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt="第9回 pythonでNQueen（エイトクイーン）対象解除法（2）">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</strong>
-<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第9回目。対象解除法が正しいことの検証をしてみたいと思います。プログラムを改造してクイーンの配置を出力するようにします。 対象解除法が正しいか検証してみよう 今回は対象解除法が正しいかどうかを検証するためプログラムを改造してクイーンを設置した場所を出力するようにし…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第9回目。対象解除法が正しいことの検証をしてみたいと思います。プログラムを改造してクイーンの配置を出力するようにします。 対象解除法が正しいか検証してみよう 今回は対象解除法が正しいかどうかを検証するためプログラムを改造してクイーンを設置した場所を出力するようにし…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/>
 <div class=article-image>
 <picture class=picture>
@@ -529,14 +387,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=28>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-17-01-wyoshi/img01_hued0e192f18d41708fb9ce45664b03bde_79209_200x0_resize_q75_box.jpg 2x" width=100 height=56 loading=lazy alt=CSSだけで簡単に1行や複数行の3点リーダーを付ける方法>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>CSSだけで簡単に1行や複数行の3点リーダーを付ける方法</strong>
-<p class=text>この方法を知っていれば、1行でも複数行でも3点リーダーを表示でき、レスポンシブルデザインのようなマルチデバイスでもレイアウトが崩れずに表示可能です HTMLのレイアウトでは時には文字がはみ出した際に、3点リーダーと呼ばれる「…」をつける場合があります。 普通に記述してしまえば対応できますが…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>この方法を知っていれば、1行でも複数行でも3点リーダーを表示でき、レスポンシブルデザインのようなマルチデバイスでもレイアウトが崩れずに表示可能です HTMLのレイアウトでは時には文字がはみ出した際に、3点リーダーと呼ばれる「…」をつける場合があります。 普通に記述してしまえば対応できますが…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/>
 <div class=article-image>
 <picture class=picture>
@@ -544,14 +398,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-16-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt="第8回 pythonでNQueen（エイトクイーン）対象解除法（1）">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>第8回 pythonでNQueen（エイトクイーン）対象解除法（1）</strong>
-<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第8回目。今回から対象解除法が登場します。解を見てみると左右反転だったり90度、180度回転すると同じものがあります。この性質を利用して探索回数を減らそうというアルゴリズムです。今回は対象解除法の概要を説明します。 対象解除法 今回から対象解除法を取り扱います。 解を見てみると左右反転だったり90度、180度回転す…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第8回目。今回から対象解除法が登場します。解を見てみると左右反転だったり90度、180度回転すると同じものがあります。この性質を利用して探索回数を減らそうというアルゴリズムです。今回は対象解除法の概要を説明します。 対象解除法 今回から対象解除法を取り扱います。 解を見てみると左右反転だったり90度、180度回転す…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/>
 <div class=article-image>
 <picture class=picture>
@@ -559,14 +409,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-09-01-ani/chess_hub5f46a8b8fc9e255d0122f98accfe16c_94129_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt="第7回 pythonでNQueen（エイトクイーン）バックトラック（3）">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>第7回 pythonでNQueen（エイトクイーン）バックトラック（3）</strong>
-<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。 バックトラック 今回も引き続きバックトラックを説明していきたいと思います。 前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第7回目。今回はバックトラックについて図で示しながら詳細な動きを説明します。バックトラックは上下左右対角線上のフラグをチェックするので探索がより効率よくなっています。 バックトラック 今回も引き続きバックトラックを説明していきたいと思います。 前回はプログラムの概要を説明しましたが、今回はnqueenメソッドの…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
 <div class=article-image>
 <picture class=picture>
@@ -574,14 +420,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=25>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" width=100 height=51 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</strong>
-<p class=text>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -589,14 +431,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-kill-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（７）【kill】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（７）【kill】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>プロセスを強制終了させます。killは実行中のプロセスを終了させる場合に使うコマンドです。 killコマンド killコマンドでプロセスIDを指定してプロセスを終了させる killallコマンドで名前を指定してプロセスを終了させる kil…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>プロセスを強制終了させます。killは実行中のプロセスを終了させる場合に使うコマンドです。 killコマンド killコマンドでプロセスIDを指定してプロセスを終了させる killallコマンドで名前を指定してプロセスを終了させる kil…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -604,14 +442,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-less-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（6）【less】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（6）【less】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>メッセージやテキストファイルを1画面ずつ表示する lessコマンド テキストを1画面ずつ表示する キー操作のヘルプを表示する 長い行を折り返さずに表示する ファイルの末尾まで表示したらすぐに終了する…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>メッセージやテキストファイルを1画面ずつ表示する lessコマンド テキストを1画面ずつ表示する キー操作のヘルプを表示する 長い行を折り返さずに表示する ファイルの末尾まで表示したらすぐに終了する…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -619,14 +453,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（5）【more】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（5）【more】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>長いメッセージやテキストファイルを1画面ずつ表示する moreコマンド 長いメッセージやテキストファイルを1画面ずつ表示する テキストを1画面ずつ止めながら表示する 実行結果を止めながら表示したいとき…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>長いメッセージやテキストファイルを1画面ずつ表示する moreコマンド 長いメッセージやテキストファイルを1画面ずつ表示する テキストを1画面ずつ止めながら表示する 実行結果を止めながら表示したいとき…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -634,30 +464,18 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-11-01-tail-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（４）【tail】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（４）【tail】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。 tailコマンド tailコマンドでファイルの末尾部分だけを表示する ログファイルを監視する ファイルの特定の範囲の行を取り出す（headとtai…</p>
-</div>
-</a>
-</article>
-</div>
-<div class=link-btns>
+<p class=text>headコマンドとは逆に、ファイルの末尾だけ表示するのがtailコマンドです。 tailコマンド tailコマンドでファイルの末尾部分だけを表示する ログファイルを監視する ファイルの特定の範囲の行を取り出す（headとtai…</p></div></a>
+</article></div><div class=link-btns>
 <a href=https://suzukiiichiro.github.io/posts/>最新の記事をもっと見る</a>
-</div>
-</div>
-</section>
-<section class="widget archives">
-<h2 class=section-title>サイト内検索</h2>
-<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+</div></div></section><section class="widget archives">
+<h2 class=section-title>サイト内検索</h2><form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
 <input name=keyword required placeholder=検索する文字>
 <button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
 </button>
-</form>
-</section>
-<section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
-<h2 class=section-title>人気コンテンツ</h2>
-<div class=sidearticle-contents>
+</form></section><section class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2><div class=sidearticle-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
@@ -667,14 +485,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15>
 <img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【プログレスバー】Bashでプログレスバーを作ってみようって話>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</strong>
-<p class=text>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。 プログレスバー ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。 処理が進むにつれて、ジリジリとメーターが右に増えていくあ…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。 プログレスバー ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。 処理が進むにつれて、ジリジリとメーターが右に増えていくあ…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/>
 <div class=article-image>
 <picture class=picture>
@@ -682,14 +496,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=34>
 <img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=SCSS/CSSを含んだファイルがGitHubActionsでビルドできない>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない</strong>
-<p class=text>Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。 scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。 GitHub Pagesで公開しているHug…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。 scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。 GitHub Pagesで公開しているHug…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -697,14 +507,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt="【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。 or 条件を if文で使う …</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。 or 条件を if文で使う …</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -712,14 +518,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-15-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【１５．変数に2つの文字列を組み合わせる】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。 変数に2つの文字列を組み合わせる 文字列変数を組み合わせる： 文字列変数はbashで簡単に組み合わせることができます。「string_combi…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>文字列変数はbashで簡単に組み合わせることができます。「string_combine.sh」という名前のファイルを作成し、次のスクリプトを追加して、変数を一緒に配置するか、「+」演算子を使用して、bashで文字列変数を組み合わせる方法を確認します。 変数に2つの文字列を組み合わせる 文字列変数を組み合わせる： 文字列変数はbashで簡単に組み合わせることができます。「string_combi…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -727,14 +529,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２８．dateコマンド】ざっくりわかる「シェルスクリプト」>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/>
 <div class=article-image>
 <picture class=picture>
@@ -742,14 +540,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=34>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-01-wyoshi/catch_hua1e03cb04863b34ec3302b219f888af8_22468_200x0_resize_q75_box.jpg 2x" width=100 height=68 loading=lazy alt="2022年に注目すべきモバイルアプリ開発トレンド 15選">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>2022年に注目すべきモバイルアプリ開発トレンド 15選</strong>
-<p class=text>モバイルアプリ開発の新しいトレンドが数多く出現していますが、今回はモバイルアプリ開発のトレンドのTOP15を取り上げます。注目のトレンド満載です。 出典元：Top 15 Mobile App Development Trends to Watch for in 2022 モバイルアプリ開発業界は、驚異的なスピードで進化しています。このデジタルダーウィン時代に生き残り、繁栄する…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>モバイルアプリ開発の新しいトレンドが数多く出現していますが、今回はモバイルアプリ開発のトレンドのTOP15を取り上げます。注目のトレンド満載です。 出典元：Top 15 Mobile App Development Trends to Watch for in 2022 モバイルアプリ開発業界は、驚異的なスピードで進化しています。このデジタルダーウィン時代に生き残り、繁栄する…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -757,44 +551,28 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong>
-<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p>
-</div>
-</a>
-</article>
-</div>
-<div class=link-btns>
+<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p></div></a>
+</article></div><div class=link-btns>
 <a href=https://suzukiiichiro.github.io/ranking/>人気のコンテンツをもっと見る</a>
-</div>
-</div>
-</section>
-<section class="widget archives">
-<h2 class="widget-title section-title">アーカイブ</h2>
-<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
+</div></div></section><section class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2><select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2022年02月>
 2022年02月（23）
 </option><option value=/archives/#2022年01月>
 2022年01月（59）
 </option><option value=/archives/#2021年12月>
 2021年12月（14）
 </option></select>
-</section>
-</div>
-</div>
-<footer class=site-footer>
+</section></div></div><footer class=site-footer>
 <section class=copyright>
 &copy;
 <a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
-</section>
-</footer>
-<section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+</section></footer><section class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
 <div class=contents-area>
 <header>
-<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
-<h2 class=section-title>最近人気の記事</h2>
-</header>
-<div class=sidearticle-contents>
+<button type=button onclick='document.body.classList.remove("show-menu")'>CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2></header><div class=sidearticle-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/>
@@ -804,14 +582,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-08-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt="【８．If 文】ざっくりわかる「シェルスクリプト」">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【８．If 文】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>単数、または複数の条件でif条件を使用できます。このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。ここでは、変数nに10が割り当てられています。$nの値が10未満の場合、出力は「1桁の数値です」になります。それ以外の場合、出力は「2桁の数値です」になります。…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>単数、または複数の条件でif条件を使用できます。このステートメントの開始ブロックと終了ブロックは、「if」と「fi」で定義されます。「simple_if.sh」という名前のファイルを作成し、bashでのifステートメントの使用を確認します。ここでは、変数nに10が割り当てられています。$nの値が10未満の場合、出力は「1桁の数値です」になります。それ以外の場合、出力は「2桁の数値です」になります。…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -819,14 +593,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【grep/sed/awkも】ざっくりわかるシェルスクリプト５」>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</strong>
-<p class=text>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。 …</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。 …</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -834,14 +604,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux_hu86d6acd804ad404fbf9e1694bf0c7390_22913_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux_hu86d6acd804ad404fbf9e1694bf0c7390_22913_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux_hu86d6acd804ad404fbf9e1694bf0c7390_22913_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux_hu86d6acd804ad404fbf9e1694bf0c7390_22913_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-28-01-suzuki/linux_hu86d6acd804ad404fbf9e1694bf0c7390_22913_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt=iPadに開発環境を構築してみるテスト>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>iPadに開発環境を構築してみるテスト</strong>
-<p class=text>はじめに まずはこちらをやりましょう。 パソコンは不要。iPhoneやiPadなどのスマホ…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>はじめに まずはこちらをやりましょう。 パソコンは不要。iPhoneやiPadなどのスマホ…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -849,14 +615,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-10-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt="【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【１０．or 条件を if文で使う】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。 or 条件を if文で使う …</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>'||'は、ifステートメントでorロジックを定義するために使用されます。次のコードを使用して「if_with_or.sh」という名前のファイルを作成し、ifステートメントのorロジックの使用を確認します。ここで、nの値はユーザーから取得されます。値が15または45の場合、出力は「ゲームに勝ちました」になります。それ以外の場合、出力は「ゲームに負けました」になります。 or 条件を if文で使う …</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -864,14 +626,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-10-01-head-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（３）【head】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（３）【head】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>headはテキストファイルの最初の10行を、tailは最後の10行を表示するコマンドです。表示する行数は、オプションで変更することができます。 headコマンド headコマンドでファイルの先頭部分だけを表示する パイプを使って実行結果の最初の部分だけを確認する tailコマンドでファイル…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>headはテキストファイルの最初の10行を、tailは最後の10行を表示するコマンドです。表示する行数は、オプションで変更することができます。 headコマンド headコマンドでファイルの先頭部分だけを表示する パイプを使って実行結果の最初の部分だけを確認する tailコマンドでファイル…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -879,14 +637,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong>
-<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -894,14 +648,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt="【２．echo コマンド】ざっくりわかる「シェルスクリプト」">
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【２．echo コマンド】ざっくりわかる「シェルスクリプト」</strong>
-<p class=text>さまざまなオプションでechoコマンドを使用できます。次の例では、いくつかの便利なオプションについて説明します。オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。'-n'オプションは、改行なしでテキストを印刷するために使用され、'-e'オプションは、出力からバックスラッシュ文字を削除するために使用されます。'echo_example.sh'という名前の新しいbash…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>さまざまなオプションでechoコマンドを使用できます。次の例では、いくつかの便利なオプションについて説明します。オプションなしで「echo」コマンドを使用すると、デフォルトで改行が追加されます。'-n'オプションは、改行なしでテキストを印刷するために使用され、'-e'オプションは、出力からバックスラッシュ文字を削除するために使用されます。'echo_example.sh'という名前の新しいbash…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -909,14 +659,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
 <img src=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【はじめから】ざっくりわかるシェルスクリプト２>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>【はじめから】ざっくりわかるシェルスクリプト２</strong>
-<p class=text>前１回目の説明に続き、ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。 はじめに Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>前１回目の説明に続き、ここではbashプログラミングの基本的な考え方２として、bashスクリプトの一般的な操作を、ざっくりと説明します。 はじめに Bashスクリプトは、シェルコマンドの実行、複数のコマンドの同時実行、管理タスクのカスタマイズ、タスクの自動化の実行など、さまざまな…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -924,14 +670,10 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-13-01-more-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（5）【more】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（5）【more】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>長いメッセージやテキストファイルを1画面ずつ表示する moreコマンド 長いメッセージやテキストファイルを1画面ずつ表示する テキストを1画面ずつ止めながら表示する 実行結果を止めながら表示したいとき…</p>
-</div>
-</a>
-</article>
-<article class=has-image>
+<p class=text>長いメッセージやテキストファイルを1画面ずつ表示する moreコマンド 長いメッセージやテキストファイルを1画面ずつ表示する テキストを1画面ずつ止めながら表示する 実行結果を止めながら表示したいとき…</p></div></a>
+</article><article class=has-image>
 <a href=https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/>
 <div class=article-image>
 <picture class=picture>
@@ -939,19 +681,11 @@ exit;
 <source srcset="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
 <img src=https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-09-01-cat-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（２）【cat】シェルスクリプトコマンド活用紹介>
 </picture>
-</div>
-<div class=article-details>
+</div><div class=article-details>
 <strong class=article-title>（２）【cat】シェルスクリプトコマンド活用紹介</strong>
-<p class=text>「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。 catコマンド ファイルの内容を表示する ファイルの内容を行番号付きで表示する 複数ファイルを連結して1つのファイルにする 概要 「cat」は、「co…</p>
-</div>
-</a>
-</article>
-</div>
-</div>
-</div>
-</section>
-<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<p class=text>「cat」は、「conCATenate（つなぐ、連結する）」のcatです。ファイルを連結するためのコマンドですが、ファイルの内容を表示する際によく使われます。 catコマンド ファイルの内容を表示する ファイルの内容を行番号付きで表示する 複数ファイルを連結して1つのファイルにする 概要 「cat」は、「co…</p></div></a>
+</article></div></div></div></section><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script>
 <script type=module>
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
@@ -969,6 +703,5 @@ exit;
   
 </script>
 <script src=https://suzukiiichiro.github.io/js/Custom.js></script>
-<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
-</body>
-</html>
+<script>let setFillHeight=()=>{let e=window.innerHeight*.01;document.documentElement.style.setProperty("--vh",`${e}px`)};window.addEventListener("resize",setFillHeight),setFillHeight(),document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementsByTagName("code");Array.from(e).forEach(e=>{if(e.className){let t=e.className.split(":"),s=t[0],n=t[1];n&&(e.classList.remove(e.className),e.classList.add(s),e.parentElement.setAttribute("data-lang",n),e.parentElement.classList.add("code-block-header"))}})})</script>
+</body></html>
