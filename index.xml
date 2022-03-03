@@ -1,17 +1,107 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 18 Feb 2022 18:25:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第10回 pythonでNQueen（エイトクイーン）対象解除法（3）</title><link>https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/</link><pubDate>Fri, 18 Feb 2022 18:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-18-01-ani/chess.jpg" alt="Featured image of post 第10回 pythonでNQueen（エイトクイーン）対象解除法（3）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
-&lt;p>今回も引き続き、対象解除法が正しいかどうかを検証するためプログラムを改造したいと思います。&lt;br>
-前回は出力結果を目視で検証しないとだめでしたが今回はプログラム内で検証できるようにしたいと思います。&lt;/p>
-&lt;p>プログラムソースは以下のURLにあります。 &lt;br>
-&lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
->https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py&lt;/a>&lt;/p>
-&lt;h2 id="プログラム内で検証する方法">プログラム内で検証する方法&lt;/h2>
-&lt;p>前回の試みでABORDを使えばプログラムで全ての解のクイーンの配置の出力はできそうです。&lt;/p>
-&lt;p>stotal が2,4,8のものについて出力結果を回転させてクイーンの配置を作ることができれば、両者を比較して解の数、クイーンの配置が全て同じであれば対象解除法が正しいと言えそうです。&lt;/p>
-&lt;p>プログラムでABOARDを回転させるにはどうすれば良いでしょう。&lt;br>
-symmetryopsはメソッド内でABOARDを回転させてクイーンの配置をチェックしています。&lt;br>
-vmirrorメソッドが左右反転、rotateメソッドが90度回転です。&lt;br>
-これらのメソッドを利用して出力結果を回転させるプログラムを作ってみましょう。&lt;/p>
-&lt;h2 id="vmirror">vmirror&lt;/h2></description></item><item><title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</link><pubDate>Thu, 17 Feb 2022 17:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess.jpg" alt="Featured image of post 第9回 pythonでNQueen（エイトクイーン）対象解除法（2）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP</title><link>https://suzukiiichiro.github.io/</link><description>Recent content on NLP</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Wed, 02 Mar 2022 18:25:55 +0900</lastBuildDate><atom:link href="https://suzukiiichiro.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>第1回 pythonで自然言語解析（1）</title><link>https://suzukiiichiro.github.io/posts/2022-03-03-01-ani/</link><pubDate>Wed, 02 Mar 2022 18:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-03-03-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-03-03-01-ani/python.jpg" alt="Featured image of post 第1回 pythonで自然言語解析（1）" />&lt;h2 id="pythonで自然言語解析してみよう">pythonで自然言語解析してみよう&lt;/h2>
+&lt;p>新聞記事の要約を試みています。要約の文字数が指定されているので文抽出型の要約だけですと指定文字数よりオーバーすることがあります。&lt;br>
+これを文生成型の要約を補完的に適用することによって文字数を指定文字数まで調整できるようなものを作りたいというのが最終目標です。&lt;br>
+最終目標に向けて前処理をコツコツしてきたいと思います。&lt;br>
+まずは、教師データとして、元の文章とお手本の要約した文章があるとして、文単位で比較していき似ているけどちょっと違う文を抽出してみたいと思います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>元の文章
+　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。パーソンズ会長のコメントとして「圧倒的な数の関係者と連絡をとりオープンに議論した。彼らは私たちが決定を再考しなければ、２０２２年パラリンピック大会に重大な結果をもたらす可能性が高いと語った。複数のＮＰＣ、中には政府、チーム、アスリートからの働きかけを受けていたが、競技に参加しなさそうでもあった」と、撤回に至った経緯を説明した。
+要約文
+　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣが「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。
+&lt;/code>&lt;/pre>&lt;p>元の文章と要約文を比較してみると、元の文章は全部で4文ありますが、要約文は上の2文を抽出しています。そして2文目の「ＩＰＣは声明で」が「ＩＰＣが」に修正されています。&lt;/p>
+&lt;p>これを、修正のあった文だけ抽出し、さらに修正内容も出力してみたいと思います。&lt;/p>
+&lt;p>この例だと&lt;/p>
+&lt;pre tabindex="0">&lt;code>元の文章
+ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。
+要約文
+ＩＰＣが「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。
+修正内容
+「は声明で」-&amp;gt;「が」
+&lt;/code>&lt;/pre>&lt;h2 id="包含関係にあるものはスキップしたい">包含関係にあるものはスキップしたい&lt;/h2>
+&lt;p>似ているけどちょっと違うという文をピックアップしたいので要約が元の文章の文の数だけ減らしただけのものはスキップしたいと思います。&lt;/p>
+&lt;p>例えば、以下の例だと要約文は元の文章の第2文までをそのまま抜粋しただけなので教師データからは除外したいと思います。&lt;br>
+プログラムでは、要約文と元の文章が包含関係にあるものはスキップするという処理を入れたいと思います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>元の文章
+　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。パーソンズ会長のコメントとして「圧倒的な数の関係者と連絡をとりオープンに議論した。彼らは私たちが決定を再考しなければ、２０２２年パラリンピック大会に重大な結果をもたらす可能性が高いと語った。複数のＮＰＣ、中には政府、チーム、アスリートからの働きかけを受けていたが、競技に参加しなさそうでもあった」と、撤回に至った経緯を説明した。
+要約文
+　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。
+&lt;/code>&lt;/pre>&lt;p>python で包含関係を調べる良い方法がないかなと調べたところ in 演算子というのを使うのが手っ取り早そうです。&lt;/p>
+&lt;p>a in b とすると a が bに包含されている場合はTrueをそうでない場合はFalseを返します。&lt;/p>
+&lt;p>プログラムは以下になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>summary=&amp;#34;　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。
+&amp;#34;
+original=&amp;#34;　国際パラリンピック委員会（ＩＰＣ）は３日、声明を発表し、前日２日に中立選手としての北京パラリンピック（４日開幕）への参加を容認したＲＰＣ（ロシアパラリンピック委員会）、ベラルーシの選手について、一転して出場を認めないことを発表した。ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。パーソンズ会長のコメントとして「圧倒的な数の関係者と連絡をとりオープンに議論した。彼らは私たちが決定を再考しなければ、２０２２年パラリンピック大会に重大な結果をもたらす可能性が高いと語った。複数のＮＰＣ、中には政府、チーム、アスリートからの働きかけを受けていたが、競技に参加しなさそうでもあった」と、撤回に至った経緯を説明した。&amp;#34;
+print(summary in original)
+&lt;/code>&lt;/pre>&lt;h2 id="類似度の高い文を見つける">類似度の高い文を見つける&lt;/h2>
+&lt;p>包含関係にある文章をスキップしたら、あとは文ごとに修正の有無を確認していきたいと思います。&lt;br>
+要約文の文と元の文を1文目から比較して内容が同じであれば次の文へ移動し、似ている文は違いを抽出していきます。&lt;br>
+似ている文を見つける方法としてdifflib.SequenceMatcher のratioというのが使えそうです。&lt;br>
+r = difflib.SequenceMatcher(None, 比較したい文字列1, 比較したい文字列2).ratio()&lt;br>
+とすると戻り値として類似度が返却されます。1.0が完全一致で0.95とかだと95%同一という意味です。&lt;/p>
+&lt;pre tabindex="0">&lt;code>import difflib
+summary=&amp;#34;ＩＰＣは声明で「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。&amp;#34;
+original=&amp;#34;ＩＰＣが「ＲＰＣおよびベラルーシの選手のエントリーを拒否することを決定しました」と発表した。&amp;#34;
+r = difflib.SequenceMatcher(None, summary, original).ratio()
+print(r)
+0.9230769230769231
+&lt;/code>&lt;/pre>&lt;h2 id="差分を出力する">差分を出力する&lt;/h2>
+&lt;p>閾値を決めて類似度の高い文が見つかったら差分を出力します。差分の出力もdifflibでできそうです。&lt;br>
+Differのcompare メソッドで差分を出力できるみたいです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>diff = difflib.Differ()
+diff_array = diff.compare(summary, original)
+for df in diff_array :
+print(df)
+Ｉ
+Ｐ
+Ｃ
++ が
+- は
+- 声
+- 明
+- で
+「
+Ｒ
+Ｐ
+Ｃ
+お
+よ
+び
+ベ
+ラ
+ル
+ー
+シ
+の
+選
+手
+の
+エ
+ン
+ト
+リ
+ー
+を
+拒
+否
+す
+る
+こ
+と
+を
+決
+定
+し
+ま
+し
+た
+」
+と
+発
+表
+し
+た
+。
+&lt;/code>&lt;/pre>&lt;p>この出力結果から「は声明で」-&amp;gt;「が」に変換するにはどうすれば良いでしょうか。&lt;br>
+結構大変そうなので次回にします。&lt;/p></description></item><item><title>第9回 pythonでNQueen（エイトクイーン）対象解除法（2）</title><link>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</link><pubDate>Thu, 17 Feb 2022 17:25:55 +0900</pubDate><guid>https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/</guid><description>&lt;img src="https://suzukiiichiro.github.io/posts/2022-02-17-01-ani/chess.jpg" alt="Featured image of post 第9回 pythonでNQueen（エイトクイーン）対象解除法（2）" />&lt;h2 id="対象解除法が正しいか検証してみよう">対象解除法が正しいか検証してみよう&lt;/h2>
 &lt;p>今回は対象解除法が正しいかどうかを検証するためプログラムを改造してクイーンを設置した場所を出力するようにしてみましょう。&lt;/p>
 &lt;p>プログラムソースは以下のURLにあります。 &lt;br>
 &lt;a class="link" href="https://github.com/suzukiiichiro/N-Queens/blob/master/03Python/py04_nqueen.py" target="_blank" rel="noopener"
