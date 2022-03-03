@@ -2,7 +2,7 @@
 title: "第10回 pythonでNQueen（エイトクイーン）対象解除法（3）"
 description: "pythonを勉強しながらNQueen（エイトクイーン）問題を解いていきます。今回は第10回目。引き続き対象解除法が正しいことの検証をしてみたいと思います。左右反転、９０度回転などを使ってプログラム内で正しさを検証できるようにします。" 
 date: 2022-02-18T18:25:55+09:00
-draft: false 
+draft: true 
 image: chess.jpg
 categories:
   - programming 
