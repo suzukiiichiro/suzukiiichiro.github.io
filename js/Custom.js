@@ -32,20 +32,33 @@ class Custom {
   //アドセンスを遅延読み込み
   googleAd() {
     let lazyloadads = false;
-    window.addEventListener("scroll", ()  => {
-      if ((document.documentElement.scrollTop != 0 && lazyloadads === false) || (document.body.scrollTop != 0 && lazyloadads === false)) {
-        {
-          let ad = document.createElement('script');
-          ad.type = 'text/javascript';
-          ad.async = true;
-          ad.crossorigin = 'anonymous';
-          ad.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424';
-          let sc = document.getElementsByTagName('script')[0];
-          sc.parentNode.insertBefore(ad, sc);
-          lazyloadads = true;
-        }
-      }
-    }, true)
+    let downloadJsAtOnload = () => {
+      let el = document.createElement("script");
+      el.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424";
+      el.async = true;
+      el.setAttribute('crossorigin', 'anonymous');
+      document.body.appendChild(el);
+      // let ad = document.createElement('script');
+      // ad.type = 'text/javascript';
+      // ad.async = true;
+      // ad.crossorigin = 'anonymous';
+      // ad.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424';
+      // let sc = document.getElementsByTagName('script')[0];
+      // sc.parentNode.insertBefore(ad, sc);
+    }
+    if (window.addEventListener) {
+      window.addEventListener("load", downloadJsAtOnload, false);
+    } else if (window.attachEvent) {
+      window.attachEvent("onload", downloadJsAtOnload);
+    } else {
+      window.onload = downloadJsAtOnload;
+    }
+    // window.addEventListener("scroll", ()  => {
+    //   if ((document.documentElement.scrollTop != 0 && lazyloadads === false) || (document.body.scrollTop != 0 && lazyloadads === false)) {
+    //     downloadJsAtOnload();
+    //     lazyloadads = true;
+    //   }
+    // }, true)
   }
   //実行
   init(){
