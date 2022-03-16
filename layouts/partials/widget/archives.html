@@ -1,7 +1,7 @@
 {{- $query := first 1 (where .Site.Pages "Layout" "==" "archives") -}}
 {{- if $query -}}
     {{- $archivesPage := index $query 0 -}}
-    <section class="widget archives">
+    <aside class="widget archives">
         <h2 class="widget-title section-title">{{ T "widget.archives.title" }}</h2>
 
         {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
@@ -19,7 +19,7 @@
                 </option>
             {{ end }}
         </select>
-    </section>
+    </aside>
 {{- else -}}
     {{- warnf "Archives page not found. Create a page with layout: archives." -}}
 {{- end -}}
