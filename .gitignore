@@ -4,3 +4,5 @@ trash
 /docs
 jsconfig.json
 /resources
+_assets
+_layouts
