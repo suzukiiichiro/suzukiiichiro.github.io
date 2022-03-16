@@ -31,34 +31,30 @@ class Custom {
   }
   //アドセンスを遅延読み込み
   googleAd() {
-    let lazyloadads = false;
-    let downloadJsAtOnload = () => {
-      let el = document.createElement("script");
-      el.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424";
-      el.async = true;
-      el.setAttribute('crossorigin', 'anonymous');
-      document.body.appendChild(el);
-      // let ad = document.createElement('script');
-      // ad.type = 'text/javascript';
-      // ad.async = true;
-      // ad.crossorigin = 'anonymous';
-      // ad.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424';
-      // let sc = document.getElementsByTagName('script')[0];
-      // sc.parentNode.insertBefore(ad, sc);
-    }
-    if (window.addEventListener) {
-      window.addEventListener("load", downloadJsAtOnload, false);
-    } else if (window.attachEvent) {
-      window.attachEvent("onload", downloadJsAtOnload);
+    if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+      let lazyadsense = false;
+      window.addEventListener("scroll", () => {
+        if ((document.documentElement.scrollTop != 0 && lazyadsense === false) || (document.body.scrollTop != 0 && lazyadsense === false)) {
+          {
+            let ad = document.createElement('script');
+            ad.type = 'text/javascript';
+            ad.async = true;
+            ad.crossorigin = 'anonymous';
+            ad.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424';
+            let sc = document.getElementsByTagName('script')[0];
+            sc.parentNode.insertBefore(ad, sc);
+          }
+          lazyadsense = true;
+        }
+      }, true)
     } else {
-      window.onload = downloadJsAtOnload;
+      let createAdsbygooglejs = document.createElement('script');
+      createAdsbygooglejs.async = true;
+      createAdsbygooglejs.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8689199204567424";
+      createAdsbygooglejs.async = true;
+      createAdsbygooglejs.setAttribute('crossorigin', 'anonymous');
+      document.body.appendChild(createAdsbygooglejs);
     }
-    // window.addEventListener("scroll", ()  => {
-    //   if ((document.documentElement.scrollTop != 0 && lazyloadads === false) || (document.body.scrollTop != 0 && lazyloadads === false)) {
-    //     downloadJsAtOnload();
-    //     lazyloadads = true;
-    //   }
-    // }, true)
   }
   //実行
   init(){
