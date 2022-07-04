@@ -26,8 +26,16 @@ tags:
 - 文字列を含まない行を対象にする
 
 ## grepコマンド概要
-「grep」は、ファイルの中で「文字列（パターン）」が含まれている行を表示するコマンドです。検索対象には、複数のファイルやディレクトリを指定できます。
+「grep」コマンドは、ファイル中の「文字列（パターン）」が含まれている行を表示するコマンドで、UNIX/Linuxで、最も頻度高く利用されているコマンドの一つです。
 
+　文章中に検索したい文字列の位置や頻出回数を確認する
+　ディレクトリ中のファイル一覧を作成し、そのファイル一覧から、該当するファイル名を探索する。
+
+{{% tips-list tips %}}
+ヒント
+: 抽出した結果をさらに「パイプ｜コマンド」で絞り込んだり、その結果を別のファイルに出力したりすることも簡単にできます。
+{{% /tips-list %}}
+ 
 ## grepコマンドの書式
 grep [オプション] 検索パターン ファイル
 コマンド | grep [オプション] 検索パターン
@@ -44,20 +52,43 @@ grep [オプション] 検索パターン ファイル
 |-e            |検索パターンを指定する|
 |-f            |ファイルに書かれているパターンを検索する|
 
+{{% tips-list tips %}}
+ヒント
+: 一覧のオプションは一部です。 $ man grep   などで、grepの使い方を確認してください。
+{{% /tips-list %}}
+
+
 ## grepコマンド詳細説明
 
 ### コマンドの実行結果から必要な箇所だけを抽出する
-　「dmesg」コマンド（起動時のシステムメッセージを再表示するコマンド）の実行結果から、grepコマンドで“video”という文字列を含む行だけを表示したい場合は「dmesg | grep video」と指定します 
+　「dmesg」コマンド（起動時のシステムメッセージを再表示するコマンド）の実行結果から、grepコマンドで“volume”という文字列を含む行だけを表示したい場合は「dmesg | grep volume」と指定します 
 
+システムメッセージを表示する
 ```
-$ dmesg | grep video
+$ dmesg
 ```
+
+システムメッセージの出力から「volume」を含む行を抽出する
+```
+$ dmesg | grep volume
+```
+
+大文字と小文字を「-iオプション」を付与して区別しないで抽出する
+```
+$ dmesg | grep -i volume
+```
+
+{{% tips-list tips %}}
+ヒント
+: dmesg コマンドは、システムメッセージを表示するコマンドです。
+{{% /tips-list %}}
 
 ### 単語単位で検索する
-先ほどの検索で、「video」という文字列を検索しましたが、検索結果には「video」と「vboxvideo」が表示されていました。“videoという単語のみ”を検索対象としたい場合には、「-w」オプション（--word-regexp）を使用します
+「volume」という文字列を検索したい場合、、検索結果には「volume」と「vboxvolume」が表示される場合もあります。“volumeという単語のみ”を検索対象としたい場合には、「-w」オプション（--word-regexp）を使用します
 
+単語単位で検索する
 ```
-$ dmesg | grep -w video
+$ dmesg | grep -i -w volume
 ```
 
 ### 前後の行も表示する
@@ -65,23 +96,28 @@ $ dmesg | grep -w video
 　文字列を検索する際には、該当する行の前後も表示されていると分かりやすい場合があります。例えば、前後2行ずつ表示したい場合は、「-2」のように数字で指定します。これは「-C（--context=）」オプションと同じです。
 
 ```
-$ dmesg | grep -w -C2 video
+$ dmesg | grep -w -C2 volume
 ```
+
+{{% tips-list tips %}}
+ヒント
+: ログなどでの利用は効果的ではありませんが、ドキュメント内を検索する場合に、GoogleのSnippetのように前後の文章が表示されることで、よりわかりやすくなります。さらに次の項目では、検索結果の評判号を表示させることもできます。
+{{% /tips-list %}}
 
 ### 行番号付きで表示する
 
 grepコマンドでの検索結果に行番号を付けて表示したい場合は、「-n」オプション（--line-number）を使用します。「行番号:」のように表示されますが、前後の行も併せて表示している場合は、前後の行は「行番号-」のように「-」記号で、該当する行は「:」記号で示されます。
 
 ```
-$ dmesg | grep -w -C2 -n video
+$ dmesg | grep -w -C2 -n volume
 ```
 
 ### 複数の文字列を指定して検索する
 
-grepコマンドで「videoまたはnetworkを含む行を検索」のように、複数の文字列を検索したい場合には、「-e」オプションを付けて、それぞれが「検索パターン」であることを明示します。
+grepコマンドで「volumeまたはkeybagを含む行を検索」のように、複数の文字列を検索したい場合には、「-e」オプションを付けて、それぞれが「検索パターン」であることを明示します。
 
 ```
-$ dmesg | grep -i -e network -e video
+$ dmesg | grep -i -e keybag -e volume
 ```
 
 ### 複数の文字列を指定して検索する
@@ -89,7 +125,17 @@ $ dmesg | grep -i -e network -e video
 複数の文字列を検索したい場合、正規表現で“または”という意味の「|」記号を使って指定することもできます。
 
 ```
-$ dmesg | grep -i "network\|video"
+$ dmesg | grep -i "keybag\|volume"
+```
+{{% tips-list tips %}}
+ヒント
+: ここでは OR 条件で抽出することを目的としています。AND条件で抽出する場合は、grep コマンドを「|」パイプコマンドで連結させます。
+{{% /tips-list %}}
+
+
+どちらの検索ワードも含む行
+```
+$ dmesg | grep -i volume | grep -i keybag
 ```
 
 ### 検索文字列をファイルから読み込む
@@ -98,29 +144,49 @@ $ dmesg | grep -i "network\|video"
 
 ```
 $ cat wordlist
-network
-video
+keybag
+volume
 $ dmesg | grep -i -f wordlist
 ```
+
+{{% tips-list tips %}}
+ヒント
+: この使い方は意外と知られていないのです。一般的にはwordlistをシェルスクリプトであらかじめ作成しておき、while read line; do などで wordlistを順番にgrepコマンドに渡す手法が多いです。
+{{% /tips-list %}}
+
+```:bash 
+
+:> wordlist
+echo "keybag" >> wordlist;
+echo "volume" >> wordlist;
+
+cat wordlist | while read line; do
+  echo "$line での検索";
+  dmesg | grep "$line" ;
+  echo "";
+done
+```
+
+
 
 ### どちらも含む行を探したい場合
 
 　「どちらの検索ワードも含む行」としたい場合は、検索結果をさらにgrepするのが簡単です。
 
 ```
-$ dmesg | grep -i video
-$ dmesg | grep -i network 
+$ dmesg | grep -i volume
+$ dmesg | grep -i keybag 
 
 # どちらの検索ワードも含む行
-$ dmesg | grep -i video | grep -i network
+$ dmesg | grep -i volume | grep -i keybag
 ```
 
 ### 文字列を含まない行を対象にする
 grepコマンドで「～を含まない行」だけを表示したい場合は「-v」オプション（「--invert-match」オプション）を使います。
 
 ```
-# network を含みvideoを含まない検索結果
-$ dmesg | grep -i network | grep -v video
+# keybag を含みvolumeを含まない検索結果
+$ dmesg | grep -i keybag | grep -v volume
 ```
 
 {{% tips-list tips %}}
