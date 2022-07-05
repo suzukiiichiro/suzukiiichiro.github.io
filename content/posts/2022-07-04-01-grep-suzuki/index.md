@@ -8,7 +8,6 @@ image: bash.jpg
 categories:
   - programming
 tags:
-  - kill
   - シェルスクリプト
   - Bash
   - 鈴木維一郎
