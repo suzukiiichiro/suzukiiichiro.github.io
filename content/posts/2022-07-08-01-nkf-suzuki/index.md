@@ -96,10 +96,6 @@ $ cat sjisFile.txt | nkf -wLu --overwrite
 {{% /tips-list %}}
 
 
-{{% tips-list tips %}}
-ヒント
-: とにかくシェルクスクリプトで起動パラメータを設定することができました。便利なツールをたくさん作ってください。では
-{{% /tips-list %}}
 
 ## CentOS 7にnkfをインストールするには？ 
 
