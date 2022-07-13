@@ -68,9 +68,9 @@ $ du -h -s
 ```
 
 
-du -s で、カレントディレクトリ直下のファイルおよびディレクトリごとの集計となります。
+du -h -s * で、カレントディレクトリ直下のファイルおよびディレクトリごとの集計となります。
 ```
-$ du -h -s 
+$ du -h -s *
  72K	AI_Algorithm_Game_Bash
 440K	AI_Algorithm_Game_Chess
 276M	AI_Algorithm_Game_Othello
