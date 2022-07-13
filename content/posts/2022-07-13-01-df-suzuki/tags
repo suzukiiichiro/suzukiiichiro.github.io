@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/631690a/
+- \x1B$BNkLZ0]0lO:\x1B(B	index.md	/^  - $BNkLZ0]0lO:(B$/;"	s
+\x1B$B%G%#%9%/$N6u$-MFNL$rD4$Y$k\x1B(B	index.md	/^### $B%G%#%9%\/$N6u$-MFNL$rD4$Y$k(B$/;"	S	section:df\x1B$B%3%^%s%I>\\:Y@bL@\x1B(B
+\x1B$B=q@R$N>R2p\x1B(B	index.md	/^## $B=q@R$N>R2p(B$/;"	s
+df\x1B$B%3%^%s%I$N<g$J%*%W%7%g%s\x1B(B	index.md	/^## df$B%3%^%s%I$N<g$J%*%W%7%g%s(B$/;"	s
+df\x1B$B%3%^%s%I$N=q<0\x1B(B	index.md	/^## df$B%3%^%s%I$N=q<0(B$/;"	s
+df\x1B$B%3%^%s%I35MW\x1B(B	index.md	/^## df$B%3%^%s%I35MW(B$/;"	s
+df\x1B$B%3%^%s%I>\\:Y@bL@\x1B(B	index.md	/^## df$B%3%^%s%I>\\:Y@bL@(B$/;"	s
+df\x1B$B%3%^%s%I\x1B(B	index.md	/^## df$B%3%^%s%I(B$/;"	s
