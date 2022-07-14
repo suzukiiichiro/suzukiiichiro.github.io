@@ -1,6 +1,6 @@
 ---
 title: "（１７）【expand】シェルスクリプトコマンド活用紹介"
-description: ""
+description: "タブと空白を変換する"
 date: 2022-07-14T13:19:26+09:00
 draft: false
 
