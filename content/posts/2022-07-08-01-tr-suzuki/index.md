@@ -18,6 +18,7 @@ tags:
 - 文字を置換する
 - 大文字／小文字を変換する
 - 改行を除去する
+- 固定長のデータをタブ区切りに変換する／カンマ区切りに変換する
 
 
 ## trコマンド概要
@@ -97,6 +98,48 @@ $ echo "$string_sample" | tr -d '\n'
 重要
 : tr -d '\n' のくくりはシングルクォーテーションである必要があります。ダブルクォーテーションではいけません。理由は「文字列」ではなく「文字（一文字）」しか扱えないからです。
 {{% /tips-list %}}
+
+
+### 固定長のデータをタブ区切りに変換する／カンマ区切りに変換する
+
+ls -la コマンドで普通に出力します。
+```
+$ ls -la
+drwxr-xr-x  13 suzukiiichiro  staff     416  7 14 13:31 ./
+drwxrwxrwx+ 48 suzukiiichiro  staff    1536  7  5 10:05 ../
+drwxrwxrwx   7 suzukiiichiro  staff     224  4 10  2020 AI_Algorithm_Game_Bash/
+drwxrwxrwx  18 suzukiiichiro  staff     576  4 10  2020 AI_Algorithm_Game_Chess/
+drwxrwxrwx  39 suzukiiichiro  staff    1248  4 10  2020 AI_Algorithm_Game_Othello/
+drwxrwxrwx  31 suzukiiichiro  staff     992  4 10  2020 AI_Algorithm_Game_RubiksCube/
+drwxrwxrwx  33 suzukiiichiro  staff    1056  4 10  2020 AI_Algorithm_Game_Shogi/
+drwxrwxrwx   7 suzukiiichiro  staff     224  4 10  2020 C_Othello/
+```
+
+
+連続した空白をタブに変換します。
+```
+$ ls -l | tr -s " " "\t"
+total	528
+drwxrwxrwx	7	suzukiiichiro	staff	224	4	10	2020	AI_Algorithm_Game_Bash/
+drwxrwxrwx	18	suzukiiichiro	staff	576	4	10	2020	AI_Algorithm_Game_Chess/
+drwxrwxrwx	39	suzukiiichiro	staff	1248	4	10	2020	AI_Algorithm_Game_Othello/
+drwxrwxrwx	31	suzukiiichiro	staff	992	4	10	2020	AI_Algorithm_Game_RubiksCube/
+drwxrwxrwx	33	suzukiiichiro	staff	1056	4	10	2020	AI_Algorithm_Game_Shogi/
+drwxrwxrwx	7	suzukiiichiro	staff	224	4	10	2020	C_Othello/
+```
+
+連続した空白をカンマに変換します。
+```
+$ ls -l | tr -s " " ","
+drwxrwxrwx,7,suzukiiichiro,staff,224,4,10,2020,AI_Algorithm_Game_Bash/
+drwxrwxrwx,18,suzukiiichiro,staff,576,4,10,2020,AI_Algorithm_Game_Chess/
+drwxrwxrwx,39,suzukiiichiro,staff,1248,4,10,2020,AI_Algorithm_Game_Othello/
+drwxrwxrwx,31,suzukiiichiro,staff,992,4,10,2020,AI_Algorithm_Game_RubiksCube/
+drwxrwxrwx,33,suzukiiichiro,staff,1056,4,10,2020,AI_Algorithm_Game_Shogi/
+drwxrwxrwx,7,suzukiiichiro,staff,224,4,10,2020,C_Othello/
+```
+
+
 
 ## 書籍の紹介
 
