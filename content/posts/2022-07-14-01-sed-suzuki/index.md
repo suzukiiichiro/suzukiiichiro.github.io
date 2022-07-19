@@ -587,11 +587,139 @@ $
 {{% /tips-list %}}
 
 
-### 一致するものがない場合は、行末に何かを追加します
+### 一致するものがない場合は、行末に文字列を追加
+次の`sed`コマンドは、os.txt内でテキスト「Linux」を含まない行を検索し、各行の最後にテキスト「Operating System」を追加します。ここで、「$」記号は、新しいテキストが追加される行を識別するために使用されます。
+
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed '/Linux/! s/$/ Operating System/'
+Windows Operating System
+Linux
+Android Operating System
+OS Operating System
+```
+
+{{% tips-list tips %}}
+ヒント
+: /Linux/! で、Linuxという文字列が行になければという意味、$は行末を意味します。Operation Systemの戦闘に空白が有るのがミソです。
+{{% /tips-list %}}
+
+
 ### 一致するものがない場合は、行を削除します
+web.txtという名前のファイルを作成し、次のコンテンツを追加して、一致するパターンを含まない行を削除します。 
+
+```web.txt
+HTML5
+JavaScript
+CSS
+PHP
+MySQL
+JQuery
+```
+
+次の`sed`コマンドは、テキスト「CSS」を含まない行を検索して削除します。
+
+実行結果は以下のとおりです。
+```
+$ cat web.txt
+HTML5
+JavaScript
+CSS
+PHP
+MySQL
+JQuery
+$
+$ cat web.txt | sed '/CSS/!d'
+CSS
+```
+
+上記のコマンドを実行すると、次の出力が表示されます。'CSS'というテキストを含むファイルに1行あります。したがってCSSを含む1行だけが出力され、CSSを含まない行は削除されます。
+
+
 ### テキストの後にスペースを追加した後、一致したテキストを複製します
+次の`sed`コマンドは、ファイルpython.txt内の'to'という単語を検索します。その単語が存在する場合は、スペースを追加して、同じ単語が検索単語の後に挿入されます。ここでは、「&」記号を使用して重複テキストを追加しています。
+
+```:python.txt
+Python is a very popular language.
+Python is easy to use. Python is easy to learn.
+Python is a cross-platform language
+```
+
+```
+$ cat python.txt
+Python is a very popular language.
+Python is easy to use. Python is easy to learn.
+Python is a cross-platform language
+$
+$ cat python.txt | sed -e 's/to /& to/g'
+Python is a very popular language.
+Python is easy to  touse. Python is easy to  tolearn.
+Python is a cross-platform language
+$
+```
+
+{{% tips-list tips %}}
+ヒント
+: 意味のないサンプルとなりましたが、このコマンドを実行すると、「to」という単語がファイルpython.txtで検索され、この単語はこのファイルの2行目に存在することがわかります。結果、一致するテキストの後にスペースを含む「to 」が追加されます。
+{{% /tips-list %}}
+
 ### 文字列のリストの1つを新しい文字列に置き換えます
+この例をテストするには、2つのリストファイルを作成する必要があります。
+
+```list1.txt
+1001 => Jafar Ali
+1023 => Nir Hossain
+1067 => John Michel
+```
+
+```list2.txt
+1001    CSE     GPA-3.63
+1002    CSE     GPA-3.24
+1023    CSE     GPA-3.11
+1067    CSE     GPA-3.84
+```
+
+次の`sed`コマンドは、上記の2つのテキストファイルの最初の列と一致し、一致するテキストをファイルlist1.txtの3番目の列の値に置き換えます。
+
+実行結果は以下のとおりです。
+```
+$ cat list1.txt
+1001 => Jafar Ali
+1023 => Nir Hossain
+1067 => John Michel
+$
+$ cat list2.txt
+1001    CSE     GPA-3.63
+1002    CSE     GPA-3.24
+1023    CSE     GPA-3.11
+1067    CSE     GPA-3.84
+$
+$ sed `cat list1.txt | awk '{print "-e s/"$1"/"$3"/"}'`<<<"` cat list2.txt`"
+Jafar   CSE     GPA-3.63
+1002    CSE     GPA-3.24
+Nir     CSE     GPA-3.11
+John    CSE     GPA-3.84
+```
+
+{{% tips-list tips %}}
+ヒント
+: list1.txtファイルの1001、1023、1067は、list2.txtファイルの3つのデータと一致し、これらの値は、list1.txtの3番目の列の対応する名前に置き換えられます。
+{{% /tips-list %}}
+
+
 ### 一致した文字列を改行を含む文字列に置き換えます
+次のコマンドは、 `echo`コマンドから入力を受け取り、テキスト内の「Python」という単語を検索します。単語がテキストに存在する場合、新しいテキスト「Added Text」が改行で挿入されます。
+
+```
+$ echo "Bash Perl Python Java PHP ASP" | sed 's/Python/Added Text\n/'
+Bash Perl Added Text
+ Java PHP ASP
+```
+
 ### ファイルから改行を削除し、各行の最後にコンマを挿入します
 ### カンマを削除し、改行を追加して、テキストを複数の行に分割します
 ### 大文字と小文字を区別しない一致を検索し、行を削除します
