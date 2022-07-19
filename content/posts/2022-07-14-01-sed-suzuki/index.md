@@ -727,11 +727,96 @@ Bash Perl Added Text
  Java PHP ASP
 ```
 
-### ファイルから改行を削除し、各行の最後にコンマを挿入します
+### ファイルから改行を削除し各行の最後にコンマを挿入
+次の`sed`コマンドは、ファイルos.txtの各改行をコンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。
+
+```os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed -z 's/\n/,/g'
+Windows,Linux,Android,OS,$
+```
+
 ### カンマを削除し、改行を追加して、テキストを複数の行に分割します
+次の`sed`コマンドは、` echo`コマンドからコンマで区切られた行を入力として受け取り、コンマを改行に置き換えます。
+
+```
+$ echo "Kaniz Fatema,30th,batch" | sed "s/,/\n/g"
+Kaniz Fatema
+30th
+batch
+```
+
+{{% tips-list tips %}}
+ヒント
+: 上記のコマンドを実行すると、入力テキストのカンマは改行に置き換えられ3行で印刷されます。
+{{% /tips-list %}}
+
+
 ### 大文字と小文字を区別しない一致を検索し、行を削除します
+'I'は、大文字と小文字を区別しないオプションです。一致で大文字と小文字を無視することを示します。
+
+次の`sed`コマンドは、「linux」という単語を大文字小文字を区別せずに検索し、 os.txtファイルからその行を削除します。
+
+```os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed '/linux/Id'
+Windows
+Android
+OS
+```
+
 ### 大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換えます
+次の`sed`コマンドは、` echo`コマンドからの入力を受け取り、単語'bash'を単語'PHP'に置き換えます。
+
+「Bash」という単語は、大文字と小文字を区別しない検索のために「bash」という単語と一致し、「PHP」という単語に置き換えられています。
+
+```
+$ echo "I like bash programming " | sed 's/Bash/PHP/i'
+I like PHP programming
+```
+
+
 ### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換えます
+'\U'は`sed`で使用され、テキストをすべて大文字に変換します。次の`sed`コマンドは、 os.txtファイル内の単語'linux 'を検索し、単語が存在する場合は、単語をすべて大文字に置き換えます。
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed 's/\(linux\)/\U\1/Ig'
+Windows
+LINUX
+Android
+OS
+
+```
 ### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換えます
 ### テキスト内のすべての大文字を小文字に置き換えます
 ### 行の番号を検索し、番号の後に通貨記号を追加します
