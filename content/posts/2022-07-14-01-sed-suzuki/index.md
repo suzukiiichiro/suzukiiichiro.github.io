@@ -299,7 +299,7 @@ $
 ### マッチした文字列のあとに出現した文字列が見つかった場合に置換する
 次の`sed`コマンドでは、2つの置換コマンドが使用されています。文字列「CSE 」でマッチした行で「Count 」は100に置き換えられ、文字列「EEE」でマッチした行で「Count」は70に置き換えられます。
 
-```dept.txt
+```:dept.txt
 CSE - Count
 EEE - Count
 Civil - Count
@@ -321,7 +321,7 @@ Civil - Count
 ### 文字列に他のテキストが見つからない場合のみテキストを置き換える
 次の`sed`コマンドは、テキスト「CSE」を含まない行の「Count」値を置き換えます。dept.txtファイルには、テキスト「CSE」を含まない2行が含まれています。したがって、「カウント」テキストは2行で80に置き換えられます。
 
-```dept.txt
+```:dept.txt
 CSE - Count
 EEE - Count
 Civil - Count
@@ -360,7 +360,7 @@ Learn Bash programming language
 ### 一致する行を削除
 'd'オプションは、ファイルから任意の行を削除するために`sed`コマンドで使用されます。os.txtという名前のファイルを作成し、次のコンテンツを追加して、 「d」オプションの機能をテストします。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -385,7 +385,7 @@ bash-5.1$
 ### 一致する行の後の2行を削除
 次のコマンドは、パターン「Linux」が見つかった場合、ファイルos.txtから3行を削除します。os.txtには、2行目に「Linux 」というテキストが含まれています。したがって、この行と次の2行は削除されます。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -403,7 +403,7 @@ Windows
 [:blank:]クラス（といいます）を使用すると、テキストまたは任意のファイルのコンテンツからスペースとタブを削除できます。次のコマンドは、ファイルos.txt  の各行の終わりにあるスペースを削除します。
 
 以下のテキストの行末には半角スペースが３つづつついています。（みえないけど）
-```os_blank.txt
+```:os_space.txt
 Windows   
 Linux   
 Android   
@@ -431,7 +431,7 @@ OS
 ### 行で2回一致するすべての行を削除
 次の内容のinput.txtという名前のテキストファイルを作成し、検索パターンを含むファイルの行を2回削除します。
 
-```input.txt
+```:input.txt
 PHP is a server-side scripting language.
 PHP is an open-source language and PHP is case-sensitive.
 PHP is platform-independent.
@@ -459,7 +459,7 @@ PHP is platform-independent.
 ### 空行を削除
 この例をテストするには、コンテンツに空の行が含まれているファイルを選択します。前の例で作成されたinput.txtファイルには、次の`sed`コマンドを使用して削除できる2つの空の行が含まれています。ここで、「^$」は、ファイルinput.txtの空の行を見つけるために使用されます。
 
-```os_blank.txt
+```:os_blank.txt
 Windows
 
 Linux
@@ -516,7 +516,7 @@ $
 ### 一致した場合行末に文字列を追加
 次の`sed`コマンドは、 os.txtファイルのテキスト「Windows」を含む行の最後に「10」を追加します。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -541,7 +541,7 @@ OS
 ### 一致した場合行前に行を挿入
 次の`sed`コマンドは、前に作成されたinput.txtファイルの「PHP is platform-independent」というテキストを検索します。ファイルのいずれかの行にこのテキストが含まれている場合、「PHP is an interpreted language」がその行の前に挿入されます。
 
-```input.txt
+```:input.txt
 PHP is a server-side scripting language.
 PHP is an open-source language and PHP is case-sensitive.
 PHP is platform-independent.
@@ -564,7 +564,7 @@ PHP is platform-independent.
 ### 一致したら一致行の下に文字列を挿入
 次の`sed`コマンドは、ファイルos.txt内のテキスト' Linux'を検索し、テキストがいずれかの行に存在する場合は、新しいテキスト' Ubuntu 'がその行の後に挿入されます。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -597,6 +597,13 @@ $
 ### 一致しない場合は行末に文字列を追加
 次の`sed`コマンドは、os.txt内でテキスト「Linux」を含まない行を検索し、各行の最後にテキスト「Operating System」を追加します。ここで、「$」記号は、新しいテキストが追加される行を識別するために使用されます。
 
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
 ```
 $ cat os.txt
 Windows
@@ -619,7 +626,7 @@ OS Operating System
 ### 一致しない行を削除
 web.txtという名前のファイルを作成し、次のコンテンツを追加して、一致するパターンを含まない行を削除します。 
 
-```web.txt
+```:web.txt
 HTML5
 JavaScript
 CSS
@@ -677,13 +684,13 @@ $
 ### 文字列のリストの1つを新しい文字列に置き換える
 この例をテストするには、2つのリストファイルを作成する必要があります。
 
-```list1.txt
+```:list1.txt
 1001 => Jafar Ali
 1023 => Nir Hossain
 1067 => John Michel
 ```
 
-```list2.txt
+```:list2.txt
 1001    CSE     GPA-3.63
 1002    CSE     GPA-3.24
 1023    CSE     GPA-3.11
@@ -730,7 +737,7 @@ Bash Perl Added Text
 ### ファイルから改行を削除し各行の最後にコンマを挿入
 次の`sed`コマンドは、ファイルos.txtの各改行をコンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -748,7 +755,7 @@ $ cat os.txt | sed -z 's/\n/,/g'
 Windows,Linux,Android,OS,$
 ```
 
-### カンマを削除し、改行を追加して、テキストを複数の行に分割します
+### カンマを削除し、改行を追加して、テキストを複数の行に分割
 次の`sed`コマンドは、`echo`コマンドからコンマで区切られた行を入力として受け取り、コンマを改行に置き換えます。
 
 ```
@@ -764,12 +771,12 @@ batch
 {{% /tips-list %}}
 
 
-### 大文字と小文字を区別しない一致を検索し、行を削除します
+### 大文字と小文字を区別しない一致を検索し、行を削除
 次の`sed`コマンド'I'は、大文字と小文字を区別しないオプションです。一致で大文字と小文字を無視することを示します。
 
 次の`sed`コマンドは、「linux」という単語を大文字小文字を区別せずに検索し、 os.txtファイルからその行を削除します。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -789,7 +796,7 @@ Android
 OS
 ```
 
-### 大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換えます
+### 大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換える
 次の`sed`コマンドは、`echo`コマンドからの入力を受け取り、単語'bash'を単語'PHP'に置き換えます。
 
 「Bash」という単語は、大文字と小文字を区別しない検索のために「bash」という単語と一致し、「PHP」という単語に置き換えられています。
@@ -800,10 +807,10 @@ I like PHP programming
 ```
 
 
-### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換えます
+### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換える
 '\U'は、テキストをすべて大文字に変換します。次の`sed`コマンドは、 os.txtファイル内の単語'linux'を大文字小文字を区別せずに検索し、単語が存在する場合は、単語をすべて大文字に置き換えます。
 
-```os.txt
+```:os.txt
 Windows
 Linux
 Android
@@ -824,30 +831,458 @@ Android
 OS
 
 ```
-### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換えます
+### 大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換える
+'\L'は`sed`で使用され、テキストをすべて小文字に変換します。次の`sed`コマンドは、os.txtファイルの「Linux」という単語を検索し、その単語をすべて小文字に置き換えます。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed 's/\(linux\)/\L\1/Ig'
+Windows
+linux
+Android
+OS
+```
+
+### テキスト内のすべての大文字を小文字に置き換える
+次の`sed`コマンドは、os.txtファイル内のすべての大文字を検索し、「\L」を使用して文字を小文字に置き換えます。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed  's/\(.*\)/\L\1/'
+windows
+linux
+android
+os
+```
+
+### 行の番号を検索し、番号の後に通貨記号を追加
+以下のファイルを準備します。
+
+```:items.txt
+HDD       100
+Monitor   80
+Mouse     10
+```
+
+実行結果は以下の通りです。
+```
+$ cat items.txt
+HDD       100
+Monitor   80
+Mouse     10
+$
+$ cat items.txt | sed 's/\([0-9]\)/$\1/'
+HDD       $100
+Monitor   $80
+Mouse     $10
+```
+
+上記のコマンドを実行すると、次の出力が表示されます。ここでは、各行の番号の前に「$」記号が追加されています。
 
 
-### テキスト内のすべての大文字を小文字に置き換えます
-### 行の番号を検索し、番号の後に通貨記号を追加します
-### 3桁を超える数値にコンマを追加する
+### 3桁を超える数値にコンマを追加
+次の`sed`コマンドは、` echo`コマンドからの入力として数値を受け取り、右から数えて3桁の各グループの後にコンマを追加します。ここで、「：a」はラベルを示し、「ta」はグループ化プロセスを繰り返すために使用されます。
+
+```
+$ echo "5098673" | sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
+5,098,673
+```
+
+{{% tips-list tips %}}
+ヒント
+: ようするに桁区切りを`sed`コマンドで実現するということです。
+{{% /tips-list %}}
+
+
 ### タブ文字を4つのスペース文字に置き換えます
+次の`sed`コマンドは、各タブ（\ t）文字を4つのスペース文字に置き換えます。「$」記号は「sed」コマンドでタブ文字と一致するように使用され、「g」はすべてのタブ文字を置き換えるために使用されます。
+
+実行結果は以下のとおりです。\tという文字列が
+```
+$ echo -e "1\t2\t3" | sed $'s/\t/    /g'
+1    2    3
+```
+
 ### 4つの連続するスペース文字をタブ文字に置き換えます
+次のコマンドは、4つの連続する文字をタブ（\ t）文字に置き換えます。
+
+```
+$ echo -e "1    2" | sed $'s/    /\t/g'
+1	2
+```
+
 ### すべての行を最初の80文字に切り捨てます
-### 文字列の正規表現を検索し、その後に標準テキストを追加します
+この例をテストするには、80文字を超える行を含むin.txtという名前のテキストファイルを作成します。
+
+```:in.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.
+PHP is platform-independent.
+```
+
+```
+$ cat in.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.PHP is platform-independent.
+$
+$ cat in.txt | sed 's/\(^.\{1,80\}\).*/\1/'
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.PHP is platform-indepen
+```
+
+{{% tips-list tips %}}
+ヒント
+: 上記のコマンドを実行すると、次の出力が表示されます。in.txtファイルの2行目には、80文字を超える文字が含まれており、この行は出力で切り捨てられます。
+{{% /tips-list %}}
+
+
+### 文字列の正規表現を検索し、その後に標準テキストを追加
+次の`sed`コマンドは、入力テキスト内のテキスト' hello 'を検索し、そのテキストの後にテキスト' John 'を追加します。
+
+実行結果は以下のとおりです。
+```
+$ echo "hello, how are you?" | sed 's/\(hello\)/\1 John/'
+hello John, how are you?
+```
+
+
 ### 文字列の正規表現と、その後に見つかった文字列の2番目のコピーを検索します
+次の`sed`コマンドは、 input.txtの各行のテキスト「 PHP 」を検索し、各行の2番目の一致をテキスト「NewTextAdded」に置き換えます。
+
+```:input.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.
+PHP is platform-independent.
+```
+
+実行結果は以下のとおりです。
+```
+$ cat input.txt | sed 's/\(PHP\)/\1 (New Text added)/2'
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP (New Text added) is case-sensitive.
+PHP is platform-independent.
+```
+
+{{% tips-list tips %}}
+ヒント
+: 上記のコマンドを実行すると、次の出力が表示されます。検索テキスト「PHP 」は、 input.txtファイルの2行目と3行目に2回表示されます。そのため、2行目と3行目に「NewTextadded」というテキストが挿入されます。 
+{{% /tips-list %}}
+
 ### ファイルからの複数行の`sed`スクリプトの実行
-### 複数行のパターンに一致し、新しい複数行のテキストに置き換えます
+複数の`sed`スクリプトをファイルに保存し、`sed`コマンドを実行することですべてのスクリプトを一緒に実行できます。'sedcmd 'という名前のファイルを作成し、次のコンテンツを追加します。ここでは、2つの`sed`スクリプトがファイルに追加されています。1つのスクリプトがテキスト「PHP」を「ASP」に置き換えます。別のスクリプトがテキスト「独立」をテキスト「依存」に置き換えます。
+
+```sedcmd
+s/PHP/ASP/
+s/independent/dependent/
+```
+
+```:input.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.
+PHP is platform-independent.
+```
+
+実行結果は以下のとおりです。
+```
+$ cat sedcmd
+s/PHP/ASP/
+s/independent/dependent/
+$
+$ cat input.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.
+PHP is platform-independent.
+$
+$ cat input.txt | sed -f sedcmd
+ASP is a server-side scripting language.
+ASP is an open-source language and PHP is case-sensitive.
+ASP is platform-dependent.
+```
+
+{{% tips-list tips %}}
+ヒント
+: 同様の検索ルールを別ファイルにしておくことで、何度も同じルールを書くことをしなくてすみます。必要なときにファイルを読み出せばよいわけです。
+{{% /tips-list %}}
+
+
+### 複数行のパターンに一致し、新しい複数行のテキストに置き換える
+次の`sed`コマンドは、複数行のテキスト'Linux \ nAndroid'を検索し、パターンが一致する場合、一致する行は複数行のテキスト' Ubuntu \nAndroidLollipop'に置き換えられます。ここで、PとDはマルチライン処理に使用されます。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed '$!N;s/Linux\nAndroid/Ubuntu\nAndoid Lollipop/;P;D'
+Windows
+Ubuntu
+Andoid Lollipop
+OS
+```
+
+{{% tips-list tips %}}
+ヒント
+: わけがわかりませんね。http://blog.livedoor.jp/morituri/archives/52036613.html　こちらを参考に。検索文字列は「sed Nコマンド」です。
+{{% /tips-list %}}
+
 ### パターンに一致する2つの単語の順序を置き換えます
+次の`sed`コマンドは、` echo`コマンドから2つの単語の入力を受け取り、これらの単語の順序を置き換えます。
+
+実行結果は以下のとおりです。
+```
+$ echo "perl python" | sed -e 's/\([^ ]*\) *\([^ ]*\)/\2 \1/'
+python perl
+```
+
 ### コマンドラインから複数のsedコマンドを使用する
+'-e'オプションは、コマンドラインから複数の`sed`スクリプトを実行するために`sed`コマンドで使用されます。次の`sed`コマンドは、` echo`コマンドからの入力としてテキストを受け取り、「Ubuntu」を「Kubuntu」に、「Centos」を「Fedora」に置き換えます。
+
+実行結果は以下のとおりです。
+```
+$ echo "Ubuntu Centos Debian" | sed -e 's/Ubuntu/Kubuntu/; s/Centos/Fedora/'
+Kubuntu Fedora Debian
+```
+
 ### sedを他のコマンドと組み合わせる
-### ファイルに空の行を挿入します
-### ファイルの各行からすべての英数字を削除します。
-### 文字列と一致させるには「＆」を使用します
+次のコマンドは、`sed`コマンドと`cat`コマンドを組み合わせたものです。最初の`sed`コマンドはos.txtファイルから入力を受け取り、テキスト''Linux'を'Fedora'に置き換えた後、コマンドの出力を2番目の`sed`コマンドに送信します。2番目の`sed`コマンドは、テキスト「Windows」を「Windows10」に置き換えます。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed 's/Linux/Fedora/'| sed 's/windows/Windows 10/i'
+Windows 10
+Fedora
+Android
+OS
+```
+
+{{% tips-list tips %}}
+ヒント
+: sedの連結は以下のように書くことができます。
+{{% /tips-list %}}
+
+```
+$ cat os.txt | sed -e 's/Linux/Fedora/' -e  's/windows/Windows 10/i'
+Windows 10
+Fedora
+Android
+OS
+bash-5.1$
+```
+
+{{% tips-list tips %}}
+ヒント
+: sed -e と書くことで、パイプで渡すことなく、sedコマンドを連続して使うことができます。 
+{{% /tips-list %}}
+
+
+### ファイルに空の行を挿入
+次の内容のstdlist.txtを作成します。
+
+```:stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+```
+
+「G」オプションは、ファイルに空の行を挿入するために使用されます。次の`sed`コマンドは、 stdlistファイルの各行の後に空の行を挿入します。
+
+
+実行結果は以下のとおりです。
+```
+$ cat stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+$
+$ sed G stdlist.txt
+#ID #Name
+
+[ 101 ]    -Ali
+
+[ 102 ]    -Neha
+
+```
+
+{{% tips-list tips %}}
+ヒント
+: 一見、使われそうなGオプションですが、使うシチュエーションに出会ったことがありません。
+{{% /tips-list %}}
+
+
+
+### ファイルの各行からすべての英数字を削除
+次のコマンドは、 stdlistファイル内のすべての英数字をスペースに置き換えます。
+
+```:stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+```
+
+実行結果は以下のとおりです。
+```
+$ cat stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+$
+$ cat stdlist.txt | sed 's/[A-Za-z0-9]//g'
+# #
+[  ]    -
+[  ]    -
+$
+```
+
+### 「&」を使用して文字列と一致させる
+次のコマンドは、「L」で始まる単語を検索し、「Matched String is –」を「&」記号を使用して一致した単語に追加することでテキストを置き換えます。ここで、「p」は変更されたテキストを印刷するために使用されます。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed -n 's/^L/Matched String is - &/p'
+Matched String is - Linux
+```
+
 ### 単語のペアを切り替える
-### 各単語の最初の文字を大文字にします
+各行に単語のペアを含む次のコンテンツを含むcourse.txtという名前のテキストファイルを作成します。
+
+```:course.txt
+PHP            ASP
+MySQL          Oracle
+CodeIgniter    Laravel
+```
+
+実行結果は以下のとおりです。
+```
+$ cat course.txt
+PHP ASP
+MySQL Oracle
+CodeIgniter Laravel
+$
+$ cat course.txt | sed 's/\([^ ]*\) *\([^ ]*\)/\2 \1/'
+ASP PHP
+Oracle MySQL
+Laravel CodeIgniter
+$
+```
+
+### 各単語の最初の文字を大文字に変換する
+次の`sed`コマンドは、` echo`コマンドから入力テキストを受け取り、各単語の最初の文字を大文字に変換します。
+
+```
+$ echo "I like bash programming" | sed 's/\([a-z]\)\([a-zA-Z0-9]*\)/\u\1\2/g'
+I Like Bash Programming
+```
+
+{{% tips-list tips %}}
+ヒント
+: ここまでくると、カルト級ですね。使いこなせる人がいればほぼ神業ですね。
+{{% /tips-list %}}
+
+
 ### ファイルの行番号を印刷する
+'='記号は、ファイルの各行の前に行番号を出力するために`sed`コマンドで使用されます。次のコマンドは、os.txtファイルの内容を行番号とともに出力します。
+
+```:os.txt
+Windows
+Linux
+Android
+OS
+```
+
+実行結果は以下のとおりです。
+```
+$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt |sed '='
+1
+Windows
+2
+Linux
+3
+Android
+4
+OS
+```
+
+{{% tips-list tips %}}
+ヒント
+: できれば行頭に行番号が来てほしいですね。工夫して頑張って作ってみてください。
+{{% /tips-list %}}
 
 
+```
+$ cat os.txt | sed '=' | sed 'N;s/\n/ /'
+```
+
+{{% tips-list tips %}}
+ヒント
+: 楽しめましたか？では
+{{% /tips-list %}}
 
 ## 書籍の紹介
 
