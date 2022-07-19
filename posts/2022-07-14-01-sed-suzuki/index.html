@@ -1,10 +1,10 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=keywords content="シェルスクリプト,Bash,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/><meta property="og:title" content="（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP"><meta property="og:description" content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-07-14T15:00:57+09:00"><meta property="article:modified_time" content="2022-07-19T18:59:54+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"><meta name=twitter:title content="（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP"><meta name=twitter:description content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2022-07-14-01-sed-suzuki/bash.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（１８）【sed】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"],"datePublished":"2022-07-14T15:00:57+09:00","dateModified":"2022-07-19T18:59:54+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"（１８）【sed】シェルスクリプトコマンド活用紹介","item":"https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=keywords content="シェルスクリプト,Bash,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/><meta property="og:title" content="（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP"><meta property="og:description" content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-07-14T15:00:57+09:00"><meta property="article:modified_time" content="2022-07-19T20:51:17+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"><meta name=twitter:title content="（１８）【sed】シェルスクリプトコマンド活用紹介｜NLP"><meta name=twitter:description content="文字列を編集する｜最新技術やプログラム、デザインなど様々な情報を提供するサイト"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2022-07-14-01-sed-suzuki/bash.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"（１８）【sed】シェルスクリプトコマンド活用紹介","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/bash.jpg"],"datePublished":"2022-07-14T15:00:57+09:00","dateModified":"2022-07-19T20:51:17+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"（１８）【sed】シェルスクリプトコマンド活用紹介","item":"https://suzukiiichiro.github.io/posts/2022-07-14-01-sed-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_85>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a><li><span class=breadcrumb-item>（１８）【sed】シェルスクリプトコマンド活用紹介</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2022.07.14</time>
 <time class="article-time--item article-time--updatedate">2022.07.19</time>
-<time class="article-time--item article-time--reading">読了時間: 19分</time></div></header><h1 class=article-title>（１８）【sed】シェルスクリプトコマンド活用紹介</h1></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#sedコマンド概要>sedコマンド概要</a></li><li><a href=#sedコマンドの書式>sedコマンドの書式</a></li><li><a href=#sedコマンドの主なオプション>sedコマンドの主なオプション</a></li><li><a href=#sedのバージョンを確認する>sedのバージョンを確認する</a></li><li><a href=#sedコマンド詳細説明>sedコマンド詳細説明</a><ol><li><a href=#sedを使用した基本的なテキスト置換>&lsquo;sed&rsquo;を使用した基本的なテキスト置換</a></li><li><a href=#gオプションを使用してファイルの特定の行にあるテキストのすべてを置き換える>&lsquo;g&rsquo;オプションを使用して、ファイルの特定の行にあるテキストのすべてを置き換える</a></li><li><a href=#各行で一致する2番目の値のみを置き換える>各行で一致する2番目の値のみを置き換える</a></li><li><a href=#各行で一致する最後の値のみを置き換える>各行で一致する最後の値のみを置き換える</a></li><li><a href=#ファイル内の最初の一致を新しいテキストに置き換える>ファイル内の最初の一致を新しいテキストに置き換える</a></li><li><a href=#ファイル内の最後の一致を新しいテキストに置き換える>ファイル内の最後の一致を新しいテキストに置き換える</a></li><li><a href=#ファイルパスの検索と置換を管理するためのreplaceコマンドでのバックスラッシュのエスケープ>ファイルパスの検索と置換を管理するためのreplaceコマンドでのバックスラッシュのエスケープ</a></li><li><a href=#ファイルのフルパスをファイル名だけに置き換える>ファイルのフルパスをファイル名だけに置き換える</a></li><li><a href=#マッチした文字列のあとに出現した文字列が見つかった場合に置換する>マッチした文字列のあとに出現した文字列が見つかった場合に置換する</a></li><li><a href=#文字列に他のテキストが見つからない場合のみテキストを置き換える>文字列に他のテキストが見つからない場合のみテキストを置き換える</a></li><li><a href=#--1-を使用して一致するパターンの前に文字列を追加>&rsquo; \ 1 &lsquo;を使用して、一致するパターンの前に文字列を追加</a></li><li><a href=#一致する行を削除>一致する行を削除</a></li><li><a href=#一致する行の後の2行を削除>一致する行の後の2行を削除</a></li><li><a href=#テキスト行の最後にあるすべてのスペースを削除>テキスト行の最後にあるすべてのスペースを削除</a></li><li><a href=#行で2回一致するすべての行を削除>行で2回一致するすべての行を削除</a></li><li><a href=#空行を削除>空行を削除</a></li><li><a href=#印刷できない文字をすべて削除>印刷できない文字をすべて削除</a></li><li><a href=#一致した場合行末に文字列を追加>一致した場合行末に文字列を追加</a></li><li><a href=#一致した場合行前に行を挿入>一致した場合行前に行を挿入</a></li><li><a href=#一致したら一致行の下に文字列を挿入>一致したら一致行の下に文字列を挿入</a></li><li><a href=#一致しない場合は行末に文字列を追加>一致しない場合は行末に文字列を追加</a></li><li><a href=#一致しない行を削除>一致しない行を削除</a></li><li><a href=#テキストの後にスペースを追加した後一致したテキストを複製する>テキストの後にスペースを追加した後、一致したテキストを複製する</a></li><li><a href=#文字列のリストの1つを新しい文字列に置き換える>文字列のリストの1つを新しい文字列に置き換える</a></li><li><a href=#一致した文字列を改行を含む文字列に置き換える>一致した文字列を改行を含む文字列に置き換える</a></li><li><a href=#ファイルから改行を削除し各行の最後にコンマを挿入>ファイルから改行を削除し各行の最後にコンマを挿入</a></li><li><a href=#カンマを削除し改行を追加してテキストを複数の行に分割します>カンマを削除し、改行を追加して、テキストを複数の行に分割します</a></li><li><a href=#大文字と小文字を区別しない一致を検索し行を削除します>大文字と小文字を区別しない一致を検索し、行を削除します</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて新しいテキストに置き換えます>大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換えます</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて同じテキストのすべて大文字に置き換えます>大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換えます</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて同じテキストのすべての小文字に置き換えます>大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換えます</a></li><li><a href=#テキスト内のすべての大文字を小文字に置き換えます>テキスト内のすべての大文字を小文字に置き換えます</a></li><li><a href=#行の番号を検索し番号の後に通貨記号を追加します>行の番号を検索し、番号の後に通貨記号を追加します</a></li><li><a href=#3桁を超える数値にコンマを追加する>3桁を超える数値にコンマを追加する</a></li><li><a href=#タブ文字を4つのスペース文字に置き換えます>タブ文字を4つのスペース文字に置き換えます</a></li><li><a href=#4つの連続するスペース文字をタブ文字に置き換えます>4つの連続するスペース文字をタブ文字に置き換えます</a></li><li><a href=#すべての行を最初の80文字に切り捨てます>すべての行を最初の80文字に切り捨てます</a></li><li><a href=#文字列の正規表現を検索しその後に標準テキストを追加します>文字列の正規表現を検索し、その後に標準テキストを追加します</a></li><li><a href=#文字列の正規表現とその後に見つかった文字列の2番目のコピーを検索します>文字列の正規表現と、その後に見つかった文字列の2番目のコピーを検索します</a></li><li><a href=#ファイルからの複数行のsedスクリプトの実行>ファイルからの複数行の<code>sed</code>スクリプトの実行</a></li><li><a href=#複数行のパターンに一致し新しい複数行のテキストに置き換えます>複数行のパターンに一致し、新しい複数行のテキストに置き換えます</a></li><li><a href=#パターンに一致する2つの単語の順序を置き換えます>パターンに一致する2つの単語の順序を置き換えます</a></li><li><a href=#コマンドラインから複数のsedコマンドを使用する>コマンドラインから複数のsedコマンドを使用する</a></li><li><a href=#sedを他のコマンドと組み合わせる>sedを他のコマンドと組み合わせる</a></li><li><a href=#ファイルに空の行を挿入します>ファイルに空の行を挿入します</a></li><li><a href=#ファイルの各行からすべての英数字を削除します>ファイルの各行からすべての英数字を削除します。</a></li><li><a href=#文字列と一致させるにはを使用します>文字列と一致させるには「＆」を使用します</a></li><li><a href=#単語のペアを切り替える>単語のペアを切り替える</a></li><li><a href=#各単語の最初の文字を大文字にします>各単語の最初の文字を大文字にします</a></li><li><a href=#ファイルの行番号を印刷する>ファイルの行番号を印刷する</a></li></ol></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<time class="article-time--item article-time--reading">読了時間: 26分</time></div></header><h1 class=article-title>（１８）【sed】シェルスクリプトコマンド活用紹介</h1></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#sedコマンド概要>sedコマンド概要</a></li><li><a href=#sedコマンドの書式>sedコマンドの書式</a></li><li><a href=#sedコマンドの主なオプション>sedコマンドの主なオプション</a></li><li><a href=#sedのバージョンを確認する>sedのバージョンを確認する</a></li><li><a href=#sedコマンド詳細説明>sedコマンド詳細説明</a><ol><li><a href=#sedを使用した基本的なテキスト置換>&lsquo;sed&rsquo;を使用した基本的なテキスト置換</a></li><li><a href=#gオプションを使用してファイルの特定の行にあるテキストのすべてを置き換える>&lsquo;g&rsquo;オプションを使用して、ファイルの特定の行にあるテキストのすべてを置き換える</a></li><li><a href=#各行で一致する2番目の値のみを置き換える>各行で一致する2番目の値のみを置き換える</a></li><li><a href=#各行で一致する最後の値のみを置き換える>各行で一致する最後の値のみを置き換える</a></li><li><a href=#ファイル内の最初の一致を新しいテキストに置き換える>ファイル内の最初の一致を新しいテキストに置き換える</a></li><li><a href=#ファイル内の最後の一致を新しいテキストに置き換える>ファイル内の最後の一致を新しいテキストに置き換える</a></li><li><a href=#ファイルパスの検索と置換を管理するためのreplaceコマンドでのバックスラッシュのエスケープ>ファイルパスの検索と置換を管理するためのreplaceコマンドでのバックスラッシュのエスケープ</a></li><li><a href=#ファイルのフルパスをファイル名だけに置き換える>ファイルのフルパスをファイル名だけに置き換える</a></li><li><a href=#マッチした文字列のあとに出現した文字列が見つかった場合に置換する>マッチした文字列のあとに出現した文字列が見つかった場合に置換する</a></li><li><a href=#文字列に他のテキストが見つからない場合のみテキストを置き換える>文字列に他のテキストが見つからない場合のみテキストを置き換える</a></li><li><a href=#--1-を使用して一致するパターンの前に文字列を追加>&rsquo; \ 1 &lsquo;を使用して、一致するパターンの前に文字列を追加</a></li><li><a href=#一致する行を削除>一致する行を削除</a></li><li><a href=#一致する行の後の2行を削除>一致する行の後の2行を削除</a></li><li><a href=#テキスト行の最後にあるすべてのスペースを削除>テキスト行の最後にあるすべてのスペースを削除</a></li><li><a href=#行で2回一致するすべての行を削除>行で2回一致するすべての行を削除</a></li><li><a href=#空行を削除>空行を削除</a></li><li><a href=#印刷できない文字をすべて削除>印刷できない文字をすべて削除</a></li><li><a href=#一致した場合行末に文字列を追加>一致した場合行末に文字列を追加</a></li><li><a href=#一致した場合行前に行を挿入>一致した場合行前に行を挿入</a></li><li><a href=#一致したら一致行の下に文字列を挿入>一致したら一致行の下に文字列を挿入</a></li><li><a href=#一致しない場合は行末に文字列を追加>一致しない場合は行末に文字列を追加</a></li><li><a href=#一致しない行を削除>一致しない行を削除</a></li><li><a href=#テキストの後にスペースを追加した後一致したテキストを複製する>テキストの後にスペースを追加した後、一致したテキストを複製する</a></li><li><a href=#文字列のリストの1つを新しい文字列に置き換える>文字列のリストの1つを新しい文字列に置き換える</a></li><li><a href=#一致した文字列を改行を含む文字列に置き換える>一致した文字列を改行を含む文字列に置き換える</a></li><li><a href=#ファイルから改行を削除し各行の最後にコンマを挿入>ファイルから改行を削除し各行の最後にコンマを挿入</a></li><li><a href=#カンマを削除し改行を追加してテキストを複数の行に分割>カンマを削除し、改行を追加して、テキストを複数の行に分割</a></li><li><a href=#大文字と小文字を区別しない一致を検索し行を削除>大文字と小文字を区別しない一致を検索し、行を削除</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて新しいテキストに置き換える>大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換える</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて同じテキストのすべて大文字に置き換える>大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換える</a></li><li><a href=#大文字と小文字を区別しない一致を見つけて同じテキストのすべての小文字に置き換える>大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換える</a></li><li><a href=#テキスト内のすべての大文字を小文字に置き換える>テキスト内のすべての大文字を小文字に置き換える</a></li><li><a href=#行の番号を検索し番号の後に通貨記号を追加>行の番号を検索し、番号の後に通貨記号を追加</a></li><li><a href=#3桁を超える数値にコンマを追加>3桁を超える数値にコンマを追加</a></li><li><a href=#タブ文字を4つのスペース文字に置き換えます>タブ文字を4つのスペース文字に置き換えます</a></li><li><a href=#4つの連続するスペース文字をタブ文字に置き換えます>4つの連続するスペース文字をタブ文字に置き換えます</a></li><li><a href=#すべての行を最初の80文字に切り捨てます>すべての行を最初の80文字に切り捨てます</a></li><li><a href=#文字列の正規表現を検索しその後に標準テキストを追加>文字列の正規表現を検索し、その後に標準テキストを追加</a></li><li><a href=#文字列の正規表現とその後に見つかった文字列の2番目のコピーを検索します>文字列の正規表現と、その後に見つかった文字列の2番目のコピーを検索します</a></li><li><a href=#ファイルからの複数行のsedスクリプトの実行>ファイルからの複数行の<code>sed</code>スクリプトの実行</a></li><li><a href=#複数行のパターンに一致し新しい複数行のテキストに置き換える>複数行のパターンに一致し、新しい複数行のテキストに置き換える</a></li><li><a href=#パターンに一致する2つの単語の順序を置き換えます>パターンに一致する2つの単語の順序を置き換えます</a></li><li><a href=#コマンドラインから複数のsedコマンドを使用する>コマンドラインから複数のsedコマンドを使用する</a></li><li><a href=#sedを他のコマンドと組み合わせる>sedを他のコマンドと組み合わせる</a></li><li><a href=#ファイルに空の行を挿入>ファイルに空の行を挿入</a></li><li><a href=#ファイルの各行からすべての英数字を削除>ファイルの各行からすべての英数字を削除</a></li><li><a href=#を使用して文字列と一致させる>「&」を使用して文字列と一致させる</a></li><li><a href=#単語のペアを切り替える>単語のペアを切り替える</a></li><li><a href=#各単語の最初の文字を大文字に変換する>各単語の最初の文字を大文字に変換する</a></li><li><a href=#ファイルの行番号を印刷する>ファイルの行番号を印刷する</a></li></ol></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><h2 id=sedコマンド概要>sedコマンド概要</h2><p>　「sed」は「Stream EDitor」の略で、「sed スクリプトコマンド ファイル名」で、指定したファイルをコマンドに従って処理し、標準出力へ出力します。ファイル名を省略した場合は、標準入力からのデータを処理します。sedコマンドでは、パイプとリダイレクトを活用するのが一般的です。</p><h2 id=sedコマンドの書式>sedコマンドの書式</h2><p>sed [オプション]<br>sed [オプション] スクリプトコマンド 入力ファイル</p><h2 id=sedコマンドの主なオプション>sedコマンドの主なオプション</h2><table><thead><tr><th>オプション</th><th>意味</th></tr></thead><tbody><tr><td>-e スクリプト</td><td>スクリプト（コマンド）を追加する</td></tr><tr><td>-f スクリプトファイル</td><td>実行するコマンドとしてスクリプトファイルの内容を追加する</td></tr></tbody></table><p>|-t 文字数 |タブの文字数またはタブ位置のリストを指定する|</p><h2 id=sedのバージョンを確認する>sedのバージョンを確認する</h2><pre tabindex=0><code>$ sed --version
 </code></pre><p>僕の環境では以下のとおりです</p><pre tabindex=0><code>bash-5.1$ sed --version
 gsed (GNU sed) 4.8
@@ -99,14 +99,14 @@ myfile.txt
 $ echo &#34;/home/ubuntu/temp/myfile.txt&#34; | sed &#39;s/.*\///&#39;
 myfile.txt
 $
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>basename コマンドを使うのが一般的ですが、sedに置き換えることでsedの正規表現の理解を深めることが狙いです。</dd></dl></div><h3 id=マッチした文字列のあとに出現した文字列が見つかった場合に置換する>マッチした文字列のあとに出現した文字列が見つかった場合に置換する</h3><p>次の<code>sed</code>コマンドでは、2つの置換コマンドが使用されています。文字列「CSE 」でマッチした行で「Count 」は100に置き換えられ、文字列「EEE」でマッチした行で「Count」は70に置き換えられます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-dept.txt data-lang=dept.txt><span class=line><span class=cl>CSE - Count
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>basename コマンドを使うのが一般的ですが、sedに置き換えることでsedの正規表現の理解を深めることが狙いです。</dd></dl></div><h3 id=マッチした文字列のあとに出現した文字列が見つかった場合に置換する>マッチした文字列のあとに出現した文字列が見つかった場合に置換する</h3><p>次の<code>sed</code>コマンドでは、2つの置換コマンドが使用されています。文字列「CSE 」でマッチした行で「Count 」は100に置き換えられ、文字列「EEE」でマッチした行で「Count」は70に置き換えられます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:dept.txt data-lang=:dept.txt><span class=line><span class=cl>CSE - Count
 </span></span><span class=line><span class=cl>EEE - Count
 </span></span><span class=line><span class=cl>Civil - Count
 </span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat dept.txt | sed  -e &#39;/CSE/ s/Count/100/; /EEE/ s/Count/70/;&#39;
 CSE - 100
 EEE - 70
 Civil - Count
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>以外に知られていないトリッキーなsedの利用例ですが、とてもよく使われます。</dd></dl></div><h3 id=文字列に他のテキストが見つからない場合のみテキストを置き換える>文字列に他のテキストが見つからない場合のみテキストを置き換える</h3><p>次の<code>sed</code>コマンドは、テキスト「CSE」を含まない行の「Count」値を置き換えます。dept.txtファイルには、テキスト「CSE」を含まない2行が含まれています。したがって、「カウント」テキストは2行で80に置き換えられます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-dept.txt data-lang=dept.txt><span class=line><span class=cl>CSE - Count
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>以外に知られていないトリッキーなsedの利用例ですが、とてもよく使われます。</dd></dl></div><h3 id=文字列に他のテキストが見つからない場合のみテキストを置き換える>文字列に他のテキストが見つからない場合のみテキストを置き換える</h3><p>次の<code>sed</code>コマンドは、テキスト「CSE」を含まない行の「Count」値を置き換えます。dept.txtファイルには、テキスト「CSE」を含まない2行が含まれています。したがって、「カウント」テキストは2行で80に置き換えられます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:dept.txt data-lang=:dept.txt><span class=line><span class=cl>CSE - Count
 </span></span><span class=line><span class=cl>EEE - Count
 </span></span><span class=line><span class=cl>Civil - Count
 </span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat dept.txt | sed &#39;/CSE/! s/Count/80/;&#39;
@@ -115,7 +115,7 @@ EEE - 80
 Civil - 80
 </code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>!（アポストロフィー）をつけると「以外は」という意味になります。</dd></dl></div><h3 id=--1-を使用して一致するパターンの前に文字列を追加>&rsquo; \ 1 &lsquo;を使用して、一致するパターンの前に文字列を追加</h3><p><code>sed</code>コマンドで一致するパターンマッチは、「\1」、「\2」などで示されます。</p><p>次の<code>sed</code>コマンドは、パターン&rsquo;Bash&rsquo;を検索し、パターンが一致する場合は、テキストを置き換える部分「bash」を&rsquo;\1&rsquo;として処理をします。<br>ここでは、入力テキストで「Bash」というテキストが検索され、「\1」の前に1つのテキストが追加され、後に別のテキストが追加されます。</p><pre tabindex=0><code>$ echo &#34;Bash language&#34; | sed  &#39;s/\(Bash\)/Learn \1 programming/&#39;
 Learn Bash programming language
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>難しく考える必要はありません。&rsquo;s/(文字列)/ で文字列を検索します。その後、検索した文字列を \1 として、文字A \1 文字B として出力します。</dd></dl></div><h3 id=一致する行を削除>一致する行を削除</h3><p>&rsquo;d&rsquo;オプションは、ファイルから任意の行を削除するために<code>sed</code>コマンドで使用されます。os.txtという名前のファイルを作成し、次のコンテンツを追加して、 「d」オプションの機能をテストします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>難しく考える必要はありません。&rsquo;s/(文字列)/ で文字列を検索します。その後、検索した文字列を \1 として、文字A \1 文字B として出力します。</dd></dl></div><h3 id=一致する行を削除>一致する行を削除</h3><p>&rsquo;d&rsquo;オプションは、ファイルから任意の行を削除するために<code>sed</code>コマンドで使用されます。os.txtという名前のファイルを作成し、次のコンテンツを追加して、 「d」オプションの機能をテストします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -124,13 +124,13 @@ Windows
 Linux
 Android
 bash-5.1$
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>d オプションは、delete（削除）です。</dd></dl></div><h3 id=一致する行の後の2行を削除>一致する行の後の2行を削除</h3><p>次のコマンドは、パターン「Linux」が見つかった場合、ファイルos.txtから3行を削除します。os.txtには、2行目に「Linux 」というテキストが含まれています。したがって、この行と次の2行は削除されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>d オプションは、delete（削除）です。</dd></dl></div><h3 id=一致する行の後の2行を削除>一致する行の後の2行を削除</h3><p>次のコマンドは、パターン「Linux」が見つかった場合、ファイルos.txtから3行を削除します。os.txtには、2行目に「Linux 」というテキストが含まれています。したがって、この行と次の2行は削除されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
 </span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt | sed &#39;/Linux/,+2d&#39;
 Windows
-</code></pre><h3 id=テキスト行の最後にあるすべてのスペースを削除>テキスト行の最後にあるすべてのスペースを削除</h3><p>[:blank:]クラス（といいます）を使用すると、テキストまたは任意のファイルのコンテンツからスペースとタブを削除できます。次のコマンドは、ファイルos.txt の各行の終わりにあるスペースを削除します。</p><p>以下のテキストの行末には半角スペースが３つづつついています。（みえないけど）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os_blank.txt data-lang=os_blank.txt><span class=line><span class=cl>Windows   
+</code></pre><h3 id=テキスト行の最後にあるすべてのスペースを削除>テキスト行の最後にあるすべてのスペースを削除</h3><p>[:blank:]クラス（といいます）を使用すると、テキストまたは任意のファイルのコンテンツからスペースとタブを削除できます。次のコマンドは、ファイルos.txt の各行の終わりにあるスペースを削除します。</p><p>以下のテキストの行末には半角スペースが３つづつついています。（みえないけど）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os_space.txt data-lang=:os_space.txt><span class=line><span class=cl>Windows   
 </span></span><span class=line><span class=cl>Linux   
 </span></span><span class=line><span class=cl>Android   
 </span></span><span class=line><span class=cl>OS   
@@ -145,7 +145,7 @@ Windows
 Linux
 Android
 OS
-</code></pre><p>出力されたテキストには、半角スペースが除去されています（みえないけど）</p><h3 id=行で2回一致するすべての行を削除>行で2回一致するすべての行を削除</h3><p>次の内容のinput.txtという名前のテキストファイルを作成し、検索パターンを含むファイルの行を2回削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-input.txt data-lang=input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
+</code></pre><p>出力されたテキストには、半角スペースが除去されています（みえないけど）</p><h3 id=行で2回一致するすべての行を削除>行で2回一致するすべての行を削除</h3><p>次の内容のinput.txtという名前のテキストファイルを作成し、検索パターンを含むファイルの行を2回削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:input.txt data-lang=:input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
 </span></span><span class=line><span class=cl>PHP is an open-source language and PHP is case-sensitive.
 </span></span><span class=line><span class=cl>PHP is platform-independent.
 </span></span></code></pre></div><p>input.txtファイルには一行に「PHP」というワードが２回表示される行が２行あります。<br>以下の例では、<code>sed</code>コマンドの -e オプションを使って、sedコマンドを連続して使用し、パターン&rsquo;PHP&rsquo;を含む２行を削除します。</p><p>最初の<code>sed</code>コマンドは、各行の2番目に出現する&rsquo;PHP&rsquo;を&rsquo;dl&rsquo;に置き換え、次の<code>sed</code>コマンド「-e」で、テキスト&rsquo; dl &lsquo;を含む行を「dオプション」で削除します。</p><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>cat input.txt
@@ -156,7 +156,7 @@ $
 $ cat input.txt | sed -e &#39;s/php/dl/i2;&#39; -e &#39;/dl/d&#39;
 PHP is a server-side scripting language.
 PHP is platform-independent.
-</code></pre><h3 id=空行を削除>空行を削除</h3><p>この例をテストするには、コンテンツに空の行が含まれているファイルを選択します。前の例で作成されたinput.txtファイルには、次の<code>sed</code>コマンドを使用して削除できる2つの空の行が含まれています。ここで、「^$」は、ファイルinput.txtの空の行を見つけるために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os_blank.txt data-lang=os_blank.txt><span class=line><span class=cl>Windows
+</code></pre><h3 id=空行を削除>空行を削除</h3><p>この例をテストするには、コンテンツに空の行が含まれているファイルを選択します。前の例で作成されたinput.txtファイルには、次の<code>sed</code>コマンドを使用して削除できる2つの空の行が含まれています。ここで、「^$」は、ファイルinput.txtの空の行を見つけるために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os_blank.txt data-lang=:os_blank.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>
@@ -183,7 +183,7 @@ Hello	World
 $ echo Hello&#34;$tab&#34;World | sed &#39;s/[^[:print:]]//g&#39;
 HelloWorld
 $
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、次の出力が表示されます。最初の<code>echo</code>コマンドはTAB付きで出力し、<code>sed</code>コマンドの[^[:print:]]出力できない文字であるタブスペースを削除し出力します。</dd></dl></div><h3 id=一致した場合行末に文字列を追加>一致した場合行末に文字列を追加</h3><p>次の<code>sed</code>コマンドは、 os.txtファイルのテキスト「Windows」を含む行の最後に「10」を追加します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、次の出力が表示されます。最初の<code>echo</code>コマンドはTAB付きで出力し、<code>sed</code>コマンドの[^[:print:]]出力できない文字であるタブスペースを削除し出力します。</dd></dl></div><h3 id=一致した場合行末に文字列を追加>一致した場合行末に文字列を追加</h3><p>次の<code>sed</code>コマンドは、 os.txtファイルのテキスト「Windows」を含む行の最後に「10」を追加します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -197,7 +197,7 @@ Windows 10
 Linux
 Android
 OS
-</code></pre><h3 id=一致した場合行前に行を挿入>一致した場合行前に行を挿入</h3><p>次の<code>sed</code>コマンドは、前に作成されたinput.txtファイルの「PHP is platform-independent」というテキストを検索します。ファイルのいずれかの行にこのテキストが含まれている場合、「PHP is an interpreted language」がその行の前に挿入されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-input.txt data-lang=input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
+</code></pre><h3 id=一致した場合行前に行を挿入>一致した場合行前に行を挿入</h3><p>次の<code>sed</code>コマンドは、前に作成されたinput.txtファイルの「PHP is platform-independent」というテキストを検索します。ファイルのいずれかの行にこのテキストが含まれている場合、「PHP is an interpreted language」がその行の前に挿入されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:input.txt data-lang=:input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
 </span></span><span class=line><span class=cl>PHP is an open-source language and PHP is case-sensitive.
 </span></span><span class=line><span class=cl>PHP is platform-independent.
 </span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>cat input.txt
@@ -210,7 +210,7 @@ PHP is a server-side scripting language.
 PHP is an open-source language and PHP is case-sensitive.
 PHP is an interpreted language.
 PHP is platform-independent.
-</code></pre><h3 id=一致したら一致行の下に文字列を挿入>一致したら一致行の下に文字列を挿入</h3><p>次の<code>sed</code>コマンドは、ファイルos.txt内のテキスト&rsquo; Linux&rsquo;を検索し、テキストがいずれかの行に存在する場合は、新しいテキスト&rsquo; Ubuntu &lsquo;がその行の後に挿入されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><h3 id=一致したら一致行の下に文字列を挿入>一致したら一致行の下に文字列を挿入</h3><p>次の<code>sed</code>コマンドは、ファイルos.txt内のテキスト&rsquo; Linux&rsquo;を検索し、テキストがいずれかの行に存在する場合は、新しいテキスト&rsquo; Ubuntu &lsquo;がその行の後に挿入されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -227,7 +227,11 @@ Ubuntu
 Android
 OS
 $
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>&\n が自分自身の行のあとに改行という意味になります。</dd></dl></div><h3 id=一致しない場合は行末に文字列を追加>一致しない場合は行末に文字列を追加</h3><p>次の<code>sed</code>コマンドは、os.txt内でテキスト「Linux」を含まない行を検索し、各行の最後にテキスト「Operating System」を追加します。ここで、「$」記号は、新しいテキストが追加される行を識別するために使用されます。</p><pre tabindex=0><code>$ cat os.txt
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>&\n が自分自身の行のあとに改行という意味になります。</dd></dl></div><h3 id=一致しない場合は行末に文字列を追加>一致しない場合は行末に文字列を追加</h3><p>次の<code>sed</code>コマンドは、os.txt内でテキスト「Linux」を含まない行を検索し、各行の最後にテキスト「Operating System」を追加します。ここで、「$」記号は、新しいテキストが追加される行を識別するために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><pre tabindex=0><code>$ cat os.txt
 Windows
 Linux
 Android
@@ -237,7 +241,7 @@ Windows Operating System
 Linux
 Android Operating System
 OS Operating System
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>/Linux/! で、Linuxという文字列が行になければという意味、$は行末を意味します。Operation Systemの戦闘に空白が有るのがミソです。</dd></dl></div><h3 id=一致しない行を削除>一致しない行を削除</h3><p>web.txtという名前のファイルを作成し、次のコンテンツを追加して、一致するパターンを含まない行を削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-web.txt data-lang=web.txt><span class=line><span class=cl>HTML5
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>/Linux/! で、Linuxという文字列が行になければという意味、$は行末を意味します。Operation Systemの戦闘に空白が有るのがミソです。</dd></dl></div><h3 id=一致しない行を削除>一致しない行を削除</h3><p>web.txtという名前のファイルを作成し、次のコンテンツを追加して、一致するパターンを含まない行を削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:web.txt data-lang=:web.txt><span class=line><span class=cl>HTML5
 </span></span><span class=line><span class=cl>JavaScript
 </span></span><span class=line><span class=cl>CSS
 </span></span><span class=line><span class=cl>PHP
@@ -266,10 +270,10 @@ Python is a very popular language.
 Python is easy to  touse. Python is easy to  tolearn.
 Python is a cross-platform language
 $
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>意味のないサンプルとなりましたが、このコマンドを実行すると、「to」という単語がファイルpython.txtで検索され、この単語はこのファイルの2行目に存在することがわかります。結果、一致するテキストの後にスペースを含む「to 」が追加されます。</dd></dl></div><h3 id=文字列のリストの1つを新しい文字列に置き換える>文字列のリストの1つを新しい文字列に置き換える</h3><p>この例をテストするには、2つのリストファイルを作成する必要があります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-list1.txt data-lang=list1.txt><span class=line><span class=cl>1001 =&gt; Jafar Ali
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>意味のないサンプルとなりましたが、このコマンドを実行すると、「to」という単語がファイルpython.txtで検索され、この単語はこのファイルの2行目に存在することがわかります。結果、一致するテキストの後にスペースを含む「to 」が追加されます。</dd></dl></div><h3 id=文字列のリストの1つを新しい文字列に置き換える>文字列のリストの1つを新しい文字列に置き換える</h3><p>この例をテストするには、2つのリストファイルを作成する必要があります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:list1.txt data-lang=:list1.txt><span class=line><span class=cl>1001 =&gt; Jafar Ali
 </span></span><span class=line><span class=cl>1023 =&gt; Nir Hossain
 </span></span><span class=line><span class=cl>1067 =&gt; John Michel
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-list2.txt data-lang=list2.txt><span class=line><span class=cl>1001    CSE     GPA-3.63
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-:list2.txt data-lang=:list2.txt><span class=line><span class=cl>1001    CSE     GPA-3.63
 </span></span><span class=line><span class=cl>1002    CSE     GPA-3.24
 </span></span><span class=line><span class=cl>1023    CSE     GPA-3.11
 </span></span><span class=line><span class=cl>1067    CSE     GPA-3.84
@@ -292,7 +296,7 @@ John    CSE     GPA-3.84
 </code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>list1.txtファイルの1001、1023、1067は、list2.txtファイルの3つのデータと一致し、これらの値は、list1.txtの3番目の列の対応する名前に置き換えられます。</dd></dl></div><h3 id=一致した文字列を改行を含む文字列に置き換える>一致した文字列を改行を含む文字列に置き換える</h3><p>次のコマンドは、 <code>echo</code>コマンドから入力を受け取り、テキスト内の「Python」という単語を検索します。単語がテキストに存在する場合、新しいテキスト「Added Text」が改行で挿入されます。</p><pre tabindex=0><code>$ echo &#34;Bash Perl Python Java PHP ASP&#34; | sed &#39;s/Python/Added Text\n/&#39;
 Bash Perl Added Text
  Java PHP ASP
-</code></pre><h3 id=ファイルから改行を削除し各行の最後にコンマを挿入>ファイルから改行を削除し各行の最後にコンマを挿入</h3><p>次の<code>sed</code>コマンドは、ファイルos.txtの各改行をコンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><h3 id=ファイルから改行を削除し各行の最後にコンマを挿入>ファイルから改行を削除し各行の最後にコンマを挿入</h3><p>次の<code>sed</code>コマンドは、ファイルos.txtの各改行をコンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -303,11 +307,11 @@ Android
 OS
 $ cat os.txt | sed -z &#39;s/\n/,/g&#39;
 Windows,Linux,Android,OS,$
-</code></pre><h3 id=カンマを削除し改行を追加してテキストを複数の行に分割します>カンマを削除し、改行を追加して、テキストを複数の行に分割します</h3><p>次の<code>sed</code>コマンドは、<code>echo</code>コマンドからコンマで区切られた行を入力として受け取り、コンマを改行に置き換えます。</p><pre tabindex=0><code>$ echo &#34;Kaniz Fatema,30th,batch&#34; | sed &#34;s/,/\n/g&#34;
+</code></pre><h3 id=カンマを削除し改行を追加してテキストを複数の行に分割>カンマを削除し、改行を追加して、テキストを複数の行に分割</h3><p>次の<code>sed</code>コマンドは、<code>echo</code>コマンドからコンマで区切られた行を入力として受け取り、コンマを改行に置き換えます。</p><pre tabindex=0><code>$ echo &#34;Kaniz Fatema,30th,batch&#34; | sed &#34;s/,/\n/g&#34;
 Kaniz Fatema
 30th
 batch
-</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、入力テキストのカンマは改行に置き換えられ3行で印刷されます。</dd></dl></div><h3 id=大文字と小文字を区別しない一致を検索し行を削除します>大文字と小文字を区別しない一致を検索し、行を削除します</h3><p>次の<code>sed</code>コマンド&rsquo;I&rsquo;は、大文字と小文字を区別しないオプションです。一致で大文字と小文字を無視することを示します。</p><p>次の<code>sed</code>コマンドは、「linux」という単語を大文字小文字を区別せずに検索し、 os.txtファイルからその行を削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、入力テキストのカンマは改行に置き換えられ3行で印刷されます。</dd></dl></div><h3 id=大文字と小文字を区別しない一致を検索し行を削除>大文字と小文字を区別しない一致を検索し、行を削除</h3><p>次の<code>sed</code>コマンド&rsquo;I&rsquo;は、大文字と小文字を区別しないオプションです。一致で大文字と小文字を無視することを示します。</p><p>次の<code>sed</code>コマンドは、「linux」という単語を大文字小文字を区別せずに検索し、 os.txtファイルからその行を削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -320,9 +324,9 @@ $ cat os.txt | sed &#39;/linux/Id&#39;
 Windows
 Android
 OS
-</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて新しいテキストに置き換えます>大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換えます</h3><p>次の<code>sed</code>コマンドは、<code>echo</code>コマンドからの入力を受け取り、単語&rsquo;bash&rsquo;を単語&rsquo;PHP&rsquo;に置き換えます。</p><p>「Bash」という単語は、大文字と小文字を区別しない検索のために「bash」という単語と一致し、「PHP」という単語に置き換えられています。</p><pre tabindex=0><code>$ echo &#34;I like bash programming &#34; | sed &#39;s/Bash/PHP/i&#39;
+</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて新しいテキストに置き換える>大文字と小文字を区別しない一致を見つけて、新しいテキストに置き換える</h3><p>次の<code>sed</code>コマンドは、<code>echo</code>コマンドからの入力を受け取り、単語&rsquo;bash&rsquo;を単語&rsquo;PHP&rsquo;に置き換えます。</p><p>「Bash」という単語は、大文字と小文字を区別しない検索のために「bash」という単語と一致し、「PHP」という単語に置き換えられています。</p><pre tabindex=0><code>$ echo &#34;I like bash programming &#34; | sed &#39;s/Bash/PHP/i&#39;
 I like PHP programming
-</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて同じテキストのすべて大文字に置き換えます>大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換えます</h3><p>&lsquo;\U&rsquo;は、テキストをすべて大文字に変換します。次の<code>sed</code>コマンドは、 os.txtファイル内の単語&rsquo;linux&rsquo;を大文字小文字を区別せずに検索し、単語が存在する場合は、単語をすべて大文字に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-os.txt data-lang=os.txt><span class=line><span class=cl>Windows
+</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて同じテキストのすべて大文字に置き換える>大文字と小文字を区別しない一致を見つけて、同じテキストのすべて大文字に置き換える</h3><p>&lsquo;\U&rsquo;は、テキストをすべて大文字に変換します。次の<code>sed</code>コマンドは、 os.txtファイル内の単語&rsquo;linux&rsquo;を大文字小文字を区別せずに検索し、単語が存在する場合は、単語をすべて大文字に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
 </span></span><span class=line><span class=cl>Linux
 </span></span><span class=line><span class=cl>Android
 </span></span><span class=line><span class=cl>OS
@@ -336,7 +340,205 @@ Windows
 LINUX
 Android
 OS
-</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて同じテキストのすべての小文字に置き換えます>大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換えます</h3><h3 id=テキスト内のすべての大文字を小文字に置き換えます>テキスト内のすべての大文字を小文字に置き換えます</h3><h3 id=行の番号を検索し番号の後に通貨記号を追加します>行の番号を検索し、番号の後に通貨記号を追加します</h3><h3 id=3桁を超える数値にコンマを追加する>3桁を超える数値にコンマを追加する</h3><h3 id=タブ文字を4つのスペース文字に置き換えます>タブ文字を4つのスペース文字に置き換えます</h3><h3 id=4つの連続するスペース文字をタブ文字に置き換えます>4つの連続するスペース文字をタブ文字に置き換えます</h3><h3 id=すべての行を最初の80文字に切り捨てます>すべての行を最初の80文字に切り捨てます</h3><h3 id=文字列の正規表現を検索しその後に標準テキストを追加します>文字列の正規表現を検索し、その後に標準テキストを追加します</h3><h3 id=文字列の正規表現とその後に見つかった文字列の2番目のコピーを検索します>文字列の正規表現と、その後に見つかった文字列の2番目のコピーを検索します</h3><h3 id=ファイルからの複数行のsedスクリプトの実行>ファイルからの複数行の<code>sed</code>スクリプトの実行</h3><h3 id=複数行のパターンに一致し新しい複数行のテキストに置き換えます>複数行のパターンに一致し、新しい複数行のテキストに置き換えます</h3><h3 id=パターンに一致する2つの単語の順序を置き換えます>パターンに一致する2つの単語の順序を置き換えます</h3><h3 id=コマンドラインから複数のsedコマンドを使用する>コマンドラインから複数のsedコマンドを使用する</h3><h3 id=sedを他のコマンドと組み合わせる>sedを他のコマンドと組み合わせる</h3><h3 id=ファイルに空の行を挿入します>ファイルに空の行を挿入します</h3><h3 id=ファイルの各行からすべての英数字を削除します>ファイルの各行からすべての英数字を削除します。</h3><h3 id=文字列と一致させるにはを使用します>文字列と一致させるには「＆」を使用します</h3><h3 id=単語のペアを切り替える>単語のペアを切り替える</h3><h3 id=各単語の最初の文字を大文字にします>各単語の最初の文字を大文字にします</h3><h3 id=ファイルの行番号を印刷する>ファイルの行番号を印刷する</h3><h2 id=書籍の紹介>書籍の紹介</h2><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/prosedct/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens-22&linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16"></div><div class="columns amazon-info"><h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2><p>Unixのプログラムは「ツール」と呼ばれます。
+</code></pre><h3 id=大文字と小文字を区別しない一致を見つけて同じテキストのすべての小文字に置き換える>大文字と小文字を区別しない一致を見つけて、同じテキストのすべての小文字に置き換える</h3><p>&lsquo;\L&rsquo;は<code>sed</code>で使用され、テキストをすべて小文字に変換します。次の<code>sed</code>コマンドは、os.txtファイルの「Linux」という単語を検索し、その単語をすべて小文字に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$ cat os.txt | sed &#39;s/\(linux\)/\L\1/Ig&#39;
+Windows
+linux
+Android
+OS
+</code></pre><h3 id=テキスト内のすべての大文字を小文字に置き換える>テキスト内のすべての大文字を小文字に置き換える</h3><p>次の<code>sed</code>コマンドは、os.txtファイル内のすべての大文字を検索し、「\L」を使用して文字を小文字に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed  &#39;s/\(.*\)/\L\1/&#39;
+windows
+linux
+android
+os
+</code></pre><h3 id=行の番号を検索し番号の後に通貨記号を追加>行の番号を検索し、番号の後に通貨記号を追加</h3><p>以下のファイルを準備します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:items.txt data-lang=:items.txt><span class=line><span class=cl>HDD       100
+</span></span><span class=line><span class=cl>Monitor   80
+</span></span><span class=line><span class=cl>Mouse     10
+</span></span></code></pre></div><p>実行結果は以下の通りです。</p><pre tabindex=0><code>$ cat items.txt
+HDD       100
+Monitor   80
+Mouse     10
+$
+$ cat items.txt | sed &#39;s/\([0-9]\)/$\1/&#39;
+HDD       $100
+Monitor   $80
+Mouse     $10
+</code></pre><p>上記のコマンドを実行すると、次の出力が表示されます。ここでは、各行の番号の前に「$」記号が追加されています。</p><h3 id=3桁を超える数値にコンマを追加>3桁を超える数値にコンマを追加</h3><p>次の<code>sed</code>コマンドは、<code> echo</code>コマンドからの入力として数値を受け取り、右から数えて3桁の各グループの後にコンマを追加します。ここで、「：a」はラベルを示し、「ta」はグループ化プロセスを繰り返すために使用されます。</p><pre tabindex=0><code>$ echo &#34;5098673&#34; | sed -e :a -e &#39;s/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta&#39;
+5,098,673
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>ようするに桁区切りを<code>sed</code>コマンドで実現するということです。</dd></dl></div><h3 id=タブ文字を4つのスペース文字に置き換えます>タブ文字を4つのスペース文字に置き換えます</h3><p>次の<code>sed</code>コマンドは、各タブ（\ t）文字を4つのスペース文字に置き換えます。「$」記号は「sed」コマンドでタブ文字と一致するように使用され、「g」はすべてのタブ文字を置き換えるために使用されます。</p><p>実行結果は以下のとおりです。\tという文字列が</p><pre tabindex=0><code>$ echo -e &#34;1\t2\t3&#34; | sed $&#39;s/\t/    /g&#39;
+1    2    3
+</code></pre><h3 id=4つの連続するスペース文字をタブ文字に置き換えます>4つの連続するスペース文字をタブ文字に置き換えます</h3><p>次のコマンドは、4つの連続する文字をタブ（\ t）文字に置き換えます。</p><pre tabindex=0><code>$ echo -e &#34;1    2&#34; | sed $&#39;s/    /\t/g&#39;
+1	2
+</code></pre><h3 id=すべての行を最初の80文字に切り捨てます>すべての行を最初の80文字に切り捨てます</h3><p>この例をテストするには、80文字を超える行を含むin.txtという名前のテキストファイルを作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:in.txt data-lang=:in.txt><span class=line><span class=cl>PHP is a server-side scripting language.
+</span></span><span class=line><span class=cl>PHP is an open-source language and PHP is case-sensitive.
+</span></span><span class=line><span class=cl>PHP is platform-independent.
+</span></span></code></pre></div><pre tabindex=0><code>$ cat in.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.PHP is platform-independent.
+$
+$ cat in.txt | sed &#39;s/\(^.\{1,80\}\).*/\1/&#39;
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.PHP is platform-indepen
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、次の出力が表示されます。in.txtファイルの2行目には、80文字を超える文字が含まれており、この行は出力で切り捨てられます。</dd></dl></div><h3 id=文字列の正規表現を検索しその後に標準テキストを追加>文字列の正規表現を検索し、その後に標準テキストを追加</h3><p>次の<code>sed</code>コマンドは、入力テキスト内のテキスト&rsquo; hello &lsquo;を検索し、そのテキストの後にテキスト&rsquo; John &lsquo;を追加します。</p><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ echo &#34;hello, how are you?&#34; | sed &#39;s/\(hello\)/\1 John/&#39;
+hello John, how are you?
+</code></pre><h3 id=文字列の正規表現とその後に見つかった文字列の2番目のコピーを検索します>文字列の正規表現と、その後に見つかった文字列の2番目のコピーを検索します</h3><p>次の<code>sed</code>コマンドは、 input.txtの各行のテキスト「 PHP 」を検索し、各行の2番目の一致をテキスト「NewTextAdded」に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:input.txt data-lang=:input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
+</span></span><span class=line><span class=cl>PHP is an open-source language and PHP is case-sensitive.
+</span></span><span class=line><span class=cl>PHP is platform-independent.
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat input.txt | sed &#39;s/\(PHP\)/\1 (New Text added)/2&#39;
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP (New Text added) is case-sensitive.
+PHP is platform-independent.
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>上記のコマンドを実行すると、次の出力が表示されます。検索テキスト「PHP 」は、 input.txtファイルの2行目と3行目に2回表示されます。そのため、2行目と3行目に「NewTextadded」というテキストが挿入されます。</dd></dl></div><h3 id=ファイルからの複数行のsedスクリプトの実行>ファイルからの複数行の<code>sed</code>スクリプトの実行</h3><p>複数の<code>sed</code>スクリプトをファイルに保存し、<code>sed</code>コマンドを実行することですべてのスクリプトを一緒に実行できます。&lsquo;sedcmd &lsquo;という名前のファイルを作成し、次のコンテンツを追加します。ここでは、2つの<code>sed</code>スクリプトがファイルに追加されています。1つのスクリプトがテキスト「PHP」を「ASP」に置き換えます。別のスクリプトがテキスト「独立」をテキスト「依存」に置き換えます。</p><pre tabindex=0><code class=language-sedcmd data-lang=sedcmd>s/PHP/ASP/
+s/independent/dependent/
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-:input.txt data-lang=:input.txt><span class=line><span class=cl>PHP is a server-side scripting language.
+</span></span><span class=line><span class=cl>PHP is an open-source language and PHP is case-sensitive.
+</span></span><span class=line><span class=cl>PHP is platform-independent.
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat sedcmd
+s/PHP/ASP/
+s/independent/dependent/
+$
+$ cat input.txt
+PHP is a server-side scripting language.
+PHP is an open-source language and PHP is case-sensitive.
+PHP is platform-independent.
+$
+$ cat input.txt | sed -f sedcmd
+ASP is a server-side scripting language.
+ASP is an open-source language and PHP is case-sensitive.
+ASP is platform-dependent.
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>同様の検索ルールを別ファイルにしておくことで、何度も同じルールを書くことをしなくてすみます。必要なときにファイルを読み出せばよいわけです。</dd></dl></div><h3 id=複数行のパターンに一致し新しい複数行のテキストに置き換える>複数行のパターンに一致し、新しい複数行のテキストに置き換える</h3><p>次の<code>sed</code>コマンドは、複数行のテキスト&rsquo;Linux \ nAndroid&rsquo;を検索し、パターンが一致する場合、一致する行は複数行のテキスト&rsquo; Ubuntu \nAndroidLollipop&rsquo;に置き換えられます。ここで、PとDはマルチライン処理に使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed &#39;$!N;s/Linux\nAndroid/Ubuntu\nAndoid Lollipop/;P;D&#39;
+Windows
+Ubuntu
+Andoid Lollipop
+OS
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>わけがわかりませんね。http://blog.livedoor.jp/morituri/archives/52036613.html　こちらを参考に。検索文字列は「sed Nコマンド」です。</dd></dl></div><h3 id=パターンに一致する2つの単語の順序を置き換えます>パターンに一致する2つの単語の順序を置き換えます</h3><p>次の<code>sed</code>コマンドは、<code> echo</code>コマンドから2つの単語の入力を受け取り、これらの単語の順序を置き換えます。</p><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ echo &#34;perl python&#34; | sed -e &#39;s/\([^ ]*\) *\([^ ]*\)/\2 \1/&#39;
+python perl
+</code></pre><h3 id=コマンドラインから複数のsedコマンドを使用する>コマンドラインから複数のsedコマンドを使用する</h3><p>&lsquo;-e&rsquo;オプションは、コマンドラインから複数の<code>sed</code>スクリプトを実行するために<code>sed</code>コマンドで使用されます。次の<code>sed</code>コマンドは、<code> echo</code>コマンドからの入力としてテキストを受け取り、「Ubuntu」を「Kubuntu」に、「Centos」を「Fedora」に置き換えます。</p><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ echo &#34;Ubuntu Centos Debian&#34; | sed -e &#39;s/Ubuntu/Kubuntu/; s/Centos/Fedora/&#39;
+Kubuntu Fedora Debian
+</code></pre><h3 id=sedを他のコマンドと組み合わせる>sedを他のコマンドと組み合わせる</h3><p>次のコマンドは、<code>sed</code>コマンドと<code>cat</code>コマンドを組み合わせたものです。最初の<code>sed</code>コマンドはos.txtファイルから入力を受け取り、テキスト&rsquo;&lsquo;Linux&rsquo;を&rsquo;Fedora&rsquo;に置き換えた後、コマンドの出力を2番目の<code>sed</code>コマンドに送信します。2番目の<code>sed</code>コマンドは、テキスト「Windows」を「Windows10」に置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed &#39;s/Linux/Fedora/&#39;| sed &#39;s/windows/Windows 10/i&#39;
+Windows 10
+Fedora
+Android
+OS
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>sedの連結は以下のように書くことができます。</dd></dl></div><pre tabindex=0><code>$ cat os.txt | sed -e &#39;s/Linux/Fedora/&#39; -e  &#39;s/windows/Windows 10/i&#39;
+Windows 10
+Fedora
+Android
+OS
+bash-5.1$
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>sed -e と書くことで、パイプで渡すことなく、sedコマンドを連続して使うことができます。</dd></dl></div><h3 id=ファイルに空の行を挿入>ファイルに空の行を挿入</h3><p>次の内容のstdlist.txtを作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:stdlist.txt data-lang=:stdlist.txt><span class=line><span class=cl>#ID #Name
+</span></span><span class=line><span class=cl>[ 101 ]    -Ali
+</span></span><span class=line><span class=cl>[ 102 ]    -Neha
+</span></span></code></pre></div><p>「G」オプションは、ファイルに空の行を挿入するために使用されます。次の<code>sed</code>コマンドは、 stdlistファイルの各行の後に空の行を挿入します。</p><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+$
+$ sed G stdlist.txt
+#ID #Name
+
+[ 101 ]    -Ali
+
+[ 102 ]    -Neha
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>一見、使われそうなGオプションですが、使うシチュエーションに出会ったことがありません。</dd></dl></div><h3 id=ファイルの各行からすべての英数字を削除>ファイルの各行からすべての英数字を削除</h3><p>次のコマンドは、 stdlistファイル内のすべての英数字をスペースに置き換えます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:stdlist.txt data-lang=:stdlist.txt><span class=line><span class=cl>#ID #Name
+</span></span><span class=line><span class=cl>[ 101 ]    -Ali
+</span></span><span class=line><span class=cl>[ 102 ]    -Neha
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat stdlist.txt
+#ID #Name
+[ 101 ]    -Ali
+[ 102 ]    -Neha
+$
+$ cat stdlist.txt | sed &#39;s/[A-Za-z0-9]//g&#39;
+# #
+[  ]    -
+[  ]    -
+$
+</code></pre><h3 id=を使用して文字列と一致させる>「&」を使用して文字列と一致させる</h3><p>次のコマンドは、「L」で始まる単語を検索し、「Matched String is –」を「&」記号を使用して一致した単語に追加することでテキストを置き換えます。ここで、「p」は変更されたテキストを印刷するために使用されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt | sed -n &#39;s/^L/Matched String is - &amp;/p&#39;
+Matched String is - Linux
+</code></pre><h3 id=単語のペアを切り替える>単語のペアを切り替える</h3><p>各行に単語のペアを含む次のコンテンツを含むcourse.txtという名前のテキストファイルを作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:course.txt data-lang=:course.txt><span class=line><span class=cl>PHP            ASP
+</span></span><span class=line><span class=cl>MySQL          Oracle
+</span></span><span class=line><span class=cl>CodeIgniter    Laravel
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat course.txt
+PHP ASP
+MySQL Oracle
+CodeIgniter Laravel
+$
+$ cat course.txt | sed &#39;s/\([^ ]*\) *\([^ ]*\)/\2 \1/&#39;
+ASP PHP
+Oracle MySQL
+Laravel CodeIgniter
+$
+</code></pre><h3 id=各単語の最初の文字を大文字に変換する>各単語の最初の文字を大文字に変換する</h3><p>次の<code>sed</code>コマンドは、<code> echo</code>コマンドから入力テキストを受け取り、各単語の最初の文字を大文字に変換します。</p><pre tabindex=0><code>$ echo &#34;I like bash programming&#34; | sed &#39;s/\([a-z]\)\([a-zA-Z0-9]*\)/\u\1\2/g&#39;
+I Like Bash Programming
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>ここまでくると、カルト級ですね。使いこなせる人がいればほぼ神業ですね。</dd></dl></div><h3 id=ファイルの行番号を印刷する>ファイルの行番号を印刷する</h3><p>&lsquo;=&lsquo;記号は、ファイルの各行の前に行番号を出力するために<code>sed</code>コマンドで使用されます。次のコマンドは、os.txtファイルの内容を行番号とともに出力します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-:os.txt data-lang=:os.txt><span class=line><span class=cl>Windows
+</span></span><span class=line><span class=cl>Linux
+</span></span><span class=line><span class=cl>Android
+</span></span><span class=line><span class=cl>OS
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>$ cat os.txt
+Windows
+Linux
+Android
+OS
+$
+$ cat os.txt |sed &#39;=&#39;
+1
+Windows
+2
+Linux
+3
+Android
+4
+OS
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>できれば行頭に行番号が来てほしいですね。工夫して頑張って作ってみてください。</dd></dl></div><pre tabindex=0><code>$ cat os.txt | sed &#39;=&#39; | sed &#39;N;s/\n/ /&#39;
+</code></pre><div class="tips-area tips"><dl><dt>ヒント</dt><dd>楽しめましたか？では</dd></dl></div><h2 id=書籍の紹介>書籍の紹介</h2><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/prosedct/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens-22&linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16"></div><div class="columns amazon-info"><h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2><p>Unixのプログラムは「ツール」と呼ばれます。
 Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
 そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
 また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
