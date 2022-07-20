@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>枝刈りポイント発見システム</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="assets/lib/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/lib/code-prettify/monokai.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+  <nav id="navigation">
+    <aside class="select start-disabled">
+      <select id="selectFile" name="selectFile">
+        <option value="1">01. ブルートフォース　力任せ探索</option>
+        <option value="2">02. 配置フラグ（制約テスト高速化）</option>
+        <option value="3">03. バックトラック</option>
+        <option value="4">04. バックトラック＋対称解除法</option>
+        <option value="5">05. バックトラック＋対称解除法＋枝刈り</option>
+        <option value="6">06. バックトラック＋ビットマップ</option>
+        <option value="7">07. バックトラック＋ビットマップ＋対称解除法 2</option>
+        <option value="8">08. 枝刈り</option>
+        <option value="9">09. クイーンの位置による分岐BOUND 1</option>
+        <option value="10">10. クイーンの位置による分岐BOUND 1,2</option>
+        <option value="11">11. 枝刈り</option>
+        <option value="12">12. 最適化</option>
+        <option value="13" selected>13. 並列処理</option>
+     </select>
+   </aside>
+   <aside class="select start-disabled">
+      <select name="rev" id="rev">
+       <option value="1">非再帰</option>
+       <option value="2">再帰</option>
+     </select>
+   </aside>
+    <input type="number" id="num" value="4" min="4" class="start-disabled">
+    <div id="speed-slider" class="start-disabled">
+      <i class="fas fa-walking"></i>
+      <input type="range" id="speed" value="0.1" step="0.1" min="0" max="1" class="input-range"><i class="fas fa-running"></i>
+    </div>
+  
+    <input class="chk-toggle" type="checkbox" id="analyze" />
+    <label for="analyze" title="">解析モード</label>
+
+    <button type="button" id="btn-done"><span class="msg-start">スタート</span><span class="msg-stop">ストップ</span></button>
+  </nav>
+  <section id="container">
+    <div id="textView">
+      <pre>
+        <code class="prettyprint linenums lang-js"></code>
+      </pre>
+    </div>
+    <div id="response-area">
+      <div id="views">
+        <div id="table"></div>
+        <div id="queens"></div>
+      </div>
+      <div id="results">
+        <div id="output"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/lib/code-prettify/prettify.js"></script>
+  <script src="assets/lib/html2canvas.min.js"></script>
+  <script src="assets/js/common.js"></script>
+
+</body>
+
+</html>
