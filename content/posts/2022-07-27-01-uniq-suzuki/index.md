@@ -66,6 +66,14 @@ $ cat fileName.txt | sort -u
 : `uniq`コマンドのignore-caseは-iです。同時に予め実行しておくsortコマンドもignore-caseも行う必要がありますが、こちらのオプションは -f です。紛らわしいですね。 
 {{% /tips-list %}}
 
+{{% tips-list tips %}}
+ヒント
+: 各コマンドのignore-case(大文字小文字を区別しない)は、以下のとおりです。
+: sort -f
+: uniq -i
+: grep -i
+{{% /tips-list %}}
+
 
 実行結果は以下のとおりです。
 ```
