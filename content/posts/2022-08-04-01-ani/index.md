@@ -1,5 +1,5 @@
 ---
-title: "第1回 NQueen日記（２）"
+title: "NQueen日記 2022/08/04"
 description: "NQueenのロジックを研究してます。日々NQueenで試行錯誤したことを備忘録として日記に追加することにしました。" 
 date: 2022-08-04T09:55:55+09:00
 draft: false 
