@@ -105,6 +105,32 @@ function fn() {
 }
 ```
 
+## インクリメント
+
+インクリメントなどは以下のように書くことができます。
+
+一般的な書き方
+``` bash
+#!/usr/bin/bash
+
+set -ueo pipefail 
+
+value=0;
+value=`echo "$value+1" | bc`;
+echo "valueの値は " $value;
+```
+
+スッキリとした書き方
+``` bash
+#!/usr/bin/bash
+
+set -uo pipefail  # eをつけると動きません
+
+declare -i value=0;
+((value++));
+echo "valueの値は" $value;
+```
+
 ## if C言語やJavaのような条件式で記述する
 
 メリットは以下のとおりです。
@@ -137,31 +163,6 @@ if ((x>2 && x<=5)); then
 fi
 ```
 
-## インクリメント
-
-さらにインクリメントなどは以下のように書くことができます。
-
-一般的な書き方
-``` bash
-#!/usr/bin/bash
-
-set -ueo pipefail 
-
-value=0;
-value=`echo "$value+1" | bc`;
-echo "valueの値は " $value;
-```
-
-スッキリとした書き方
-``` bash
-#!/usr/bin/bash
-
-set -uo pipefail  # eをつけると動きません
-
-declare -i value=0;
-((value++));
-echo "valueの値は" $value;
-```
 
 ## while C言語やJavaのような条件式で記述する
 
@@ -204,7 +205,11 @@ for((i=1;i<=10;i++)){
 ## grepで該当文字列があったら反応する
 
 ``` bash
-# grep は検索結果が見つかったときだけ 0 を返すコマンド
+# 一般的には以下のようにします。
+if cat hoge.txt | grep "Apple" >/dev/null; then
+  echo "hoge.txtにはAppleが含まれた行がある"
+fi
+
 # --quiet は標準出力に何も書き出さないオプション
 if cat hoge.txt | grep --quiet "Apple"; then
   echo "hoge.txtにはAppleが含まれた行がある"
@@ -230,7 +235,7 @@ aws --region ap-northeast-1 cloudformation deploy \
     EnableDebugLog=true
 ```
 
- パイプラインでの改行はエスケープがいらない！
+驚いたことに（僕も驚きました）パイプラインでの改行はエスケープがいらない！
 
 ``` bash
 cat access.log |
@@ -243,6 +248,12 @@ cat access.log |
 ```
 
 ## 関数パラメータは変数に格納する
+
+関数に渡された値は $1,$2...というふうにアクセスできます。
+とはいえ、関数の中で $1,$2を使うとなにがなんだかわかりにくくなります。
+ですので、関数冒頭で変数に格納しましょう。
+もちろん忘れずに変数には`local` 変数をつけましょう。
+変数の型がわかっているのであれば（わかっているでしょう）、declare -i などで明示的に変数の型を指定するのが望ましいのです。
 
 ``` bash
 function do_something() {
