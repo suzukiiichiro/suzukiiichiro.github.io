@@ -85,7 +85,7 @@ declare -r num=5;
 
 str=$((num+2));
 echo $num # => 5
-echo $str # => 5+2
+echo $str # => 7
 ```
 
 ## ローカル変数を定義する
