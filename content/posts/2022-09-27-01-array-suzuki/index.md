@@ -358,6 +358,8 @@ my_array=(a b c d)
 
 以下の例では、  「array」 は変数です 。「a、b、c、d」 は配列の要素です。配列の長さは 4 で、  「a」 要素のインデックス番号は 0 番目のインデックスにあり、  「d」 は 3 番目のインデックスにあります。
 
+以下の例では、０番目の要素に"First Item"、１番目の要素に"Second Item"を代入しています。
+
 ```bash
 declare -a my_array;
 my_array[0]="First Item";
