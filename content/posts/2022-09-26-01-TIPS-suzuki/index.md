@@ -1,5 +1,6 @@
 ---
-title: "【TIPS】シェルスクリプトコマンド活用紹介"
+title: "【TIPS】ざっくりわかるシェルスクリプト"
+
 date: 2022-09-26T14:19:38+09:00
 draft: false
 authors: suzuki
