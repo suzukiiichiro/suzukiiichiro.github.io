@@ -408,6 +408,50 @@ $
  
 {{% /tips-list %}}
 
+
+## 文字列からの配列の代入
+
+
+一般的なwhile read 文。配列の内容を別の配列にコピーしています。
+```bash:month_array.sh
+#!/usr/bin/bash
+
+declare -a month_array=("jan feb mar apr");
+declare -i number=0; # 変数は数値型
+declare -a my_array; # 変数は配列型
+
+while read number;do
+  my_array[$number]=${month_array[$number]};
+  let number++;
+done< <( seq 0 4)
+
+echo ${my_array[@]};
+```
+
+修正したスクリプト。while read がまるごと不要となっていますね。
+```bash:month_array2.sh
+#!/usr/bin/bash
+
+declare -a month_array=("jan feb mar apr");
+# コメントアウト
+# declare -i number=0;
+# 空白を区切り文字として配列に代入
+declare -a my_array=(${month_array// / });
+
+: '
+コメントアウト
+while read number;do
+  my_array[$number]=${month_array[$number]};
+  let number++;
+done< <( seq 0 4)
+'
+echo ${my_array[@]};
+
+```
+
+
+
+
 <!--
 {{% tips-list alert %}}
 注意
