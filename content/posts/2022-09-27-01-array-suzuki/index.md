@@ -38,9 +38,8 @@ Bashは、強力な編集機能や変更機能など、多くの高度な機能�
 こうしたBashスクリプトでアルゴリズムを習得するシリーズを始めます。
 まずは、Bashスクリプトの初歩、そしてデータ構造について、その後、ソートアルゴリズムやツリー、グラフなどへ進みます。
 
-このページではBashスクリプトによる配列について、重点的に習得します。
+このページではBashスクリプトの配列について、重点的に習得します。
 
-以下は、目次となります。
 
 
 ## Bashスクリプティング
@@ -52,7 +51,7 @@ Bashスクリプトを作成するには、テキストエディターを開き�
 
 ３行目に「Hello, world!」を出力するスクリプトを記述します。
 
-```bash
+```bash:hello.sh
 #!/usr/bin/bash
 
 echo "Hello, world!" ;
@@ -68,17 +67,20 @@ Hello, world!
 local: $
 ```
 
-Bash スクリプトで変数を割り当てるのはとてもかんたんです。データ型は不要です。任意の文字、単語、数字は自動で判断され処理します。
+Bash スクリプトで変数を割り当てるのはとてもかんたんです。
+ほかのプログラム言語にあるデータ型は不要です。
+変数に代入される任意の文字、単語、数字は、Bashによって自動で判断され処理します。
 
-コメント行は 「#」を行頭に挿入します。「#」以降の文字列はコメント業として扱われます。
+コメント行は 「#」を行頭に挿入すると、「#」以降の文字列はコメントとして扱われます。
 複数行のコメントは「 :'」で開始し、「'」で終わります。
 
 
-```bash
+```bash:comment.sh
 #!/usr/bin/bash
 
 # 変数への代入
 :'
+ここのブロックはコメントです
 変数名 = [値]
 '
 
@@ -86,9 +88,10 @@ var="Hello, world!";
 echo "$var";
 ```
 
+
 実行結果は以下のとおりです。
 ```
-local: $ bash hello.sh
+local: $ bash comment.sh
 Hello, world!
 local: $
 ```
@@ -107,30 +110,32 @@ local: $
 データ構造の実装に関しては、配列が不可欠です。
 
 実際の例で配列を理解します。
-以下の電話連絡帳は、連絡先がその配列(Array)の要素(Elements)である配列です。連絡先番号の追加や削除など、配列の要素を操作することができます。
+以下の電話連絡帳は、人の名前や連絡先電話番号が、配列(Array)の要素(Elements)となります。人の名前や連絡先電話番号の追加や削除といった、配列の要素を操作することが簡単にできます。
 
 ![電話番号](word-image-482-1024x434.png)
 
-複数の変数を格納できる変数を「配列」と呼びます。
-配列に多数の変数を割り当てる場合、特に制限はありません。
-配列要素は、通常ゼロから始まるインデックス番号によって参照されます。
-配列は主にデータ構造の実装に使用されます。
+配列は主にデータ構造の実装に使用します。
+複数の変数を格納できる変数を「配列(Array)」と呼びます。
+配列(Array)は複数の要素(Elements)で構成されています。
+配列に複数の変数を割り当てる場合、構成される要素数の制限はありません。
+配列要素は通常ゼロから始まり、「添え字」といわれるインデックス番号によって参照します。
 
-以下の画像は、１０個の要素があり、配列の長さは１０となります。
-最初の要素番号は０で、最後の要素番号は９となります。
+以下の画像は、１０個の要素(Elements)で構成され、配列の長さは１０です。
+最初の要素番号は０から始まり、最後の要素番号は９となります。
+この要素番号をインデックスと言い、要素番号を「添え字」と言います。
 
 ![配列](word-image-483-1024x383.png)
 
 {{% tips-list tips %}}
 ヒント
-: 複数の変数を一つずつ定義する代わりに、配列を使用すると、一度に定義できます。これはプログラミングで変数を割り当てる効率的な方法です。
+: 配列を使用すると、複数の変数を一度に定義できます。これはプログラミングで同じ変数の型で同じ構造の変数を割り当てる効率的な方法です。
 {{% /tips-list %}}
 
 
 
 ## 配列の応用
 
-配列は非常に強力なユーティリティであり、多くの科学計算で使用できます。どのプログラミング言語の配列も、他の構造体よりもはるかに機能的です。配列のいくつかの注目すべき実装を以下に示します。
+配列は非常に強力なユーティリティであり、多くの科学計算で使用できます。
 
 - 配列は、同じ名前の複数の変数を管理するために使用されます。
 - 配列はベクトルで使用できます。ベクトルは通常、機械学習で広く使用される 1 次元配列です。
@@ -156,17 +161,21 @@ Bashはインデックス付き配列（１次元配列）と、連想配列の�
  name_of_array[subscript]=value;
 ```
 
-配列は要素の集まりであるため、配列内の要素番号は添え字（そえじ）と呼ばれます。添え字は、配列内の要素の位置を示します。
-例えば、配列内の５番目の要素に値を代入または変更するには、以下のようにします。
+配列は要素の集まりであるため、配列内の要素番号は添え字（そえじ）と呼ばれます。
+添え字は、配列内の要素の位置を示します。
+配列内の５番目の要素に値を代入または変更するには、以下のようにします。
+５番目なのにname_of_array[4]となる理由は、インデックスが０から始まっているからです。
 
 ```bash
-name_of_array[5]=value;
+# 0,1,2,3,4,5
+name_of_array[4]=value;
 
 ```
 
-declare キーワードで配列を宣言するとより正確なソースコードを書くことができます。
+declare キーワードで配列を宣言すると、まちがいの少ないソースコードを書くことができます。
 
 ```bash
+# 変数(name_of_array) を 配列(-a)で宣言(declare)する。
 declare -a name_of_array;
 
 ```
@@ -174,14 +183,24 @@ declare -a name_of_array;
 複数の値を代入する場合は以下の構文となります。
 
 ```bash
+# 変数(name_of_array) を 配列(-a)で宣言(declare)する。
 declare -a name_of_array;
 name_of_array=(value1 value2 …);
 ```
 
+一行にまとめて書くこともできます。
+
+```bash
+# 変数(name_of_array) を 配列(-a)で宣言(declare)する。
+declare -a name_of_array=(value1 value2 …);
+```
+
 
 ## Bashでの配列の割り当て
-Bash スクリプトの配列は、さまざまな方法で割り当てることができます。Bash スクリプトで配列を割り当てる最も簡単な方法は、以下に示すように、丸括弧内にスペースを含む一連の値を変数に割り当てることです。
-「@」は配列内のすべての要素を指定する場合に使います。
+Bash スクリプトの配列は、さまざまな方法で割り当てることができます。
+Bash スクリプトで配列を割り当てる最も簡単な方法は、丸括弧内にスペースを含む一連の値を、半角スペース区切りで値を代入することです。
+`echo`行に見られる「@」は配列内のすべての要素を出力する場合に使います。
+
 
 ```bash:number.sh
 #!/usr/bin/bash
@@ -196,7 +215,9 @@ bash-5.1$ bash number.sh
 bash-5.1$ 
 ```
 
-Bash 配列には、さまざまなタイプの要素を含めることができます。文字列要素で配列を割り当てるには以下のとおりです。
+Bash スクリプトの配列には、さまざまなデータ型の要素を代入することができます。
+データ型が文字列の要素を配列に割り当てるには以下のようにします。
+
 
 ```bash:month.sh
 #!/usr/bin/bash
@@ -211,7 +232,7 @@ jan feb mar apr
 bash-5.1$ 
 ```
 
-配列に、要素を割り当てるには、角括弧 `[要素番号]で添字を指定して、値を割り当てます。
+配列に、要素を割り当てるには、角括弧 [要素番号]で要素番号を指定して、値を割り当てます。
 
 ```bash:month2.sh
 declare -a my_array=([0]="jan" [1]="feb" [2]="mar" [3]="apr");
@@ -224,37 +245,41 @@ jan feb mar apr
 bash-5.1$ 
 ```
 
-一行ずつ書くと以下の通りとなります。
+要素を一つずつ書くと以下の通りとなります。
 
 ```bash
 my_array[0]="jan";
 my_array[1]="feb";
 ```
 
-配列は、「declare」 キーワードで宣言することもできます。オプション 「-a」 と 「-A」 は、それぞれインデックス付き配列と連想配列を宣言するために使用されます。
+配列は、「declare」 キーワードで宣言することが理想です。
+declareのオプション 「-a」 と 「-A」 はそれぞれ、配列と連想配列を宣言するために区別され使用されます。
 
 
 一般的な配列
 ```bash
-declare -a my_array;
+declare -a my_array; #配列
 my_array[0]="jan";
 my_array[1]="feb";
 ```
 
 連想配列
 ```bash
-declare -A my_array;
+declare -A my_array; #連想配列
 my_array[first]="jan";
 my_array[second]="feb";
 ```
 
 連想配列は以下のように入力することもできます。
+
+
 ```bash
-my_array=([first]="jan" [second]="feb" [third]="mar" [fourth]="apr");
+declare -A my_array=([first]="jan" [second]="feb" [third]="mar" [fourth]="apr");
 ```
 
 
 以下のスクリプトは、１から６までの数値を配列に代入します。
+
 ```bash:seq.sh
 declare -a my_array=$(seq 1 6);
 echo ${my_array[@]};
@@ -272,6 +297,8 @@ bash-5.1$
 
 配列は、ループを介して割り当てることもできます。
 以下は、month_arrayの内容をmy_arrayへコピーして出力しています。
+このブロックは少し難しいかもしれません。
+Bash固有の知識も必要なこともあり、アルゴリズムの習得には特に必要なことではないので、読み飛ばしていただいても結構です。
 
 ```bash:month_array.sh
 #!/usr/bin/bash
@@ -291,21 +318,22 @@ echo ${my_array[@]};
 
 ## 文字列からの配列の代入
 
-前の項のサンプルをもう少しかんたんに配列に割り当てることができます。
+前の項のサンプルをもう少し簡単に配列を割り当てることができます。
 
-前の項のサンプル
+修正前の前項のサンプル
 ```bash:month_array.sh
 #!/usr/bin/bash
 
 declare -a month_array=("jan feb mar apr");
-declare -i number=0; # 変数は数値型
 declare -a my_array; # 変数は配列型
 
+declare -i number=0; # 変数は数値型
 while read number;do
   my_array[$number]=${month_array[$number]};
   let number++;
 done< <( seq 0 4)
 
+# 出力
 echo ${my_array[@]};
 ```
 
@@ -315,17 +343,18 @@ echo ${my_array[@]};
 #!/usr/bin/bash
 
 declare -a month_array=("jan feb mar apr");
-# コメントアウト
-# declare -i number=0;
 declare -a my_array=(${month_array// / });
 
+このブロックはまるごとコメントアウト
 : '
-コメントアウト
+declare -i number=0;
 while read number;do
   my_array[$number]=${month_array[$number]};
   let number++;
 done< <( seq 0 4)
 '
+
+# 出力
 echo ${my_array[@]};
 
 ```
@@ -338,26 +367,28 @@ declare -a my_array=(${month_array//-/ });
 ```
 
 
-## Bashの6種類の配列
+## Bash ２種類の配列
 
-配列を使用するには、多くの方法とアプローチがあります。Bash には、次の 2 種類のプライマリ配列があります。
+配列を使用するには、多くの方法とアプローチがあります。Bashには２種類の配列があります。
 
-- インデックス付き配列
+- インデックス付き配列（一般的な配列）
 - 連想配列
 
 
 ## インデックス付き配列
 
-インデックス付き配列は、0 から始まるインデックス番号で参照される要素を格納する配列の基本的な形式です。Bash スクリプトでのインデックス付き配列の例を以下に示します。
+インデックス付き配列は、0から始まるインデックス番号で参照される要素を格納する配列の基本的な形式です。Bash スクリプトでのインデックス付き配列の例を以下に示します。
 
 ```bash
-my_array=(a b c d)
+declare -a my_array=(a b c d);
 ```
 
 前述の通り、配列はdeclareキーワードを使って宣言すると、間違いな少なくなります。
-
-以下の例では、  「array」 は変数です 。「a、b、c、d」 は配列の要素です。配列の長さは 4 で、  「a」 要素のインデックス番号は 0 番目のインデックスにあり、  「d」 は 3 番目のインデックスにあります。
-
+「my_array」は変数です。
+「a、b、c、d」 は配列の要素です。
+配列の長さは４です。
+「a」の要素番号は０です。
+要素番号は０から始まるので「d」の要素番号は３となります。
 以下の例では、０番目の要素に"First Item"、１番目の要素に"Second Item"を代入しています。
 
 ```bash
@@ -365,6 +396,7 @@ declare -a my_array;
 my_array[0]="First Item";
 my_array[1]="Second Item";
 ```
+
 
 ## 連想配列
 
@@ -380,28 +412,34 @@ my_array[two]="Second Item";
 echo "${my_array[@]}";
 ```
 
+実行結果は以下の通りです。
 ```
 bash-5.1$ bash associativeArrays.sh
 First Item Second Item
 bash-5.1$ 
-
 ```
 
 連想配列の宣言には、任意の文字列、または文字セットが使用されます。
+
 ```bash:associativeArray2.sh
-my_array["this is a string"]="Hello Linux";
+# 連想配列として宣言
+declare -A my_array["this is a string"]="Hello Linux";
+echo "${my_array[@]}";
 ```
 
+実行結果は以下の通りです。
 ```
 bash-5.1$ associativeArray2.sh
 Hello Linux
 bash-5.1$ 
 ```
 
-上記のように、配列インデックス内の文字列にはスペースが含まれていることに注意することが重要です。連想配列を初期化する別の方法を以下に示します。
+上記のように、配列インデックス内の文字列にはスペースが含まれていることに注意することが重要です。
+連想配列を初期化する別の方法を以下に示します。
 
 ```bash:associativeArrays3.sh
-my_array=([month1]=jan [month2]=feb [month3]=mar);
+declare -A my_array=([month1]=jan [month2]=feb [month3]=mar);
+echo "${my_array[@]}";
 ```
 
 ```
@@ -430,6 +468,7 @@ feb
 bash-5.1$ 
 ```
 
+
 ## 配列のすべての要素の表示
 
 配列のすべての要素を表示するには、「@」を使います。
@@ -438,7 +477,7 @@ bash-5.1$
 echo ${my_array[@]};
 ```
 
-すべての要素を単一引用符文字列として表示するには、「*」を使います。
+すべての要素を単一引用符文字列として表示するには、「＊」を使います。
 
 ```bash
 echo ${my_array[*]};
@@ -447,49 +486,54 @@ echo ${my_array[*]};
 ## 配列の特定の要素の表示
 
 配列の任意の要素を表示するには以下のようにします。
-
 配列の3番目の要素を出力する
+
 ```bash
+# ０から始まる要素番号の３番目は２です。
 echo ${my_array[2]};
 ```
 
-配列の最後の要素を添え字拡張メソッドで出力します。
+配列の最後の要素を添え字拡張メソッドで出力することができます。
+
 ```bash
 echo ${my_array[@]: -1};
 ```
 
-
 添え字構文を使用して最後の要素を出力するには、次を使用します。
-```
+
+```bash
 echo ${my_array[-1]};
 ```
 
 要素の範囲を出力するには、以下の構文を使用します。
+
 ```bash
 echo ${my_array[@]:x:y};
 ```
 
 ここで 、xは最初のインデックス番号で、yは最後のインデックス番号です。
 例えば、インデックス0から2までの要素を表示するには、次を使用します。
+
 ```bash
 echo ${my_array[@]:1:3};
 ```
 
-ここまでのまとめをいかに記します。
+ここまでのまとめを以下にまとめました。
+
 ```bash:arraysAccess.sh
 #!/usr/bin/bash
 
 declare -a my_array=( jan feb mar apr );
 
 echo "配列のすべての要素:" ${my_array[@]};
-echo "配列の 2 番目の要素:" ${my_array[1]} #インデックスは0から始まる
+echo "配列の 2 番目の要素:" ${my_array[1]}; #インデックスは0から始まる
 echo "部分文字列展開による配列の最後の要素:" ${my_array[@]: -1};
-echo "添字による配列の最後の要素:" ${my_array[-1]}
+echo "添字による配列の最後の要素:" ${my_array[-1]};
 echo "インデックス 1 から 3 までの要素:" ${my_array[@]:1:3};
 ```
 
 実行結果は以下のとおりです。
-```bash:arraysAccess.sh
+```bash
 bash-5.1$ bash arraysAccess.sh
 配列のすべての要素: jan feb mar apr
 配列の 2 番目の要素: feb
@@ -499,9 +543,11 @@ bash-5.1$ bash arraysAccess.sh
 bash-5.1$
 ```
 
+
 ## 配列の初期化されたインデックスへのアクセス
 
-配列のインデックスは、プログラミング中の重要な要素です。インデックス番号を取得するには、次を使用します。
+配列のインデックスは、プログラミング中の重要な要素です。
+インデックス番号を取得するには、次を使用します。
 
 ```bash:indexAccess.sh
 #!/usr/bin/bash
@@ -535,6 +581,7 @@ declare -a my_array;
 
 my_array=(jan feb mar apr);
 echo "現在の要素  :" ${my_array[@]};
+
 my_array[2]="may";
 echo "更新した要素:" ${my_array[@]}
 ```
@@ -584,13 +631,15 @@ bash-5.1$
 #!/usr/bin/bash
 
 declare -a my_array=(jan feb mar apr);
-
 echo ${my_array[@]};
+
 i=2;
 my_array=("${my_array[@]:0:$i}" "aug" "${my_array[@]:$i}");
 echo ${my_array[@]};
 ```
-上記の例では、配列(my_array)の2番目のインデックスに要素augを挿入し、次の要素を次のインデックスにシフトしています。要素marとaprは、それぞれインデックス3と4にシフトされます。
+
+上記の例では、配列(my_array)の2番目のインデックスに要素augを挿入し、次の要素を次のインデックスにシフトしています。
+要素marとaprは、それぞれインデックス３と４にシフトされます。
 
 実行結果は以下のとおりです。
 ```bash
@@ -600,21 +649,25 @@ jan feb aug mar apr
 bash-5.1$ 
 ```
 
+
 ## 要素の削除
 
-Bash 配列では、「unset」コマンドを使用して要素を削除できます。たとえば、配列のすべての要素を削除するには、次を使用します。
+Bash 配列では、「unset」コマンドを使用して要素を削除できます。
+配列のすべての要素を削除するには、次のようにします。
+
 ```bash
 declare -a my_array=(jan feb mar apr)
-unset my_array
+unset my_array # 配列を削除
 ```
 
-「unset」は、宣言された変数を削除するための組み込みコマンドです。配列内の特定の要素の設定を解除するには、次を使用します。
+「unset」は、宣言された変数を削除するための組み込みコマンドです。
+配列内の特定の要素の設定を解除するには、次のようにします。
 
 ```bash:deleteArrays.sh
 #!/usr/bin/bash
 
 declare -a my_array=(jan feb mar apr);
-unset my_array[2]
+unset my_array[2]; #３番目の要素を削除
 echo "3番目の要素を削除したあとの配列:"${my_array[@]}
 ```
 
@@ -627,8 +680,10 @@ bash-5.1$
 
 ### パターンコマンドで削除する
 
-「pattern」コマンドを使用して要素を削除することもできます。
+patternコマンドを使用して要素を削除することもできます。
+
 ```bash
+# ju で始まる要素を配列から削除します。
 my_pattern(${my_array[@]/ju*/})
 ```
 
@@ -657,20 +712,21 @@ bash-5.1$
 2 つの配列をマージするには、次を使用します。
 
 ```bash
-my_array=(${my_array1[@]} ${my_array2[@]})
+# 二つの配列をマージ（結合）します
+my_array=(${my_array1[@]} ${my_array2[@]});
 ```
 
 ```bash:mergeArrays.sh
 #!/usr/bin/bash
 
-declare -a my_array1=(jan feb mar apr)
+declare -a my_array1=(jan feb mar apr);
 echo "my_array1: " ${my_array1[@]};
-declare -a my_array2=(may jun jul aug)
+declare -a my_array2=(may jun jul aug);
 echo "my_array2: " ${my_array2[@]};
 
 #マージ
-declare -a my_array=(${my_array1[@]} ${my_array2[@]})
-echo "マージした配列:"${my_array[@]}
+declare -a my_array=(${my_array1[@]} ${my_array2[@]});
+echo "マージした配列:"${my_array[@]};
 ```
 
 実行結果は以下のとおりです。
@@ -684,7 +740,7 @@ bash-5.1$
 
 {{% tips-list alert %}}
 注意
-マージというか結合ですね。
+:マージというか結合ですね。
 {{% /tips-list %}}
 
 
@@ -710,8 +766,9 @@ bash-5.1$
 
 {{% tips-list alert %}}
 注意
-my_array[@]で出力する段階で、余分なスペースが連続していたとしても除去され空白は一つになります。
+:my_array[@]で出力する段階で、余分なスペースが連続していたとしても除去され空白は一つになります。
 {{% /tips-list %}}
+
 
 ## Bashで配列の長さを求める
 
@@ -731,7 +788,8 @@ bash-5.1$
 
 ## Bashでループを使用して配列を反復処理する
 
-配列にアクセスするにはさまざまな方法があります。すべての要素を入力して明示的にアクセスするか、配列の要素をループすることができます。例を通してそれを理解しましょう。
+配列にアクセスするにはさまざまな方法があります。
+すべての要素を入力して明示的にアクセスするか、配列の要素をループすることができます。
 
 一般的なforループで配列を出力
 ```bash:forArrays.sh
@@ -756,7 +814,8 @@ bash-5.1$
 ```
 
 CやJavaのような書き方もできます。
-「-lt」の代わりに、 小なり記号 「<」 も使用できます。上記の ループは次のようにも記述できます。
+「-lt」の代わりに、 小なり記号 「<」 も使用できます。
+上記の ループは次のようにも記述できます。
 
 ```bash:smartForArray.sh
 #!/usr/bin/bash
@@ -766,7 +825,7 @@ for((i=0;i<${#my_array[@]};i++));do
 done
 ```
 
-doやdoneを中括弧に置き換えることも実はできます。
+forに限定ですが、実はdoやdoneを中括弧に置き換えることもできます。
 ```bash:moreSmartForArray.sh
 #!/usr/bin/bash
 echo "もっとスマートな書き方";
@@ -776,9 +835,9 @@ for((i=0;i<${#my_array[@]};i++)){
 ```
 
 whileループも同様です。
-「-lt」の代わりに、 小なり記号 「<」 も使用できます。上記の ループは次のようにも記述できます。
+「-lt」の代わりに、 小なり記号 「<」 も使用できます。
 
-```bash 
+```bash:while.sh
 #!/usr/bin/bash
 
 declare -a my_array=( e1 e2 e3 e4 e5 e6 );
@@ -786,8 +845,8 @@ declare -i i=0;
 
 echo "一般的な書き方";
 while [ $i -lt ${#my_array[@]} ];do
-  echo my_array[$i]
-  i=$((i+1))
+  echo my_array[$i];
+  i=$((i+1));
 done
 
 echo "スマートな書き方";
@@ -797,6 +856,7 @@ while(($i<${#my_array[@]}));do
   ((i++)); # インクリメント
 done
 ```
+
 
 ## Bashの多次元配列
 
@@ -814,14 +874,14 @@ read cols
 
 for((x=0;x<rows;x++)){
   for((y=0;y<cols;y++)){
-    my_array[${x},${y}]=$RANDOM #乱数の割当
+    my_array[${x},${y}]=$RANDOM; #乱数の割当
   }
 }
 for((i=0;i<rows;i++)){
   for((y=0;y<cols;y++)){
-    echo -ne "${my_array[${x},${y}]}\t"
+    echo -ne "${my_array[${x},${y}]}\t";
   }
-  echo
+  echo;
 }
 ```
 
@@ -843,6 +903,7 @@ bash-5.1$
 
 上記のコードは、ユーザーからの入力として行と列を受け取り、0～32767の疑似乱数を生成します 。
 
+
 ## Bashでのバブルソート
 
 ソートはデータの管理に使用され、検索アルゴリズムなどのアルゴリズム機能をより効率的にするプログラミングのよく知られた手法のひとつです。
@@ -853,18 +914,18 @@ bash-5.1$
 ```bash:bubbleSort.sh
 #! /bin/bash
 
-my_array=(2 3 1 5 4);
-
+declare -a my_array=(2 3 1 5 4);
 echo "未ソートの配列 :" ${my_array[*]};
-for ((x=0; x<5; x++));do
-  for ((y=0; y<5-i-1; y++));do
+
+for ((x=0; x<5; x++)){
+  for ((y=0; y<5-i-1; y++)){
     if [ ${my_array[y]} -gt ${my_array[$((y+1))]} ]; then
       temp=${my_array[y]};
       my_array[$y]=${my_array[$((y+1))]};
       my_array[$((y+1))]=$temp;
     fi
-  done
-done
+  }
+}
 echo "ソート済みの配列" ${my_array[*]};
 ```
 
@@ -879,7 +940,6 @@ bash-5.1$
 ヒント
 : ソートアルゴリズムについては、次回の「ざっくりわかるシェルスクリプト７」で詳しく説明します。
 {{% /tips-list %}}
-
 
 
 
