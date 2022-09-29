@@ -1,5 +1,6 @@
 ---
-title: "【TIPS】シェルスクリプトコマンド活用紹介"
+title: "【TIPS】ざっくりわかるシェルスクリプト"
+
 date: 2022-09-26T14:19:38+09:00
 draft: false
 authors: suzuki
@@ -360,6 +361,96 @@ $
 ヒント
 : 色々と便利なbashですが、これからも便利な書き方があれば更新してきます。
 {{% /tips-list %}}
+
+## マルチラインコメント
+<font color=orange><b> 複数行コメントの使用</b></font>
+bashではさまざまな方法で複数行コメントを使用できます。
+次の例に簡単な方法を示します。
+'multiline-comment.sh'という名前の新しいbashを作成し、次のスクリプトを追加します。
+ここでは、「:」と「'」でbashで複数行コメントを実現しています。
+次のスクリプトは、5の2乗を計算します。
+
+``` bash:multiline-comment.sh
+#!/bin/bash
+
+: '
+次のスクリプトは、
+数値の2乗値5を計算します。
+'
+((area=5*5));
+echo "$area";
+```
+bashコマンドでファイルを実行します。
+
+```
+$ bash multiline-comment.sh
+25
+$
+```
+
+{{% tips-list tips %}}
+ヒント
+: 多くの場合、マルチラインコメントの存在は知られていない。
+: ほとんどの人は、行頭に「#」をならべて複数行コメントを行う。
+: それは、過去のメジャーソースコードの冒頭にそうあるからだ。
+: そう、UNIX/Linuxの開発者のほとんどは、マルチラインコメントを知らないのだ。
+
+: 今後出てくるであろうファイルの生成に「touch」というコマンドがある。これ実は 「:>ファイル名」で、空のファイルを生成する事ができる。「:」は、”なにもしないことを示す。if文の中で何もしない場合は、以下のように記述する。
+
+: if [ "$v" -eq 5 ];then
+:   : # 何もしない
+: fi
+
+: touchは既にファイルがあれば、そのファイルにはさわらない。
+: :> は既にファイルがあれば、そのファイルさえも空にする。
+: 上記 if 文の中の : は　何もしないことを示す。
+: マルチラインコメントも同じ「:」から始まり、何もしないことを示している。
+ 
+{{% /tips-list %}}
+
+
+## 文字列からの配列の代入
+
+
+一般的なwhile read 文。配列の内容を別の配列にコピーしています。
+```bash:month_array.sh
+#!/usr/bin/bash
+
+declare -a month_array=("jan feb mar apr");
+declare -i number=0; # 変数は数値型
+declare -a my_array; # 変数は配列型
+
+while read number;do
+  my_array[$number]=${month_array[$number]};
+  let number++;
+done< <( seq 0 4)
+
+echo ${my_array[@]};
+```
+
+修正したスクリプト。while read がまるごと不要となっていますね。
+```bash:month_array2.sh
+#!/usr/bin/bash
+
+declare -a month_array=("jan feb mar apr");
+# コメントアウト
+# declare -i number=0;
+# 空白を区切り文字として配列に代入
+declare -a my_array=(${month_array// / });
+
+: '
+コメントアウト
+while read number;do
+  my_array[$number]=${month_array[$number]};
+  let number++;
+done< <( seq 0 4)
+'
+echo ${my_array[@]};
+
+```
+
+
+
 
 <!--
 {{% tips-list alert %}}
