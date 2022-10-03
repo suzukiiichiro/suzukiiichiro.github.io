@@ -431,7 +431,82 @@ sys	0m0.020s
 bash-5.1$
 ```
 
+この章のソース全文は以下のとおりです。
 
+```bash:01Eval_Array.sh
+#######################################
+# 01Array.shを、少しだけオブジェクティブに
+# aRray[0].getValue() で値を取得できるように改変した
+# 配列にIDと値を入れるだけのbashスクリプト
+#######################################
+#
+# グローバル変数
+declare -i nElems=0;
+##
+# <>display()  
+# 配列を表示
+function display(){
+  for((i=0;i<nElems;i++)){
+    echo -n "aRray[$i]  \
+    ID: " $( aRray[$i].getID ) " \
+    Value:" $( aRray[$i].getValue ) ; 
+    echo "";
+  }
+}
+##
+# <>setValue() 
+# セッター
+function setValue() {
+  #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
+  local Elem="$1";      
+  local value="$2";
+	eval "aRray[$Elem].getValue()      { echo "$value"; }"
+}
+##
+# <>setID()
+# セッター
+function setID(){
+  #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
+  local Elem="$1";      
+  local ID="$2";
+	eval "aRray[$Elem].getID()         { echo "$ID"; }"
+}
+##
+# <> insert
+# 配列の要素に値を代入
+function insert(){
+  local ID=$1;          #100からの連番
+  local value=$2;       #配列に代入される要素の値
+  setID     "$nElems"    "$ID";      #IDをセット
+  setValue  "$nElems"    "$value";   #Valueをセット
+  ((nElems++));
+}
+##
+# <> set Array
+# 配列を作成
+function setArray(){
+  local N=$1;           #すべての要素数
+  local ID=100;         #100からの連番
+  local value;          #配列に代入される要素の値
+  for((i=0;i<N;i++)){
+    value=$( echo $RANDOM );
+    insert $((ID++)) $value;
+  }
+}
+##
+# <>execArray()
+# メインルーチン
+function execArray(){
+  local N=$1;           #要素数
+  setArray $N           #配列にセット
+  display;              #表示
+}
+##
+# 実行
+#
+time execArray 10;
+exit;
+```
 
 {{% tips-list tips %}}
 ヒント
