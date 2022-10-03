@@ -82,19 +82,19 @@ array[0][0]
 不便ですね。他の言語では、
 
 ```
-array[0][1].getName() 
+array[0].getName() 
 ```
 
 と、すると名前を取り出せたり、
 
 ```
-array[0][1].getAddress()
+array[0].getAddress()
 ```
 
 とすると、住所が取り出せたり、さらには
 
 ```
-array[0][0].setName() 
+array[0].setName() 
 ```
 
 とすると、名前をセットしたりすることもできたりします。
