@@ -236,13 +236,17 @@ echo "Hello,shellscript." > file.txt;
 コメントを複数行にわたって書きたいことがあります。行頭に「# 」を書けばよいのですが、改行の度に行頭に「# 」を挿入する必要があり、とっても面倒です。
 C 言語やJava、HTMLですらも複数行コメントがあるのに。。。
 シェルスクリプトにもあります。あるんです。みんな知らないだけです。
-最初のコメントの先頭の前に「:'」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。
+最初のコメントの先頭の前に「: '」を置き、最後のコメントの後に「'」と書くことだけです。理解を深めるために、次のスクリプトを調べることができます。
 
+{{% tips-list tips %}}
+ヒント
+: 「:」と「'」の間は半角スペースを入れます。
+{{% /tips-list %}}
 
 ``` bash:multiComment.sh
 #!/bin/bash
 
-:'
+: '
 This is the segment of multi-line comments
 Through this script, you will learn
 How to do multi-line commenting
@@ -267,8 +271,9 @@ echo "Hello,shellscript." > file.txt
     blah
 COMMENT
 
+
 # シンプルなマルチラインコメント
-:'
+: '
 This is the segment of multi-line comments
 Through this script, you will learn
 How to do multi-line commenting
@@ -278,6 +283,10 @@ How to do multi-line commenting
 echo "Hello,shellscript." > file.txt;
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 「:」と「'」の間は半角スペースを入れます。
+{{% /tips-list %}}
 
 ヒアドキュメントはとてもべんりな出力方法です。
 コメントではありませんが、上記のマルチラインコメントと似ているので、ここでご紹介します。
