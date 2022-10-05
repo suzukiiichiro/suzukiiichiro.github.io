@@ -186,7 +186,6 @@ function selectionSort(){
 ## <>insertionSort()
 # 挿入ソート
 # URL:https://www.youtube.com/watch?v=DFG-XuyPYUQ
-cnt=0;
 function insertionSort(){
   local tmp_id;
   local tmp_value;
