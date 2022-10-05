@@ -1,6 +1,6 @@
 ---
-title: "【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０"
-date: 2022-10-05T11:06:56+09:00
+title: "【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１"
+date: 2022-10-05T14:49:14+09:00
 draft: false
 authors: suzuki
 image: algorithm.jpg
@@ -12,60 +12,64 @@ tags:
   - 鈴木維一郎
 ---
 
-## バブルソート
+## 選択ソート
+選択ソートは、未整列の配列要素の中から最小を選択し、配列先頭の整列済み列の末尾に追加していく並べ替えアルゴリズム。
+バブルソートと処理コストはほぼ同等。
+意図して選択ソートで並べ替えるといったシチュエーションはまるでない。
+木構造のヒープソートを学ぶための一里塚としての位置づけとも言われている。
+データ配列の要素数が小さい場合にのみごまかして使うなどの用途しかない。
 
-バブルソートは単純選択方法と同様、実現は簡単です。
-しかし、比較回数と交換回数は最悪の場合、O(N^2)です。
-ソート中に選ばれた最大値が水の中の泡のように水面に向かって浮かび上がっていく過程から、バブルソートと呼ばれています。
-データの交換を中心に行っているため、単純交換法とも言われています。
 
-バブルソートのイメージは以下の図を見てもらえればと思います。
-![バブルソート](Sorting_bubblesort_anim.gif)
+![選択ソート](Selection_sort1.gif)
 
 
 ## プログラムソース
 この章で使っているプログラムソースは以下にあります。
-[02_1BubbleSort.sh 一般的な配列のバブルソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[02_1Eval_BubbleSort.sh 擬似的な２次元配列で実装したバブルソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[02_2SelectionSort.sh 一般的な配列の選択ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[02_2Eval_SelectionSort.sh 擬似的な２次元配列で実装した選択ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
 
 
-## バブルソートの処理手順
+## 選択ソートの処理手順
 
-データは１次元配列に格納されていると仮定します。
-図の赤枠で囲まれた左右の要素を比較して、
-大きな要素を右に小さな要素を左に配置します。
-移動した段階で左に小さな要素、右に大きな要素がある場合は、要素の交換が不要なので、赤枠は一つ場所を右に移動します。
-右端まで移動しきった場合、一番右の要素には配列の中で最も大きな値を持つ要素が配置されています。
-しかし、それ以外の要素はまだ並べ替えが完了していないので、交換の場所を一番左に移動し、並べ替えが完了した一番右端の一つ手前まで、上記の処理を繰り返します。
+配列の先頭から小さい順（昇順）に並べる。
+まず、先頭から末尾までの間で最も小さい値を見つけ、一時保管場所へ複写する。
+配列の最後尾まで行き着いたら、一時保管場所へ複写した「最も小さい値」を、「配列中で最も小さい値」とし、配列の先頭の値と交換すし、交換した要素は完了済みとしてマークする。
+処理は、マークした右隣から始める。
+最後尾までの間で「最も小さい値」を見つけ、２番目の値と交換し、交換した要素は完了済みとしてマークする。
+処理は、マークした右隣から始める。
+以降も同様に、n番目から末尾までで最も小さい値をn番目と入れ替えるという操作を繰り返す。
+これを末尾の一つ前の値まで繰り返せば、先頭が最も小さく末尾が最も大きい数値の列が得られる。
 
-![バブルソート２](Bubble-sort-example-300px.gif)
+
+![選択ソート２](Selection_sort2.gif)
 
 
-## ２つのループ
+## 選択ソートのアルゴリズム
 
-バブルソートは２つのforループで構成されます。
-外側のforループは、一番右端に最大の値を持つ要素を配置すると、次からはその一つ手前まで、さらにその次は、その一つ手前までといった具合に、配列全体の移動範囲を狭めていきます。
-外側のforループではこうした理由からデクリメントされているわけです。
-内側のforループは左右の要素の交換処理を行います。
-配列の要素（自分自身）と、その要素の一つ右の要素を比較し、配列の要素（自分自身）が、一つ右の要素よりも値が大きければ、自分自身と右側の要素を交換し、右側の要素の値が大きくなるようにした上で、交換場所を一つ右に移動します。
+バブルソートによく似たアルゴリズムです。
+選択ソートは、最小値を未整列部分の先頭（整列部分の最後尾）に移動させるだけなので、ループにおける値の交換回数が1回です。
+とはいえ、最小値を探すために必要な「要素の値を繰り返し比較する回数」は、バブルソートと同じです。
+結果、バブルソートよりも交換回数が少しだけ少ないので選択ソートの方が高速です。
 
 ```bash
 ##
-# <>bubbleSort()
-# バブルソートの１次元配列版
-function bubbleSort(){
-  for((i=nElems;i>0;i--));do
-    for((j=0;j<i-1;j++));do
-      # 自分自身と右側の要素を比較
-      if (( array[j] > array[j+1] ));then
-        # 交換
-        tmp=${array[j]};
-        array[j]=${array[j+1]};
-        array[j+1]=$tmp;
-        # 交換
+# <>selectionSort
+# 選択ソート
+selectionSort(){
+  for((i=0;i<nElems;i++));do
+    # 一番小さな値を入れるための保管場所
+    min=$i;
+    for((j=i+1;j<nElems;j++));do
+      if(( array[min] > array[j] ));then
+        min=$j;
       fi
     done
-  done  
+    # 交換
+    tmp=${array[min]};
+    array[min]=${array[i]};
+    array[i]=$tmp;
+    # 交換
+  done
 }
 ```
 
@@ -73,7 +77,7 @@ function bubbleSort(){
 
 ```bash:02_1Eval_BubbleSort.sh
 #######################################
-# 02_1BubbleSort.shを、少しだけオブジェクティブに
+# 少しだけオブジェクティブに
 # aRray[0].getValue() で値を取得できるように改変した
 # 配列にIDと値を入れるだけのbashスクリプト
 #######################################
@@ -98,7 +102,7 @@ function setValue() {
   #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
   local Elem="$1";      
   local value="$2";
-    eval "aRray[$Elem].getValue()      { echo "$value"; }"
+  eval "aRray[$Elem].getValue()      { echo "$value"; }"
 }
 ##
 # <>setID()
@@ -107,7 +111,7 @@ function setID(){
   #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
   local Elem="$1";      
   local ID="$2";
-    eval "aRray[$Elem].getID()         { echo "$ID"; }"
+  eval "aRray[$Elem].getID()         { echo "$ID"; }"
 }
 ##
 # <> insert
@@ -153,6 +157,29 @@ function bubbleSort(){
     } 
   }  
 }
+## <>selectionSort()
+# 選択ソート
+# URL:https://www.youtube.com/watch?v=g-PGLbMth_g
+function selectionSort(){
+  local tmp_id;
+  local tmp_value;
+  for((i=0;i<nElems;i++)){
+    min=$i;
+    for((j=i+1;j<nElems;j++)){
+      if(($(aRray[$min].getValue)>$(aRray[$j].getValue)));then
+        min=$j;
+      fi
+    }
+    # 交換
+    tmp_id=$(aRray[$min].getID);
+    tmp_value=$(aRray[$min].getValue);
+    setID     "$min"    $(aRray[$i].getID);      #IDをセット
+    setValue  "$min"    $(aRray[$i].getValue);   #Valueをセット
+    setID     $i    $tmp_id;      #IDをセット
+    setValue  $i    $tmp_value;   #Valueをセット
+    # 交換
+  }
+}
 ##
 # <>execSort()
 # メインルーチン
@@ -161,7 +188,8 @@ function execSort(){
   setArray $N;    #配列をセット
   echo "修正前"
   display;
-  bubbleSort;     # バブルソート
+  #bubbleSort;     #バブルソート
+  selectionSort;  #選択ソート
   echo "修正後"
   display;
 }
@@ -171,51 +199,56 @@ time execSort 10;
 exit;
 ```
 
+
 ## 実行結果
 
 ```
-bash-5.1$ bash 02_1Eval_BubbleSort.sh
+bash-5.1$ bash 02_2Eval_SelectionSort.sh
 修正前
-aRray[0]      ID:  100      Value: 14256
-aRray[1]      ID:  101      Value: 2502
-aRray[2]      ID:  102      Value: 11843
-aRray[3]      ID:  103      Value: 21197
-aRray[4]      ID:  104      Value: 30372
-aRray[5]      ID:  105      Value: 10460
-aRray[6]      ID:  106      Value: 440
-aRray[7]      ID:  107      Value: 6641
-aRray[8]      ID:  108      Value: 12185
-aRray[9]      ID:  109      Value: 8073
+aRray[0]      ID:  100      Value: 26575
+aRray[1]      ID:  101      Value: 7756
+aRray[2]      ID:  102      Value: 4820
+aRray[3]      ID:  103      Value: 27520
+aRray[4]      ID:  104      Value: 5972
+aRray[5]      ID:  105      Value: 31315
+aRray[6]      ID:  106      Value: 11637
+aRray[7]      ID:  107      Value: 19155
+aRray[8]      ID:  108      Value: 8036
+aRray[9]      ID:  109      Value: 20576
 修正後
-aRray[0]      ID:  106      Value: 440
-aRray[1]      ID:  101      Value: 2502
-aRray[2]      ID:  107      Value: 6641
-aRray[3]      ID:  109      Value: 8073
-aRray[4]      ID:  105      Value: 10460
-aRray[5]      ID:  102      Value: 11843
-aRray[6]      ID:  108      Value: 12185
-aRray[7]      ID:  100      Value: 14256
-aRray[8]      ID:  103      Value: 21197
-aRray[9]      ID:  104      Value: 30372
+aRray[0]      ID:  102      Value: 4820
+aRray[1]      ID:  104      Value: 5972
+aRray[2]      ID:  101      Value: 7756
+aRray[3]      ID:  108      Value: 8036
+aRray[4]      ID:  106      Value: 11637
+aRray[5]      ID:  107      Value: 19155
+aRray[6]      ID:  109      Value: 20576
+aRray[7]      ID:  100      Value: 26575
+aRray[8]      ID:  103      Value: 27520
+aRray[9]      ID:  105      Value: 31315
 
-real    0m0.289s
-user    0m0.125s
-sys    0m0.162s
+real    0m0.219s
+user    0m0.091s
+sys    0m0.127s
 bash-5.1$
 ```
 Valueの値がソートされているのが見てわかると思います。
 
+
+
 ## 処理コスト
 
-バブルソートの処理コストは非常に高いわけですが、まずは一番最初のバブルソートの実装ができたわけです。次回からは、もう少しだけ効率的なソート手法の紹介をします。
+選択ソートの処理コストはバブルソートに負けず劣らず非常に高いわけですが、まずはバブルソートに続き、遅さＮｏ．２の選択ソートの実装ができたわけです。次回からは、さらにもう少しだけ効率的なソート手法の紹介をします。
 
 処理コストを可視化（いずれ何がどうなのかはわかります）
-![バブルソート３](Bubble_sort_animation.gif)
+![選択ソート３](Selection_sort3.gif)
 
 
 
 
 ## 「ざっくり」シリーズのご紹介
+【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１
+https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-selectionsort-suzuki/
 【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０
 https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-bubblesort-suzuki/
 【アルゴリズム ビッグオー】ざっくりわかるシェルスクリプト９
