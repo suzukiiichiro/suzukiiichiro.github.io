@@ -56,13 +56,13 @@ tags:
 function bubbleSort(){
   for((i=nElems;i>0;i--));do
     for((j=0;j<i-1;j++));do
-			# 自分自身と右側の要素を比較
+      # 自分自身と右側の要素を比較
       if(( array[j] > ${array[j+1]}));then
-				# 交換
+        # 交換
         tmp=${array[j]};
         array[j]=${array[j+1]};
         array[j+1]=$tmp;
-				# 交換
+        # 交換
       fi
     done
   done  
