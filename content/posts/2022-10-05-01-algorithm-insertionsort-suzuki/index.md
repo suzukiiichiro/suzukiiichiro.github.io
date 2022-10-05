@@ -1,6 +1,6 @@
 ---
-title: "【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１"
-date: 2022-10-05T14:49:14+09:00
+title: "【アルゴリズム 挿入ソート】ざっくりわかるシェルスクリプト１２"
+date: 2022-10-05T16:36:32+09:00
 draft: false
 authors: suzuki
 image: algorithm.jpg
@@ -12,75 +12,74 @@ tags:
   - 鈴木維一郎
 ---
 
-## 選択ソート
-選択ソートは、未整列の配列要素の中から最小を選択し、配列先頭の整列済み列の末尾に追加していく並べ替えアルゴリズムです。
-バブルソートと処理コストはほぼ同等です。
-意図して選択ソートで並べ替えるといったシチュエーションはまるでありません。
-木構造のヒープソートを学ぶための一里塚としての位置づけとも言われています。
-データ配列の要素数が小さい場合にのみごまかして使うなどの用途しかありません。
+## 挿入ソート
 
-がんばれ選択ソート！
+挿入ソートとは、未整列の要素を一つずつつまみ上げて、整列済みの列の適切な位置に挿入していくアルゴリズムです。
+挿入ソートは、選択ソートと異なり、整列したいデータ列以外の一時記憶領域を用意しなくて良いという特徴があります。
+対象データ列が短い場合などに効果的に利用されます。
+また、配列の要素が、整列済み（ソート済み）に近い状態ならば高速に整列を完了できます（最良計算時間はO（n））。
+ところが、配列の要素が逆順に並んでいる場合は、気が遠くなるほどの回数の比較が必要となるとされています。
+人間に並べ替えを行わせるとまっさきに思いつく方法として親しまれていたりもします。
 
-![選択ソート](Selection_sort1.gif)
+がんばれ挿入ソート！
+
+![挿入ソート](Insertion_sort1.gif)
 
 
 ## プログラムソース
 この章で使っているプログラムソースは以下にあります。
-[02_2SelectionSort.sh 一般的な配列の選択ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[02_2Eval_SelectionSort.sh 擬似的な２次元配列で実装した選択ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[02_3InsertionSort.sh 一般的な配列の挿入ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[02_3Eval_InsertionSort.sh 擬似的な２次元配列で実装した挿入ソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
 
 
-## 選択ソートの処理手順
+## 挿入ソートの処理手順
 
-１．配列の先頭から小さい順（昇順）に並べる。
-２．先頭から末尾までの間で最も小さい値を見つけ、一時保管場所へ複写する。
-３．配列の最後尾まで行き着いたら、一時保管場所へ複写した「最も小さい値」を、「配列中で最も小さい値」とし、配列の先頭の値と交換すし、交換した要素は完了済みとしてマークする。
-４．処理の再開は、マークした右隣から始める。
-５．最後尾までの間で「最も小さい値」を見つけ、２番目の値と交換し、交換した要素は完了済みとしてマークする。
-６．処理の再開は、マークした右隣から始める。
-７．以降も同様に、n番目から末尾までで最も小さい値をn番目と入れ替えるという操作を繰り返す。
+１．配列の先頭から小さい順に並べる。
+２．先頭から2つの値を比較して小さい方を１番目に、大きい方を２番目に置く。
+３．３番目の値を取り出し、１番め、２番目と順に比較し、適切な位置（左から小さい順に並ぶよう）に挿入する。
+４．４番目以降も同様に、n番目の値を取り出して先頭からn-1番目まで順番に比較し、適切な位置に挿入します。
+５．上記の操作を末尾の値まで繰り返すことで、先頭が最も小さく末尾が最も大きい数値の列が得られる。
 
-上記を末尾の一つ前の値まで繰り返せば、先頭が最も小さく末尾が最も大きい数値の列が得られる。
+n番目の値を挿入する際、
+- ｎ番目の値が整列済みの列の中で最も小さければ、先頭の値との1回の比較で挿入位置が決定できます。
 
-がんばれ選択ソート！
+ところが、
 
-![選択ソート２](Selection_sort2.gif)
+- ｎ番目の値が整列済みの列の中で最も大きければ、整列済みの値の数（n-1回）だけ比較を繰り返さなければなりません（ここが挿入ソートの最大の弱点）
+
+がんばれ挿入ソート！
+
+![挿入ソート２](Insertion_sort2.gif)
 
 
-## 選択ソートのアルゴリズム
+## 挿入ソートのアルゴリズム
 
-バブルソートによく似たアルゴリズムです。
-選択ソートは、最小値を未整列部分の先頭（整列部分の最後尾）に移動させるだけなので、ループにおける値の交換回数が1回です。
-とはいえ、最小値を探すために必要な「要素の値を繰り返し比較する回数」は、バブルソートと同じです。
-結果、バブルソートよりも交換回数が少しだけ少ないので選択ソートの方が高速です。
+配列の要素が整列済みに近い状態ならば高速に整列を完了できる（最良計算時間はO（n））
+逆順に並んでいる場合はとてつもない回数の比較が必要（最悪計算時間はO（n2））となってしまう。
+この欠点をある程度緩和したアルゴリズムとしてシェルソート（Shell sort）がある。
 
-Bash/シェルスクリプトで実装した一般的な配列で実装した選択ソート。
+選択ソートのように一時的な要素の値を保管する領域を確保する必要はないことが挿入ソートのメリット。
+選択ソートはヒープソートを学ぶための一里塚と言われているが、同様に挿入ソートは、シェルソートを学ぶための一里塚との位置づけとも言われている。
 
-```bash
+
+Bash/シェルスクリプトで実装した一般的な配列で実装した挿入ソート。
+```bash:
 ##
-# <>selectionSort
-# 選択ソート
-selectionSort(){
-  for((i=0;i<nElems;i++));do
-    # 一番小さな値を入れるための保管場所
-    min=$i;
-    for((j=i+1;j<nElems;j++));do
-      if (( array[min] > array[j] ));then
-        min=$j;
-      fi
-    done
-    # 交換
-    tmp=${array[min]};
-    array[min]=${array[i]};
-    array[i]=$tmp;
-    # 交換
-  done
+# <>insertionSort()
+# 挿入ソート
+function insertionSort(){
+  for((out=1;out<nElems;out++)){
+    tmp=$((array[out]));
+    for((in=out;in>0 && array[in-1]>tmp;in--)){
+      array[in]=$((array[in-1]));
+    }
+    array[in]=$tmp;
+  }
 }
 ```
 
 ## bash/シェルスクリプトによる疑似２次元配列の実装
-
-```bash:02_2Eval_SelectionSort.sh
+```bash:02_3Eval_InsertionSort.sh
 #######################################
 # 少しだけオブジェクティブに
 # aRray[0].getValue() で値を取得できるように改変した
@@ -107,7 +106,7 @@ function setValue() {
   #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
   local Elem="$1";      
   local value="$2";
-  eval "aRray[$Elem].getValue()      { echo "$value"; }"
+	eval "aRray[$Elem].getValue()      { echo "$value"; }"
 }
 ##
 # <>setID()
@@ -116,7 +115,7 @@ function setID(){
   #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
   local Elem="$1";      
   local ID="$2";
-  eval "aRray[$Elem].getID()         { echo "$ID"; }"
+	eval "aRray[$Elem].getID()         { echo "$ID"; }"
 }
 ##
 # <> insert
@@ -186,6 +185,26 @@ function selectionSort(){
   }
 }
 ##
+## <>insertionSort()
+# 挿入ソート
+# URL:https://www.youtube.com/watch?v=DFG-XuyPYUQ
+cnt=0;
+function insertionSort(){
+  local tmp_id;
+  local tmp_value;
+  for((out=1;out<nElems;out++)){
+    tmp_id=$(aRray[$out].getID);
+    tmp_value=$(aRray[$out].getValue);
+    in=$out;
+    while (( in>0 )) && (( $(aRray[$((in-1))].getValue)>tmp_value ));do
+      setID     "$in"    $(aRray[$((in-1))].getID);      #IDをセット
+      setValue  "$in"    $(aRray[$((in-1))].getValue);   #Valueをセット
+      in=$((in-1));
+    done 
+    setID     "$in"    $tmp_id;      #IDをセット
+    setValue  "$in"    $tmp_value;   #Valueをセット
+  } 
+}
 # <>execSort()
 # メインルーチン
 function execSort(){
@@ -194,7 +213,8 @@ function execSort(){
   echo "修正前"
   display;
   #bubbleSort;     #バブルソート
-  selectionSort;  #選択ソート
+  #selectionSort;  #選択ソート
+  insertionSort;
   echo "修正後"
   display;
 }
@@ -208,33 +228,33 @@ exit;
 ## 実行結果
 
 ```
-bash-5.1$ bash 02_2Eval_SelectionSort.sh
+bash-5.1$ bash 02_3Eval_InsertionSort.sh
 修正前
-aRray[0]      ID:  100      Value: 26575
-aRray[1]      ID:  101      Value: 7756
-aRray[2]      ID:  102      Value: 4820
-aRray[3]      ID:  103      Value: 27520
-aRray[4]      ID:  104      Value: 5972
-aRray[5]      ID:  105      Value: 31315
-aRray[6]      ID:  106      Value: 11637
-aRray[7]      ID:  107      Value: 19155
-aRray[8]      ID:  108      Value: 8036
-aRray[9]      ID:  109      Value: 20576
+aRray[0]      ID:  100      Value: 16343
+aRray[1]      ID:  101      Value: 11323
+aRray[2]      ID:  102      Value: 1381
+aRray[3]      ID:  103      Value: 15343
+aRray[4]      ID:  104      Value: 28067
+aRray[5]      ID:  105      Value: 27342
+aRray[6]      ID:  106      Value: 32195
+aRray[7]      ID:  107      Value: 15563
+aRray[8]      ID:  108      Value: 24240
+aRray[9]      ID:  109      Value: 28649
 修正後
-aRray[0]      ID:  102      Value: 4820
-aRray[1]      ID:  104      Value: 5972
-aRray[2]      ID:  101      Value: 7756
-aRray[3]      ID:  108      Value: 8036
-aRray[4]      ID:  106      Value: 11637
-aRray[5]      ID:  107      Value: 19155
-aRray[6]      ID:  109      Value: 20576
-aRray[7]      ID:  100      Value: 26575
-aRray[8]      ID:  103      Value: 27520
-aRray[9]      ID:  105      Value: 31315
+aRray[0]      ID:  102      Value: 1381
+aRray[1]      ID:  101      Value: 11323
+aRray[2]      ID:  103      Value: 15343
+aRray[3]      ID:  107      Value: 15563
+aRray[4]      ID:  100      Value: 16343
+aRray[5]      ID:  108      Value: 24240
+aRray[6]      ID:  105      Value: 27342
+aRray[7]      ID:  104      Value: 28067
+aRray[8]      ID:  109      Value: 28649
+aRray[9]      ID:  106      Value: 32195
 
-real    0m0.219s
-user    0m0.091s
-sys    0m0.127s
+real	0m0.145s
+user	0m0.062s
+sys	0m0.082s
 bash-5.1$
 ```
 Valueの値がソートされているのが見てわかると思います。
@@ -243,15 +263,17 @@ Valueの値がソートされているのが見てわかると思います。
 
 ## 処理コスト
 
-選択ソートの処理コストはバブルソートに負けず劣らず非常に高いわけですが、まずはバブルソートに続き、遅さＮｏ．２の選択ソートの実装ができたわけです。次回からは、さらにもう少しだけ効率的なソート手法の紹介をします。
+挿入ソートの処理コストはバブルソートや選択ソートに負けず劣らず非常に高いわけですが、まずはバブルソート、選択ソートに続き、遅さＮｏ．２を争う挿入ソートの実装ができたわけです。次回からは、さらにもう少しだけ効率的なソート手法の紹介をします。
 
 処理コストを可視化（いずれ何がどうなのかはわかります）
-![選択ソート３](Selection_sort3.gif)
+![挿入ソート３](Insertion_sort3.gif)
 
 
 
 
 ## 「ざっくり」シリーズのご紹介
+【アルゴリズム 挿入ソート】ざっくりわかるシェルスクリプト１２
+https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-insertionsort-suzuki/
 【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１
 https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-selectionsort-suzuki/
 【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０
