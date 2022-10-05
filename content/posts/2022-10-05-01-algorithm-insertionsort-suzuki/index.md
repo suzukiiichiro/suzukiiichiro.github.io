@@ -69,7 +69,7 @@ Bash/シェルスクリプトで実装した一般的な配列で実装した挿
 # 挿入ソート
 function insertionSort(){
   for((out=1;out<nElems;out++)){
-    tmp=$((array[out]));
+    local tmp=$((array[out]));
     for((in=out;in>0 && array[in-1]>tmp;in--)){
       array[in]=$((array[in-1]));
     }
@@ -192,6 +192,7 @@ cnt=0;
 function insertionSort(){
   local tmp_id;
   local tmp_value;
+  local in;
   for((out=1;out<nElems;out++)){
     tmp_id=$(aRray[$out].getID);
     tmp_value=$(aRray[$out].getValue);
