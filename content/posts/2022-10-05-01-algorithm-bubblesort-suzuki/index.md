@@ -1,5 +1,5 @@
 ---
-title: "【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト９"
+title: "【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０"
 date: 2022-10-05T11:06:56+09:00
 draft: false
 authors: suzuki
@@ -216,6 +216,8 @@ Valueの値がソートされているのが見てわかると思います。
 
 
 ## 「ざっくり」シリーズのご紹介
+【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０
+https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-bubblesort-suzuki/
 【アルゴリズム ビッグオー】ざっくりわかるシェルスクリプト９
 https://suzukiiichiro.github.io/posts/2022-10-04-01-algorithm-bigO-suzuki/
 【アルゴリズム ２次元配列編】ざっくりわかるシェルスクリプト８
