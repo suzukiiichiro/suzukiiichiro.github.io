@@ -1,10 +1,10 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta name=keywords content="シェルスクリプト,Bash,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/><meta property="og:title" content="【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP"><meta property="og:description" content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-10-06T13:43:07+09:00"><meta property="article:modified_time" content="2022-10-06T14:23:14+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"><meta name=twitter:title content="【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP"><meta name=twitter:description content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"],"datePublished":"2022-10-06T13:43:07+09:00","dateModified":"2022-10-06T14:23:14+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４","item":"https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta name=keywords content="シェルスクリプト,Bash,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/><meta property="og:title" content="【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP"><meta property="og:description" content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2022-10-06T13:43:07+09:00"><meta property="article:modified_time" content="2022-10-06T14:57:39+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"><meta name=twitter:title content="【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４｜NLP"><meta name=twitter:description content="キューはデータ構造の一つです。 キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。 行列においては、先に並んだ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/algorithm.jpg"],"datePublished":"2022-10-06T13:43:07+09:00","dateModified":"2022-10-06T14:57:39+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/suzukiiichiro","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"記事一覧","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４","item":"https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_120>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>記事一覧</a><li><span class=breadcrumb-item>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2022.10.06</time>
-<time class="article-time--item article-time--reading">読了時間: 6分</time></div></header><h1 class=article-title>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４</h1></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#プログラムソース>プログラムソース</a></li><li><a href=#キューの処理アルゴリズム>キューの処理アルゴリズム</a></li><li><a href=#bashシェルスクリプトの配列で実装したキュー>Bash/シェルスクリプトの配列で実装したキュー</a></li><li><a href=#bashシェルスクリプトによる疑似２次元配列の実装>bash/シェルスクリプトによる疑似２次元配列の実装</a></li><li><a href=#実行結果>実行結果</a></li><li><a href=#ざっくりシリーズのご紹介>「ざっくり」シリーズのご紹介</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><p>キューはデータ構造の一つです。<br>キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。<br>行列においては、先に並んだ人ほど優先されます。<br>キューにデータを追加する場合、データは一番最後に追加されます。</p><p><figure><a href=https://suzukiiichiro.github.io/enqueue.png><img src=https://suzukiiichiro.github.io/enqueue.png loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><p>キューにデータを追加する操作をenqueue（エンキュー）と呼びます。<br>キューからデータを取り出す場合、最も古くに追加されたデータから取り出されます。<br>キューからデータを取り出す操作をdequeue（デキュー）と呼びます。<br>このような、先に入れたものを先に出す先入れ先出しの仕組みを<br>「First In First Out」を略してFIFOと呼びます。</p><p><figure class=gallery-image style=flex-grow:160;flex-basis:384px><a href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue.gif data-size=640x400><img src=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue.gif width=640 height=400 loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><h2 id=プログラムソース>プログラムソース</h2><p>この章で使っているプログラムソースは以下にあります。<br><a class=link href=https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash target=_blank rel=noopener>03_1Stack.sh 一般的な配列のキュー</a><br><a class=link href=https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash target=_blank rel=noopener>03_2Eval_Stack.sh 擬似的な２次元配列で実装したキュー</a></p><h2 id=キューの処理アルゴリズム>キューの処理アルゴリズム</h2><p>処理は複雑ではありません。むしろシンプルです。<br>rear（リア）と、front（フロント）の動きをもう一度見てください。</p><p><figure class=gallery-image style=flex-grow:178;flex-basis:427px><a href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue2.gif data-size=2280x1280><img src=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue2.gif width=2280 height=1280 loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><h2 id=bashシェルスクリプトの配列で実装したキュー>Bash/シェルスクリプトの配列で実装したキュー</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:03_2Queue.sh data-lang=bash:03_2Queue.sh><span class=line><span class=cl><span class=c1>##</span>
+<time class="article-time--item article-time--reading">読了時間: 10分</time></div></header><h1 class=article-title>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４</h1></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#プログラムソース>プログラムソース</a></li><li><a href=#キュー>キュー</a></li><li><a href=#bashシェルスクリプトの配列で実装したキュー>Bash/シェルスクリプトの配列で実装したキュー</a></li><li><a href=#bashシェルスクリプトによる疑似２次元配列の実装>bash/シェルスクリプトによる疑似２次元配列の実装</a></li><li><a href=#実行結果>実行結果</a></li><li><a href=#連環キュー>連環キュー</a></li><li><a href=#bashシェルスクリプトの配列で実装したキュー-1>Bash/シェルスクリプトの配列で実装したキュー</a></li><li><a href=#bashシェルスクリプトによる疑似２次元配列の実装-1>bash/シェルスクリプトによる疑似２次元配列の実装</a></li><li><a href=#実行結果-1>実行結果</a></li><li><a href=#ざっくりシリーズのご紹介>「ざっくり」シリーズのご紹介</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><p>キューはデータ構造の一つです。<br>キューは待ち行列とも呼ばれ、その名の通り行列に並ぶ事を考えるとイメージしやすいです。<br>行列においては、先に並んだ人ほど優先されます。<br>キューにデータを追加する場合、データは一番最後に追加されます。</p><p><figure><a href=https://suzukiiichiro.github.io/enqueue.png><img src=https://suzukiiichiro.github.io/enqueue.png loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><p>キューにデータを追加する操作をenqueue（エンキュー）と呼びます。<br>キューからデータを取り出す場合、最も古くに追加されたデータから取り出されます。<br>キューからデータを取り出す操作をdequeue（デキュー）と呼びます。<br>このような、先に入れたものを先に出す先入れ先出しの仕組みを<br>「First In First Out」を略してFIFOと呼びます。<br><figure class=gallery-image style=flex-grow:160;flex-basis:384px><a href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue.gif data-size=640x400><img src=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/Queue.gif width=640 height=400 loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><h2 id=プログラムソース>プログラムソース</h2><p>この章で使っているプログラムソースは以下にあります。<br><a class=link href=https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash target=_blank rel=noopener>03_1Stack.sh 一般的な配列のキュー</a><br><a class=link href=https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash target=_blank rel=noopener>03_2Eval_Stack.sh 擬似的な２次元配列で実装したキュー</a></p><h2 id=キュー>キュー</h2><p>処理は複雑ではありません。むしろシンプルです。<br>rear（リア）と、front（フロント）の動きをもう一度見てください。<br>リアとフロントの動きに着目しましょう。<br>要するに、リア（最後尾）、フロント（最前面）はどこか。<br>追加されるときはリア（最後尾）に。<br>出すときはフロント（最前面）から。</p><p>この図がわかりやすいです。<br><figure class=gallery-image style=flex-grow:173;flex-basis:416px><a href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/enqueue2.gif data-size=884x510><img src=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/enqueue2.gif width=884 height=510 loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><h2 id=bashシェルスクリプトの配列で実装したキュー>Bash/シェルスクリプトの配列で実装したキュー</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:03_2Queue.sh data-lang=bash:03_2Queue.sh><span class=line><span class=cl><span class=c1>##</span>
 </span></span><span class=line><span class=cl><span class=c1># &lt;&gt;queueDisplay()</span>
 </span></span><span class=line><span class=cl><span class=c1># 表示</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> queueDisplay<span class=o>(){</span>
@@ -171,6 +171,289 @@ peek :2 : 30
 4 50
 ------
 bash-5.1$
+</code></pre><h2 id=連環キュー>連環キュー</h2><p>映画館の待ち行列なら、先頭の一人が列を去ったら、列全体が前に進みます。<br>キューでも、削除のたびに全ての項目を移動する事は出来ますが、しかしその時間が無駄です。<br>むしろ項目はそのままにしておいて、キューの前端や後端が動いた方が簡単なのです。<br>しかしその場合の問題は、キューの後端がすぐに配列の終端に達してしまいます。<br>まだ満杯ではないのに新たなデータを挿入できないというこの問題を解決するために、<br>キューのfrontとrear矢印は配列の先頭へラップアラウンド（最初に戻る）します。<br>その結果として連環キューというものができあがります。リングバッファとも呼ばれます。</p><p><figure class=gallery-image style=flex-grow:234;flex-basis:563px><a href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/CircularQueues.gif data-size=648x276><img src=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/CircularQueues.gif width=648 height=276 loading=lazy alt=キュー></a></a><figcaption>キュー</figcaption></figure></p><h2 id=bashシェルスクリプトの配列で実装したキュー-1>Bash/シェルスクリプトの配列で実装したキュー</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:03_3CircularQueue.sh data-lang=bash:03_3CircularQueue.sh><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> display<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>n</span><span class=o>=</span>0<span class=p>;</span>n&lt;nElems<span class=p>;</span>n++<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$n</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>array</span><span class=p>[n]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>done</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;------&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> insert<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  array<span class=o>[</span>nElems++<span class=o>]=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> setArray<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nv>nElems</span><span class=o>=</span>0<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;<span class=nv>$1</span><span class=p>;</span>i++<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>    insert <span class=k>$(</span><span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$RANDOM</span><span class=s2>&#34;</span><span class=k>)</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>done</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQDisplay<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;maxSize<span class=p>;</span>i++<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$i</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>queue</span><span class=p>[i]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>done</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;------&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQDequeue<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span>front++<span class=o>))</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span><span class=nv>front</span><span class=o>==</span>maxSize<span class=o>))&amp;&amp;{</span> <span class=nv>front</span><span class=o>=</span>0<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQEnqueue<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span> <span class=nv>rear</span><span class=o>==(</span>maxSize-1<span class=o>)</span> <span class=o>))&amp;&amp;{</span> <span class=nv>rear</span><span class=o>=</span>-1<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>  queue<span class=o>[</span>++rear<span class=o>]=</span><span class=nv>$1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQPeek<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;peek :front :</span><span class=nv>$front</span><span class=s2>  rear : </span><span class=nv>$rear</span><span class=s2>  peek : </span><span class=nv>$front</span><span class=s2> </span><span class=si>${</span><span class=nv>queue</span><span class=p>[front]</span><span class=si>}</span><span class=s2> &#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> execCircularQ<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nv>rear</span><span class=o>=</span>-1<span class=p>;</span> <span class=c1>#後ろ端（enqueueされるほう）</span>
+</span></span><span class=line><span class=cl>  <span class=nv>front</span><span class=o>=</span>0<span class=p>;</span> <span class=c1>#前端（peek/dequeueされるほう)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nv>maxSize</span><span class=o>=</span><span class=m>5</span> <span class=c1>#キューの項目数</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 10<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 20<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 30<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 40<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを4つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>#exit;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを2つdequeue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>#exit;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 50<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを1つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>#exit;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  <span class=c1># CircularQ</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 60<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue 70<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを2つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>#exit;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#---</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを3つdequeue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl>execCircularQ<span class=p>;</span>
+</span></span><span class=line><span class=cl>exit<span class=p>;</span>
+</span></span></code></pre></div><h2 id=bashシェルスクリプトによる疑似２次元配列の実装-1>bash/シェルスクリプトによる疑似２次元配列の実装</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:03_3Eval_CircularQueue.sh data-lang=bash:03_3Eval_CircularQueue.sh><span class=line><span class=cl><span class=c1>#######################################</span>
+</span></span><span class=line><span class=cl><span class=c1># 03_3CircularQueue.shを、少しだけオブジェクティブに</span>
+</span></span><span class=line><span class=cl><span class=c1># aRray[0].getValue() で値を取得できるように改変した</span>
+</span></span><span class=line><span class=cl><span class=c1># 配列にIDと値を入れるだけのbashスクリプト</span>
+</span></span><span class=line><span class=cl><span class=c1>#######################################</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1># グローバル変数</span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>nElems</span><span class=o>=</span>0<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>rear</span><span class=o>=</span>0<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt;display()  </span>
+</span></span><span class=line><span class=cl><span class=c1># 配列を表示</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> display<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;nElems<span class=p>;</span>i++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> -n <span class=s2>&#34;aRray[</span><span class=nv>$i</span><span class=s2>]  \
+</span></span></span><span class=line><span class=cl><span class=s2>    ID: &#34;</span> <span class=k>$(</span> aRray<span class=o>[</span><span class=nv>$i</span><span class=o>]</span>.getID <span class=k>)</span> <span class=s2>&#34; \
+</span></span></span><span class=line><span class=cl><span class=s2>    Value:&#34;</span> <span class=k>$(</span> aRray<span class=o>[</span><span class=nv>$i</span><span class=o>]</span>.getValue <span class=k>)</span> <span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt;setValue() </span>
+</span></span><span class=line><span class=cl><span class=c1># セッター</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> setValue<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>Elem</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>      
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>value</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nb>eval</span> <span class=s2>&#34;aRray[</span><span class=nv>$Elem</span><span class=s2>].getValue()      { echo &#34;</span><span class=nv>$value</span><span class=s2>&#34;; }&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt;setID()</span>
+</span></span><span class=line><span class=cl><span class=c1># セッター</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> setID<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>Elem</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>      
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>ID</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nb>eval</span> <span class=s2>&#34;aRray[</span><span class=nv>$Elem</span><span class=s2>].getID()         { echo &#34;</span><span class=nv>$ID</span><span class=s2>&#34;; }&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt; insert</span>
+</span></span><span class=line><span class=cl><span class=c1># 配列の要素に値を代入</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> insert<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>ID</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>          <span class=c1>#100からの連番</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>value</span><span class=o>=</span><span class=nv>$2</span><span class=p>;</span>       <span class=c1>#配列に代入される要素の値</span>
+</span></span><span class=line><span class=cl>  setID     <span class=s2>&#34;</span><span class=nv>$nElems</span><span class=s2>&#34;</span>    <span class=s2>&#34;</span><span class=nv>$ID</span><span class=s2>&#34;</span><span class=p>;</span>      <span class=c1>#IDをセット</span>
+</span></span><span class=line><span class=cl>  setValue  <span class=s2>&#34;</span><span class=nv>$nElems</span><span class=s2>&#34;</span>    <span class=s2>&#34;</span><span class=nv>$value</span><span class=s2>&#34;</span><span class=p>;</span>   <span class=c1>#Valueをセット</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span>nElems++<span class=o>))</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt; set Array</span>
+</span></span><span class=line><span class=cl><span class=c1># 配列を作成</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> setArray<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>N</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>           <span class=c1>#すべての要素数</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>ID</span><span class=o>=</span>100<span class=p>;</span>         <span class=c1>#100からの連番</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> value<span class=p>;</span>          <span class=c1>#配列に代入される要素の値</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;N<span class=p>;</span>i++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>    <span class=nv>value</span><span class=o>=</span><span class=k>$(</span> <span class=nb>echo</span> <span class=nv>$RANDOM</span> <span class=k>)</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    insert <span class=k>$((</span>ID++<span class=k>))</span> <span class=nv>$value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;&gt; init Array</span>
+</span></span><span class=line><span class=cl><span class=c1># 配列を作成</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> initArray<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>N</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>           <span class=c1>#すべての要素数</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>ID</span><span class=o>=</span>100<span class=p>;</span>         <span class=c1>#100からの連番</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=nv>value</span><span class=o>=</span>null<span class=p>;</span>          <span class=c1>#配列に代入される要素の値</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;N<span class=p>;</span>i++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>    insert <span class=k>$((</span>ID++<span class=k>))</span> <span class=nv>$value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQDisplay<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;maxSize<span class=p>;</span>i++<span class=o>))</span><span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$i</span><span class=s2>&#34;</span> <span class=k>$(</span>aRray<span class=o>[</span><span class=nv>$i</span><span class=o>]</span>.getValue<span class=k>)</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>done</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;------&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQDequeue<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span>front++<span class=o>))</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span><span class=nv>front</span><span class=o>==</span>maxSize<span class=o>))&amp;&amp;{</span> <span class=nv>front</span><span class=o>=</span>0<span class=p>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQEnqueue<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nv>ID</span><span class=o>=</span><span class=nv>$1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>value</span><span class=o>=</span><span class=nv>$2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span><span class=o>((</span> <span class=nv>rear</span><span class=o>==(</span>maxSize-1<span class=o>)</span> <span class=o>))</span><span class=p>;</span><span class=k>then</span> 
+</span></span><span class=line><span class=cl>    <span class=nv>rear</span><span class=o>=</span>-1<span class=p>;</span> 
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  <span class=o>((</span>rear++<span class=o>))</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  setID     <span class=s2>&#34;</span><span class=nv>$rear</span><span class=s2>&#34;</span>    <span class=s2>&#34;</span><span class=nv>$ID</span><span class=s2>&#34;</span><span class=p>;</span>      <span class=c1>#IDをセット</span>
+</span></span><span class=line><span class=cl>  setValue  <span class=s2>&#34;</span><span class=nv>$rear</span><span class=s2>&#34;</span>    <span class=s2>&#34;</span><span class=nv>$value</span><span class=s2>&#34;</span><span class=p>;</span>   <span class=c1>#Valueをセット</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> CircularQPeek<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;peek :front :</span><span class=nv>$front</span><span class=s2>  rear : </span><span class=nv>$rear</span><span class=s2>  peek : </span><span class=nv>$front</span><span class=s2> </span><span class=k>$(</span>aRray<span class=o>[</span><span class=nv>$front</span><span class=o>]</span>.getValue<span class=k>)</span><span class=s2> &#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> execCircularQ<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nv>rear</span><span class=o>=</span>-1<span class=p>;</span> <span class=c1>#後ろ端（enqueueされるほう）</span>
+</span></span><span class=line><span class=cl>  <span class=nv>front</span><span class=o>=</span>0<span class=p>;</span> <span class=c1>#前端（peek/dequeueされるほう)</span>
+</span></span><span class=line><span class=cl>  <span class=nv>ID</span><span class=o>=</span>100<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nv>maxSize</span><span class=o>=</span><span class=m>5</span> <span class=c1>#キューの項目数</span>
+</span></span><span class=line><span class=cl>  initArray <span class=nv>$maxSize</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 10<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 20<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 30<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 40<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを4つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを2つdequeue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 50<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを1つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#----</span>
+</span></span><span class=line><span class=cl>  <span class=c1># CircularQ</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 60<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQEnqueue <span class=k>$((</span>ID++<span class=k>))</span> 70<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを2つenqueue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>#---</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDequeue<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;データを3つdequeue&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQPeek<span class=p>;</span>
+</span></span><span class=line><span class=cl>  CircularQDisplay<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>##</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># 実行</span>
+</span></span><span class=line><span class=cl>execCircularQ<span class=p>;</span>
+</span></span><span class=line><span class=cl>exit<span class=p>;</span>
+</span></span></code></pre></div><h2 id=実行結果-1>実行結果</h2><pre tabindex=0><code>データを4つenqueue
+peek :front :0  rear : 3  peek : 0 10 
+0 10
+1 20
+2 30
+3 40
+4 null
+------
+データを2つdequeue
+peek :front :2  rear : 3  peek : 2 30 
+0 10
+1 20
+2 30
+3 40
+4 null
+------
+データを1つenqueue
+peek :front :2  rear : 4  peek : 2 30 
+0 10
+1 20
+2 30
+3 40
+4 50
+------
+データを2つenqueue
+peek :front :2  rear : 1  peek : 2 30 
+0 60
+1 70
+2 30
+3 40
+4 50
+------
+データを3つdequeue
+peek :front :0  rear : 1  peek : 0 60 
+0 60
+1 70
+2 30
+3 40
+4 50
+------
 </code></pre><h2 id=ざっくりシリーズのご紹介>「ざっくり」シリーズのご紹介</h2><p>【アルゴリズム キュー】ざっくりわかるシェルスクリプト１３<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/</a><br>【アルゴリズム スタック】ざっくりわかるシェルスクリプト１２<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-stack-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-stack-suzuki/</a><br>【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-selectionsort-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-selectionsort-suzuki/</a><br>【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-bubblesort-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-bubblesort-suzuki/</a><br>【アルゴリズム ビッグオー】ざっくりわかるシェルスクリプト９<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-04-01-algorithm-bigO-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-04-01-algorithm-bigO-suzuki/</a><br>【アルゴリズム ２次元配列編】ざっくりわかるシェルスクリプト８<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-03-01-algorithm-eval-array-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-03-01-algorithm-eval-array-suzuki/</a><br>【アルゴリズム 配列準備編】ざっくりわかるシェルスクリプト７<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-10-03-01-algorithm-array-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-10-03-01-algorithm-array-suzuki/</a><br>【アルゴリズム 配列編】ざっくりわかるシェルスクリプト６<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-09-27-01-array-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-09-27-01-array-suzuki/</a><br>【grep/sed/awkも】ざっくりわかるシェルスクリプト５<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/</a><br>【grep特集】ざっくりわかるシェルスクリプト４<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/</a><br>【はじめから】ざっくりわかるシェルスクリプト３<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-01-13-01-suzuki/</a><br>【はじめから】ざっくりわかるシェルスクリプト２<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-01-12-01-suzuki/</a><br>【はじめから】ざっくりわかるシェルスクリプト１<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-01-07-01-suzuki/</a></p><p>【TIPS】ざっくりわかるシェルスクリプト<br><a class=link href=https://suzukiiichiro.github.io/posts/2022-09-26-01-tips-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2022-09-26-01-tips-suzuki/</a></p><h2 id=書籍の紹介>書籍の紹介</h2><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens-22&linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16"></div><div class="columns amazon-info"><h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2><p>Unixのプログラムは「ツール」と呼ばれます。
 Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
 そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
