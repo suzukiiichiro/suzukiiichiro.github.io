@@ -24,8 +24,6 @@ tags:
 キューからデータを取り出す操作をdequeue（デキュー）と呼びます。
 このような、先に入れたものを先に出す先入れ先出しの仕組みを
 「First In First Out」を略してFIFOと呼びます。
-
-
 ![キュー](Queue.gif)
 
 
@@ -36,13 +34,17 @@ tags:
 
 
 
-## キューの処理アルゴリズム
+## キュー
 
 処理は複雑ではありません。むしろシンプルです。
 rear（リア）と、front（フロント）の動きをもう一度見てください。
+リアとフロントの動きに着目しましょう。
+要するに、リア（最後尾）、フロント（最前面）はどこか。
+追加されるときはリア（最後尾）に。
+出すときはフロント（最前面）から。
 
-![キュー](Queue2.gif)
-
+この図がわかりやすいです。
+![キュー](enqueue2.gif)
 
 ## Bash/シェルスクリプトの配列で実装したキュー
 
@@ -229,7 +231,316 @@ bash-5.1$
 ```
 
 
+## 連環キュー
 
+映画館の待ち行列なら、先頭の一人が列を去ったら、列全体が前に進みます。
+キューでも、削除のたびに全ての項目を移動する事は出来ますが、しかしその時間が無駄です。
+むしろ項目はそのままにしておいて、キューの前端や後端が動いた方が簡単なのです。
+しかしその場合の問題は、キューの後端がすぐに配列の終端に達してしまいます。
+まだ満杯ではないのに新たなデータを挿入できないというこの問題を解決するために、
+キューのfrontとrear矢印は配列の先頭へラップアラウンド（最初に戻る）します。
+その結果として連環キューというものができあがります。リングバッファとも呼ばれます。
+
+![キュー](CircularQueues.gif)
+
+
+
+## Bash/シェルスクリプトの配列で実装したキュー
+```bash:03_3CircularQueue.sh
+##
+#
+function display(){
+  for((n=0;n<nElems;n++));do
+    echo "$n" "${array[n]}";
+  done
+  echo "------";
+}
+##
+#
+function insert(){
+  array[nElems++]="$1";
+}
+##
+#
+function setArray(){
+  nElems=0;
+  for((i=0;i<$1;i++));do
+    insert $(echo "$RANDOM");
+  done
+}
+##
+#
+function CircularQDisplay(){
+  for((i=0;i<maxSize;i++));do
+      echo "$i" "${queue[i]}";
+  done
+  echo "------";
+}
+##
+#
+function CircularQDequeue(){
+  ((front++));
+  ((front==maxSize))&&{ front=0; }
+}
+##
+#
+function CircularQEnqueue(){
+  (( rear==(maxSize-1) ))&&{ rear=-1; }
+  queue[++rear]=$1;
+}
+##
+#
+function CircularQPeek(){
+  echo "peek :front :$front  rear : $rear  peek : $front ${queue[front]} ";
+}
+##
+#
+function execCircularQ(){
+  rear=-1; #後ろ端（enqueueされるほう）
+  front=0; #前端（peek/dequeueされるほう)
+
+  maxSize=5 #キューの項目数
+
+  CircularQEnqueue 10;
+  CircularQEnqueue 20;
+  CircularQEnqueue 30;
+  CircularQEnqueue 40;
+  echo "データを4つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+#exit;
+  #----
+  CircularQDequeue;
+  CircularQDequeue;
+  echo "データを2つdequeue";
+  CircularQPeek;
+  CircularQDisplay;
+#exit;
+  #----
+  CircularQEnqueue 50;
+  echo "データを1つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+#exit;
+  #----
+  # CircularQ
+  CircularQEnqueue 60;
+  CircularQEnqueue 70;
+  echo "データを2つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+#exit;
+  #---
+  CircularQDequeue;
+  CircularQDequeue;
+  CircularQDequeue;
+  echo "データを3つdequeue";
+  CircularQPeek;
+  CircularQDisplay;
+}
+##
+#
+execCircularQ;
+exit;
+```
+
+## bash/シェルスクリプトによる疑似２次元配列の実装
+
+```bash:03_3Eval_CircularQueue.sh
+#######################################
+# 03_3CircularQueue.shを、少しだけオブジェクティブに
+# aRray[0].getValue() で値を取得できるように改変した
+# 配列にIDと値を入れるだけのbashスクリプト
+#######################################
+##
+# グローバル変数
+declare -i nElems=0;
+declare -i rear=0;
+#
+# <>display()  
+# 配列を表示
+function display(){
+  for((i=0;i<nElems;i++)){
+    echo -n "aRray[$i]  \
+    ID: " $( aRray[$i].getID ) " \
+    Value:" $( aRray[$i].getValue ) ; 
+    echo "";
+  }
+}
+##
+# <>setValue() 
+# セッター
+function setValue() {
+  #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
+  local Elem="$1";      
+  local value="$2";
+	eval "aRray[$Elem].getValue()      { echo "$value"; }"
+}
+##
+# <>setID()
+# セッター
+function setID(){
+  #今後挿入や置き換えに備えてnElemsとは別の変数を用意しておく
+  local Elem="$1";      
+  local ID="$2";
+	eval "aRray[$Elem].getID()         { echo "$ID"; }"
+}
+##
+# <> insert
+# 配列の要素に値を代入
+function insert(){
+  local ID=$1;          #100からの連番
+  local value=$2;       #配列に代入される要素の値
+  setID     "$nElems"    "$ID";      #IDをセット
+  setValue  "$nElems"    "$value";   #Valueをセット
+  ((nElems++));
+}
+##
+# <> set Array
+# 配列を作成
+function setArray(){
+  local N=$1;           #すべての要素数
+  local ID=100;         #100からの連番
+  local value;          #配列に代入される要素の値
+  for((i=0;i<N;i++)){
+    value=$( echo $RANDOM );
+    insert $((ID++)) $value;
+  }
+}
+# <> init Array
+# 配列を作成
+function initArray(){
+  local N=$1;           #すべての要素数
+  local ID=100;         #100からの連番
+  local value=null;          #配列に代入される要素の値
+  for((i=0;i<N;i++)){
+    insert $((ID++)) $value;
+  }
+}
+##
+function CircularQDisplay(){
+  for((i=0;i<maxSize;i++));do
+      echo "$i" $(aRray[$i].getValue);
+  done
+  echo "------";
+}
+##
+#
+function CircularQDequeue(){
+  ((front++));
+  ((front==maxSize))&&{ front=0; }
+}
+##
+#
+function CircularQEnqueue(){
+  ID=$1;
+  value=$2;
+  if(( rear==(maxSize-1) ));then 
+    rear=-1; 
+  fi
+  ((rear++));
+  setID     "$rear"    "$ID";      #IDをセット
+  setValue  "$rear"    "$value";   #Valueをセット
+}
+##
+#
+function CircularQPeek(){
+  echo "peek :front :$front  rear : $rear  peek : $front $(aRray[$front].getValue) ";
+}
+##
+#
+function execCircularQ(){
+  rear=-1; #後ろ端（enqueueされるほう）
+  front=0; #前端（peek/dequeueされるほう)
+  ID=100;
+
+  maxSize=5 #キューの項目数
+  initArray $maxSize;
+
+  CircularQEnqueue $((ID++)) 10;
+  CircularQEnqueue $((ID++)) 20;
+  CircularQEnqueue $((ID++)) 30;
+  CircularQEnqueue $((ID++)) 40;
+  echo "データを4つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+  #----
+  CircularQDequeue;
+  CircularQDequeue;
+  echo "データを2つdequeue";
+  CircularQPeek;
+  CircularQDisplay;
+  #----
+  CircularQEnqueue $((ID++)) 50;
+  echo "データを1つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+  #----
+  # CircularQ
+  CircularQEnqueue $((ID++)) 60;
+  CircularQEnqueue $((ID++)) 70;
+  echo "データを2つenqueue";
+  CircularQPeek;
+  CircularQDisplay;
+  #---
+  CircularQDequeue;
+  CircularQDequeue;
+  CircularQDequeue;
+  echo "データを3つdequeue";
+  CircularQPeek;
+  CircularQDisplay;
+}
+##
+#
+# 実行
+execCircularQ;
+exit;
+```
+
+## 実行結果
+
+```
+データを4つenqueue
+peek :front :0  rear : 3  peek : 0 10 
+0 10
+1 20
+2 30
+3 40
+4 null
+------
+データを2つdequeue
+peek :front :2  rear : 3  peek : 2 30 
+0 10
+1 20
+2 30
+3 40
+4 null
+------
+データを1つenqueue
+peek :front :2  rear : 4  peek : 2 30 
+0 10
+1 20
+2 30
+3 40
+4 50
+------
+データを2つenqueue
+peek :front :2  rear : 1  peek : 2 30 
+0 60
+1 70
+2 30
+3 40
+4 50
+------
+データを3つdequeue
+peek :front :0  rear : 1  peek : 0 60 
+0 60
+1 70
+2 30
+3 40
+4 50
+------
+```
 ## 「ざっくり」シリーズのご紹介
 【アルゴリズム キュー】ざっくりわかるシェルスクリプト１３
 https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/
