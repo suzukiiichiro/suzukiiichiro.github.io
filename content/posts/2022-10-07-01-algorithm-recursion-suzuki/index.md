@@ -34,6 +34,10 @@ tags:
 ## プログラムソース
 この章で使っているプログラムソースは以下にあります。
 [04_1Factorial.sh 再帰-階乗](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[04_2Euclid.sh 再帰-ユークリッドの互除法](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[4_3Trianglar.sh.sh 再帰-三角数](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[04_4Hanoi.sh 再帰-ハノイの塔](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[04_5Hanoi.sh 再帰-ハノイの塔CUI版](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
 
 
 
@@ -694,7 +698,8 @@ bash-5.1$ bash 04_5Hanoi.sh 3
 ```
 
 ソースの内容はともかくこういったものもBash/シェルスクリプトで作成できるって面白いですね。（それでよいです）
-![ハノイの塔](Hanoi.gif);
+![ハノイの塔](Hanoi.gif)
+[04_5Hanoi.sh 再帰-ハノイの塔CUI版](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
 
 
 
