@@ -171,6 +171,8 @@ bash-5.1$
 
 ソースは以下のとおりです。
 ```bash:04_2Euclid.sh
+#!/usr/bin/bash
+
 # <> gcd()
 # ユークリッドの互除法（再帰）
 function gcd(){
@@ -315,6 +317,8 @@ bash-5.1$
 こうなります。
 
 ```bash:04_3Trianglar.sh
+#!/usr/bin/bash 
+
 ##
 # <>triangle
 # 三角数（再帰）
@@ -459,6 +463,8 @@ http://www13.plala.or.jp/kymats/study/C++/Hanoi/Hanoi.html
 
 
 ```bash:04_4Hanoi.sh
+#!/usr/bin/bash
+
 ##########################
 # ハノイの塔
 # Bash/シェルスクリプト版
@@ -515,7 +521,7 @@ bash-5.1$
 ## ハノイの塔の実稼働が見えるCUI版
 
 ```bash:04_5Hanoi.sh
-#!/bin/bash
+#!/usr/bin/bash
 
 # 起動方法  ./ファイル名 円盤の数
 # ./Hanoni.sh 5 
