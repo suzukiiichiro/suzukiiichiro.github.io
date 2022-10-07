@@ -542,17 +542,23 @@ peek :front :0  rear : 1  peek : 0 60
 4 50
 ------
 ```
+
+
 ## 「ざっくり」シリーズのご紹介
-【アルゴリズム キュー】ざっくりわかるシェルスクリプト１３
+【アルゴリズム 再帰】ざっくりわかるシェルスクリプト１５
+https://suzukiiichiro.github.io/posts/2022-10-07-01-algorithm-recursion-suzuki/
+【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４
 https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-queue-suzuki/
-【アルゴリズム スタック】ざっくりわかるシェルスクリプト１２
+【アルゴリズム スタック】ざっくりわかるシェルスクリプト１３
 https://suzukiiichiro.github.io/posts/2022-10-06-01-algorithm-stack-suzuki/
+【アルゴリズム 挿入ソート】ざっくりわかるシェルスクリプト１２
+https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-insertionsort-suzuki/
 【アルゴリズム 選択ソート】ざっくりわかるシェルスクリプト１１
 https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-selectionsort-suzuki/
 【アルゴリズム バブルソート】ざっくりわかるシェルスクリプト１０
 https://suzukiiichiro.github.io/posts/2022-10-05-01-algorithm-bubblesort-suzuki/
 【アルゴリズム ビッグオー】ざっくりわかるシェルスクリプト９
-https://suzukiiichiro.github.io/posts/2022-10-04-01-algorithm-bigO-suzuki/
+https://suzukiiichiro.github.io/posts/2022-10-04-01-algorithm-bigo-suzuki/
 【アルゴリズム ２次元配列編】ざっくりわかるシェルスクリプト８
 https://suzukiiichiro.github.io/posts/2022-10-03-01-algorithm-eval-array-suzuki/
 【アルゴリズム 配列準備編】ざっくりわかるシェルスクリプト７
