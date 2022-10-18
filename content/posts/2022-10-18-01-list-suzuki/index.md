@@ -66,11 +66,11 @@ tags:
 
 ## プログラムソース
 この章で使っているプログラムソースは以下にあります。
-[04_6LinkedList.sh 連結リスト](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[list1 リストファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[node1 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[node2 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
-[node3 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash)
+[04_6LinkedList.sh 連結リスト](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/04_6LinkedList.sh)
+[list1 リストファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/list1)
+[node1 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/node1)
+[node2 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/node2)
+[node3 ノードファイル](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/node3)
 
 
 ## 挿入
@@ -460,7 +460,7 @@ bash-5.1$
 
 ## 「ざっくり」シリーズのご紹介
 【アルゴリズム リスト】ざっくりわかるシェルスクリプト１６
-https://suzukiiichiro.github.io/posts/2022-10-07-01-algorithm-list-suzuki/
+https://suzukiiichiro.github.io/posts/2022-10-18-01-list-suzuki/
 【アルゴリズム 再帰】ざっくりわかるシェルスクリプト１５
 https://suzukiiichiro.github.io/posts/2022-10-07-01-algorithm-recursion-suzuki/
 【アルゴリズム キュー】ざっくりわかるシェルスクリプト１４
