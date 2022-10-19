@@ -128,29 +128,6 @@ tags:
 
 ## プログラムソース
 
-まず、４つのファイルを準備します。
-
-```:list1
-node1
-3
-```
-
-```:node1
-node2
-foo
-```
-
-```:node2
-node3
-bar
-```
-
-```:node3
-none
-!
-```
-
-上記４つのファイルを実行ファイルと同じ場所に配置してください。
 
 今回のプログラムソースは、今後の実用性も考えて、以下の機能にに加えて、
 
@@ -167,11 +144,6 @@ none
 
 ソースはやや長くなりましたが、じっくりと動かしてみてください。
 
-{{% tips-list tips %}}
-ヒント
-: プログラムを修正しているうちに、実行ファイルが４つのファイル（list1,node1,node2,node3）の内容を書き換えてしまうことがあります。
-: おかしいな？と思ったら、４つのファイルを作り直して実行してみると良いです。
-{{% /tips-list %}}
 
 
 ``` bash:04_6LinkedList.sh
@@ -183,27 +155,44 @@ none
 # Bash シェルスクリプト版
 ########################################
 
-## 準備すべき４つのファイル
-## 実行ファイル（このファイル）と同じ場所に４つのファイルを配置してください。
-##
 
-: '
-## list1
-node1
-3
 ##
-## node1
-node2
-foo
+# final()
+# 実行後に行うファイナル処理
+# 実行に必要なノードファイルを削除します。
+function final(){
+  rm -fr $dirName;
+}
 ##
-## node2
-node3
-bar
-##
-## node3
-none
-!
-';
+# makeNodeFile()
+# ノードファイルを作成
+#
+dirName="demo";
+list1="list1";
+node1="node1";
+node2="node2";
+node3="node3";
+#
+function makeNodeFile(){
+  rm -fr "$dirName";
+  mkdir -p $dirName;
+  cd demo;
+  :>$list1;
+  echo "node1"  | tee "$list1";
+  echo "3"      | tee -a "$list1";
+  :>$node1;
+  echo "node2"  | tee "$node1";
+  echo "foo"    | tee -a "$node1";
+  :>$node2;
+  echo "node3"  | tee "$node2";
+  echo "bar"    | tee -a "$node2";
+  :>$node3;
+  echo "none"   | tee "$node3";
+  echo "!"      | tee -a "$node3";
+  cd ../
+}
+
+
 
 ##
 ## 
@@ -325,42 +314,60 @@ function printList {
 # execLinkedList()
 # 連結リストの実行
 function execLinkedList(){
-  printList $(head -n1 list1);
+  # demoディレクトリへ移動
+  cd demo;
+  #
+  printList $(head -n1 $list1);
   printf "\nリストの先頭に hello を追加\n"
-  add "list1" "hello";
-  printList $(head -n1 list1);
+  add "$list1" "hello";
+  printList $(head -n1 $list1);
+  #
   printf "\nリストの先頭に world を追加\n"
-  add "list1" "world"
-  printList $(head -n1 list1)
+  add "$list1" "world"
+  printList $(head -n1 $list1)
+  #
   printf "\n０から数えて１番目の要素を取得\n"
-  get $(head -n1 list1) 1
+  get $(head -n1 $list1) 1
+  #
   printf "\n０から数えて１番目のノード名を取得\n"
-  getNode "list1" 1
+  getNode "$list1" 1
+  #
   printf "\n０から数えて２番目に要素 327 を挿入\n"
-  addAtIdx "list1" 2 327
-  printList $(head -n1 list1)
+  addAtIdx "$list1" 2 327
+  printList $(head -n1 $list1)
+  #
   printf "\nリストの先頭に要素 94 を挿入\n"
-  addAtIdx "list1" 0 94
-  printList $(head -n1 list1)
+  addAtIdx "$list1" 0 94
+  printList $(head -n1 $list1)
+  #
   printf "\n０から数えて７番目に要素 1138 を挿入\n"
-  addAtIdx "list1" 7 1138
-  printList $(head -n1 list1)
-  printf "\nリストの先頭の要素 %s を削除\n" $(remove "list1")
-  printList $(head -n1 list1)
-  printf "\nリストの１番目の要素 %s を削除\n" $(removeAtIdx "list1" 1)
-  printList $(head -n1 list1)
-  printf "\nリスト５番目の要素 %s を削除\n" $(removeAtIdx "list1" 5)
-  printList $(head -n1 list1)
+  addAtIdx "$list1" 7 1138
+  printList $(head -n1 $list1)
+  #
+  printf "\nリストの先頭の要素 %s を削除\n" $(remove "$list1")
+  printList $(head -n1 $list1)
+  #
+  printf "\nリストの１番目の要素 %s を削除\n" $(removeAtIdx "$list1" 1)
+  printList $(head -n1 $list1)
+  #
+  printf "\nリスト５番目の要素 %s を削除\n" $(removeAtIdx "$list1" 5)
+  printList $(head -n1 $list1)
+  #
   printf "\nリストの先頭の要素 %s を削除\n" $(removeAtIdx "list1" 0)
-  printList $(head -n1 list1)
-  printf "\n%s を削除し初期状態に戻りました\n" $(remove "list1")
-  printList $(head -n1 list1)
+  printList $(head -n1 $list1)
+  #
+  printf "\n%s を削除し初期状態に戻りました\n" $(remove "$list1")
+  printList $(head -n1 $list1)
+  #
+  cd ../;
 }
 ##
 # メイン
+makeNodeFile; # makeDir makeFileなどのノードファイルを作成します。
 execLinkedList
-exit;
+final;        # 作成したディレクトリを削除（当然中にあるノードファイルも消えます）
 
+exit;
 ```
 
 ## 実行結果
@@ -369,6 +376,14 @@ exit;
 
 ```
 bash-5.1$ bash 04_6LinkedList.sh
+node1
+3
+node2
+foo
+node3
+bar
+none
+!
 データアイテム: foo 次の参照: node2
 データアイテム: bar 次の参照: node3
 データアイテム: ! 次の参照: none
