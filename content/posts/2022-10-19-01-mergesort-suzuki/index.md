@@ -534,7 +534,9 @@ bash-5.1$
 ```
 
 ## 「ざっくり」シリーズのご紹介
-【アルゴリズム リスト】ざっくりわかるシェルスクリプト１６
+【アルゴリズム マージソート】ざっくりわかるシェルスクリプト１７
+https://suzukiiichiro.github.io/2022-10-19-01-mergesort-suzuki/
+【アルゴリズム 連結リスト】ざっくりわかるシェルスクリプト１６
 https://suzukiiichiro.github.io/posts/2022-10-18-01-list-suzuki/
 【アルゴリズム 再帰】ざっくりわかるシェルスクリプト１５
 https://suzukiiichiro.github.io/posts/2022-10-07-01-algorithm-recursion-suzuki/
