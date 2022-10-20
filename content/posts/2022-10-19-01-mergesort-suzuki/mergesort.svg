@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="681" height="201" viewBox="0 0 1362 402" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <polygon points="861,361 901,361 901,401 861,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="941,361 981,361 981,401 941,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1021,361 1061,361 1061,401 1021,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1101,361 1141,361 1141,401 1101,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1181,361 1221,361 1221,401 1181,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1261,361 1301,361 1301,401 1261,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="881,241 921,241 921,281 881,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="921,241 961,241 961,281 921,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1041,241 1081,241 1081,281 1041,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1081,241 1121,241 1121,281 1081,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1201,241 1241,241 1241,281 1201,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1241,241 1281,241 1281,281 1241,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="761,241 801,241 801,281 761,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1121,121 1161,121 1161,161 1121,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1161,121 1201,121 1201,161 1161,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1081,121 1121,121 1121,161 1081,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1201,121 1241,121 1241,161 1201,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="781,121 821,121 821,161 781,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="821,121 861,121 861,161 821,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="861,121 901,121 901,161 861,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="941,1 981,1 981,41 941,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="901,1 941,1 941,41 901,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="861,1 901,1 901,41 861,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="981,1 1021,1 1021,41 981,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1021,1 1061,1 1061,41 1021,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1061,1 1101,1 1101,41 1061,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="1101,1 1141,1 1141,41 1101,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="161,361 201,361 201,401 161,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="241,361 281,361 281,401 241,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="321,361 361,361 361,401 321,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="401,361 441,361 441,401 401,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="481,361 521,361 521,401 481,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="561,361 601,361 601,401 561,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="181,241 221,241 221,281 181,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="221,241 261,241 261,281 221,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="341,241 381,241 381,281 341,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="381,241 421,241 421,281 381,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="501,241 541,241 541,281 501,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="541,241 581,241 581,281 541,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="61,241 101,241 101,281 61,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="421,121 461,121 461,161 421,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="461,121 501,121 501,161 461,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="381,121 421,121 421,161 381,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="501,121 541,121 541,161 501,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="81,121 121,121 121,161 81,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="121,121 161,121 161,161 121,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="161,121 201,121 201,161 161,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="241,1 281,1 281,41 241,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="201,1 241,1 241,41 201,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="161,1 201,1 201,41 161,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="281,1 321,1 321,41 281,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="321,1 361,1 361,41 321,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="361,1 401,1 401,41 361,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polygon points="401,1 441,1 441,41 401,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px;"/>
+    <polyline points="121,161 81,241" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="92.6831670216898,233.28614179911895 81,241 80.16118634769097,227.02515146211954" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="221,281 181,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="192.6831670216898,353.2861417991189 181,361 180.16118634769097,347.02515146211954" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="221,281 261,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="261.838813652309,347.02515146211954 261,361 249.3168329783102,353.2861417991189" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="381,281 341,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="352.68316702168977,353.2861417991189 341,361 340.161186347691,347.02515146211954" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="381,281 421,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="421.838813652309,347.02515146211954 421,361 409.31683297831023,353.2861417991189" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="541,281 501,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="512.6831670216898,353.2861417991189 501,361 500.161186347691,347.02515146211954" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="541,281 581,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="581.838813652309,347.02515146211954 581,361 569.3168329783102,353.2861417991189" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="173.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="93.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="73.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="213.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="253.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="133.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="173.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="233.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="253.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="193.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="173.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="373.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="413.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="293.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="333.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="393.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="353.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="333.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="433.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="393.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="413.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="473.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="513.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="493.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="513.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="553.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="573.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="773.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="873.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="953.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="1033.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="1113.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="1193.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="1273.2109375" y="390.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="893.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="933.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="1053.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="1093.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="1213.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="1253.2109375" y="270.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="793.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="833.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="873.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="1093.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="1133.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="1173.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="1213.2109375" y="150.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <text x="873.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">2</text>
+    <text x="913.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">3</text>
+    <text x="953.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">4</text>
+    <text x="993.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">5</text>
+    <text x="1033.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">6</text>
+    <text x="1073.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">7</text>
+    <text x="1113.2109375" y="30.5" style="stroke: none; fill: rgb(0, 0, 0); font-size: 28px; font-family: Arial;">8</text>
+    <polyline points="21,41 21,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="1341,41 1341,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="21,361 1,341" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="21,361 41,341" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="1341,41 1321,61" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="1341,41 1361,61" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="661,381 801,381" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="801,381 781,361" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <polyline points="801,381 781,401" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 2px; stroke-linecap: round;"/>
+    <path d="M 941,301 A 20,20 0 0,1 941,341 L 901,341 A 20,20 0 0,1 901,301 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="881,361 892.0557280900008,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="880.372561068311,346.60240202087937 892.0557280900008,338.8885438199983 892.8945417423099,352.86339235787875" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="961,361 949.9442719099992,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="949.1054582576902,352.86339235787875 949.9442719099992,338.8885438199983 961.627438931689,346.60240202087937" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="921,301 921,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="914,293.12435565298216 921,281 928,293.12435565298216" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="892.6484375" y="328" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <path d="M 1101,301 A 20,20 0 0,1 1101,341 L 1061,341 A 20,20 0 0,1 1061,301 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="1041,361 1052.0557280900007,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1040.372561068311,346.6024020208794 1052.0557280900007,338.8885438199983 1052.8945417423097,352.86339235787875" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1121,361 1109.9442719099993,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1109.1054582576903,352.86339235787875 1109.9442719099993,338.8885438199983 1121.627438931689,346.6024020208794" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1081,301 1081,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1074,293.12435565298216 1081,281 1088,293.12435565298216" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="1052.6484375" y="328" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <path d="M 1261,301 A 20,20 0 0,1 1261,341 L 1221,341 A 20,20 0 0,1 1221,301 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="1201,361 1212.0557280900007,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1200.372561068311,346.6024020208794 1212.0557280900007,338.8885438199983 1212.8945417423097,352.86339235787875" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1281,361 1269.9442719099993,338.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1269.1054582576903,352.86339235787875 1269.9442719099993,338.8885438199983 1281.627438931689,346.6024020208794" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1241,301 1241,281" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1234,293.12435565298216 1241,281 1248,293.12435565298216" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="1212.6484375" y="328" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <path d="M 861,181 A 20,20 0 0,1 861,221 L 821,221 A 20,20 0 0,1 821,181 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="801,241 812.0557280900008,218.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="800.372561068311,226.60240202087937 812.0557280900008,218.8885438199983 812.8945417423099,232.86339235787875" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="881,241 869.9442719099992,218.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="869.1054582576902,232.86339235787875 869.9442719099992,218.8885438199983 881.627438931689,226.60240202087937" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="841,181 841,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="834,173.12435565298213 841,161 848,173.12435565298213" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="812.6484375" y="208" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <path d="M 1181,181 A 20,20 0 0,1 1181,221 L 1141,221 A 20,20 0 0,1 1141,181 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="1121,241 1132.055728090001,218.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1120.3725610683111,226.60240202087934 1132.055728090001,218.8885438199983 1132.89454174231,232.86339235787875" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1201,241 1189.944271909999,218.8885438199983" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1189.10545825769,232.86339235787875 1189.944271909999,218.8885438199983 1201.6274389316889,226.60240202087934" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1161,181 1161,161" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1154,173.12435565298213 1161,161 1168,173.12435565298213" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="1132.6484375" y="208" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <path d="M 1001,61 A 20,20 0 0,1 1001,101 L 961,101 A 20,20 0 0,1 961,61 Z" style="stroke: rgb(0, 0, 0); fill: rgb(211, 211, 211); stroke-width: 1px;"/>
+    <polyline points="901,121 944.3589941132432,92.09400392450459" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="930.388019049946,92.99503432395333 944.3589941132432,92.09400392450459 938.1538217970992,104.64373844468315" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="1081,121 1018.8885438199984,89.94427190999915" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="1026.6024020208795,101.62743893168894 1018.8885438199984,89.94427190999915 1032.8633923578789,89.10545825769013" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="981,61 981,41" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="974,53.124355652982146 981,41 988,53.124355652982146" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <text x="952.6484375" y="88" style="stroke: none; fill: rgb(0, 0, 0); font-size: 20px; font-family: Arial;">merge</text>
+    <polyline points="121,161 181,241" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="179.32538660821072,227.1005154776143 181,241 168.1253866082107,235.50051547761427" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="461,161 421,241" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="432.68316702168977,233.28614179911895 421,241 420.161186347691,227.02515146211954" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="461,161 501,241" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="501.838813652309,227.02515146211954 501,241 489.31683297831023,233.28614179911892" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="281,41 201,121" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="214.52296156804695,117.37653336856471 201,121 204.6234666314353,107.47703843195305" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+    <polyline points="281,41 381,121" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 1px; stroke-linecap: round;"/>
+    <polyline points="375.9053341688729,107.95989340269236 381,121 367.159603503111,118.89205673489478" style="stroke: rgb(0, 0, 0); stroke-width: 1px; fill: none; stroke-linecap: round;"/>
+</svg>
