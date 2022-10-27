@@ -279,6 +279,7 @@ function setArray(){
 function shellSort(){
   #hの初期値
   interval=1 ;
+  # インターバルの計算
   while (( "$interval" <= "$(($nElems/9))" )); do
     interval=$(($interval*3+1)) ; # (1,4,13,40,121.....)
   done
