@@ -183,7 +183,7 @@ N/８は１となります。
 |４|３＊　４０＋１＝|１２１|
 |５|３＊１２１＋１＝|３６４|
 
-たとえば、要素数 200 の配列に対しては、h の値を 121, 40, 13, 4, 1 の順番で狭めていきます。
+たとえば、要素数 ２０００ の配列に対しては、２０００・９＝２２２ですから、h の値を １２１, ４０, １３, ４, １ の順番で狭めていきます。
 
 下の方で紹介するbash/シェルスクリプトによるシェルソートの実装でもこのインターバルの手法を使っています。
 
@@ -279,7 +279,7 @@ function setArray(){
 function shellSort(){
   #hの初期値
   interval=1 ;
-  while (( "$interval" <= "$(($nElems/3))" )); do
+  while (( "$interval" <= "$(($nElems/9))" )); do
     interval=$(($interval*3+1)) ; # (1,4,13,40,121.....)
   done
   #h=1になるまでhを減らす
@@ -295,6 +295,7 @@ function shellSort(){
       done
       array["$inner"]="$tmp" ;
     done
+    # 間隔を縮める
     interval=$(( ($interval-1)/3 )) ;
   done
 }
