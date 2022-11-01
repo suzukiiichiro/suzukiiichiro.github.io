@@ -197,11 +197,11 @@ params:
     widgets:
         enabled:
             - 300x250
+            - tag-cloud
             - newpost
             - search
             - popular-articles
             - archives
-            # - tag-cloud
 
 #         archives:
 #             limit: 5
