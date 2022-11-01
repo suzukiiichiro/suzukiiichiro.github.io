@@ -1018,6 +1018,8 @@ bash-5.1$
 [05_3QuickSort.sh クイックソート](https://github.com/suzukiiichiro/Algorithms-And-Data-Structures/tree/master/Bash/)
 
 
+## これまでのソートまとめ
+![ソートまとめ](main-qimg-58dc29bc4966efe3ac20c6ae66088a12.gif)
 
 ## 「ざっくり」シリーズのご紹介
 【アルゴリズム クイックソート】ざっくりわかるシェルスクリプト１９
