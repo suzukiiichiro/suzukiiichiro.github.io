@@ -1,6 +1,8 @@
 <article class="{{ if .Params.image }}has-image {{ end }}main-article">
   {{ partialCached "article/components/details_article" . .RelPermalink }}
-
+  <div class="article-footer">
+    {{ partial "article/components/tags" . }}
+  </div>
   {{ partial "article/components/tableOfContents" . }}
   {{ partial "ads/detail" . }}
   {{ partial "article/components/content" . }}
