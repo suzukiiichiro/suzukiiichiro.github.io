@@ -433,22 +433,16 @@ function SortCase(){
 #  display;
   case "$2" in
     bubbleSort) 
-      echo "bubbleSort";
       bubbleSort;;
     selectionSort) 
-      echo "selectionSort";
       selectionSort;;
     insertionSort) 
-      echo "insertionSort";
       insertionSort;;
     mergeSort) 
-      echo "mergeSort";
       mergeSort 0 $((nElems-1));;
     shellSort) 
-      echo "shellSort";
       shellSort;;
     quickSort) 
-      echo "quickSort";
       quickSort 0 $((nElems-1));;
   esac
 #  display;
@@ -457,14 +451,25 @@ function SortCase(){
 # ソート各種
 # 必要であればコメントアウトなどしてください。
 function Sort(){
+  echo -n "bubbleSort";
   time SortCase 1000 "bubbleSort";
+  echo "";
+  echo -n "selectionSort";
   time SortCase 1000 "selectionSort";
+  echo "";
+  echo -n "insertionSort";
   time SortCase 1000 "insertionSort";
+  echo "";
+  echo -n "mergeSort";
   time SortCase 1000 "mergeSort";
+  echo "";
+  echo -n "shellSort";
   time SortCase 1000 "shellSort";
+  echo "";
+  echo -n "quickSort";
   time SortCase 1000 "quickSort";
+  echo "";
 }
-
 ##
 # メイン
 Sort;
@@ -475,33 +480,33 @@ exit;
 
 ```
 bash-5.1$ bash 06SortAlgorithm.sh
-bubbleSort
 
+bubbleSort
 real	0m12.639s
 user	0m11.889s
 sys	0m0.657s
-selectionSort
 
+selectionSort
 real	0m8.200s
 user	0m7.484s
 sys	0m0.664s
-insertionSort
 
+insertionSort
 real	0m5.286s
 user	0m4.604s
 sys	0m0.657s
-mergeSort
 
+mergeSort
 real	0m1.644s
 user	0m1.025s
 sys	0m0.618s
-shellSort
 
+shellSort
 real	0m1.476s
 user	0m0.819s
 sys	0m0.655s
-quickSort
 
+quickSort
 real	0m1.438s
 user	0m0.790s
 sys	0m0.648s
