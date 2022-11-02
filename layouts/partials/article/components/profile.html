@@ -1,0 +1,23 @@
+{{- $author := partial "data/author" . }}
+{{- if .Params.authors -}}
+{{- if ne "" .Params.authors -}}
+{{- if ne "nlp" $author.name -}}
+<div class="profile-area widget">
+  {{ $prof_url := print "https://api.github.com/users/" $author.name }}
+  {{ $dataJ := getJSON $prof_url }}
+  <span class="profile-icon" style="background-image: url(https://github.com/{{- $author.name -}}.png)"></span>
+  <div class="profile-bio-area">
+    <h4 class="profile-name">{{ $author.name }}</h4>
+    <p class="profile-bio">
+      {{ $dataJ.bio }}
+    </p>
+    {{- if .Params.authors -}}
+    {{- range (.GetTerms "authors") -}}<a href="{{ .Permalink }}">「{{- $author.name -}}」のコンテンツ一覧</a>{{- end -}}
+    {{- else }}
+    {{- $author.name -}}
+    {{- end -}}
+  </div>
+</div>
+  {{- end -}}
+  {{- end -}}
+{{- end -}}

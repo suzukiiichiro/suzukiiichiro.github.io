@@ -2,8 +2,8 @@
 {{- $git_author := "" -}}
 
 {{- $url := slice -}}
+{{ printf "%#v" $url }}
 {{- if .GitInfo -}}
-  {{- $author = .GitInfo.AuthorName -}}
   {{- $git_author = .GitInfo.AuthorName -}}
   {{ $result := findRE "[亜-熙ぁ-んァ-ヶ]" $author }}
   {{ if $result }}
@@ -16,7 +16,7 @@
   {{- range (.GetTerms "authors") -}}
 
     {{- $url = $url | append .Permalink -}}
-    
+
     {{ if in "suzuki" .Name }}
       {{- $author = "suzukiiichiro" -}}
     {{- end -}}
