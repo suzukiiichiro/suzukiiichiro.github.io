@@ -2,7 +2,7 @@
 {{- if .Params.authors -}}
 {{- if ne "" .Params.authors -}}
 {{- if ne "nlp" $author.name -}}
-<div class="profile-area">
+<div class="profile-area widget">
   {{ $prof_url := print "https://api.github.com/users/" $author.name }}
   {{ $dataJ := getJSON $prof_url }}
   <span class="profile-icon" style="background-image: url(https://github.com/{{- $author.name -}}.png)"></span>
