@@ -1,6 +1,9 @@
 {{ if .Site.Params.widgets.enabled }}
 {{ $context := . }}
 <div class="sidebar right-sidebar sticky">
+  {{- if eq "posts" .Type }}
+  {{ partial "article/components/profile.html" . }}
+  {{ end }}
   {{ range $widget := .Site.Params.widgets.enabled }}
   {{ partialCached (printf "widget/%s" $widget) $context }}
   {{ end }}
