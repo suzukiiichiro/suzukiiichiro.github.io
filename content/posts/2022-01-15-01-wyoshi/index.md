@@ -209,7 +209,7 @@ CSS `overscroll-behavior` は、何年も前に無理やり対応していた問
 ## オススメの書籍
 {{% amazon
 title=" ざっくりつかむ　CSS設計[リフロー版] "
-url="https://www.amazon.co.jp/ざっくりつかむ-CSS設計-リフロー版-高津戸-壮-ebook/dp/B09NKTJL73/?tag=nlpqueens-22"
+url="https://www.amazon.co.jp/ざっくりつかむ-CSS設計-リフロー版-高津戸-壮-ebook/dp/B09NKTJL73/?tag=nlpqueens09-22"
 summary=`
 Web制作の現場でこれだけは知っておきたい、CSSの扱い方、管理、運用の基本！
 
@@ -220,7 +220,7 @@ imageUrl="https://m.media-amazon.com/images/I/51up1uqI8bL.jpg"
 
 {{% amazon
 title=" プロの「引き出し」を増やす　HTML+CSSコーディングの強化書 "
-url="https://www.amazon.co.jp/プロの「引き出し」を増やす-HTML-CSSコーディングの強化書-草野あけみ-ebook/dp/B09MH4Z3WH/?tag=nlpqueens-22"
+url="https://www.amazon.co.jp/プロの「引き出し」を増やす-HTML-CSSコーディングの強化書-草野あけみ-ebook/dp/B09MH4Z3WH/?tag=nlpqueens09-22"
 summary=`HTML・CSSの基本は覚えたけれど、デザインカンプから情報を読み取って、イチからコーディングするのはまだ無理……。
 初心者を脱して、コーダー／マークアップエンジニアとして制作現場でバリバリ活躍する力をつけたい。
 

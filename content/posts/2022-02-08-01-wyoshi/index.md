@@ -93,7 +93,7 @@ instant storeの場合は、イメージを作成して、立ち上げて該当�
 これさえ覚えておけば、大丈夫です。
 
 ## おすすめの書籍
-{{% amazon title=" 図解即戦力 Amazon Web Servicesのしくみと技術がこれ1冊でしっかりわかる教科書 " url="https://www.amazon.co.jp/図解即戦力-Amazon-Web-Servicesのしくみと技術がこれ1冊でしっかりわかる教科書-小笠原/dp/4297108895/?tag=nlpqueens-22" summary=` 【「ITエンジニア本大賞2021」技術書部門 入賞! 】 Amazon Web Servicesのしくみがすぐにわかる! Amazon Web Services(AWS)のしくみや関連技術についてわかりやすく解説する図解本です。エンジニア1年生、IT業界などへの転職・就職を目指す人が、AWS関連の用語、しくみ、クラウドとネットワークの基礎技術などを一通り学ぶことのできる、1冊目の入門書としてふさわしい内容を目指します。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51AEyJOSYaL.jpg" %}}
+{{% amazon title=" 図解即戦力 Amazon Web Servicesのしくみと技術がこれ1冊でしっかりわかる教科書 " url="https://www.amazon.co.jp/図解即戦力-Amazon-Web-Servicesのしくみと技術がこれ1冊でしっかりわかる教科書-小笠原/dp/4297108895/?tag=nlpqueens09-22" summary=` 【「ITエンジニア本大賞2021」技術書部門 入賞! 】 Amazon Web Servicesのしくみがすぐにわかる! Amazon Web Services(AWS)のしくみや関連技術についてわかりやすく解説する図解本です。エンジニア1年生、IT業界などへの転職・就職を目指す人が、AWS関連の用語、しくみ、クラウドとネットワークの基礎技術などを一通り学ぶことのできる、1冊目の入門書としてふさわしい内容を目指します。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51AEyJOSYaL.jpg" %}}
 
-{{% amazon title=" 要点整理から攻略する『AWS認定 データベース-専門知識』 (Compass Booksシリーズ) " url="https://www.amazon.co.jp/要点整理から攻略する『AWS認定-データベース-専門知識』-Compass-Booksシリーズ-NRIネットコム株式会社/dp/4839975078/?tag=nlpqueens-22" summary=` 「AWS 認定 データベース」に頻出する内容を1冊にまとめました! ■AWS認定とは AWS 認定試験は、AWSに関する知識・スキルを測るための試験です。レベル別・カテゴリー別に認定され、基礎コース・アソシエイト・プロフェッショナルの3つのレベルと、ネットワークやセキュリティなど分野ごとの専門知識(スペシャリティ)があります。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51svKeJL9KS.jpg" %}}
+{{% amazon title=" 要点整理から攻略する『AWS認定 データベース-専門知識』 (Compass Booksシリーズ) " url="https://www.amazon.co.jp/要点整理から攻略する『AWS認定-データベース-専門知識』-Compass-Booksシリーズ-NRIネットコム株式会社/dp/4839975078/?tag=nlpqueens09-22" summary=` 「AWS 認定 データベース」に頻出する内容を1冊にまとめました! ■AWS認定とは AWS 認定試験は、AWSに関する知識・スキルを測るための試験です。レベル別・カテゴリー別に認定され、基礎コース・アソシエイト・プロフェッショナルの3つのレベルと、ネットワークやセキュリティなど分野ごとの専門知識(スペシャリティ)があります。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51svKeJL9KS.jpg" %}}
 

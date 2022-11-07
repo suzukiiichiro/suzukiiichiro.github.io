@@ -7,6 +7,7 @@ image: unix.jpg
 categories:
   - programming
 tags:
+  - 名著紹介
   - linux
   - unix
   - シェルスクリプト

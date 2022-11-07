@@ -8,6 +8,7 @@ image: shellscript.jpg
 categories:
   - programming
 tags:
+  - ざっくりわかるシリーズ
   - プログラミング
   - シェルスクリプト
   - Bash
@@ -109,7 +110,7 @@ bash-5.1$
 
 title="詳解 シェルスクリプト 大型本 – 2006/1/16"
 
-url="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens-22&linkId=ef087fd92d3628bb94e1eb10cb202d43"
+url="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens09-22&linkId=ef087fd92d3628bb94e1eb10cb202d43"
 
 summary=`Unixのプログラムは「ツール」と呼ばれます。
 Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
@@ -127,7 +128,7 @@ imageUrl="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg"
 
 title="UNIXシェルスクリプト マスターピース132"
 
-url="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797377623&linkCode=as2&tag=nlpqueens-22&linkId=3c8d4566263ae99374221c4f8f469154"
+url="https://www.amazon.co.jp/gp/product/4797377623/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797377623&linkCode=as2&tag=nlpqueens09-22&linkId=3c8d4566263ae99374221c4f8f469154"
 
 summary=`すべてのUNIXエンジニア必携!!
 
@@ -142,7 +143,7 @@ imageUrl="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg"
 
 title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20"
 
-url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
+url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens09-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
 
 summary=`定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
 シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
@@ -158,7 +159,7 @@ imageUrl="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg"
 
 title="新しいシェルプログラミングの教科書 単行本"
 
-url="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797393106&linkCode=as2&tag=nlpqueens-22&linkId=f514a6378c1c10e59ab16275745c2439"
+url="https://www.amazon.co.jp/gp/product/4797393106/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797393106&linkCode=as2&tag=nlpqueens09-22&linkId=f514a6378c1c10e59ab16275745c2439"
 
 summary=`エキスパートを目指せ!!
 

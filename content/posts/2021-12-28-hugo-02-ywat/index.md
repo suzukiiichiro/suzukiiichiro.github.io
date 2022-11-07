@@ -100,7 +100,7 @@ GitHub Pagesを使えば、難しいサーバの設定などをすることな�
 
 title="いちばんやさしいGit&GitHubの教本 人気講師が教えるバージョン管理＆共有入門 「いちばんやさしい教本」シリーズ"
 
-url="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07LBSWJNP&linkCode=as2&tag=nlpqueens-22&linkId=fd3f2918d16f32f53feccf492263133a"
+url="https://www.amazon.co.jp/gp/product/B07LBSWJNP/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07LBSWJNP&linkCode=as2&tag=nlpqueens09-22&linkId=fd3f2918d16f32f53feccf492263133a"
 
 summary=`実際のワークフローをイメージしながら
 実践的なGit/GitHubの使い方が身につく「いちばんやさしい」入門書です。
@@ -114,7 +114,7 @@ imageUrl="//m.media-amazon.com/images/I/51SRr41G-ZL._SL250_.jpg"
 
 title="Web制作者のためのGitHubの教科書 チームの効率を最大化する共同開発ツール"
 
-url="https://www.amazon.co.jp/Web%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEGitHub%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E5%8A%B9%E7%8E%87%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96%E3%81%99%E3%82%8B%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BA%E3%83%84%E3%83%BC%E3%83%AB-%E5%A1%A9%E8%B0%B7-%E5%95%93/dp/4844337009?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=3C1ZNYZB4N0C3&keywords=github&qid=1640665205&sprefix=github%2Caps%2C284&sr=8-8&linkCode=ll1&tag=nlpqueens-22&linkId=65876fc9d77e695d11f02ec867bc8c4a&language=ja_JP&ref_=as_li_ss_tl"
+url="https://www.amazon.co.jp/Web%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEGitHub%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%83%81%E3%83%BC%E3%83%A0%E3%81%AE%E5%8A%B9%E7%8E%87%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96%E3%81%99%E3%82%8B%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BA%E3%83%84%E3%83%BC%E3%83%AB-%E5%A1%A9%E8%B0%B7-%E5%95%93/dp/4844337009?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=3C1ZNYZB4N0C3&keywords=github&qid=1640665205&sprefix=github%2Caps%2C284&sr=8-8&linkCode=ll1&tag=nlpqueens09-22&linkId=65876fc9d77e695d11f02ec867bc8c4a&language=ja_JP&ref_=as_li_ss_tl"
 summary=`そろそろ「プルリ」しませんか?しくみを理解して使えば怖くない。リポジトリの作成から複数デザインの提示、「Pull Request」を使った分担作業まで、Webサイト制作を例に実践的なワークフローを身に付ける。`
 imageUrl="//m.media-amazon.com/images/I/51wTwJndWVL._SL250_.jpg"
 %}}

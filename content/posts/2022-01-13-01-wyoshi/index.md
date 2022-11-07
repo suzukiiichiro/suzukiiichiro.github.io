@@ -165,7 +165,7 @@ ulとolの違いは、ulの場合はliの頭に「・」が付き、olの場合�
 ## オススメの書籍
 {{% amazon
 title=" 【Amazon.co.jp 限定】1冊ですべて身につくHTML & CSSとWebデザイン入門講座 (DL特典: CSS Flexbox チートシート) "
-url="https://www.amazon.co.jp/【Amazon-co-jp-限定】1冊ですべて身につくHTML-CSSとWebデザイン入門講座-DL特典-Flexbox/dp/4797398892/?tag=nlpqueens-22"
+url="https://www.amazon.co.jp/【Amazon-co-jp-限定】1冊ですべて身につくHTML-CSSとWebデザイン入門講座-DL特典-Flexbox/dp/4797398892/?tag=nlpqueens09-22"
 summary=`Web界隈やデザイナーに大人気!
 Web関連の情報やデザインについて記事が学べる『Webクリエイターボックス』の管理人、
 Manaによる渾身のHTML & CSSとWebデザインが学べる本`
@@ -174,7 +174,7 @@ imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51xAu2jeqrL.jpg"
 
 {{% amazon
 title=" これだけで基本がしっかり身につく HTML/CSS&Webデザイン1冊目の本 "
-url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens-22"
+url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens09-22"
 summary=`  Webサイト制作をこれから学ぶ人へ送る
 “1冊目"に最適の入門書! 【学びをサポートする4大特典つき】
 

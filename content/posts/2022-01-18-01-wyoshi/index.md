@@ -108,8 +108,8 @@ Illustratorで色を塗っていた場合、styleタグに色情報が記述さ�
 みなさんも、ぜひダークモードに対応したおしゃれなファビコンを設置してみませんか？
 
 ## オススメの書籍
-{{% amazon title=" ブランディングデザインの教科書 " url="https://www.amazon.co.jp/ブランディングデザインの教科書-西澤-明洋/dp/4756252524/?tag=nlpqueens-22" summary=` 企業経営に役立つ「ブランディング」と「デザイン」がこの1冊で一気にわかる!
+{{% amazon title=" ブランディングデザインの教科書 " url="https://www.amazon.co.jp/ブランディングデザインの教科書-西澤-明洋/dp/4756252524/?tag=nlpqueens09-22" summary=` 企業経営に役立つ「ブランディング」と「デザイン」がこの1冊で一気にわかる!
 ブランディング成功の秘訣とは──。
 これからブランディングをはじめたい経営者やプランナー、ブランド全体をデザインしてみたいというデザイナーや学生の方に向け、100以上のブランド開発実績を持つブランディングデザイナー西澤明洋が「ブランディング」と「デザイン」の方法を徹底解説。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/41EKomzrUQL.jpg" %}}
 
-{{% amazon title=" ICONISM 世界のアイコン・ピクトグラムのデザイン " url="https://www.amazon.co.jp/ICONISM-世界のアイコン・ピクトグラムのデザイン-Sandu-Publishing/dp/4756254853/?tag=nlpqueens-22" summary=` 情報をわかりやすく効果的に伝えるデザインと活用例が満載! アイコンやピクトグラムは、ガイドサインだけでなく、ブランディングやウェブサイト・アプリなど現代生活のあらゆる場面で、コミュニケーションを円滑にするためますます重要な役割を担っています。世界各国の優れたデザインと展開実例を用途別に集めた1冊です。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/419GLprboML.jpg" %}}
+{{% amazon title=" ICONISM 世界のアイコン・ピクトグラムのデザイン " url="https://www.amazon.co.jp/ICONISM-世界のアイコン・ピクトグラムのデザイン-Sandu-Publishing/dp/4756254853/?tag=nlpqueens09-22" summary=` 情報をわかりやすく効果的に伝えるデザインと活用例が満載! アイコンやピクトグラムは、ガイドサインだけでなく、ブランディングやウェブサイト・アプリなど現代生活のあらゆる場面で、コミュニケーションを円滑にするためますます重要な役割を担っています。世界各国の優れたデザインと展開実例を用途別に集めた1冊です。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/419GLprboML.jpg" %}}

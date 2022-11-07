@@ -267,7 +267,7 @@ function setYear() {
 
 title="1週間でGoogleアナリティクス4の基礎が学べる本 (1週間で基礎が学べるシリーズ)"
 
-url="https://www.amazon.co.jp/1%E9%80%B1%E9%96%93%E3%81%A7Google%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B94%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8C%E5%AD%A6%E3%81%B9%E3%82%8B%E6%9C%AC-1%E9%80%B1%E9%96%93%E3%81%A7%E5%9F%BA%E7%A4%8E%E3%81%8C%E5%AD%A6%E3%81%B9%E3%82%8B%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E7%AA%AA%E7%94%B0-%E6%9C%9B/dp/429501172X?_encoding=UTF8&qid=1641513597&sr=8-1&linkCode=li2&tag=nlpqueens-22&linkId=1ee510fa1a17d9dbf251af13ddde94c3&language=ja_JP&ref_=as_li_ss_il"
+url="https://www.amazon.co.jp/1%E9%80%B1%E9%96%93%E3%81%A7Google%E3%82%A2%E3%83%8A%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%82%B94%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8C%E5%AD%A6%E3%81%B9%E3%82%8B%E6%9C%AC-1%E9%80%B1%E9%96%93%E3%81%A7%E5%9F%BA%E7%A4%8E%E3%81%8C%E5%AD%A6%E3%81%B9%E3%82%8B%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E7%AA%AA%E7%94%B0-%E6%9C%9B/dp/429501172X?_encoding=UTF8&qid=1641513597&sr=8-1&linkCode=li2&tag=nlpqueens09-22&linkId=1ee510fa1a17d9dbf251af13ddde94c3&language=ja_JP&ref_=as_li_ss_il"
 
 summary=`大幅に改訂されたWebマーケティングツール「Googleアナリティクス4」の基礎と活用法を最前線のWebマーケッターたちがやさしく解説!
 本書は、WebマーケターのためにGoogleアナリティクス4（GA4・ジーエーフォー）の基礎知識を解説した入門書です。`
@@ -279,7 +279,7 @@ imageUrl="//m.media-amazon.com/images/I/51bQyK5wvGL._SL160_.jpg"
 
 title="詳解! Google Apps Script完全入門[第2版] ~GoogleアプリケーションとGoogle Workspaceの最新プログラミングガイド"
 
-url="https://www.amazon.co.jp/Google-Apps-Script%E5%AE%8C%E5%85%A8%E5%85%A5%E9%96%80-Google%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8Google-Workspace%E3%81%AE%E6%9C%80%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%AC%E3%82%A4%E3%83%89/dp/4798063339?_encoding=UTF8&qid=1641513615&sr=8-8&linkCode=li3&tag=nlpqueens-22&linkId=e2278a36e1a2780b57906fc14ef78eb4&language=ja_JP&ref_=as_li_ss_il"
+url="https://www.amazon.co.jp/Google-Apps-Script%E5%AE%8C%E5%85%A8%E5%85%A5%E9%96%80-Google%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8Google-Workspace%E3%81%AE%E6%9C%80%E6%96%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%AC%E3%82%A4%E3%83%89/dp/4798063339?_encoding=UTF8&qid=1641513615&sr=8-8&linkCode=li3&tag=nlpqueens09-22&linkId=e2278a36e1a2780b57906fc14ef78eb4&language=ja_JP&ref_=as_li_ss_il"
 
 summary=`今や私たちの仕事や生活に無くてはならない存在になったGoogleサービス。これらGoogleサービスの自動化や連携を行うことで、大幅な効率化が図れます。そして、それを可能にするのがGoogle Apps Script(GAS)です。`
 

@@ -143,19 +143,20 @@ UXとは？
 
 
 ## おすすめの書籍
-{{% amazon title=" HTML&CSSとWebデザインが1冊できちんと身につく本[増補改訂版] " url="https://www.amazon.co.jp/HTML-CSSとWebデザインが1冊できちんと身につく本-増補改訂版-服部-雄樹/dp/4297125102/?tag=nlpqueens-22" summary=` 美しいデザインでサイト制作の知識とワザが「1冊で」身につく本格入門! PC&モバイルサイトデザインの基礎力とHTML・CSSコーディングの知識が1冊で同時に身につく! ウェブ制作を仕事にするならHTMLとCSSを学ぶことから始めますが、本書は体系立てた文法学習よりも、まずは「コーディングとはどのような作業なのか」を理解できる初学者向け入門書です。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51isr1Hz2BL.jpg" %}}
+{{% amazon title=" HTML&CSSとWebデザインが1冊できちんと身につく本[増補改訂版] " url="https://www.amazon.co.jp/HTML-CSSとWebデザインが1冊できちんと身につく本-増補改訂版-服部-雄樹/dp/4297125102/?tag=nlpqueens09-22" summary=` 美しいデザインでサイト制作の知識とワザが「1冊で」身につく本格入門! PC&モバイルサイトデザインの基礎力とHTML・CSSコーディングの知識が1冊で同時に身につく! ウェブ制作を仕事にするならHTMLとCSSを学ぶことから始めますが、本書は体系立てた文法学習よりも、まずは「コーディングとはどのような作業なのか」を理解できる初学者向け入門書です。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51isr1Hz2BL.jpg" %}}
 
-{{% amazon title=" 1冊ですべて身につくHTML & CSSとWebデザイン入門講座 " url="https://www.amazon.co.jp/1冊ですべて身につくHTML-CSSとWebデザイン入門講座-Mana/dp/4797398892/?tag=nlpqueens-22" summary=` 【全国の書店員さんがオススメする本「CPU大賞」第1位受賞!】
+{{% amazon title=" 1冊ですべて身につくHTML & CSSとWebデザイン入門講座 " url="https://www.amazon.co.jp/1冊ですべて身につくHTML-CSSとWebデザイン入門講座-Mana/dp/4797398892/?tag=nlpqueens09-22" summary=` 【全国の書店員さんがオススメする本「CPU大賞」第1位受賞!】
 
 ずっと、一番売れているHTML本!
 Web界隈やデザイナーに大人気! Web関連の情報やデザインについて記事が学べる『Webクリエイターボックス』の管理人、 Manaによる渾身のHTML & CSSとWebデザインが学べる本です。
 著者は、カナダやオーストラリア、イギリスの企業でWebデザイナーとして働き、現在は全国各地でWeb関連のセミナーに登壇し、Webサイト制作のインストラクターとして教育に携わっている。ブログ「Webクリエイターボックス」は2010年日本のアルファブロガーアワードを受賞。` imageUrl="https://images-fe.ssl-images-amazon.com/images/I/51xAu2jeqrL.jpg" %}}
 
-{{% amazon title=" これだけで基本がしっかり身につく HTML/CSS&Webデザイン1冊目の本 " url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens-22" summary=` Webサイト制作をこれから学ぶ人へ送る “1冊目"に最適の入門書!
+{{% amazon title=" これだけで基本がしっかり身につく HTML/CSS&Webデザイン1冊目の本 " url="https://www.amazon.co.jp/これだけで基本がしっかり身につく-HTML-Webデザイン1冊目の本-Capybara-Design/dp/4798170119/?tag=nlpqueens09-22" summary=` Webサイト制作をこれから学ぶ人へ送る “1冊目"に最適の入門書!
 
 【学びをサポートする4大特典つき】
 
 本書は手を動かしてWebサイトを作りながら HTML/CSSとWebデザインの基本を楽しく学べる入門書です。
 
 初学者が1冊目に読む本としてふさわしい内容を盛り込んでいるため、これを読めば必要な基礎知識がひととおり身につきます。 ` imageUrl="https://images-na.ssl-images-amazon.com/images/I/51iJCT7O+YL.jpg" %}}
+
 
