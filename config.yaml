@@ -211,10 +211,10 @@ params:
             limit: 30
 
         populerArticles:
-            limit: 30
+            limit: 20
 
         newpost:
-            limit: 20
+            limit: 10
 
 #     opengraph:
 #         twitter:
