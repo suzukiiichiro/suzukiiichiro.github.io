@@ -206,15 +206,15 @@ params:
 #         archives:
 #             limit: 5
         tagCloud:
-            limit: 20
+            limit: 30
         categories:
-            limit: 10
+            limit: 30
 
         populerArticles:
-            limit: 10
+            limit: 30
 
         newpost:
-            limit: 10
+            limit: 20
 
 #     opengraph:
 #         twitter:
