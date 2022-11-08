@@ -5,7 +5,7 @@ theme: hugo-theme-stack
 # theme: ananke
 # publishDir: "docs"
 canonifyurls: true
-paginate: 10
+paginate: 20
 timeout: 60000
 
 # Change it to your Disqus shortname before using
@@ -208,13 +208,13 @@ params:
         tagCloud:
             limit: 30
         categories:
-            limit: 30
+            limit: 15 
 
         populerArticles:
-            limit: 30
+            limit: 15 
 
         newpost:
-            limit: 30
+            limit: 10
 
 #     opengraph:
 #         twitter:
