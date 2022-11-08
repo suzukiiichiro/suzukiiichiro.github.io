@@ -17,15 +17,14 @@ tags:
 ## columnコマンド
 「column」はテキストを、複数の列（column）に整形するコマンドです。
 
+## 区切り文字を指定して表形式で表示する
+
 普通のカンマ区切りのcsvファイル
 ```
 $ cat hoge.csv
 bar00,bar01,bar02,bar03,bar04
 bar05,bar06,bar07,bar08,bar09
 ```
-
-
-## 区切り文字を指定する
 
 上記csvファイルを、`column`コマンドで見やすくします。
 オプション -s で区切り文字をカンマ(,)に指定し、
@@ -36,7 +35,6 @@ $ column -t -s, hoge.csv
 bar00  bar01  bar02  bar03  bar04
 bar05  bar06  bar07  bar08  bar09
 ```
-
 
 
 
