@@ -73,8 +73,8 @@ getopts01: 不正なオプションです -- d
 </span></span><span class=line><span class=cl>     a<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;[-a] が指定された(引数=</span><span class=nv>$OPTARG</span><span class=s2>)&#34;</span><span class=p>;;</span>
 </span></span><span class=line><span class=cl>     b<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;[-b] が指定された&#34;</span><span class=p>;;</span>
 </span></span><span class=line><span class=cl>     c<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;[-c] が指定された(引数=</span><span class=nv>$OPTARG</span><span class=s2>)&#34;</span><span class=p>;;</span>
-</span></span><span class=line><span class=cl>     :<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$OPTARGに引数が指定されていません</span><span class=s2>&#34;</span><span class=p>;;</span>
-</span></span><span class=line><span class=cl>     ?<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$OPTARGは定義されていません</span><span class=s2>&#34;</span><span class=p>;;</span>
+</span></span><span class=line><span class=cl>     :<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$OPTARG</span><span class=s2>に引数が指定されていません&#34;</span><span class=p>;;</span>
+</span></span><span class=line><span class=cl>     ?<span class=o>)</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$OPTARG</span><span class=s2>は定義されていません&#34;</span><span class=p>;;</span>
 </span></span><span class=line><span class=cl>  <span class=k>esac</span>
 </span></span><span class=line><span class=cl><span class=k>done</span>
 </span></span></code></pre></div><p>実行結果</p><pre tabindex=0><code>$ bash getopts03.sh -a filename -b -c 100
