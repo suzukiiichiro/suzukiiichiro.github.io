@@ -183,11 +183,13 @@ Ctrl u : カーソルの前の行を切り取ります。次に Ctrl y で貼り
 
 こんな面倒なことってよくありますよね。
 
+
+### 一般的な方法 Ctrl a ＋ #(Shift 3)
+
 ```
 $ ./configure sutasuta hoihoi option=hoge
 ```
 
-### 一般的な方法 Ctrl a ＋ #(Shift 3)
 と、入力して、このコマンドラインのカーソル行を`Ctrl a`で先頭に移動して、#(Shift 3)を入力してEnterキーを押す。
 
 そうすると、コマンドラインは以下のようになります。
