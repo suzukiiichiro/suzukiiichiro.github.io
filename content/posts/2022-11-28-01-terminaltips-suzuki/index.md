@@ -262,8 +262,6 @@ $ ./configure sutasuta hoihoi option=hoge
 
 <!--
 
-
-
 {{% tips-list tips %}}
 ヒント
 {{% /tips-list %}}
