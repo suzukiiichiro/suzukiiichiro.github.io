@@ -243,6 +243,13 @@ $ ./configure sutasuta hoihoi option=hoge
 <Enterキーで実行>
 ```
 
+
+まとめると、
+1. `Esc #`でコマンドラインをコメントアウト
+2. 何らかの別コマンドを入力
+3. `Ctrl p`で先程のコマンドラインを呼び出す
+4. `Ctrl d`で行頭の`#`を削除してEnter
+
 {{% tips-list tips %}}
 ヒント
 : `Esc #` はコマンドライン全体をコメントアウトして改行するコマンドです。
