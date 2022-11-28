@@ -164,12 +164,93 @@ Ctrl w : カーソルの前の単語を切り取ります。Ctrl y 貼り付け�
 Ctrl u : カーソルの前の行を切り取ります。次に Ctrl y で貼り付けます
 ```
 
+
 {{% tips-list tips %}}
 ヒント
 : とにかく、ゆっくりとコマンドを入力することです。
 何度も繰り返しゆっくりと実行することで、いずれ素早く実行できるようになります。
 焦ってはいけません。
 {{% /tips-list %}}
+
+
+## 超裏技 Esc #(Shift 3) コマンドライン行をコメントアウトして改行
+このTIPSはものすごく便利です。
+必ず覚えておくと良いことがあります。
+
+まず、ある程度長いコマンドを入力し終わってEnterキーを押して実行しようとしているとします。
+「あ・・」と、気がついて「ディレクトリに入るのを忘れてた」と思い出します。
+`cd hoge` など、ディレクトリ移動をして、先程の長いコマンドを再入力する。
+
+こんな面倒なことってよくありますよね。
+
+```
+$ ./configure sutasuta hoihoi option=hoge
+```
+
+### 一般的な方法 Ctrl a ＋ #(Shift 3)
+と、入力して、このコマンドラインのカーソル行を`Ctrl a`で先頭に移動して、#(Shift 3)を入力してEnterキーを押す。
+
+そうすると、コマンドラインは以下のようになります。
+
+```
+$ #./configure sutasuta hoihoi option=hoge 
+```
+
+ここで改めて
+```
+$ cd hoge
+```
+
+で、ディレクトリに入ってから、`Ctrl p`で１つ前のコマンドを呼び出して、行頭の`#`を`Ctrl d`で消します。
+
+```
+$ #./configure sutasuta hoihoi option=hoge 
+<Ctrl d で行頭の # を消す>
+$ ./configure sutasuta hoihoi option=hoge 
+<Enterキーで実行>
+```
+
+### 超裏技 Esc ＋ #（Shift 3）
+もう少し楽にできるショートカットが用意されています。
+`Esc` を押し離してから`#（Shift+3）`を押します。
+すると一瞬でコマンドラインの行頭に # が付与されて改行されます。
+
+
+まず、先走ってコマンドラインを入力したとします。
+```
+$ ./configure sutasuta hoihoi option=hoge 
+```
+
+`Esc #` でコマンドラインをコメントアウトします。
+```
+$ #./configure sutasuta hoihoi option=hoge 
+```
+
+その後、あらためて`cd hoge`でディレクトリ移動
+```
+$ cd hoge
+```
+
+`Ctrl p`で１つ前のコマンドを呼び出して、`Ctrl d`で行頭の`#`を消す
+
+```
+<Ctrl p>で１つ前のコマンドを呼び出す
+$ #./configure sutasuta hoihoi option=hoge 
+
+<Ctrl d で行頭の # を消す>
+$ ./configure sutasuta hoihoi option=hoge 
+
+<Enterキーで実行>
+```
+
+{{% tips-list tips %}}
+ヒント
+: `Esc #` はコマンドライン全体をコメントアウトして改行するコマンドです。
+一度入力したコマンドを再入力する手間が省けます。
+{{% /tips-list %}}
+
+
+
 
 
 <!--
