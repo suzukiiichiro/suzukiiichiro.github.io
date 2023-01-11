@@ -82,7 +82,7 @@ sed '/regex/{x;p;x;}'
 ```
 
 
-regexに一致するすべての行の下に空白行を挿入しますregex。
+regexに一致するすべての行の下に空白行を挿入します。
 ```:bash
 sed '/regex/G'
 ```
@@ -318,7 +318,7 @@ awk '!/baz/{gsub(/foo/, "bar")}; 1'
 
 
 
-scarletまたはrubyまたはpuceを次のように変更しredます。
+scarletまたはrubyまたはpuceをredに変更します。
 ```:bash
 sed 's/scarlet/red/g;s/ruby/red/g;s/puce/red/g'   # most seds
 gsed 's/scarlet\|ruby\|puce/red/g'                # GNU sed only
@@ -363,13 +363,13 @@ sed -e :a -e '/\\$/N; s/\\\n//; ta'
 ```
 
 
-行が等号で始まる場合は、それを前の行に追加し、「=」を 単一のスペースに置き換えます。
+行が等号で始まる場合は前の行に追加し、「=」を 単一のスペースに置き換えます。
 ```:bash
 sed -e :a -e '$!N;s/\n=/ /;ta' -e 'P;D'
 ```
 
 
-「1234567」を「1,234,567」に変更して、数値文字列にコンマを追加します。
+数値文字列にコンマを追加し「1234567」を「1,234,567」に変更します。
 ```:bash
 gsed ':a;s/\B[0-9]\{3\}\>/,&/;ta'                     # GNU sed
 sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'  # other seds
@@ -432,15 +432,15 @@ awk 'ORS=NR%5?",":"\n"'
 ```
 
 
-各ファイル名の文字列の名前を次のように変更aaaしbbbます。
+各ファイル名の文字列の名前の部分aaaをbbbに変更します。
 ```:bash
 ls | perl -ne 'chomp; next unless -e; $o = $_; s/aaa/bbb/; next if -e; rename $o, $_';
 ```
 
 
-## 選択印刷
+## 選択出力
 最初の 10 行を出力します。
-```
+```:bash
 head
 sed 10q
 awk 'NR < 11'
@@ -448,7 +448,7 @@ awk 'NR < 11'
 
 
 最初の行を印刷:
-```
+```bash
 head -1
 sed q
 awk 'NR>1{exit};1'
@@ -456,22 +456,22 @@ awk 'NR>1{exit};1'
 
 
 最後の 10 行を出力します。
-```
+```:bash
 tail
 sed -e :a -e '$q;N;11,$D;ba'
 ```
 
 
 最後の 2 行を出力します。
-```
+```:bash
 tail -2
 sed '$!N;$!D'
 awk '{y=x "\n" $0; x=$0};END{print y}'
 ```
 
 
-最後の行を印刷:
-```
+最後の行を出力
+```:bash 
 tail -1
 sed '$!d'
 sed -n '$p'
@@ -479,8 +479,8 @@ awk 'END{print}'
 ```
 
 
-最終行の次の行を印刷します。
-```
+最終行の次の行を出力します。
+```:bash
 sed -e '$!{h;d;}' -e x              # for 1-line, print blank line
 sed -e '1{$q;}' -e '$!{h;d;}' -e x  # for 1-line, print the line
 sed -e '1{$d;}' -e '$!{h;d;}' -e x  # for 1-line, print nothing
@@ -488,7 +488,7 @@ sed -e '1{$d;}' -e '$!{h;d;}' -e x  # for 1-line, print nothing
 
 
 正規表現に一致する行のみを出力します。
-```
+```:bash
 grep 'regex'
 sed -n '/regex/p'           # method 1
 sed '/regex/!d'             # method 2
@@ -497,7 +497,7 @@ awk '/regex/'
 
 
 正規表現に一致しない行のみを出力:
-```
+```:bash
 grep -v regex
 sed -n '/regex/!p'          # method 1, corresponds to above
 sed '/regex/d'              # method 2, simpler syntax
@@ -506,7 +506,7 @@ awk '!/regex/'
 
 
 正規表現の直前の行を出力しますが、正規表現を含む行は出力しません:
-```
+```:bash
 sed -n '/regex/{g;1!p;};h'
 awk '/regex/{print x};{x=$0}'
 awk '/regex/{print (NR==1 ? "match on line 1" : x)};{x=$0}'
@@ -514,35 +514,35 @@ awk '/regex/{print (NR==1 ? "match on line 1" : x)};{x=$0}'
 
 
 正規表現の直後の行を出力しますが、それを含む行は出力しません:
-```
+```:bash
 sed -n '/regex/{n;p;}'
 awk '/regex/{getline;print}'
 ```
 
 
 正規表現の前後に 1 行のコンテキストを行番号付きで出力します。
-```
+```:bash
 grep -A1 -B1 -n regex
 sed -n -e '/regex/{=;x;1!p;g;$!N;p;D;}' -e h
 ```
 
 
-AAAand BBBandを検索しCCCます (任意の順序で):
-```
+AAA と BBB と CCC を検索します (任意の順序で):
+```:bash
 sed '/AAA/!d; /BBB/!d; /CCC/!d'
 awk '/AAA/ && /BBB/ && /CCC/'
 ```
 
 
-AAAand andBBBをCCC(この順序で)検索します。
-```
+AAA、BBB、CCC(この順序で)を含む行を検索します。
+```:bash
 sed '/AAA.*BBB.*CCC/!d'
 awk '/AAA.*BBB.*CCC/'
 ```
 
 
-AAAまたはBBBまたはを検索しCCCます。
-```
+AAA、BBBまたはCCCを検索します。
+```:bash
 egrep "AAA|BBB|CCC"
 grep -E "AAA|BBB|CCC"
 sed -e '/AAA/b' -e '/BBB/b' -e '/CCC/b' -e d    # most seds
@@ -550,34 +550,34 @@ gsed '/AAA\|BBB\|CCC/!d'                        # GNU sed only
 ```
 
 
-含まれている場合は段落を印刷しますAAA(空白行で段落を区切ります):
-```
+AAAが含まれている段落を出力します(空白行で段落を区切ります):
+```:bash
 sed -e '/./{H;$!d;}' -e 'x;/AAA/!d;'
 ```
 
 
-AAA段落にandBBBとCCC(任意の順序で)が含まれている場合は、段落を出力します。
-```
+段落AAAに BBBとCCC(任意の順序で)が含まれている段落を出力します。
+```:bash
 sed -e '/./{H;$!d;}' -e 'x;/AAA/!d;/BBB/!d;/CCC/!d'
 ```
 
 
-AAAまたはBBBまたはが含まれている場合、段落を印刷しますCCC。
-```
+AAA、BBBまたはCCCが含まれている段落を出力します。
+```:bash
 sed -e '/./{H;$!d;}' -e 'x;/AAA/b' -e '/BBB/b' -e '/CCC/b' -e d
 gsed '/./{H;$!d;};x;/AAA\|BBB\|CCC/b;d'         # GNU sed only
 ```
 
 
-65 文字以上の行のみを出力します。
-```
+65 文字以上の行を出力します。
+```:bash
 sed -n '/^.\{65\}/p'
 awk 'length > 64'
 ```
 
 
 65 文字未満の行のみを出力します。
-```
+```:bash
 sed -n '/^.\{65\}/!p'        # method 1, corresponds to above
 sed '/^.\{65\}/d'            # method 2, simpler syntax
 awk 'length < 65'
@@ -585,7 +585,7 @@ awk 'length < 65'
 
 
 正規表現から最後までのセクションを出力します。
-```
+```:bash
 sed -n '/regex/,$p'
 awk '/regex/,0'
 awk '/regex/,EOF'
@@ -593,7 +593,7 @@ awk '/regex/,EOF'
 
 
 行番号に基づいてセクションを出力します (8 行目から 12 行目まで):
-```
+```:bash
 sed -n '8,12p'
 sed '8,12!d'
 awk 'NR==8,NR==12'
@@ -603,7 +603,7 @@ perl -pe 'exit if 8<$. && $.<12'
 
 
 行番号 52 を出力します。
-```
+```:bash
 sed -n '52p'
 sed '52!d'
 sed '52q;d'                  # efficient on large files
@@ -613,14 +613,14 @@ awk 'NR==52 {print;exit}'    # more efficient on large files
 
 
 3 行目から 7 行ごとに出力します。
-```
+```:bash
 gsed -n '3~7p'
 sed -n '3,${p;n;n;n;n;n;n;}'
 ```
 
 
 2 つの正規表現の間のセクションを出力します (包括的):
-```
+```:bash
 sed -n '/START/,/END/p'
 awk '/START/,/END/'
 perl -ne 'print if /START/ .. /END/'
@@ -629,77 +629,76 @@ perl -ne 'print if m{START} .. m{END}'
 
 
 2 つの正規表現の間のセクションを除くすべてを出力します。
-```
+```:bash
 sed '/START/,/END/d'
 perl -i.old -ne 'print unless /START/ .. /END/'
 ```
 
 
 フィールドを正規表現と照合します。
-```
+```:bash
 awk '$7  ~ /^[a-f]/'    # print line if field #7 matches regex
 awk '$7 !~ /^[a-f]/'    # print line if field #7 does NOT match regex
 ```
 
 
 フィールド 5 が に等しい任意の行を出力しますabc123。
-```
+```:bash
 awk '$5 == "abc123"'
 ```
 
 
-フィールド 5 が等しくない行のみを出力しabc123ます (フィールドが 5 未満の行も出力し
-ます)。
-```
+フィールド 5 が等しくない行のみを出力しabc123ます (フィールドが 5 未満の行も出力します)。
+```:bash
 awk '$5 != "abc123"'
 awk '!($5 == "abc123")'
 ```
 
 
-回文を印刷する：
-```
+回文を出力します。
+```:bash
 perl -lne 'print if $_ eq reverse'
 ```
 
 
 重複した単語を一行に出力する：
-```
+```:bash
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi'
 ```
 
 
 パターンからの抜粋:
-```
+```:bash
 awk 'match($0, /(.+)/, a) { print a[1] }'
 grep -oP "queue name='\K.+?(?=')"
 ```
 
 
 コンテキストでフィルタリングし、コンテキストからフィールドを出力します。
-```
+```:bash
 grep -A1 'to filter' /etc/multipath.conf | awk 'BEGIN { RS="--" } ; { print $2, $4 }'
 ```
 
 
-キャプチャ グループから印刷:
-```
+クリップボードから出力します。
+```:bash
 awk 'match($0, /h_vmem=([0-9]+[kKmMgGtT])/, a) { print a[1] }'
 ```
 
 
 
 ## 選択的削除
-重複する連続した行を削除します。一連の重複行の最初の行は保持され、残りは
-削除されます。
-```
+重複する連続した行を削除します。
+一連の重複行の最初の行は保持され、残りは削除されます。
+```:bash
 uniq
 sed '$!N; /^\(.*\)\n\1$/!P; D'
 awk 'a !~ $0; {a=$0}'
 ```
 
 
-重複する連続していない行を削除します。
-```
+重複が連続していない行を削除します。
+```:bash
 sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P'
 awk '!a[$0]++'                     # most concise script
 awk '!($0 in a){a[$0];print}'      # most efficient script
@@ -707,21 +706,21 @@ awk '!($0 in a){a[$0];print}'      # most efficient script
 
 
 重複する行を除くすべての行を削除します。
-```
+```:bash
 uniq -d
 sed '$!N; s/^\(.*\)\n\1$/\1/; t; D'
 ```
 
 
 最初の行を削除します。
-```
+```:bash
 tail -n +2
 awk 'NR > 1'
 ```
 
 
 最初の 10 行を削除します。
-```
+```:bash
 sed '1,10d'
 awk 'NR > 10'
 perl -ne 'print unless 1 .. 10'
@@ -729,53 +728,53 @@ perl -ne 'print unless 1 .. 10'
 
 
 5 行目を削除します。
-```
+```:bash
 awk 'NR != 5'
 sed '5d'
 ```
 
 
 5 ～ 10 などの範囲の行を削除します。
-```
+```:bash
 awk 'NR < 5 || NR > 10'
 sed '5,10d'
 ```
 
 
 最後の行を削除します。
-```
+```:bash
 sed '$d'
 ```
 
 
 最後の 2 行を削除します。
-```
+```:bash
 sed 'N;$!P;$!D;$d'
 ```
 
 
 最後の 10 行を削除します。
-```
+```:bash
 sed -e :a -e '$d;N;2,10ba' -e 'P;D'   # method 1
 sed -n -e :a -e '1,10!{P;N;D;};N;ba'  # method 2
 ```
 
 
 8 行ごとに削除します。
-```
+```:bash
 gsed '0~8d'                           # GNU sed only
 sed 'n;n;n;n;n;n;n;d;'                # other seds
 ```
 
 
 パターンに一致する行を削除:
-```
+```:bash
 sed '/pattern/d'
 ```
 
 
 空行をすべて削除します。
-```
+```:bash
 grep '.'
 sed '/^$/d'                           # method 1
 sed '/./!d'                           # method 2
@@ -785,7 +784,7 @@ awk '/./'
 
 
 最初の空白行を除くすべての連続する空白行を削除し、先頭と末尾のすべての空白行も削除します。
-```
+```:bash
 cat -s
 sed '/./,/^$/!d'          # method 1, allows 0 blanks at top, 1 at EOF
 sed '/^$/N;/\n$/D'        # method 2, allows 1 blank at top, 0 at EOF
@@ -793,26 +792,26 @@ sed '/^$/N;/\n$/D'        # method 2, allows 1 blank at top, 0 at EOF
 
 
 最初の 2 行を除く連続する空白行をすべて削除します。
-```
+```:bash
 sed '/^$/N;/\n$/N;//D'
 ```
 
 
 先頭の空白行をすべて削除します。
-```
+```:bash
 sed '/./,$!d'
 ```
 
 
 末尾の空白行をすべて削除します。
-```
+```:bash
 sed -e :a -e '/^\n*$/{$d;N;ba' -e '}'  # works on all seds
 sed -e :a -e '/^\n*$/N;/\n$/ba'        # dito, except for gsed 3.02.*
 ```
 
 
 各段落の最後の行を削除します。
-```
+```:bash
 sed -n '/^$/{p;h;};/./{x;/./p;}'
 ```
 
@@ -820,19 +819,19 @@ sed -n '/^$/{p;h;};/./{x;/./p;}'
 
 ## 挿入
 最初の行として挿入:
-```
+```:bash
 sed '1 i foo
 ```
 
 
 最初の行の後に (2 行目として) 挿入:
-```
+```:bash
 sed '1 a foo'
 ```
 
 
 AAA を含む行の上に BBB を含む行を挿入します。
-```
+```:bash
 sed '/AAA/i BBB'
 ```
 
@@ -840,14 +839,13 @@ sed '/AAA/i BBB'
 
 ## 文字列の作成
 特定の長さの文字列を作成します (例: 513 スペースを生成)
-```
+```:bash
 awk 'BEGIN{while (a++<513) s=s " "; print s}'
 ```
 
 
-特定の文字位置に特定の長さの文字列を挿入します (例
-では、各入力行の列 6 の後に 49 個のスペースを挿入します)。
-```
+特定の文字位置に特定の長さの文字列を挿入します (例 では、各入力行の列 6 の後に 49 個のスペースを挿入します)。
+```:bash
 gawk --re-interval 'BEGIN{while(a++<49)s=s " "};{sub(/^.{6}/,"&" s)};1'
 ```
 
@@ -859,30 +857,31 @@ gawk --re-interval 'BEGIN{while(a++<49)s=s " "};{sub(/^.{6}/,"&" s)};1'
 
 
 ## SED スクリプトでの '\t' の使用: 
-ドキュメントを明確にするために、スクリプトでタブ文字 (0x09) を示すために表現 `\t` を使用しました。ただし、ほとんどのバージョンの sed は「\t」の省略形を認識しないため、コマンドラインからこれらのスクリプトを入力するときは、代わりに `TAB` キーを押す必要があります。
+ドキュメントを明確にするために、スクリプトでタブ文字 (0x09) を示すために表現 `\t` を使用しました。
+ただし、ほとんどのバージョンの sed は `\t` の省略形を認識しないため、コマンドラインからこれらのスクリプトを入力するときは、代わりに `TAB` キーを押す必要があります。
 
 
 
 ## SED のバージョン: 
-sed のバージョンは異なります。また、多少の構文の違いが予想されます。特に、編集コマンド内でのラベル (:name) または分岐命令 (b,t) の使用は、コマンドの最後を除き、ほとんどサポートされていません。
-sed の一般的な GNU バージョンではより簡潔な構文が許可されていますが、sed のほとんどのユーザーに移植可能な構文を使用しました。読者が次のようなかなり長いコマンドを見た場合:
+sed のバージョンが異なる場合、多少の構文の違いが予想されます。
+特に、編集コマンド内でのラベル (:name)、または分岐命令 (b,t) の使用は、コマンドの最後を除き、ほとんどサポートされていません。
+sed の一般的な GNU バージョンではより簡潔な構文が許可されています。
 
-```
+次のようなかなり長いコマンドは、
+```:bash
 sed -e '/AAA/b' -e '/BBB/b' -e '/CCC/b' -e d
 ```
 
 
-GNU sed を使用すると、次のように削減できることを知って心強いです。
+GNU sed を使用すると、次のように書くことができます。
 
 ```
 sed '/AAA/b;/BBB/b;/CCC/b;d'      # or even
 sed '/AAA\|BBB\|CCC/b;d'
 ```
 
+sed の多くのバージョンは「/one/s/RE1/RE2/」のようなコマンドを受け入れますが、「/one/! s/RE1/RE2/」で、「s」の前にスペースが含まれています。コマンドを入力するときは、スペースを省略してください。
 
-sed の多くのバージョンは「/one/s/RE1/RE2/」のようなコマンドを受け入れますが、
-「/one/! s/RE1/RE2/」で、「s」の前にスペースが含まれています。コマンドを入力するときは、スペースを省略して
-ください。
 
 
 ## 速度の最適化: 
@@ -905,7 +904,8 @@ sed -n '51q;45,50p' filename       # same, but executes much faster
 
 
 ## ワンライナーの定義
-ワンライナーとして認定するには、コマンド ラインを ６５文字以下にする必要があります。このファイル内のさまざまなスクリプトは、次のユーザーによって作成または提供されています。
+ワンライナーとして認定するには、コマンド ラインを ６５文字以下にする必要があります。
+
 
 
 
