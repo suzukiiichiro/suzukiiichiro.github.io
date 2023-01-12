@@ -55,11 +55,11 @@ done<$DATAFILE    # ファイルの入力
 
 echo "配列の内容すべてを表示"
 echo ${aLine[@]}; # One Two Three
-echo "添字の0を表示
+echo "添字の0を表示"
 echo ${aLine[0]}; # One
-echo "添字の1を表示
+echo "添字の1を表示"
 echo ${aLine[1]}; # Two
-echo "添字の2を表示
+echo "添字の2を表示"
 echo ${aLine[2]}; # Three
 ```
 
