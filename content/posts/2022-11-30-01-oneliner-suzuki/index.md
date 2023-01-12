@@ -442,6 +442,44 @@ cat filename | sed 's/.\{4\}/&\n/g'
 for i in $(ls);do sed -i "s/$/\t$i/" $i;done
 ```
 
+### 空白行の操作
+
+空行１行を空行２行に増やす
+``` bash
+sed G
+awk '1;{print ""}'
+awk 'BEGIN{ORS="\n\n"};1'
+```
+
+空行１行を空行３業に増やす
+``` bash
+sed '/^$/d;G'
+awk 'NF{print $0 "\n"}'
+```
+
+空行２行を空行１業に減らす
+``` bash
+sed 'G;G'
+awk '1;{print "\n"}'
+```
+
+
+sed 'n;d'
+一致するすべての行の上に空白行を挿入しますregex。
+
+sed '/regex/{x;p;x;}'
+に一致するすべての行の下に空白行を挿入しますregex。
+
+sed '/regex/G'
+正規表現に一致するすべての行の上下に空白行を挿入します。
+
+sed '/regex/{x;p;x;G;}'
+末尾に改行を追加します:
+
+sed '$a\'
+
+
+
 
 ## awk
 ### タブをフィールドセパレータとして設定
