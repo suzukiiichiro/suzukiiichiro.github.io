@@ -96,7 +96,7 @@ sed '/regex/{x;p;x;G;}'
 
 末尾に改行を追加します:
 ``` bash
-sed '$a\'
+sed '$a \\'
 ```
 
 
