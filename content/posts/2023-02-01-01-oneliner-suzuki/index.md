@@ -3722,47 +3722,6 @@ sudo apt-get install poppler-utils
 pdftotext example.pdf example.txt
 ```
 
----
-title: "【ターミナルTIPS】ターミナルで知っておくとちょっとだけ便利なコマンド"
-date: 2022-11-28T11:49:20+09:00
-draft: false
-authors: suzuki
-image: linux.jpg
-categories:
-  - programming
-tags:
-  - ターミナル
-  - TIPS
-  - マニアックコマンド
-  - シェルスクリプト
-  - Bash
-  - コマンド活用
-  - 鈴木維一郎
----
-
-
-
----
-title: "【TIPS】ざっくりわかるシェルスクリプト"
-
-date: 2022-09-26T14:19:38+09:00
-draft: false
-authors: suzuki
-image: bash.jpg
-categories:
-  - programming
-tags:
-  - TIPS
-  - ざっくりわかるシリーズ
-  - シェルスクリプト
-  - Bash
-  - 鈴木維一郎
-
----
-
-ここではシェルスクリプトのBashについてのTIPSを紹介します。C言語やJavaといった高級言語にあってbashにはない部分について補完できる様々な手法をご紹介します。
-
-Bashで普通に動くスクリプトを記述することはできるけど、C言語やJavaなどで記述したり構築したりするにはどうすればよいのか？ということについて、様々なアイディアも含めて、同等の表現方法がいくつかあるので、参考にしてください。
 
 
 ## 「ざっくり」シリーズのご紹介
