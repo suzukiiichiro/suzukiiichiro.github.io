@@ -214,7 +214,8 @@ ID  Name            Email           Phone
 $
 ```
 
-次の「grep」コマンドは、Customers.txtファイルのテキスト「 MalihaChowdhury 」を検索します。検索テキストがファイルに存在する場合、テキストを含む行が印刷されます。
+次の「grep」コマンドは、Customers.txtファイルのテキストから「Ali」を含む語句を検索します。
+検索テキストがファイルに存在する場合、テキストを含む行が印刷されます。
 
 <pre>
 $ cat Customers.txt
