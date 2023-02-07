@@ -1480,9 +1480,9 @@ sed '/AAA\|BBB\|CCC/b;d'
 実行速度を上げる必要がある場合 (入力ファイルが大きい、プロセッサやハードディスクが遅いなどの理由で)、「s/…/…/」を指定する前に「find」式を指定すると、置換がより迅速に実行されます。
 
 ``` bash
-sed 's/foo/bar/g' filename         # standard replace command
-sed '/foo/ s/foo/bar/g' filename   # executes more quickly
-sed '/foo/ s//bar/g' filename      # shorthand sed syntax
+sed 's/foo/bar/g' filename         # 通常の書き方
+sed '/foo/ s/foo/bar/g' filename   # ちょっと早い
+sed '/foo/ s//bar/g' filename      # かなり高速
 ```
 
 
