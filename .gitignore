@@ -1,3 +1,9 @@
+themes/hugo-theme-stack
+.gitignore
+test
+*.swp
+*.txt
+tags
 trash
 .DS_Store
 /public
