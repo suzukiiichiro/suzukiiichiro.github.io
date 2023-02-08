@@ -139,7 +139,7 @@ Ctrl e : 行末に移動します。
 
 {{% tips-list tips %}}
 ヒント
-: この３つのキーボードショートカットは、ＰＣのほぼすべてのテキストフィールド共通で使えます。
+: この３つのキーボードショートカットは、ＰＣのほぼすべてのテキスト列共通で使えます。
 {{% /tips-list %}}
 
 
@@ -175,7 +175,7 @@ Ctrl x backspace : 行頭からカーソルまでのすべてのテキストを�
 
 {{% tips-list tips %}}
 ヒント
-: この３つのキーボードショートカットは、ＰＣのほぼすべてのテキストフィールド共通で使えます。
+: この３つのキーボードショートカットは、ＰＣのほぼすべてのテキスト列共通で使えます。
 消したい場所にカーソルで移動して、消したい文字の数だけDeleteキーを押すという必要がないのです。
 {{% /tips-list %}}
 
@@ -1445,11 +1445,11 @@ $
 
 
 ## awk のTIPS
-### タブをフィールドセパレータとして設定
+### タブを列セパレータとして設定
 ``` bash
 awk -F $'\t' 
 ```
-### タブ区切りとして出力 (フィールド区切りとしても)
+### タブ区切りとして出力 (列区切りとしても)
 ``` bash
 awk -v OFS='\t'
 ```
@@ -1476,6 +1476,15 @@ sed '/AAA/b;/BBB/b;/CCC/b;d'
 sed '/AAA\|BBB\|CCC/b;d'
 ```
 
+{{% tips-list tips %}}
+ヒント
+: sed -e '/AAA/b' -e '/BBB/b' -e '/CCC/b' -e d
+: を
+: sed '/AAA/b;/BBB/b;/CCC/b;d'
+: 書くことでソースが簡潔で見やすくなりますので、是非身につけておきたいものです。
+{{% /tips-list %}}
+
+
 ### sedの速度最適化
 実行速度を上げる必要がある場合 (入力ファイルが大きい、プロセッサやハードディスクが遅いなどの理由で)、「s/…/…/」を指定する前に「find」式を指定すると、置換がより迅速に実行されます。
 
@@ -1493,6 +1502,13 @@ sed -n '45,50p' filename           # print line nos. 45-50 of a file
 sed -n '51q;45,50p' filename       # same, but executes much faster
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `sed` での高速化は最初にfindすることがコツです。 
+: sed 's/foo/bar/g' filename         # 通常の書き方
+: sed '/foo/ s/foo/bar/g' filename   # ちょっと早い
+: sed '/foo/ s//bar/g' filename      # かなり高速
+{{% /tips-list %}}
 
 
 ## 空白行や改行の扱い
@@ -1517,6 +1533,12 @@ world!
 
 bash-3.2$
 ```
+
+{{% tips-list tips %}}
+ヒント
+: G オプションは、各行の下に空行を挿入します。
+{{% /tips-list %}}
+
 
 ### awk 行末を行末＋改行に置き換えます。
 ``` :blankText.txt
@@ -1592,6 +1614,11 @@ Hello,world!
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 'G;G' オプションは、各行の下に空行＋空行を挿入します。
+{{% /tips-list %}}
+
 
 ### awk 行末を（行末＋改行）ｘ２に置き換えます
 ``` :spaceText.txt
@@ -1655,6 +1682,25 @@ bash-3.2$
 awk '{print NF}'
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt
+10  11	1
+12  13	1
+14  15	1
+16  17	1
+18  19	1
+20  21	1
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
+
 
 ### awk １行おきに空白行を挿入します。
 ``` :spaceText.txt
@@ -1714,6 +1760,11 @@ Hello,world!
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 'n;d' オプションは １行おきに削除するという意味です。
+{{% /tips-list %}}
+
 
 ### sed パターンに一致するすべての行の上に空白行を挿入
 ``` :regex01.txt
@@ -1762,6 +1813,12 @@ Hello,China!
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 'G' オプションは、パターンにマッチした行の下に空業を挿入します。
+{{% /tips-list %}}
+
+
 
 ### sed パターンに一致するすべての行の上下に空白行を挿入
 ``` :regex01.txt
@@ -1809,6 +1866,12 @@ Hello,China!
 
 bash-3.2$
 ```
+
+{{% tips-list tips %}}
+ヒント
+: `$a` は最下行を意味します。また `\\` は `\` をエスケープ `\` します。
+{{% /tips-list %}}
+
 
 ### sed awk 空白行の操作
 空行１行を空行２行に増やす
@@ -1879,6 +1942,10 @@ Hello,China!
 ENDLINE
 bash-3.2$
 ```
+{{% tips-list tips %}}
+ヒント
+: `$a` は最下行を意味します。
+{{% /tips-list %}}
 
 
 ### sed ファイルの末尾に複数行の文字列を追加
@@ -1907,6 +1974,12 @@ Line2
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `$a` は最下行を意味します。
+{{% /tips-list %}}
+
+
 ### sed ファイルの先頭に文字列を追加 (例: "[")
 ``` bash
 cat filename | sed -i '1s/^/[/'
@@ -1925,6 +1998,13 @@ cat filename | sed '$s/$/]/'
 cat filaname | sed '$a\'
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `$a` は最下行を意味します。
+: `\` は改行を意味します。
+: 空行を挿入する場合は `$a \\` となります。
+{{% /tips-list %}}
+
 
 ### sed すべての行の先頭に文字列を追加します (例: 'bbo')
 
@@ -1932,11 +2012,25 @@ cat filaname | sed '$a\'
 cat filename | sed -e 's/^/bbo/'
 ```
 
+{{% tips-list tips %}}
+ヒント
+: awkの基本です。`^` は行頭を意味します。
+{{% /tips-list %}}
+
+
+
+
 ### sed 各行の末尾に文字列を追加します (例: "}")
 
 ``` bash
 cat filename | sed -e 's/$/\}\]/'
 ```
+
+{{% tips-list tips %}}
+ヒント
+: awkの基本です。`$` は行末を意味します。
+{{% /tips-list %}}
+
 
 ### sed ４番目の文字ごとに改行を追加します
 (たとえば、4 番目の文字ごと)
@@ -1968,6 +2062,11 @@ bash-3.2$ sed = country.txt | sed 'N;s/\n/\t/'
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `N` で行番号を付与、行番号の後ろの改行をタブに置き換えています。
+{{% /tips-list %}}
+
 
 ### awk タブを使用して各行に左揃えで行番号を付与
 ``` :country.txt
@@ -1991,6 +2090,41 @@ bash-3.2$ cat country.txt | awk '{print FNR "\t" $0}'
 bash-3.2$
 ```
 
+参考：FNR（行番号）とNR(行番号）の違い
+``` :FNR01.txt
+abc withdrawal
+def payment
+xyz deposit
+xxx balance
+```
+
+``` :FNR02.txt
+20081010 1123 xxx
+20081011 1234 def
+20081012 0933 xyz
+20081013 0512 abc
+20081013 0717 def
+```
+
+```
+$ awk '{print NR":"FNR}' FNR01.txt FNR02.txt
+1:1
+2:2
+3:3
+4:4
+5:1
+6:2
+7:3
+8:4
+9:5
+```
+
+{{% tips-list tips %}}
+ヒント
+: NRとFNRの違いは、NRが通し番号なのに対して、FNRがファイル毎に振られる番号であるという点があります。
+{{% /tips-list %}}
+
+
 
 ### awk タブを使用して各行の前に行番号を付けます。
 ``` :country.txt
@@ -2011,6 +2145,25 @@ bash-3.2$ cat country.txt | awk '{print NR "\t" $0}'
 2    Hello,America!
 3    Hello,France!
 4    Hello,China!
+bash-3.2$
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
 bash-3.2$
 ```
 
@@ -2036,6 +2189,15 @@ bash-3.2$ cat country.txt | nl
      4    Hello,China!
 bash-3.2$
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 行番号を付与する場合、一般的なのは `nl` コマンドです。
+: オプションも豊富なので、詳しくは `man nl` を見てください。
+{{% /tips-list %}}
+
+
+
 
 ### sed 行番号を付ける (左揃え、右揃えの番号)。
 ``` :country.txt
@@ -2080,6 +2242,27 @@ bash-3.2$ cat country.txt | awk '{printf("%6d : %s\n",NR,$0)}'
      4 : Hello,China!
 bash-3.2$
 ```
+
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
 
 
 ### sed 行が空白でない場合にのみ行番号を付ける。
@@ -2188,6 +2371,12 @@ bash-3.2$ cat country02.txt | awk '{print (NF? ++a " :" :"") $0}' | grep -v ^$
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `cat` の後で `grep -v ^$` をしてから行番号を付与しても良いですね。
+{{% /tips-list %}}
+
+
 ### sed 特定の行番号に文字列を追加します (例: 1 行目と 3 行目に 'something' を追加)
 
 ``` bash
@@ -2199,9 +2388,48 @@ cat filename | sed -e '1isomething' -e '3isomething'
 awk '{print NR,length($0);}'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
 ### awk すべての行に番号/インデックスを付ける
 ``` bash
 awk '{printf("%s\t%s\n",NR,$0)}'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 
@@ -2226,6 +2454,11 @@ bash-3.2$ cat country.txt | wc -l
        4
 bash-3.2$
 ```
+
+{{% tips-list tips %}}
+ヒント
+: `wc -l` は基本中の基本です。是が非でも覚えてください。
+{{% /tips-list %}}
 
 
 ### sed 行のカウント
@@ -2267,7 +2500,27 @@ bash-3.2$ cat country.txt | awk 'END{print NR}'
 bash-3.2$
 ```
 
-## 行列計算
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
+## 行列の計算と操作
 ### awk 行（A列とB列）の合計を出力
 ``` :calc.txt
 10  11
@@ -2296,17 +2549,7 @@ bash-3.2$ cat calc.txt | awk '{s=0;for(i=0;i<NF;i++) s=s+$i; print s}'
 bash-3.2$
 ```
 
-### awk 行（A列とB列とC列）の合計を出力
-``` :calc02.txt
-10  11	1
-12  13	1
-14  15	1
-16  17	1
-18  19	1
-20  21	1
-```
-
-参考：NF（フィールド数）
+参考：NF（列数）
 ```
 bash-3.2$ cat calc02.txt | awk '{ print NF }'
 3
@@ -2318,27 +2561,7 @@ bash-3.2$ cat calc02.txt | awk '{ print NF }'
 bash-3.2$
 ```
 
-参考：NR（行番号）
-```
-bash-3.2$ cat calc02.txt
-10  11  1
-12  13  1
-14  15  1
-16  17  1
-18  19  1
-20  21  1
-bash-3.2$ cat calc02.txt | awk '{ print NR}'
-1
-2
-3
-4
-5
-6
-bash-3.2$
-```
-
-
-### awk 各フィールドの合計を出力
+### awk 行（A列とB列とC列）の合計を出力
 ``` :calc02.txt
 10  11	1
 12  13	1
@@ -2366,8 +2589,20 @@ bash-3.2$ cat calc02.txt | awk '{s=0;for(i=1;i<NF;i++)s=s+$i;print s}'
 bash-3.2$
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
 
-### awk 各フィールドの値が０より小さい場合に特定の文字列にに置き換える
+
+### awk 各列の値が０より小さい場合に特定の文字列にに置き換える
 ``` :calc03.txt
 10  11  1
 12  13  1
@@ -2395,9 +2630,21 @@ bash-3.2$ cat calc03.txt | awk '{for(i=0;i<NF;i++)if($i<0)$i="Nega"; print }'
 bash-3.2$
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
 
 
-### awk 各行のフィールド数を出力、その後に次の行を出力
+
+### awk 各行の列数を出力、その後に次の行を出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2425,8 +2672,21 @@ bash-3.2$ cat calc04.txt | awk '{print NF " : " $0}'
 bash-3.2$
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
 
-### awk 各行の最後のフィールドを出力
+
+
+### awk 各行の最後の列を出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2454,8 +2714,21 @@ bash-3.2$ cat calc04.txt | awk '{print $NF " : " $0}'
 bash-3.2$
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
 
-### awk 最初のフィールドを除くすべてを出力
+
+
+### awk 最初の列を除くすべてを出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2483,9 +2756,14 @@ bash-3.2$ cat calc04.txt | awk '{$1="";print substr($0,2)}'
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 
+{{% /tips-list %}}
 
 
-### awk 最後の行の最後のフィールドを出力
+
+### awk 最後の行の最後の列を出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2508,8 +2786,21 @@ bash-3.2$ cat calc04.txt | awk '{field=$NF}END{print field}'
 bash-3.2$
 ```
 
+参考：NF（列数）
+```
+bash-3.2$ cat calc02.txt | awk '{ print NF }'
+3
+3
+3
+3
+3
+3
+bash-3.2$
+```
 
-### awk ３つ以上のフィールドを含むすべての行を出力
+
+
+### awk ３つ以上の列を含むすべての行を出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2536,7 +2827,7 @@ bash-3.2$
 ```
 
 
-### awk 最後のフィールドの値が >2 であるすべての行を出力
+### awk 最後の列の値が >2 であるすべての行を出力
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2589,7 +2880,7 @@ bash-3.2$ cat calc04.txt | perl -lane 'print $F[0]+$F[-1]'
 bash-3.2$
 ```
 
-### perl フィールドのすべての数値を 1 増やします。
+### perl 列のすべての数値を 1 増やします。
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2618,7 +2909,7 @@ bash-3.2$
 ```
 
 
-### perl すべてのフィールドの値を合計します。
+### perl すべての列の値を合計します。
 ``` :calc04.txt
 10  11  1
 12  13  1
@@ -2642,7 +2933,116 @@ bash-3.2$
 ```
 
 
-### awk ファイルのすべての番号を四捨五入 
+### awk 行を並べ替える 
+(例: 1 40 35 12 23 > 1 12 23 35 40)
+``` bash
+awk ' {split( $0, a, "\t" ); asort( a ); for( i = 1; i <= length(a); i++ ) printf( "%s\t", a[i] ); printf( "\n" ); }'
+```
+
+### awk ２つの列を逆順で出力
+``` 
+bash-3.2$ echo "world." "Hello, " | awk '{ print $2, $1;}'
+Hello, world.
+bash-3.2$
+```
+
+
+### awk ２つの列を逆順で出力
+```
+bash-3.2$ echo "Hello," "world." | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'
+world. Hello,
+bash-3.2$
+```
+
+
+```
+bash-3.2$ echo "world." "Hello, " | awk '{tmp=$1;$1=$2;$2=tmp;}END{print}'
+Hello, world.
+bash-3.2$
+```
+
+### awk 列にカンマがあるかどうかを確認します (例: 列 $1)
+``` bash
+awk '$1~/,/ {print}' 
+```
+
+
+### cut ２列目以降を出力
+```
+bash-3.2$ echo "Hello," "world." | cut -d' ' -f2-
+world.
+```
+
+
+### awk ２列目以降を出力
+```
+bash-3.2$ echo "Hello," "world." | awk '{$1="";}END{print;}'
+ world.
+bash-3.2$
+```
+
+
+### awk 列間にカンマ区切りを使用して、5 行ごとに入力を連結します。
+``` bash
+awk 'ORS=NR%5?",":"\n"'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
+### join 指定した列を使用して結合
+（例：fileAの３列目とfileBの５列目を結合）
+``` bash
+join -1 3 -2 5 fileA fileB
+```
+
+### awk 列の先頭に文字列を追加します (たとえば、列 $3 に「chr」を追加します)。
+``` bash
+awk 'BEGIN{OFS="\t"}$3="chr"$3'
+```
+
+### awk 最後の列を削除
+``` bash
+awk 'NF{NF-=1};1' file
+```
+
+### join 2 つのファイルを列ごとにタブで結合
+(デフォルトでは両方のファイルの最初の列で結合し、デフォルトのセパレータはスペースです)
+``` bash
+join -t '\t' fileA fileB
+```
+
+### rev cut ファイルの最後の列を切り取って取得する
+``` bash
+cat file|rev | cut -d/ -f1 | rev
+```
+
+### rev cut 最後の列を切り取る
+``` bash
+cat filename|rev|cut -f1|rev
+```
+
+
+
+## 数値の変換
+### awk ファイル内のすべての番号を四捨五入 
 (例: 有効数字 2 桁)
 ``` bash
 awk '{while (match($0,/[0-9]+\[0-9]+/)){printf "%s%.2f",substr($0,0,RSTART-1),substr($0,RSTART,RLENGTH)$0=substr($0, RSTART+RLENGTH)}print}'
@@ -2654,10 +3054,23 @@ awk '{while (match($0,/[0-9]+\[0-9]+/)){printf "%s%.2f",substr($0,0,RSTART-1),su
 awk '{s+=$1}END{print s/NR}'
 ```
 
-### awk 行を並べ替える 
-(例: 1 40 35 12 23 > 1 12 23 35 40)
-``` bash
-awk ' {split( $0, a, "\t" ); asort( a ); for( i = 1; i <= length(a); i++ ) printf( "%s\t", a[i] ); printf( "\n" ); }'
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 ### awk 前の行の値を減算します 
@@ -2667,11 +3080,32 @@ awk '{$6 = $4 - prev5; prev5 = $5; print;}'
 ```
 
 
+### gsed 数値文字列に３桁区切りを付与
+```
+bash-3.2$ echo "12345678910" | gsed ':a;s/\B[0-9]\{3\}\>/,&/;ta'
+12,345,678,910
+bash-3.2$
+```
+
+
+### gsed 数値文字列に３桁区切りを付与
+```
+bash-3.2$ echo "12345678910" |sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
+12,345,678,910
+bash-3.2$
+```
+
+
+### sed 小数点とマイナス記号を含む数値にカンマを追加
+```
+bash-3.2$ echo "1234.56 -789.10" |sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
+1,234.56 -789.10
+bash-3.2$
+```
 
 
 ## 単語や文字列のカウント
-### awk すべての行のフィールド (「単語」) の総数を出力
-
+### awk すべての行の列 (「単語」) の総数を出力
 ``` :doc01.txt
 This book is suitable for classroom use as a general introduction to programming concepts.  
 ```
@@ -2685,7 +3119,7 @@ bash-3.2$
 ```
 
 
-### awk 特定の単語を含むフィールドの（「単語」）の総数を出力
+### awk 特定の単語を含む列の（「単語」）の総数を出力
 ``` :doc02.txt
 This book is suitable for classroom use as a general introduction to programming concepts.
 This document is herewith granted to the Public Domain. No copyright!
@@ -2736,7 +3170,7 @@ bash-3.2$
 
 
 ### awk 最大文字列長を含む行を出力
-(フィールド 1 で最も長い文字列を見つけることを目的としています)。
+(列 1 で最も長い文字列を見つけることを目的としています)。
 ``` :doc03.txt
 Advanced Bash-Scripting Guide
 An in-depth exploration of the art of shell scripting
@@ -2782,6 +3216,13 @@ bash-3.2$ cat doc01.txt | tr -d '\n'
 This book is suitable for classroom use as a general introduction to programming concepts.This document is herewith granted to the Public Domain. No copyright!bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 改行を切り落とす `tr -d '\n' は頻度の高いコマンドです。
+: 注意する点は '\n' であって "\n"ではありません。
+: 対象は一文字なので、シングルクォートで囲む必要があります。
+{{% /tips-list %}}
+
 
 ### tr CRLF を LF 形式に変換します。
 行末にCRLF形式の改行「」が入っているテキスト。
@@ -2802,6 +3243,25 @@ This document is herewith granted to the Public Domain. No copyright!
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: 最近でもOSの違い、エディター間の解釈の違いから ``が行末についてしまうこともまれにあります。手作業で除去することもできるのですが、該当箇所が多くある場合は、`tr -d '\r' で除去できることを覚えておくと良いです。
+{{% /tips-list %}}
+
+
+
+### sed 先頭の空白とタブを削除
+``` bash
+cat filename | sed -e 's/^[ \t]*//'
+```
+
+{{% tips-list tips %}}
+ヒント
+: 先頭のタブだけを削除したい場合は、`sed -e 's/^[\t]*//' となります。
+{{% /tips-list %}}
+
+
+
 
 ### awk 各行の終わりから末尾の空白 (スペース、タブ) を削除します。
 ``` ENDTAB.txt
@@ -2818,7 +3278,6 @@ This book is suitable for classroom use as a general introduction to programming
 This document is herewith granted to the Public Domain. No copyright!
 bash-3.2$
 ```
-
 
 ### sed 各行から先頭と末尾の両方の空白を削除します。
 ``` :space.txt
@@ -2922,8 +3381,8 @@ bash-3.2$
 
 ```
 
-### sed ２行間の改行を削除
 
+### sed ２行間の改行を削除
 ``` :newline.txt
 currentLine
 nextLine
@@ -2934,6 +3393,11 @@ $ cat newline.xt | sed ':a;N;$!ba;s/\n//g'
 $ currentLinenextLine
 $ 
 ```
+
+{{% tips-list tips %}}
+ヒント
+: もちろん `tr -d '\n'` でも同様のことができます。
+{{% /tips-list %}}
 
 
 
@@ -3062,16 +3526,50 @@ bash-3.2$
 sed '/baz/s/foo/bar/g'
 ```
 
+このコマンドはわかりやすく分解すると、
+```
+sed '/baz/' 
+```
+
+で、まずは baz を含む行を抽出します。
+その上で、
+```
+sed 's/foo/bar/g'
+```
+で、文字列 foo を bar に変換します。
+この２つの`sed`コマンドをつなげると
+```
+sed '/baz/s/foo/bar/g'
+```
+
+となるわけです。
+
+{{% tips-list tips %}}
+ヒント
+: この組み合わせコマンドは`sed`の高速化に貢献します。
+{{% /tips-list %}}
+
+
+
+
 ### awk bazを含む行のfooをbarに置き換えます。
 ```
 awk '/baz/{gsub(/foo/, "bar")}; 1'
 ```
 
 
+
 ### sed bazを除く行のfooをbarに置き換えます。
 ```
 sed '/baz/!s/foo/bar/g'
 ```
+
+{{% tips-list tips %}}
+ヒント
+: `sed '/baz/!' が baz「以外」のという意味になります。
+{{% /tips-list %}}
+
+
 
 ### awk bazを除く行のfooをbarに置き換えます。
 ```
@@ -3083,10 +3581,53 @@ awk '!/baz/{gsub(/foo/, "bar")}; 1'
 sed 's/scarlet/red/g;s/ruby/red/g;s/puce/red/g'
 ``` 
 
+こちらは３つの`sed`コマンドが一つになった書き方です。
+多くの場合はこう書くことが多いです。
+
+```
+sed -e 's/scarlet/red/g' -e 's/ruby/red/g' -e 's/puce/red/g'
+```
+
+{{% tips-list tips %}}
+ヒント
+: セミコロン `;` で区切ることで一行で書くこともできるということです。
+{{% /tips-list %}}
+
+
+
+
 ### gsed scarletまたはrubyまたはpuceをredに変更します。
 ``` 
 gsed 's/scarlet\|ruby\|puce/red/g'
 ``` 
+
+多くの場合はこう書くことでしょう。
+```
+sed -e 's/scarlet/red/g' 
+    -e 's/ruby/red/g' 
+    -e 's/puce/red/g'
+```
+
+一つ前の項目で、上記をさらに簡潔に書くことを紹介しました。
+`;`セミコロンで区切るのでしたね。
+``` 
+sed 's/scarlet/red/g;s/ruby/red/g;s/puce/red/g'
+``` 
+
+もっとわかりやすく書くこともできるわけです。
+`\` エスケープした上で `|`パイプで区切り、条件を複数列挙します。
+``` 
+gsed 's/scarlet\|ruby\|puce/red/g'
+``` 
+
+{{% tips-list tips %}}
+ヒント
+: `sed -e` は 複数の `sed` を連続させるときに使うオプションですが、`;`セミコロンで区切り連続させることもできますし、`\|`パイプで条件を区切り列挙することもできます。
+: 見やすいと思う方法でプログラムを書けば良いと思います。
+{{% /tips-list %}}
+
+
+
 
 ### awk scarletまたはrubyまたはpuceをredに変更します。
 ``` 
@@ -3097,6 +3638,14 @@ awk '{gsub(/scarlet|ruby|puce/, "red")}; 1'
 ``` 
 sed 's/foo/bar/'                      
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 「最初に見つかった」語句だけではなく、複数箇所の語句を置換したい場合は、グローバルオプション`g`をつけます。
+: sed 's/foo/bar/g' となります。
+{{% /tips-list %}}
+
+
 
 ### awk 文中の最初のfooだけをbarに置換
 ```
@@ -3117,6 +3666,13 @@ gawk '{$0=gensub(/foo/,"bar",4)}; 1'
 ```
 sed 's/foo/bar/g'                     
 ```
+
+{{% tips-list tips %}}
+ヒント
+: 「最初に見つかった」語句だけを置換したい場合は、グローバルオプション`g`をはずします。
+: sed 's/foo/bar/' となります。
+{{% /tips-list %}}
+
 
 ### awk 文中のすべてのfooをbarに置換
 ```
@@ -3396,33 +3952,6 @@ rename 's/ABC//' *.gz
 rename s/$/.txt/ *
 ```
 
-
-## 数値のカンマ区切り
-### gsed 数値文字列に３桁区切りを付与
-```
-bash-3.2$ echo "12345678910" | gsed ':a;s/\B[0-9]\{3\}\>/,&/;ta'
-12,345,678,910
-bash-3.2$
-```
-
-
-### gsed 数値文字列に３桁区切りを付与
-```
-bash-3.2$ echo "12345678910" |sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
-12,345,678,910
-bash-3.2$
-```
-
-
-### sed 小数点とマイナス記号を含む数値にカンマを追加
-```
-bash-3.2$ echo "1234.56 -789.10" |sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
-1,234.56 -789.10
-bash-3.2$
-```
-
-
-## フィールド操作
 ### paste ファイルの行を並べて結合
 ``` :hello.txt
 Hello, world.
@@ -3442,58 +3971,16 @@ Hello, world.    Welcome to Japan.
 bash-3.2$
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `paste`コマンドは複数のファイルを横に並べて結合します。
+{{% /tips-list %}}
+
+
+
 ### paste 2つ以上のファイルを列に結合/貼り付けます (例: fileA、fileB、fileC)
 ``` bash
 paste fileA fileB fileC
-```
-
-
-### awk ２つのフィールドを逆順で出力
-``` 
-bash-3.2$ echo "world." "Hello, " | awk '{ print $2, $1;}'
-Hello, world.
-bash-3.2$
-```
-
-
-### awk ２つのフィールドを逆順で出力
-```
-bash-3.2$ echo "Hello," "world." | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'
-world. Hello,
-bash-3.2$
-```
-
-
-```
-bash-3.2$ echo "world." "Hello, " | awk '{tmp=$1;$1=$2;$2=tmp;}END{print}'
-Hello, world.
-bash-3.2$
-```
-
-### awk 列にコンマがあるかどうかを確認します (例: 列 $1)
-``` bash
-awk '$1~/,/ {print}' 
-```
-
-
-### cut ２列目以降を出力
-```
-bash-3.2$ echo "Hello," "world." | cut -d' ' -f2-
-world.
-```
-
-
-### awk ２列目以降を出力
-```
-bash-3.2$ echo "Hello," "world." | awk '{$1="";}END{print;}'
- world.
-bash-3.2$
-```
-
-
-### awk フィールド間にコンマ区切りを使用して、5 行ごとに入力を連結します。
-``` bash
-awk 'ORS=NR%5?",":"\n"'
 ```
 
 
@@ -3502,38 +3989,6 @@ awk 'ORS=NR%5?",":"\n"'
 ls | perl -ne 'chomp; next unless -e; $o = $_; s/aaa/bbb/; next if -e; rename $o, $_';
 ```
 
-### join 2 つのファイルをフィールドごとにタブで結合
-(デフォルトでは両方のファイルの最初の列で結合し、デフォルトのセパレータはスペースです)
-``` bash
-join -t '\t' fileA fileB
-```
-
-### join 指定したフィールドを使用して結合
-（例：fileAの３列目とfileBの５列目を結合）
-``` bash
-join -1 3 -2 5 fileA fileB
-```
-
-
-### rev cut ファイルの最後の列を切り取って取得する
-``` bash
-cat file|rev | cut -d/ -f1 | rev
-```
-
-### rev cut 最後の列を切り取る
-``` bash
-cat filename|rev|cut -f1|rev
-```
-
-### awk 列の先頭に文字列を追加します (たとえば、列 $3 に「chr」を追加します)。
-``` bash
-awk 'BEGIN{OFS="\t"}$3="chr"$3'
-```
-
-### awk 最後の列を削除
-``` bash
-awk 'NF{NF-=1};1' file
-```
 
 
 ## 条件出力
@@ -3545,10 +4000,31 @@ sed 10q
 awk 'NR < 11'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
 ### awk 文字列を含む行出力しない (例: 'bbo')
 ``` bash
 cat file | awk '!/bbo/'
 ```
+
 
 
 ### head sed awk 最初の行を出力
@@ -3557,6 +4033,25 @@ cat file | awk '!/bbo/'
 head -1
 sed q
 awk 'NR>1{exit};1'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 
@@ -3617,6 +4112,11 @@ sed -n '/regex/!p'          # method 1, corresponds to above
 sed '/regex/d'              # method 2, simpler syntax
 awk '!/regex/'
 ```
+
+{{% tips-list tips %}}
+ヒント
+: `grep -v` は基本です。
+{{% /tips-list %}}
 
 ### grep 空行をカウントする
 ``` bash
@@ -3720,6 +4220,26 @@ awk '/regex/{print x};{x=$0}'
 awk '/regex/{print (NR==1 ? "match on line 1" : x)};{x=$0}'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
 
 ### sed awk 正規表現の直後の行を出力
 正規表現を含む行は出力しません:
@@ -3812,6 +4332,26 @@ perl -ne 'print if 8 .. 12'
 perl -pe 'exit if 8<$. && $.<12'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
+
 
 ### sed awk 行番号 52 を出力
 ``` bash
@@ -3820,6 +4360,25 @@ sed '52!d'
 sed '52q;d'
 awk 'NR==52'
 awk 'NR==52 {print;exit}'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 
@@ -3846,20 +4405,20 @@ perl -i.old -ne 'print unless /START/ .. /END/'
 ```
 
 
-### awk フィールドを正規表現と照合
+### awk 列を正規表現と照合
 ``` bash
 awk '$7  ~ /^[a-f]/'
 awk '$7 !~ /^[a-f]/'
 ```
 
 
-### awk ５番目のフィールドが条件にあっていれば出力
+### awk ５番目の列が条件にあっていれば出力
 ``` bash
 awk '$5 == "abc123"'
 ```
 
 
-### awk ５番目のフィールドが条件にあっていなければ出力
+### awk ５番目の列が条件にあっていなければ出力
 ``` bash
 awk '$5 != "abc123"'
 awk '!($5 == "abc123")'
@@ -3898,12 +4457,50 @@ tail -n +2
 awk 'NR > 1'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
 
 ### sed awk perl 最初の 10 行を削除
 ``` bash
 sed '1,10d'
 awk 'NR > 10'
 perl -ne 'print unless 1 .. 10'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 
@@ -3913,11 +4510,49 @@ awk 'NR != 5'
 sed '5d'
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
 
 ### awk sed 5から10 といった範囲の行を削除
 ``` bash
 awk 'NR < 5 || NR > 10'
 sed '5,10d'
+```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
 ```
 
 
@@ -5968,11 +6603,11 @@ $ du -h -s *
 
 ## cutコマンド
 - 文字数を指定して切り出す
-- フィールドを指定して切り出す
+- 列を指定して切り出す
 - 出力の区切り文字を変更する
 
 ### cutコマンド概要
-　「cut」は、ファイルを読み込んで、それぞれの行から指定した部分だけを切り出すコマンドです。例えば、「3文字目から10文字目」や、タブなどで区切られたファイルから「1番目のフィールドと3番目のフィールド」のように選んで取り出すことができます。
+　「cut」は、ファイルを読み込んで、それぞれの行から指定した部分だけを切り出すコマンドです。例えば、「3文字目から10文字目」や、タブなどで区切られたファイルから「1番目の列と3番目の列」のように選んで取り出すことができます。
 
 
 ### cutコマンドの書式
@@ -5984,8 +6619,8 @@ cut オプション [ファイル]
 |オプション    |意味|
 |--------------|----|
 |-c            |切り出す位置のリストを文字数で指定する|
-|-f 1,3または1-3|切り出す位置のリストをタブ区切りのフィールドで指定する（区切り文字は「-d」オプションで変更可能）|
-|-d '文字'     |フィールドの区切り文字として、タブの代わりに使用する文字を指定する（1文字のみ）|
+|-f 1,3または1-3|切り出す位置のリストをタブ区切りの列で指定する（区切り文字は「-d」オプションで変更可能）|
+|-d '文字'     |列の区切り文字として、タブの代わりに使用する文字を指定する（1文字のみ）|
 
 
 ### cutコマンド詳細説明
@@ -6016,8 +6651,8 @@ Hell
 ```
 
 
-### フィールドを指定して切り出す
-フィールドの区切り文字は、デフォルトで ,(カンマ）とTAB(タブ）です。
+### 列を指定して切り出す
+列の区切り文字は、デフォルトで ,(カンマ）とTAB(タブ）です。
 特に指定しなければ、cutコマンドが考えて区切り文字として認識してくれます。
 ただカンマとTABが混在している場合は不安ですね。
 次の項で、区切り文字（デリミタ）を指定する方法を説明します。
@@ -6040,7 +6675,7 @@ _timed:*:266:266:Time Sync Daemon:/var/db/timed:/usr/bin/false
 ```
 
 
-デリミタを指定した場合はきちんと１番目、７番目のフィールドが切り取られました
+デリミタを指定した場合はきちんと１番目、７番目の列が切り取られました
 まずはcutコマンドで実現します。
 ```
 $ sudo cat /etc/passwd | cut -f 1,7 -d ':' | tail
@@ -6075,7 +6710,7 @@ $
 
 {{% tips-list tips %}}
 ヒント
-: 文字を切り出す方法にもいくつかありますし、フィールドの切り出しにもいろいろな方法があります。用途に合わせて使い分けてください。最初のうちは、一つの方法を覚えておけばよいです。
+: 文字を切り出す方法にもいくつかありますし、列の切り出しにもいろいろな方法があります。用途に合わせて使い分けてください。最初のうちは、一つの方法を覚えておけばよいです。
 {{% /tips-list %}}
 
 
@@ -6455,12 +7090,12 @@ name006
 ## sortコマンド
 - テキストファイルを並べ替える
 - 数値の大小で並べ替える
-- フィールドを指定して並べ替える
+- 列を指定して並べ替える
 - CSVデータを並べ替える
 
 
 ### sortコマンド概要
-`sort`は、テキストファイルを「行単位で並べ替える」コマンドです。他のコマンドの実行結果を並べ替える場合にも使用できます。また、空白やカンマ区切りのデータに対し、並べ替えに使用するフィールドを指定することも可能です。
+`sort`は、テキストファイルを「行単位で並べ替える」コマンドです。他のコマンドの実行結果を並べ替える場合にも使用できます。また、空白やカンマ区切りのデータに対し、並べ替えに使用する列を指定することも可能です。
 
 
 ### sortコマンドの書式
@@ -6560,8 +7195,8 @@ $ seq 10 | sort -n
 10
 ```
 
-### フィールドを指定して並べ替える
-　「-k」オプションを使うと、並べ替えに使用する「フィールド」を指定できます。例えば、duコマンドの結果の2番目のフィールド、つまり「ディレクトリ名」で並べ替えるには、「du -s * | sort -k 2」のように指定します。さらに、2番目のフィールドで逆順に並べ替えるならば、「du -s * | sort -k 2r」と指定します。
+### 列を指定して並べ替える
+　「-k」オプションを使うと、並べ替えに使用する「列」を指定できます。例えば、duコマンドの結果の2番目の列、つまり「ディレクトリ名」で並べ替えるには、「du -s * | sort -k 2」のように指定します。さらに、2番目の列で逆順に並べ替えるならば、「du -s * | sort -k 2r」と指定します。
 
 まずは以下のファイルを作成します。
 ```:du.txt
@@ -6601,7 +7236,7 @@ $ cat du.txt | sort -n
 24631656	Desktop
 ```
 
-次は、２番目のフィールド（ディレクトリ名）で並べ替えを行います。
+次は、２番目の列（ディレクトリ名）で並べ替えを行います。
 ```
 $ cat du.txt | sort -k2
 2912	Applications
@@ -6620,13 +7255,13 @@ $ cat du.txt | sort -k2
 
 
 ### CSVデータを並べ替える
-　「-k」オプションでは、空白文字を区切りとして、並べ替えに使うフィールドを指定することができます。区切り文字を変更したい場合は、「-t」オプションで使用する文字を指定します。
+　「-k」オプションでは、空白文字を区切りとして、並べ替えに使う列を指定することができます。区切り文字を変更したい場合は、「-t」オプションで使用する文字を指定します。
 
 　例えば、CSV（comma-separated values）データの場合、区切り文字は「,（カンマ）」なので「-t ,」または「-t ","」のように指定します。
 
-　なお、3番目のフィールドの値を数値として並べ替える場合は「-k 3n」、数値としてさらに逆順で並べ替えるなら「-k 3nr」のように指定します。
+　なお、3番目の列の値を数値として並べ替える場合は「-k 3n」、数値としてさらに逆順で並べ替えるなら「-k 3nr」のように指定します。
 
-フィールドは以下のとおりです。
+列は以下のとおりです。
 連番,氏名,氏名（カタカナ）,性別,年齢,取得ポイント
 
 ```:data.txt
@@ -6664,7 +7299,7 @@ sort -t, -nr -k5
 -t, は、CSVデータの区切り文字をカンマ（,）とする
 -nr の、nは並べ替えのデータを数値として扱う
     の、rは逆順で出力する
--k5 は、並べ替えのキーとなるフィールドを５列目とする
+-k5 は、並べ替えのキーとなる列を５列目とする
 
 という意味です。
 では、６列目の取得ポイントの多く順に並べ替えてみます。
@@ -7746,6 +8381,25 @@ END{
 3 6 9
 ```
 
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
 
 
 ## shufコマンド
@@ -8115,6 +8769,26 @@ bash-5.1$ awk '{print NR, $0}' distros.txt
 10 Ubuntu
 bash-5.1$
 ```
+
+参考：NR（行番号）
+```
+bash-3.2$ cat calc02.txt
+10  11  1
+12  13  1
+14  15  1
+16  17  1
+18  19  1
+20  21  1
+bash-3.2$ cat calc02.txt | awk '{ print NR}'
+1
+2
+3
+4
+5
+6
+bash-3.2$
+```
+
 
 
 {{% tips-list tips %}}
@@ -9312,8 +9986,8 @@ Bash Perl Added Text
  Java PHP ASP
 ```
 
-### ファイルから改行を削除し各行の最後にコンマを挿入
-次の`sed`コマンドは、ファイルos.txtの各改行をコンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。
+### ファイルから改行を削除し各行の最後にカンマを挿入
+次の`sed`コマンドは、ファイルos.txtの各改行をカンマに置き換えます。ここで、-zオプションは、行をNULL文字で区切るために使用されます。
 
 ```:os.txt
 Windows
@@ -9334,7 +10008,7 @@ Windows,Linux,Android,OS,$
 ```
 
 ### カンマを削除し、改行を追加して、テキストを複数の行に分割
-次の`sed`コマンドは、`echo`コマンドからコンマで区切られた行を入力として受け取り、コンマを改行に置き換えます。
+次の`sed`コマンドは、`echo`コマンドからカンマで区切られた行を入力として受け取り、カンマを改行に置き換えます。
 
 ```
 $ echo "Kaniz Fatema,30th,batch" | sed "s/,/\n/g"
@@ -9483,8 +10157,8 @@ Mouse     $10
 上記のコマンドを実行すると、次の出力が表示されます。ここでは、各行の番号の前に「$」記号が追加されています。
 
 
-### 3桁を超える数値にコンマを追加
-次の`sed`コマンドは、` echo`コマンドからの入力として数値を受け取り、右から数えて3桁の各グループの後にコンマを追加します。ここで、「：a」はラベルを示し、「ta」はグループ化プロセスを繰り返すために使用されます。
+### 3桁を超える数値にカンマを追加
+次の`sed`コマンドは、` echo`コマンドからの入力として数値を受け取り、右から数えて3桁の各グループの後にカンマを追加します。ここで、「：a」はラベルを示し、「ta」はグループ化プロセスを繰り返すために使用されます。
 
 ```
 $ echo "5098673" | sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'
