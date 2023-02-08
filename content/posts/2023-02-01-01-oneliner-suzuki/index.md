@@ -4935,158 +4935,6 @@ bash-3.2$
 ```
 
 
-## xargs
-### タブを区切り文字として設定 (デフォルト: スペース)
-``` bash
-xargs -d\t
-```
-
-### コマンドを実行する前にコマンドをプロンプトする
-``` bash
-ls|xargs -L1 -p head
-```
-
-### 1 行に 3 項目を表示
-``` bash
-echo 1 2 3 4 5 6| xargs -n 3
-# 1 2 3
-# 4 5 6
-```
-
-### 実行前のプロンプト
-``` bash
-echo a b c |xargs -p -n 3
-```
-
-### `find` の結果を `rm` する
-``` bash
-find . -name "*.html"|xargs rm
-```
-
-### ファイル名に空白が含まれるファイルを削除します (例: 「hello 2001」)
-``` bash
-find . -name "*.c" -print0|xargs -0 rm -rf
-```
-
-### ファイルをフォルダに移動
-``` bash
-find . -name "*.bak" -print 0|xargs -0 -I {} mv {} ~/old
-```
-
-または、
-
-``` bash
-find . -name "*.bak" -print 0|xargs -0 -I file mv file ~/old
-```
-
-### 最初の 100 番目のファイルをディレクトリ (例: d1) に移動します。
-``` bash
-ls |head -100|xargs -I {} mv {} d1
-```
-
-### 並行処理
-``` bash
-time echo {1..5} |xargs -n 1 -P 5 sleep
-```
-
-### すべてのファイルを A から B にコピーします
-``` bash
-find /dir/to/A -type f -name "*.py" -print 0| xargs -0 -r -I file cp -v -p file --target-directory=/path/to/B
-```
-
-### ファイル名をファイルの最初の行に追加します
-``` bash
-ls |sed 's/.txt//g'|xargs -n1 -I file sed -i -e '1 i\>file\' file.txt
-```
-
-### すべてのファイルの行数を出力
-``` bash
-ls |xargs -n1 wc -l
-``` 
-
-### 出力を 1 行にする
-``` bash
-ls -l| xargs
-```
-
-### すべてのファイルの行をカウントし、合計行もカウントします
-``` bash
-ls|xargs wc -l
-```
-
-### Xargs と grepを組み合わせる
-``` bash
-cat grep_list |xargs -I{} grep {} filename
-```
-
-### Xargs と sed (/etc ディレクトリの下のすべての古い IP アドレスを新しい IP アドレスに置き換えます)
-``` bash
-grep -rl '192.168.1.111' /etc | xargs sed -i 's/192.168.1.111/192.168.2.111/g'
-```
-
-## if
-### 文字列一致の検出
-``` bash
-if [[ "$c" == "read" ]]; then outputdir="seq"; else outputdir="write" ; fi
-```
-
-### myfile に文字列 'test' が含まれているかどうかを確認
-```
-``` bah
-if grep -q hello myfile; then echo -e "file contains the string!" ; fi
-```
-
-### 変数がnull であるかを確認
-``` bash
-myvariable="";if [ ! -s "myvariable" ]; then echo -e "variable is null!" ; fi
-```
-
-### 該当のファイルが存在するかを確認
-``` bash
-if [ -e 'filename' ];then echo -e "file exists!"; fi
-```
-
-### ファイルに加えてシンボリックリンクの存在も確認
-``` bash
-if [ -e myfile ] || [ -L myfile ];then echo -e "file exists!"; fi
-```
-
-### xの値が５以上かどうかを確認
-``` bash
-if [ "$x" -ge 5 ]; then echo -e "greater or equal than 5!" ; fi
-```
-
-### bash版：xの値が５以上かどうかを確認
-``` bash
-if ((x >= 5)); then echo -e "greater or equal than 5!" ; fi
-```
-
-### (( )) を使う
-``` bash
-j=3;u=1;if ((j==u+2)); then echo -e "j==u+2";fi
-```
-
-### [[ ]] を使う
-``` bash
-age=25;if [[ $age -gt 21 ]]; then echo -e "forever 21" ; fi
-```
-
-## for
-### ディレクトリ内のファイル名を出力
-``` bash
-for i in $(ls); do echo file: $i;done
-```
-
-もしくは、
-
-``` bash
-for i in *; do echo file: $i; done
-```
-
-### myfile内に記載された名前を使ってディレクトリを作成
-``` bash
-for dir in $(<myfile); do mkdir $dir; done
-``` 
 
 ## openssl
 ### 16 進数の MD5 チェックサム値を base64 エンコード形式に変換します。
@@ -5134,29 +4982,6 @@ cd tmp/ && tar xvf ~/a.tar
 ### 別のコマンドがゼロ以外の終了ステータスを返した場合にのみコマンドを実行する (終了していない)
 ``` bash
 cd tmp/a/b/c ||mkdir -p tmp/a/b/c
-```
-
-## read
-### ユーザー入力の読み取り
-``` bash
-read input
-echo $input
-```
-
-## 配列
-### 配列の宣言
-``` bash
-declare -a array=()
-```
-
-または
-``` bash
-declare array=()
-```
-
-または
-``` bash
-declare -A array=()
 ```
 
 ## 圧縮・解凍
@@ -6385,6 +6210,93 @@ $ sudo make install
 : rpmやyumでインストールする場合と、ソースからインストールする場合、いずれも好みです。人それぞれのやり方や考え方でいいと思います。いずれ使い分けができるようになると思います。今はうまく行ったほうで頑張ってください。
 {{% /tips-list %}}
 
+
+## if
+### 文字列一致の検出
+``` bash
+if [[ "$c" == "read" ]]; then outputdir="seq"; else outputdir="write" ; fi
+```
+
+### myfile に文字列 'test' が含まれているかどうかを確認
+```
+``` bah
+if grep -q hello myfile; then echo -e "file contains the string!" ; fi
+```
+
+### 変数がnull であるかを確認
+``` bash
+myvariable="";if [ ! -s "myvariable" ]; then echo -e "variable is null!" ; fi
+```
+
+### 該当のファイルが存在するかを確認
+``` bash
+if [ -e 'filename' ];then echo -e "file exists!"; fi
+```
+
+### ファイルに加えてシンボリックリンクの存在も確認
+``` bash
+if [ -e myfile ] || [ -L myfile ];then echo -e "file exists!"; fi
+```
+
+### xの値が５以上かどうかを確認
+``` bash
+if [ "$x" -ge 5 ]; then echo -e "greater or equal than 5!" ; fi
+```
+
+### bash版：xの値が５以上かどうかを確認
+``` bash
+if ((x >= 5)); then echo -e "greater or equal than 5!" ; fi
+```
+
+### (( )) を使う
+``` bash
+j=3;u=1;if ((j==u+2)); then echo -e "j==u+2";fi
+```
+
+### [[ ]] を使う
+``` bash
+age=25;if [[ $age -gt 21 ]]; then echo -e "forever 21" ; fi
+```
+
+## for
+### ディレクトリ内のファイル名を出力
+``` bash
+for i in $(ls); do echo file: $i;done
+```
+
+もしくは、
+
+``` bash
+for i in *; do echo file: $i; done
+```
+
+### myfile内に記載された名前を使ってディレクトリを作成
+``` bash
+for dir in $(<myfile); do mkdir $dir; done
+``` 
+
+## read
+### ユーザー入力の読み取り
+``` bash
+read input
+echo $input
+```
+
+## 配列
+### 配列の宣言
+``` bash
+declare -a array=()
+```
+
+または
+``` bash
+declare array=()
+```
+
+または
+``` bash
+declare -A array=()
+```
 
 
 
@@ -9118,6 +9030,97 @@ bash-3.2$
 
 
 `mapfile`と`read`コマンドを上手に使って、効率的に配列に代入してください。
+
+
+## xargs
+### タブを区切り文字として設定 (デフォルト: スペース)
+``` bash
+xargs -d\t
+```
+
+### コマンドを実行する前にコマンドをプロンプトする
+``` bash
+ls|xargs -L1 -p head
+```
+
+### 1 行に 3 項目を表示
+``` bash
+echo 1 2 3 4 5 6| xargs -n3
+# 1 2 3
+# 4 5 6
+```
+
+### 実行前のプロンプト
+``` bash
+echo a b c |xargs -p -n3
+```
+
+### `find` の結果を `rm` する
+``` bash
+find . -name "*.html"|xargs rm
+```
+
+### ファイル名に空白が含まれるファイルを削除します (例: 「hello 2001」)
+``` bash
+find . -name "*.c" -print0|xargs -0 rm -rf
+```
+
+### ファイルをフォルダに移動
+``` bash
+find . -name "*.bak" -print 0|xargs -0 -I {} mv {} ~/old
+```
+
+または、
+
+``` bash
+find . -name "*.bak" -print 0|xargs -0 -I file mv file ~/old
+```
+
+### 最初の 100 番目のファイルをディレクトリ (例: d1) に移動します。
+``` bash
+ls |head -100|xargs -I {} mv {} d1
+```
+
+### 並行処理
+``` bash
+time echo {1..5} |xargs -n1 -P5 sleep
+```
+
+### すべてのファイルを A から B にコピーします
+``` bash
+find /dir/to/A -type f -name "*.py" -print 0| xargs -0 -r -I file cp -v -p file --target-directory=/path/to/B
+```
+
+### ファイル名をファイルの最初の行に追加します
+``` bash
+ls |sed 's/.txt//g'|xargs -n1 -I file sed -i -e '1 i\>file\' file.txt
+```
+
+### すべてのファイルの行数を出力
+``` bash
+ls |xargs -n1 wc -l
+``` 
+
+### 出力を 1 行にする
+``` bash
+ls -l| xargs
+```
+
+### すべてのファイルの行をカウントし、合計行もカウントします
+``` bash
+ls|xargs wc -l
+```
+
+### Xargs と grepを組み合わせる
+``` bash
+cat grep_list |xargs -I{} grep {} filename
+```
+
+### Xargs と sed (/etc ディレクトリの下のすべての古い IP アドレスを新しい IP アドレスに置き換えます)
+``` bash
+grep -rl '192.168.1.111' /etc | xargs sed -i 's/192.168.1.111/192.168.2.111/g'
+```
+
 
 
 
