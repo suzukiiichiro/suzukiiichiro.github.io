@@ -4173,11 +4173,25 @@ cat filename.txt | grep -v '^#'
 cat filename.txt | grep -i "bbo"
 ```
 
+{{% tips-list tips %}}
+ヒント
+: こちらのオプションもよく使われます。
+{{% /tips-list %}}
+
 
 ### grep マッチに色を付けます (例: 'bbo')!
 
 ``` bash
 cat filename.txt | grep --color bbo
+```
+
+以下の2行を ~/.bashrc に追記して保存しておくと常に`grep`コマンドがカラー表示となります。
+
+``` bash:~/.bashrc
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias ls='ls -FG'; 
 ```
 
 
@@ -4590,12 +4604,19 @@ sed '/pattern/d'
 
 ### grep sed awk 空行をすべて削除
 ``` bash
+grep -v ^$
 grep '.'
 sed '/^$/d'                           
 sed '/./!d'                          
 awk NF
 awk '/./'
 ```
+
+{{% tips-list tips %}}
+ヒント
+: `grep -v "^$"` をパイプで組み合わせて使うことが一般的ですが、`sed '/^$/d'` を覚えておくと、以降の理解が進むと思います。
+{{% /tips-list %}}
+
 
 
 ### cat sed 最初の空白行を除く連続する空白行を削除し、先頭と末尾のすべての空白行も削除
@@ -4638,6 +4659,12 @@ sed -n '/^$/{p;h;};/./{x;/./p;}'
 cat filename | sed '/bbo/d'
 ```
 
+{{% tips-list tips %}}
+ヒント
+: `sed '/regex/d'` の d オプションは delete（消す）という意味となります。
+{{% /tips-list %}}
+
+
 ### sed 1行目を削除
 
 ``` bash
@@ -4651,24 +4678,22 @@ cat filename | sed 1,100d
 ```
 
 
-### sed 文字列を含む行を削除 (例: 'bbo')
-
-``` bash
-cat filename | sed "/bbo/d"
-```
-
-
 ### sed 空行の削除
 
 ``` bash
-cat filename | sed '/^\s*$/d'
+cat filename | grep -v "^$"
 ``` 
-
-または
+または、
 
 ``` bash
 cat filename | sed '/^$/d'
 ```
+
+{{% tips-list tips %}}
+ヒント
+: このパターンは必ず身につけましょう。
+{{% /tips-list %}}
+
 
 ### sed 最後の行を削除
 
@@ -4846,6 +4871,17 @@ tr -dc '[:print:]' < filename
 
 
 ### tr 改行を削除
+``` 
+cat filename | tr -d '\n'
+```
+
+{{% tips-list tips %}}
+ヒント
+: -d オプションは --delete と書いても同じです。
+{{% /tips-list %}}
+
+
+
 ``` bash
 tr --delete '\n' <input.txt >output.txt
 ```
@@ -4857,7 +4893,7 @@ tr -d '\n' <input.txt >output.txt
 
 ### tr 改行を置換
 ``` bash
-tr '\n' ' ' <filename
+tr '\n' ' ' <filename>
 ```
 
 ### tr 大文字/小文字へ
