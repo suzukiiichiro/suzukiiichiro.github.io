@@ -1,5 +1,5 @@
 ---
-title: "N-Queens問題：Ｎクイーン問題（１）"
+title: "Ｎクイーン問題（１）について"
 date: 2023-02-14T12:01:52+09:00
 draft: false
 authors: suzuki
