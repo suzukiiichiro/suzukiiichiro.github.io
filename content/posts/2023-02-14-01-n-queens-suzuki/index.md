@@ -1,7 +1,7 @@
 ---
 title: "N-Queens問題：Ｎクイーン問題（１）"
 date: 2023-02-14T12:01:52+09:00
-draft: true
+draft: false
 authors: suzuki
 image: shellscript.jpg
 categories:
