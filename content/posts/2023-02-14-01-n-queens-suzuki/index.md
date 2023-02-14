@@ -173,9 +173,11 @@ N=24発見 電気通信大学
   https://github.com/suzukiiichiro/N-Queens
 
 
-  次回は、シェルスクリプトでエイト・クイーンを解決・解説していきたいと思います。
+次回は、シェルスクリプトでエイト・クイーンを解決・解説していきたいと思います。
 
-
+次の記事
+N-Queens問題：Ｎクイーン問題（２）
+https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 
 
 
