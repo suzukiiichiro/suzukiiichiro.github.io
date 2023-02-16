@@ -19,6 +19,10 @@ N-Queens問題：Ｎクイーン問題（１）
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 
+エイト・クイーンのソース置き場 BashもJavaもPythonも！
+https://github.com/suzukiiichiro/N-Queens
+
+
 ## ブルートフォース前前夜
 ではさっそくＮクイーン問題を考えてみましょう。
 この章では、可能性のあるすべての解を体系的に数え上げる方法を考えてみます。
