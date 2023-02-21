@@ -681,14 +681,14 @@ N-Queen02 0 5;
 
 この処理は以下の部分が大きく影響しています。
 
-```
+``` bash
         flag_a[$col]=1; # trueを代入
         N-Queen02 "$((min+1))" "$size" ;
         flag_a[$col]=0; # falseを代入
 ```
 
 さらに言えば、クイーンの横列の当たり判定部分は以下のとおりです。
-```
+``` bash
     if (( flag_a[col] == 0 ));then
 ```
 
