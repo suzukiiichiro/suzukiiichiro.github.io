@@ -543,7 +543,6 @@ function N-Queen01(){
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queen01()";
   N-Queen01 0 5;
 }
 # 
@@ -609,7 +608,6 @@ function N-Queen01(){
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queen01()";
   N-Queen01 0 5;
 }
 # 
@@ -619,7 +617,6 @@ NQ;
 実行結果は以下のとおりです。
 ```
 bash-3.2$ bash N-Queens.sh
-<>１．ブルートフォース（力まかせ探索） N-Queen01()
 col: 0 size: 5 min: 0
 col: 1 size: 5 min: 0
 col: 2 size: 5 min: 0
