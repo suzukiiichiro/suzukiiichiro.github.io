@@ -20,6 +20,7 @@ https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 前の記事
 N-Queens問題：Ｎクイーン問題（３）ブルートフォース前夜
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+過去の記事
 N-Queens問題：Ｎクイーン問題（２）ブルートフォース前前夜
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１）
@@ -46,6 +47,24 @@ https://github.com/suzukiiichiro/N-Queens
   |---|---|---|---|---|4
   +-------------------+
 ```
+
+
+
+
+この記事
+N-Queens問題：Ｎクイーン問題（４）ブルートフォース
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+前の記事
+N-Queens問題：Ｎクイーン問題（３）ブルートフォース前夜
+https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+過去の記事
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース前前夜
+https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１）
+https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
+エイト・クイーンのソース置き場 BashもJavaもPythonも！
+https://github.com/suzukiiichiro/N-Queens
 
 
 ## 書籍の紹介
