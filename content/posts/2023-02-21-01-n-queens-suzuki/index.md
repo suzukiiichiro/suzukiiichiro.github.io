@@ -439,7 +439,7 @@ downを使って縦と横を判定しています。
 declare -i TOTAL=0;     # カウンター
 declare -i UNIQUE=0;    # ユニークユーザー
 
-function N-Queen03(){
+function N-Queen04(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;       # 再帰に必要
@@ -459,7 +459,7 @@ function N-Queen03(){
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
         left[$row+$col]=1;
-        N-Queen03 "$((row+1))" "$size" ;
+        N-Queen04 "$((row+1))" "$size" ;
         down[$col]=0;
         right[$row-$col+($size-1)]=0;
         left[$row+$col]=0;
@@ -480,7 +480,7 @@ function N-Queen(){
     TOTAL=0;
     UNIQUE=0;
     startTime=$(date +%s);# 計測開始時間
-    N-Queen03 0 "$N";
+    N-Queen04 0 "$N";
     endTime=$(date +%s); 	# 計測終了時間
     ss=$((endTime-startTime));# hh:mm:ss 形式に変換
     hh=$((ss/3600));
@@ -491,7 +491,7 @@ function N-Queen(){
   } 
 }
 #
-N-Queen 0 5;
+N-Queen
 ```
 
 実行結果は以下のとおりです。
