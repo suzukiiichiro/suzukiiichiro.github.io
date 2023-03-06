@@ -516,6 +516,9 @@ bash-3.2$
 
 
 
+次の記事
+N-Queens問題：Ｎクイーン問題（５）制約フラグ
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 
 
 この記事
