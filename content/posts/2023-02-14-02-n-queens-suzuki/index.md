@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（２）ブルートフォース前前夜"
+title: "Ｎクイーン問題（２）ブルートフォース"
 date: 2023-02-14T14:56:53+09:00
 draft: false
 authors: suzuki
@@ -23,7 +23,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 https://github.com/suzukiiichiro/N-Queens
 
 
-## ブルートフォース前前夜
+## ブルートフォース
 ではさっそくＮクイーン問題を考えてみましょう。
 この章では、可能性のあるすべての解を体系的に数え上げる方法を考えてみます。
 
@@ -1211,10 +1211,10 @@ bash-3.2$
 
 
 次の記事
-Ｎクイーン問題（３）ブルートフォース前夜
+Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 過去記事
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース前前夜
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１）について
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/

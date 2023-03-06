@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（３）ブルートフォース前夜"
+title: "Ｎクイーン問題（３）バックトラック準備編"
 date: 2023-02-14T18:18:42+09:00
 draft: false
 authors: suzuki
@@ -14,9 +14,11 @@ tags:
   - 鈴木維一郎
 ---
 
-N-Queens問題：Ｎクイーン問題（３）ブルートフォース前夜
+この記事
+N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース前前夜
+前の記事
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１）
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
@@ -24,7 +26,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
 
-## ブルートフォース前夜
+## ブルートフォース
 前回の記事では、エイトクイーンの３つのルール
 １．縦に一つだけのクイーン
 ２．横に一つだけのクイーン
@@ -36,10 +38,10 @@ https://github.com/suzukiiichiro/N-Queens
 
 要するに、縦にも横にもクイーンの効きが当たらないように配置するということになります。
 
-そういう意味で、前回は「前前夜」、今回は「前夜」となります。
+そういう意味で、前回は「ブルートフォース」、今回は「バックトラック準備編」となります。
 
-次回でようやくエイトクイーンの解決となる「ブルートフォース」の完結となります。
-今回は、その前夜ということです。
+次回でようやくエイトクイーンの解決となる「バックトラック」の前準備編となります。
+今回は、バックトラックの前段階である、ブルートフォースについて説明します。
 とはいえ、今回はもっとも基本的で重要な処理方法ですのでしっかりとボード画面を追って動きを把握してください。
 
 
@@ -1024,15 +1026,15 @@ bash-3.2$
 
 
 次の記事
-N-Queens問題：Ｎクイーン問題（４）ブルートフォース
+N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 
 この記事
-N-Queens問題：Ｎクイーン問題（３）ブルートフォース前夜
+N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 
 過去記事
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース前前夜
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１）について
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
