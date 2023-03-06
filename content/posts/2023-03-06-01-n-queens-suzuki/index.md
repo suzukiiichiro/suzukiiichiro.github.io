@@ -16,7 +16,7 @@ tags:
 
 この記事
 N-Queens問題：Ｎクイーン問題（５）制約フラグ
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 
 過去記事
 N-Queens問題：Ｎクイーン問題（４）バックトラック
@@ -41,7 +41,8 @@ https://github.com/suzukiiichiro/N-Queens
 
 この記事
 N-Queens問題：Ｎクイーン問題（５）制約フラグ
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+
 
 過去記事
 N-Queens問題：Ｎクイーン問題（４）バックトラック
