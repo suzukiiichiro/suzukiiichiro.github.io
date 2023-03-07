@@ -19,6 +19,10 @@ N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 
 過去記事
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（４）バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（２）ブルートフォース
@@ -30,10 +34,12 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 https://github.com/suzukiiichiro/N-Queens
 
 
-## ブルートフォース
+
+## これまでのあらすじ
 ブルートフォースは日本語で「ちからまかせ探索」という意味になります。
 すべての可能性を探索するなかで条件に見合った場合にカウントします。
 
+以前の記事
 N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 
@@ -44,15 +50,13 @@ https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 ブルートフォースは、すべての可能性を列挙した上で、効きであるかどうかを判定し、効きであるばあいはループを抜けて、効きでなければクイーンを配置するという動きになります。
 
 
-
-おさらいですが、
-ブルートフォースのソースは以下の通りです。
+おさらいですが、以前紹介したブルートフォースのソースは以下の通りです。
 ``` bash:N-Queens01.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
 
-function N-Queen01(){
+function N-Queens01(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;         # 再帰に必要
@@ -66,12 +70,12 @@ function N-Queen01(){
   else
     for(( col=0;col<size;col++ )){
       aBoard[$row]="$col";
-      N-Queen01 "$((row+1))" "$size" ;
+      N-Queens01 "$((row+1))" "$size" ;
     }
   fi
 }
 #
-N-Queen01 0 5;   # 縦に一つだけのクイーンを許す
+N-Queens01 0 5;   # 縦に一つだけのクイーンを許す
 ```
 
 実行結果は以下のとおりです。
@@ -139,13 +143,15 @@ N-Queen01 0 5;   # 縦に一つだけのクイーンを許す
 N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 
-前回のバックトラック準備編で「縦と横それぞれに一つだけのクイーンの配置」という条件は、縦と横の効きを有効にすることを意味します。上記のforに以下の条件を加えるだけでした。
+前回ご紹介した「バックトラック準備編」で、「縦と横それぞれに一つだけのクイーンの配置」という条件は、縦と横の効きを有効にすることを意味します。
+
+上記のforに以下の条件を加え
 
 ``` bash
     if (( down[col]==0 ));then
 ```
 
-再帰部分で、downに１を代入して、再帰が終了したら０に戻すという処理が独特です。
+再帰部分で、downに１を代入して、再帰が終了したら０に戻すという処理を追加しました。
 ここはいずれ分かるようになります。
 
 ```
@@ -160,7 +166,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 
 declare -i COUNT=0;     # カウンター
 
-function N-Queen02(){
+function N-Queens02(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;       # 再帰に必要
@@ -176,14 +182,14 @@ function N-Queen02(){
       aBoard[$row]="$col";
       if (( down[col]==0 ));then
         down[$col]=1;
-        N-Queen02 "$((row+1))" "$size" ;
+        N-Queens02 "$((row+1))" "$size" ;
         down[$col]=0;
       fi
     }
   fi
 }
 #
-N-Queen02 0 5;    # 縦と横に一つだけのクイーンを許す
+N-Queens02 0 5;    # 縦と横に一つだけのクイーンを許す
 ```
 
 実行結果は以下のとおりです。
@@ -312,12 +318,12 @@ N-Queen02 0 5;    # 縦と横に一つだけのクイーンを許す
 
 １２０ステップというのは、
 ５＊４＊３＊２＊１＝１２０
-という計算方式で求められることも説明しました。
+という計算方式で求められます。
 上記を「５！」と表記します。
 いわゆる　Ｎ！ですね。
 
-## バックトラック
 
+## バックトラック
 ブルートフォースは、すべてのパターンを出力してから、解となりうるかを判定します。
 具体的に言うと、解の候補となるリストから、解となりうるかをチェックします。
 
@@ -329,32 +335,69 @@ N-Queens01で行った、
 ５＾５
 いわゆる　Ｎ＾Ｎですね。
 
-こちらは、「ブルートフォース」といいます。
 （実際に解の数は数えませんでしたが）
 
+前回記事では、ブルートフォースよりも少しマシな方法として
+縦と横の効きを考慮した手法を紹介しました。
 
-少しマシな方法として紹介した
-縦と横の効きを考慮した
-N-Queens02で行った ５＊４＊３＊２＊１＝１２０
+N-Queens02で行った 
+５＊４＊３＊２＊１＝１２０
 は、５！
 いわゆる　Ｎ！ですね。
 
-こちらはすこし工夫しているのでバックトラックといいます。
-バックトラックは日本語では「総当り方」と言われています
-（が、解の数は数えませんでしたね）バックトラックの手前、いわゆる準備編だと考えてください。
+
+バックトラックは Ｎ！です。
+
+バックトラックは日本語では「総当り法」と言われています
+（しつこいようですが、解の数までは数えませんでした）
+N-Queens02.sh はバックトラックの手前、いわゆる準備編だと考えてください。
 
 バックトラックは、パターンを生成し終わってからチェックを行うのではなく、途中で制約を満たさないことが明らかな場合は、 それ以降のパターン生成を行わない方法です。
 
-では、N-Queens03はまさに「バックトラック」です。
+今回ご紹介する、N-Queens03.shはまさに「バックトラック」です。
 さらにこれまでと違って「解」がでています。
 
+完全なブルートフォースである N-Queens01.sh はステップ数が３１２５でした。
+また、縦と横の効きを考慮した N-Queens02.sh はステップ数が１２０でした。
+ステップ数が小さければそれだけ処理が高速であることを示します。
+
+前回の、縦と横の効きに対応した処理部分は以下の通りです。
+downを使って縦と横を判定しています。
+```
+      if (( down[col]==0 ));then
+        down[$col]=1;
+        N-Queen02 "$((row+1))" "$size" ;
+        down[$col]=0;
+      fi
+```
+
+今回の斜めの効きは、rightとleftを使います。
+斜めを判定するために、`row`や`col`、`size` の値を使っています。
+`down` に加えて `right` と `left` が加わっているのが見て取れると思います。
+じっくり考えると分かることなのですが、今は読み飛ばして頂いても構いません。
+
+``` bash
+      if (( down[col]==0 && right[row-col+size-1]==0 && left[row+col]==0));then
+        down[$col]=1;
+        right[$row-$col+($size-1)]=1;
+        left[$row+$col]=1;
+
+        N-Queen03 "$((row+1))" "$size" ;
+
+        down[$col]=0;
+        right[$row-$col+($size-1)]=0;
+        left[$row+$col]=0;
+      fi
+```
+
+ではソースを見てみましょう。
 バックトラックのソースは以下のとおりです。
 ``` bash:N-Queens03.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
 
-function N-Queen03(){
+function N-Queens03(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;       # 再帰に必要
@@ -374,7 +417,7 @@ function N-Queen03(){
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
         left[$row+$col]=1;
-        N-Queen03 "$((row+1))" "$size" ;
+        N-Queens03 "$((row+1))" "$size" ;
         down[$col]=0;
         right[$row-$col+($size-1)]=0;
         left[$row+$col]=0;
@@ -383,7 +426,7 @@ function N-Queen03(){
   fi
 }
 
-N-Queen03 0 5;
+N-Queens03 0 5;
 ```
 
 
@@ -404,144 +447,30 @@ bash-3.2$ bash N-Queens03.sh
 bash-3.2$
 ```
 
-前回の、縦と横の効きに対応した処理は以下の通りでした。
-downを使って縦と横を判定しています。
-```
-      if (( down[col]==0 ));then
-        down[$col]=1;
-        N-Queen02 "$((row+1))" "$size" ;
-        down[$col]=0;
-      fi
-```
+次回は、Ｎ５だけでなく、Ｎが一つ一つ増えていき処理が進み進捗する経過が見える「進捗表示テーブル」の作成を紹介します。
 
-今回の斜めの効きは、rightとleftを使います。
-斜めを判定するために、`row`や`col`、`size`を使っていますね。
-これは、じっくり考えると分かることなのですが、いまは読み飛ばしても構いません。
-
-
-``` bash
-      if (( down[col]==0 && right[row-col+size-1]==0 && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-
-        N-Queen03 "$((row+1))" "$size" ;
-
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-```
-
-
-## Ｎを徐々に増やしていく処理に変更
-
-では、すこし処理に手を加えて、処理結果を見やすく修正します。
-まず、ソースは以下のとおりです。
-
-
-``` bash:N-Queens04.sh
-#!/usr/bin/bash
-
-declare -i TOTAL=0;     # カウンター
-declare -i UNIQUE=0;    # ユニークユーザー
-
-function N-Queen04(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=0;       # 再帰に必要
-  if (( row==size ));then
-    ((TOTAL++));
-    # echo -n "$COUNT:"
-    # for(( i=0;i<size;i++ )){
-    #   echo -n "${aBoard[i]} "
-    # }
-    # echo "";
-  else
-    for(( col=0;col<size;col++ )){
-      aBoard[$row]="$col";
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-        N-Queen04 "$((row+1))" "$size" ;
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-    }
-  fi
-}
-#
-function N-Queen(){
-  local -i max=15;
-  local -i min=4;
-  local -i N="$min";
-  local startTime=0;
-	local endTime=0;
-	local hh=mm=ss=0; 
-  echo " N:        Total       Unique        hh:mm:ss" ;
-  for((N=min;N<=max;N++)){
-    TOTAL=0;
-    UNIQUE=0;
-    startTime=$(date +%s);# 計測開始時間
-    N-Queen04 0 "$N";
-    endTime=$(date +%s); 	# 計測終了時間
-    ss=$((endTime-startTime));# hh:mm:ss 形式に変換
-    hh=$((ss/3600));
-    ss=$((ss%3600));
-    mm=$((ss/60));
-    ss=$((ss%60));
-    printf "%2d:%13d%13d%10d:%.2d:%.2d\n" $N $TOTAL $UNIQUE $hh $mm $ss ;
-  } 
-}
-#
-N-Queen
-```
-
-実行結果は以下のとおりです。
-```
-bash-3.2$ bash N-Queens04.sh
- N:        Total       Unique        hh:mm:ss
- 4:            2            0         0:00:00
- 5:           10            0         0:00:00
- 6:            4            0         0:00:00
- 7:           40            0         0:00:01
- 8:           92            0         0:00:00
- 9:          352            0         0:00:02
-10:          724            0         0:00:11
-bash-3.2$
-```
-
-おー、Ｎが増えていくと解が出力されて見やすいですね。
-さらに右側には処理時間も出力しています。
-
-次回は、「制約フラグ」について説明します。
-お楽しみに。
-
-
-
-次の記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+お楽しみに！
 
 
 この記事
 N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-前の記事
+
+過去記事
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（４）バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-過去の記事
 N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）
+N-Queens問題：Ｎクイーン問題（１）について
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
+
 
 
 

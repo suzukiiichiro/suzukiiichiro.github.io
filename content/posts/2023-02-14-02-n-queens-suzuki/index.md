@@ -24,7 +24,7 @@ https://github.com/suzukiiichiro/N-Queens
 
 
 過去記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
@@ -1360,7 +1360,7 @@ bash-3.2$
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 
 過去記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/

@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（４）制約フラグ"
+title: "Ｎクイーン問題（５）進捗表示テーブルの作成"
 date: 2023-03-06T22:31:15+09:00
 draft: false
 authors: suzuki
@@ -15,7 +15,7 @@ tags:
 ---
 
 この記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 
 過去記事
@@ -32,15 +32,100 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 https://github.com/suzukiiichiro/N-Queens
 
 
-## 制約フラグ
+## Ｎを徐々に増やしていく進捗表示テーブルの作成
+今は、ソースの中でパラメータを渡す形でＮの値を `5` だったり `8` だったりに手動で数値を置き換えています。
+`4` の処理が終わったら自動的に `5` に移り、その後、6,7,8....と処理が進んでいくと便利です。
 
+まず、ソースは以下のとおりです。
+``` bash:N-Queens04.sh
+#!/usr/bin/bash
 
+declare -i TOTAL=0;     # カウンター
+declare -i UNIQUE=0;    # ユニークユーザー
+' :
+エイトクイーン バックトラック
+';
+function N-Queens04(){
+  local -i row="$1";
+  local -i size="$2";
+  local -i col=0;       # 再帰に必要
+  if (( row==size ));then
+    ((TOTAL++));
+    # echo -n "$COUNT:"
+    # for(( i=0;i<size;i++ )){
+    #   echo -n "${aBoard[i]} "
+    # }
+    # echo "";
+  else
+    for(( col=0;col<size;col++ )){
+      aBoard[$row]="$col";
+      if (( down[col]==0 
+        && right[row-col+size-1]==0
+        && left[row+col]==0));then
+        down[$col]=1;
+        right[$row-$col+($size-1)]=1;
+        left[$row+$col]=1;
+        N-Queens04 "$((row+1))" "$size" ;
+        down[$col]=0;
+        right[$row-$col+($size-1)]=0;
+        left[$row+$col]=0;
+      fi
+    }
+  fi
+}
+#
+function NQ(){
+  local -i max=15;
+  local -i min=4;
+  local -i N="$min";
+  local startTime=0;
+	local endTime=0;
+	local hh=mm=ss=0; 
+  echo " N:        Total       Unique        hh:mm:ss" ;
+  for((N=min;N<=max;N++)){
+    TOTAL=0;
+    UNIQUE=0;
+    startTime=$(date +%s);# 計測開始時間
+    N-Queens04 0 "$N";
+    endTime=$(date +%s); 	# 計測終了時間
+    ss=$((endTime-startTime));# hh:mm:ss 形式に変換
+    hh=$((ss/3600));
+    ss=$((ss%3600));
+    mm=$((ss/60));
+    ss=$((ss%60));
+    printf "%2d:%13d%13d%10d:%.2d:%.2d\n" $N $TOTAL $UNIQUE $hh $mm $ss ;
+  } 
+}
+#
+NQ;
+```
 
+実行結果は以下のとおりです。
+```
+bash-3.2$ bash N-Queens04.sh
+ N:        Total       Unique        hh:mm:ss
+ 4:            2            0         0:00:00
+ 5:           10            0         0:00:00
+ 6:            4            0         0:00:00
+ 7:           40            0         0:00:01
+ 8:           92            0         0:00:00
+ 9:          352            0         0:00:02
+10:          724            0         0:00:11
+:
+:
+bash-3.2$
+```
+
+おー、Ｎが増えていくと解が出力されて見やすいですね。
+さらに右側には処理時間も出力しています。
+
+次回は、「制約フラグ」について説明します。
+お楽しみに。
 
 
 
 この記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
+N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 
 
