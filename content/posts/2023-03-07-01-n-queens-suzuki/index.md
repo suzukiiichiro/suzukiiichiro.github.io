@@ -75,7 +75,50 @@ https://github.com/suzukiiichiro/N-Queens
       fi
 ```
 
+C言語に慣れ親しんでいる人は数値の「０」はFalse、「１」はTrueという理解だと思います。
+NOの０（ゼロ）とおぼえましょう。
 
+で、変数は１がTrueなので、
+
+```
+if (( down ));then
+
+fi
+```
+
+これは、
+```
+#  (( down )) と同じ
+if (( down==1 ));then
+
+fi
+```
+と同じことなのです。
+ですので、
+```
+if (( !down ));then
+
+fi
+```
+これは、
+```
+#  ((!down )) と同じ
+if (( down==0 ));then
+
+fi
+```
+と同じです。
+
+
+
+```
+      if (( down[dx]==0 && right[rx]==0 && left[lx]==0));then
+```
+は、
+```
+      if (( !down[dx] && !right[rx] && !left[lx]));then
+```
+と、同じなのです、ここまでを以下のソースにまとめました
 ソース全体は以下のとおりです。
 ``` bash:N-Queens05.sh
 #!/usr/bin/bash
@@ -105,7 +148,7 @@ function N-Queens05(){
       dx=$col;
       rx=$((row-col+size-1));
       lx=$((row+col));
-      if (( down[dx]==0 && right[rx]==0 && left[lx]==0));then
+      if (( !down[dx] && !right[rx] && !left[lx]));then
         down[$dx]=1; right[$rx]=1; left[$lx]=1;
         N-Queens05 "$((row+1))" "$size" ;
         down[$dx]=0; right[$rx]=0; left[$lx]=0;
@@ -155,6 +198,8 @@ bash-3.2$
 ```
 
 だんだん、それっぽくなってきましたね。
+次もお楽しみに！
+
 
 
 この記事
