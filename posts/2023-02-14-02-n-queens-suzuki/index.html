@@ -1,14 +1,14 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（２）ブルートフォース｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/><meta property="og:title" content="Ｎクイーン問題（２）ブルートフォース｜NLP"><meta property="og:description" content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-02-14T14:56:53+09:00"><meta property="article:modified_time" content="2023-03-07T11:22:27+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（２）ブルートフォース｜NLP"><meta name=twitter:description content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（２）ブルートフォース","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"],"datePublished":"2023-02-14T14:56:53+09:00","dateModified":"2023-03-07T11:22:27+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（２）ブルートフォース","item":"https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（２）ブルートフォース｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/><meta property="og:title" content="Ｎクイーン問題（２）ブルートフォース｜NLP"><meta property="og:description" content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-02-14T14:56:53+09:00"><meta property="article:modified_time" content="2023-03-07T13:09:37+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（２）ブルートフォース｜NLP"><meta name=twitter:description content="前回の記事 N-Queens問題：Ｎクイーン問題（１） https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ エイト・クイーンのソース置き場 BashもJavaもPythonも！ https://github.com/suzukiiichiro/N-Queens 過去記事 N-Que"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（２）ブルートフォース","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/shellscript.jpg"],"datePublished":"2023-02-14T14:56:53+09:00","dateModified":"2023-03-07T13:09:37+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（２）ブルートフォース","item":"https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_151>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li><li><a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>Linux</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a><li><span class=breadcrumb-item>Ｎクイーン問題（２）ブルートフォース</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2023.02.14</time>
 <time class="article-time--item article-time--updatedate">2023.03.07</time>
-<time class="article-time--item article-time--reading">読了時間: 19分</time></div></header><h1 class=article-title>Ｎクイーン問題（２）ブルートフォース</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
+<time class="article-time--item article-time--reading">読了時間: 20分</time></div></header><h1 class=article-title>Ｎクイーン問題（２）ブルートフォース</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
 <a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ｎクイーンについて簡単に>Ｎクイーンについて簡単に</a></li><li><a href=#効き筋について>効き筋について</a></li><li><a href=#クイーンの動きを１手ずつ見てみます>クイーンの動きを１手ずつ見てみます</a></li><li><a href=#ボードの動きを数値で表す>ボードの動きを数値で表す</a></li><li><a href=#挙動をプログラムに置き換えてみます>挙動をプログラムに置き換えてみます。</a></li><li><a href=#速度の最適化>速度の最適化</a></li><li><a href=#ｎが５のロジックの計算方法>Ｎが５のロジックの計算方法</a></li><li><a href=#８ｘ８の出力結果>８ｘ８の出力結果</a></li><li><a href=#ｎが８のロジックの計算方法>Ｎが８のロジックの計算方法</a></li><li><a href=#ひとこと>ひとこと</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ｎクイーンについて簡単に>Ｎクイーンについて簡単に</a></li><li><a href=#効き筋について>効き筋について</a></li><li><a href=#クイーンの動きを１手ずつ見てみます>クイーンの動きを１手ずつ見てみます</a></li><li><a href=#処理完了直前の状態から>処理完了直前の状態から</a></li><li><a href=#ボードの動きを数値で表す>ボードの動きを数値で表す</a></li><li><a href=#挙動をプログラムに置き換えてみます>挙動をプログラムに置き換えてみます。</a></li><li><a href=#forループ>forループ</a></li><li><a href=#外側colのforループの作成>外側(col)のforループの作成</a></li><li><a href=#内側rowのforループの作成>内側(row)のforループの作成</a></li><li><a href=#再帰を使って書いてみます>再帰を使って書いてみます</a></li><li><a href=#重要なこと>重要なこと</a></li><li><a href=#echo-コマンドで２つの便利><code>echo</code> コマンドで２つの便利</a></li><li><a href=#カウンターの設置>カウンターの設置</a></li><li><a href=#インクリメントの仕方>インクリメントの仕方</a></li><li><a href=#速度の最適化>速度の最適化</a></li><li><a href=#echo-を抑制する><code>echo</code> を抑制する</a></li><li><a href=#ｎ５の計算方法>Ｎ５の計算方法</a></li><li><a href=#８ｘ８の出力結果>８ｘ８の出力結果</a></li><li><a href=#ｎ８の計算方法>Ｎ８の計算方法</a></li><li><a href=#ひとこと>ひとこと</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><p>前回の記事<br>N-Queens問題：Ｎクイーン問題（１）<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/</a></p><p>エイト・クイーンのソース置き場 BashもJavaもPythonも！<br><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p><p>過去記事<br>N-Queens問題：Ｎクイーン問題（５）制約フラグ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（４）バックトラック<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（３）バックトラック準備編<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（２）ブルートフォース<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１）について<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/</a></p><h2 id=ｎクイーンについて簡単に>Ｎクイーンについて簡単に</h2><p>ではさっそくＮクイーン問題を考えてみましょう。<br>この章では、可能性のあるすべての解を体系的に数え上げる方法を考えてみます。</p><p>こういった「ちからまかせ」に数え上げる方法を、ブルートフォースといいます。</p><p>今回は、Ｎクイーンを「ブルートフォース」で考えてみるということになります。</p><h2 id=効き筋について>効き筋について</h2><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |---|-*-|---|-*-|---|0
@@ -45,7 +45,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|---|4
   +-------------------+
-</code></pre><p>ということで、エイト・クイーンは、<br>１．縦に一つだけのクイーン<br>２．横に一つだけのクイーン<br>３．斜めに一つだけのクイーン<br>の３つを満たしている必要があります。</p><p>とはいえ、この章では、「縦の効き筋」のことだけを考えて作っていきます。</p><p>ですので「横の効き筋」と「斜めの効き筋」のことは一旦忘れてください。</p><h2 id=クイーンの動きを１手ずつ見てみます>クイーンの動きを１手ずつ見てみます</h2><p>では、まずは<code>0,0</code>のクイーンをひとつ下に移動します。<br><code>col0,row0</code>のクイーンは<code>col0,row1</code>に移動しました。</p><pre tabindex=0><code>        column(列)
+</code></pre><p>ということで、エイト・クイーンは、<br>１．縦に一つだけのクイーン<br>２．横に一つだけのクイーン<br>３．斜めに一つだけのクイーン<br>の３つを満たしている必要があります。</p><p>とはいえ、この章では、「縦の効き筋」のことだけを考えて作っていきます。</p><p>ですので「横の効き筋」と「斜めの効き筋」のことは一旦忘れてください。</p><h2 id=クイーンの動きを１手ずつ見てみます>クイーンの動きを１手ずつ見てみます</h2><p>では、まずはクイーンを動かしてみましょう。<br>プログラムの動きに合わせて説明していきたいと思います。</p><p>第一手目、<code>0,0</code>のクイーンをひとつ下に移動します。<br><code>col0,row0</code>のクイーンは<code>col0,row1</code>に移動しました。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|-Q-|---|0
   +-------------------+
@@ -93,7 +93,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|-Q-|4
   +-------------------+
-</code></pre><p>ここで<code>col0,row4</code>のクイーンは一番下まできたわけです。<br>こうなると<code>col0,row4</code>のクイーンは最下部へ到達し、もう下にはいけなくなりました。<br>ここで桁上りの処理で、col0列のクイーンは<code>col0,row0</code>へ戻り、<code>col1,row0</code>のクイーンがひとつ下に移動します。<br>図で表すと以下のようになります。</p><pre tabindex=0><code>        column(列)
+</code></pre><p>ここで<code>col0,row4</code>のクイーンは一番下の最下部まで到達し、もうこれ以上下に行けなくなりました。</p><p>ここで桁上りの処理で、col0列のクイーンは<code>col0,row0</code>へ戻り、<code>col1,row0</code>のクイーンがひとつ下に移動します。</p><p>図で表すと以下のようになります。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|---|-Q-|0
   +-------------------+
@@ -153,7 +153,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|-Q-|4
   +-------------------+
-</code></pre><p>こうなると<code>col0,row4</code>のクイーンはまた<code>col0,row0</code>へ戻り、<code>col1,row1</code>のクイーンもひとつ下におります。<br>図で表すと以下のようになります。<br><code>col0,row4</code>のクイーンは<code>col0,row0</code>へ戻り、col1列のクイーンは<code>col1,row2</code>へ移動します。</p><pre tabindex=0><code>        column(列)
+</code></pre><p>ここで先程と同様、<code>col0,row4</code>のクイーンは<code>col0,row0</code>へ戻り、col1列のクイーンは<code>col1,row2</code>へ移動します。</p><p>図で表すと以下のようになります。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|---|-Q-|0
   +-------------------+
@@ -165,7 +165,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|---|4
   +-------------------+
-</code></pre><p>クイーンは、最下部へ到達すると、最上部へ戻り、隣のクイーンがひとつ下に降ります。<br>以下の場合はどうなりますか？</p><pre tabindex=0><code>        column(列)
+</code></pre><p>クイーンは、最下部へ到達すると、最上部へ戻り、左隣のクイーンがひとつ下に降ります。</p><p>さて、以下の場合はどうなりますか？</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|---|---|0
   +-------------------+
@@ -177,7 +177,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|-Q-|-Q-|4
   +-------------------+
-</code></pre><p>この場合は、<code>col1,row4</code>のクイーンと、<code>col0,row4</code>のクイーンは最上部にもどり、<code>col2</code>列のクイーンが<code>col2,row1</code>へ移動します。<br>図で表すと以下のとおりです。</p><pre tabindex=0><code>        column(列)
+</code></pre><p>この場合は、<code>col1,row4</code>のクイーンと、<code>col0,row4</code>のクイーンは最上部にもどります。<br>同時に、<code>col2</code>列のクイーンが<code>col2,row1</code>へ移動します。</p><p>図で表すと以下のとおりです。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|---|-Q-|-Q-|0
   +-------------------+
@@ -189,7 +189,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|---|4
   +-------------------+
-</code></pre><p>こうしたことからわかることは、<code>col0</code>列のクイーンは最も反復が多く、次に<code>col1</code>列目、<code>col2</code>列目、<code>col3</code>列目のクイーンが忙しく動くことがわかります。</p><p>処理が終わる直前の状態として以下の場合は考えてみます。<br><code>col4</code>列目、<code>col3</code>列目、<code>col2</code>列目、<code>col1</code>列目のクイーンが最下部にあるとします。<br><code>col0</code>列目のクイーンが順を追って最下部へ向かって移動を繰り返します。</p><pre tabindex=0><code>        column(列)
+</code></pre><p>このことからわかるように、<code>col0</code>列のクイーンは最も反復が多く、次に<code>col1</code>列目、<code>col2</code>列目、<code>col3</code>列目のクイーンが忙しく動くことがわかります。</p><p>最下部に到達したら、最上部へ戻り、左隣のクイーンを一つ下げる。という処理を繰り返し行います。</p><h2 id=処理完了直前の状態から>処理完了直前の状態から</h2><p>では、処理が終わる直前の状態として以下の場合は考えてみましょう。</p><p><code>col4</code>列目、<code>col3</code>列目、<code>col2</code>列目、<code>col1</code>列目のクイーンが最下部にあるとします。</p><p><code>col0</code>列目のクイーンが順を追って最下部へ向かって移動を繰り返します。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |---|---|---|---|-Q-|0
   +-------------------+
@@ -213,7 +213,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |-Q-|-Q-|-Q-|-Q-|-Q-|4
   +-------------------+
-</code></pre><h2 id=ボードの動きを数値で表す>ボードの動きを数値で表す</h2><p>プログラムで処理するので、ボードの盤面を数字で表すことにします。<br>例えば下のボード画面は、<code>col4</code> <code>col3</code> <code>col2</code> <code>col1</code> <code>col0</code> の row の場所を使って<br><code>0,0,0,0,0</code> とします。</p><pre tabindex=0><code>0,0,0,0,0
+</code></pre><h2 id=ボードの動きを数値で表す>ボードの動きを数値で表す</h2><p>プログラムで処理するので、ボードの盤面を数字で表すことにします。</p><p>例えば下のボード画面は、<br><code>col4</code> <code>col3</code> <code>col2</code> <code>col1</code> <code>col0</code><br>の row の場所を使って</p><p><code>0,0,0,0,0</code> とします。</p><pre tabindex=0><code>0,0,0,0,0
 
         column(列)
    _4___3___2___1___0_
@@ -283,11 +283,11 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|-Q-|-Q-|4
   +-------------------+
-</code></pre><p><code>0,0,0,4,4</code>となります。<br>処理終了直前のボード画面が以下の通りだったとします。</p><pre tabindex=0><code>0,4,4,4,4
+</code></pre><p><code>0,0,0,4,4</code>となります。</p><p>また、処理終了直前のボード画面が以下の通りだったとします。</p><pre tabindex=0><code>4,4,4,4,0
 
         column(列)
    _4___3___2___1___0_
-  |-Q-|---|---|---|---|0
+  |---|---|---|---|-Q-|0
   +-------------------+
   |---|---|---|---|---|1
   +-------------------+ 
@@ -295,9 +295,9 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+ 
   |---|---|---|---|---|3
   +-------------------+
-  |---|-Q-|-Q-|-Q-|-Q-|4
+  |-Q-|-Q-|-Q-|-Q-|---|4
   +-------------------+
-</code></pre><p><code>0,4,4,4,4</code> ですね。<br>処理が終了した段階で<code>4,4,4,4,4</code> となります。</p><pre tabindex=0><code>0,4,4,4,4
+</code></pre><p><code>4,4,4,4,0</code> ですね。</p><p>以下は、処理が終了した状態で<code>4,4,4,4,4</code> となります。</p><pre tabindex=0><code>4,4,4,4,4
 
         column(列)
    _4___3___2___1___0_
@@ -311,35 +311,44 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |-Q-|-Q-|-Q-|-Q-|-Q-|4
   +-------------------+
-</code></pre><h2 id=挙動をプログラムに置き換えてみます>挙動をプログラムに置き換えてみます。</h2><p>(※)この章の挙動は、各行に１個の王妃を配置する組み合わせを、列挙するだけで、Ｎクイーン問題を解いているわけではありません。<br>なんと言ってもエイト・クイーンにある３つのルール<br>１．縦列に一つだけのクイーン<br>２．横列に一つだけのクイーン<br>３．斜め列に一つだけのクイーン</p><p>の１を満たしているに過ぎません。</p><p>ということで、気を取り直して<br><code>NQueen.sh</code> ファイルを作成してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:NQueen.sh data-lang=bash:NQueen.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</code></pre><h2 id=挙動をプログラムに置き換えてみます>挙動をプログラムに置き換えてみます。</h2><p>(※)この章の挙動は、各行に１個のクイーンを配置する組み合わせを列挙するだけで、Ｎクイーン問題を解いているわけではありません。</p><p>というのも、今回の説明では、<br>そもそもエイト・クイーンにある３つのルール</p><p>１．縦列に一つだけのクイーン<br>２．横列に一つだけのクイーン<br>３．斜め列に一つだけのクイーン</p><p>の１を満たしているに過ぎません。</p><p>ということで、気を取り直して<br><code>N-Queens01.sh</code> ファイルを作成してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl> : <span class=c1># まだなにもない</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><p>ファイルを実行するとファイル最下部の <code>NQ</code>が実行され、<code>function NQ()</code>が呼び出されます。<br>現在の<code>function NQ()</code>は<code>echo</code>と <code>N-Queen01</code>関数の呼び出しがあるだけです。</p><pre tabindex=0><code>  N-Queen01 0 5;
-</code></pre><p>にあるとおり、<code>N-Queen01()</code>関数に、２つのパラメータ <code>0 8</code> を渡しています。</p><p><code>function N-Queen01()</code>関数の中身はまだなにもありませんが、渡された２つのパラメータを、<code>N-Queen01()</code>関数の冒頭で明示的に変数へ代入しています。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span></code></pre></div><p>ファイルを実行するとファイル最下部の <code>NQ</code>が実行され、<code>function NQ()</code>が呼び出されます。</p><p>現在の<code>function NQ()</code>は<code>echo</code>と <code>N-Queens01()</code>関数の呼び出しがあるだけです。</p><pre tabindex=0><code>  N-Queens01 0 5;
+</code></pre><p><code>N-Queens01()</code>関数に、２つのパラメータ <code>0</code> と <code>8</code> の２つのパラメータ（値）を渡しています。</p><p><code>function N-Queens01()</code>関数を追記します。<br>さっそく <code>NQ()</code> から <code>N-Queens01()</code> へ渡した２つのパラメータを、<code>N-Queen01()</code>関数の冒頭で明示的に変数へ代入しましょう。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
-</span></span></code></pre></div><p>２つの変数 <code>min</code> と <code>size</code> は、この関数でしか使わないローカル変数なので、明示的に<code>local</code>としておきます。<br><code>local</code> の後ろに続く <code>-i</code> は、代入される値が数値であることを定義しています。<br>関数パラメータの <code>$1</code> や <code>$2</code> といった変数は、関数の冒頭で必ずダブルクォーテーションで囲みましょう。<br>ここまでのソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:NQueen.sh data-lang=bash:NQueen.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><p>変数前についている <code>local</code> は、この関数でのみ有効な変数であることを示しており、<code>-i</code> は、変数に代入される値が「整数」であることを明示的に指定しています。</p><p>関数パラメータの <code>$1</code> や <code>$2</code> といった変数は、関数に渡された変数の順番で、</p><pre tabindex=0><code>  N-Queens01 0 5;
+</code></pre><p>１つ目のパラメータは <code>0</code> なので <code>$1</code>に、２つ目のパラメータは <code>5</code> なので、<code>$2</code> として関数に渡されます。</p><p>関数内で、<code>$1</code> <code>$2</code> としてプログラムを表記しても動作しますが、ソースの可読性（読みやすさ）が落ちてしまいます。</p><p>関数の冒頭で、きちんとわかりやすい変数名に代入してあげることが望ましいです。</p><p>また、<code>$1</code> や <code>$2</code>の代入は、必ずダブルクォーテーションで囲みましょう。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><p>ここまでのソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># ブルートフォース　力まかせ探索</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><p>次は、<code>for</code>ループ部分についてです。<br>もっとも激しく動いていたクイーンは<code>col0</code>列のクイーンでした。<br>逆に、もっとも動きの小さなクイーンは<code>col4</code>列のクイーンでしたね。</p><pre tabindex=0><code>        column(列)
+</span></span></code></pre></div><h2 id=forループ>forループ</h2><p>次は、<code>for</code>ループ部分についてです。<br>最も激しく動いていたクイーンは <code>col0</code> 列のクイーンでした。<br>逆に、もっとも動きの小さなクイーンは <code>col4</code> 列のクイーンでした。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|-Q-|---|0
   +-------------------+
@@ -351,15 +360,25 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
   +-------------------+
   |---|---|---|---|---|4
   +-------------------+
-</code></pre><p>この場合、２つの<code>for</code>ループで表現します。<br>外側の<code>for</code>ループは<code>col</code>の横移動を表します。<br>内側の<code>for</code>ループは<code>row</code>の縦移動を表すことにしましょう。</p><p>５ｘ５の５クイーンをプログラム化します。<br>外側の <code>for</code> ループは以下の通りとなります。<br><code>col0</code> 列目から順を追って<code>col1</code>，<code>col2</code>，<code>col3</code>，<code>col4</code> 列目までたどっていきます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>col&lt;size<span class=p>;</span>col++<span class=o>)){</span>
-</span></span><span class=line><span class=cl>    : <span class=c1># まだなにもない</span>
+</code></pre><p>こうしたクイーンの動きは、<br>この場合、２つの<code>for</code>ループで表現します。<br>外側の<code>for</code>ループは<code>col</code>を表します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span> 外側の col が ０から４へ順番に <span class=o>)){</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span><span class=o>((</span> 内側の row が０から４へ順番に <span class=o>)){</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
 </span></span><span class=line><span class=cl>  <span class=o>}</span>
-</span></span></code></pre></div><p>さて、デバッグも兼ねて動きをひとつひとつ見ていくことにします。<br>良い方法として、実行して処理のステップを順を追って目視で確認していきたいところです。</p><pre tabindex=0><code>read -p &#34;なにかキーを入力してください&#34;
-</code></pre><p>こんなコマンドをソースに埋め込んでみます。<br>さらにコメント部分に、ウォッチしておきたい変数を埋め込みます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:NQueen.sh data-lang=bash:NQueen.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl>  
+</span></span></code></pre></div><h2 id=外側colのforループの作成>外側(col)のforループの作成</h2><p>では、５ｘ５の５クイーンをプログラム化します。<br>最初に、<code>col</code>の動きを表す外側の <code>for</code> ループを作りましょう。</p><p><code>col0</code> 列目から順を追って<code>col1</code>，<code>col2</code>，<code>col3</code>，<code>col4</code> 列目までたどっていきます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=c1># sizeは `5`</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>col&lt;size<span class=p>;</span>col++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>    : <span class=c1># まだなにもない</span>
+</span></span><span class=line><span class=cl>    : <span class=c1># `col` は０から４へ順番に</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span></code></pre></div><p>さて、デバッグも兼ねて動きをひとつひとつ見ていくことにします。</p><p>おすすめの方法は、実行しながら処理のステップを順を追って、目視で確認することです。</p><p>以下のコマンドをプログラムに埋め込むことにします。</p><pre tabindex=0><code>read -p &#34;なにかキーを入力してください&#34;
+</code></pre><p>さらにコメント部分に、ウォッチしておきたい変数を埋め込みます。<br>具体的には以下のソースを見てください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:NQueens01.sh data-lang=bash:NQueens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>col&lt;size<span class=p>;</span>col++<span class=o>)){</span>
 </span></span><span class=line><span class=cl>     pos<span class=o>[</span><span class=nv>$min</span><span class=o>]=</span><span class=s2>&#34;</span><span class=nv>$col</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>     <span class=nb>read</span> -p <span class=s2>&#34;col: </span><span class=nv>$col</span><span class=s2> size: </span><span class=nv>$size</span><span class=s2> min: </span><span class=nv>$min</span><span class=s2>&#34;</span><span class=p>;</span>
@@ -367,20 +386,19 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># ブルートフォース　力まかせ探索</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash N-Queens.sh
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash N-Queens01.sh
 col: 0 size: 5 min: 0
 col: 1 size: 5 min: 0
 col: 2 size: 5 min: 0
 col: 3 size: 5 min: 0
 col: 4 size: 5 min: 0
 bash-3.2$
-</code></pre><pre tabindex=0><code>      外側のループ `col` は左方向へたどります。
-
-    ←　←　←　←　←
+</code></pre><p><code>col</code> が ０から４まで移動しているのが判りますね。</p><p>外側のループ <code>col</code> は左方向へ順にたどっていきます。</p><pre tabindex=0><code>    ←　←　←　←　←
 
         column(列)
    _4___3___2___1___0_
@@ -394,7 +412,7 @@ bash-3.2$
   +-------------------+
   |---|---|---|---|---|4
   +-------------------+
-</code></pre><p>次は<code>row</code>列の縦移動を作ってみます。<br>この動きは外側の<code>for</code>ループの内側にもう一つ<code>for</code>ループをおいて、クイーンの縦の動きを表現すると良さそうです。</p><pre tabindex=0><code>        column(列)
+</code></pre><h2 id=内側rowのforループの作成>内側(row)のforループの作成</h2><p>次は <code>row</code> の縦移動を作ってみます。</p><p>この動きは、外側の <code>for</code> ループの内側にもう一つ <code>for</code> ループを作成し、<code>col</code> ごとに <code>row</code> の動きを表現します。</p><p>クイーンの <code>row</code> (縦)の動きを表現すると以下の通りになります。</p><pre tabindex=0><code>        column(列)
    _4___3___2___1___0_
   |-Q-|-Q-|-Q-|-Q-|-Q-|0        ↓   
   +-------------------+             
@@ -406,9 +424,11 @@ bash-3.2$
   +-------------------+             
   |---|---|---|---|---|4        ↓  
   +-------------------+             
-</code></pre><p>ソースは以下のとおりです。<br><code>read -p</code> で出力を確認することができてとても便利です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens.sh data-lang=bash:N-Queens.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</code></pre><p>では、内側の <code>for</code> ループを追記したソースは以下のとおりです。</p><p><code>read -p</code> で出力を確認することができてとても便利です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>col&lt;size<span class=p>;</span>col++<span class=o>)){</span>
@@ -420,13 +440,13 @@ bash-3.2$
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash N-Queens.sh
-&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash N-Queens01.sh
+&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()
 col: 0 row: 0 size: 5 min: 0
 col: 0 row: 1 size: 5 min: 0
 col: 0 row: 2 size: 5 min: 0
@@ -453,9 +473,11 @@ col: 4 row: 2 size: 5 min: 0
 col: 4 row: 3 size: 5 min: 0
 col: 4 row: 4 size: 5 min: 0
 bash-3.2$
-</code></pre><p><code>row</code> が 0から4まで行きつくと、<code>col</code>が一つインクリメントしていく挙動が見て取れますね。</p><p>さて、<code>col0</code> が最下部へ達したら <code>col1</code> へ。その次は <code>col2</code> へと桁上りするプログラムを書いてみます。<br>細かいところがわからないと思いますが、ここでは気にせずに先に進んでください。<br>ここで大事なことは <code>col0</code> から桁上りしない　ということです。<br>なぜでしょうか。まず実行結果も含めてみてください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</code></pre><p><code>row</code> が ０から４まで順に進み、最下部まで到達したら、０に戻り同時に、左隣の <code>col</code> が一つインクリメントします。</p><h2 id=再帰を使って書いてみます>再帰を使って書いてみます</h2><p>ここまでの処理を再帰を使って書いてみます。<br>まずは、ソースを見てください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=k>for</span><span class=o>((</span><span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>col&lt;size<span class=p>;</span>col++<span class=o>)){</span>
@@ -466,14 +488,14 @@ bash-3.2$
 </span></span><span class=line><span class=cl>       <span class=o>}</span>
 </span></span><span class=line><span class=cl>       <span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>  <span class=c1># 改行</span>
 </span></span><span class=line><span class=cl>      <span class=k>else</span>
-</span></span><span class=line><span class=cl>        N-Queen01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>        N-Queens01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
 </span></span><span class=line><span class=cl>     <span class=k>fi</span>
 </span></span><span class=line><span class=cl>  <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
@@ -483,12 +505,14 @@ bash-3.2$
  0  0  0  0  3
  0  0  0  0  4
 bash-3.2$
-</code></pre><p><code>col0</code> の処理で終わってしまっています。<br>この理由は再帰処理に使われる変数の定義が原因なのです。<br>以下の２行を関数の冒頭に加えるだけで動くようになります。</p><pre tabindex=0><code>  local -i col=0;         # 再帰に必要
+</code></pre><p>あれ？<br><code>col0</code> の処理で終わってしまっていますね。<br><code>col</code>が左に桁上りできずにいるようです。</p><p>この理由は、再帰処理に使われる変数の定義が原因なのです。<br>以下の２行を関数の冒頭に加えるだけで動くようになります。</p><pre tabindex=0><code>  local -i col=0;         # 再帰に必要
   local -i row=0;         # 再帰に必要
-</code></pre><p>ここも少しだけ言及しておきます。</p><pre tabindex=0><code>        N-Queen01 &#34;$((min+1))&#34; &#34;$size&#34;; 
-</code></pre><p><code>$((min+1))</code> の部分はインクリメントしているわけですが、<code>$((min++))</code> ではきちんと処理はなされません。<br>明示的に <code>min+1</code> とする必要があります。<br>再帰に関していくつか注意しなければいけないこともありますが、まずは動かしてみて、自分が自分を呼び出すときに <code>min+1</code> のように一つ値を加算して、<code>min==size-1</code> のように基底条件を<br>わすれずに添えることを忘れないでください。</p><p>上記のことを含めたソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens.sh data-lang=bash:N-Queens.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
-</span></span></span><span class=line><span class=cl><span class=cp></span>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</code></pre><h2 id=重要なこと>重要なこと</h2><pre tabindex=0><code>        N-Queen01 &#34;$((min+1))&#34; &#34;$size&#34;; 
+</code></pre><p><code>$((min+1))</code></p><p>の部分はインクリメントしているわけですが、</p><p><code>$((min++))</code></p><p>では動きません。<br>明示的に <code>min+1</code> とする必要があります。</p><p>あと、<code>min==size-1</code> といった基底条件を忘れずに。<br>上記のことを含めたソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>         <span class=c1># 再帰に必要</span>
@@ -502,14 +526,14 @@ bash-3.2$
 </span></span><span class=line><span class=cl>       <span class=o>}</span>
 </span></span><span class=line><span class=cl>       <span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>  <span class=c1># 改行</span>
 </span></span><span class=line><span class=cl>      <span class=k>else</span>
-</span></span><span class=line><span class=cl>        N-Queen01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>        N-Queens01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
 </span></span><span class=line><span class=cl>     <span class=k>fi</span>
 </span></span><span class=line><span class=cl>  <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
@@ -544,14 +568,16 @@ bash-3.2$
  4  4  4  4  2 
  4  4  4  4  3 
  4  4  4  4  4 
-</code></pre><p>なんか動くようになりました!</p><p><code>echo -n</code> は、出力する際に改行を行わないオプションです。<br>連続して出力されますので、空白を含めています。<br><code>else</code> の直前で <code>echo ""</code> を使って改行を行っています。</p><p>さて、どのくらいのステップが必要となるのかも知りたいところです。<br>カウンターとして変数 <code>COUNT</code> をソースの冒頭で宣言してみます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>COUNT</span><span class=o>=</span>0<span class=p>;</span>
-</span></span></code></pre></div><p><code>if</code> 文の直後で <code>COUNT</code> をインクリメントしています。<br>インクリメントは ((COUNT++)) で実行できますが、実行の値を引き出すために、$((COUNT++)) と <code>$</code> をつけています。<br><code>echo -n</code> で出力しつつ $((COUNT++)) でインクリメントしているわけですが、分割して書くと以下のようになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>((</span>COUNT++<span class=o>))</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$COUNT</span><span class=s2>: &#34;</span><span class=p>;</span> 
-</span></span></code></pre></div><p>ソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens.sh data-lang=bash:N-Queens.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</code></pre><p>なんか動くようになりました!<br>すべてのコマが４となっていることから分かる通り、５つのクイーンは最下部へ到達して処理が終了していることが判ります。</p><h2 id=echo-コマンドで２つの便利><code>echo</code> コマンドで２つの便利</h2><p><code>echo -n</code> は、出力する際に改行を行わないオプションです。<br>連続して出力されますので、空白を含めています。</p><p><code>else</code> の直前で <code>echo ""</code> を使って改行を行っています。</p><h2 id=カウンターの設置>カウンターの設置</h2><p>さて、どのくらいのステップが必要となるのかも知りたいところです。<br>カウンター <code>COUNT</code> 変数をソースの冒頭で宣言してみます。<br>宣言するために <code>declare</code>を、<code>-i</code> は変数は整数を扱うことを明示的にしてしています。</p><p>カウンターは０で初期化しています。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>COUNT</span><span class=o>=</span>0<span class=p>;</span>
+</span></span></code></pre></div><h2 id=インクリメントの仕方>インクリメントの仕方</h2><p><code>if</code> 文の直後で <code>COUNT</code> をインクリメントしています。</p><p>インクリメントの方法は、<code>let</code>コマンドや<code>bc</code>コマンドなど色々ありますが、最も完結でわかりやすい <code>((COUNT++))</code> で実行できます。</p><p>改行無しで出力する理由ですが、次に続く、クイーンの位置情報を右に連結したいからです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>((</span>COUNT++<span class=o>))</span><span class=p>;</span>        <span class=c1># インクリメント</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$COUNT</span><span class=s2>: &#34;</span><span class=p>;</span> <span class=c1># 改行無しで出力</span>
+</span></span></code></pre></div><p>ここまでのソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>COUNT</span><span class=o>=</span>0<span class=p>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>         <span class=c1># 再帰に必要</span>
@@ -566,18 +592,18 @@ bash-3.2$
 </span></span><span class=line><span class=cl>       <span class=o>}</span>
 </span></span><span class=line><span class=cl>       <span class=nb>echo</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>  <span class=c1># 改行</span>
 </span></span><span class=line><span class=cl>      <span class=k>else</span>
-</span></span><span class=line><span class=cl>        N-Queen01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>        N-Queens01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span> 
 </span></span><span class=line><span class=cl>     <span class=k>fi</span>
 </span></span><span class=line><span class=cl>  <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()
 1:0 0 0 0 0 
 2:0 0 0 0 1 
 3:0 0 0 0 2 
@@ -631,11 +657,13 @@ bash-3.2$
 3123:4 4 4 4 2 
 3124:4 4 4 4 3 
 3125:4 4 4 4 4 
-</code></pre><h2 id=速度の最適化>速度の最適化</h2><p>やっぱり処理時間は速いに越したことはありませんね。<br>処理速度のボトルネックの多くはファイルや画面への出力になります。<br><code>echo -n</code> は 外側の <code>for</code> でも出力していますが、もっとも回転回数の多い内側の <code>for</code> でも使われています。<br>この２箇所の出力は画面に出力することなく、変数に入れるだけにして、内側の <code>for</code> を抜けたときにまとめて画面出力することが速度改善に繋がります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queen.sh data-lang=bash:N-Queen.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</code></pre><h2 id=速度の最適化>速度の最適化</h2><p>処理時間は速いに越したことありません。</p><p>プログラムの処理速度のボトルネックの多くは、ファイルの入出力処理部分、もしくは画面への出力です。</p><h2 id=echo-を抑制する><code>echo</code> を抑制する</h2><p><code>echo -n</code> は 外側の <code>for</code> でも出力していますが、もっとも回転回数の多い内側の <code>for</code> は外側の回数とは比較にならないほど多くの「出力」がされています。</p><p>この２箇所の出力は画面に出力することなく、変数に入れるだけにして、内側の <code>for</code> を抜けたときにまとめて画面出力することが速度改善に繋がります。</p><p>ソースは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:N-Queens01.sh data-lang=bash:N-Queens01.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>COUNT</span><span class=o>=</span>0<span class=p>;</span>       <span class=c1># カウンター</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>function</span> N-Queen01<span class=o>(){</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39; :
+</span></span></span><span class=line><span class=cl><span class=s1>ブルートフォース　力まかせ探索
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> N-Queens01<span class=o>(){</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>min</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> -i <span class=nv>col</span><span class=o>=</span>0<span class=p>;</span>         <span class=c1># 再帰に必要</span>
@@ -658,21 +686,33 @@ bash-3.2$
 </span></span><span class=line><span class=cl>       <span class=c1># -n オプションは付けずに改行付きで出力します。</span>
 </span></span><span class=line><span class=cl>       <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$sEcho</span><span class=s2>&#34;</span>     <span class=c1># flush出力</span>
 </span></span><span class=line><span class=cl>      <span class=k>else</span>
-</span></span><span class=line><span class=cl>        N-Queen01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span>  <span class=c1># 再帰</span>
+</span></span><span class=line><span class=cl>        N-Queens01 <span class=s2>&#34;</span><span class=k>$((</span>min+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span><span class=p>;</span>  <span class=c1># 再帰</span>
 </span></span><span class=line><span class=cl>     <span class=k>fi</span>
 </span></span><span class=line><span class=cl>  <span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> NQ<span class=o>(){</span>
-</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 5<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 5<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=o>}</span>
 </span></span><span class=line><span class=cl><span class=c1># </span>
 </span></span><span class=line><span class=cl>NQ<span class=p>;</span>
-</span></span></code></pre></div><h2 id=ｎが５のロジックの計算方法>Ｎが５のロジックの計算方法</h2><p>ここでＮが５の場合は３１２５ステップかかったところに着目しましょう。<br>このステップは計算で算出することが可能です。</p><p>５＊５＊５＊５＊５＝３１２５</p><p>Ｎ^５＝３１２５<br>ということになります。</p><h2 id=８ｘ８の出力結果>８ｘ８の出力結果</h2><p>参考までに８ｘ８の実行結果は以下のとおりです。<br>以下の部分を８とすればよいですね。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=c1># N-Queen01 0 5;</span>
-</span></span><span class=line><span class=cl>  N-Queen01 <span class=m>0</span> 8<span class=p>;</span>
-</span></span></code></pre></div><p>実行方法</p><pre tabindex=0><code>$ bash N-Queens.sh
-</code></pre><pre tabindex=0><code>&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queen01()
+</span></span></code></pre></div><p>今は、Ｎが５ですからそんなに変化はないかもしれません。<br>いずれ、Ｎが７，８、、、１５，１６・・・。<br>爆発的に処理が膨らまないうちに、色々工夫をしておいたほうが良さそうです。</p><h2 id=ｎ５の計算方法>Ｎ５の計算方法</h2><p>Ｎが５の時の実行結果終了部分をみてみると・・・</p><pre tabindex=0><code>:
+:
+:
+3117:4 4 4 3 1 
+3118:4 4 4 3 2 
+3119:4 4 4 3 3 
+3120:4 4 4 3 4 
+3121:4 4 4 4 0 
+3122:4 4 4 4 1 
+3123:4 4 4 4 2 
+3124:4 4 4 4 3 
+3125:4 4 4 4 4 
+</code></pre><p>Ｎ５の場合、３１２５ステップかかりました。<br>このステップは計算で算出することが可能です。</p><p>５＊５＊５＊５＊５＝３１２５<br>Ｎ^Ｎ＝３１２５</p><p>ということになります。</p><h2 id=８ｘ８の出力結果>８ｘ８の出力結果</h2><p>参考までに８ｘ８の実行結果は以下のとおりです。<br>以下の部分を８とすればよいですね。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=c1># N-Queens01 0 5;</span>
+</span></span><span class=line><span class=cl>  N-Queens01 <span class=m>0</span> 8<span class=p>;</span>
+</span></span></code></pre></div><p>実行方法</p><pre tabindex=0><code>$ bash N-Queens01.sh
+</code></pre><pre tabindex=0><code>&lt;&gt;１．ブルートフォース（力まかせ探索） N-Queens01()
 1: 0 0 0 0 0 0 0 0 
 2: 0 0 0 0 0 0 0 1 
 3: 0 0 0 0 0 0 0 2 
@@ -779,7 +819,7 @@ real	43m42.887s
 user	42m39.067s
 sys	0m41.138s
 bash-3.2$
-</code></pre><p>４３分かかりました。^^;</p><p>16777216: 77777777<br>16,777,216 １千６百７７万ステップもかかりましたね。</p><h2 id=ｎが８のロジックの計算方法>Ｎが８のロジックの計算方法</h2><p>Ｎが８の場合は１６，７７７，２１６ステップかかりました<br>このステップも計算で算出することが可能です。</p><p>８＊８＊８＊８＊８＊８＊８＊８＝１６，７７７，２１６<br>Ｎ^８＝１６，７７７，２１６<br>ということになります。</p><h2 id=ひとこと>ひとこと</h2><p>今回は、縦列に一つだけのクイーンを配置するという一つのルールで処理しました。<br>次回は、横行に一つだけのクイーンを配置するというルールを追加して処理してみます。</p><p>次回からは以下はだめで</p><pre tabindex=0><code>  　　       column(列)
+</code></pre><p>４３分かかりました。^^;</p><p>16777216: 77777777<br>16,777,216 １千６百７７万ステップもかかりましたね。</p><h2 id=ｎ８の計算方法>Ｎ８の計算方法</h2><p>Ｎ８の場合は、１６，７７７，２１６ステップかかりました<br>このステップも計算で算出することが可能です。</p><p>８＊８＊８＊８＊８＊８＊８＊８＝１６，７７７，２１６<br>Ｎ^８＝１６，７７７，２１６<br>ということになります。</p><h2 id=ひとこと>ひとこと</h2><p>今回は、縦列に一つだけのクイーンを配置するという一つのルールで処理しました。<br>次回は、横行に一つだけのクイーンを配置するというルールを追加して処理してみます。</p><p>次回からは以下の配置はだめなのです。<br>縦にも横にも１つのクイーンしか置けません。</p><pre tabindex=0><code>  　　       column(列)
   row(行)_0___1___2___3___4_
        0|-Q-|-Q-|---|---|---|
         +-------------------+
@@ -791,7 +831,7 @@ bash-3.2$
         +-------------------+
        4|---|---|---|---|---|
         +-------------------+
-</code></pre><p>以下ならよし、という感じです。<br>では次回をお楽しみに。</p><pre tabindex=0><code>  　　       column(列)
+</code></pre><p>以下なら「よし」という感じです。<br>では次回をお楽しみに。</p><pre tabindex=0><code>  　　       column(列)
   row(行)_0___1___2___3___4_
        0|-Q-|---|---|---|---|
         +-------------------+
