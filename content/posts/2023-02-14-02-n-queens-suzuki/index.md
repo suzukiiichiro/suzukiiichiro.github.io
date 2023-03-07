@@ -23,11 +23,32 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 https://github.com/suzukiiichiro/N-Queens
 
 
-## ブルートフォース
+過去記事
+N-Queens問題：Ｎクイーン問題（５）制約フラグ
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（４）バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１）について
+https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
+
+
+
+## Ｎクイーンについて簡単に
 ではさっそくＮクイーン問題を考えてみましょう。
 この章では、可能性のあるすべての解を体系的に数え上げる方法を考えてみます。
 
-まず、効き筋について。
+こういった「ちからまかせ」に数え上げる方法を、ブルートフォースといいます。
+
+今回は、Ｎクイーンを「ブルートフォース」で考えてみるということになります。
+
+
+## 効き筋について
+
 ```
         column(列)
    _4___3___2___1___0_
@@ -44,13 +65,16 @@ https://github.com/suzukiiichiro/N-Queens
 ```
 
 チェスで言うところのクイーンの動きは、縦、横、斜めに直線の効き筋を持っています。
+
 将棋の飛車と角を足した動きがクイーンです。
 
 チェス盤は縦８ｘ横８のサイズなのですが、この章では少し小さめの５ｘ５で考えてみます。
+
 この場合、Ｎが５ということで「５クイーン」と言われることが多いです。
+
 さて５クイーンのルールは、
 
-１．各縦（列）に一つのクイーンがあります。
+１．各縦（列）に一つのクイーンがある。
 
 ```
         column(列)
@@ -68,7 +92,7 @@ https://github.com/suzukiiichiro/N-Queens
 ```
 
 この場合、横の効き筋が効いてしまいますね。
-横一列はエイトクイーンではありえません。
+横一列にクイーンが配置されるのは、エイトクイーンのルールではありえませんが、今回はわかりやすくするために「置きます」。
 ```
         column(列)
    _4___3___2___1___0_
@@ -90,8 +114,11 @@ https://github.com/suzukiiichiro/N-Queens
 の３つを満たしている必要があります。
 
 とはいえ、この章では、「縦の効き筋」のことだけを考えて作っていきます。
+
 ですので「横の効き筋」と「斜めの効き筋」のことは一旦忘れてください。
 
+
+## クイーンの動きを１手ずつ見てみます
 では、まずは`0,0`のクイーンをひとつ下に移動します。
 `col0,row0`のクイーンは`col0,row1`に移動しました。
 
@@ -1213,11 +1240,19 @@ bash-3.2$
 次の記事
 Ｎクイーン問題（３）バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+
 過去記事
+N-Queens問題：Ｎクイーン問題（５）制約フラグ
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（４）バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（２）ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１）について
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
 
 
 ## 書籍の紹介
