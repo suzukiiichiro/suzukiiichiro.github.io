@@ -189,7 +189,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 #!/usr/bin/bash
 
 declare -i COUNT=0;   # カウンター
-' :
+: '
  縦と横に１つだけのクイーン
 ';
 function N-Queens02(){

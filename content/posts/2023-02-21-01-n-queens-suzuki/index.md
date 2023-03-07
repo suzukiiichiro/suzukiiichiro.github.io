@@ -55,7 +55,9 @@ https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
-
+: '
+エイトクイーン　ブルートフォース
+';
 function N-Queens01(){
   local -i row="$1";
   local -i size="$2";
@@ -165,7 +167,9 @@ https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
-
+: '
+エイトクイーン　バックトラック準備編
+';
 function N-Queens02(){
   local -i row="$1";
   local -i size="$2";
@@ -396,7 +400,9 @@ downを使って縦と横を判定しています。
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
-
+: '
+エイトクイーン　バックトラック
+';
 function N-Queens03(){
   local -i row="$1";
   local -i size="$2";

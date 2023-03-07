@@ -42,7 +42,7 @@ https://github.com/suzukiiichiro/N-Queens
 
 declare -i TOTAL=0;     # カウンター
 declare -i UNIQUE=0;    # ユニークユーザー
-' :
+: '
 エイトクイーン バックトラック
 ';
 function N-Queens04(){
@@ -145,7 +145,7 @@ bash-3.2$
 
 Uniqueは今はまだ使いませんが、以降で使うことになるので気にしないでください。
 
-次回は、「制約フラグ」について説明します。
+次回は、「配置フラグ」について説明します。
 お楽しみに。
 
 

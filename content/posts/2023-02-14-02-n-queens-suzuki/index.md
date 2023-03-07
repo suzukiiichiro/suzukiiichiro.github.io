@@ -601,7 +601,7 @@ function N-Queen01(){
 ここまでのソースは以下のとおりです。
 ``` bash:N-Queens01.sh
 #!/usr/bin/bash
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -679,7 +679,7 @@ read -p "なにかキーを入力してください"
 
 ``` bash:NQueens01.sh
 #!/usr/bin/bash
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -758,7 +758,7 @@ bash-3.2$
 
 ``` bash:N-Queens01.sh
 #!/usr/bin/bash
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -821,7 +821,7 @@ bash-3.2$
 
 ``` bash N-Queens01.sh
 #!/usr/bin/bash
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -892,7 +892,7 @@ bash-3.2$
 上記のことを含めたソースは以下のとおりです。
 ``` bash:N-Queens01.sh
 #!/usr/bin/bash
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -999,7 +999,7 @@ echo -n "$COUNT: "; # 改行無しで出力
 #!/usr/bin/bash
 
 declare -i COUNT=0;
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
@@ -1106,7 +1106,7 @@ NQ;
 #!/usr/bin/bash
 
 declare -i COUNT=0;       # カウンター
-' :
+: '
 ブルートフォース　力まかせ探索
 ';
 function N-Queens01(){
