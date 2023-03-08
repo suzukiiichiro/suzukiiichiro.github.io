@@ -275,7 +275,7 @@ T/t) 進捗テーブル表示 （５）
 " selectNo;
 echo 
 case "$selectNo" in
-  [Td])
+  [Dd])
     echo "これから作ります";
     # N-Queens06 0 5;  # 盤面の出力
     ;;
