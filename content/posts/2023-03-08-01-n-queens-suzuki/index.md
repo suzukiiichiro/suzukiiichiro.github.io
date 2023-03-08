@@ -79,31 +79,38 @@ https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 ```
 エイト・クイーン メニュー
 実行したい番号を選択
-D/d) デバッグモード   （６）
-T/t) 進捗テーブル表示 （５）
-4) 配置フラグ         （４）
-3) 縦と横と斜めの制約 （３）
-2) 縦と横の制約       （２）
-1) 縦のみの制約       （１）
+6) 配置フラグ         （６）
+4) 縦と横と斜めの制約 （４）
+3) 縦と横の制約       （３）
+2) 縦のみの制約       （２）
 ```
 
-例えば、「進捗テーブルの表示」を実行したい場合は、「T」または「t」を入力します。
-
-行末の全角数字は、シリーズ番号です。
+行末の全角数字は、エイトクイーンのシリーズ番号です。
 プログラムは、多少手を入れましたが、これまで紹介したソースの構造をおおよそ踏襲しています。
 
 一枚のソースで動きます。
 以下のソースをファイルに保存して実行してください。
+ファイル名はシリーズ番号に揃えて `N-Queens07.sh`としました。（N-Queens06.shは飛ばしました）
 
+ソースは以下のとおりです。
 ``` bash:N-Queens07.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;
 declare -i TOTAL=0;     # カウンター
 declare -i UNIQUE=0;    # ユニークユーザー
-
-: '進捗テーブルの表示';
-function N-Queens05(){
+#
+: 'レコードを出力';
+printRecord(){
+  sEcho="$COUNT: ";  
+  for((i=0;i<size;i++)){
+  sEcho="${sEcho}${aBoard[i]} ";
+  }
+  echo "$sEcho";
+}
+#
+: '配置フラグ';
+function N-Queens06(){
   local -i row="$1";
   local -i size="$2";
   local -i col=;        # 再帰に必要
@@ -125,7 +132,7 @@ function N-Queens05(){
       down[$dx]=1; 
       right[$rx]=1; 
       left[$lx]=1;
-      N-Queens05 "$((row+1))" "$size";
+      N-Queens06 "$((row+1))" "$size";
       down[$dx]=0; 
       right[$rx]=0; 
       left[$lx]=0;
@@ -133,48 +140,9 @@ function N-Queens05(){
    fi
   }
 }
-: 'レコードを出力';
-printRecord(){
-  sEcho="$COUNT: ";  
-  for((i=0;i<size;i++)){
-  sEcho="${sEcho}${aBoard[i]} ";
-  }
-  echo "$sEcho";
-}
-: '配置フラグ';
+#
+: '縦と横と斜めの制約';
 function N-Queens04(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=;        # 再帰に必要
-  local sEcho="";
-  local dx="$3";        # 再帰に必要
-  local rx="$4";        # 再帰に必要            
-  local lx="$5";        # 再帰に必要
-  for((col=0;col<size;col++)){
-    dx=$col;
-    rx=$((row+col));
-    lx=$((row-col+(size-1)));
-    if((!down[dx] 
-      && !right[rx] 
-      && !left[lx]));then
-    aBoard[$row]="$col";
-    if((row==(size-1)));then
-      ((COUNT++));
-      printRecord;
-    else
-      down[$dx]=1; 
-      right[$rx]=1; 
-      left[$lx]=1;
-      N-Queens04 "$((row+1))" "$size";
-      down[$dx]=0; 
-      right[$rx]=0; 
-      left[$lx]=0;
-    fi
-   fi
-  }
-}
-: '斜めの制約を追加';
-function N-Queens03(){
   local -i row="$1";
   local -i size="$2";
   local -i col=;      # 再帰に必要
@@ -191,7 +159,7 @@ function N-Queens03(){
       down[$col]=1;
       right[$row+$col]=1;
       left[$row-$col+($size-1)]=1;
-      N-Queens03 "$((row+1))" "$size";
+      N-Queens04 "$((row+1))" "$size";
       down[$col]=0;
       right[$row+$col]=0;
       left[$row-$col+($size-1)]=0;
@@ -199,8 +167,9 @@ function N-Queens03(){
    fi
   }
 }
+#
 : '横の制約を追加';
-function N-Queens02(){
+function N-Queens03(){
   local -i row="$1";
   local -i size="$2";
   local -i col=;      # 再帰に必要
@@ -213,7 +182,7 @@ function N-Queens02(){
       printRecord;
     else
       down[$col]=1;
-      N-Queens02 "$((row+1))" "$size";
+      N-Queens03 "$((row+1))" "$size";
       down[$col]=0;
     fi
    fi
@@ -221,7 +190,7 @@ function N-Queens02(){
 }
 #
 : '縦のみの制約';
-function N-Queens01(){
+function N-Queens02(){
   local -i row="$1";
   local -i size="$2";
   local -i col=;      # 再帰に必要
@@ -232,7 +201,7 @@ function N-Queens01(){
       ((COUNT++));
       printRecord;
     else
-      N-Queens01 "$((row+1))" "$size";
+      N-Queens02 "$((row+1))" "$size";
     fi
   }
 }
@@ -263,43 +232,44 @@ function NQ(){
   } 
 }
 
+while :
+do
 read -n1 -p "
 エイト・クイーン メニュー
 実行したい番号を選択
-D/d) デバッグモード   （６）
-T/t) 進捗テーブル表示 （５）
-4) 配置フラグ         （４）
-3) 縦と横と斜めの制約 （３）
-2) 縦と横の制約       （２）
-1) 縦のみの制約       （１）
+6) 配置フラグ         （６）
+4) 縦と横と斜めの制約 （４）
+3) 縦と横の制約       （３）
+2) 縦のみの制約       （２）
+
+echo "行頭の番号を入力してください";
+
 " selectNo;
 echo 
 case "$selectNo" in
-  [Dd])
-    echo "これから作ります";
-    # N-Queens06 0 5;  # 盤面の出力
-    ;;
-
-  [Tt])
-    NQ "N-Queens05"; # 進捗テーブルの表示
+  6)
+    NQ "N-Queens06"; # 配置フラグ
+    break;
     ;;
   4)
-    N-Queens04 0 5;  # 配置フラグ
+    N-Queens04 0 5;  # 縦と横と斜めの制約
+    break;
     ;;
   3)
-    N-Queens03 0 5;  # 縦と横と斜めの制約
+    N-Queens03 0 5;  # 縦と横の制約
+    break;
     ;;
   2)
-    N-Queens02 0 5;  # 縦と横の制約
-    ;;
-  1)
-    N-Queens01 0 5;  # 縦のみの制約
+    N-Queens02 0 5;  # 縦のみの制約
+    break;
     ;;
   *)
-    echo "その他";
+    ;; 
 esac
+done
 exit;
 ```
+
 
 実行結果は以下のとおりです。
 ```
@@ -307,13 +277,11 @@ bash-3.2$ bash N-Queens07.sh
 
 エイト・クイーン メニュー
 実行したい番号を選択
-D/d) デバッグモード   （６）
-T/t) 進捗テーブル表示 （５）
-4) 配置フラグ         （４）
-3) 縦と横と斜めの制約 （３）
-2) 縦と横の制約       （２）
-1) 縦のみの制約       （１）
-t
+6) 配置フラグ         （６）
+4) 縦と横と斜めの制約 （４）
+3) 縦と横の制約       （３）
+2) 縦のみの制約       （２）
+6
  N:        Total       Unique        hh:mm:ss
  4:            2            0         0:00:00
  5:           10            0         0:00:00
