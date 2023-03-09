@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（７）メニュー画面"
+title: "Ｎクイーン問題（７）ブルートフォース再び"
 date: 2023-03-08T15:32:38+09:00
 draft: false
 authors: suzuki
@@ -14,10 +14,8 @@ tags:
   - 鈴木維一郎
 ---
 
-
-
 この記事
-N-Queens問題：Ｎクイーン問題（７）メニュー画面
+N-Queens問題：Ｎクイーン問題（７）ブルートフォース再び
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
 
 過去記事
@@ -38,270 +36,151 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 https://github.com/suzukiiichiro/N-Queens
 
 
-## ここまでのあらすじ
-ここまでのおさらいと整理・まとめをしておきたいと思います。
-（１）ではエイトクイーンについてを説明しました。先人の方々の努力や現在までの経緯などをリンクも交えて紹介しました。
-N-Queens問題：Ｎクイーン問題（１）について
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+## ブルートフォース再び
 
-（２）では解は出しはしませんでしたが「ブルートフォース」について説明しました。
-ブルートフォースは、すべてのステップを出しつつ、解を求める方法で、Ｎ５の場合は５＊５＊５＊５＊５＝３１２５ステップも必要となります。これを　５＾５　または　Ｎ＾Ｎと表記することも説明してきました。
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
+今回、一番初めに紹介しておきながら、クイーンの位置を列挙することにとどめて、解を出すことのなかった「ブルートフォース」で解を出します。
 
-（３）ではバックトラックの前準備として縦だけではなく横の制約もいれて「縦方向と横方向の効き」を活かした方法を紹介しました。
-ステップは　５＊４＊３＊２＊１＝１２０ステップですみます。これを　５！　または　Ｎ！　と表記することも説明してきました。
-こちらの方法はバックトラックと言われる「縦と横と斜め」の効きについての一歩手前の処理と言えます。
-ブルートフォースと異なり、処理をする中で、「可能性がなければ前のトラックに戻って処理をすすめる」というアプローチです。
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+なぜ、「ブルートフォース」の完成形を今更やるのか？
+なぜ、最初から解を出すことをやらなかったのか。
 
-（４）では、バックトラックをご紹介しました。「縦と横と斜め」の効きを活かしたプログラムで、Ｎ５の解は１０と出ました。
-これまでのアプローチと比べてとても高速でした。
-N-Queens問題：Ｎクイーン問題（４）バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+それは、ブルートフォースですべての可能性を列挙することは（２）で紹介したとおりです。
+ですが、そこから解を導き出すための処理は、
+（２）で縦だけの制約を学び
+（３）で縦と横の制約を学び
+（４）で縦と横と斜めの制約を学び、
+（６）で配置フラグについて学ぶ。
 
-（５）では、今後、処理が複雑なり、同時に処理が高速化するに連れ、Ｎを増やして見たくなることを想定して、進捗表示テーブルを作成しました。
-N-Queens問題：Ｎクイーン問題（６）配置フラグ
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-
-（６）では、制約テスト「配置フラグ」を導入しました。ソースの可読性が高まるだけではなく、今後ご紹介する「ビットマップ」への橋渡しとして、必要なステップです。
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-
-今回ご紹介する（７）では、シェルスクリプトでメニュー画面を作り、今後の実行を簡単に切り替えて動作させることができます。
+そこまで理解した上で、初めて「ブルートフォース」で解を出すことができるのです。
 
 
-## メニュー画面
-メニュー画面は以下のイメージで作ります。
-実行するとメインメニューが表示され、行頭の番号またはアルファベットを入力すると項目が実行されます。
+## プログラムソース
+プログラムソースは以下のとおりです。
 
-```
-エイト・クイーン メニュー
-実行したい番号を選択
-6) 配置フラグ         （６）
-4) 縦と横と斜めの制約 （４）
-3) 縦と横の制約       （３）
-2) 縦のみの制約       （２）
-```
-
-行末の全角数字は、エイトクイーンのシリーズ番号です。
-プログラムは、多少手を入れましたが、これまで紹介したソースの構造をおおよそ踏襲しています。
-
-一枚のソースで動きます。
-以下のソースをファイルに保存して実行してください。
-ファイル名はシリーズ番号に揃えて `N-Queens07.sh`としました。（N-Queens06.shは飛ばしました）
-
-ソースは以下のとおりです。
 ``` bash:N-Queens07.sh
 #!/usr/bin/bash
 
-declare -i COUNT=0;
 declare -i TOTAL=0;     # カウンター
-declare -i UNIQUE=0;    # ユニークユーザー
 #
-: 'レコードを出力';
-printRecord(){
-  sEcho="$COUNT: ";  
+: 'ブルートフォース用レコードを出力';
+printRecordBF(){
+  sEcho="$TOTAL: ";  
   for((i=0;i<size;i++)){
-  sEcho="${sEcho}${aBoard[i]} ";
+  sEcho="${sEcho}${col[i]} ";
   }
   echo "$sEcho";
 }
 #
-: '配置フラグ';
+: 'abs関数をbashで実装';
+function abs_diff {
+  echo $(($1 >= $2 ? $1 - $2 : $2 - $1))
+}
+#
+: 'ブルートフォースで解を出す';
+function check(){
+  local -i size="$1";
+  for(( i=(size-1);i>=0;i-- )){
+    col[$i]=${board[i]};
+    for(( j=i+1;j<size;j++ )){
+      if(( col[i]<=col[j] ));then
+        (( col[j]++ ));
+      fi
+    }
+  }
+  for(( i=0;i<size;i++ )){
+    for(( j=i+1;j<size;j++ )){
+      tmp=`abs_diff "${col[$i]}" "${col[$j]}"`;
+      tm2=`abs_diff "$j" "$i"`;
+      if(( tmp==tm2 ));then
+        return 0;
+      fi
+    }
+  }
+  (( TOTAL++ ));
+  printRecordBF;
+}
+#
+: 'ブルートフォースで解を出す';
 function N-Queens06(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=;        # 再帰に必要
-  local sEcho="";
-  local dx="$3";        # 再帰に必要
-  local rx="$4";        # 再帰に必要            
-  local lx="$5";        # 再帰に必要
-  for((col=0;col<size;col++)){
-    dx=$col;
-    rx=$((row+col));
-    lx=$((row-col+(size-1)));
-    if((!down[dx] 
-      && !right[rx] 
-      && !left[lx]));then
-    aBoard[$row]="$col";
-    if((row==(size-1)));then
-      ((TOTAL++));
-    else
-      down[$dx]=1; 
-      right[$rx]=1; 
-      left[$lx]=1;
-      N-Queens06 "$((row+1))" "$size";
-      down[$dx]=0; 
-      right[$rx]=0; 
-      left[$lx]=0;
-    fi
-   fi
-  }
+ local -i row="$1";
+ local -i size="$2";
+ local -i which=;
+ if(( row==size ));then
+   check "$size";
+ else
+   for(( which=0;which<(size-row);which++ )){
+     board["$row"]="$which";
+     N-Queens06 $((row+1)) $size ;
+   }
+ fi
 }
 #
-: '縦と横と斜めの制約';
-function N-Queens04(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=;      # 再帰に必要
-  local sEcho="";
-  for((col=0;col<size;col++)){
-    if((!down[col] 
-      && !right[row+col] 
-      && !left[row-col+(size-1)]));then
-    aBoard[$row]="$col";
-    if((row==(size-1)));then
-      ((COUNT++));
-      printRecord;
-    else
-      down[$col]=1;
-      right[$row+$col]=1;
-      left[$row-$col+($size-1)]=1;
-      N-Queens04 "$((row+1))" "$size";
-      down[$col]=0;
-      right[$row+$col]=0;
-      left[$row-$col+($size-1)]=0;
-    fi
-   fi
-  }
-}
-#
-: '横の制約を追加';
-function N-Queens03(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=;      # 再帰に必要
-  local sEcho="";
-  for((col=0;col<size;col++)){
-   if((!down[col]));then
-    aBoard[$row]="$col";
-    if((row==(size-1)));then
-      ((COUNT++));
-      printRecord;
-    else
-      down[$col]=1;
-      N-Queens03 "$((row+1))" "$size";
-      down[$col]=0;
-    fi
-   fi
-  }
-}
-#
-: '縦のみの制約';
-function N-Queens02(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=;      # 再帰に必要
-  local sEcho="";
-  for((col=0;col<size;col++)){
-    aBoard[$row]="$col";
-    if((row==(size-1)));then
-      ((COUNT++));
-      printRecord;
-    else
-      N-Queens02 "$((row+1))" "$size";
-    fi
-  }
-}
-#
-function NQ(){
-  local selectName="$1";
-  local -i max=15;
-  local -i min=4;
-  local -i N="$min";
-  local startTime=0;
-	local endTime=0;
-	local hh=mm=ss=0; 
-  echo " N:        Total       Unique        hh:mm:ss" ;
-  for((N=min;N<=max;N++)){
-    TOTAL=0;
-    UNIQUE=0;
-    startTime=$(date +%s);# 計測開始時間
-
-    "$selectName" 0 "$N";
-
-    endTime=$(date +%s); 	# 計測終了時間
-    ss=$((endTime-startTime));# hh:mm:ss 形式に変換
-    hh=$((ss/3600));
-    ss=$((ss%3600));
-    mm=$((ss/60));
-    ss=$((ss%60));
-    printf "%2d:%13d%13d%10d:%.2d:%.2d\n" $N $TOTAL $UNIQUE $hh $mm $ss ;
-  } 
-}
-
-while :
-do
-read -n1 -p "
-エイト・クイーン メニュー
-実行したい番号を選択
-6) 配置フラグ         （６）
-4) 縦と横と斜めの制約 （４）
-3) 縦と横の制約       （３）
-2) 縦のみの制約       （２）
-
-echo "行頭の番号を入力してください";
-
-" selectNo;
-echo 
-case "$selectNo" in
-  6)
-    NQ "N-Queens06"; # 配置フラグ
-    break;
-    ;;
-  4)
-    N-Queens04 0 5;  # 縦と横と斜めの制約
-    break;
-    ;;
-  3)
-    N-Queens03 0 5;  # 縦と横の制約
-    break;
-    ;;
-  2)
-    N-Queens02 0 5;  # 縦のみの制約
-    break;
-    ;;
-  *)
-    ;; 
-esac
-done
-exit;
+N-Queens06 0 5;
 ```
 
-
+## 実行結果
 実行結果は以下のとおりです。
+
 ```
 bash-3.2$ bash N-Queens07.sh
-
-エイト・クイーン メニュー
-実行したい番号を選択
-6) 配置フラグ         （６）
-4) 縦と横と斜めの制約 （４）
-3) 縦と横の制約       （３）
-2) 縦のみの制約       （２）
-6
- N:        Total       Unique        hh:mm:ss
- 4:            2            0         0:00:00
- 5:           10            0         0:00:00
- 6:            4            0         0:00:00
- 7:           40            0         0:00:01
- 8:           92            0         0:00:00
- 9:          352            0         0:00:03
- :
- :
+1: 0 2 4 1 3
+2: 0 3 1 4 2
+3: 1 3 0 2 4
+4: 1 4 2 0 3
+5: 2 0 3 1 4
+6: 2 4 1 3 0
+7: 3 0 2 4 1
+8: 3 1 4 2 0
+9: 4 1 3 0 2
+10: 4 2 0 3 1
 bash-3.2$
 ```
 
-だんだんとソースが長くなってきましたが、プログラムらしくなってきました。この調子で少しずつ続けていっていただければと思います。
+なんだよ、これまでの結果と変わらないじゃん。
+そう思うのも無理はありません。
+処理の仕方がぜんぜん違うのです。
+
+ざっくりいうと、（３）や
+
+N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+
+（４）は、
+
+N-Queens問題：Ｎクイーン問題（４）バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+
+処理の中で縦や横、斜めの効きにアタルようであれば処理をしませんでした。
+ですので、解を列挙する途中で「もうこれ以上は進めても意味がない」となれば、ただちに処理を切り上げ、バックトラックし、`col`列を戻り（トラックをバックし）、また可能性のある配置を探す。ということをしてきました。
+
+「だから解を出すことが速かった」のです。
+
+今回の「ブルートフォース再び」編では、バックトラックすることなく処理を途中で切り上げず、バカ真面目に、ちからまかせに最後まで可能性を探索します。
+
+ですので、Ｎ５の場合の５＊５＊５＊５＊５＝３１２５ステップをちゃんと処理しつつ、その結果の中で、縦と横と斜めの効きに当たらない「解」を算出しています。
+
+今回のソースは（３）や（４）と比べて、
+「だから解を出すのが遅い」のです。
+
+今回のソースでは、（２）でやった処理
+N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
+
+で、一つ一つの可能性が出力されるたびに、縦横斜めの効きを判定します。
+ですから、最も原始的なやり方ではありますが、（４）の「バックトラック」や（６）の「配置フラグ」で学んだ「効率的な判定」の知識が必要になります。
+
+さらに、この「ブルートフォース再び」は、後に登場する「高速化のための枝刈り」というポイントを探すために絶対必要な処理となります。
+
+すべてのステップを出力し、順番にクイーンの移動を目視して、正しく効きが処理されているかをデバッグするために必要なプログラムなのです。
+
+次回は、ここまでいろいろと紹介してきたステップを「メニュー画面」で切り替えて実行できるようにする方法を紹介します。
+
+お楽しみに！
 
 
 
 この記事
-N-Queens問題：Ｎクイーン問題（７）メニュー画面
+N-Queens問題：Ｎクイーン問題（７）ブルートフォース再び
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-
 
 過去記事
 N-Queens問題：Ｎクイーン問題（６）配置フラグ
@@ -407,8 +286,6 @@ CHAPTER15 読みやすいシェルスクリプト
 `
 imageUrl="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg"
 %}}
-
-
 
 
 
