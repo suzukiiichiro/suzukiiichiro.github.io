@@ -43,18 +43,18 @@ https://github.com/suzukiiichiro/N-Queens
 
 前回までは以下のように表記していました。
 ``` bash
+    for(( col=0;col<size;col++ )){
+      aBoard[$row]="$col";
       if (( down[col]==0 && right[row-col+size-1]==0 && left[row+col]==0));then
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
         left[$row+$col]=1;
-
         N-Queens04 "$((row+1))" "$size" ;
-
         down[$col]=0;
         right[$row-$col+($size-1)]=0;
         left[$row+$col]=0;
       fi
-
+    }
 ```
 `down[]` `right[]` `down[]`変数の添字の中で毎回計算をしていますね。
 ソースも見にくくなっていました。
@@ -64,17 +64,32 @@ https://github.com/suzukiiichiro/N-Queens
 
 なにより、以降で進む「ビットマップ」への足がかりとして必要なステップなのです。
 ``` bash
+    for(( col=0;col<size;col++ )){
       aBoard[$row]="$col";
       dx=$col;
       rx=$((row-col+size-1));
       lx=$((row+col));
-      if (( down[dx]==0 && right[rx]==0 && left[lx]==0));then
+      if (( !down[dx] && !right[rx] && !left[lx]));then
         down[$dx]=1; right[$rx]=1; left[$lx]=1;
-        N-Queens05 "$((row+1))" "$size" ;
+        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
         down[$dx]=0; right[$rx]=0; left[$lx]=0;
       fi
+    }
 ```
 
+また、
+
+``` bash
+        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
+```
+ここで、`N-Queens05`にわたすパラメータが３つ増えていることに気が付きましたか？
+まだ、さほど効果は期待できませんが、再帰で今ある値を次の再帰に渡す。というテクニックです。
+いずれ、ここらへんもしっかり身につけていきましょう。
+今は、深く考える必要はありません。
+
+```
+      if (( !down[dx] && !right[rx] && !left[lx]));then
+```
 Ｃ言語に慣れ親しんでいる人は数値の「０」はFalse、「１」はTrueという理解だと思います。
 NOの０（ゼロ）とおぼえましょう。
 
@@ -131,9 +146,9 @@ function N-Queens05(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;       # 再帰に必要
-  local -i dx;
-  local -i rx;
-  local -i lx;
+  local -i dx="$3";
+  local -i rx="$4";
+  local -i lx="$5";
   if (( row==size ));then
     ((TOTAL++));
     # echo -n "$COUNT:"
@@ -149,7 +164,7 @@ function N-Queens05(){
       lx=$((row+col));
       if (( !down[dx] && !right[rx] && !left[lx]));then
         down[$dx]=1; right[$rx]=1; left[$lx]=1;
-        N-Queens05 "$((row+1))" "$size" ;
+        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
         down[$dx]=0; right[$rx]=0; left[$lx]=0;
       fi
     }
@@ -190,7 +205,7 @@ bash-3.2$ bash N-Queens05.sh
  6:            4            0         0:00:00
  7:           40            0         0:00:00
  8:           92            0         0:00:01
- 9:          352            0         0:00:04
+ 9:          352            0         0:00:03
 10:          724            0         0:00:16
 11:         2680            0         0:01:22
 bash-3.2$
