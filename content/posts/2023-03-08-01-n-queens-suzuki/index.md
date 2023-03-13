@@ -64,54 +64,54 @@ declare -i TOTAL=0;     # カウンター
 #
 : 'ブルートフォース用レコードを出力';
 function printRecordBF(){
-	echo "$TOTAL:";
+  echo "$TOTAL:";
   sEcho=" ";  
   for((i=0;i<size;i++)){
-  sEcho="${sEcho}${col[i]} ";
+    sEcho="${sEcho}${col[i]} ";
   }
   echo "$sEcho";
-
-	echo -n "+";
-	for((i=0;i<size;i++)){
-		echo -n "-";
-		if((i<(size-1)));then
-			echo -n "+";
-		fi
-	}
-	echo "+";
-	for((i=0;i<size;i++)){
-		echo -n "|";
-		for((j=0;j<size;j++)){
-			if((i==col[j]));then
-				echo -n "O";
-			else
-				echo -n " ";
-			fi
-			if((j<(size-1)));then
-				echo -n "|";
-			fi
-		}
-		echo "|";
-		if((i<(size-1)));then
-			echo -n "+";
-			for((j=0;j<size;j++)){
-				echo -n "-";
-				if((j<(size-1)));then
-					echo -n "+";
-				fi
-			}
-			echo "+";
-		fi
-	}
   echo -n "+";
-	for((i=0;i<size;i++)){
-		echo -n "-";
-		if((i<(size-1)));then
-			echo -n "+";
-		fi
-	}	
-	echo "+";
-	echo "";
+  for((i=0;i<size;i++)){
+    echo -n "-";
+    if((i<(size-1)));then
+      echo -n "+";
+    fi
+  }
+  echo "+";
+  for((i=0;i<size;i++)){
+    echo -n "|";
+    for((j=0;j<size;j++)){
+      #if((j==col[i]));then
+      if((i==col[j]));then
+        echo -n "O";
+      else
+        echo -n " ";
+      fi
+      if((j<(size-1)));then
+        echo -n "|";
+      fi
+    }
+  echo "|";
+  if((i<(size-1)));then
+    echo -n "+";
+    for((j=0;j<size;j++)){
+      echo -n "-";
+      if((j<(size-1)));then
+        echo -n "+";
+      fi
+    }
+  echo "+";
+  fi
+  }
+  echo -n "+";
+  for((i=0;i<size;i++)){
+    echo -n "-";
+    if((i<(size-1)));then
+      echo -n "+";
+    fi
+  }  
+  echo "+";
+  echo "";
 }
 #
 : 'abs関数をbashで実装';
