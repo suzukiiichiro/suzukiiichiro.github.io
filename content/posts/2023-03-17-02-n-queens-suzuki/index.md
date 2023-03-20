@@ -202,9 +202,12 @@ function rdlFlag_NR(){
   while ((row>-1));do
     matched=0;
     for ((col=board[row]+1;col<size;col++)){
-      if ((down[col]==0
-        && right[col-row+size-1]==0
-        && left[col+row]==0 ));then
+      if (( !down[col]
+        &&  !right[col-row+size-1]
+        &&  !left[col+row] ));then
+        dix=$col;
+        rix=$((row-col+(size-1)));
+        lix=$((row+col));
         if ((board[row]!=-1));then
           down[${board[$row]}]=0;
           right[${board[$row]}-$row+($size-1)]=0;
@@ -213,7 +216,7 @@ function rdlFlag_NR(){
         board[$row]=$col;   # Qを配置
         down[$col]=1;
         right[$col-$row+($size-1)]=1;
-        left[$row+$col]=1;  # 効き筋とする
+        left[$col+$row]=1;  # 効き筋とする
         matched=1;          # 配置した
         break;
       fi
@@ -222,9 +225,7 @@ function rdlFlag_NR(){
       ((row++));            #次のrowへ
       if ((row==size));then
         ((TOTAL++));
-        if (( DISPLAY==1 ));then
-          printRecord "$size";# 出力
-        fi
+        printRecord "$size";# 出力
         ((row--));
       fi
     else
@@ -238,6 +239,7 @@ function rdlFlag_NR(){
     fi
   done
 }
+#
 #
 : '再帰版配置フラグ';
 function rdlFlag_R(){
@@ -266,6 +268,7 @@ function rdlFlag_R(){
     }
   fi
 }
+#
 : '非再帰版バックトラック';
 function backTracking_NR(){
   local -i row="$1";
@@ -375,7 +378,6 @@ function bluteForce_R(){
     }
   fi
 }
-#
 #
 function NQ(){
   local selectName="$1";

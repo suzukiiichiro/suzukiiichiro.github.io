@@ -16,12 +16,15 @@ tags:
 
 ## 第２章　エイトクイーン　配置フラグ
 
-国内で最もきちんと説明していると（僕が勝手に）思っているＵＲＬを参照します。
+国内で最もきちんと説明していると（僕が勝手に）思っているＵＲＬを参照させてください。
+僕が説明するよりももっと深みがあります。
+
 [C++ゲーム解析プログラミング Nクイーン【前編】](https://tech.pjin.jp/blog/2020/06/12/nqueen-1)
 
 （以下上記ＵＲＬの内容）
 ```
 前章のバックトラッキング探索では、行の各カラムにクイーンを順に置いてみて、各行に配置しているクイーンの位置と比較してクイーンの効きチェックを行っていた。
+
 が、この処理はfor文で各行を調べていたので、意外と処理が重い。
 しかもノードを探索するたびに呼ばれるので、トータルの処理回数が多くなり、それに時間を要する。
 
@@ -41,12 +44,15 @@ bool 型配列 col[], rup[], rdn[] を用意する（下図参照）。
 
 
 
-ほれぼれします。
-僕は、このページに出会わなかったら、第一章の配置フラグの認識のまま、一生を終えていたかもしれません。
+ほれぼれしますね。
+
+僕は、このページに出会わなかったら、第一章の配置フラグの認識のまま、言い換えればご認識のまま一生を終えていたかもしれません。
+
 「知れば知るほど知らないことを知る」とはよく言ったものです。
 
 第三章で紹介する予定の「ビットマップ」との橋渡しという位置づけの書籍が多いのですが、まだまだこの配置フラグの可能性はあるのではないかと思っています。
-なんといっても、ビットマップになると、もう何がなんだかわからなくなるので、枝刈りやロジックの最適化に二の足を踏んでしまうのです。
+
+なんといっても、ビットマップになると、クイーンの位置を把握するにも、「もう何がなんだかわからなくなる」ので、枝刈りやロジックの最適化に二の足を踏んでしまうのです。
 
 配置フラグ頑張れ！
 
@@ -68,7 +74,7 @@ function rdlFlag_R(){
   local -i col=0;       # 再帰に必要
   if (( row==size ));then
      ((TOTAL++));
-     printRecord "$size"; # 出力しないならコメント
+     printRecord "$size";# 出力
   else
     for(( col=0;col<size;col++ )){
       board[$row]="$col";
@@ -88,6 +94,75 @@ function rdlFlag_R(){
 }
 ```
 
+
+配置フラグのロジックについて簡単に説明します。
+```
+    for(( col=0;col<size;col++ )){
+      board[$row]="$col";
+      if (( down[col]==0 
+        && right[row-col+size-1]==0
+        && left[row+col]==0));then
+        down[$col]=1;
+        right[$row-$col+($size-1)]=1;
+        left[$row+$col]=1;
+        rdlFlag_R "$((row+1))" "$size" ;
+        down[$col]=0;
+        right[$row-$col+($size-1)]=0;
+        left[$row+$col]=0;
+      fi
+    }
+```
+
+以下でクイーンを配置します。
+```
+      board[$row]="$col";
+```
+
+以下の記述は、
+```
+      if (( down[col]==0 
+        && right[row-col+size-1]==0
+        && left[row+col]==0));then
+```
+
+このように書くこともできます。
+明示的に down[col]==0 と書くほうが良いという人もいますし、
+
+```
+      if (( down[col]==0 
+        && right[row-col+size-1]==0
+        && left[row+col]==0));then
+```
+
+以下のように書くほうがスッキリするという人もいます。
+```
+      if (( !down[col]
+        &&  !right[row-col+size-1]
+        &&  !left[row+col]));then
+```
+
+好みです。
+
+以下の部分で、下、右斜下、左斜下を配置済みとして「１」(true)をフラグとしてセットします。
+```
+        down[$col]=1;
+        right[$row-$col+($size-1)]=1;
+        left[$row+$col]=1;
+```
+
+その直後で再帰を実行して`row`をインクリメントしながらボードの下方向へクイーンを配置していきます。
+```
+        rdlFlag_R "$((row+1))" "$size" ;
+```
+
+再帰が終わったら、`down[]`,`right[]`,`left[]`の配置フラグに「０」を代入してクリアし、空き地にします。
+```
+        down[$col]=0;
+        right[$row-$col+($size-1)]=0;
+        left[$row+$col]=0;
+```
+
+
 ## 配置フラグ非再帰版
 配置フラグ非再帰版のプログラムソースは以下のとおりです。
 
@@ -101,9 +176,12 @@ function rdlFlag_NR(){
   while ((row>-1));do
     matched=0;
     for ((col=board[row]+1;col<size;col++)){
-      if ((down[col]==0
-        && right[col-row+size-1]==0
-        && left[col+row]==0 ));then
+      if (( !down[col]
+        &&  !right[col-row+size-1]
+        &&  !left[col+row] ));then
+        dix=$col;
+        rix=$((row-col+(size-1)));
+        lix=$((row+col));
         if ((board[row]!=-1));then
           down[${board[$row]}]=0;
           right[${board[$row]}-$row+($size-1)]=0;
@@ -112,7 +190,7 @@ function rdlFlag_NR(){
         board[$row]=$col;   # Qを配置
         down[$col]=1;
         right[$col-$row+($size-1)]=1;
-        left[$row+$col]=1;  # 効き筋とする
+        left[$col+$row]=1;  # 効き筋とする
         matched=1;          # 配置した
         break;
       fi
@@ -209,9 +287,12 @@ function rdlFlag_NR(){
   while ((row>-1));do
     matched=0;
     for ((col=board[row]+1;col<size;col++)){
-      if ((down[col]==0
-        && right[col-row+size-1]==0
-        && left[col+row]==0 ));then
+      if (( !down[col]
+        &&  !right[col-row+size-1]
+        &&  !left[col+row] ));then
+        dix=$col;
+        rix=$((row-col+(size-1)));
+        lix=$((row+col));
         if ((board[row]!=-1));then
           down[${board[$row]}]=0;
           right[${board[$row]}-$row+($size-1)]=0;
@@ -220,7 +301,7 @@ function rdlFlag_NR(){
         board[$row]=$col;   # Qを配置
         down[$col]=1;
         right[$col-$row+($size-1)]=1;
-        left[$row+$col]=1;  # 効き筋とする
+        left[$col+$row]=1;  # 効き筋とする
         matched=1;          # 配置した
         break;
       fi
@@ -244,6 +325,7 @@ function rdlFlag_NR(){
   done
 }
 #
+#
 : '再帰版配置フラグ';
 function rdlFlag_R(){
   local -i row="$1";
@@ -251,7 +333,7 @@ function rdlFlag_R(){
   local -i col=0;       # 再帰に必要
   if (( row==size ));then
      ((TOTAL++));
-     printRecord "$size"; # 出力しないならコメント
+     printRecord "$size";# 出力
   else
     for(( col=0;col<size;col++ )){
       board[$row]="$col";
@@ -273,10 +355,9 @@ function rdlFlag_R(){
 # time rdlFlag_NR 0 5;    
 #
 # 再帰版配置フラグ
-# time rdlFlag_R 0 5;    
+ time rdlFlag_R 0 5;    
 #
 exit;
-
 ```
 
 
@@ -430,8 +511,8 @@ bash-3.2$
 
 ## ブルートフォースとバックトラック、配置フラグの特色と違い
 ブルートフォース版
-for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしている。
-```
+for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
+``` bash
   if ((row==size));then
     check_bluteForce "$size";
     if (( $?==1 ));then 
@@ -449,7 +530,7 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 
 バックトラック版
 ブルートフォース（力まかせ探索）のように最後まで配置して効きをチェックするのではなく、各行にクイーンを置くたびに効きチェックを行って、効きがあればその状態からの探索を行わない点が異なります。
-```
+``` bash
   if ((row==size));then
     ((TOTAL++));
     printRecord "$size";   # 出力
@@ -465,14 +546,14 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 ```
 
 配置フラグ版
-計算済みの配置フラグは再帰によって「メモ」化される。
-この仕組みを利用して、`down[]`,`right[]`,`left[]` の３つの配列に１は配置済み、０は未配置といった情報を与える。
-これにより再帰処理の中で、垂直・対角線方向にクイーンが配置済みかどうかを直線状にチェックすることが可能。
-どの方向にも配置済みでなければ、そのカラムにクイーンを配置し、次の行に進むというわけだ。
-非再帰の場合はこの「メモ化」するロジックを入れ込む必要があるので多少処理が重複する部分も出てくるのが悩ましい。
-とはいえ、配置フラグはバックトラックよりもさらに高速です。
+計算済みの配置フラグは再帰によって「メモ」化されます。
+この仕組みを利用して、`down[]`,`right[]`,`left[]` の３つの配列に１は配置済み、０は未配置（クリア）といった情報を与えます。
+これにより再帰処理の中で、垂直下方向・対角線左右斜め方向にクイーンが配置済みかどうかをチェックすることが可能です。
+どの方向にも配置済みで「なければ」、クイーンを配置し、次の `col` に進むというわけです。
 
-```
+配置フラグはバックトラックよりもさらに高速です。
+
+``` bash
     for(( col=0;col<size;col++ )){
       board[$row]="$col";
       if (( down[col]==0 
