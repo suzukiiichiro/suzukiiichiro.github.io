@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（１）について"
+title: "Ｎクイーン問題（１）第一章　エイトクイーンについて"
 date: 2023-02-14T12:01:52+09:00
 draft: false
 authors: suzuki
@@ -14,35 +14,15 @@ tags:
   - 鈴木維一郎
 ---
 
-## 関連リンク
-  エイト・クイーン（Ｎクイーン問題）をBash/Lua/Python/Java/C/OpenCL/CUDAなどあらゆるプログラミング言語でワールドレコード（世界一）に挑戦するサイト 
-
-  N-Queens
-  https://github.com/suzukiiichiro/N-Queens
-
-
-過去記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
-
-
 
 
 ## Ｎクイーン問題とは
-　Ｎクイーン問題とは、「８列×８行のチェスボードに８個のクイーンを、互いに効きが当たらないように並べよ」という８クイーン問題のクイーン(Ｎ)を、どこまで大きなＮまで解を求めることができるかという問題。
+　Ｎクイーン問題とは、「８列×８行のチェスボードに８個のクイーンを、互いに効きが当たらないように並べよ」というエイトクイーン問題のクイーンの数を `Ｎ` として、どこまで大きなＮまで解を求めることができるかという問題で、「Ｎクイーン問題」とも言う。
 ![download.png](download.png)
 
 　Ｎクイーン問題は、１８４８年から存在し、ガウスなど著名な科学者が研究した工学研究の頂点となる研究である。
 
-名前の通り８つのクイーンの解を求めるというパズルであり、Ｎクイーンは、エイトクイーンの拡張版で、Nの値は８、９、１０，１１，１２･･･と言った風に増え続け、そのNの値であるボードの解を求めるものである。
+　名前の通り８つのクイーンの解を求めるというパズルであり、Ｎクイーンは、エイトクイーンの拡張版で、Nの値は８、９、１０，１１，１２･･･と言った風に増え続け、そのNの値であるボードの解を求めるものである。
 
 　クイーンとは、チェスで使われているクイーンを指し、チェス盤の中で、縦、横、斜めにどこまでも進むことができる駒で、日本の将棋でいう「飛車と角」を合わせた動きとなる。
 ![qneen.png](queen.png)
@@ -243,17 +223,34 @@ https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
   https://github.com/suzukiiichiro/N-Queens
 
 
-過去記事
-N-Queens問題：Ｎクイーン問題（５）制約フラグ
+## リンクと過去記事
+N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
+N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
+N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
+エイト・クイーンのソース置き場 BashもJavaもPythonも！
+https://github.com/suzukiiichiro/N-Queens
 
 
 

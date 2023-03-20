@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（８）第一章まとめ"
+title: "Ｎクイーン問題（８）第一章　まとめ"
 date: 2023-03-09T14:45:39+09:00
 draft: false
 authors: suzuki
@@ -14,29 +14,6 @@ tags:
   - 鈴木維一郎
 ---
 
-
-この記事
-N-Queens問題：Ｎクイーン問題（８）第一章まとめ
-https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
-
-過去記事
-N-Queens問題：Ｎクイーン問題（７）ブルートフォース再び
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（６）配置フラグ
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
-
-エイト・クイーンのソース置き場 BashもJavaもPythonも！
-https://github.com/suzukiiichiro/N-Queens
 
 
 ## ここまでのあらすじ
@@ -61,13 +38,17 @@ https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 （４）では、「縦横斜めの効き」を考慮した「バックトラック」をご紹介しました。Ｎ５の解は１０と出ました。 これまでのアプローチと比べてとても高速でした。
 N-Queens問題：Ｎクイーン問題（４）バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+実は、この（４）の手法は、（５）の「配置フラグ」を使っています。
+第二章で厳格な違いをご説明し、ソースも添付します。
+現段階では、曖昧に「バックトラック」と「配置フラグ」が「ある」ということだけ覚えておいてください。
 
 （５）では、今後、処理が複雑なり、同時に処理が高速化するに連れ、Ｎを増やして見たくなることを想定して、進捗表示テーブルを作成しました。
 これにより、Ｎは４，５，６，７，８・・・と連続して処理をすることができます。
 N-Queens問題：Ｎクイーン問題（６）配置フラグ
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
 
-（６）では、制約テスト「配置フラグ」を導入しました。ソースの可読性が高まるだけではなく、今後ご紹介する「ビットマップ」への橋渡しとして、必要なステップです。
+（６）では、制約テスト「配置フラグ」を導入しました。ソースの可読性が高まるだけではなく、今後ご紹介する「ビットマップ」への橋渡しとして、必要なステップです。こちらは先にご説明したとおり、正しい配置フラグの説明ではありません。
+きちんと「バックトラック」と「配置フラグ」の違いを第二章で明確に説明します。
 N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
 
@@ -205,12 +186,12 @@ function check(){
 function N-Queens06(){
  local -i row="$1";
  local -i size="$2";
- local -i which=;
+ local -i col=;
  if(( row==size ));then
    check "$size";
  else
-   for(( which=0;which<(size-row);which++ )){
-     board["$row"]="$which";
+   for(( col=0;col<(size-row);col++ )){
+     board["$row"]="$col";
      N-Queens06 $((row+1)) $size ;
    }
  fi
@@ -554,32 +535,40 @@ bash-3.2$
 
 だんだんとソースが長くなってきましたが、プログラムらしくなってきました。この調子で少しずつ続けていっていただければと思います。
 
-次は「第二章」となります。
+次は「第二章」となります。これまでの説明をもう少しだけ掘り下げて具体的にご説明します。
+そのためにも、再帰、非再帰を併記してご説明する必要が出てきました。
 お楽しみに。
 
 
-この記事
-N-Queens問題：Ｎクイーン問題（８）第一章まとめ
+## リンクと過去記事
+N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
 https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
-
-過去記事
-N-Queens問題：Ｎクイーン問題（７）ブルートフォース再び
+N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（６）配置フラグ
+N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
+N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
+N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
+N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
+
 
 
 

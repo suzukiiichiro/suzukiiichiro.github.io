@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（６）配置フラグ"
+title: "Ｎクイーン問題（６）第一章　配置フラグ"
 date: 2023-03-07T16:10:45+09:00
 draft: false
 authors: suzuki
@@ -16,27 +16,6 @@ tags:
 
 
 
-この記事
-N-Queens問題：Ｎクイーン問題（６）配置フラグ
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-
-
-過去記事
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
-
-エイト・クイーンのソース置き場 BashもJavaもPythonも！
-https://github.com/suzukiiichiro/N-Queens
-
-
 ## 配置フラグ
 各列、対角線上にクイーンがあるかどうかのフラグを用意して高速化を図ります。
 これまでもやっていたわけですが、そこの部分を「配置フラグ」と呼ぶことを覚えておいてください。
@@ -49,7 +28,7 @@ https://github.com/suzukiiichiro/N-Queens
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
         left[$row+$col]=1;
-        N-Queens04 "$((row+1))" "$size" ;
+        N-Queens05 "$((row+1))" "$size" ;
         down[$col]=0;
         right[$row-$col+($size-1)]=0;
         left[$row+$col]=0;
@@ -71,7 +50,7 @@ https://github.com/suzukiiichiro/N-Queens
       lx=$((row+col));
       if (( !down[dx] && !right[rx] && !left[lx]));then
         down[$dx]=1; right[$rx]=1; left[$lx]=1;
-        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
+        N-Queens06 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
         down[$dx]=0; right[$rx]=0; left[$lx]=0;
       fi
     }
@@ -80,9 +59,9 @@ https://github.com/suzukiiichiro/N-Queens
 また、
 
 ``` bash
-        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
+        N-Queens06 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
 ```
-ここで、`N-Queens05`にわたすパラメータが３つ増えていることに気が付きましたか？
+ここで、`N-Queens06`にわたすパラメータが３つ増えていることに気が付きましたか？
 まだ、さほど効果は期待できませんが、再帰で今ある値を次の再帰に渡す。というテクニックです。
 いずれ、ここらへんもしっかり身につけていきましょう。
 今は、深く考える必要はありません。
@@ -134,7 +113,7 @@ fi
 
 と、同じなのです、ここまでを以下のソースにまとめました
 ソース全体は以下のとおりです。
-``` bash:N-Queens05.sh
+``` bash:N-Queens06.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター
@@ -142,7 +121,7 @@ declare -i UNIQUE=0;    # ユニークユーザー
 : '
 エイトクイーン 配置フラグ
 ';
-function N-Queens05(){
+function N-Queens06(){
   local -i row="$1";
   local -i size="$2";
   local -i col=0;       # 再帰に必要
@@ -164,7 +143,7 @@ function N-Queens05(){
       lx=$((row+col));
       if (( !down[dx] && !right[rx] && !left[lx]));then
         down[$dx]=1; right[$rx]=1; left[$lx]=1;
-        N-Queens05 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
+        N-Queens06 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
         down[$dx]=0; right[$rx]=0; left[$lx]=0;
       fi
     }
@@ -183,7 +162,7 @@ function NQ(){
     TOTAL=0;
     UNIQUE=0;
     startTime=$(date +%s);# 計測開始時間
-    N-Queens05 0 "$N";
+    N-Queens06 0 "$N";
     endTime=$(date +%s); 	# 計測終了時間
     ss=$((endTime-startTime));# hh:mm:ss 形式に変換
     hh=$((ss/3600));
@@ -198,7 +177,7 @@ NQ;
 ```
 
 ```
-bash-3.2$ bash N-Queens05.sh
+bash-3.2$ bash N-Queens06.sh
  N:        Total       Unique        hh:mm:ss
  4:            2            0         0:00:00
  5:           10            0         0:00:00
@@ -211,30 +190,42 @@ bash-3.2$ bash N-Queens05.sh
 bash-3.2$
 ```
 
+
+
 だんだん、それっぽくなってきましたね。
 次もお楽しみに！
 
-
-
-この記事
-N-Queens問題：Ｎクイーン問題（６）配置フラグ
+## リンクと過去記事
+N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-
-
-過去記事
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
+N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
+N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
+N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
+
+
+
 
 ## 書籍の紹介
 {{% amazon

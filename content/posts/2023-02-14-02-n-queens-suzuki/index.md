@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（２）ブルートフォース"
+title: "Ｎクイーン問題（２）第一章　ブルートフォース"
 date: 2023-02-14T14:56:53+09:00
 draft: false
 authors: suzuki
@@ -14,36 +14,13 @@ tags:
   - 鈴木維一郎
 ---
 
-前回の記事
-N-Queens問題：Ｎクイーン問題（１）
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
-
-
-エイト・クイーンのソース置き場 BashもJavaもPythonも！
-https://github.com/suzukiiichiro/N-Queens
-
-
-過去記事
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
-
 
 
 
 ## Ｎクイーンについて簡単に
 ではさっそくＮクイーン問題を考えてみましょう。
 この章では、可能性のあるすべての解を体系的に数え上げる方法を考えてみます。
-
 こういった「ちからまかせ」に数え上げる方法を、ブルートフォースといいます。
-
 今回は、Ｎクイーンを「ブルートフォース」で考えてみるということになります。
 
 
@@ -539,36 +516,36 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 の１を満たしているに過ぎません。
 
 ということで、気を取り直して
-`N-Queens01.sh` ファイルを作成してください。
-``` bash:N-Queens01.sh
+`N-Queens02.sh` ファイルを作成してください。
+
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 
-function N-Queens01(){
+function N-Queens02(){
  : # まだなにもない
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queen01()";
-  N-Queens01 0 5;
+  echo "<>１．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
 ```
 
 ファイルを実行するとファイル最下部の `NQ`が実行され、`function NQ()`が呼び出されます。
-
-現在の`function NQ()`は`echo`と `N-Queens01()`関数の呼び出しがあるだけです。
+現在の`function NQ()`は`echo`と `N-Queens02()`関数の呼び出しがあるだけです。
 
 ```
-  N-Queens01 0 5;
+  N-Queens02 0 5;
 ```
-`N-Queens01()`関数に、２つのパラメータ `0` と ` 8` の２つのパラメータ（値）を渡しています。
 
-`function N-Queens01()`関数を追記します。
-さっそく `NQ()` から `N-Queens01()` へ渡した２つのパラメータを、`N-Queen01()`関数の冒頭で明示的に変数へ代入しましょう。
+`N-Queens02()`関数に、２つのパラメータ `0` と ` 8` の２つのパラメータ（値）を渡しています。
+`function N-Queens02()`関数を追記します。
+さっそく `NQ()` から `N-Queens02()` へ渡した２つのパラメータを、`N-Queens02()`関数の冒頭で明示的に変数へ代入しましょう。
 
 ``` bash
-function N-Queen01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
 }
@@ -576,42 +553,39 @@ function N-Queen01(){
 
 変数前についている `local` は、この関数でのみ有効な変数であることを示しており、`-i` は、変数に代入される値が「整数」であることを明示的に指定しています。
 
-関数パラメータの `$1` や `$2` といった変数は、関数に渡された変数の順番で、
+関数パラメータの `$1` や `$2` といった変数は、関数に渡された変数の順番です。
 
 ```
-  N-Queens01 0 5;
+  N-Queens02 0 5;
 ```
 
 
 １つ目のパラメータは `0` なので `$1`に、２つ目のパラメータは `5` なので、`$2` として関数に渡されます。
-
 関数内で、`$1` `$2` としてプログラムを表記しても動作しますが、ソースの可読性（読みやすさ）が落ちてしまいます。
-
 関数の冒頭で、きちんとわかりやすい変数名に代入してあげることが望ましいです。
-
 また、`$1` や `$2`の代入は、必ずダブルクォーテーションで囲みましょう。
 
 ``` bash
-function N-Queen01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
 }
 ```
 
 ここまでのソースは以下のとおりです。
-``` bash:N-Queens01.sh
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
 }
 #
 function NQ(){
   # ブルートフォース　力まかせ探索
-  N-Queens01 0 5;
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -682,7 +656,7 @@ read -p "なにかキーを入力してください"
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
 
@@ -694,7 +668,7 @@ function N-Queens01(){
 #
 function NQ(){
   # ブルートフォース　力まかせ探索
-  N-Queens01 0 5;
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -702,7 +676,7 @@ NQ;
 
 実行結果は以下のとおりです。
 ```
-bash-3.2$ bash N-Queens01.sh
+bash-3.2$ bash N-Queens02.sh
 col: 0 size: 5 min: 0
 col: 1 size: 5 min: 0
 col: 2 size: 5 min: 0
@@ -756,12 +730,12 @@ bash-3.2$
 
 `read -p` で出力を確認することができてとても便利です。
 
-``` bash:N-Queens01.sh
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
   for((col=0;col<size;col++)){
@@ -773,8 +747,8 @@ function N-Queens01(){
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queens01()";
-  N-Queens01 0 5;
+  echo "<>１．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -782,8 +756,8 @@ NQ;
 
 実行結果は以下のとおりです。
 ```
-bash-3.2$ bash N-Queens01.sh
-<>１．ブルートフォース（力まかせ探索） N-Queens01()
+bash-3.2$ bash N-Queens02.sh
+<>１．ブルートフォース（力まかせ探索） N-Queens02()
 col: 0 row: 0 size: 5 min: 0
 col: 0 row: 1 size: 5 min: 0
 col: 0 row: 2 size: 5 min: 0
@@ -819,12 +793,12 @@ bash-3.2$
 ここまでの処理を再帰を使って書いてみます。
 まずは、ソースを見てください。
 
-``` bash N-Queens01.sh
+``` bash N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
   for((col=0;col<size;col++)){
@@ -835,14 +809,14 @@ function N-Queens01(){
        }
        echo "";  # 改行
       else
-        N-Queens01 "$((min+1))" "$size"; 
+        N-Queens02 "$((min+1))" "$size"; 
      fi
   }
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queens01()";
-  N-Queens01 0 5;
+  echo "<>１．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -876,7 +850,7 @@ bash-3.2$
 ## 重要なこと
 
 ```
-        N-Queen01 "$((min+1))" "$size"; 
+        N-Queens02 "$((min+1))" "$size"; 
 ```
 
 `$((min+1))` 
@@ -890,12 +864,12 @@ bash-3.2$
 
 あと、`min==size-1` といった基底条件を忘れずに。
 上記のことを含めたソースは以下のとおりです。
-``` bash:N-Queens01.sh
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
   local -i col=0;         # 再帰に必要
@@ -909,14 +883,14 @@ function N-Queens01(){
        }
        echo "";  # 改行
       else
-        N-Queens01 "$((min+1))" "$size"; 
+        N-Queens02 "$((min+1))" "$size"; 
      fi
   }
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queens01()";
-  N-Queens01 0 5;
+  echo "<>１．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -925,7 +899,7 @@ NQ;
 
 実行結果
 ```
-<>１．ブルートフォース（力まかせ探索） N-Queen01()
+<>１．ブルートフォース（力まかせ探索） N-Queens02()
  0  0  0  0  0 
  0  0  0  0  1 
  0  0  0  0  2 
@@ -995,14 +969,14 @@ echo -n "$COUNT: "; # 改行無しで出力
 
 
 ここまでのソースは以下のとおりです。
-``` bash:N-Queens01.sh
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
   local -i col=0;         # 再帰に必要
@@ -1017,14 +991,14 @@ function N-Queens01(){
        }
        echo "";  # 改行
       else
-        N-Queens01 "$((min+1))" "$size"; 
+        N-Queens02 "$((min+1))" "$size"; 
      fi
   }
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queens01()";
-  N-Queens01 0 5;
+  echo "<>１．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -1033,7 +1007,7 @@ NQ;
 実行結果は以下のとおりです。
 
 ```
-<>１．ブルートフォース（力まかせ探索） N-Queens01()
+<>１．ブルートフォース（力まかせ探索） N-Queens02()
 1:0 0 0 0 0 
 2:0 0 0 0 1 
 3:0 0 0 0 2 
@@ -1102,14 +1076,14 @@ NQ;
 この２箇所の出力は画面に出力することなく、変数に入れるだけにして、内側の `for` を抜けたときにまとめて画面出力することが速度改善に繋がります。
 
 ソースは以下のとおりです。
-``` bash:N-Queens01.sh
+``` bash:N-Queens02.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;       # カウンター
 : '
 ブルートフォース　力まかせ探索
 ';
-function N-Queens01(){
+function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
   local -i col=0;         # 再帰に必要
@@ -1132,14 +1106,14 @@ function N-Queens01(){
        # -n オプションは付けずに改行付きで出力します。
        echo "$sEcho"     # flush出力
       else
-        N-Queens01 "$((min+1))" "$size";  # 再帰
+        N-Queens02 "$((min+1))" "$size";  # 再帰
      fi
   }
 }
 #
 function NQ(){
-  echo "<>１．ブルートフォース（力まかせ探索） N-Queens01()";
-  N-Queens01 0 5;
+  echo "<>２．ブルートフォース（力まかせ探索） N-Queens02()";
+  N-Queens02 0 5;
 }
 # 
 NQ;
@@ -1180,17 +1154,17 @@ NQ;
 参考までに８ｘ８の実行結果は以下のとおりです。
 以下の部分を８とすればよいですね。
 ``` bash
-  # N-Queens01 0 5;
-  N-Queens01 0 8;
+  # N-Queens02 0 5;
+  N-Queens02 0 8;
 ```
 
 実行方法
 ```
-$ bash N-Queens01.sh
+$ bash N-Queens02.sh
 ```
 
 ```
-<>１．ブルートフォース（力まかせ探索） N-Queens01()
+<>１．ブルートフォース（力まかせ探索） N-Queens02()
 1: 0 0 0 0 0 0 0 0 
 2: 0 0 0 0 0 0 0 1 
 3: 0 0 0 0 0 0 0 2 
@@ -1355,21 +1329,34 @@ bash-3.2$
 ```
 
 
-次の記事
-Ｎクイーン問題（３）バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-
-過去記事
-N-Queens問題：Ｎクイーン問題（５）進捗表示テーブルの作成
+## リンクと過去記事
+N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
 https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）バックトラック
+N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック
 https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）バックトラック準備編
+N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編
 https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）ブルートフォース
+N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース
 https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）について
+N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて
 https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
+エイト・クイーンのソース置き場 BashもJavaもPythonも！
+https://github.com/suzukiiichiro/N-Queens
 
 
 
