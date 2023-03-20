@@ -207,7 +207,7 @@ https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
 https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
@@ -223,7 +223,6 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
-
 
 
 

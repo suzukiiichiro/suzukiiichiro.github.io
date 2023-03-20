@@ -212,16 +212,6 @@ N=24発見 電気通信大学
 
 次回は、シェルスクリプトでエイト・クイーンを解決・解説していきたいと思います。
 
-次の記事
-N-Queens問題：Ｎクイーン問題（２）
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-
-
-  エイト・クイーン（Ｎクイーン問題）をBash/Lua/Python/Java/C/OpenCL/CUDAなどあらゆるプログラミング言語でワールドレコード（世界一）に挑戦するサイト 
-
-  N-Queens
-  https://github.com/suzukiiichiro/N-Queens
-
 
 ## リンクと過去記事
 N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
@@ -235,7 +225,7 @@ https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
 https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
 https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
@@ -251,7 +241,6 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
-
 
 
 
