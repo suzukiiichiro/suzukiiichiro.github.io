@@ -1,0 +1,898 @@
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（１３）第三章　ビットマップ｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><meta property="og:title" content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta property="og:description" content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-04-05T19:08:30+09:00"><meta property="article:modified_time" content="2023-04-05T19:19:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta name=twitter:description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１３）第三章　ビットマップ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"],"datePublished":"2023-04-05T19:08:30+09:00","dateModified":"2023-04-05T19:19:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１３）第三章　ビットマップ","item":"https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_159>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li><li><a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>Linux</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a><li><span class=breadcrumb-item>Ｎクイーン問題（１３）第三章　ビットマップ</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
+<time class="article-time--item article-time--published">2023.04.05</time>
+<time class="article-time--item article-time--reading">読了時間: 19分</time></div></header><h1 class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ビットマップ>ビットマップ</a></li><li><a href=#ビットマップの特徴>ビットマップの特徴</a></li><li><a href=#実践ビットマップ>実践、ビットマップ！</a></li><li><a href=#効き筋>効き筋</a></li><li><a href=#bitビット>bit（ビット）</a></li><li><a href=#qの位置を確認>Qの位置を確認</a></li><li><a href=#row--1-のleftの効き筋をチェックしてみます>row + 1 のleftの効き筋をチェック）してみます</a></li><li><a href=#row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</a></li><li><a href=#row--1-のrightの効き筋をチェック>row + 1 のrightの効き筋をチェック</a></li><li><a href=#maskマスク>mask（マスク）</a></li><li><a href=#leftdownrightを反転して配置可能な場所を求める>(left|down|right)を反転して、配置可能な場所を求める</a></li><li><a href=#斜めの効き筋>斜めの効き筋</a></li><li><a href=#ソースコード>ソースコード</a></li><li><a href=#実行結果>実行結果</a></li><li><a href=#リンクと過去記事>リンクと過去記事</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><h2 id=ビットマップ>ビットマップ</h2><p>Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものが<code>bitmap</code>(ビットマップ)です。</p><h2 id=ビットマップの特徴>ビットマップの特徴</h2><p>斜め方向にクイーンを配置したかどうかを、<code>left</code> <code>down</code> <code>right</code> といった <code>bit</code> フラグで表します。</p><p>大きなメリットは、<br>１．ビットマップであれば、シフト(&#171;1,&#187;1)により高速にデータを移動できる。<br>２．配置フラグといったフラグ配列では、データの移動に O(N) の時間がかかるが、ビットマップであれば O(1)ですむ。<br>３．フラグ配列のように斜め方向に <code>2*N-1</code> の要素を用意する必要はなく <code>Nビット</code>で充分たりる。<br>４．ビットは初期値が０なので扱いやすい</p><p>デメリットとしては<br>２進数と１０進数により難読化が極まっている。</p><h2 id=実践ビットマップ>実践、ビットマップ！</h2><p>Ｎ５のボードレイアウト</p><pre tabindex=0><code> 4 2 0 3 1  ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | |O| | | 00100
++-+-+-+-+-+
+|O| | | | | 10000
++-+-+-+-+-+
+| | | |O| | 00010
++-+-+-+-+-+
+| |O| | | | 01000
++-+-+-+-+-+
+</code></pre><p>各行(row)の状態をbitwise（ビットワイズ）で表現します。<br>クイーンが置いてある位置の<code>bit</code>（ビット）をON（１）にします。</p><p>バックトラッキングは行(row=0)から下に向かって順に、クイーンが配置できた場所の<code>bit</code>をON（１）にして、その後rowが一つインクリメントします。</p><pre tabindex=0><code> 4         ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code> 4 2       ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | |O| | | 00100
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code> 4 2 0     ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | |O| | | 00100
++-+-+-+-+-+
+|O| | | | | 10000
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code> 4 2 0 3   ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | |O| | | 00100
++-+-+-+-+-+
+|O| | | | | 10000
++-+-+-+-+-+
+| | | |O| | 00010
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code> 4 2 0 3 1  ↓ bitmapで表現
++-+-+-+-+-+
+| | | | |O| 00001
++-+-+-+-+-+
+| | |O| | | 00100
++-+-+-+-+-+
+|O| | | | | 10000
++-+-+-+-+-+
+| | | |O| | 00010
++-+-+-+-+-+
+| |O| | | | 01000
++-+-+-+-+-+
+</code></pre><h2 id=効き筋>効き筋</h2><p>次に、効き筋をチェックするためにさらに３つのビットフィールドを用意します。</p><pre tabindex=0><code>left
++-+-+-+-+-+
+| | | |Q| |
++-+-+-+-+-+
+| | |L| | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code>down
++-+-+-+-+-+
+| | | |Q| |
++-+-+-+-+-+
+| | | |D| |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code>right
++-+-+-+-+-+
+| | | |Q| |
++-+-+-+-+-+
+| | | | |R|
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><p>左下に効き筋が進む(left)もの、真下に効き筋が進む(down)もの、右下に効き筋が進む(right)ものの３つです。<br>その３つのビットフィールドをそれぞれ、left, down, right と呼ぶことにします。</p><p>まずは <code>row0</code> にクイーンを配置します。</p><pre tabindex=0><code>Qの配置
++-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><p>次に、<code>row0</code> のビットフィールドから <code>row+1</code> 番目のビットフィールド、ようするにひとつ下の <code>row</code> に探索を進め、Ｎ番目のビットフィールド <code>bit</code> と、３つのビット <code>left</code> <code>down</code> <code>right</code> と「ＯＲ演算」を使って効きをチェックします。</p><p>leftはひとつ左に</p><pre tabindex=0><code>left
++-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+| | |L| | | 00100
++-+-+-+-+-+
+</code></pre><p>downはそのまま下に、</p><pre tabindex=0><code>down
++-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+| | | |D| | 00010
++-+-+-+-+-+
+
+rightはひとつ右へ
+
+right
++-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+| | | | |R| 00001
++-+-+-+-+-+
+</code></pre><p>こういったロジックで <code>row + 1</code> 番目の効き筋をチェックします。</p><h2 id=bitビット>bit（ビット）</h2><p>クイーンの位置は「Q」です。<br>Qを配置した場合、そのposition（場所）は<code>bit</code>で表します。<br><code>bit</code>（ビット）には、クイーンが配置されるとその位置が格納されるわけです。</p><p>以下の場合、<code>bit</code>は <code>00010</code> となります。</p><pre tabindex=0><code>+-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+</code></pre><p>ここで<code>bit</code>の操作が複雑となる原因のひとつ、<br>「00010」というクイーンの位置情報は、そのまま<code>bit</code>に格納されるのではありません。</p><p><code>bit</code>には<code>00010</code> という場所の情報が格納されるわけですが、</p><p>「00001」の場合は「 1」<br>「00010」の場合は「 2」<br>「00100」の場合は「 4」<br>「01000」の場合は「 8」<br>「10000」の場合は「16」</p><p>が格納されることになります。</p><p>「はぁ？」</p><p>まず、<br>「00001」という並びは０と１でなりたつ表現方法で「２進数」といいます。<br>また、１０で桁上りをする表現方法はおなじみの「１０進数」といいます。</p><pre tabindex=0><code>00010   　２進数
+    2   １０進数 
+</code></pre><p>２進数を１０進数に置き換える早見表</p><pre tabindex=0><code>10進数  128  64  32  16   8   4   2   1
+ 2進数    0   0   0   0   0   0   0   0
+</code></pre><p>２進数は <code>00010</code> の１０進数の値が知りたいわけですから、イカのように当てはめると、１０進数では <code>4</code> となります。</p><pre tabindex=0><code>２進数を１０進数に置き換える早見表
+10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+</code></pre><p><code>4</code> が <code>bit</code>に格納されます。</p><p>bashでは２進数を１０進数に変換して出力する方法が用意されています。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00001 ))
+1
+bash-3.2$ echo $(( 2#00010 ))
+2
+bash-3.2$ echo $(( 2#00100 ))
+4
+bash-3.2$ echo $(( 2#01000 ))
+8
+bash-3.2$ echo $(( 2#10000 ))
+16
+bash-3.2$
+</code></pre><p>余談ですが（余談ということでもないのですが）、<br>Ｎが８の場合で、00010000 というクイーン配置の場合</p><pre tabindex=0><code>10進数  128  64  32  16   8   4   2   1
+ 2進数    0   0   0   1   0   0   0   0
+</code></pre><p>ですので、10進数では「16」となります。<br>bashでも求めることができます。<br>入力する値が２進数であることを明示的に <code>2#</code> としています。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#0010000 ))
+16
+bash-3.2$
+</code></pre><p>さらに余談ですが（これは本当に余談）、ビットフィールドに複数の<code>bit</code>がON（１）である場合、例えば「00101010」のような場合は、以下のように計算します。<br>（（一行にクイーンが３つもある！！）</p><pre tabindex=0><code>00101010 
+10進数  128  64  32  16   8   4   2   1
+ 2進数    0   0   1   0   1   0   1   0
+</code></pre><p>この場合は、<code>bit</code>が立っている（と言います）10進数を足し合わせることで表現できます。</p><pre tabindex=0><code>32 + 8 + 2 = 42
+</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00101010 ))
+42
+bash-3.2$
+</code></pre><h2 id=qの位置を確認>Qの位置を確認</h2><p>では、まずはQのposition（位置）を確認します。</p><pre tabindex=0><code>Q
++-+-+-+-+-+
+| | | |Q| | 00010 (`bit`)
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+</code></pre><p>Qのpositionは <code>00010</code> です。<br>１０進数では以下の早見表で見つけると良いです。</p><p>Qが置かれている<code>bit</code>の値は「00010」です</p><pre tabindex=0><code>10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+</code></pre><p>10進数では「2」ですね。<br>まず、Qのpositionがわかりました。<br>Qのpositionを<code>bit</code>と言います。<br>通常、<code>bit</code>は変数名も<code>bit</code>とします。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+</code></pre><h2 id=row--1-のleftの効き筋をチェックしてみます>row + 1 のleftの効き筋をチェック）してみます</h2><pre tabindex=0><code>left
++-+-+-+-+-+
+| | | |Q| | 00010 (`bit`)
++-+-+-+-+-+
+| | |L| | | 
++-+-+-+-+-+
+</code></pre><p>「L」は「Q」を左に一つずらした位置となります。<br><code>L</code>を<code>left</code>に置き換えた計算は以下のとおりです。</p><pre tabindex=0><code>( left | bit)&lt;&lt;1
+</code></pre><p><code>left | bit</code> といった振る舞いを「ＯＲ演算」と言います。</p><p><code>left</code> にはこの段階では値が何も入っていませんので「0」となります。<br>要するに初期値「０」のまま計算します。<br>前項で求めたとおり、Qである<code>bit</code>は以下の通りでした。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+</code></pre><p>この計算式の (left | bit) の 「left」は、まだ分かっていない値なので「０」となります。</p><pre tabindex=0><code>( left | bit )
+(   0  |  2  )
+</code></pre><p>という計算式になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|0) ))
+2
+bash-3.2$
+</code></pre><p>「２」とでました。<br>さらに左に一つシフト（&#171;1）してみます。</p><pre tabindex=0><code>( left | bit )&lt;&lt;1
+(   0  |  2  )&lt;&lt;1
+</code></pre><pre tabindex=0><code>bash-3.2$ echo $(( (2|0)&lt;&lt;1 ))
+4
+bash-3.2$
+</code></pre><p>「４」とでました。<br>「４」の２進数はなんでしょう？<br>いつもの早見表で確認しましょう。</p><pre tabindex=0><code>10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+</code></pre><p><code>00100</code> という事ですね。</p><p>Qが置かれている場所が「00010」で、<br>Lは「00100」となったわけです。<br>図で表すと以下のとおりです。</p><pre tabindex=0><code>left
++-+-+-+-+-+
+| | | |Q| | 00010 (bit)
++-+-+-+-+-+
+| | |L| | | 00100 (left|bit)&lt;&lt;1
++-+-+-+-+-+
+</code></pre><p>ということで、Qの位置から左に一つずれているのがわかります。</p><p>結果、こちらの計算式は、</p><pre tabindex=0><code>left  ← (left | bit)&lt;&lt;1
+</code></pre><pre tabindex=0><code>left  = ( left |  bit  )&lt;&lt;1
+00100 = (  0   | 00010 )&lt;&lt;1
+  4   = (  0   |   2   )&lt;&lt;1
+</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (0|2)&lt;&lt;1 ))
+4
+bash-3.2$
+</code></pre><p>ということになります。<br>結局、Qの位置「00010」のひとつ下のrowのleftの効き筋は (left|bit)&#171;1 という計算式を用いて、「00100」と、ビットの位置を一つ左にシフトした、ということになります。</p><h2 id=row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</h2><p>leftの場合は、( left | bit )&#171;1 ということをしてQの位置から左に一つずらした位置を求めました。<br>downはleftのように左に一つずらしたりする必要はありません。</p><p>ただ、気をつけることは、<code>left</code> 同様、代入される値は２進数ではなく１０進数であることです。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+
+left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+</code></pre><p>では、downを見てみます。</p><pre tabindex=0><code>down
++-+-+-+-+-+
+| | | |Q| | 00010 (bit)
++-+-+-+-+-+
+| | | |D| | 00010 (D)
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code>bit = Q = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+
+left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+</code></pre><p>downは「00010」ですのでQと同じです。<br>そりゃそうです、真下が効きですから。<br>ですので計算は以下のとおりです。</p><pre tabindex=0><code>down  = ( down |  bit  )
+00010 = (  0   | 00010 )
+  2   = (  0   |   2   )
+</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (0|2) ))
+2
+bash-3.2$
+</code></pre><p>down は 2#00010 ですので 2 です。</p><p>ここまでをまとめると以下のとおりです。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+
+left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+
+down = (down|bit)    = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+</code></pre><h2 id=row--1-のrightの効き筋をチェック>row + 1 のrightの効き筋をチェック</h2><p>rightはleft同様にシフトするわけですが、今度は右へシフトします。</p><pre tabindex=0><code>right
++-+-+-+-+-+
+| | | |Q| | 00010 (bit)
++-+-+-+-+-+
+| | | | |R| 00001 (R)
++-+-+-+-+-+
+</code></pre><pre tabindex=0><code>right = ( right |  bit  )&gt;&gt;1
+00010 = (   0   | 00010 )&gt;&gt;1
+  1   = (   0   |   2   )&gt;&gt;1
+</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (0|2)&gt;&gt;1 ))
+1
+bash-3.2$
+</code></pre><p>ここまでをまとめると以下のとおりです。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+
+left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+10進数  16   8   4   2   1
+ 2進数   0   0   1   0   0
+
+down = (down|bit)    = 2#00010 = 2
+10進数  16   8   4   2   1
+ 2進数   0   0   0   1   0
+
+right =(right|bit)&gt;&gt;1= 2#00001 = 1
+10進数  16   8   4   2   1
+ 2進数   0   0   0   0   1
+</code></pre><h2 id=maskマスク>mask（マスク）</h2><p><code>row + 1</code> 番目のビットフィールドを探索して、<code>left</code> <code>down</code> <code>right</code> の３つのbitフラグを「ＯＲ演算」したビットフィールドを作り、それがＯＮになっている位置は効き筋に当たるので置くことができない位置ということになります。</p><p>「はぁ？」<br>では解説します。</p><pre tabindex=0><code>`row + 1` 番目のビットフィールドを探索して」
+</code></pre><p>こちらをもう少し噛み砕いて説明すると、現在は <code>row</code>にいるわけですが、</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  今、自分はここにいて
++-+-+-+-+-+
+| | | | | |   1
++-+-+-+-+-+
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>自分がいる <code>row</code> の一つしたの「row+1」のビットフィールド、</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+
+|*|*|*|*|*|   1  この行(row)を順番に探索する
++-+-+-+-+-+
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>を、<code>left</code> <code>down</code> <code>right</code> の３つのフラグを使って、効きををチェックするわけだけど、いずれかがＯＮ（１）になっていたら効き筋に当たるからクイーンは配置できませんよ。という意味になります。</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  bit  =      Q        = 2#00010 = 2
++-+-+-+-+-+      left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+|*|*|L|D|R|   1  down = (down|bit)    = 2#00010 = 2
++-+-+-+-+-+      right= (right|bit)&gt;&gt;1= 2#00001 = 1
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>そこで、上記の図の２箇所の「アスタリスク＊」の場所がクイーンの配置が可能であることがわかりました。</p><p>この２箇所のアスタリスクは場所を簡単に得ることができます。</p><p>まず、<code>left</code> <code>down</code> <code>right</code> の３つのビットフィールドをORしたビットフィールドをビット反転させます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>~<span class=o>(</span>left<span class=p>|</span>down<span class=p>|</span>right<span class=o>)</span>
+</span></span></code></pre></div><p>チルダ（〜）をつけると反転します。</p><p>leftは4 downは2 rightは1 なのですから、</p><pre tabindex=0><code>bit  =      Q        = 2#00010 = 2
+left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+down = (down|bit)    = 2#00010 = 2
+right= (right|bit)&gt;&gt;1= 2#00001 = 1
+</code></pre><p>(left|down|right)<br>は、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>(</span>2<span class=p>|</span>4<span class=p>|</span>1<span class=o>)</span>
+</span></span></code></pre></div><p>と、なります。<br>bashで確認すると以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|4|1) ))
+7
+bash-3.2$
+</code></pre><p>以下の図の通り３箇所にクイーンの効きがあることを示しています。</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+| | |L|D|R|   1  00111 
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>bashで確認すると以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00111 ))
+7
+bash-3.2$
+</code></pre><p>LDRの位置は <code>2#00111</code> で１０進数では <code>7</code> です。<br>ここで、<code>2#11000</code>を求めることができれば、それがクイーンを配置することができる場所ということになります。</p><p><code>2#11000</code> をbashで求めると<code>24</code>になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#11000 ))
+24
+bash-3.2$
+</code></pre><p>演算で求める場合は、上記で言う「反転」という演算を使います。</p><p>(L|D|R) の 反転はチルダ「〜」を使って</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>~<span class=o>(</span>L<span class=p>|</span>D<span class=p>|</span>R<span class=o>)</span>
+</span></span></code></pre></div><p>となります。<br>では、先に求めた「２４」になるかを確認してみましょう。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|4|1) ))
+7
+bash-3.2$ echo $(( ~(2|4|1) ))
+-8
+bash-3.2$ 
+</code></pre><p>なりませんね。。。</p><p>ここでmask(マスク）を使います。<br>maskとは、ビットフィールドのビットをすべて立てたものです。</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+|M|M|M|M|M|   1  11111
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>このmaskは簡単に求めることができます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span>&lt;&lt;size<span class=o>)-</span><span class=m>1</span> <span class=k>))</span><span class=p>;</span>
+</span></span></code></pre></div><p>Ｎ５の場合、２進数で求めると「３１」になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#11111 ))
+31
+</code></pre><p>Ｎはサイズ<br>( 1&#171;Ｎ )-1 という計算式で求めることができます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (1&lt;&lt;5)-1 ))
+31
+bash-3.2$
+</code></pre><p>このmaskを使って<br>１．<code>left</code> <code>down</code> <code>right</code>の３つのビットを使って効きの場所を特定<br>２．maskですべての配置箇所のビットをＯＮ（１）にする<br>３．maskから(left|down|right)を間引く</p><p>ことによって、効きのない場所を特定することができます。</p><p><code>left</code> <code>down</code> <code>right</code></p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+| | |L|D|R|   1  00111
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>maskを使ってすべてのビットを立てる</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+|M|M|M|M|M|   1  11111
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+|1|1|0|0|0|   1  11000 = 31
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>ここまでの動きを演算式で書くと以下の通りになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>size</span><span class=o>=</span>5<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
+</span></span></span><span class=line><span class=cl><span class=s>bitmap=$((mas</span>k<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=k>))</span><span class=o>)</span><span class=p>;</span>
+</span></span></code></pre></div><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+|1|1|0|0|0|   1  11000 = 31
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><p>この「３１(2#11000)」をbitmap（ビットマップ）と言います。<br>Ｎクイーンでは、配置可能な場所という位置づけになります。</p><h2 id=leftdownrightを反転して配置可能な場所を求める>(left|down|right)を反転して、配置可能な場所を求める</h2><p>先の項でご説明したとおり、配置可能なビットフィールドを <code>bitmap</code> に格納することができました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>size</span><span class=o>=</span>5<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
+</span></span></span><span class=line><span class=cl><span class=s>bitmap=$((mas</span>k<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=k>))</span><span class=o>)</span><span class=p>;</span>
+</span></span></code></pre></div><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  
++-+-+-+-+-+      
+|1|1|0|0|0|   1  11000 = 31
++-+-+-+-+-+      
+| | | | | |   2
++-+-+-+-+-+
+| | | | | |   3
++-+-+-+-+-+
+| | | | | |   4
++-+-+-+-+-+
+</code></pre><h2 id=斜めの効き筋>斜めの効き筋</h2><p>ビットマッププログラムのポイントは、斜めの利き筋のチェックをビット演算で行うことです。</p><pre tabindex=0><code>    0 1 2 3 4
+  *-------------
+  | . . . . . .
+  | . . . -3. .  0x02
+  | . . -2. . .  0x04
+  | . -1. . . .  0x08 (1 bit 右シフト)
+  | Q . . . . .  0x10 (Q の位置は 4)
+  | . +1. . . .  0x20 (1 bit 左シフト)  
+  | . . +2. . .  0x40
+  | . . . +3. .  0x80
+  *-------------
+</code></pre><p>ビットマップで肝となるところはここです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>    <span class=nv>bit</span><span class=o>=</span><span class=k>$((</span> <span class=o>-</span>bitmap <span class=o>&amp;</span> bitmap <span class=k>))</span><span class=p>;</span>    <span class=c1># 一番右のビットを取り出す</span>
+</span></span><span class=line><span class=cl>    <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>       <span class=c1># 配置可能なパターンが一つずつ取り出される</span>
+</span></span></code></pre></div><p>この演算式の意味を理解するには負の値がコンピュータにおける２進法ではどのように表現されているのかを知る必要があります。</p><p>負の値を２進数で表すと次のようになります。</p><pre tabindex=0><code> 00000011   3
+ 00000010   2
+ 00000001   1
+ 00000000   0
+ 11111111  -1
+ 11111110  -2
+ 11111101  -3
+</code></pre><p>正の値を負の値（補数と言います）にするときは、Ｒをビット反転してから＋１します。</p><pre tabindex=0><code>
+ 00000001   1
+ 11111110   反転
+ 11111111   -1 （1を加える）
+
+ 00000010   2
+ 11111101  反転
+ 11111110  -2  （１を加える）
+</code></pre><p>加えるところがわかりにくいですね。</p><pre tabindex=0><code> 00000001   1
+</code></pre><p>に１を加えると</p><pre tabindex=0><code> 00000010   2
+</code></pre><p>さらに１を加えると</p><pre tabindex=0><code>00000011   3
+</code></pre><p>となります。１０進数の足し算と２進数のインクリメントは異なります。</p><p>ここで、 正の値２２と−２２をＡＮＤ演算すると以下のようになります。</p><pre tabindex=0><code>     00010110   22
+ AND 11101010  -22
+------------------
+     00000010
+</code></pre><p>Ｎを２進法で表したときの一番下位のＯＮビットがひとつだけ抽出される結果が得られ、極めて簡単な演算によって１ビット抽出を実現させていることが重要です。</p><p>余談ですが、<br>bashで２進数を１０進数に変換するには以下のようにしました。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#01000 ));
+8
+</code></pre><p>bashで１０進数を２進数に変換するには以下のようにします。</p><pre tabindex=0><code>bash-3.2$ bc &lt;&lt;&lt;&#34;ibase=10;obase=10;8&#34;
+1000
+</code></pre><p>余談終わり。</p><p>そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=o>((</span> bitmap <span class=o>))</span><span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=nv>bit</span><span class=o>=</span><span class=k>$((</span><span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap<span class=k>))</span> <span class=p>;</span>       <span class=c1># 一番右のビットを取り出す</span>
+</span></span><span class=line><span class=cl>    <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>       <span class=c1># 配置可能なパターンが一つずつ取り出される</span>
+</span></span><span class=line><span class=cl>    board<span class=o>[</span><span class=nv>$row</span><span class=o>]=</span><span class=s2>&#34;</span><span class=nv>$bit</span><span class=s2>&#34;</span><span class=p>;</span>             <span class=c1># Qを配置</span>
+</span></span><span class=line><span class=cl>    bitmap_R <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=k>$((</span> <span class=o>(</span>left<span class=o>|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ))&#34; &#34;$((down|bit))&#34; &#34;$(( (right|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>done</span>
+</span></span></code></pre></div><img src=bitmap.jpg width=80%><h2 id=ソースコード>ソースコード</h2><p>ソースの一番下で、再帰・非再帰を切換えて事項してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bitmap.sh data-lang=bash:bitmap.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>TOTAL</span><span class=o>=</span>0<span class=p>;</span>     <span class=c1># カウンター</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl>: <span class=s1>&#39;ボードレイアウトを出力&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>function</span> printRecord<span class=o>()</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>flag</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$2</span><span class=s2>&#34;</span><span class=p>;</span> <span class=c1># bitmap版は1 それ以外は 0</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$TOTAL</span><span class=s2>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>sEcho</span><span class=o>=</span><span class=s2>&#34; &#34;</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  : <span class=s1>&#39;ビットマップ版
+</span></span></span><span class=line><span class=cl><span class=s1>     ビットマップ版からは、左から数えます
+</span></span></span><span class=line><span class=cl><span class=s1>     上下反転左右対称なので、これまでの上から数える手法と
+</span></span></span><span class=line><span class=cl><span class=s1>     rowを下にたどって左から数える方法と解の数に変わりはありません。
+</span></span></span><span class=line><span class=cl><span class=s1>     0 2 4 1 3 
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>    |O| | | | | 0
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>    | | |O| | | 2
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>    | | | | |O| 4
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>    | |O| | | | 1
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>    | | | |O| | 3
+</span></span></span><span class=line><span class=cl><span class=s1>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s1>  &#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>((</span>flag<span class=o>))</span><span class=p>;</span><span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span><span class=o>((</span><span class=nv>i</span><span class=o>=</span>0<span class=p>;</span>i&lt;size<span class=p>;</span>i++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span><span class=o>((</span><span class=nv>j</span><span class=o>=</span>0<span class=p>;</span>j&lt;size<span class=p>;</span>j++<span class=o>)){</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>((</span> board<span class=o>[</span>i<span class=o>]</span><span class=p>&amp;</span>1<span class=s>&lt;&lt;j ));then
+</span></span></span><span class=line><span class=cl><span class=s>          sEcho=&#34;${sEcho}$((j</span><span class=o>))</span> <span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        fi 
+</span></span></span><span class=line><span class=cl><span class=s2>      }
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  else 
+</span></span></span><span class=line><span class=cl><span class=s2>  : &#39;ビットマップ版以外
+</span></span></span><span class=line><span class=cl><span class=s2>     (ブルートフォース、バックトラック、配置フラグ)
+</span></span></span><span class=line><span class=cl><span class=s2>     上から数えます
+</span></span></span><span class=line><span class=cl><span class=s2>     0 2 4 1 3 
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>    |O| | | | |
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>    | | | |O| |
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>    | |O| | | |
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>    | | | | |O|
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>    | | |O| | |
+</span></span></span><span class=line><span class=cl><span class=s2>    +-+-+-+-+-+
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>     &#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>    for((i=0;i&lt;size;i++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      sEcho=&#34;</span><span class=si>${</span><span class=nv>sEcho</span><span class=si>}${</span><span class=nv>board</span><span class=p>[i]</span><span class=si>}</span> <span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span><span class=nv>$sEcho</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>  echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  for((i=0;i&lt;size;i++)){
+</span></span></span><span class=line><span class=cl><span class=s2>    echo -n &#34;</span>-<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    if((i&lt;(size-1)));then
+</span></span></span><span class=line><span class=cl><span class=s2>      echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  }
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  for((i=0;i&lt;size;i++)){
+</span></span></span><span class=line><span class=cl><span class=s2>    echo -n &#34;</span><span class=p>|</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    for((j=0;j&lt;size;j++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((flag));then
+</span></span></span><span class=line><span class=cl><span class=s2>        if (( board[i]&amp;1&lt;&lt;j ));then
+</span></span></span><span class=line><span class=cl><span class=s2>          echo -n &#34;</span>O<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        else
+</span></span></span><span class=line><span class=cl><span class=s2>          echo -n &#34;</span> <span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
+</span></span></span><span class=line><span class=cl><span class=s2>      else
+</span></span></span><span class=line><span class=cl><span class=s2>        if((i==board[j]));then
+</span></span></span><span class=line><span class=cl><span class=s2>          echo -n &#34;</span>O<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        else
+</span></span></span><span class=line><span class=cl><span class=s2>          echo -n &#34;</span> <span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>      if((j&lt;(size-1)));then
+</span></span></span><span class=line><span class=cl><span class=s2>        echo -n &#34;</span><span class=p>|</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span><span class=p>|</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  if((i&lt;(size-1)));then
+</span></span></span><span class=line><span class=cl><span class=s2>    echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    for((j=0;j&lt;size;j++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      echo -n &#34;</span>-<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      if((j&lt;(size-1)));then
+</span></span></span><span class=line><span class=cl><span class=s2>        echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>  }
+</span></span></span><span class=line><span class=cl><span class=s2>  echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  for((i=0;i&lt;size;i++)){
+</span></span></span><span class=line><span class=cl><span class=s2>    echo -n &#34;</span>-<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    if((i&lt;(size-1)));then
+</span></span></span><span class=line><span class=cl><span class=s2>      echo -n &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  }  
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span>+<span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰版ビットマップ&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function bitmap_NR()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i mask=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
+</span></span></span><span class=line><span class=cl><span class=s>  local -i bitmap;
+</span></span></span><span class=line><span class=cl><span class=s>  local -i bit;
+</span></span></span><span class=line><span class=cl><span class=s>  local -a left[$size</span><span class=o>]</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a down<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a right<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a tmpBoard<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>         <span class=c1>#各rowのleft,right,downを足した配列</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a board<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>            <span class=c1>#クイーンを配置した場所を格納する配列</span>
+</span></span><span class=line><span class=cl>  <span class=nv>bitmap</span><span class=o>=</span>mask<span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=nb>true</span> <span class=p>;</span><span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>((</span> bitmap <span class=k>))</span><span class=s2>;then
+</span></span></span><span class=line><span class=cl><span class=s2>      bit=</span><span class=k>$((</span> <span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap <span class=k>))</span><span class=s2>;    # 一番右のビットを取り出す 
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap=</span><span class=k>$((</span> bitmap^bit <span class=k>))</span><span class=s2>;     # 配置可能なパターンが一つずつ取り出される
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;           # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( row==(size-1) ));then
+</span></span></span><span class=line><span class=cl><span class=s2>        ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>        printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;    # 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>        bitmap=tmpBoard[row];
+</span></span></span><span class=line><span class=cl><span class=s2>        ((--row));
+</span></span></span><span class=line><span class=cl><span class=s2>        continue;
+</span></span></span><span class=line><span class=cl><span class=s2>      else
+</span></span></span><span class=line><span class=cl><span class=s2>        local -i n=</span><span class=k>$((</span>row++<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        left[</span><span class=nv>$row</span><span class=s2>]=</span><span class=k>$((</span><span class=o>(</span>  left<span class=o>[</span>n<span class=o>]|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ));
+</span></span></span><span class=line><span class=cl><span class=s>        down[$row]=$((   down[n]|bit ));
+</span></span></span><span class=line><span class=cl><span class=s>        right[$row]=$(((right[n]|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        tmpBoard[</span><span class=nv>$row</span><span class=s2>]=</span><span class=nv>$bitmap</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;         # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>        bitmap=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>[</span>row<span class=o>]|</span>down<span class=o>[</span>row<span class=o>]|</span>right<span class=o>[</span>row<span class=o>])</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        continue;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    else
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap=tmpBoard[row];
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( row==0));then
+</span></span></span><span class=line><span class=cl><span class=s2>        break ;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>      (( row-- ));
+</span></span></span><span class=line><span class=cl><span class=s2>      continue
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  done 
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;再帰版ビットマップ&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function bitmap_R()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;; local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i left=&#34;</span><span class=nv>$3</span><span class=s2>&#34;; local -i down=&#34;</span><span class=nv>$4</span><span class=s2>&#34;; local -i right=&#34;</span><span class=nv>$5</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i bitmap=;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i bit=;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i col=0;                     # 再帰に必要
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i mask=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
+</span></span></span><span class=line><span class=cl><span class=s>  if (( row==size</span> <span class=k>))</span><span class=s2>;then
+</span></span></span><span class=line><span class=cl><span class=s2>     ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>     printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;         # 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>  else
+</span></span></span><span class=line><span class=cl><span class=s2>    bitmap=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    while (( bitmap ));do
+</span></span></span><span class=line><span class=cl><span class=s2>      bit=</span><span class=k>$((</span><span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap<span class=k>))</span><span class=s2> ;       # 一番右のビットを取り出す
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span><span class=s2> ;       # 配置可能なパターンが一つずつ取り出される
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;             # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap_R &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34; &#34;</span><span class=k>$((</span> <span class=o>(</span>left<span class=o>|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ))&#34; &#34;$((down|bit))&#34; &#34;$(( (right|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2># 非再帰版ビットマップ
+</span></span></span><span class=line><span class=cl><span class=s2>#time bitmap_NR 5 0;
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2># 再帰版ビットマップ
+</span></span></span><span class=line><span class=cl><span class=s2>time bitmap_R 5 0 0 0 0;    
+</span></span></span><span class=line><span class=cl><span class=s2> echo &#34;</span><span class=nv>$TOTAL</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>exit;
+</span></span></span></code></pre></div><h2 id=実行結果>実行結果</h2><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>1
+ 0 2 4 1 3 
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+2
+ 0 3 1 4 2 
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+3
+ 1 3 0 2 4 
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+4
+ 1 4 2 0 3 
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+5
+ 2 0 3 1 4 
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+6
+ 2 4 1 3 0 
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+
+7
+ 3 0 2 4 1 
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+8
+ 3 1 4 2 0 
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+
+9
+ 4 1 3 0 2 
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+10
+ 4 2 0 3 1 
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+10
+
+real	0m0.025s
+user	0m0.022s
+sys	0m0.002s
+</code></pre><h2 id=リンクと過去記事>リンクと過去記事</h2><p>N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（８）第一章　まとめ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/</a></p><p>エイト・クイーンのソース置き場 BashもJavaもPythonも！<br><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p><h2 id=書籍の紹介>書籍の紹介</h2><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4873112672/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873112672&amp;linkCode=as2&amp;tag=nlpqueens09-22&amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16"></div><div class="columns amazon-info"><h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2><p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。</p><span class=link>Amazonで詳細を見る</span></div></a><small>Amazon.co.jpアソシエイトを使用</small></aside><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4797377623/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4797377623&amp;linkCode=as2&amp;tag=nlpqueens09-22&amp;linkId=3c8d4566263ae99374221c4f8f469154" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg alt="UNIXシェルスクリプト マスターピース132"></div><div class="columns amazon-info"><h2 class=amazon-name>UNIXシェルスクリプト マスターピース132</h2><p>すべてのUNIXエンジニア必携!!<p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。<br>知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。</p></p><span class=link>Amazonで詳細を見る</span></div></a><small>Amazon.co.jpアソシエイトを使用</small></aside><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4774186945/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4774186945&amp;linkCode=as2&amp;tag=nlpqueens09-22&amp;linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー）  2017/1/20"></div><div class="columns amazon-info"><h2 class=amazon-name>[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） 2017/1/20</h2><p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。</p><span class=link>Amazonで詳細を見る</span></div></a><small>Amazon.co.jpアソシエイトを使用</small></aside><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4797393106/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4797393106&amp;linkCode=as2&amp;tag=nlpqueens09-22&amp;linkId=f514a6378c1c10e59ab16275745c2439" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg alt="新しいシェルプログラミングの教科書 単行本"></div><div class="columns amazon-info"><h2 class=amazon-name>新しいシェルプログラミングの教科書 単行本</h2><p>エキスパートを目指せ!!<p>システム管理やソフトウェア開発など、<br>実際の業務では欠かせないシェルスクリプトの知識を徹底解説</p><p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、<br>類書と差別化を図るとともに、より実践的なプログラミングを紹介します。<br>またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。<br>イマドキのエンジニア必携の一冊。</p><p>▼目次<br>CHAPTER01 シェルってなんだろう<br>CHAPTER02 シェルスクリプトとは何か<br>CHAPTER03 シェルスクリプトの基本<br>CHAPTER04 変数<br>CHAPTER05 クォーティング<br>CHAPTER06 制御構造<br>CHAPTER07 リダイレクトとパイプ<br>CHAPTER08 関数<br>CHAPTER09 組み込みコマンド<br>CHAPTER10 正規表現と文字列<br>CHAPTER11 シェルスクリプトの実行方法<br>CHAPTER12 シェルスクリプトのサンプルで学ぼう<br>CHAPTER13 シェルスクリプトの実用例<br>CHAPTER14 テストとデバッグ<br>CHAPTER15 読みやすいシェルスクリプト</p></p><span class=link>Amazonで詳細を見る</span></div></a><small>Amazon.co.jpアソシエイトを使用</small></aside></div><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><aside class="section related-contents--wrapper"><h2 class=section-title>関連するコンテンツ</h2><div class=article-list><article class="has-image article-item" data-date=2023.03.17><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（１２）第二章　まとめ></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（１２）第二章　まとめ</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.17</time></div><p class=article-subtitle>第２章 まとめ ここまでＮクイーンをこんなにやってきました。 N-Queens問題：Ｎクイーン問題（１２）第二章 まとめ https://s…</p></div></a></article><article class="has-image article-item" data-date=2023.03.17><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.17</time></div><p class=article-subtitle>第２章 エイトクイーン 配置フラグ 国内で最もきちんと説明していると（僕が勝手に）思っているＵＲＬを参照させてください。 僕が説明するよりも…</p></div></a></article><article class="has-image article-item" data-date=2023.03.17><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.17</time></div><p class=article-subtitle>第２章 エイトクイーン バックトラック 前回の「ブルートフォース（力まかせ探索）」では、Ｎ個のクイーン配置が完了し、解の候補が生成される都度…</p></div></a></article><article class="has-image article-item" data-date=2023.03.16><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.16</time></div><p class=article-subtitle>Ｎクイーン問題について Ｎクイーン問題とは、ＮxＮの盤面にチェスのクイーンＮ個を、互いに効きが無い（クイーンは縦・横・斜め45度方向に効きが…</p></div></a></article><article class="has-image article-item" data-date=2023.03.09><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（８）第一章　まとめ></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（８）第一章　まとめ</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.09</time></div><p class=article-subtitle>ここまでのあらすじ ここまでのおさらいと整理・まとめをしておきたいと思います。 （１）ではエイトクイーンについてを説明しました。先人の方々の…</p></div></a></article><article class="has-image article-item" data-date=2023.03.08><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（７）第一章　ブルートフォース再び></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（７）第一章　ブルートフォース再び</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.08</time></div><p class=article-subtitle>ブルートフォース再び 今回、一番初めに紹介しておきながら、クイーンの位置を列挙することにとどめて、解を出すことのなかった「ブルートフォース」…</p></div></a></article><article class="has-image article-item" data-date=2023.03.07><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（６）第一章　配置フラグ></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（６）第一章　配置フラグ</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.07</time></div><p class=article-subtitle>配置フラグ 各列、対角線上にクイーンがあるかどうかのフラグを用意して高速化を図ります。 これまでもやっていたわけですが、そこの部分を「配置フ…</p></div></a></article><article class="has-image article-item" data-date=2023.03.06><a class=article-link href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/><header class=article-header><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=254><img src=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_400x0_resize_q75_box.jpg 2x" width=200 height=254 loading=lazy alt=Ｎクイーン問題（５）第一章　進捗表示テーブルの作成></picture></div><div class=article-category><span class=article-category-item>プログラミング</span></div></header><div class=article-details><h2 class=article-title>Ｎクイーン問題（５）第一章　進捗表示テーブルの作成</h2><div class=article-time><time class="article-time--item article-time--published">2023.03.06</time></div><p class=article-subtitle>Ｎを徐々に増やしていく進捗表示テーブルの作成 今は、ソースの中でパラメータを渡す形でＮの値を 5 だったり 8 だったりに手動で数値を置き換…</p></div></a></article></div></aside><footer class=article-footer></footer><div class=article-pager><div class="article-pager-item article-pager--prev"><div class="article has-image"><a href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/><div class=article-image><img src=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" width=50 height=63 alt=Ｎクイーン問題（１２）第二章　まとめ></div><div class=article-details><h4 class=article-title>Ｎクイーン問題（１２）第二章　まとめ</h4></div></a></div></div></div></article><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><div class="sidebar right-sidebar sticky"><div class="profile-area widget"><span class=profile-icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><div class=profile-bio-area><h4 class=profile-name>suzukiiichiro</h4><p class=profile-bio>鈴木維一郎
+/慶應義塾大学大学院特別研究講師(常勤)
+/RPG Rogue日本語版開発者
+/遠隔操作リモートデスクトップ特許発明者
+/離散数学数論研究開発者
+/自然言語処理研究開発者</p><a href=https://suzukiiichiro.github.io/authors/suzuki/>「suzukiiichiro」のコンテンツ一覧</a></div></div><aside class=widget><ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></aside><aside class="widget tagCloud"><h2 class="widget-title section-title">タグ</h2><div class=tagCloud-tags><a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_118>Bash</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_118>鈴木維一郎</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_117>シェルスクリプト</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E3%82%8F%E3%81%8B%E3%82%8B%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/ class=font_size_58>ざっくりわかるシリーズ</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_46>プログラム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>プログラミング</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E6%B4%BB%E7%94%A8/ class=font_size_38>コマンド活用</a>
+<a href=https://suzukiiichiro.github.io/tags/n-queen/ class=font_size_25>N-Queen</a>
+<a href=https://suzukiiichiro.github.io/tags/designer/ class=font_size_20>Designer</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%9E%E3%83%8B%E3%82%A2%E3%83%83%E3%82%AF%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/ class=font_size_18>マニアックコマンド</a>
+<a href=https://suzukiiichiro.github.io/tags/front-engineer/ class=font_size_16>Front engineer</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_16>HTML</a>
+<a href=https://suzukiiichiro.github.io/tags/web-designer/ class=font_size_16>Web designer</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_15>Web</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ class=font_size_15>アルゴリズムとデータ構造</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_14>css</a>
+<a href=https://suzukiiichiro.github.io/tags/develop/ class=font_size_14>Develop</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class=font_size_14>アルゴリズム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/ class=font_size_14>エイト・クイーン</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>e-Stat</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_13>Hugo</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>データマイニング</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_9>wyoshi</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_8>開発</a>
+<a href=https://suzukiiichiro.github.io/tags/corder/ class=font_size_7>Corder</a>
+<a href=https://suzukiiichiro.github.io/tags/program/ class=font_size_7>Program</a>
+<a href=https://suzukiiichiro.github.io/tags/web-technic/ class=font_size_7>Web Technic</a>
+<a href=https://suzukiiichiro.github.io/tags/tips/ class=font_size_6>TIPS</a>
+<a href=https://suzukiiichiro.github.io/tags/github/ class=font_size_5>GitHub</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB/ class=font_size_5>ターミナル</a></div></aside><aside class="widget archives sidearticle-contents--wrapper" id=newpost-articles><h2 class=section-title>最新記事</h2><div class=sidearticle-contents><div class="flex article-list--tile"><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（１３）第三章　ビットマップ></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</strong><p class=text>ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表し…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（１２）第二章　まとめ></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（１２）第二章　まとめ</strong><p class=text>第２章 まとめ ここまでＮクイーンをこんなにやってきました。 N-Queens問題：Ｎクイ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰</strong><p class=text>第２章 エイトクイーン 配置フラグ 国内で最もきちんと説明していると（僕が勝手に）思ってい…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰</strong><p class=text>第２章 エイトクイーン バックトラック 前回の「ブルートフォース（力まかせ探索）」では、Ｎ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰</strong><p class=text>Ｎクイーン問題について Ｎクイーン問題とは、ＮxＮの盤面にチェスのクイーンＮ個を、互いに効…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（８）第一章　まとめ></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（８）第一章　まとめ</strong><p class=text>ここまでのあらすじ ここまでのおさらいと整理・まとめをしておきたいと思います。 （１）では…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（７）第一章　ブルートフォース再び></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（７）第一章　ブルートフォース再び</strong><p class=text>ブルートフォース再び 今回、一番初めに紹介しておきながら、クイーンの位置を列挙することにと…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（６）第一章　配置フラグ></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（６）第一章　配置フラグ</strong><p class=text>配置フラグ 各列、対角線上にクイーンがあるかどうかのフラグを用意して高速化を図ります。 こ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（５）第一章　進捗表示テーブルの作成></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（５）第一章　進捗表示テーブルの作成</strong><p class=text>Ｎを徐々に増やしていく進捗表示テーブルの作成 今は、ソースの中でパラメータを渡す形でＮの値…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-02-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt></picture></div><div class=article-details><strong class=article-title></strong><p class=text>書籍の紹介 詳解 シェルスクリプト 大型本 2006/1/16 Unixのプログラムは「ツ…</p></div></a></article></div><div class=link-btns><a href=https://suzukiiichiro.github.io/posts/>最新の記事をもっと見る</a></div></div></aside><section class="widget archives"><h2 class=section-title>サイト内検索</h2><form action=https://suzukiiichiro.github.io/search/ class="search-form widget"><input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg></button></form></section><aside class="widget archives sidearticle-contents--wrapper" id=popular-articles><h2 class=section-title>人気コンテンツ</h2><div class=sidearticle-contents><div class="flex article-list--tile"><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15><img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法></picture></div><div class=article-details><strong class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</strong><p class=text>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法 やりたいこと sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトして…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２９．waitコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。 wa…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２７．mailコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。 mailコマンド メールを送る： &amp;rsquo; mail &amp;lsquo…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２８．dateコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15><img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【プログレスバー】Bashでプログレスバーを作ってみようって話></picture></div><div class=article-details><strong class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</strong><p class=text>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。 プログレスバー ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。 処理が進むにつれて、ジリジリとメーターが右に増えていくあ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75><source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38><img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="hugoで[failed to unmarshal YAML]エラーが出た場合の対処法"></picture></div><div class=article-details><strong class=article-title>hugoで[failed to unmarshal YAML]エラーが出た場合の対処法</strong><p class=text>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=170><source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85><img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４></picture></div><div class=article-details><strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong><p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=58><source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=29><img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" width=100 height=58 loading=lazy alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止"></picture></div><div class=article-details><strong class=article-title>overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止</strong><p class=text>overflow: scroll で後ろの要素がスクロールすることがありますが、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。 出典元： Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed position: fixedの要素があるとしましょう。スクロールがある場合は、要素の下部の境界に到達…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=51><source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=25><img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" width=100 height=51 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成></picture></div><div class=article-details><strong class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</strong><p class=text>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元： CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129><source srcset="https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64><img src=https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-13-01-df-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（１４）【df】シェルスクリプトコマンド活用紹介></picture></div><div class=article-details><strong class=article-title>（１４）【df】シェルスクリプトコマンド活用紹介</strong><p class=text>ディスクの空き容量を表示する dfコマンド ディスクの空き容量を調べる dfコマンド概要 「df」は、ディスクの空き領域（freeスペース）のサイズを集計して表示するコマンドで…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=34><img src=https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-hugo-ywat/af7ef3c0-44c1-4f2f-aad8-1a0664724558_huf3902e4d08fb0294f3a250034e0748e3_207097_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=SCSS/CSSを含んだファイルがGitHubActionsでビルドできない></picture></div><div class=article-details><strong class=article-title>SCSS/CSSを含んだファイルがGitHubActionsでビルドできない</strong><p class=text>Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。 scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。 GitHub Pagesで公開しているHug…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67><source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33><img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？></picture></div><div class=article-details><strong class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</strong><p class=text>ここではe-Statの検索ランキング上位の「アイスクリーム」というのはどういう統計データなのかを説明しながら、私のe-Statデータマイニングの目的が大量のビックデータから社会的関心の高い項目を抽出することであることを示します。 私のe-Statでのデータマイニングの現在の目的は以下の通りです 大量の政府公開データの中から ①面白そうなデータをピックアップする ②データをわ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</strong><p class=text>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。 関数からの戻り値の受け渡し 関数からの戻り値の受け渡し： Bash関数は、数値と…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=70><source srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=35><img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" width=100 height=70 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説></picture></div><div class=article-details><strong class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</strong><p class=text>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129><source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64><img src=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（１１）【getopts】シェルスクリプトコマンド活用紹介></picture></div><div class=article-details><strong class=article-title>（１１）【getopts】シェルスクリプトコマンド活用紹介</strong><p class=text>シェルスクリプトでオプションを処理したい getoptsコマンド オプションを解析する エラーメッセージを表示しない 引数付きのオプションを使用する getoptsコマンド概要 「getopt…</p></div></a></article></div><div class=link-btns><a href=https://suzukiiichiro.github.io/ranking/>人気のコンテンツをもっと見る</a></div></div></aside><aside class="widget archives"><h2 class="widget-title section-title">アーカイブ</h2><select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2023年04月>
+2023年04月（1）</option><option value=/archives/#2023年03月>
+2023年03月（8）</option><option value=/archives/#2023年02月>
+2023年02月（6）</option><option value=/archives/#2023年01月>
+2023年01月（4）</option><option value=/archives/#2022年11月>
+2022年11月（17）</option><option value=/archives/#2022年10月>
+2022年10月（13）</option><option value=/archives/#2022年09月>
+2022年09月（8）</option><option value=/archives/#2022年08月>
+2022年08月（10）</option><option value=/archives/#2022年07月>
+2022年07月（20）</option><option value=/archives/#2022年03月>
+2022年03月（1）</option><option value=/archives/#2022年02月>
+2022年02月（22）</option><option value=/archives/#2022年01月>
+2022年01月（59）</option><option value=/archives/#2021年12月>
+2021年12月（14）</option></select></aside></div></div><footer class=site-footer><section class=copyright>&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.</section></footer><aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month><div class=contents-area><header><button type=button onclick='document.body.classList.remove("show-menu")'>CLOSE</button><h2 class=section-title>最近人気の記事</h2></header><div class=sidearticle-contents><div class="flex article-list--tile"><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30><source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15><img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法></picture></div><div class=article-details><strong class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</strong><p class=text>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法 やりたいこと sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトして…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２９．waitコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。 wa…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=58><source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=29><img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" width=100 height=58 loading=lazy alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止"></picture></div><div class=article-details><strong class=article-title>overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止</strong><p class=text>overflow: scroll で後ろの要素がスクロールすることがありますが、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。 出典元： Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed position: fixedの要素があるとしましょう。スクロールがある場合は、要素の下部の境界に到達…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２８．dateコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=170><source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85><img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４></picture></div><div class=article-details><strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong><p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２７．mailコマンド】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</strong><p class=text>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。 mailコマンド メールを送る： &amp;rsquo; mail &amp;lsquo…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67><source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33><img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？></picture></div><div class=article-details><strong class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</strong><p class=text>ここではe-Statの検索ランキング上位の「アイスクリーム」というのはどういう統計データなのかを説明しながら、私のe-Statデータマイニングの目的が大量のビックデータから社会的関心の高い項目を抽出することであることを示します。 私のe-Statでのデータマイニングの現在の目的は以下の通りです 大量の政府公開データの中から ①面白そうなデータをピックアップする ②データをわ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30><source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15><img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【プログレスバー】Bashでプログレスバーを作ってみようって話></picture></div><div class=article-details><strong class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</strong><p class=text>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。 プログレスバー ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。 処理が進むにつれて、ジリジリとメーターが右に増えていくあ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129><source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64><img src=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（１１）【getopts】シェルスクリプトコマンド活用紹介></picture></div><div class=article-details><strong class=article-title>（１１）【getopts】シェルスクリプトコマンド活用紹介</strong><p class=text>シェルスクリプトでオプションを処理したい getoptsコマンド オプションを解析する エラーメッセージを表示しない 引数付きのオプションを使用する getoptsコマンド概要 「getopt…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」></picture></div><div class=article-details><strong class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</strong><p class=text>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。 ファイルを削除する ファイルを削除します： &amp;lsquo;rm&amp;rsquo;コマンドは、ファイルまたはディレ…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=51><source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=25><img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" width=100 height=51 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成></picture></div><div class=article-details><strong class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</strong><p class=text>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元： CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのUIを…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75><source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38><img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="hugoで[failed to unmarshal YAML]エラーが出た場合の対処法"></picture></div><div class=article-details><strong class=article-title>hugoで[failed to unmarshal YAML]エラーが出た場合の対処法</strong><p class=text>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【grep/sed/awkも】ざっくりわかるシェルスクリプト５」></picture></div><div class=article-details><strong class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</strong><p class=text>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。 …</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=70><source srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=35><img src=https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-26-01-wyoshi/catch_hud5f0ce966674d6b97fd2cc6aa77b573d_63288_200x0_resize_q75_box.jpg 2x" width=100 height=70 loading=lazy alt=HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説></picture></div><div class=article-details><strong class=article-title>HUGOでxmlやjsonファイルを複数出力する方法を詳しく解説</strong><p class=text>Hugoで複数のファイルを出力する方法は？この方法の出力やファイル形式を変えることで、RSSやJSON、AMPなどの形式も出力可能になります。 HUGOは非常に強力な静的HTMLジェネレーターです。 複数のXMLを設置する機会があり、どうやったら設置できるのかなと悪戦苦闘しながら実装で…</p></div></a></article><article class=has-image><a href=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/><div class=article-image><picture class=picture><source srcset="https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127><source srcset="https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63><img src=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=Ｎクイーン問題（４）第一章　バックトラック></picture></div><div class=article-details><strong class=article-title>Ｎクイーン問題（４）第一章　バックトラック</strong><p class=text>これまでのあらすじ ブルートフォースは日本語で「ちからまかせ探索」という意味になります。 …</p></div></a></article></div></div></div></aside><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script><script type=module>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script><script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let e=window.innerHeight*.01;document.documentElement.style.setProperty("--vh",`${e}px`)};window.addEventListener("resize",setFillHeight),setFillHeight(),document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementsByTagName("code");Array.from(e).forEach(e=>{if(e.className){let t=e.className.split(":"),s=t[0],n=t[1];n&&(e.classList.remove(e.className),e.classList.add(s),e.parentElement.setAttribute("data-lang",n),e.parentElement.classList.add("code-block-header"))}})})</script></body></html>
