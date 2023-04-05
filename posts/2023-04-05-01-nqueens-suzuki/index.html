@@ -1,14 +1,14 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（１３）第三章　ビットマップ｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><meta property="og:title" content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta property="og:description" content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-04-05T19:08:30+09:00"><meta property="article:modified_time" content="2023-04-05T19:19:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta name=twitter:description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１３）第三章　ビットマップ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"],"datePublished":"2023-04-05T19:08:30+09:00","dateModified":"2023-04-05T19:19:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１３）第三章　ビットマップ","item":"https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（１３）第三章　ビットマップ｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><meta property="og:title" content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta property="og:description" content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-04-05T19:08:30+09:00"><meta property="article:modified_time" content="2023-04-05T20:54:41+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta name=twitter:description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１３）第三章　ビットマップ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"],"datePublished":"2023-04-05T19:08:30+09:00","dateModified":"2023-04-05T20:54:41+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１３）第三章　ビットマップ","item":"https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_159>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li><li><a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>Linux</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a><li><span class=breadcrumb-item>Ｎクイーン問題（１３）第三章　ビットマップ</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2023.04.05</time>
-<time class="article-time--item article-time--reading">読了時間: 19分</time></div></header><h1 class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
+<time class="article-time--item article-time--reading">読了時間: 20分</time></div></header><h1 class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
 <a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ビットマップ>ビットマップ</a></li><li><a href=#ビットマップの特徴>ビットマップの特徴</a></li><li><a href=#実践ビットマップ>実践、ビットマップ！</a></li><li><a href=#効き筋>効き筋</a></li><li><a href=#bitビット>bit（ビット）</a></li><li><a href=#qの位置を確認>Qの位置を確認</a></li><li><a href=#row--1-のleftの効き筋をチェックしてみます>row + 1 のleftの効き筋をチェック）してみます</a></li><li><a href=#row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</a></li><li><a href=#row--1-のrightの効き筋をチェック>row + 1 のrightの効き筋をチェック</a></li><li><a href=#maskマスク>mask（マスク）</a></li><li><a href=#leftdownrightを反転して配置可能な場所を求める>(left|down|right)を反転して、配置可能な場所を求める</a></li><li><a href=#斜めの効き筋>斜めの効き筋</a></li><li><a href=#ソースコード>ソースコード</a></li><li><a href=#実行結果>実行結果</a></li><li><a href=#リンクと過去記事>リンクと過去記事</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><h2 id=ビットマップ>ビットマップ</h2><p>Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものが<code>bitmap</code>(ビットマップ)です。</p><h2 id=ビットマップの特徴>ビットマップの特徴</h2><p>斜め方向にクイーンを配置したかどうかを、<code>left</code> <code>down</code> <code>right</code> といった <code>bit</code> フラグで表します。</p><p>大きなメリットは、<br>１．ビットマップであれば、シフト(&#171;1,&#187;1)により高速にデータを移動できる。<br>２．配置フラグといったフラグ配列では、データの移動に O(N) の時間がかかるが、ビットマップであれば O(1)ですむ。<br>３．フラグ配列のように斜め方向に <code>2*N-1</code> の要素を用意する必要はなく <code>Nビット</code>で充分たりる。<br>４．ビットは初期値が０なので扱いやすい</p><p>デメリットとしては<br>２進数と１０進数により難読化が極まっている。</p><h2 id=実践ビットマップ>実践、ビットマップ！</h2><p>Ｎ５のボードレイアウト</p><pre tabindex=0><code> 4 2 0 3 1  ↓ bitmapで表現
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#ビットマップ>ビットマップ</a></li><li><a href=#ビットマップの特徴>ビットマップの特徴</a></li><li><a href=#実践ビットマップ>実践、ビットマップ！</a></li><li><a href=#効き筋>効き筋</a></li><li><a href=#bitビット>bit（ビット）</a></li><li><a href=#qの位置を確認>Qの位置を確認</a></li><li><a href=#row--1-のleftの効き筋をチェックしてみます>row + 1 のleftの効き筋をチェック）してみます</a></li><li><a href=#row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</a></li><li><a href=#row--1-のrightの効き筋をチェック>row + 1 のrightの効き筋をチェック</a></li><li><a href=#maskマスク>mask（マスク）</a></li><li><a href=#斜めの効き筋>斜めの効き筋</a></li><li><a href=#ソースコード>ソースコード</a></li><li><a href=#実行結果>実行結果</a></li><li><a href=#リンクと過去記事>リンクと過去記事</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><h2 id=ビットマップ>ビットマップ</h2><p>Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものが<code>bitmap</code>(ビットマップ)です。</p><h2 id=ビットマップの特徴>ビットマップの特徴</h2><p>斜め方向にクイーンを配置したかどうかを、<code>left</code> <code>down</code> <code>right</code> といった <code>bit</code> フラグで表します。</p><p>大きなメリットは、<br>１．ビットマップであれば、シフト(<code>&lt;&lt;1</code> ,<code>>>1</code>)により高速にデータを移動できる。<br>２．配置フラグといったフラグ配列では、データの移動に O(N) の時間がかかるが、ビットマップであれば O(1)ですむ。<br>３．フラグ配列のように斜め方向に <code>2*N-1</code> の要素を用意する必要はなく <code>Nビット</code>で充分たりる。<br>４．ビットは初期値が０なので扱いやすい</p><p>デメリットとしては<br>２進数と１０進数により難読化が極まっている。</p><h2 id=実践ビットマップ>実践、ビットマップ！</h2><p>Ｎ５のボードレイアウト</p><pre tabindex=0><code> 4 2 0 3 1  ↓ bitmapで表現
 +-+-+-+-+-+
 | | | | |O| 00001
 +-+-+-+-+-+
@@ -116,7 +116,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
 +-+-+-+-+-+
 | | | | | |
 +-+-+-+-+-+
-</code></pre><p>左下に効き筋が進む(left)もの、真下に効き筋が進む(down)もの、右下に効き筋が進む(right)ものの３つです。<br>その３つのビットフィールドをそれぞれ、left, down, right と呼ぶことにします。</p><p>まずは <code>row0</code> にクイーンを配置します。</p><pre tabindex=0><code>Qの配置
+</code></pre><p>左下に効き筋が進む(left)、真下に効き筋が進む(down)、右下に効き筋が進む(right)３つです。<br>その３つのビットフィールドをそれぞれ、left, down, right と呼ぶことにします。</p><p>まずは <code>row0</code> にクイーンを配置します。</p><pre tabindex=0><code>Qの配置
 +-+-+-+-+-+
 | | | |Q| | 00010
 +-+-+-+-+-+
@@ -128,7 +128,31 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
 +-+-+-+-+-+
 | | | | | |
 +-+-+-+-+-+
-</code></pre><p>次に、<code>row0</code> のビットフィールドから <code>row+1</code> 番目のビットフィールド、ようするにひとつ下の <code>row</code> に探索を進め、Ｎ番目のビットフィールド <code>bit</code> と、３つのビット <code>left</code> <code>down</code> <code>right</code> と「ＯＲ演算」を使って効きをチェックします。</p><p>leftはひとつ左に</p><pre tabindex=0><code>left
+</code></pre><p>次に、<code>row0</code> のビットフィールドから <code>row+1</code> 番目のビットフィールド、ようするにひとつ下の <code>row1</code> に探索を進め、</p><pre tabindex=0><code>Qの配置
++-+-+-+-+-+
+| | | |Q| | 00010
++-+-+-+-+-+
+| | | | | | ←ここ
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><p><code>row0</code>のビットフィールドでクイーンが配置されている <code>bit</code> と、</p><pre tabindex=0><code>Qの配置
++-+-+-+-+-+
+| | | |Q| | 00010 = bit
++-+-+-+-+-+
+| | | | | | 
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+| | | | | |
++-+-+-+-+-+
+</code></pre><p>３つのビット <code>left</code> <code>down</code> <code>right</code> を使って、効き筋をチェックします。</p><p>効き筋は「ＯＲ演算」を使います。</p><p>ビット演算に関しては以下のリンクがおすすめです。<br><a class=link href=https://qiita.com/Ingward/items/43acda931c8a62c70d2f target=_blank rel=noopener>ビット演算入門</a></p><p>leftはひとつ左に</p><pre tabindex=0><code>left
 +-+-+-+-+-+
 | | | |Q| | 00010
 +-+-+-+-+-+
@@ -140,26 +164,23 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
 +-+-+-+-+-+
 | | | |D| | 00010
 +-+-+-+-+-+
-
-rightはひとつ右へ
-
-right
+</code></pre><p>rightはひとつ右へ</p><pre tabindex=0><code>right
 +-+-+-+-+-+
 | | | |Q| | 00010
 +-+-+-+-+-+
 | | | | |R| 00001
 +-+-+-+-+-+
-</code></pre><p>こういったロジックで <code>row + 1</code> 番目の効き筋をチェックします。</p><h2 id=bitビット>bit（ビット）</h2><p>クイーンの位置は「Q」です。<br>Qを配置した場合、そのposition（場所）は<code>bit</code>で表します。<br><code>bit</code>（ビット）には、クイーンが配置されるとその位置が格納されるわけです。</p><p>以下の場合、<code>bit</code>は <code>00010</code> となります。</p><pre tabindex=0><code>+-+-+-+-+-+
+</code></pre><p>こういったロジックで <code>row+1</code> 番目の効き筋をチェックします。</p><h2 id=bitビット>bit（ビット）</h2><p>クイーンの位置は「Q」です。<br>Qを配置した場合、そのposition（場所）は<code>bit</code>で表します。<br><code>bit</code>（ビット）には、クイーンが配置されるとその位置が格納されるわけです。</p><p>以下の場合、<code>bit</code>は <code>00010</code> となります。</p><p><code>row0</code>にQが配置された</p><pre tabindex=0><code>+-+-+-+-+-+
 | | | |Q| | 00010
 +-+-+-+-+-+
 </code></pre><p>ここで<code>bit</code>の操作が複雑となる原因のひとつ、<br>「00010」というクイーンの位置情報は、そのまま<code>bit</code>に格納されるのではありません。</p><p><code>bit</code>には<code>00010</code> という場所の情報が格納されるわけですが、</p><p>「00001」の場合は「 1」<br>「00010」の場合は「 2」<br>「00100」の場合は「 4」<br>「01000」の場合は「 8」<br>「10000」の場合は「16」</p><p>が格納されることになります。</p><p>「はぁ？」</p><p>まず、<br>「00001」という並びは０と１でなりたつ表現方法で「２進数」といいます。<br>また、１０で桁上りをする表現方法はおなじみの「１０進数」といいます。</p><pre tabindex=0><code>00010   　２進数
-    2   １０進数 
+    2   １０進数 (00010を１０進数にすると 2 になる）
 </code></pre><p>２進数を１０進数に置き換える早見表</p><pre tabindex=0><code>10進数  128  64  32  16   8   4   2   1
  2進数    0   0   0   0   0   0   0   0
-</code></pre><p>２進数は <code>00010</code> の１０進数の値が知りたいわけですから、イカのように当てはめると、１０進数では <code>4</code> となります。</p><pre tabindex=0><code>２進数を１０進数に置き換える早見表
+</code></pre><p>２進数 <code>00010</code> を１０進数に置き換えた値が知りたいは、早見表を使うと１０進数では <code>4</code> となります。</p><pre tabindex=0><code>２進数を１０進数に置き換える早見表
 10進数  16   8   4   2   1
  2進数   0   0   1   0   0
-</code></pre><p><code>4</code> が <code>bit</code>に格納されます。</p><p>bashでは２進数を１０進数に変換して出力する方法が用意されています。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00001 ))
+</code></pre><p>ということで、クイーンの位置が <code>00100</code> の場合は、<code>4</code> が <code>bit</code>に格納されます。</p><p>bashでは２進数を１０進数に変換して出力する方法が用意されています。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00001 ))
 1
 bash-3.2$ echo $(( 2#00010 ))
 2
@@ -170,46 +191,46 @@ bash-3.2$ echo $(( 2#01000 ))
 bash-3.2$ echo $(( 2#10000 ))
 16
 bash-3.2$
-</code></pre><p>余談ですが（余談ということでもないのですが）、<br>Ｎが８の場合で、00010000 というクイーン配置の場合</p><pre tabindex=0><code>10進数  128  64  32  16   8   4   2   1
+</code></pre><p>＃（シャープ）の前の数字は２進数であることを示しています。<br>２進数 <code>00100</code> の１０進数の値が知りたければ、次のようにします。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00100 ))
+4
+</code></pre><p>余談ですが（余談ということでもないのですが）、<br>Ｎが８の場合で、<code>00010000</code> というクイーン配置の場合</p><pre tabindex=0><code>10進数  128  64  32  16   8   4   2   1
  2進数    0   0   0   1   0   0   0   0
-</code></pre><p>ですので、10進数では「16」となります。<br>bashでも求めることができます。<br>入力する値が２進数であることを明示的に <code>2#</code> としています。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#0010000 ))
+</code></pre><p>早見表の通り、１０進数では「16」となります。<br>当然、bashでも求めることができます。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00010000 ))
 16
-bash-3.2$
 </code></pre><p>さらに余談ですが（これは本当に余談）、ビットフィールドに複数の<code>bit</code>がON（１）である場合、例えば「00101010」のような場合は、以下のように計算します。<br>（（一行にクイーンが３つもある！！）</p><pre tabindex=0><code>00101010 
 10進数  128  64  32  16   8   4   2   1
  2進数    0   0   1   0   1   0   1   0
-</code></pre><p>この場合は、<code>bit</code>が立っている（と言います）10進数を足し合わせることで表現できます。</p><pre tabindex=0><code>32 + 8 + 2 = 42
-</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00101010 ))
+</code></pre><p>この場合は、<code>bit</code>が立っている（と言います）10進数の値をを足し合わせることで表現できます。</p><p>ビットが立っている（１となっている）のは、３２と８と２ですから、</p><pre tabindex=0><code>32 + 8 + 2 = 42
+</code></pre><p>となります。</p><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00101010 ))
 42
-bash-3.2$
-</code></pre><h2 id=qの位置を確認>Qの位置を確認</h2><p>では、まずはQのposition（位置）を確認します。</p><pre tabindex=0><code>Q
+</code></pre><p>おお、いい感じですね。着いてきていますか？</p><h2 id=qの位置を確認>Qの位置を確認</h2><p>では、まずはQのposition（位置）を確認します。</p><pre tabindex=0><code>Q
 +-+-+-+-+-+
-| | | |Q| | 00010 (`bit`)
+| | | |Q| | 00010=bit といいます。
 +-+-+-+-+-+
 | | | | | | 
 +-+-+-+-+-+
 </code></pre><p>Qのpositionは <code>00010</code> です。<br>１０進数では以下の早見表で見つけると良いです。</p><p>Qが置かれている<code>bit</code>の値は「00010」です</p><pre tabindex=0><code>10進数  16   8   4   2   1
  2進数   0   0   0   1   0
-</code></pre><p>10進数では「2」ですね。<br>まず、Qのpositionがわかりました。<br>Qのpositionを<code>bit</code>と言います。<br>通常、<code>bit</code>は変数名も<code>bit</code>とします。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+</code></pre><p>10進数では「2」ですね。</p><p>まず、Qのpositionがわかりました。<br>Qのpositionを<code>bit</code>と言います。<br>通常、<code>bit</code>は変数名も<code>bit</code>とします。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
 </code></pre><h2 id=row--1-のleftの効き筋をチェックしてみます>row + 1 のleftの効き筋をチェック）してみます</h2><pre tabindex=0><code>left
 +-+-+-+-+-+
 | | | |Q| | 00010 (`bit`)
 +-+-+-+-+-+
-| | |L| | | 
+| | |L| | | ←ここ
 +-+-+-+-+-+
-</code></pre><p>「L」は「Q」を左に一つずらした位置となります。<br><code>L</code>を<code>left</code>に置き換えた計算は以下のとおりです。</p><pre tabindex=0><code>( left | bit)&lt;&lt;1
-</code></pre><p><code>left | bit</code> といった振る舞いを「ＯＲ演算」と言います。</p><p><code>left</code> にはこの段階では値が何も入っていませんので「0」となります。<br>要するに初期値「０」のまま計算します。<br>前項で求めたとおり、Qである<code>bit</code>は以下の通りでした。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
-</code></pre><p>この計算式の (left | bit) の 「left」は、まだ分かっていない値なので「０」となります。</p><pre tabindex=0><code>( left | bit )
+</code></pre><p>「L」は「Q」の真下（<code>row+1</code>）を左に一つずらした位置となります。<br>ビット演算では以下のようになります。Lはleftを表しています。</p><pre tabindex=0><code>( left | bit)&lt;&lt;1
+</code></pre><p><code>( left | bit)</code> といった表現を「ＯＲ演算」と言います。</p><p><code>left</code> にはこの段階では値が何も入っていませんので「0」となります。<br>要するに初期値「０」のまま計算します。</p><p>前項で求めたとおり、Qである<code>bit</code>は以下の通りでした。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
+</code></pre><p><code>left</code>は、初期値「０」な訳ですから、</p><pre tabindex=0><code>( left | bit )
 (   0  |  2  )
-</code></pre><p>という計算式になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|0) ))
+</code></pre><p>という計算式になります。<br>bashで計算してみましょう。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|0) ))
 2
 bash-3.2$
-</code></pre><p>「２」とでました。<br>さらに左に一つシフト（&#171;1）してみます。</p><pre tabindex=0><code>( left | bit )&lt;&lt;1
+</code></pre><p>「２」とでました。<br>さらに左に一つシフト（&#171;1）してみます。<br>こうなりますね。</p><pre tabindex=0><code>( left | bit )&lt;&lt;1
 (   0  |  2  )&lt;&lt;1
-</code></pre><pre tabindex=0><code>bash-3.2$ echo $(( (2|0)&lt;&lt;1 ))
+</code></pre><p>bashで計算してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|0)&lt;&lt;1 ))
 4
 bash-3.2$
-</code></pre><p>「４」とでました。<br>「４」の２進数はなんでしょう？<br>いつもの早見表で確認しましょう。</p><pre tabindex=0><code>10進数  16   8   4   2   1
+</code></pre><p>「４」とでました。<br>「４」の２進数はなんでしょう？<br>さっそく早見表で確認しましょう。</p><pre tabindex=0><code>10進数  16   8   4   2   1
  2進数   0   0   1   0   0
 </code></pre><p><code>00100</code> という事ですね。</p><p>Qが置かれている場所が「00010」で、<br>Lは「00100」となったわけです。<br>図で表すと以下のとおりです。</p><pre tabindex=0><code>left
 +-+-+-+-+-+
@@ -217,34 +238,16 @@ bash-3.2$
 +-+-+-+-+-+
 | | |L| | | 00100 (left|bit)&lt;&lt;1
 +-+-+-+-+-+
-</code></pre><p>ということで、Qの位置から左に一つずれているのがわかります。</p><p>結果、こちらの計算式は、</p><pre tabindex=0><code>left  ← (left | bit)&lt;&lt;1
-</code></pre><pre tabindex=0><code>left  = ( left |  bit  )&lt;&lt;1
+</code></pre><p>ということで、Qの位置から左に一つずれているのがわかります。<br>Qを配置して<code>left</code>を使って左下の効きを簡単に求めることができました。</p><pre tabindex=0><code>left  = ( left |  bit  )&lt;&lt;1
 00100 = (  0   | 00010 )&lt;&lt;1
   4   = (  0   |   2   )&lt;&lt;1
-</code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (0|2)&lt;&lt;1 ))
-4
-bash-3.2$
-</code></pre><p>ということになります。<br>結局、Qの位置「00010」のひとつ下のrowのleftの効き筋は (left|bit)&#171;1 という計算式を用いて、「00100」と、ビットの位置を一つ左にシフトした、ということになります。</p><h2 id=row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</h2><p>leftの場合は、( left | bit )&#171;1 ということをしてQの位置から左に一つずらした位置を求めました。<br>downはleftのように左に一つずらしたりする必要はありません。</p><p>ただ、気をつけることは、<code>left</code> 同様、代入される値は２進数ではなく１０進数であることです。</p><pre tabindex=0><code>bit = Q = 2#00010 = 2
-10進数  16   8   4   2   1
- 2進数   0   0   0   1   0
-
-left = (left|bit)&lt;&lt;1 = 2#00100 = 4
-10進数  16   8   4   2   1
- 2進数   0   0   1   0   0
-</code></pre><p>では、downを見てみます。</p><pre tabindex=0><code>down
+</code></pre><p><code>row0</code>にある Q の位置「00010」の、ひとつ下の <code>row1</code> の<code>left</code>の効き筋は <code>(left|bit)&lt;&lt;1</code> という計算式を用いて、「00100」となりました。<br>言い換えると、Qの位置を<code>bit</code>にして、<code>(left|bit)&lt;&lt;1</code>とすることで、ビットの位置を一つ左にシフトして、Qの<code>left</code>の効き筋を求めることができたということになります。</p><h2 id=row--1-のdownの効き筋をチェックしてみます>row + 1 のdownの効き筋をチェック）してみます</h2><p>leftの場合は、( left | bit )&#171;1 ということをしてQの位置から左に一つずらした位置を求めました。</p><p>downはleftのように左に一つずらしたりする必要はありません。<br>Qの位置からましたに下ろすだけですから値は同じなのです。</p><pre tabindex=0><code>down
 +-+-+-+-+-+
-| | | |Q| | 00010 (bit)
+| | | |Q| | 00010
 +-+-+-+-+-+
-| | | |D| | 00010 (D)
+| | | |D| | 00010 (down|bit)
 +-+-+-+-+-+
-</code></pre><pre tabindex=0><code>bit = Q = 2#00010 = 2
-10進数  16   8   4   2   1
- 2進数   0   0   0   1   0
-
-left = (left|bit)&lt;&lt;1 = 2#00100 = 4
-10進数  16   8   4   2   1
- 2進数   0   0   1   0   0
-</code></pre><p>downは「00010」ですのでQと同じです。<br>そりゃそうです、真下が効きですから。<br>ですので計算は以下のとおりです。</p><pre tabindex=0><code>down  = ( down |  bit  )
+</code></pre><pre tabindex=0><code>down  = ( down |  bit  )
 00010 = (  0   | 00010 )
   2   = (  0   |   2   )
 </code></pre><p>bashでも確認してみます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (0|2) ))
@@ -265,7 +268,7 @@ down = (down|bit)    = 2#00010 = 2
 +-+-+-+-+-+
 | | | |Q| | 00010 (bit)
 +-+-+-+-+-+
-| | | | |R| 00001 (R)
+| | | | |R| 00001 (R)  (right|bit)&gt;&gt;1
 +-+-+-+-+-+
 </code></pre><pre tabindex=0><code>right = ( right |  bit  )&gt;&gt;1
 00010 = (   0   | 00010 )&gt;&gt;1
@@ -288,8 +291,14 @@ down = (down|bit)    = 2#00010 = 2
 right =(right|bit)&gt;&gt;1= 2#00001 = 1
 10進数  16   8   4   2   1
  2進数   0   0   0   0   1
-</code></pre><h2 id=maskマスク>mask（マスク）</h2><p><code>row + 1</code> 番目のビットフィールドを探索して、<code>left</code> <code>down</code> <code>right</code> の３つのbitフラグを「ＯＲ演算」したビットフィールドを作り、それがＯＮになっている位置は効き筋に当たるので置くことができない位置ということになります。</p><p>「はぁ？」<br>では解説します。</p><pre tabindex=0><code>`row + 1` 番目のビットフィールドを探索して」
-</code></pre><p>こちらをもう少し噛み砕いて説明すると、現在は <code>row</code>にいるわけですが、</p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><h2 id=maskマスク>mask（マスク）</h2><p>ここまでで３つのフラグを用いてQの効き筋を求めてきました。</p><pre tabindex=0><code>left+down+right
++-+-+-+-+-+
+| | | |Q| | 00010 (bit)
++-+-+-+-+-+
+| | |L|D|R| 00111 (left|down|right)
++-+-+-+-+-+
+</code></pre><p>３箇所の効き筋を演算子を使うと</p><pre tabindex=0><code>(left|down|right) 
+</code></pre><p>となり、こうした表現を「ＯＲ演算」と言います。</p><p>さて、<code>row + 1</code> 番目のビットフィールドを探索して、<code>left</code> <code>down</code> <code>right</code> の３つのbitフラグを「ＯＲ演算」したビットフィールドを作りました。</p><p>ＯＮ（１）になっている位置は効き筋に当たるので置くことができません。</p><p><code>row</code>にQを配置して、</p><pre tabindex=0><code>+-+-+-+-+-+  row
 | | | |Q| |   0  今、自分はここにいて
 +-+-+-+-+-+
 | | | | | |   1
@@ -300,7 +309,7 @@ right =(right|bit)&gt;&gt;1= 2#00001 = 1
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>自分がいる <code>row</code> の一つしたの「row+1」のビットフィールド、</p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><p>自分がいる <code>row</code> の一つしたの「row+1」のビットフィールドを探索するために、</p><pre tabindex=0><code>+-+-+-+-+-+  row
 | | | |Q| |   0  
 +-+-+-+-+-+
 |*|*|*|*|*|   1  この行(row)を順番に探索する
@@ -311,7 +320,7 @@ right =(right|bit)&gt;&gt;1= 2#00001 = 1
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>を、<code>left</code> <code>down</code> <code>right</code> の３つのフラグを使って、効きををチェックするわけだけど、いずれかがＯＮ（１）になっていたら効き筋に当たるからクイーンは配置できませんよ。という意味になります。</p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><p><code>left</code> <code>down</code> <code>right</code> の３つのフラグを使って、効きををチェックします。</p><p><code>left</code> <code>down</code> <code>right</code> のいずれかがＯＮ（１）になっていたら効き筋に当たるから、その場所にはクイーンは配置できませんね。<br>という意味になります。</p><pre tabindex=0><code>+-+-+-+-+-+  row
 | | | |Q| |   0  bit  =      Q        = 2#00010 = 2
 +-+-+-+-+-+      left = (left|bit)&lt;&lt;1 = 2#00100 = 4
 |*|*|L|D|R|   1  down = (down|bit)    = 2#00010 = 2
@@ -322,42 +331,42 @@ right =(right|bit)&gt;&gt;1= 2#00001 = 1
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>そこで、上記の図の２箇所の「アスタリスク＊」の場所がクイーンの配置が可能であることがわかりました。</p><p>この２箇所のアスタリスクは場所を簡単に得ることができます。</p><p>まず、<code>left</code> <code>down</code> <code>right</code> の３つのビットフィールドをORしたビットフィールドをビット反転させます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>~<span class=o>(</span>left<span class=p>|</span>down<span class=p>|</span>right<span class=o>)</span>
-</span></span></code></pre></div><p>チルダ（〜）をつけると反転します。</p><p>leftは4 downは2 rightは1 なのですから、</p><pre tabindex=0><code>bit  =      Q        = 2#00010 = 2
+</code></pre><p>そこで、上記の図の２箇所（アスタリスク＊の場所）がクイーンを配置することがが可能です。<br>この２箇所のアスタリスクは場所を簡単に得ることができます。</p><p>以下の通り、<code>left</code> は4 <code>down</code> は2 <code>right</code> は1 です。</p><pre tabindex=0><code>bit  =      Q        = 2#00010 = 2
+
 left = (left|bit)&lt;&lt;1 = 2#00100 = 4
 down = (down|bit)    = 2#00010 = 2
 right= (right|bit)&gt;&gt;1= 2#00001 = 1
-</code></pre><p>(left|down|right)<br>は、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>(</span>2<span class=p>|</span>4<span class=p>|</span>1<span class=o>)</span>
-</span></span></code></pre></div><p>と、なります。<br>bashで確認すると以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|4|1) ))
+</code></pre><p>効き筋 <code>(left|down|right)</code> は、次のように求めることができます。</p><pre tabindex=0><code>(4|2|1)
+</code></pre><p>と、なります。<br>bashで確認すると以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ echo $(( (4|2|1) ))
 7
 bash-3.2$
-</code></pre><p>以下の図の通り３箇所にクイーンの効きがあることを示しています。</p><pre tabindex=0><code>+-+-+-+-+-+  row
-| | | |Q| |   0  
-+-+-+-+-+-+      
-| | |L|D|R|   1  00111 
-+-+-+-+-+-+      
+</code></pre><p>「７」となりました。これを２進数で表すと</p><pre tabindex=0><code>bash-3.2$ bc &lt;&lt;&lt;&#34;ibase10;obase=2;7&#34;
+111
+bash-3.2$
+</code></pre><p>「１１１」ですから５ビットにすると<br><code>2#00111</code> となります。</p><p>そこで、以下のアスタリスクの部分を求めるには「反転」という演算をおこないます。</p><pre tabindex=0><code>+-+-+-+-+-+  row
+| | | |Q| |   0  bit  =      Q        = 2#00010 = 2
++-+-+-+-+-+      left = (left|bit)&lt;&lt;1 = 2#00100 = 4
+|*|*|L|D|R|   1  down = (down|bit)    = 2#00010 = 2
++-+-+-+-+-+      right= (right|bit)&gt;&gt;1= 2#00001 = 1
 | | | | | |   2
 +-+-+-+-+-+
 | | | | | |   3
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>bashで確認すると以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#00111 ))
-7
-bash-3.2$
-</code></pre><p>LDRの位置は <code>2#00111</code> で１０進数では <code>7</code> です。<br>ここで、<code>2#11000</code>を求めることができれば、それがクイーンを配置することができる場所ということになります。</p><p><code>2#11000</code> をbashで求めると<code>24</code>になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#11000 ))
+</code></pre><p>ここで、<code>2#11000</code>を求めることができれば、それがクイーンを配置することができる場所ということになります。</p><p><code>2#11000</code> をbashで求めると<code>24</code>になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#11000 ))
 24
 bash-3.2$
-</code></pre><p>演算で求める場合は、上記で言う「反転」という演算を使います。</p><p>(L|D|R) の 反転はチルダ「〜」を使って</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>~<span class=o>(</span>L<span class=p>|</span>D<span class=p>|</span>R<span class=o>)</span>
-</span></span></code></pre></div><p>となります。<br>では、先に求めた「２４」になるかを確認してみましょう。</p><pre tabindex=0><code>bash-3.2$ echo $(( (2|4|1) ))
+</code></pre><p>演算で求める場合は、「反転」という演算を使います。<br>(L|D|R) の 反転はチルダ「〜」を使います。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>~<span class=o>(</span>L<span class=p>|</span>D<span class=p>|</span>R<span class=o>)</span>
+</span></span></code></pre></div><p>では、先に求めた「２４」になるかを確認してみましょう。</p><pre tabindex=0><code>bash-3.2$ echo $(( (4|2|1) ))
 7
-bash-3.2$ echo $(( ~(2|4|1) ))
+bash-3.2$ echo $(( ~(4|2|1) ))
 -8
 bash-3.2$ 
 </code></pre><p>なりませんね。。。</p><p>ここでmask(マスク）を使います。<br>maskとは、ビットフィールドのビットをすべて立てたものです。</p><pre tabindex=0><code>+-+-+-+-+-+  row
 | | | |Q| |   0  
 +-+-+-+-+-+      
-|M|M|M|M|M|   1  11111
+|M|M|M|M|M|   1  mask=2#11111
 +-+-+-+-+-+      
 | | | | | |   2
 +-+-+-+-+-+
@@ -368,10 +377,11 @@ bash-3.2$
 </code></pre><p>このmaskは簡単に求めることができます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span>&lt;&lt;size<span class=o>)-</span><span class=m>1</span> <span class=k>))</span><span class=p>;</span>
 </span></span></code></pre></div><p>Ｎ５の場合、２進数で求めると「３１」になります。</p><pre tabindex=0><code>bash-3.2$ echo $(( 2#11111 ))
 31
-</code></pre><p>Ｎはサイズ<br>( 1&#171;Ｎ )-1 という計算式で求めることができます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (1&lt;&lt;5)-1 ))
+</code></pre><p><code>mask</code>は、size=5 <code>( 1&lt;&lt;size )-1</code> という計算式で求めることができます。</p><pre tabindex=0><code>bash-3.2$ echo $(( (1&lt;&lt;5)-1 ))
 31
-bash-3.2$
-</code></pre><p>このmaskを使って<br>１．<code>left</code> <code>down</code> <code>right</code>の３つのビットを使って効きの場所を特定<br>２．maskですべての配置箇所のビットをＯＮ（１）にする<br>３．maskから(left|down|right)を間引く</p><p>ことによって、効きのない場所を特定することができます。</p><p><code>left</code> <code>down</code> <code>right</code></p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><p>このmaskを使って<br>１．<code>left</code> <code>down</code> <code>right</code>の３つのビットを使って効きの場所を特定</p><pre tabindex=0><code>(left|down|right)
+
++-+-+-+-+-+  row
 | | | |Q| |   0  
 +-+-+-+-+-+      
 | | |L|D|R|   1  00111
@@ -382,7 +392,12 @@ bash-3.2$
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>maskを使ってすべてのビットを立てる</p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><p>２．反転させる</p><pre tabindex=0><code>~(left|down|right)
+</code></pre><p>２．maskですべての配置箇所のビットをＯＮ（１）にする</p><pre tabindex=0><code>maskを使ってすべてのビットを立てる
+
+size=5;
+mask=$(( (1&lt;&lt;size)-1 ));
++-+-+-+-+-+  row
 | | | |Q| |   0  
 +-+-+-+-+-+      
 |M|M|M|M|M|   1  11111
@@ -393,7 +408,8 @@ bash-3.2$
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
+</code></pre><p>３．maskから~(left|down|right)を間引いた値を<code>bitmap</code>に格納</p><pre tabindex=0><code>bitmap=$(( mask&amp;~(left|down|right) ))
++-+-+-+-+-+  row
 | | | |Q| |   0  
 +-+-+-+-+-+      
 |1|1|0|0|0|   1  11000 = 31
@@ -404,34 +420,20 @@ bash-3.2$
 +-+-+-+-+-+
 | | | | | |   4
 +-+-+-+-+-+
-</code></pre><p>ここまでの動きを演算式で書くと以下の通りになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>size</span><span class=o>=</span>5<span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
-</span></span></span><span class=line><span class=cl><span class=s>bitmap=$((mas</span>k<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=k>))</span><span class=o>)</span><span class=p>;</span>
-</span></span></code></pre></div><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
-| | | |Q| |   0  
-+-+-+-+-+-+      
-|1|1|0|0|0|   1  11000 = 31
-+-+-+-+-+-+      
-| | | | | |   2
-+-+-+-+-+-+
-| | | | | |   3
-+-+-+-+-+-+
-| | | | | |   4
-+-+-+-+-+-+
-</code></pre><p>この「３１(2#11000)」をbitmap（ビットマップ）と言います。<br>Ｎクイーンでは、配置可能な場所という位置づけになります。</p><h2 id=leftdownrightを反転して配置可能な場所を求める>(left|down|right)を反転して、配置可能な場所を求める</h2><p>先の項でご説明したとおり、配置可能なビットフィールドを <code>bitmap</code> に格納することができました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>size</span><span class=o>=</span>5<span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
-</span></span></span><span class=line><span class=cl><span class=s>bitmap=$((mas</span>k<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=k>))</span><span class=o>)</span><span class=p>;</span>
-</span></span></code></pre></div><p>maskから(L|D|R)を間引く</p><pre tabindex=0><code>+-+-+-+-+-+  row
-| | | |Q| |   0  
-+-+-+-+-+-+      
-|1|1|0|0|0|   1  11000 = 31
-+-+-+-+-+-+      
-| | | | | |   2
-+-+-+-+-+-+
-| | | | | |   3
-+-+-+-+-+-+
-| | | | | |   4
-+-+-+-+-+-+
+</code></pre><p>これで効きのない場所を特定することができました。<br>１がクイーンを配置できる場所、いわゆる効き筋に当たらない場所ということになります。</p><p>bashで書くと以下の通りになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:masktest.sh data-lang=bash:masktest.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=nv>mask</span><span class=o>=</span>31<span class=p>;</span> <span class=c1># 2#11111</span>
+</span></span><span class=line><span class=cl><span class=nv>left</span><span class=o>=</span>4<span class=p>;</span>  <span class=c1># 2#00100</span>
+</span></span><span class=line><span class=cl><span class=nv>down</span><span class=o>=</span>2<span class=p>;</span>  <span class=c1># 2#00010</span>
+</span></span><span class=line><span class=cl><span class=nv>right</span><span class=o>=</span>1<span class=p>;</span> <span class=c1># 2#00001</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># (left|down|right)を反転させてmaskで間引く</span>
+</span></span><span class=line><span class=cl><span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 間引いた１０進数を２進数にして確認</span>
+</span></span><span class=line><span class=cl>bc<span class=o>&lt;&lt;&lt;</span><span class=s2>&#34;ibase=10;obase=2;</span><span class=nv>$bitmap</span><span class=s2>&#34;</span>
+</span></span></code></pre></div><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash masktest.sh
+11000
 </code></pre><h2 id=斜めの効き筋>斜めの効き筋</h2><p>ビットマッププログラムのポイントは、斜めの利き筋のチェックをビット演算で行うことです。</p><pre tabindex=0><code>    0 1 2 3 4
   *-------------
   | . . . . . .
@@ -443,9 +445,12 @@ bash-3.2$
   | . . +2. . .  0x40
   | . . . +3. .  0x80
   *-------------
-</code></pre><p>ビットマップで肝となるところはここです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>    <span class=nv>bit</span><span class=o>=</span><span class=k>$((</span> <span class=o>-</span>bitmap <span class=o>&amp;</span> bitmap <span class=k>))</span><span class=p>;</span>    <span class=c1># 一番右のビットを取り出す</span>
-</span></span><span class=line><span class=cl>    <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>       <span class=c1># 配置可能なパターンが一つずつ取り出される</span>
-</span></span></code></pre></div><p>この演算式の意味を理解するには負の値がコンピュータにおける２進法ではどのように表現されているのかを知る必要があります。</p><p>負の値を２進数で表すと次のようになります。</p><pre tabindex=0><code> 00000011   3
+</code></pre><p>ビットマップで肝となるところはここです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 一番右のビットを取り出す</span>
+</span></span><span class=line><span class=cl><span class=nv>bit</span><span class=o>=</span><span class=k>$((</span> <span class=o>-</span>bitmap <span class=o>&amp;</span> bitmap <span class=k>))</span><span class=p>;</span>    
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置可能なパターンが一つずつ取り出される</span>
+</span></span><span class=line><span class=cl><span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>       
+</span></span></code></pre></div><p>この演算式の意味を理解するには、負の値がコンピュータにおける２進法ではどのように表現されているのかを知る必要があります。</p><p>負の値を２進数で表すと次のようになります。</p><pre tabindex=0><code> 00000011   3
  00000010   2
  00000001   1
  00000000   0
@@ -463,7 +468,7 @@ bash-3.2$
 </code></pre><p>加えるところがわかりにくいですね。</p><pre tabindex=0><code> 00000001   1
 </code></pre><p>に１を加えると</p><pre tabindex=0><code> 00000010   2
 </code></pre><p>さらに１を加えると</p><pre tabindex=0><code>00000011   3
-</code></pre><p>となります。１０進数の足し算と２進数のインクリメントは異なります。</p><p>ここで、 正の値２２と−２２をＡＮＤ演算すると以下のようになります。</p><pre tabindex=0><code>     00010110   22
+</code></pre><p>と、なります。<br>１０進数の足し算と２進数のインクリメントは異なるところに注意が必要です。</p><p>ここで、 正の値２２と−２２をＡＮＤ演算すると以下のようになります。</p><pre tabindex=0><code>     00010110   22
  AND 11101010  -22
 ------------------
      00000010
@@ -471,14 +476,15 @@ bash-3.2$
 8
 </code></pre><p>bashで１０進数を２進数に変換するには以下のようにします。</p><pre tabindex=0><code>bash-3.2$ bc &lt;&lt;&lt;&#34;ibase=10;obase=10;8&#34;
 1000
-</code></pre><p>余談終わり。</p><p>そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span><span class=p>;</span>
+</code></pre><p>余談終わり。</p><p>そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>  <span class=c1># 配置可能な場所を特定</span>
+</span></span><span class=line><span class=cl>  <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=o>((</span> bitmap <span class=o>))</span><span class=p>;</span><span class=k>do</span>
-</span></span><span class=line><span class=cl>    <span class=nv>bit</span><span class=o>=</span><span class=k>$((</span><span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap<span class=k>))</span> <span class=p>;</span>       <span class=c1># 一番右のビットを取り出す</span>
-</span></span><span class=line><span class=cl>    <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>       <span class=c1># 配置可能なパターンが一つずつ取り出される</span>
-</span></span><span class=line><span class=cl>    board<span class=o>[</span><span class=nv>$row</span><span class=o>]=</span><span class=s2>&#34;</span><span class=nv>$bit</span><span class=s2>&#34;</span><span class=p>;</span>             <span class=c1># Qを配置</span>
+</span></span><span class=line><span class=cl>    <span class=nv>bit</span><span class=o>=</span><span class=k>$((</span><span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap<span class=k>))</span> <span class=p>;</span>  <span class=c1># 一番右のビットを取り出す</span>
+</span></span><span class=line><span class=cl>    <span class=nv>bitmap</span><span class=o>=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span> <span class=p>;</span>  <span class=c1># 配置可能なパターンが一つずつ取り出される</span>
+</span></span><span class=line><span class=cl>    board<span class=o>[</span><span class=nv>$row</span><span class=o>]=</span><span class=s2>&#34;</span><span class=nv>$bit</span><span class=s2>&#34;</span><span class=p>;</span>        <span class=c1># Qを配置</span>
 </span></span><span class=line><span class=cl>    bitmap_R <span class=s2>&#34;</span><span class=nv>$size</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=k>$((</span> <span class=o>(</span>left<span class=o>|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ))&#34; &#34;$((down|bit))&#34; &#34;$(( (right|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=k>done</span>
-</span></span></code></pre></div><img src=bitmap.jpg width=80%><h2 id=ソースコード>ソースコード</h2><p>ソースの一番下で、再帰・非再帰を切換えて事項してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bitmap.sh data-lang=bash:bitmap.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
+</span></span></code></pre></div><p><code>left</code> <code>down</code> <code>right</code> は、Qが配置されるたびに、その効き筋を足し合わせ、すべてのrowに対応します。</p><p>再帰では、こうしたことをプログラマが意識することなく実現できるわけですが、非再帰の場合は、<code>left</code> <code>down</code> <code>right</code> を配列などにして効き筋を覚えておく必要が出てきます。</p><p>それはどうとして猛烈にわかりやすい図がありました。<br><img src=bitmap.jpg width=80%></p><h2 id=ソースコード>ソースコード</h2><p>ソースの一番下で、再帰・非再帰を切換えて事項してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bitmap.sh data-lang=bash:bitmap.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>TOTAL</span><span class=o>=</span>0<span class=p>;</span>     <span class=c1># カウンター</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
