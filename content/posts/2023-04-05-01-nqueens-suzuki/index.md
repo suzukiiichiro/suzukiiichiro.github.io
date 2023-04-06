@@ -914,7 +914,7 @@ bitmap_R "$size" "$((row+1))" "$(( (left|bit)<<1 ))" "$((down|bit))" "$(( (right
 ```
 
 ### bitmap=$(( mask&~(left|down|right) ))
-ページ冒頭で説明
+このページ冒頭で説明
 
 ### bit=$(( -bitmap & -bitmap ));
 while中の各繰り返しで、`bit` に、配置できる可能性と配置できない可能性をAND演算した結果を`bit`にセットしています。この結果、`bit` は、`bitmap` の最下位ビットを除いて、すべて`0`に設定し、Qを配置します。
