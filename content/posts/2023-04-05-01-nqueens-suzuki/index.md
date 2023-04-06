@@ -1094,9 +1094,12 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 ``` bash:bitmap.sh
 #!/usr/bin/bash
 
+declare -i COUNT=0;
 declare -i TOTAL=0;     # カウンター
+declare -i UNIQUE=0;    # ユニークユーザー
+declare -i DISPLAY=0;   # ボード出力するか
 #
-: 'ボードレイアウトを出力';
+: 'ボードレイアウトを出力 ビットマップ対応版';
 function printRecord()
 {
   size="$1";
@@ -1203,7 +1206,7 @@ function printRecord()
   echo "";
 }
 #
-: '非再帰版ビットマップ';
+: '非再帰ビットマップ版';
 function bitmap_NR()
 {
   local -i size="$1";
@@ -1214,17 +1217,19 @@ function bitmap_NR()
   local -a left[$size];
   local -a down[$size];
   local -a right[$size];
-  local -a tmpBoard[$size];         #各rowのleft,right,downを足した配列
-  local -a board[$size];            #クイーンを配置した場所を格納する配列
+  local -a tmpBoard[$size];       #各rowのleft,right,downを足した配列
+  local -a board[$size];          #クイーンを配置した場所を格納する配列
   bitmap=mask;
   while true ;do
     if (( bitmap ));then
-      bit=$(( -bitmap&bitmap ));    # 一番右のビットを取り出す 
-      bitmap=$(( bitmap^bit ));     # 配置可能なパターンが一つずつ取り出される
-      board[$row]="$bit";           # Qを配置
+      bit=$(( -bitmap&bitmap ));  # 一番右のビットを取り出す 
+      bitmap=$(( bitmap^bit ));   # 配置可能なパターンが一つずつ取り出される
+      board[$row]="$bit";         # Qを配置
       if (( row==(size-1) ));then
         ((TOTAL++));
-        printRecord "$size" "1";    # 出力 1:bitmap版 0:それ以外
+        if ((DISPLAY==1));then
+          printRecord "$size" "1";# 出力 1:bitmap版 0:それ以外
+        fi
         bitmap=tmpBoard[row];
         ((--row));
         continue;
@@ -1234,7 +1239,7 @@ function bitmap_NR()
         down[$row]=$((   down[n]|bit ));
         right[$row]=$(((right[n]|bit)>>1 ));
         tmpBoard[$row]=$bitmap;
-        board[$row]="$bit";         # Qを配置
+        board[$row]="$bit";       # Qを配置
         bitmap=$(( mask&~(left[row]|down[row]|right[row]) ));
         continue;
       fi
@@ -1252,32 +1257,482 @@ function bitmap_NR()
 : '再帰版ビットマップ';
 function bitmap_R()
 {
-  local -i size="$1"; local -i row="$2";
-  local -i left="$3"; local -i down="$4"; local -i right="$5";
+  local -i size="$1"; 
+  local -i row="$2";
+  local -i mask="$3";
+  local -i left="$4"; 
+  local -i down="$5"; 
+  local -i right="$6";
   local -i bitmap=;
   local -i bit=;
   local -i col=0;                     # 再帰に必要
-  local -i mask=$(( (1<<size)-1 ));
   if (( row==size ));then
-     ((TOTAL++));
-     printRecord "$size" "1";         # 出力 1:bitmap版 0:それ以外
+    ((TOTAL++));
+    if ((DISPLAY==1));then
+      printRecord "$size" "1";         # 出力 1:bitmap版 0:それ以外
+    fi
   else
     bitmap=$(( mask&~(left|down|right) ));
     while (( bitmap ));do
       bit=$((-bitmap&bitmap)) ;       # 一番右のビットを取り出す
       bitmap=$((bitmap&~bit)) ;       # 配置可能なパターンが一つずつ取り出される
       board[$row]="$bit";             # Qを配置
-      bitmap_R "$size" "$((row+1))" "$(( (left|bit)<<1 ))" "$((down|bit))" "$(( (right|bit)>>1 ))";
+      bitmap_R "$size" "$((row+1))" "$mask" "$(( (left|bit)<<1 ))" "$((down|bit))" "$(( (right|bit)>>1 ))";
     done
   fi
 }
-# 非再帰版ビットマップ
-#time bitmap_NR 5 0;
 #
-# 再帰版ビットマップ
-time bitmap_R 5 0 0 0 0;    
- echo "$TOTAL";
+: '非再帰版配置フラグ(right/down/left flag)';
+function rdlFlag_NR()
+{
+  local -i size="$1";
+  local -i row="$2"
+  local -i matched=0;
+  for ((i=0;i<size;i++)){ board[$i]=-1; }
+  while ((row>-1));do
+    matched=0;
+    for ((col=board[row]+1;col<size;col++)){
+      if (( !down[col]
+        &&  !right[col-row+size-1]
+        &&  !left[col+row] ));then
+        dix=$col;
+        rix=$((row-col+(size-1)));
+        lix=$((row+col));
+        if ((board[row]!=-1));then
+          down[${board[$row]}]=0;
+          right[${board[$row]}-$row+($size-1)]=0;
+          left[${board[$row]}+$row]=0;
+        fi       
+        board[$row]=$col;   # Qを配置
+        down[$col]=1;
+        right[$col-$row+($size-1)]=1;
+        left[$col+$row]=1;  # 効き筋とする
+        matched=1;          # 配置した
+        break;
+      fi
+    }
+    if ((matched));then     # 配置済み
+      ((row++));            #次のrowへ
+      if ((row==size));then
+        ((TOTAL++));
+        if ((DISPLAY==1));then
+          printRecord "$size";# 出力
+        fi
+        ((row--));
+      fi
+    else
+      if ((board[row]!=-1));then
+        down[${board[$row]}]=0;
+        right[${board[$row]}-$row+($size-1)]=0;
+        left[${board[$row]}+$row]=0;
+        board[$row]=-1;
+      fi
+      ((row--));            # バックトラック
+    fi
+  done
+}
 #
+: '再帰版配置フラグ';
+function postFlag_R()
+{
+  local -i size="$1";
+  local -i row="$2";
+  local -i col=0;       # 再帰に必要
+  if (( row==size ));then
+     ((TOTAL++));
+    if (( DISPLAY==1 ));then
+      printRecord "$size";# 出力
+    fi
+  else
+    for(( col=0;col<size;col++ )){
+      board[$row]="$col";
+      if (( down[col]==0 
+        && right[row-col+size-1]==0
+        && left[row+col]==0));then
+        down[$col]=1;
+        right[$row-$col+($size-1)]=1;
+        left[$row+$col]=1;
+        postFlag_R "$size" "$((row+1))";
+        down[$col]=0;
+        right[$row-$col+($size-1)]=0;
+        left[$row+$col]=0;
+      fi
+    }
+  fi
+}
+#
+: 'バックトラック版効き筋をチェック';
+function check_backTracking()
+{
+  local -i row="$1";
+  local -i flag=0;
+  for ((i=0;i<row;++i)){
+    if (( board[i]>=board[row] ));then
+      val=$(( board[i]-board[row] ));
+    else
+      val=$(( board[row]-board[i] ));
+    fi
+    if (( board[i]==board[row] || val==(row-i) ));then
+      flag=0;
+      return ;
+    fi
+  }
+  flag=1;
+  [[ $flag -eq 0 ]]
+  return $?;
+}
+#
+: '非再帰版バックトラック';
+function backTracking_NR()
+{
+  local -i size="$1";
+  local -i row="$2";
+  for ((i=0;i<size;i++)){ board[$i]=-1; }
+  while ((row>-1));do
+    local -i matched=0;
+    local -i col=0;  
+    for((col=board[row]+1;col<size;col++)){
+      board[$row]=$col;
+      check_backTracking "$row";  # 効きをチェック
+      if (($?==1));then # 直前のreturnを利用
+        matched=1;
+        break;
+      fi
+    }
+    if ((matched));then
+      ((row++));
+      if ((row==size));then  # 最下部まで到達
+        ((row--));
+        ((TOTAL++));
+        if (( DISPLAY==1 ));then
+          printRecord "$size";# 出力
+        fi
+      fi
+    else
+      if ((board[row]!=-1));then
+        board[$row]=-1;
+      fi
+      ((row--));
+    fi
+ done  
+}
+#
+: '再帰版バックトラック';
+function backTracking_R()
+{
+  local -i size="$1";
+  local -i row="$2";
+  local -i col=0;
+  if ((row==size));then
+    ((TOTAL++));
+    if (( DISPLAY==1 ));then
+      printRecord "$size";# 出力
+    fi
+  else
+    for(( col=0;col<size;col++ )){
+      board["$row"]="$col";
+      check_backTracking "$row";
+      if (($?==1));then 
+        backTracking_R  $size $((row+1));
+      fi
+    }
+  fi
+}
+#
+: 'ブルートフォース版効き筋をチェック';
+function check_bluteForce()
+{
+  local -i size="$1";
+  local -i flag=1;
+  for ((r=1;r<size;++r)){
+    for ((i=0;i<r;++i)){
+      #echo `$(($1-$2)) | sed -e "s/^-//g"`;
+      if (( board[i]>=board[r] ));then
+        val=$(( board[i]-board[r] ));
+      else
+        val=$(( board[r]-board[i] ));
+      fi
+
+      if (( board[i]==board[r] || val==(r-i) ));then
+        flag=0; 
+        return ;
+      fi
+    }
+  }
+  flag=1;
+  [[ $flag -eq 0 ]]
+  return $?;
+}
+#
+: '非再帰版ブルートフォース';
+function bluteForce_NR()
+{
+  local -i size="$1";
+  local -i row="$2";
+  for ((i=0;i<size;i++)){ board[$i]=-1; }
+  while ((row>-1));do
+    local -i matched=0;
+    local -i col=0;  
+    for((col=board[row]+1;col<size;col++)){
+      board[$row]=$col;
+      matched=1;
+      break;
+    }
+    if ((matched));then
+      ((row++));
+      if ((row==size));then  # 最下部まで到達
+        ((row--));
+        check_bluteForce "$size";  # 効きをチェック
+        if (($?==1));then # 直前のreturnを利用
+          ((TOTAL++));
+          if (( DISPLAY==1 ));then
+            printRecord "$size";# 出力
+          fi
+        fi
+      fi
+    else
+      if ((board[row]!=-1));then
+        board[$row]=-1;
+      fi
+      ((row--));
+    fi
+ done  
+}
+#
+: '再帰版ブルートフォース';
+function bluteForce_R()
+{
+  local -i size="$1";
+  local -i row="$2";
+  local -i col=;
+  if ((row==size));then
+    check_bluteForce "$size";
+    if (( $?==1 ));then 
+      ((TOTAL++));
+      if (( DISPLAY==1 ));then
+        printRecord "$size";# 出力
+      fi
+    fi
+  else
+    #for(( col=0;col<(size-row);col++ )){
+    for(( col=0;col<size;col++ )){
+      board["$row"]="$col";
+      bluteForce_R  $size $((row+1));
+    }
+  fi
+}
+#
+function NQ()
+{
+  local selectName="$1";
+  local -i max=15;
+  local -i min=4;
+  local -i N="$min";
+  local startTime=0;
+	local endTime=0;
+	local hh=mm=ss=0; 
+  echo " N:        Total       Unique        hh:mm:ss" ;
+  for((N=min;N<=max;N++)){
+    TOTAL=0;
+    UNIQUE=0;
+    startTime=$(date +%s);# 計測開始時間
+    row=0;
+    mask=$(( (1<<N)-1 ));
+    "$selectName" "$N" 0 "$mask" 0 0 0;
+
+    endTime=$(date +%s); 	# 計測終了時間
+    ss=$((endTime-startTime));# hh:mm:ss 形式に変換
+    hh=$((ss/3600));
+    ss=$((ss%3600));
+    mm=$((ss/60));
+    ss=$((ss%60));
+    printf "%2d:%13d%13d%10d:%.2d:%.2d\n" $N $TOTAL $UNIQUE $hh $mm $ss ;
+  } 
+}
+
+while :
+do
+read -n1 -p "
+エイト・クイーン メニュー
+実行したい番号を選択
+8) 非再帰ビットマップ
+7) 再帰ビットマップ
+6) 非再帰　配置フラグ
+5) 再帰　　配置フラグ 
+4) 非再帰　バックトラック 
+3) 再帰　　バックトラック
+2) 非再帰　ブルートフォース 
+1) 再帰　　ブルートフォース 
+
+echo "行頭の番号を入力してください";
+
+" selectNo;
+echo 
+case "$selectNo" in
+  8)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ bitmap_NR
+    break;
+    ;;
+  7)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ bitmap_R 
+    break;
+    ;;
+  6)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ rdlFlag_NR
+    break;
+    ;;
+  5)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ postFlag_R;
+    break;
+    ;;
+  4)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ backTracking_NR;
+    break;
+    ;;
+  3)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ backTracking_R;
+    break;
+    ;;
+  2)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ bluteForce_NR;
+    break;
+    ;;
+  1)
+    while :
+    do 
+      read -n1 -p "
+      ボード画面の表示は？ 
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
+
+      echo "行頭のアルファベットを入力して下さい";
+
+      " select;
+      echo; 
+      case "$select" in
+        y|Y) DISPLAY=1; break; ;;
+        n|N) DISPLAY=0; break; ;;
+      esac
+    done
+    NQ bluteForce_R;
+    break;
+    ;;
+  *)
+    ;; 
+esac
+done
 exit;
 ```
 
@@ -1286,152 +1741,41 @@ exit;
 実行結果は以下のとおりです。
 
 ```
-1
- 0 2 4 1 3 
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
+bash-3.2$ bash bitmap.sh
 
-2
- 0 3 1 4 2 
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
+エイト・クイーン メニュー
+実行したい番号を選択
+8) 非再帰ビットマップ
+7) 再帰ビットマップ
+6) 非再帰　配置フラグ
+5) 再帰　　配置フラグ
+4) 非再帰　バックトラック
+3) 再帰　　バックトラック
+2) 非再帰　ブルートフォース
+1) 再帰　　ブルートフォース
 
-3
- 1 3 0 2 4 
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-
-4
- 1 4 2 0 3 
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-
-5
- 2 0 3 1 4 
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-
-6
- 2 4 1 3 0 
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-
-7
- 3 0 2 4 1 
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
+echo 行頭の番号を入力してください;
 
 8
- 3 1 4 2 0 
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
 
-9
- 4 1 3 0 2 
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
+      ボード画面の表示は？
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
 
-10
- 4 2 0 3 1 
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
+      echo 行頭のアルファベットを入力して下さい;
 
-10
-
-real	0m0.025s
-user	0m0.022s
-sys	0m0.002s
-
+      n
+ N:        Total       Unique        hh:mm:ss
+ 4:            2            0         0:00:00
+ 5:           10            0         0:00:00
+ 6:            4            0         0:00:00
+ 7:           40            0         0:00:00
+ 8:           92            0         0:00:00
+ 9:          352            0         0:00:01
+10:          724            0         0:00:04
+:
+:
+bash-3.2$
 ```  
 
 
