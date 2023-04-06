@@ -1,10 +1,10 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（１３）第三章　ビットマップ｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><meta property="og:title" content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta property="og:description" content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-04-05T19:08:30+09:00"><meta property="article:modified_time" content="2023-04-06T14:05:26+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta name=twitter:description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１３）第三章　ビットマップ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"],"datePublished":"2023-04-05T19:08:30+09:00","dateModified":"2023-04-06T14:05:26+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１３）第三章　ビットマップ","item":"https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=keywords content="エイト・クイーン,シェルスクリプト,Bash,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（１３）第三章　ビットマップ｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/><meta property="og:title" content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta property="og:description" content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="シェルスクリプト"><meta property="article:tag" content="Bash"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-04-05T19:08:30+09:00"><meta property="article:modified_time" content="2023-04-06T16:48:15+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=twitter:title content="Ｎクイーン問題（１３）第三章　ビットマップ｜NLP"><meta name=twitter:description content="ビットマップ Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものがbitmap(ビットマップ)です。 ビットマッ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１３）第三章　ビットマップ","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/shellscript.jpg"],"datePublished":"2023-04-05T19:08:30+09:00","dateModified":"2023-04-06T16:48:15+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１３）第三章　ビットマップ","item":"https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_159>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li><li><a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>Linux</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a><li><span class=breadcrumb-item>Ｎクイーン問題（１３）第三章　ビットマップ</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2023.04.05</time>
 <time class="article-time--item article-time--updatedate">2023.04.06</time>
-<time class="article-time--item article-time--reading">読了時間: 23分</time></div></header><h1 class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
+<time class="article-time--item article-time--reading">読了時間: 26分</time></div></header><h1 class=article-title>Ｎクイーン問題（１３）第三章　ビットマップ</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/>シェルスクリプト</a>
 <a href=https://suzukiiichiro.github.io/tags/bash/>Bash</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
@@ -524,9 +524,12 @@ bitmap_R &#34;$size&#34; &#34;$((row+1))&#34; &#34;$(( (left|bit)&lt;&lt;1 ))&#3
 </span></span><span class=line><span class=cl>  <span class=k>done</span>
 </span></span></code></pre></div><p><code>left</code> <code>down</code> <code>right</code> は、Qが配置されるたびに、その効き筋を足し合わせ、すべてのrowの効き筋に対応します。</p><p>再帰では、こうしたことをプログラマが意識することなく実現できるわけですが、非再帰の場合は、<code>left</code> <code>down</code> <code>right</code> を配列などで効き筋を覚えておく必要が出てきます。</p><p>それはどうとして猛烈にわかりやすい図がありました。<br><img src=bitmap.jpg width=80%></p><h2 id=ソースコード>ソースコード</h2><p>ソースの一番下で、再帰・非再帰を切換えて事項してください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash:bitmap.sh data-lang=bash:bitmap.sh><span class=line><span class=cl><span class=cp>#!/usr/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>COUNT</span><span class=o>=</span>0<span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>TOTAL</span><span class=o>=</span>0<span class=p>;</span>     <span class=c1># カウンター</span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>UNIQUE</span><span class=o>=</span>0<span class=p>;</span>    <span class=c1># ユニークユーザー</span>
+</span></span><span class=line><span class=cl><span class=nb>declare</span> -i <span class=nv>DISPLAY</span><span class=o>=</span>0<span class=p>;</span>   <span class=c1># ボード出力するか</span>
 </span></span><span class=line><span class=cl><span class=c1>#</span>
-</span></span><span class=line><span class=cl>: <span class=s1>&#39;ボードレイアウトを出力&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>: <span class=s1>&#39;ボードレイアウトを出力 ビットマップ対応版&#39;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=k>function</span> printRecord<span class=o>()</span>
 </span></span><span class=line><span class=cl><span class=o>{</span>
 </span></span><span class=line><span class=cl>  <span class=nv>size</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span><span class=p>;</span>
@@ -633,7 +636,7 @@ bitmap_R &#34;$size&#34; &#34;$((row+1))&#34; &#34;$(( (left|bit)&lt;&lt;1 ))&#3
 </span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;&#34;;
 </span></span></span><span class=line><span class=cl><span class=s2>}
 </span></span></span><span class=line><span class=cl><span class=s2>#
-</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰版ビットマップ&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰ビットマップ版&#39;;
 </span></span></span><span class=line><span class=cl><span class=s2>function bitmap_NR()
 </span></span></span><span class=line><span class=cl><span class=s2>{
 </span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
@@ -644,17 +647,19 @@ bitmap_R &#34;$size&#34; &#34;$((row+1))&#34; &#34;$(( (left|bit)&lt;&lt;1 ))&#3
 </span></span></span><span class=line><span class=cl><span class=s>  local -a left[$size</span><span class=o>]</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a down<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a right<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a tmpBoard<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>         <span class=c1>#各rowのleft,right,downを足した配列</span>
-</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a board<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>            <span class=c1>#クイーンを配置した場所を格納する配列</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a tmpBoard<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>       <span class=c1>#各rowのleft,right,downを足した配列</span>
+</span></span><span class=line><span class=cl>  <span class=nb>local</span> <span class=o>-</span>a board<span class=o>[</span><span class=nv>$size</span><span class=o>]</span><span class=p>;</span>          <span class=c1>#クイーンを配置した場所を格納する配列</span>
 </span></span><span class=line><span class=cl>  <span class=nv>bitmap</span><span class=o>=</span>mask<span class=p>;</span>
 </span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=nb>true</span> <span class=p>;</span><span class=k>do</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>((</span> bitmap <span class=k>))</span><span class=s2>;then
-</span></span></span><span class=line><span class=cl><span class=s2>      bit=</span><span class=k>$((</span> <span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap <span class=k>))</span><span class=s2>;    # 一番右のビットを取り出す 
-</span></span></span><span class=line><span class=cl><span class=s2>      bitmap=</span><span class=k>$((</span> bitmap^bit <span class=k>))</span><span class=s2>;     # 配置可能なパターンが一つずつ取り出される
-</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;           # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>      bit=</span><span class=k>$((</span> <span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap <span class=k>))</span><span class=s2>;  # 一番右のビットを取り出す 
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap=</span><span class=k>$((</span> bitmap^bit <span class=k>))</span><span class=s2>;   # 配置可能なパターンが一つずつ取り出される
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;         # Qを配置
 </span></span></span><span class=line><span class=cl><span class=s2>      if (( row==(size-1) ));then
 </span></span></span><span class=line><span class=cl><span class=s2>        ((TOTAL++));
-</span></span></span><span class=line><span class=cl><span class=s2>        printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;    # 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>        if ((DISPLAY==1));then
+</span></span></span><span class=line><span class=cl><span class=s2>          printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;# 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
 </span></span></span><span class=line><span class=cl><span class=s2>        bitmap=tmpBoard[row];
 </span></span></span><span class=line><span class=cl><span class=s2>        ((--row));
 </span></span></span><span class=line><span class=cl><span class=s2>        continue;
@@ -664,7 +669,7 @@ bitmap_R &#34;$size&#34; &#34;$((row+1))&#34; &#34;$(( (left|bit)&lt;&lt;1 ))&#3
 </span></span></span><span class=line><span class=cl><span class=s>        down[$row]=$((   down[n]|bit ));
 </span></span></span><span class=line><span class=cl><span class=s>        right[$row]=$(((right[n]|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>;
 </span></span></span><span class=line><span class=cl><span class=s2>        tmpBoard[</span><span class=nv>$row</span><span class=s2>]=</span><span class=nv>$bitmap</span><span class=s2>;
-</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;         # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;       # Qを配置
 </span></span></span><span class=line><span class=cl><span class=s2>        bitmap=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>[</span>row<span class=o>]|</span>down<span class=o>[</span>row<span class=o>]|</span>right<span class=o>[</span>row<span class=o>])</span> <span class=k>))</span><span class=s2>;
 </span></span></span><span class=line><span class=cl><span class=s2>        continue;
 </span></span></span><span class=line><span class=cl><span class=s2>      fi
@@ -682,178 +687,518 @@ bitmap_R &#34;$size&#34; &#34;$((row+1))&#34; &#34;$(( (left|bit)&lt;&lt;1 ))&#3
 </span></span></span><span class=line><span class=cl><span class=s2>: &#39;再帰版ビットマップ&#39;;
 </span></span></span><span class=line><span class=cl><span class=s2>function bitmap_R()
 </span></span></span><span class=line><span class=cl><span class=s2>{
-</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;; local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
-</span></span></span><span class=line><span class=cl><span class=s2>  local -i left=&#34;</span><span class=nv>$3</span><span class=s2>&#34;; local -i down=&#34;</span><span class=nv>$4</span><span class=s2>&#34;; local -i right=&#34;</span><span class=nv>$5</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;; 
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i mask=&#34;</span><span class=nv>$3</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i left=&#34;</span><span class=nv>$4</span><span class=s2>&#34;; 
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i down=&#34;</span><span class=nv>$5</span><span class=s2>&#34;; 
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i right=&#34;</span><span class=nv>$6</span><span class=s2>&#34;;
 </span></span></span><span class=line><span class=cl><span class=s2>  local -i bitmap=;
 </span></span></span><span class=line><span class=cl><span class=s2>  local -i bit=;
 </span></span></span><span class=line><span class=cl><span class=s2>  local -i col=0;                     # 再帰に必要
-</span></span></span><span class=line><span class=cl><span class=s2>  local -i mask=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;size)-1 ));
-</span></span></span><span class=line><span class=cl><span class=s>  if (( row==size</span> <span class=k>))</span><span class=s2>;then
-</span></span></span><span class=line><span class=cl><span class=s2>     ((TOTAL++));
-</span></span></span><span class=line><span class=cl><span class=s2>     printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;         # 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>  if (( row==size ));then
+</span></span></span><span class=line><span class=cl><span class=s2>    ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>    if ((DISPLAY==1));then
+</span></span></span><span class=line><span class=cl><span class=s2>      printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span>1<span class=s2>&#34;;         # 出力 1:bitmap版 0:それ以外
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
 </span></span></span><span class=line><span class=cl><span class=s2>  else
 </span></span></span><span class=line><span class=cl><span class=s2>    bitmap=</span><span class=k>$((</span> mask<span class=o>&amp;</span>~<span class=o>(</span>left<span class=o>|</span>down<span class=o>|</span>right<span class=o>)</span> <span class=k>))</span><span class=s2>;
 </span></span></span><span class=line><span class=cl><span class=s2>    while (( bitmap ));do
 </span></span></span><span class=line><span class=cl><span class=s2>      bit=</span><span class=k>$((</span><span class=o>-</span>bitmap<span class=o>&amp;</span>bitmap<span class=k>))</span><span class=s2> ;       # 一番右のビットを取り出す
 </span></span></span><span class=line><span class=cl><span class=s2>      bitmap=</span><span class=k>$((</span>bitmap<span class=o>&amp;</span>~bit<span class=k>))</span><span class=s2> ;       # 配置可能なパターンが一つずつ取り出される
 </span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$bit</span><span class=s2>&#34;;             # Qを配置
-</span></span></span><span class=line><span class=cl><span class=s2>      bitmap_R &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34; &#34;</span><span class=k>$((</span> <span class=o>(</span>left<span class=o>|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ))&#34; &#34;$((down|bit))&#34; &#34;$(( (right|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      bitmap_R &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34; &#34;</span><span class=nv>$mask</span><span class=s2>&#34; &#34;</span><span class=k>$((</span> <span class=o>(</span>left<span class=o>|</span>bit<span class=o>)</span><span class=s>&lt;&lt;1 ))&#34; &#34;$((down|bit))&#34; &#34;$(( (right|bit)&gt;&gt;1</span> <span class=k>))</span><span class=s2>&#34;;
 </span></span></span><span class=line><span class=cl><span class=s2>    done
 </span></span></span><span class=line><span class=cl><span class=s2>  fi
 </span></span></span><span class=line><span class=cl><span class=s2>}
-</span></span></span><span class=line><span class=cl><span class=s2># 非再帰版ビットマップ
-</span></span></span><span class=line><span class=cl><span class=s2>#time bitmap_NR 5 0;
 </span></span></span><span class=line><span class=cl><span class=s2>#
-</span></span></span><span class=line><span class=cl><span class=s2># 再帰版ビットマップ
-</span></span></span><span class=line><span class=cl><span class=s2>time bitmap_R 5 0 0 0 0;    
-</span></span></span><span class=line><span class=cl><span class=s2> echo &#34;</span><span class=nv>$TOTAL</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰版配置フラグ(right/down/left flag)&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function rdlFlag_NR()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i matched=0;
+</span></span></span><span class=line><span class=cl><span class=s2>  for ((i=0;i&lt;size;i++)){ board[</span><span class=nv>$i</span><span class=s2>]=-1; }
+</span></span></span><span class=line><span class=cl><span class=s2>  while ((row&gt;-1));do
+</span></span></span><span class=line><span class=cl><span class=s2>    matched=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    for ((col=board[row]+1;col&lt;size;col++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( !down[col]
+</span></span></span><span class=line><span class=cl><span class=s2>        &amp;&amp;  !right[col-row+size-1]
+</span></span></span><span class=line><span class=cl><span class=s2>        &amp;&amp;  !left[col+row] ));then
+</span></span></span><span class=line><span class=cl><span class=s2>        dix=</span><span class=nv>$col</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        rix=</span><span class=k>$((</span>row-col+<span class=o>(</span>size-1<span class=k>))</span><span class=s2>);
+</span></span></span><span class=line><span class=cl><span class=s2>        lix=</span><span class=k>$((</span>row+col<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>        if ((board[row]!=-1));then
+</span></span></span><span class=line><span class=cl><span class=s2>          down[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>          right[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>-</span><span class=nv>$row</span><span class=s2>+(</span><span class=nv>$size</span><span class=s2>-1)]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>          left[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>+</span><span class=nv>$row</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        fi       
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=</span><span class=nv>$col</span><span class=s2>;   # Qを配置
+</span></span></span><span class=line><span class=cl><span class=s2>        down[</span><span class=nv>$col</span><span class=s2>]=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        right[</span><span class=nv>$col</span><span class=s2>-</span><span class=nv>$row</span><span class=s2>+(</span><span class=nv>$size</span><span class=s2>-1)]=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        left[</span><span class=nv>$col</span><span class=s2>+</span><span class=nv>$row</span><span class=s2>]=1;  # 効き筋とする
+</span></span></span><span class=line><span class=cl><span class=s2>        matched=1;          # 配置した
+</span></span></span><span class=line><span class=cl><span class=s2>        break;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>    if ((matched));then     # 配置済み
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row++));            #次のrowへ
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((row==size));then
+</span></span></span><span class=line><span class=cl><span class=s2>        ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>        if ((DISPLAY==1));then
+</span></span></span><span class=line><span class=cl><span class=s2>          printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
+</span></span></span><span class=line><span class=cl><span class=s2>        ((row--));
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    else
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((board[row]!=-1));then
+</span></span></span><span class=line><span class=cl><span class=s2>        down[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        right[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>-</span><span class=nv>$row</span><span class=s2>+(</span><span class=nv>$size</span><span class=s2>-1)]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        left[</span><span class=si>${</span><span class=nv>board</span><span class=p>[</span><span class=nv>$row</span><span class=p>]</span><span class=si>}</span><span class=s2>+</span><span class=nv>$row</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=-1;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row--));            # バックトラック
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  done
+</span></span></span><span class=line><span class=cl><span class=s2>}
 </span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;再帰版配置フラグ&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function postFlag_R()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i col=0;       # 再帰に必要
+</span></span></span><span class=line><span class=cl><span class=s2>  if (( row==size ));then
+</span></span></span><span class=line><span class=cl><span class=s2>     ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>    if (( DISPLAY==1 ));then
+</span></span></span><span class=line><span class=cl><span class=s2>      printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  else
+</span></span></span><span class=line><span class=cl><span class=s2>    for(( col=0;col&lt;size;col++ )){
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=&#34;</span><span class=nv>$col</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( down[col]==0 
+</span></span></span><span class=line><span class=cl><span class=s2>        &amp;&amp; right[row-col+size-1]==0
+</span></span></span><span class=line><span class=cl><span class=s2>        &amp;&amp; left[row+col]==0));then
+</span></span></span><span class=line><span class=cl><span class=s2>        down[</span><span class=nv>$col</span><span class=s2>]=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        right[</span><span class=nv>$row</span><span class=s2>-</span><span class=nv>$col</span><span class=s2>+(</span><span class=nv>$size</span><span class=s2>-1)]=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        left[</span><span class=nv>$row</span><span class=s2>+</span><span class=nv>$col</span><span class=s2>]=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        postFlag_R &#34;</span><span class=nv>$size</span><span class=s2>&#34; &#34;</span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>        down[</span><span class=nv>$col</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        right[</span><span class=nv>$row</span><span class=s2>-</span><span class=nv>$col</span><span class=s2>+(</span><span class=nv>$size</span><span class=s2>-1)]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>        left[</span><span class=nv>$row</span><span class=s2>+</span><span class=nv>$col</span><span class=s2>]=0;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;バックトラック版効き筋をチェック&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function check_backTracking()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i flag=0;
+</span></span></span><span class=line><span class=cl><span class=s2>  for ((i=0;i&lt;row;++i)){
+</span></span></span><span class=line><span class=cl><span class=s2>    if (( board[i]&gt;=board[row] ));then
+</span></span></span><span class=line><span class=cl><span class=s2>      val=</span><span class=k>$((</span> board<span class=o>[</span>i<span class=o>]-</span>board<span class=o>[</span>row<span class=o>]</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    else
+</span></span></span><span class=line><span class=cl><span class=s2>      val=</span><span class=k>$((</span> board<span class=o>[</span>row<span class=o>]-</span>board<span class=o>[</span>i<span class=o>]</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>    if (( board[i]==board[row] || val==(row-i) ));then
+</span></span></span><span class=line><span class=cl><span class=s2>      flag=0;
+</span></span></span><span class=line><span class=cl><span class=s2>      return ;
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  }
+</span></span></span><span class=line><span class=cl><span class=s2>  flag=1;
+</span></span></span><span class=line><span class=cl><span class=s2>  [[ </span><span class=nv>$flag</span><span class=s2> -eq 0 ]]
+</span></span></span><span class=line><span class=cl><span class=s2>  return </span><span class=nv>$?</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰版バックトラック&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function backTracking_NR()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  for ((i=0;i&lt;size;i++)){ board[</span><span class=nv>$i</span><span class=s2>]=-1; }
+</span></span></span><span class=line><span class=cl><span class=s2>  while ((row&gt;-1));do
+</span></span></span><span class=line><span class=cl><span class=s2>    local -i matched=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    local -i col=0;  
+</span></span></span><span class=line><span class=cl><span class=s2>    for((col=board[row]+1;col&lt;size;col++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=</span><span class=nv>$col</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>      check_backTracking &#34;</span><span class=nv>$row</span><span class=s2>&#34;;  # 効きをチェック
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((</span><span class=nv>$?</span><span class=s2>==1));then # 直前のreturnを利用
+</span></span></span><span class=line><span class=cl><span class=s2>        matched=1;
+</span></span></span><span class=line><span class=cl><span class=s2>        break;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>    if ((matched));then
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row++));
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((row==size));then  # 最下部まで到達
+</span></span></span><span class=line><span class=cl><span class=s2>        ((row--));
+</span></span></span><span class=line><span class=cl><span class=s2>        ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>        if (( DISPLAY==1 ));then
+</span></span></span><span class=line><span class=cl><span class=s2>          printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    else
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((board[row]!=-1));then
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=-1;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row--));
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2> done  
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;再帰版バックトラック&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function backTracking_R()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i col=0;
+</span></span></span><span class=line><span class=cl><span class=s2>  if ((row==size));then
+</span></span></span><span class=line><span class=cl><span class=s2>    ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>    if (( DISPLAY==1 ));then
+</span></span></span><span class=line><span class=cl><span class=s2>      printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  else
+</span></span></span><span class=line><span class=cl><span class=s2>    for(( col=0;col&lt;size;col++ )){
+</span></span></span><span class=line><span class=cl><span class=s2>      board[&#34;</span><span class=nv>$row</span><span class=s2>&#34;]=&#34;</span><span class=nv>$col</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      check_backTracking &#34;</span><span class=nv>$row</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((</span><span class=nv>$?</span><span class=s2>==1));then 
+</span></span></span><span class=line><span class=cl><span class=s2>        backTracking_R  </span><span class=nv>$size</span><span class=s2> </span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;ブルートフォース版効き筋をチェック&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function check_bluteForce()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i flag=1;
+</span></span></span><span class=line><span class=cl><span class=s2>  for ((r=1;r&lt;size;++r)){
+</span></span></span><span class=line><span class=cl><span class=s2>    for ((i=0;i&lt;r;++i)){
+</span></span></span><span class=line><span class=cl><span class=s2>      #echo `</span><span class=k>$((</span><span class=nv>$1</span><span class=o>-</span><span class=nv>$2</span><span class=k>))</span><span class=s2> | sed -e &#34;</span>s/^-//g<span class=s2>&#34;`;
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( board[i]&gt;=board[r] ));then
+</span></span></span><span class=line><span class=cl><span class=s2>        val=</span><span class=k>$((</span> board<span class=o>[</span>i<span class=o>]-</span>board<span class=o>[</span>r<span class=o>]</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>      else
+</span></span></span><span class=line><span class=cl><span class=s2>        val=</span><span class=k>$((</span> board<span class=o>[</span>r<span class=o>]-</span>board<span class=o>[</span>i<span class=o>]</span> <span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( board[i]==board[r] || val==(r-i) ));then
+</span></span></span><span class=line><span class=cl><span class=s2>        flag=0; 
+</span></span></span><span class=line><span class=cl><span class=s2>        return ;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  }
+</span></span></span><span class=line><span class=cl><span class=s2>  flag=1;
+</span></span></span><span class=line><span class=cl><span class=s2>  [[ </span><span class=nv>$flag</span><span class=s2> -eq 0 ]]
+</span></span></span><span class=line><span class=cl><span class=s2>  return </span><span class=nv>$?</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;非再帰版ブルートフォース&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function bluteForce_NR()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  for ((i=0;i&lt;size;i++)){ board[</span><span class=nv>$i</span><span class=s2>]=-1; }
+</span></span></span><span class=line><span class=cl><span class=s2>  while ((row&gt;-1));do
+</span></span></span><span class=line><span class=cl><span class=s2>    local -i matched=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    local -i col=0;  
+</span></span></span><span class=line><span class=cl><span class=s2>    for((col=board[row]+1;col&lt;size;col++)){
+</span></span></span><span class=line><span class=cl><span class=s2>      board[</span><span class=nv>$row</span><span class=s2>]=</span><span class=nv>$col</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>      matched=1;
+</span></span></span><span class=line><span class=cl><span class=s2>      break;
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>    if ((matched));then
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row++));
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((row==size));then  # 最下部まで到達
+</span></span></span><span class=line><span class=cl><span class=s2>        ((row--));
+</span></span></span><span class=line><span class=cl><span class=s2>        check_bluteForce &#34;</span><span class=nv>$size</span><span class=s2>&#34;;  # 効きをチェック
+</span></span></span><span class=line><span class=cl><span class=s2>        if ((</span><span class=nv>$?</span><span class=s2>==1));then # 直前のreturnを利用
+</span></span></span><span class=line><span class=cl><span class=s2>          ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>          if (( DISPLAY==1 ));then
+</span></span></span><span class=line><span class=cl><span class=s2>            printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>          fi
+</span></span></span><span class=line><span class=cl><span class=s2>        fi
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    else
+</span></span></span><span class=line><span class=cl><span class=s2>      if ((board[row]!=-1));then
+</span></span></span><span class=line><span class=cl><span class=s2>        board[</span><span class=nv>$row</span><span class=s2>]=-1;
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>      ((row--));
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2> done  
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>: &#39;再帰版ブルートフォース&#39;;
+</span></span></span><span class=line><span class=cl><span class=s2>function bluteForce_R()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i size=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i row=&#34;</span><span class=nv>$2</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i col=;
+</span></span></span><span class=line><span class=cl><span class=s2>  if ((row==size));then
+</span></span></span><span class=line><span class=cl><span class=s2>    check_bluteForce &#34;</span><span class=nv>$size</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>    if (( </span><span class=nv>$?</span><span class=s2>==1 ));then 
+</span></span></span><span class=line><span class=cl><span class=s2>      ((TOTAL++));
+</span></span></span><span class=line><span class=cl><span class=s2>      if (( DISPLAY==1 ));then
+</span></span></span><span class=line><span class=cl><span class=s2>        printRecord &#34;</span><span class=nv>$size</span><span class=s2>&#34;;# 出力
+</span></span></span><span class=line><span class=cl><span class=s2>      fi
+</span></span></span><span class=line><span class=cl><span class=s2>    fi
+</span></span></span><span class=line><span class=cl><span class=s2>  else
+</span></span></span><span class=line><span class=cl><span class=s2>    #for(( col=0;col&lt;(size-row);col++ )){
+</span></span></span><span class=line><span class=cl><span class=s2>    for(( col=0;col&lt;size;col++ )){
+</span></span></span><span class=line><span class=cl><span class=s2>      board[&#34;</span><span class=nv>$row</span><span class=s2>&#34;]=&#34;</span><span class=nv>$col</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>      bluteForce_R  </span><span class=nv>$size</span><span class=s2> </span><span class=k>$((</span>row+1<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  fi
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>#
+</span></span></span><span class=line><span class=cl><span class=s2>function NQ()
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  local selectName=&#34;</span><span class=nv>$1</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i max=15;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i min=4;
+</span></span></span><span class=line><span class=cl><span class=s2>  local -i N=&#34;</span><span class=nv>$min</span><span class=s2>&#34;;
+</span></span></span><span class=line><span class=cl><span class=s2>  local startTime=0;
+</span></span></span><span class=line><span class=cl><span class=s2>	local endTime=0;
+</span></span></span><span class=line><span class=cl><span class=s2>	local hh=mm=ss=0; 
+</span></span></span><span class=line><span class=cl><span class=s2>  echo &#34;</span> N:        Total       Unique        hh:mm:ss<span class=s2>&#34; ;
+</span></span></span><span class=line><span class=cl><span class=s2>  for((N=min;N&lt;=max;N++)){
+</span></span></span><span class=line><span class=cl><span class=s2>    TOTAL=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    UNIQUE=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    startTime=</span><span class=k>$(</span>date +%s<span class=k>)</span><span class=s2>;# 計測開始時間
+</span></span></span><span class=line><span class=cl><span class=s2>    row=0;
+</span></span></span><span class=line><span class=cl><span class=s2>    mask=</span><span class=k>$((</span> <span class=o>(</span><span class=m>1</span><span class=s>&lt;&lt;N)-1 ));
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;$selectN</span>ame<span class=s2>&#34; &#34;</span><span class=nv>$N</span><span class=s2>&#34; 0 &#34;</span><span class=nv>$mask</span><span class=s2>&#34; 0 0 0;
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    endTime=</span><span class=k>$(</span>date +%s<span class=k>)</span><span class=s2>; 	# 計測終了時間
+</span></span></span><span class=line><span class=cl><span class=s2>    ss=</span><span class=k>$((</span>endTime-startTime<span class=k>))</span><span class=s2>;# hh:mm:ss 形式に変換
+</span></span></span><span class=line><span class=cl><span class=s2>    hh=</span><span class=k>$((</span>ss/3600<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    ss=</span><span class=k>$((</span>ss%3600<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    mm=</span><span class=k>$((</span>ss/60<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    ss=</span><span class=k>$((</span>ss%60<span class=k>))</span><span class=s2>;
+</span></span></span><span class=line><span class=cl><span class=s2>    printf &#34;</span><span class=o>%</span><span class=m>2</span>d:%13d%13d%10d:%.2d:%.2d<span class=se>\n</span><span class=s2>&#34; </span><span class=nv>$N</span><span class=s2> </span><span class=nv>$TOTAL</span><span class=s2> </span><span class=nv>$UNIQUE</span><span class=s2> </span><span class=nv>$hh</span><span class=s2> </span><span class=nv>$mm</span><span class=s2> </span><span class=nv>$ss</span><span class=s2> ;
+</span></span></span><span class=line><span class=cl><span class=s2>  } 
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>while :
+</span></span></span><span class=line><span class=cl><span class=s2>do
+</span></span></span><span class=line><span class=cl><span class=s2>read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>エイト・クイーン メニュー
+</span></span><span class=line><span class=cl>実行したい番号を選択
+</span></span><span class=line><span class=cl><span class=m>8</span><span class=o>)</span> 非再帰ビットマップ
+</span></span><span class=line><span class=cl><span class=m>7</span><span class=o>)</span> 再帰ビットマップ
+</span></span><span class=line><span class=cl><span class=m>6</span><span class=o>)</span> 非再帰　配置フラグ
+</span></span><span class=line><span class=cl><span class=m>5</span><span class=o>)</span> 再帰　　配置フラグ 
+</span></span><span class=line><span class=cl><span class=m>4</span><span class=o>)</span> 非再帰　バックトラック 
+</span></span><span class=line><span class=cl><span class=m>3</span><span class=o>)</span> 再帰　　バックトラック
+</span></span><span class=line><span class=cl><span class=m>2</span><span class=o>)</span> 非再帰　ブルートフォース 
+</span></span><span class=line><span class=cl><span class=m>1</span><span class=o>)</span> 再帰　　ブルートフォース 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;行頭の番号を入力してください&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s2>&#34; selectNo;
+</span></span></span><span class=line><span class=cl><span class=s2>echo 
+</span></span></span><span class=line><span class=cl><span class=s2>case &#34;</span><span class=nv>$selectNo</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>  8)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ bitmap_NR
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  7)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ bitmap_R 
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  6)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ rdlFlag_NR
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  5)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ postFlag_R;
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  4)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ backTracking_NR;
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  3)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ backTracking_R;
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  2)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ bluteForce_NR;
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  1)
+</span></span></span><span class=line><span class=cl><span class=s2>    while :
+</span></span></span><span class=line><span class=cl><span class=s2>    do 
+</span></span></span><span class=line><span class=cl><span class=s2>      read -n1 -p &#34;</span>
+</span></span><span class=line><span class=cl>      ボード画面の表示は？ 
+</span></span><span class=line><span class=cl>      y<span class=o>)</span> する（ブルートフォースはおすすめしない）
+</span></span><span class=line><span class=cl>      n<span class=o>)</span> しない
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=nb>echo</span> <span class=s2>&#34;行頭のアルファベットを入力して下さい&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34; select;
+</span></span></span><span class=line><span class=cl><span class=s2>      echo; 
+</span></span></span><span class=line><span class=cl><span class=s2>      case &#34;</span><span class=nv>$select</span><span class=s2>&#34; in
+</span></span></span><span class=line><span class=cl><span class=s2>        y|Y) DISPLAY=1; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>        n|N) DISPLAY=0; break; ;;
+</span></span></span><span class=line><span class=cl><span class=s2>      esac
+</span></span></span><span class=line><span class=cl><span class=s2>    done
+</span></span></span><span class=line><span class=cl><span class=s2>    NQ bluteForce_R;
+</span></span></span><span class=line><span class=cl><span class=s2>    break;
+</span></span></span><span class=line><span class=cl><span class=s2>    ;;
+</span></span></span><span class=line><span class=cl><span class=s2>  *)
+</span></span></span><span class=line><span class=cl><span class=s2>    ;; 
+</span></span></span><span class=line><span class=cl><span class=s2>esac
+</span></span></span><span class=line><span class=cl><span class=s2>done
 </span></span></span><span class=line><span class=cl><span class=s2>exit;
-</span></span></span></code></pre></div><h2 id=実行結果>実行結果</h2><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>1
- 0 2 4 1 3 
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
+</span></span></span></code></pre></div><h2 id=実行結果>実行結果</h2><p>実行結果は以下のとおりです。</p><pre tabindex=0><code>bash-3.2$ bash bitmap.sh
 
-2
- 0 3 1 4 2 
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
+エイト・クイーン メニュー
+実行したい番号を選択
+8) 非再帰ビットマップ
+7) 再帰ビットマップ
+6) 非再帰　配置フラグ
+5) 再帰　　配置フラグ
+4) 非再帰　バックトラック
+3) 再帰　　バックトラック
+2) 非再帰　ブルートフォース
+1) 再帰　　ブルートフォース
 
-3
- 1 3 0 2 4 
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-
-4
- 1 4 2 0 3 
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-
-5
- 2 0 3 1 4 
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-
-6
- 2 4 1 3 0 
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-
-7
- 3 0 2 4 1 
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
+echo 行頭の番号を入力してください;
 
 8
- 3 1 4 2 0 
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
 
-9
- 4 1 3 0 2 
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
+      ボード画面の表示は？
+      y) する（ブルートフォースはおすすめしない）
+      n) しない
 
-10
- 4 2 0 3 1 
-+-+-+-+-+-+
-| | | | |O|
-+-+-+-+-+-+
-| | |O| | |
-+-+-+-+-+-+
-|O| | | | |
-+-+-+-+-+-+
-| | | |O| |
-+-+-+-+-+-+
-| |O| | | |
-+-+-+-+-+-+
+      echo 行頭のアルファベットを入力して下さい;
 
-10
-
-real	0m0.025s
-user	0m0.022s
-sys	0m0.002s
+      n
+ N:        Total       Unique        hh:mm:ss
+ 4:            2            0         0:00:00
+ 5:           10            0         0:00:00
+ 6:            4            0         0:00:00
+ 7:           40            0         0:00:00
+ 8:           92            0         0:00:00
+ 9:          352            0         0:00:01
+10:          724            0         0:00:04
+:
+:
+bash-3.2$
 </code></pre><h2 id=リンクと過去記事>リンクと過去記事</h2><p>N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（８）第一章　まとめ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/</a><br>N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて<br><a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/</a></p><p>エイト・クイーンのソース置き場 BashもJavaもPythonも！<br><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p><h2 id=書籍の紹介>書籍の紹介</h2><aside class=amazon-box><a href="https://www.amazon.co.jp/gp/proteect/4873112672/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873112672&amp;linkCode=as2&amp;tag=nlpqueens09-22&amp;linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank><div class="columns amazon-image"><img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16"></div><div class="columns amazon-info"><h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2><p>Unixのプログラムは「ツール」と呼ばれます。
 Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
 そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
