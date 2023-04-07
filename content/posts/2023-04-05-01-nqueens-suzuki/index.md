@@ -980,6 +980,7 @@ mask=$(( (1<<size)-1 ));
 
 ３．maskから~(left|down|right)を間引いた値を`bitmap`に格納
 ```
+# クイーンが配置可能な位置を表す
 bitmap=$(( mask&~(left|down|right) ))
 +-+-+-+-+-+  row
 | | | |Q| |   0  
@@ -1022,6 +1023,7 @@ down=2;  # 2#00010
 right=1; # 2#00001
 
 # (left|down|right)を反転させてmaskで間引く
+# クイーンが配置可能な位置を表す
 bitmap=$(( mask&~(left|down|right) ))
 echo "$bitmap"  # 24
 
@@ -1040,7 +1042,7 @@ bash-3.2$ bash masktest.sh
 ## ビットマップで肝となるところを重点的に
 
 ```
-# 配置可能な場所を特定する 
+# クイーンが配置可能な位置を表す
 bitmap=$(( mask&~(left|down|right) ))
 
 # 一番右のビットを取り出す
@@ -1057,7 +1059,7 @@ bitmap_R "$size" "$((row+1))" "$(( (left|bit)<<1 ))" "$((down|bit))" "$(( (right
 ```
 
 ### bitmap=$(( mask&~(left|down|right) ))
-このページ冒頭で説明
+クイーンが配置可能な位置を表す
 
 ### bit=$(( -bitmap & -bitmap ));
 while中の各繰り返しで、`bit` に、配置できる可能性と配置できない可能性をAND演算した結果を`bit`にセットしています。この結果、`bit` は、`bitmap` の最下位ビットを除いて、すべて`0`に設定し、Qを配置します。
@@ -1212,8 +1214,7 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。
 
 ``` bash
-  # 配置可能な場所を特定
-  bitmap=$(( mask&~(left|down|right) ));
+  bitmap=$(( mask&~(left|down|right) )); # クイーンが配置可能な位置を表す
   while (( bitmap ));do
     bit=$((-bitmap&bitmap)) ;  # 一番右のビットを取り出す
     bitmap=$((bitmap&~bit)) ;  # 配置可能なパターンが一つずつ取り出される
@@ -1415,7 +1416,7 @@ function bitmap_R()
       printRecord "$size" "1";         # 出力 1:bitmap版 0:それ以外
     fi
   else
-    bitmap=$(( mask&~(left|down|right) ));
+    bitmap=$(( mask&~(left|down|right) )); # クイーンが配置可能な位置を表す
     while (( bitmap ));do
       bit=$((-bitmap&bitmap)) ;       # 一番右のビットを取り出す
       bitmap=$((bitmap&~bit)) ;       # 配置可能なパターンが一つずつ取り出される
