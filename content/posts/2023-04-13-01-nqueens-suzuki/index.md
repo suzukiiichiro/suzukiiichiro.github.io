@@ -1351,9 +1351,9 @@ exit;
 
 ## リンクと過去記事
 N-Queens問題：Ｎクイーン問題（１４）第三章　ミラー
-https://suzukiiichiro.github.io/posts/2023-04-13-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-04-13-01-nqueens-suzuki/
 N-Queens問題：Ｎクイーン問題（１３）第三章　ビットマップ
-https://suzukiiichiro.github.io/posts/2023-04-05-01-n-queens-suzuki/
+https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/
 N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
 https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
