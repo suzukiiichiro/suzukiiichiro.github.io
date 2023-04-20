@@ -361,7 +361,7 @@ LASTMASKに代入されるビットは以下のイメージとなります。使
 ### symmetry()メソッドのソース
 symmetry()のソースは以下のとおりです。
 ``` bash
-: '再帰・非再帰版版 対象解除';
+: '再帰・非再帰版 対象解除';
 function symmetry()
 {
   TOTAL=UNIQUE=COUNT2=COUNT4=COUNT8=0;
@@ -1394,7 +1394,7 @@ function backTrack()
   fi
 }
 #
-: '再帰・非再帰版版 対象解除';
+: '再帰版 対象解除';
 function symmetry()
 {
   TOTAL=UNIQUE=COUNT2=COUNT4=COUNT8=0;
@@ -2077,7 +2077,7 @@ function symmetry_backTrack()
   fi
 }
 #
-: '再帰・非再帰版版 対象解除';
+: '再帰版 対象解除';
 function symmetry()
 {
   size="$1"
