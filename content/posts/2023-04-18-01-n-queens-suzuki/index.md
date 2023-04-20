@@ -1,5 +1,6 @@
 ---
 title: "Ｎクイーン問題（１５）第三章　対象解除法 ソース解説"
+date: 2023-04-18T15:33:57+09:00
 draft: false
 authors: suzuki
 image: shellscript.jpg
