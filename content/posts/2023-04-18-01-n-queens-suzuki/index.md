@@ -2809,12 +2809,12 @@ case "$selectNo" in
     do 
       read -n1 -p "
       y|Y) 再帰
-      n|N) 非再帰
+      n|N) 非再帰 ※未実装
       " select;
       echo; 
       case "$select" in
         y|Y) NQ symmetry; break; ;;
-        n|N) NQ symmetry_NR; break; ;;
+        n|N) NQ symmetry; break; ;;
       esac
     done
     ;;
