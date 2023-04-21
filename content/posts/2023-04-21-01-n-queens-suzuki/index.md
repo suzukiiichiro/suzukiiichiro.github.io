@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（１７）第四章　過去の偉人を読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」"
+title: "Ｎクイーン問題（１７）第四章　偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」"
 date: 2023-04-21T10:16:27+09:00
 authors: suzuki
 image: shellscript.jpg
@@ -399,7 +399,7 @@ $ gcc -Wall -O3 nq.c -o nq && ./nq
 ```
 
 ## リンクと過去記事
-N-Queens問題：Ｎクイーン問題（１７）第四章　過去の偉人を読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」
+N-Queens問題：Ｎクイーン問題（１７）第四章　偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」
 https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１６）第三章　対象解除法 ソース解説
 https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/
