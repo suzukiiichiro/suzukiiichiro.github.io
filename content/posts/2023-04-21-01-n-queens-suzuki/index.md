@@ -13,13 +13,13 @@ tags:
   - 鈴木維一郎
 ---
 
-## Ｎ２３を発見 Jeff Somersを読む
-Jeff Somers さんはＮ２３を発見したエイトクイーンブームの立役者です。
+## Ｎ２３を発見 Ｊｅｆｆ Ｓｏｍｅｒｓを読む
+Ｊｅｆｆ Ｓｏｍｅｒｓ さんはＮ２３を発見したエイトクイーンブームの立役者です。
 
-Jeff SomersさんのＷｅｂサイト The N Queens Problem
+Ｊｅｆｆ ＳｏｍｅｒｓさんのＷｅｂサイト The N Queens Problem
 http://users.rcn.com/liusomers/nqueen_demo/nqueens.html
 
-Jeff Somersさんはエイトクイーンにビットをとミラー導入し、世界中で行き場を失ったコンピューターサイエンスおたくの心に火をつけます。
+Ｊｅｆｆ Ｓｏｍｅｒｓさんはエイトクイーンにビットをとミラー導入し、世界中で行き場を失ったコンピューターサイエンスおたくの心に火をつけます。
 
 N-Queens問題：Ｎクイーン問題（１４）第三章　ミラー
 https://suzukiiichiro.github.io/posts/2023-04-13-01-nqueens-suzuki/
@@ -38,11 +38,13 @@ http://www.arch.cs.titech.ac.jp/~kise/nq/index.htm
 
 ``` C
 /*  
-Jeff Somers Copyright(c) 2002 jsomers@alumni.williams.edu or allagash98@yahoo.com April,2002
+Ｊｅｆｆ Ｓｏｍｅｒｓ Copyright(c) 2002 jsomers@alumni.williams.edu or allagash98@yahoo.com April,2002
 
 Program:  nq
+プログラム名：nq
 
 build and execute.
+ビルドと実行
 $ gcc -Wall nq.c -o nq && ./nq 
 
 Program to find size of solutions to the N queens problem.
