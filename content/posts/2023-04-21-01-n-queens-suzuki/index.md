@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（１７）第四章　過去の偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」"
+title: "Ｎクイーン問題（１７）第四章　過去の偉人を読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」"
 date: 2023-04-21T10:16:27+09:00
 authors: suzuki
 image: shellscript.jpg
@@ -38,13 +38,11 @@ http://www.arch.cs.titech.ac.jp/~kise/nq/index.htm
 
 ``` C
 /*  
-Ｊｅｆｆ Ｓｏｍｅｒｓ Copyright(c) 2002 jsomers@alumni.williams.edu or allagash98@yahoo.com April,2002
+Jeff Somers Copyright(c) 2002 jsomers@alumni.williams.edu or allagash98@yahoo.com April,2002
 
 Program:  nq
-プログラム名：nq
 
 build and execute.
-ビルドと実行
 $ gcc -Wall nq.c -o nq && ./nq 
 
 Program to find size of solutions to the N queens problem.
