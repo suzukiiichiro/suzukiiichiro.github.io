@@ -399,6 +399,8 @@ $ gcc -Wall -O3 nq.c -o nq && ./nq
 ```
 
 ## リンクと過去記事
+N-Queens問題：Ｎクイーン問題（１７）第四章　過去の偉人を読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」
+https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１６）第三章　対象解除法 ソース解説
 https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/
 N-Queens問題：Ｎクイーン問題（１５）第三章　対象解除法 ロジック解説
