@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（９）第二章　ブルートフォースの再
 date: 2023-03-16T11:26:18+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

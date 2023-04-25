@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１）第一章　エイトクイーンについ
 date: 2023-02-14T12:01:52+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

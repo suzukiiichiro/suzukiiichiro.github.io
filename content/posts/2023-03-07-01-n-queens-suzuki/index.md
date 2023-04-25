@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（６）第一章　配置フラグ"
 date: 2023-03-07T16:10:45+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

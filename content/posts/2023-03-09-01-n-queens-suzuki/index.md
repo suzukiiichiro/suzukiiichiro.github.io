@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（８）第一章　まとめ"
 date: 2023-03-09T14:45:39+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

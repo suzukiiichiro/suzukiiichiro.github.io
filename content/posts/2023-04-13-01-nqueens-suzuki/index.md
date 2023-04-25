@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１４）第三章　ミラー"
 date: 2023-04-13T10:25:04+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

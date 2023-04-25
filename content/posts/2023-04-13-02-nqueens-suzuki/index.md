@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１５）第三章　対象解除法 ロジッ�
 date: 2023-04-13T15:33:57+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

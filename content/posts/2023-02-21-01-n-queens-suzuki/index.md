@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（４）第一章　バックトラック"
 date: 2023-02-21T18:13:01+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

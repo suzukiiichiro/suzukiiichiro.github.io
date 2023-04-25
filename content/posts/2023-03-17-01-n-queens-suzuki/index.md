@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１１）第二章　配置フラグの再帰・
 date: 2023-03-17T14:30:21+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

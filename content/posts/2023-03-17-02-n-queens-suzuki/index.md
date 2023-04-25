@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１２）第二章　まとめ"
 date: 2023-03-17T14:41:52+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

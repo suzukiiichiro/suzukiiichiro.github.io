@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（５）第一章　進捗表示テーブルの作
 date: 2023-03-06T22:31:15+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

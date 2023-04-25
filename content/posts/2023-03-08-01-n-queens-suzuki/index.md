@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（７）第一章　ブルートフォース再び
 date: 2023-03-08T15:32:38+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

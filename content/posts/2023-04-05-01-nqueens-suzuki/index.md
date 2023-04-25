@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１３）第三章　ビットマップ"
 date: 2023-04-05T19:08:30+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:

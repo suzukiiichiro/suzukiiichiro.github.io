@@ -3,7 +3,7 @@ title: "Ｎクイーン問題（１０）第二章　バックトラックの再
 date: 2023-03-17T14:10:59+09:00
 draft: false
 authors: suzuki
-image: shellscript.jpg
+image: chess.jpg
 categories:
   - programming
 tags:
