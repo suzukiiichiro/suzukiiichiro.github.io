@@ -1010,6 +1010,7 @@ mapWith(niceDiagramOf, fundamentals(halfInductive()))
 ありがとうございます、そしておやすみなさい！
 
 ## すべてのソースコード
+### eight-queens-0-fundamental.js
 ``` js:eight-queens-0-fundamental.js
 // Computes the twelve "fundamental" solutions to the eight queens problem
 // by filtering the results of the "half-inductive" algorithm.
@@ -1151,6 +1152,7 @@ function niceDiagramOf (queens) {
 mapWith(niceDiagramOf, fundamentals(halfInductive()))
 ```
 
+### eight-queens-1-half-inductive.js
 ``` js:eight-queens-1-half-inductive.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing half of the results of the inductive solution 
@@ -1226,6 +1228,7 @@ Array.from(withReflections).length
   //=> 92
 ```
 
+### eight-queens-2-inductive.js
 ``` js:eight-queens-2-inductive.js
 // Computes the all 92 solutions to the eight queens problem
 // by testing partial solutions to the "rooks" algorithm
@@ -1277,6 +1280,7 @@ Array.from(inductive()).length
 ```
 
 
+### eight-queens-3-rooks.js
 ``` js:eight-queens-3-rooks.js
 // Computes the all 92 solutions to the eight queens problem
 // by generating all of the solutions to the eight rooks
@@ -1392,6 +1396,7 @@ diagramOf(first(solutionsToEightQueens))
 ```
 
 
+### eight-queens-4-combinations.js
 ``` js:eight-queens-4-combinations.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing all of the ways eight queens can be arranged
@@ -1508,6 +1513,7 @@ const solutionsToEightQueens = filterWith(test, combinationCandidates);
 diagramOf(first(solutionsToEightQueens))
 ```
 
+### eight-queens-5-generater.js
 ``` js:eight-queens-5-generater.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing all of the possible arrangements of eight
@@ -1645,6 +1651,7 @@ const solutionsToEightQueens = filterWith(test, mostPessimumGenerator());
 diagramOf(first(solutionsToEightQueens))
 ```
 
+### eight-queens-6-pure-tree.js
 ``` js:eight-queens-6-pure-tree.js
 const OCCUPATION_HELPER = Symbol("occupationHelper");
 
@@ -1795,13 +1802,12 @@ function * inductive (board = new Board()) {
 
 
 
-
-## 上に比べれば若造、過去というかもはや最近の偉人たち
+## 僕が何年もかけて発見したエイト・クイーン関連おすすめリンク
+### 上に比べれば若造、過去というかもはや最近の偉人たち
 [N23]The N Queens Problem a study in optimization
 http://users.rcn.com/liusomers/nqueen_demo/nqueens.html
 [N24]
 N-queensの世界記録樹立，6年分の計算を並列処理により22日に短縮
-
 http://www.arch.cs.titech.ac.jp/~kise/nq/press-2004-10-05.txt
 [N24]電通大が「N-queens」問題の世界記録達成
 https://www.itmedia.co.jp/news/articles/0410/06/news079.html
@@ -1815,7 +1821,7 @@ https://tu-dresden.de/ing/informatik/die-fakultaet/news/neuer-weltrekord-fuer-qu
 https://github.com/preusser/q27
 
 
-## 解説としてとても優れているサイト・研究者
+### 解説としてとても優れているサイト・研究者
 Ｎクイーン問題（解の個数を求める）
 http://www.ic-net.or.jp/home/takaken/nt/queen/
 N-Queens 問題 Nobuhide Tsuda 26-May-2013
@@ -1832,7 +1838,7 @@ n女王問題(n-queens problem)
 http://www.yasugi.ai.kyutech.ac.jp/2012/4/nq.html
 
 
-## 研究者にとって感謝でしかない参考ソース公開サイト
+### 研究者にとって感謝でしかない参考ソース公開サイト
 月刊アスキー12月号(2004年)で、N-Queens問題を見かけました。
 10年以上前にCASL(情報処理試験専用のアセンブラ)で書いたことがあるのを思い出し、引っぱり出してきました。
 http://kwhr0.g2.xrea.com/queen/index.html
@@ -1846,7 +1852,6 @@ http://deepgreen.game.coocan.jp/NQueens/nqueen_index.htm
 http://fujimura2.fiw-web.net/java/lang/page-20-3.html
 
 
-## 何度も繰り返し訪れてしまったイケてるサイト
 ### アルゴリズム関連
 Github: mollerhoj/N-Queens-problem-with-BDD
 https://github.com/mollerhoj/N-Queens-problem-with-BDD
@@ -1930,10 +1935,6 @@ https://www.gizmodo.jp/2017/10/eight-queens-puzzle.html
 歴史あるチェスのパズル問題が現代数学における未解決問題の解明につながる可能性
 https://gigazine.net/news/20170905-million-dollar-chess-problem/
 
-
-## エイト・クイーン問題、古文書をひらく
-エイト・クイーン問題…そしてラガンワルドの意外なノスタルジー
-https://raganwald.com/2018/08/03/eight-queens.html
 
 
 
