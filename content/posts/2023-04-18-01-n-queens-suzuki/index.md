@@ -1850,7 +1850,14 @@ function symmetryOps()
       ((board[own]<bit))&& break ;
     }
     #90度回転して同型なら180度回転も270度回転も同型である
-    ((own>size-1))&&{ ((COUNT2++)); return; }
+    ((own>size-1))&&{ 
+      ((COUNT2++)); 
+      if ((DISPLAY==1));then
+        # 出力 1:bitmap版 0:それ以外
+        printRecord "$size" "1";          
+      fi
+      return; 
+    }
   }
   : '
   ２．クイーンが右上角以外にある場合、
@@ -1869,7 +1876,14 @@ function symmetryOps()
       ((board[own]<bit))&& break ;
     }
     #90度回転が同型でなくても180度回転が同型であることもある
-    ((own>size-1))&&{ ((COUNT4++)); return; }
+    ((own>size-1))&&{ 
+      ((COUNT4++)); 
+      if ((DISPLAY==1));then
+        # 出力 1:bitmap版 0:それ以外
+        printRecord "$size" "1";          
+      fi
+      return; 
+    }
   }
   : '
   ２．クイーンが右上角以外にある場合、
@@ -1886,6 +1900,10 @@ function symmetryOps()
     }
   }
   ((COUNT8++));
+  if ((DISPLAY==1));then
+    # 出力 1:bitmap版 0:それ以外
+    printRecord "$size" "1";          
+  fi
 }
 #
 : '非再帰版 角にQがない時の対象解除バックトラック';
@@ -1924,10 +1942,6 @@ function symmetry_backTrack_NR()
         if ((!(bitmap[row]&LASTMASK)));then
           symmetryOps ;
         fi
-        if ((DISPLAY==1));then
-          # 出力 1:bitmap版 0:それ以外
-          printRecord "$size" "1";          
-        fi
         ((row--));
       else
         local -i n=$((row++));
@@ -1964,15 +1978,15 @@ function symmetry_backTrack_corner_NR()
       bitmap[$row]=$(( bitmap[row]^bit ));  # 配置可能なパターンが一つずつ取り出される
       board[$row]="$bit";                   # Qを配置
       if (( row==(size-1) ));then
-         if((bitmap[row]));then
-           #枝刈りによりsymmetryOpsは不要
-           #symmetryOps ;
-           ((COUNT8++)) ;
+        if((bitmap[row]));then
+          #枝刈りによりsymmetryOpsは不要
+          #symmetryOps ;
+          ((COUNT8++)) ;
+          if ((DISPLAY==1));then
+            # 出力 1:bitmap版 0:それ以外
+            printRecord "$size" "1";          
+          fi
          fi
-        if ((DISPLAY==1));then
-          # 出力 1:bitmap版 0:それ以外
-          printRecord "$size" "1";          
-        fi
         ((row--));
       else
         if ((row<BOUND1));then
@@ -2399,7 +2413,14 @@ function symmetryOps()
       ((board[own]<bit))&& break ;
     }
     #90度回転して同型なら180度回転も270度回転も同型である
-    ((own>size-1))&&{ ((COUNT2++)); return; }
+    ((own>size-1))&&{
+      ((COUNT2++)); 
+      if ((DISPLAY==1));then
+        # 出力 1:bitmap版 0:それ以外
+        printRecord "$size" "1";          
+      fi
+      return; 
+    }
   }
   : '
   ２．クイーンが右上角以外にある場合、
@@ -2418,7 +2439,14 @@ function symmetryOps()
       ((board[own]<bit))&& break ;
     }
     #90度回転が同型でなくても180度回転が同型であることもある
-    ((own>size-1))&&{ ((COUNT4++)); return; }
+    ((own>size-1))&&{ 
+      ((COUNT4++)); 
+      if ((DISPLAY==1));then
+        # 出力 1:bitmap版 0:それ以外
+        printRecord "$size" "1";          
+      fi
+      return; 
+    }
   }
   : '
   ２．クイーンが右上角以外にある場合、
@@ -2435,6 +2463,10 @@ function symmetryOps()
     }
   }
   ((COUNT8++));
+  if ((DISPLAY==1));then
+    # 出力 1:bitmap版 0:それ以外
+    printRecord "$size" "1";          
+  fi
 }
 #
 : '非再帰版 角にQがない時の対象解除バックトラック';
@@ -2473,10 +2505,6 @@ function symmetry_backTrack_NR()
         if ((!(bitmap[row]&LASTMASK)));then
           symmetryOps ;
         fi
-        if ((DISPLAY==1));then
-          # 出力 1:bitmap版 0:それ以外
-          printRecord "$size" "1";          
-        fi
         ((row--));
       else
         local -i n=$((row++));
@@ -2513,14 +2541,14 @@ function symmetry_backTrack_corner_NR()
       bitmap[$row]=$(( bitmap[row]^bit ));  # 配置可能なパターンが一つずつ取り出される
       board[$row]="$bit";                   # Qを配置
       if (( row==(size-1) ));then
-         if((bitmap[row]));then
-           #枝刈りによりsymmetryOpsは不要
-           #symmetryOps ;
-           ((COUNT8++)) ;
-         fi
-        if ((DISPLAY==1));then
-          # 出力 1:bitmap版 0:それ以外
-          printRecord "$size" "1";          
+        if((bitmap[row]));then
+          #枝刈りによりsymmetryOpsは不要
+          #symmetryOps ;
+          ((COUNT8++)) ;
+          if ((DISPLAY==1));then
+            # 出力 1:bitmap版 0:それ以外
+            printRecord "$size" "1";          
+          fi
         fi
         ((row--));
       else
