@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（１８）第四章 エイトクイーンノスタルジー"
+title: "Ｎクイーン問題（１８）第四章 エイト・クイーンノスタルジー"
 date: 2023-04-25T11:17:22+09:00
 draft: false
 authors: suzuki
@@ -1939,7 +1939,7 @@ https://gigazine.net/news/20170905-million-dollar-chess-problem/
 
 
 ## リンクと過去記事
-Ｎクイーン問題（１８）第四章　偉人のソースを読む「エイトクイーンノスタルジー」
+Ｎクイーン問題（１８）第四章　偉人のソースを読む「エイト・クイーンノスタルジー」
 https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/
 Ｎクイーン問題（１７）第四章　偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」
 https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/
