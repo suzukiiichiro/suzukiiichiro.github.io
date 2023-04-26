@@ -152,7 +152,7 @@ function printRecord(){
 : 'バックトラック版効き筋をチェック';
 function check_backTracking(){
   local -i row="$1";
-  local -i flag=0;
+  local -i flag=1;
   for ((i=0;i<row;++i)){
     if (( board[i]>=board[row] ));then
       val=$(( board[i]-board[row] ));
@@ -161,10 +161,8 @@ function check_backTracking(){
     fi
     if (( board[i]==board[row] || val==(row-i) ));then
       flag=0;
-      return ;
     fi
   }
-  flag=1;
   [[ $flag -eq 0 ]]
   return $?;
 }
@@ -184,11 +182,9 @@ function check_bluteForce(){
 
       if (( board[i]==board[r] || val==(r-i) ));then
         flag=0; 
-        return ;
       fi
     }
   }
-  flag=1;
   [[ $flag -eq 0 ]]
   return $?;
 }
