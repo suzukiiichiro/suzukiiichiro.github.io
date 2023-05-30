@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## initChain() buildChain() carryChain_symmetry() をcarryChain()に統合して変数のパラメータ渡しを極力減らす
 せっかく分割されている関数を一つの関数にまとめるメリットってなんでしょう。
 しいてあげれば、関数間における変数のやり取りによる負荷、さらにいえば、統合することによって、渡すことすら必要がなくなります。

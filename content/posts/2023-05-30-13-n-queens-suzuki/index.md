@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## 並列処理前準備
 今回の作業は並列処理部分として、buildChain()の一番外側のfor(w)ブロックを抜き出し、
 run()としてpthreadに備える

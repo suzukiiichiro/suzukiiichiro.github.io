@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## グローバル変数を廃止しglobal構造体に移動
 COUNTERとTOTAL/UNIQUEを検討する
 COUNTERがGlobal g に格納することで良いのかは要検討

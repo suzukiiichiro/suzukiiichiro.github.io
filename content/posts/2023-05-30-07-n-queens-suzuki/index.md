@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## pthread 処理を行う関数を抜き出す準備
 まず、initChain()とcarryChain_symmetry()を抜き出して作成
 

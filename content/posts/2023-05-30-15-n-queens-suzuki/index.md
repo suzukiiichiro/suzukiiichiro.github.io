@@ -16,6 +16,9 @@ tags:
   - アルゴリズム
   - 鈴木維一郎
 ---
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 
 ## Local構造体へ統合
 スレッドに対応すべくCOUNTERをLocal構造体に移動

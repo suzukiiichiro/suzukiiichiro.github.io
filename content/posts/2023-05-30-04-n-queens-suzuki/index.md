@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## Global構造体の新設
 carryChain()のpres_a[]とpres_b[]は並列化した際、スレッドごとに値が変化するものではないため、グローバル変数へ。さらに構造体Globalを作成し、Global構造体へpres_a[]とpres_b[]を格納、Globalはスレッドごとに変化しない、またはスレッドから公平にアクセスできる変数を格納することとします。
 

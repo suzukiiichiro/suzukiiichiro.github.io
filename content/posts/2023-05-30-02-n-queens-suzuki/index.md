@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ##  グローバル変数・構造体を極力減らす
 これにより、pthread導入時の 構造体１つしか渡せない問題に対応できます。
 

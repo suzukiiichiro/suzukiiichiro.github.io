@@ -17,6 +17,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## carryChain_symmetry()の変数をLocal構造体に統合
 carryChain_symmetry()に n,e,s,w,Bをわたしていたが、Local* l を渡すようにする
 

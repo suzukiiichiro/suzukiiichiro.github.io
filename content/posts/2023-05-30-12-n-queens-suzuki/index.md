@@ -18,6 +18,9 @@ tags:
   - 鈴木維一郎
 ---
 
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
 ## 前回に引き続き、&Bをわたしていた箇所を &lに統一
 他にもポインタ渡しとなっている down,left,rightなども Local l に格納し、&lに統合する
 今回の作業は process()をなくしてinlineにする
