@@ -25,7 +25,72 @@ Bash、Lua、C、Java、Python、CUDAまで！
 https://github.com/suzukiiichiro/N-Queens
 
 ## pthread 処理を行う関数を抜き出す準備
-まず、initChain()とcarryChain_symmetry()を抜き出して作成
+チェーンの初期化ブロックをinitChain()として関数にします。
+carryChain_symmetry()を抜き出して作成
+
+
+チェーンの初期化ブロックをinitChain()として関数にします。
+07GCC_carryChain.c
++229
+``` C:
+// チェーンの初期化
+void initChain()
+{
+  // チェーンの初期化
+  unsigned int idx=0;
+  for(unsigned int a=0;a<(unsigned)g.size;++a){
+    for(unsigned int b=0;b<(unsigned)g.size;++b){
+      if(((a>=b)&&(a-b)<=1)||((b>a)&&(b-a)<=1)){ continue; }
+      g.pres_a[idx]=a;
+      g.pres_b[idx]=b;
+      ++idx;
+    }
+  }
+}
+```
+
+これにより、carryChain()の冒頭で、initChain()を呼び出します。
+
+07GCC_carryChain.c
++229
+``` C:
+// キャリーチェーン
+void carryChain()
+{
+  //チェーンの初期化
+  initChain();
+```
+
+
+また、carryChain()の対称解除部分をcarryChain_symmetry()として抜き出して関数を独立させます。
+
+07GCC_carryChain.c
++202
+``` C:
+//対称解除法
+void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned const int s,unsigned const int w,Board* B)
+{
+  // 対称解除法 
+  unsigned const int ww=(g.size-2)*(g.size-1)-1-w;
+  unsigned const int w2=(g.size-2)*(g.size-1)-1;
+  // # 対角線上の反転が小さいかどうか確認する
+  if((s==ww)&&(n<(w2-e))){ return ; }
+```
+
+これにより、carrychain()関数の対称解除呼び出し部分を以下のようにします。
+
+07GCC_carrychain.c
++284
+``` C:
+        for(unsigned s=w;s<(g.size-2)*(g.size-1)-w;++s){
+          // B=sB;
+          memcpy(&B,&sB,sizeof(Board));
+          if(!placement(g.size-1-g.pres_a[s],0,&B)){ continue; }
+          if(!placement(g.size-1-g.pres_b[s],1,&B)){ continue; }
+          // 対称解除法
+          carryChain_symmetry(n,e,s,w,&B);
+```
+
 
 ## ソースコード
 ``` C:07GCC_carryChain.c

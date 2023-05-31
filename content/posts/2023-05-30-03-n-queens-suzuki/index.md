@@ -36,7 +36,80 @@ https://github.com/suzukiiichiro/N-Queens
 そうした実情を踏まえて、しかたなく関数をまとめ、変数を減らし、さらにはグローバル変数も整理し、曲直構造化に統合して`pthread`に備えていきます。
 
 
+以下の関数の中身を
+``` C:
+void initChain(unsigned const int size,unsigned int* pres_a,unsigned int* pres_b)
+{
+  // チェーンの初期化
+  unsigned int idx=0;
+  for(unsigned int a=0;a<(unsigned)size;++a){
+    for(unsigned int b=0;b<(unsigned)size;++b){
+      if(((a>=b)&&(a-b)<=1)||((b>a)&&(b-a)<=1)){ continue; }
+      pres_a[idx]=a;
+      pres_b[idx]=b;
+      ++idx;
+    }
+  }
+}
+```
+以下のように追加します。
+↓
+``` C:
+// キャリーチェーン
+void carryChain(unsigned const int size)
+{
+  // カウンターの初期化
+  COUNTER[0]=COUNTER[1]=COUNTER[2]=0;
+  //
+  // チェーンの初期化
+  unsigned int pres_a[930]; 
+  unsigned int pres_b[930];
+  unsigned int idx=0;
+  for(unsigned int a=0;a<(unsigned)size;++a){
+    for(unsigned int b=0;b<(unsigned)size;++b){
+      if(((a>=b)&&(a-b)<=1)||((b>a)&&(b-a)<=1)){ continue; }
+      pres_a[idx]=a;
+      pres_b[idx]=b;
+      ++idx;
+    }
+  }
+```
 
+
+こちらも同様ですが、carryChain_symmetry()で呼び出している箇所に
+carryChain_symmetry()の中身で置き換えます。
+
+02GCC_carryChain.c
++245
+``` C:
+        for(unsigned s=w;s<(size-2)*(size-1)-w;++s){
+          // B=sB;
+          memcpy(&B,&sB,sizeof(Board));
+          if(!placement(size,size-1-pres_a[s],0,&B)){ continue; }
+          if(!placement(size,size-1-pres_b[s],1,&B)){ continue; }
+          //
+          carryChain_symmetry(size,n,w,s,e,&B);// 対称解除法 
+```
+
+03GCC_carryChain.c
++232
+``` C:
+        for(unsigned s=w;s<(size-2)*(size-1)-w;++s){
+          // B=sB;
+          memcpy(&B,&sB,sizeof(Board));
+          if(!placement(size,size-1-pres_a[s],0,&B)){ continue; }
+          if(!placement(size,size-1-pres_b[s],1,&B)){ continue; }
+          //
+          // 対称解除法 
+          unsigned const int ww=(size-2)*(size-1)-1-w;
+          unsigned const int w2=(size-2)*(size-1)-1;
+          // # 対角線上の反転が小さいかどうか確認する
+          if((s==ww)&&(n<(w2-e))){ continue ; }
+```
+
+同様に、buildChain()の中身を carryChain()のbuildchain()呼び出し部分と置き換えます。
+
+要するに carryChain()へひとまとめにしたということになります。
 
 ## ソースコード
 ``` C:03GCC_carryChain.c

@@ -28,20 +28,213 @@ https://github.com/suzukiiichiro/N-Queens
 THREADフラグを作成して スレッドのオン・オフで動作を確認しながら実装
 構造体初期化メソッドの実装
 
-    誤
-    for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
-    正
-    for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
 
- これにより以下の部分の末尾に１を加える必要がある
+## THREADフラグの移動
+変数はソースの上の方にあったほうが良いので、移動します。
 
-   ```
++199
+``` C:
+/**
+ * pthreadの実行
+ */
+// bool THREAD=0; // スレッドしない
+bool THREAD=1;  // スレッドする
+```
+
+## buildChain バグの修正１
+まず、バグを直します（ｗ）
+forの第２パラメータが`<`ではなく`<=`でした。
+ですので、想定していた配列が一つ少なかったのがエラーの原因です。
+配列の初期化で、１を加えて配列を一つ増やします。
+
+
+以下の２箇所
+17GCC_carryChain.c
++386
+```
+  Local l[(g.size/2)*(g.size-3)];
+  ↓
   Local l[(g.size/2)*(g.size-3)+1];
+```
++387
+```
+  pthread_t pt[(g.size/2)*(g.size-3)];
+  ↓
   pthread_t pt[(g.size/2)*(g.size-3)+1];
-  ```
+```
 
- pthreadはマルチプロセスで動くため、これまでの計測方法では、プロセスの合計で計測される。
- 実行段階から実行終了までの計測は、 gettimeofday(&t1, NULL);を使う必要がある。
+
+## buildChain バグの修正２
+さらにforループにもバグが（ｗ）
+
+バグとなりやすい forループの第２パラメータの `<=`を普通に `<` に変更し、末尾に`+1`とすることで処理のループ数を一つ増やします。
+
+この処理は２箇所、join部分に１箇所あります。
+
+17GCC_carryChain.c
++389
+```
+    for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
+      ↓
+    for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
+```
+
++398
+``` C:
+  for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
+      ↓
+  for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
+```
+
+## join 部分の修正
++415
+``` C:
+    for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
+      ↓
+    for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
+```
+
+
+## 集計部分の修正
+こちらはバグではなく、スレッド用の集計処理を追加します。
+forの第２パラメータの末尾に`+1`するのを忘れずに。
+
+17GCC_carryChain.c
++419
+```
+  /**
+   * 集計
+   */
+  if(THREAD){
+    for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
+      UNIQUE+=l[w].COUNTER[l[w].COUNT2]+
+              l[w].COUNTER[l[w].COUNT4]+
+              l[w].COUNTER[l[w].COUNT8];
+      TOTAL+= l[w].COUNTER[l[w].COUNT2]*2+
+              l[w].COUNTER[l[w].COUNT4]*4+
+              l[w].COUNTER[l[w].COUNT8]*8;
+    } 
+  }else{
+    UNIQUE= l->COUNTER[l->COUNT2]+
+            l->COUNTER[l->COUNT4]+
+            l->COUNTER[l->COUNT8];
+    TOTAL=  l->COUNTER[l->COUNT2]*2+
+            l->COUNTER[l->COUNT4]*4+
+            l->COUNTER[l->COUNT8]*8;
+  }
+```
+
+## Local構造体の初期化関数の作成
+Local構造体の初期化ををbuildChain()で行ってきましたが、わかりやすく関数にして独立させます。
+初期化させたい関数を `&l` で渡して、 initLocal()で `return` するようにします。
+
+この方法はとってもナイスな処理です。
+
+
+17GCC_carryChain.c
++394
+``` C:
+    initLocal(&l); //初期化
+```
+
++365
+``` C:
+// 構造体の初期化
+void initLocal(void* args)
+{
+  Local *l=(Local *)args;
+  l->n=l->e=l->s=l->w=0;
+  l->dimx=l->dimy=0;
+  l->COUNT2=0; 
+  l->COUNT4=1; 
+  l->COUNT8=2;
+  l->COUNTER[l->COUNT2]=
+  l->COUNTER[l->COUNT4]=
+  l->COUNTER[l->COUNT8]=0;
+  l->B.row=
+  l->B.down=
+  l->B.left=
+  l->B.right=0;
+  for(unsigned int i=0;i<g.size;++i){ l->B.x[i]=-1; }
+}
+```
+
+これであれば、 THREAD=0;（スレッドなし）でも、THREAD=1;（スレッドあり）でも同様に動きます。（ここがナイスなところ）
+
+
+## 計測方法の修正
+これまでの計測方法では、プロセスの合計で計測されます。
+pthreadはマルチプロセスで動くため、各プロセスの処理時間の合計が出力されても困ります。
+純粋に、プロセスの計測結果の合計ではなく、計測時間の開始と終了の差を出力するように変更します。
+
+実行段階から実行終了までの計測は、 gettimeofday(&t1, NULL);を使います。
+
++482
+``` C:
+  // pthread用計測
+  struct timeval t0;
+  struct timeval t1;
+  :
+  :
+    gettimeofday(&t0, NULL);
+    if(cpu){ carryChain(); }
+    else{ carryChain(); }
+    // pthread用計測
+    // TimeFormat(clock()-st,t);
+    gettimeofday(&t1, NULL);
+```
+
+動きました！
+```
+bash-3.2$ gcc 17GCC_carryChain.c -o 17GCC -pthread && ./17GCC
+Usage: ./17GCC [-c|-g]
+  -c: CPU Without recursion
+  -r: CPUR Recursion
+
+
+７．キャリーチェーン
+ N:        Total       Unique        dd:hh:mm:ss.ms
+ 4:            2            1        00:00:00:00.00
+ 5:           10            2        00:00:00:00.00
+ 6:            4            1        00:00:00:00.00
+ 7:           40            6        00:00:00:00.00
+ 8:           92           12        00:00:00:00.00
+ 9:          352           46        00:00:00:00.00
+10:          724           92        00:00:00:00.00
+11:         2680          341        00:00:00:00.00
+12:        14200         1788        00:00:00:00.01
+13:        73712         9237        00:00:00:00.03
+14:       365596        45771        00:00:00:00.11
+15:      2279184       285095        00:00:00:00.45
+16:     14772512      1847425        00:00:00:02.45
+bash-3.2$
+```
+
+実行パラメータを以下のように変更することでもっと速くなります。
+```
+bash-3.2$ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 17GCC_carryChain.c -o 17GCC && ./17GCC
+Usage: ./17GCC [-c|-g]
+  -c: CPU Without recursion
+  -r: CPUR Recursion
+
+
+７．キャリーチェーン
+ N:        Total       Unique        dd:hh:mm:ss.ms
+ 4:            2            1        00:00:00:00.00
+ 5:           10            2        00:00:00:00.00
+ 6:            4            1        00:00:00:00.00
+ 7:           40            6        00:00:00:00.00
+ 8:           92           12        00:00:00:00.00
+ 9:          352           46        00:00:00:00.00
+10:          724           92        00:00:00:00.00
+11:         2680          341        00:00:00:00.00
+12:        14200         1788        00:00:00:00.00
+13:        73712         9237        00:00:00:00.02
+14:       365596        45771        00:00:00:00.06
+15:      2279184       285095        00:00:00:00.26
+16:     14772512      1847425        00:00:00:01.40
+bash-3.2$
+```
 
 
 ## ソースコード
@@ -614,7 +807,12 @@ bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=nat
 
 
 世界一のドイツ・ドレスデン大学はＮ２７を解決しました。
+以前開発した１ヶ月くらい実行したままにしておいたらＮ２４を解決していました。
 行けそうな気がしてきませんか？
+
+次は、ＧＰＵ（ＣＵＤＡ）プログラミングでもっと速くさせたいと思います。
+
+お楽しみに！
 
 
 ## リンクと過去記事

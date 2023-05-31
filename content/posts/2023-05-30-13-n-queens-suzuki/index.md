@@ -29,6 +29,160 @@ https://github.com/suzukiiichiro/N-Queens
 今回の作業は並列処理部分として、buildChain()の一番外側のfor(w)ブロックを抜き出し、
 run()としてpthreadに備える
 
+
+まずは、buildChain()のスレッドを起動したい箇所を抜き出して thread_run()に移動します。
+とはいえ、いきなり色々やると動かなくなっても困るので、まずはちゃんと動くようにステップを踏んで進めたいと思います。
+
+１．buildChain()の移動したい箇所をコメントアウトします。
+    buildChain()関数の末尾に以下の一行を追記します。
+``` C:
+  thread_run(&l);
+```
+２．thread_run()関数を作成します。
+３．buildchain()でコメントアウトした箇所をthread_run()に入れます。
+
+では、まず１からやります。
+
+13GCC_carryChain.c
++295
+``` C:
+// チェーンのビルド
+void buildChain()
+{
+  Local l[(g.size/2)*(g.size-3)];
+
+  // カウンターの初期化
+  g.COUNT2=0; g.COUNT4=1; g.COUNT8=2;
+  g.COUNTER[g.COUNT2]=g.COUNTER[g.COUNT4]=g.COUNTER[g.COUNT8]=0;
+  // Board の初期化 nB,eB,sB,wB;
+  l->B.row=l->B.down=l->B.left=l->B.right=0;
+  // Board x[]の初期化
+  for(unsigned int i=0;i<g.size;++i){ l->B.x[i]=-1; }
+
+  //
+  // 以下を thread_run()へ移動
+  //
+  // //１ 上２行に置く
+  // memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
+  // for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+  //   memcpy(&l->B,&l->wB,sizeof(Board));       // B=wB;
+  //   l->dimx=0; l->dimy=g.pres_a[l->w]; 
+  //   if(!placement(&l)){ continue; } 
+  //   l->dimx=1; l->dimy=g.pres_b[l->w]; 
+  //   if(!placement(&l)){ continue; } 
+    // //２ 左２行に置く
+    // memcpy(&l->nB,&l->B,sizeof(Board));       // nB=B;
+    // for(l->n=l->w;l->n<(g.size-2)*(g.size-1)-l->w;++l->n){
+    //   memcpy(&l->B,&l->nB,sizeof(Board));     // B=nB;
+    //   l->dimx=g.pres_a[l->n]; l->dimy=g.size-1; 
+    //   if(!placement(&l)){ continue; } 
+    //   l->dimx=g.pres_b[l->n]; l->dimy=g.size-2; 
+    //   if(!placement(&l)){ continue; } 
+      // // ３ 下２行に置く
+      // memcpy(&l->eB,&l->B,sizeof(Board));     // eB=B;
+      // for(l->e=l->w;l->e<(g.size-2)*(g.size-1)-l->w;++l->e){
+      //   memcpy(&l->B,&l->eB,sizeof(Board));   // B=eB;
+      //   l->dimx=g.size-1; l->dimy=g.size-1-g.pres_a[l->e]; 
+      //   if(!placement(&l)){ continue; } 
+      //   l->dimx=g.size-2; l->dimy=g.size-1-g.pres_b[l->e]; 
+      //   if(!placement(&l)){ continue; } 
+        // // ４ 右２列に置く
+        // memcpy(&l->sB,&l->B,sizeof(Board));   // sB=B;
+        // for(l->s=l->w;l->s<(g.size-2)*(g.size-1)-l->w;++l->s){
+        //   memcpy(&l->B,&l->sB,sizeof(Board)); // B=sB;
+        //   l->dimx=g.size-1-g.pres_a[l->s]; l->dimy=0; 
+        //   if(!placement(&l)){ continue; } 
+        //   l->dimx=g.size-1-g.pres_b[l->s]; l->dimy=1; 
+        //   if(!placement(&l)){ continue; } 
+        //   // 対称解除法
+        //   carryChain_symmetry(&l);
+        // } //w
+      // } //e
+    // } //n
+  // } //w
+  thread_run(&l);
+}
+```
+
+buildChain()のコメントアウトした一番下 +349 に `thread_run()`を呼び出しを追加します。
+
+13GCC_carryChain.c
++349
+``` C:
+  thread_run(&l);
+```
+
+では２，`thread_run()`を作成します。
+13GCC_carrychain.c
++244
+``` C:
+// pthread run()
+void thread_run(void* args)
+{
+  Local *l=(Local *)args;
+
+}
+```
+
+最後に、buildChain()でコメントアウトした部分を貼り付けます。
+
+13GCC_carryChain.c
++244
+``` C:
+// pthread run()
+void thread_run(void* args)
+{
+  Local *l=(Local *)args;
+
+  // // カウンターの初期化
+  // g.COUNT2=0; g.COUNT4=1; g.COUNT8=2;
+  // g.COUNTER[g.COUNT2]=g.COUNTER[g.COUNT4]=g.COUNTER[g.COUNT8]=0;
+  // // Board の初期化 nB,eB,sB,wB;
+  // l->B.row=l->B.down=l->B.left=l->B.right=0;
+  // // Board x[]の初期化
+  // for(unsigned int i=0;i<g.size;++i){ l->B.x[i]=-1; }
+  //１ 上２行に置く
+  memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
+  for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+    memcpy(&l->B,&l->wB,sizeof(Board));       // B=wB;
+    l->dimx=0; l->dimy=g.pres_a[l->w]; 
+    if(!placement(l)){ continue; } 
+    l->dimx=1; l->dimy=g.pres_b[l->w]; 
+    if(!placement(l)){ continue; } 
+    //２ 左２行に置く
+    memcpy(&l->nB,&l->B,sizeof(Board));       // nB=B;
+    for(l->n=l->w;l->n<(g.size-2)*(g.size-1)-l->w;++l->n){
+      memcpy(&l->B,&l->nB,sizeof(Board));     // B=nB;
+      l->dimx=g.pres_a[l->n]; l->dimy=g.size-1; 
+      if(!placement(l)){ continue; } 
+      l->dimx=g.pres_b[l->n]; l->dimy=g.size-2; 
+      if(!placement(l)){ continue; } 
+      // ３ 下２行に置く
+      memcpy(&l->eB,&l->B,sizeof(Board));     // eB=B;
+      for(l->e=l->w;l->e<(g.size-2)*(g.size-1)-l->w;++l->e){
+        memcpy(&l->B,&l->eB,sizeof(Board));   // B=eB;
+        l->dimx=g.size-1; l->dimy=g.size-1-g.pres_a[l->e]; 
+        if(!placement(l)){ continue; } 
+        l->dimx=g.size-2; l->dimy=g.size-1-g.pres_b[l->e]; 
+        if(!placement(l)){ continue; } 
+        // ４ 右２列に置く
+        memcpy(&l->sB,&l->B,sizeof(Board));   // sB=B;
+        for(l->s=l->w;l->s<(g.size-2)*(g.size-1)-l->w;++l->s){
+          memcpy(&l->B,&l->sB,sizeof(Board)); // B=sB;
+          l->dimx=g.size-1-g.pres_a[l->s]; l->dimy=0; 
+          if(!placement(l)){ continue; } 
+          l->dimx=g.size-1-g.pres_b[l->s]; l->dimy=1; 
+          if(!placement(l)){ continue; } 
+          // 対称解除法
+          carryChain_symmetry(l);
+        } //w
+      } //e
+    } //n
+  } //w
+}
+```
+
+
 ## ソースコード
 ``` C:13GCC_carryChain.c
 /**

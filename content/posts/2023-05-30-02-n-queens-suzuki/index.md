@@ -27,6 +27,44 @@ https://github.com/suzukiiichiro/N-Queens
 ##  グローバル変数・構造体を極力減らす
 これにより、pthread導入時の 構造体１つしか渡せない問題に対応できます。
 
+ちょっと試しに COUNT2,COUNT4,COUNT8変数をなくしてみます。
+この変数には値が入っていて、配列の添字のかわりの変数です。
+``` C:
+COUNT2=0;
+COUNT4=1;
+COUNT8=2;
+```
+
+``` C:
+COUNTER[COUNT4]
+```
+
+となれば、
+``` C:
+COUNTER[1]
+```
+と等価です。
+
+試しにやってみます。（あとになってこの作業は戻すことになります）
+
+``` C:
++196
+process(size,COUNT8,B); return ;
+↓
+process(size,2,B); return ; //COUNT8
+```
+
+``` C:
++283
+  // 集計
+  UNIQUE=COUNTER[COUNT2]+COUNTER[COUNT4]+COUNTER[COUNT8];
+  TOTAL=COUNTER[COUNT2]*2+COUNTER[COUNT4]*4+COUNTER[COUNT8]*8;
+↓
+  UNIQUE=COUNTER[0]+COUNTER[1]+COUNTER[2];
+  TOTAL=COUNTER[0]*2+COUNTER[1]*4+COUNTER[2]*8;
+```
+
+
 ## ソースコード
 ソースコードは以下のとおりです。
 

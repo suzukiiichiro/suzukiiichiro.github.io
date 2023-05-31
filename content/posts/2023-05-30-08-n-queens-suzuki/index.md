@@ -28,13 +28,65 @@ https://github.com/suzukiiichiro/N-Queens
 Local構造体 lを作成。
 このlは、スレッドごとに存在する。
 
-内包される変数は
+内包される変数は以下のとおりです。
   B
   nB
   eB
   sB
   wB
   n,e,s,w
+
+08GCC_carryChain.c
++124
+``` C:
+typedef struct{
+  Board B;
+  Board nB;
+  Board eB;
+  Board sB;
+  Board wB;
+  unsigned n;
+  unsigned e;
+  unsigned s;
+  unsigned w;
+}Local;
+```
+
+この Local構造体へのアクセスは buildChain()の冒頭で宣言されます。
++63 行目
+
+アクセスするには +73 行目のように行います。
+
+08GCC_carryChain.c
++246
+``` C:
+// チェーンのビルド
+void buildChain()
+{
+  Local l[(g.size/2)*(g.size-3)];
+
+  // Board B;
+  // カウンターの初期化
+  g.COUNTER[g.COUNT2]=g.COUNTER[g.COUNT4]=g.COUNTER[g.COUNT8]=0;
+  g.COUNT2=0; g.COUNT4=1; g.COUNT8=2;
+  // Board の初期化 nB,eB,sB,wB;
+  l->B.row=l->B.down=l->B.left=l->B.right=0;
+
+```
+
+こういった事により carryChain()関数は以下のようになり、手続きがわかりやすくなりました。
+
+08GCC_carryChain.c
++311
+``` C:
+// キャリーチェーン
+void carryChain()
+{
+  listChain();  //チェーンのリストを作成
+  buildChain(); // チェーンのビルド
+  calcChain();  // 集計
+}
+```
 
 ## ソースコード
 ``` C:08GCC_carryChain.c

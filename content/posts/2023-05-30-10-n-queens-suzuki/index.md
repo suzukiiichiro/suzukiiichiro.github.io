@@ -26,8 +26,58 @@ https://github.com/suzukiiichiro/N-Queens
 
 
 ## 前回に引き続き、&Bをわたしていた箇所を &lに統一
-他にもポインタ渡しとなっている down,left,rightなども Local l に格納し、&lに統合する
-今回の作業は placement()
+`uint64_t` の`dimx`,`dimy` をLocal l に格納し`&l`に統合します。
+これにより影響を受ける関数はplacement()
+今回の作業は placement()の呼び出し部分で、２回に分けて作業します。
+
+10GCC_carryChain.c
++119
+``` C:
+typedef struct{
+  Board B;
+  Board nB;
+  Board eB;
+  Board sB;
+  Board wB;
+  unsigned n;
+  unsigned e;
+  unsigned s;
+  unsigned w;
+  uint64_t dimx;
+  uint64_t dimy;
+}Local;
+```
+
+
+上記の構造体の変更により、placement()の内容に変更が出てきます。
+２回に分ける作業の１回目に当たる今回の作業は、placement()の中身ではなく、placement()を呼び出す部分の変更にとどめます。
+
+09GCC_carryChain.c
++255
+``` C:
+    if(!placement(0,g.pres_a[l->w],&l->B)){ continue; } 
+    if(!placement(1,g.pres_b[l->w],&l->B)){ continue; }
+```
+
+↓
+１つ目のパラメータと２つ目のパラメータの値をそれぞれ、`l->dimx`,`l->dimy`に代入して placement()に渡します。
+
+10GCC_carryChain.c
++262
+``` C:
+    // if(!placement(0,g.pres_a[l->w],&l->B)){ continue; } 
+    // l->dimx=0; 
+    // l->dimy=g.pres_a[l->w]; 
+    if(!placement(l->dimx=0,l->dimy=g.pres_a[l->w],&l->B)){ continue; } 
+    // if(!placement(1,g.pres_b[l->w],&l->B)){ continue; }
+    // l->dimx=1;
+    // l->dimy=g.pres_b[l->w]; 
+    if(!placement(l->dimx=1,l->dimy=g.pres_b[l->w],&l->B)){ continue; }
+```
+
+次回は、placement()の修正に入ります。
+
+
 
 ## ソースコード
 ``` C:10GCC_carryChain.c

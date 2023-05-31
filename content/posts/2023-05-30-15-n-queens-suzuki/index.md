@@ -32,6 +32,105 @@ https://github.com/suzukiiichiro/N-Queens
 http://tsurujiro.blog.fc2.com/blog-entry-8.html
 https://www.kushiro-ct.ac.jp/yanagawa/ex-2017/1-tg/03/
 
+
+まずは、COUNTER,COUNT2,COUNT4,COUNT8をLocal構造体へ移動します。
+
+15GCC_carryChain.c
++102
+``` C:
+// 構造体
+typedef struct{
+  unsigned int size;
+  unsigned int pres_a[930]; 
+  unsigned int pres_b[930];
+  // uint64_t COUNTER[3];      
+  // //カウンター配列
+  // unsigned int COUNT2;
+  // unsigned int COUNT4;
+  // unsigned int COUNT8;
+}Global; Global g;
+// 構造体
+typedef struct{
+  uint64_t row;
+  uint64_t down;
+  uint64_t left;
+  uint64_t right;
+  uint64_t x[MAX];
+}Board ;
+typedef struct{
+  Board B;
+  Board nB;
+  Board eB;
+  Board sB;
+  Board wB;
+  unsigned n;
+  unsigned e;
+  unsigned s;
+  unsigned w;
+  uint64_t dimx;
+  uint64_t dimy;
+  uint64_t COUNTER[3];      
+  //カウンター配列
+  unsigned int COUNT2;
+  unsigned int COUNT4;
+  unsigned int COUNT8;
+}Local;
+```
+
+次に、集計関数 calcChain()を廃止し、buildChain()の末尾に挿入し、inlineにします。
+
+15GCC_carryChain.c
++322
+``` C:
+  /**
+   * 集計
+   */
+  UNIQUE= l->COUNTER[l->COUNT2]+
+          l->COUNTER[l->COUNT4]+
+          l->COUNTER[l->COUNT8];
+  TOTAL=  l->COUNTER[l->COUNT2]*2+
+          l->COUNTER[l->COUNT4]*4+
+          l->COUNTER[l->COUNT8]*8;
+```
+
+さらに、carryChain()で呼び出していた caclChain()をコメントアウトします。
+
+15GCC_carryChain.c
++345
+``` C:
+// キャリーチェーン
+void carryChain()
+{
+  listChain();  //チェーンのリストを作成
+  buildChain(); // チェーンのビルド
+  // calcChain(&l);  // 集計
+}
+```
+
+カウンターの扱いが Local構造体に変わったことで、以下の部分も変更となります。
+具体的には、g.COUNT2=0;は l->COUNT2=0; に変更となります。
+
+15GCC_carryChain.c
++309
+``` C:
+  // カウンターの初期化
+  l->COUNT2=0; l->COUNT4=1; l->COUNT8=2;
+  l->COUNTER[l->COUNT2]=l->COUNTER[l->COUNT4]=l->COUNTER[l->COUNT8]=0;
+```
+
+さらに、これまで memcpy()で行っていた構造体のコピーの方法を変更します。memcpy()はアドレスのコピーなので、スレッドでの利用は不安定です。
+
+15GCC_carryChain.c
++317
+``` C*
+  // memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
+  l->wB=l->B;
+```
+
+memcpy()は何箇所かで使っていますので、普通に代入でコピーすることにします。Ｃ言語での構造体のコピーは `=`で簡単に代入できます。
+
+
+
 ## ソースコード
 ``` C:15GCC_carryChain.c
 /**

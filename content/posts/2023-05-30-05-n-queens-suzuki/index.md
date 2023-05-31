@@ -27,6 +27,57 @@ https://github.com/suzukiiichiro/N-Queens
 ## グローバル構造体への追加
 sizeをglobalへ移動。あわせて、sizeは関数間のパラメータでのやりとりもなくし、g.sizeでアクセスできるようにします。
 
+05GCC_carryChain.c
++107
+``` C:
+// 構造体
+typedef struct{
+  unsigned int size;
+  unsigned int pres_a[930]; 
+  unsigned int pres_b[930];
+}Global; Global g;
+```
+
+これにより、size にアクセスしていた部分を適宜書き換えます。
+
+Global g に格納したsize は g.size に変更してアクセスします。
+
+05GCC_carryChain.c
++181
+``` C:
+    if( (B->x[0]!=(uint64_t)-1) ){
+      if(( (dimx<B->x[0]||dimx>=g.size-B->x[0])
+        && (dimy==0 || dimy==g.size-1)
+      )){ return 0; } 
+      if ((  (dimx==g.size-1)&&((dimy<=B->x[0])||
+          dimy>=g.size-B->x[0]))){
+        return 0;
+      } 
+```
+
+main()のsizeをg.sizeに変更するとともに、パラメータで渡していた carryChain(size)をcarryChain()に置き換えて、sizeが必要であれば関数の中で g.size としてアクセスします。
+
+05GCC_carryChain.c
++305
+``` C:
+  for(unsigned int size=min;size<=targetN;++size){
+    TOTAL=UNIQUE=0; 
+    g.size=size;
+    st=clock();
+    if(cpu){
+      carryChain();
+    }else{
+      carryChain();
+    }
+    TimeFormat(clock()-st,t);
+    printf("%2d:%13lld%16lld%s\n",size,TOTAL,UNIQUE,t);
+  }
+```
+
+ついでと言ってはなんですが、TOTAL=UNIQUE;は初期化が不十分なので、TOTAL=UNIQUE=0;に修正します。
+
+
+
 ## ソースコード
 ``` C:05GCC_carryChain.c
 /**

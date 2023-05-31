@@ -27,6 +27,75 @@ https://github.com/suzukiiichiro/N-Queens
 ## Global構造体の新設
 carryChain()のpres_a[]とpres_b[]は並列化した際、スレッドごとに値が変化するものではないため、グローバル変数へ。さらに構造体Globalを作成し、Global構造体へpres_a[]とpres_b[]を格納、Globalはスレッドごとに変化しない、またはスレッドから公平にアクセスできる変数を格納することとします。
 
+
+04GCC_carryChain.c
++110
+``` C:
+// 構造体
+typedef struct{
+  unsigned int pres_a[930]; 
+  unsigned int pres_b[930];
+}Global; Global g;
+```
+
+COUNT2,COUNT4,COUNT8変数は復活しました（ｗ
+04GCC_carryChain.c
++104
+``` C:
+//カウンター配列
+uint64_t COUNTER[3];      
+unsigned int COUNT2=0;
+unsigned int COUNT4=1;
+unsigned int COUNT8=2;
+```
+
+ですので、以下の部分（４箇所あります）を修正します。
+04GCC_carryChain.c
++266,271,275,277
+``` C:
+            process(size,2,&B); continue ;
+            ↓
+            process(size,COUNT8,&B); continue ;
+```
+
+
+集計処理を別関数にしました。
+04GCC_carryChain.c
++143
+``` C:
+// 集計
+void calcChain()
+{
+  UNIQUE=COUNTER[COUNT2]+COUNTER[COUNT4]+COUNTER[COUNT8];
+  TOTAL=COUNTER[COUNT2]*2+COUNTER[COUNT4]*4+COUNTER[COUNT8]*8;
+}
+```
+
+Global g 構造体に移動した pres_a,pres_bは g.pres_a,g.pres_bでアクセスすることができます。
+
+04GCC_carryChain.c
++208
+``` C:
+  for(unsigned int a=0;a<(unsigned)size;++a){
+    for(unsigned int b=0;b<(unsigned)size;++b){
+      if(((a>=b)&&(a-b)<=1)||((b>a)&&(b-a)<=1)){ continue; }
+      g.pres_a[idx]=a;
+      g.pres_b[idx]=b;
+      ++idx;
+    }
+  }
+```
+
+チェーンのビルド部分も同様となります。
+04GCC_carryChain.c
++228
+``` C:
+    if(!placement(size,0,g.pres_a[w],&B)){ continue; } 
+    if(!placement(size,1,g.pres_b[w],&B)){ continue; }
+```
+
+
+
 ## ソースコード
 ``` C:04GCC_carryChain.c
 /**

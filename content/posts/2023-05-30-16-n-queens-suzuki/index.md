@@ -29,6 +29,205 @@ THREADフラグを作成して スレッドのオン・オフで動作を確認�
 スレッドオフだとちゃんと解が出る
 オンだと出ない！
 
+
+ここまできたら完成間近です。
+このページのソースは完成直前であることから、スレッドで実行してもうまく動きません。
+
+以下のフラグ THREAD=0 にしておけばスレッドを実行しない通常の処理となります。もちろんこの場合はちゃんと動きます。
+
+16GCC_carryChain.c
++286
+``` C:
+/**
+ * スレッドするか 1:する 0:しない
+ */
+// bool THREAD=0; 
+bool THREAD=1; 
+```
+THREAD=1; にした場合は、以下のようなエラーとなります。
+
+実行結果
+```
+ 実行結果
+bash-3.2$ gcc 16GCC_carryChain.c -o 16GCC && ./16GCC
+Usage: ./16GCC [-c|-g]
+  -c: CPU Without recursion
+  -r: CPUR Recursion
+
+
+７．キャリーチェーン
+ N:        Total       Unique        hh:mm:ss.ms
+Segmentation fault: 11
+bash-3.2$
+```
+
+## pthreadの実装
+
+pthreadの実装は、いくつかの手順を踏む必要があります。
+まず、pthreadライブラリを追加して読み込みます。
+
+16GCC_carryChain.c
++87
+``` C:
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <sys/time.h>
+#include <pthread.h>
+#define MAX 27
+```
+
+実行時に -pthreadを追加する必要があります。
+```
+bash-3.2$ gcc 16GCC_carryChain.c -o 16GCC -pthread && ./16GCC
+```
+
+pthreadへの実装が正しいかどうかを常に比較して実行したいので、THREADフラグをつくり、THREADが 1 であれば pthreadの処理をし、THREADが 0であれば、pthreadの処理を行わないようにすることで、pthreadに係る処理以外に問題がないことを確認できるようにします。
+
+こうした方法は、難易度の高い処理を実装する上で、絶対に必要なことです。
+
+16GCC_carryChain.c
++287
+``` C:
+/**
+ * スレッドするか 1:する 0:しない
+ */
+// bool THREAD=0; 
+bool THREAD=1; 
+```
+
+16GCC_carryChain.c
++308
+``` C:
+  if(THREAD){
+    : //スレッド処理を行う
+  }else{
+    : //スレッド処理を行わない
+  }
+```
+
+では、pthreadについて簡単に説明します。
+
+16GCC_carryChain.c
++306
+``` C:
+  pthread_t pt[(g.size/2)*(g.size-3)+1];
+  for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+    if(THREAD){
+      int iFbRet;
+      iFbRet=pthread_create(&pt[l->w],NULL,&thread_run,&l[l->w]);
+      if(iFbRet>0){
+        printf("[mainThread] pthread_create #%d: %d\n", l[l->w].w, iFbRet);
+      }
+    }else{
+      thread_run(&l);
+    }
+  } 
+  /**
+   * スレッド版 joinする
+   */
+  if(THREAD){
+    for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+      pthread_join(pt[l->w],NULL);
+    } 
+  }else{
+    //何もしない
+  }
+```
+
+以下の行で pthreadのスレッドを作成します。
+スレッドの数はＮの数によって変化します。
+pt配列を必要な数だけ生成します。
+
+``` C:
+  pthread_t pt[(g.size/2)*(g.size-3)+1];
+```
+
+以下の行では、スレッドを生成している箇所です。
+forループの w を添字にした pt配列を次々と生成します。
+このときに、Local構造体を最後のパラメータで渡しています。
+３番めのパラメータは、スレッドを実行する関数です。
+これまでに作成した thread_run()を呼び出しています。
+
+``` C:
+      int iFbRet;
+      iFbRet=pthread_create(&pt[l->w],NULL,&thread_run,&l[l->w]);
+      if(iFbRet>0){
+        printf("[mainThread] pthread_create #%d: %d\n", l[l->w].w, iFbRet);
+```
+
+pthreadに対応するために、大切なことがもう一点。
+スレッド関数 thread_run()の関数をポインタにする必要があり、さらに、`return 0;`を返す必要があります。
+
+16GCC_carryChain.c
++234
+``` C:
+// pthread run()
+void* thread_run(void* args)
+{
+  Local *l=(Local *)args;
+```
+
+16GCC_carryChain.c
++281
+``` C:
+      } //w
+    } //e
+  } //n
+  return 0;
+}
+```
+
+そして、スレッドがたくさん生成される一つ一つのスレッドの処理が終了した場合、勝手に何処かに行ってしまわないように、各スレッドの終了を待機させ、すべてのスレッドの終了をじっと待つようにします。
+この処理を `join()` するといいます。
+
+16GCC_carryChain.c
++318
+``` C:
+  /**
+   * スレッド版 joinする
+   */
+  if(THREAD){
+    for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+      pthread_join(pt[l->w],NULL);
+    } 
+  }else{
+    //何もしない
+  }
+```
+
+すべてのスレッドの終了を待ち、すべてのスレッドの処理が完了したらいよいよ解の集計を行います。
+
+16GCC_carryChain.c
++328
+``` C:
+  /**
+   * 集計
+   */
+  if(THREAD){
+    // スレッド版の集計
+    for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+      // 集計
+    } 
+  }else{
+    UNIQUE= l->COUNTER[l->COUNT2]+
+            l->COUNTER[l->COUNT4]+
+            l->COUNTER[l->COUNT8];
+    TOTAL=  l->COUNTER[l->COUNT2]*2+
+            l->COUNTER[l->COUNT4]*4+
+            l->COUNTER[l->COUNT8]*8;
+  }
+```
+
+今回のソースでは、 THREAD=0;（スレッドなし）ではきちんと解が出ますが、THREAD=1;（スレッドあり）では解が出ずエラーで終了します。
+
+次回は、このエラーを修正し、pthread並列処理が完了します。
+お楽しみに！
+
+
+
+
 ## ソースコード
 ``` C:16GCC_carryChain.c
 /**

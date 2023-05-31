@@ -29,6 +29,44 @@ https://github.com/suzukiiichiro/N-Queens
 他にもポインタ渡しとなっている down,left,rightなども Local l に格納し、&lに統合する
 今回の作業は process()をなくしてinlineにする
 
+
+まず、こちらの関数をなくして、process()の内容をprocess()を呼び出している箇所に結合して`inline`(といいます）とします。
+
+
+11GCC_carryChain.c
++182
+``` C:
+// solve()を呼び出して再帰を開始する
+void process(unsigned const int sym,Board* B)
+{
+  g.COUNTER[sym]+=solve(B->row>>2,
+  B->left>>4,((((B->down>>2)|(~0<<(g.size-4)))+1)<<(g.size-5))-1,(B->right>>4)<<(g.size-5));
+}
+```
+
+具体的には３箇所あります。その１箇所を示します。
+以下の記述を
+
+11GCC_carryChain.c
++231
+``` C:
+  if(l->B.x[0]==0){ 
+    process(g.COUNT8,&l->B); return ;
+  }
+```
+
+このように書き換えます。
+12GCC_carryChain.c
++226
+``` C:
+  if(l->B.x[0]==0){ 
+    g.COUNTER[g.COUNT8]+=solve(l->B.row>>2,
+    l->B.left>>4,((((l->B.down>>2)|(~0<<(g.size-4)))+1)<<(g.size-5))-1,(l->B.right>>4)<<(g.size-5));
+    return ;
+  }
+```
+
+
 ## ソースコード
 ``` C:12GCC_carryChain.c
 /**

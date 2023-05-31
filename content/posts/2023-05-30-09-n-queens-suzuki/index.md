@@ -29,6 +29,59 @@ https://github.com/suzukiiichiro/N-Queens
 carryChain_symmetry()に n,e,s,w,Bをわたしていたが、Local* l を渡すようにする
 
 
+buildChain()内の carryChain_symmetry()の呼び出し部分は以下のように変更となります。
+
+08GCC_carryChain.c
++291
+``` C:
+          // 対称解除法
+          carryChain_symmetry(l->n,l->e,l->s,l->w,&l->B);
+```
+
+↓
+09GCC_carryChain.c
++282
+``` C:
+          // 対称解除法
+          // carryChain_symmetry(l->n,l->e,l->s,l->w,&l->B);
+          carryChain_symmetry(&l);
+```
+
+これまで、複数のパラメータをわたしていましたが、Local構造体に変数をまとめたことにより、渡すパラメータは一つとなりました。
+
+これは、pthread並列処理には絶対に必要なことなのです。
+pthread並列処理の実行にはパラメータを一つしか渡せないという制限があるので、スレッドにとって必要な変数は、構造体一つに上手にまとめて上げる必要があるのです。
+
+よって、受け取り側もシンプルになります。
+
+08GCC_carryChain.c
++219
+``` C:
+//対称解除法
+void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned const int s,unsigned const int w,Board* B)
+{
+```
+
+↓
+
+09GCC_carryChain.c
++209
+``` C:
+//対称解除法
+void carryChain_symmetry(void* args)
+{
+  Local *l=(Local *)args;
+```
+
+渡されたLocal構造体は、以下一行で `l->` で構造体の中の変数にアクセスできるようになります。
+
+``` C:
+  Local *l=(Local *)args;
+
+  if((l->s==ww)&&(l->n<(w2-l->e))){ return ; }
+```
+
+
 ## ソースコード
 ``` C:09GCC_carryChain.c
 /**

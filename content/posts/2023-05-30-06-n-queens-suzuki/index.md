@@ -28,6 +28,99 @@ https://github.com/suzukiiichiro/N-Queens
 COUNTERとTOTAL/UNIQUEを検討する
 COUNTERがGlobal g に格納することで良いのかは要検討
 
+以下のカウンター配列とカウンター変数をGlobal g 構造体に移動します。
+
+05GCC_carryChain.c
++102
+```
+//カウンター配列
+uint64_t COUNTER[3];      
+unsigned int COUNT2=0;
+unsigned int COUNT4=1;
+unsigned int COUNT8=2;
+```
+
+06GCC_carryChain.c
++102
+``` C:
+// 構造体
+typedef struct{
+  unsigned int size;
+  unsigned int pres_a[930]; 
+  unsigned int pres_b[930];
+  uint64_t COUNTER[3];      
+  //カウンター配列
+  unsigned int COUNT2;
+  unsigned int COUNT4;
+  unsigned int COUNT8;
+}Global; Global g;
+```
+
+これにより、COUNTER,COUNT2,COUNT4,COUNT8へのアクセスを以下のように変更します。
+
+06GCC_carryChain.c
++143
+``` C:
+// 集計
+void calcChain()
+{
+  UNIQUE= g.COUNTER[g.COUNT2]+
+          g.COUNTER[g.COUNT4]+
+          g.COUNTER[g.COUNT8];
+  TOTAL=  g.COUNTER[g.COUNT2]*2+
+          g.COUNTER[g.COUNT4]*4+
+          g.COUNTER[g.COUNT8]*8;
+}
+```
+
+同様に process()でもCOUNTERを使っているので、以下のように変更します。
+
+06GCC_carryChain.c
++171
+``` C:
+// solve()を呼び出して再帰を開始する
+void process(unsigned const int sym,Board* B)
+{
+  g.COUNTER[sym]+=solve(B->row>>2,
+  B->left>>4,((((B->down>>2)|(~0<<(g.size-4)))+1)<<(g.size-5))-1,(B->right>>4)<<(g.size-5));
+}
+```
+
+また、COUNTERの初期化をチェーンのビルドの冒頭で行います。
+
+06GCC_carryChain.c
++220
+``` C:
+  // カウンターの初期化
+  g.COUNTER[g.COUNT2]=g.COUNTER[g.COUNT4]=g.COUNTER[g.COUNT8]=0;
+  g.COUNT2=0; g.COUNT4=1; g.COUNT8=2;
+```
+
+
+``` C:
+process(COUNT8,&B) continue;
+```
+
+も以下のように変更します。
+06GCC_carryChain.c
++270
+``` C:
+          if(B.x[0]==0){ 
+            process(g.COUNT8,&B); continue ;
+          }
+          // n,e,s==w の場合は最小値を確認する。右回転で同じ場合は、
+          // w=n=e=sでなければ値が小さいのでskip  w=n=e=sであれば90度回転で同じ可能性
+          if(s==w){ if((n!=w)||(e!=w)){ continue; } 
+            process(g.COUNT2,&B); continue;
+          }
+          // e==wは180度回転して同じ 180度回転して同じ時n>=sの時はsmaller?
+          if((e==w)&&(n>=s)){ if(n>s){ continue; } 
+            process(g.COUNT4,&B); continue;
+          }
+          process(g.COUNT8,&B); continue;
+```
+
+
 ## ソースコード
 ``` C:06GCC_carryChain.c
 /**

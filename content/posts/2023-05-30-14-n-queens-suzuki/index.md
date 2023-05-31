@@ -29,6 +29,35 @@ https://github.com/suzukiiichiro/N-Queens
 buildChain()の一番外側のfor(w)ブロックを抜き出し、
 run()としてpthreadに備えた内容を for(w)の内側のみをthread_run()に残して稼働を確認
 
+まず、thread_run()の以下３行をコメントアウトします。
+forの閉じタグも忘れずにコメントアウトしてください。
+
+14GCC_carryChain.c
++257
+``` C:
+  // memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
+  // for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+  :
+  :
+  // } //w
+```
+
+
+次に、buildChain()の以下の２行をコメント解除します。
+forの閉じタグのコメントアウトも忘れずに解除してください。
+14GCC_carryChain.c
++313
+``` C:
+  memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
+  for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
+  :
+  :
+    thread_run(&l);
+  } //w
+```
+
+
+
 ## ソースコード
 ``` C:14GCC_carryChain.c
 /**
