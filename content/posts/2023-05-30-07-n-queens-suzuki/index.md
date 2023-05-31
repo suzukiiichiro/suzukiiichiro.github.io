@@ -118,7 +118,6 @@ void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned cons
  アドレスとポインタ
  https://yu-nix.com/archives/c-struct-pointer/
 
-
 実行結果
 bash-3.2$ gcc 07GCC_carryChain.c -o 07GCC && ./07GCC
 Usage: ./07GCC [-c|-g]
@@ -427,7 +426,6 @@ int main(int argc,char** argv)
   }
   return 0;
 }
-
 ```
 
 ## 実行結果
