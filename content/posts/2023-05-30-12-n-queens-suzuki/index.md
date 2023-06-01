@@ -68,7 +68,7 @@ void process(unsigned const int sym,Board* B)
 
 
 ## ソースコード
-``` C:12GCC_carryChain.c
+```c:12GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

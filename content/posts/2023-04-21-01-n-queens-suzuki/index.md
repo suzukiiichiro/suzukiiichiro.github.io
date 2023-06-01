@@ -40,7 +40,7 @@ http://www.arch.cs.titech.ac.jp/~kise/nq/index.htm
 では、前置きはこのくらいにして、ソースコードを見てください。
 英文は、なんとなく和訳しておきました。では。
 
-``` C
+```c
 /*  
 Jeff Somers Copyright(c) 2002 jsomers@alumni.williams.edu or allagash98@yahoo.com April,2002
 

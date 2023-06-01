@@ -32,7 +32,7 @@ COUNTERがGlobal g に格納することで良いのかは要検討
 
 05GCC_carryChain.c
 +102
-```
+```c
 //カウンター配列
 uint64_t COUNTER[3];      
 unsigned int COUNT2=0;
@@ -42,7 +42,7 @@ unsigned int COUNT8=2;
 
 06GCC_carryChain.c
 +102
-``` C:
+```c
 // 構造体
 typedef struct{
   unsigned int size;
@@ -60,7 +60,7 @@ typedef struct{
 
 06GCC_carryChain.c
 +143
-``` C:
+```c
 // 集計
 void calcChain()
 {
@@ -77,7 +77,7 @@ void calcChain()
 
 06GCC_carryChain.c
 +171
-``` C:
+```c
 // solve()を呼び出して再帰を開始する
 void process(unsigned const int sym,Board* B)
 {
@@ -90,21 +90,21 @@ void process(unsigned const int sym,Board* B)
 
 06GCC_carryChain.c
 +220
-``` C:
+```c
   // カウンターの初期化
   g.COUNTER[g.COUNT2]=g.COUNTER[g.COUNT4]=g.COUNTER[g.COUNT8]=0;
   g.COUNT2=0; g.COUNT4=1; g.COUNT8=2;
 ```
 
 
-``` C:
+```c
 process(COUNT8,&B) continue;
 ```
 
 も以下のように変更します。
 06GCC_carryChain.c
 +270
-``` C:
+```c
           if(B.x[0]==0){ 
             process(g.COUNT8,&B); continue ;
           }
@@ -122,7 +122,7 @@ process(COUNT8,&B) continue;
 
 
 ## ソースコード
-``` C:06GCC_carryChain.c
+```c:06GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

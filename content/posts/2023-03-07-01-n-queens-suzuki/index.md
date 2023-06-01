@@ -24,7 +24,7 @@ tags:
 これまでもやっていたわけですが、そこの部分を「配置フラグ」と呼ぶことを覚えておいてください。
 
 前回までは以下のように表記していました。
-``` bash
+```bash
     for(( col=0;col<size;col++ )){
       aBoard[$row]="$col";
       if (( down[col]==0 && right[row-col+size-1]==0 && left[row+col]==0));then
@@ -45,7 +45,7 @@ tags:
 これでもわずかばかりですが高速化が見込めます。
 
 なにより、以降で進む「ビットマップ」への足がかりとして必要なステップなのです。
-``` bash
+```bash
     for(( col=0;col<size;col++ )){
       aBoard[$row]="$col";
       dx=$col;
@@ -61,7 +61,7 @@ tags:
 
 また、
 
-``` bash
+```bash
         N-Queens06 "$((row+1))" "$size" "$((dx))" "$((rx))" "$((lx))";
 ```
 ここで、`N-Queens06`にわたすパラメータが３つ増えていることに気が付きましたか？
@@ -69,7 +69,7 @@ tags:
 いずれ、ここらへんもしっかり身につけていきましょう。
 今は、深く考える必要はありません。
 
-```
+```bash
       if (( !down[dx] && !right[rx] && !left[lx]));then
 ```
 Ｃ言語に慣れ親しんでいる人は数値の「０」はFalse、「１」はTrueという理解だと思います。
@@ -77,14 +77,14 @@ NOの０（ゼロ）とおぼえましょう。
 
 で、変数は１がTrueなので、
 
-```
+```bash
 if (( down ));then
 
 fi
 ```
 
 これは、
-```
+```bash
 #  (( down )) と同じ
 if (( down==1 ));then
 
@@ -92,13 +92,13 @@ fi
 ```
 と同じことなのです。
 ですので、
-```
+```bash
 if (( !down ));then
 
 fi
 ```
 これは、
-```
+```bash
 #  ((!down )) と同じ
 if (( down==0 ));then
 
@@ -106,17 +106,17 @@ fi
 ```
 と同じです。
 ですので、以下の`if`文は丁寧に `==0` としていますが、ソースを簡略して書くことができます。
-```
+```bash
       if (( down[dx]==0 && right[rx]==0 && left[lx]==0));then
 ```
 は、
-```
+```bash
       if (( !down[dx] && !right[rx] && !left[lx]));then
 ```
 
 と、同じなのです、ここまでを以下のソースにまとめました
 ソース全体は以下のとおりです。
-``` bash:N-Queens06.sh
+```bash:N-Queens06.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター

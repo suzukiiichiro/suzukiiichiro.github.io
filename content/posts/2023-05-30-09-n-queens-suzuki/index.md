@@ -33,7 +33,7 @@ buildChain()内の carryChain_symmetry()の呼び出し部分は以下のよう�
 
 08GCC_carryChain.c
 +291
-``` C:
+```c
           // 対称解除法
           carryChain_symmetry(l->n,l->e,l->s,l->w,&l->B);
 ```
@@ -41,7 +41,7 @@ buildChain()内の carryChain_symmetry()の呼び出し部分は以下のよう�
 ↓
 09GCC_carryChain.c
 +282
-``` C:
+```c
           // 対称解除法
           // carryChain_symmetry(l->n,l->e,l->s,l->w,&l->B);
           carryChain_symmetry(&l);
@@ -56,7 +56,7 @@ pthread並列処理の実行にはパラメータを一つしか渡せないと�
 
 08GCC_carryChain.c
 +219
-``` C:
+```c
 //対称解除法
 void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned const int s,unsigned const int w,Board* B)
 {
@@ -66,7 +66,7 @@ void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned cons
 
 09GCC_carryChain.c
 +209
-``` C:
+```c
 //対称解除法
 void carryChain_symmetry(void* args)
 {
@@ -75,7 +75,7 @@ void carryChain_symmetry(void* args)
 
 渡されたLocal構造体は、以下一行で `l->` で構造体の中の変数にアクセスできるようになります。
 
-``` C:
+```c
   Local *l=(Local *)args;
 
   if((l->s==ww)&&(l->n<(w2-l->e))){ return ; }
@@ -83,7 +83,7 @@ void carryChain_symmetry(void* args)
 
 
 ## ソースコード
-``` C:09GCC_carryChain.c
+```c:09GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

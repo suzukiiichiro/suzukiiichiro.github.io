@@ -166,7 +166,7 @@ tags:
 そのまえにソースを以下に示します。
 
 ## ソース
-``` bash:N-Queens03.sh
+```bash:N-Queens03.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;   # カウンター
@@ -956,14 +956,14 @@ $ bash N-Queens03.sh
 
 
 この処理は以下の部分が大きく影響しています。
-``` bash
+```bash
         down[$col]=1; # trueを代入
         N-Queens03 "$((min+1))" "$size" ;
         down[$col]=0; # falseを代入
 ```
 
 さらに言えば、クイーンの横列の当たり判定部分は以下のとおりです。
-``` bash
+```bash
     if (( down[col] == 0 ));then
 ```
 

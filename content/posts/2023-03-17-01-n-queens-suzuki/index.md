@@ -71,7 +71,7 @@ bool 型配列 col[], rup[], rdn[] を用意する（下図参照）。
 ## 配置フラグ再帰版
 配置フラグ再帰版のプログラムソースは以下のとおりです。
 
-``` bash
+```bash
 : '再帰版配置フラグ';
 function rdlFlag_R(){
   local -i row="$1";
@@ -101,7 +101,7 @@ function rdlFlag_R(){
 
 
 配置フラグのロジックについて簡単に説明します。
-```
+```bash
     for(( col=0;col<size;col++ )){
       board[$row]="$col";
       if (( down[col]==0 
@@ -119,12 +119,12 @@ function rdlFlag_R(){
 ```
 
 以下でクイーンを配置します。
-```
+```bash
       board[$row]="$col";
 ```
 
 以下の記述は、
-```
+```bash
       if (( down[col]==0 
         && right[row-col+size-1]==0
         && left[row+col]==0));then
@@ -140,7 +140,7 @@ function rdlFlag_R(){
 ```
 
 以下のように書くほうがスッキリするという人もいます。
-```
+```bash
       if (( !down[col]
         &&  !right[row-col+size-1]
         &&  !left[row+col]));then
@@ -149,19 +149,19 @@ function rdlFlag_R(){
 好みです。
 
 以下の部分で、下、右斜下、左斜下を配置済みとして「１」(true)をフラグとしてセットします。
-```
+```bash
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
         left[$row+$col]=1;
 ```
 
 その直後で再帰を実行して`row`をインクリメントしながらボードの下方向へクイーンを配置していきます。
-```
+```bash
         rdlFlag_R "$((row+1))" "$size" ;
 ```
 
 再帰が終わったら、`down[]`,`right[]`,`left[]`の配置フラグに「０」を代入してクリアし、空き地にします。
-```
+```bash
         down[$col]=0;
         right[$row-$col+($size-1)]=0;
         left[$row+$col]=0;
@@ -171,7 +171,7 @@ function rdlFlag_R(){
 ## 配置フラグ非再帰版
 配置フラグ非再帰版のプログラムソースは以下のとおりです。
 
-``` bash
+```bash
 : '非再帰版配置フラグ(right/down/left flag)';
 function rdlFlag_NR(){
   local -i row="$1"
@@ -226,7 +226,7 @@ function rdlFlag_NR(){
 再帰版・非再帰版を含むすべてのプログラムソースは以下のとおりです。
 プログラムソース最下部で、再帰と非再帰の実行をコメントアウトで切り替えてます。
 
-``` bash:rdlFlag.sh
+```bash:rdlFlag.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター
@@ -517,7 +517,7 @@ bash-3.2$
 ## ブルートフォースとバックトラック、配置フラグの特色と違い
 ブルートフォース版
 for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
-``` bash
+```bash
   if ((row==size));then
     check_bluteForce "$size";
     if (( $?==1 ));then 
@@ -535,7 +535,7 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 
 バックトラック版
 ブルートフォース（力まかせ探索）のように最後まで配置して効きをチェックするのではなく、各行にクイーンを置くたびに効きチェックを行って、効きがあればその状態からの探索を行わない点が異なります。
-``` bash
+```bash
   if ((row==size));then
     ((TOTAL++));
     printRecord "$size";   # 出力
@@ -558,7 +558,7 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 
 配置フラグはバックトラックよりもさらに高速です。
 
-``` bash
+```bash
     for(( col=0;col<size;col++ )){
       board[$row]="$col";
       if (( down[col]==0 

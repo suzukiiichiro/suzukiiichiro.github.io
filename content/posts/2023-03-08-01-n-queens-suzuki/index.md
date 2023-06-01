@@ -39,7 +39,7 @@ tags:
 ## プログラムソース
 プログラムソースは以下のとおりです。
 
-``` bash:N-Queens07.sh
+```bash:N-Queens07.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター

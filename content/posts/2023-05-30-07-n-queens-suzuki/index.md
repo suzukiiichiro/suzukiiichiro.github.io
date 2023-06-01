@@ -32,7 +32,7 @@ carryChain_symmetry()を抜き出して作成
 チェーンの初期化ブロックをinitChain()として関数にします。
 07GCC_carryChain.c
 +229
-``` C:
+```c
 // チェーンの初期化
 void initChain()
 {
@@ -53,7 +53,7 @@ void initChain()
 
 07GCC_carryChain.c
 +229
-``` C:
+```c
 // キャリーチェーン
 void carryChain()
 {
@@ -66,7 +66,7 @@ void carryChain()
 
 07GCC_carryChain.c
 +202
-``` C:
+```c
 //対称解除法
 void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned const int s,unsigned const int w,Board* B)
 {
@@ -81,7 +81,7 @@ void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned cons
 
 07GCC_carrychain.c
 +284
-``` C:
+```c
         for(unsigned s=w;s<(g.size-2)*(g.size-1)-w;++s){
           // B=sB;
           memcpy(&B,&sB,sizeof(Board));
@@ -93,7 +93,7 @@ void carryChain_symmetry(unsigned const int n,unsigned const int e,unsigned cons
 
 
 ## ソースコード
-``` C:07GCC_carryChain.c
+```c:07GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

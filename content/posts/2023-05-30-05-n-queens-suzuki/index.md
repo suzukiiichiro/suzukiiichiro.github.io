@@ -29,7 +29,7 @@ sizeをglobalへ移動。あわせて、sizeは関数間のパラメータでの
 
 05GCC_carryChain.c
 +107
-``` C:
+```c
 // 構造体
 typedef struct{
   unsigned int size;
@@ -44,7 +44,7 @@ Global g に格納したsize は g.size に変更してアクセスします。
 
 05GCC_carryChain.c
 +181
-``` C:
+```c
     if( (B->x[0]!=(uint64_t)-1) ){
       if(( (dimx<B->x[0]||dimx>=g.size-B->x[0])
         && (dimy==0 || dimy==g.size-1)
@@ -59,7 +59,7 @@ main()のsizeをg.sizeに変更するとともに、パラメータで渡して�
 
 05GCC_carryChain.c
 +305
-``` C:
+```c
   for(unsigned int size=min;size<=targetN;++size){
     TOTAL=UNIQUE=0; 
     g.size=size;
@@ -79,7 +79,7 @@ main()のsizeをg.sizeに変更するとともに、パラメータで渡して�
 
 
 ## ソースコード
-``` C:05GCC_carryChain.c
+```c:05GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

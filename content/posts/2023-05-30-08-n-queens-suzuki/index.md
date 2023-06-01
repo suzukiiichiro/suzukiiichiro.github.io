@@ -38,7 +38,7 @@ Local構造体 lを作成。
 
 08GCC_carryChain.c
 +124
-``` C:
+```c
 typedef struct{
   Board B;
   Board nB;
@@ -59,7 +59,7 @@ typedef struct{
 
 08GCC_carryChain.c
 +246
-``` C:
+```c
 // チェーンのビルド
 void buildChain()
 {
@@ -78,7 +78,7 @@ void buildChain()
 
 08GCC_carryChain.c
 +311
-``` C:
+```c
 // キャリーチェーン
 void carryChain()
 {
@@ -89,7 +89,7 @@ void carryChain()
 ```
 
 ## ソースコード
-``` C:08GCC_carryChain.c
+```c:08GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

@@ -34,7 +34,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
 
 
 おさらいですが、以前紹介したブルートフォースのソースは以下の通りです。
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
@@ -133,21 +133,21 @@ https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
 
 上記のforに以下の条件を加え
 
-``` bash
+```bash
     if (( down[col]==0 ));then
 ```
 
 再帰部分で、downに１を代入して、再帰が終了したら０に戻すという処理を追加しました。
 ここはいずれ分かるようになります。
 
-```
+```bash
         down[$col]=1;
         N-Queen02 "$((row+1))" "$size" ;
         down[$col]=0;
 ```
 
 ソースは以下のとおりです。
-``` bash:N-Queens03.sh
+```bash:N-Queens03.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター
@@ -351,7 +351,7 @@ N-Queens03 0 5;    # 縦と横に一つだけのクイーンを許す
 
 前回の、縦と横の効きに対応した処理部分は以下の通りです。
 downを使って縦と横を判定しています。
-```
+```bash
       if (( down[col]==0 ));then
         down[$col]=1;
         N-Queen02 "$((row+1))" "$size" ;
@@ -364,7 +364,7 @@ downを使って縦と横を判定しています。
 `down` に加えて `right` と `left` が加わっているのが見て取れると思います。
 じっくり考えると分かることなのですが、今は読み飛ばして頂いても構いません。
 
-``` bash
+```bash
       if (( down[col]==0 && right[row-col+size-1]==0 && left[row+col]==0));then
         down[$col]=1;
         right[$row-$col+($size-1)]=1;
@@ -380,7 +380,7 @@ downを使って縦と横を判定しています。
 
 ではソースを見てみましょう。
 バックトラックのソースは以下のとおりです。
-``` bash:N-Queens04.sh
+```bash:N-Queens04.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;     # カウンター

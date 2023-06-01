@@ -97,7 +97,7 @@ echo 行頭の番号を入力してください;
 
 ## ソース
 ソースは以下のとおりです。
-``` bash:N-Queens08.sh
+```bash:N-Queens08.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;

@@ -60,7 +60,7 @@ tags:
 ## 効き筋のチェック
 効き筋のチェック関数は、ブルートフォースにもありましたが、バックトラックの効きチェック関数とは内容がちょっと異なります。
 
-``` bash
+```bash
 : 'バックトラック版効き筋をチェック';
 function check_backTracking(){
   local -i row="$1";
@@ -87,7 +87,7 @@ board[0] から board[i] と board[row] を比較し、同一または斜め45�
 ## バックトラック再帰版
 バックトラック再帰版のプログラムソースは以下のとおりです。
 
-``` bash
+```bash
 : '再帰版バックトラック';
 function backTracking_R(){
   local -i row="$1";
@@ -109,7 +109,7 @@ function backTracking_R(){
 ```
 
 バックトラックとブルートフォース（力まかせ探索）の大きな違いは、最後まで配置してチェックするのではなく、クイーンを置くたびに効きチェックを行って、効きがあれば（解とならないとわかれば）状態から継続して探索を行わないといった点が異なります。
-```
+```bash
     for(( col=0;col<size;col++ )){
       board["$row"]="$col";
       check_backTracking "$row";
@@ -124,7 +124,7 @@ function backTracking_R(){
 ## バックトラック非再帰版
 バックトラック非再帰版のプログラムソースは以下のとおりです。
 
-``` bash
+```bash
 : '非再帰版バックトラック';
 function backTracking_NR(){
   local -i row="$1";
@@ -163,7 +163,7 @@ function backTracking_NR(){
 再帰版・非再帰版を含むすべてのプログラムソースは以下のとおりです。
 プログラムソース最下部で、再帰と非再帰の実行をコメントアウトで切り替えてます。
 
-``` bash:backTrack.sh
+```bash:backTrack.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター
@@ -453,7 +453,7 @@ bash-3.2$
 
 ブルートフォース版
 for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
-```
+```bash
   if ((row==size));then
     check_bluteForce "$size";
     if (( $?==1 ));then 
@@ -471,7 +471,7 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 
 バックトラック版
 バックトラックでは、ブルートフォース（力まかせ探索）のように最後までクイーンを配置してから効きをチェックするのではなく、クイーンを置くたびに効きチェックを行い、効きがあればその状態からの探索を行わない点が異なります。
-```
+```bash
   if ((row==size));then
     ((TOTAL++));
     printRecord "$size";   # 出力

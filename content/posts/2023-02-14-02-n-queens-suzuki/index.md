@@ -521,7 +521,7 @@ tags:
 ということで、気を取り直して
 `N-Queens02.sh` ファイルを作成してください。
 
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 
 function N-Queens02(){
@@ -539,7 +539,7 @@ NQ;
 ファイルを実行するとファイル最下部の `NQ`が実行され、`function NQ()`が呼び出されます。
 現在の`function NQ()`は`echo`と `N-Queens02()`関数の呼び出しがあるだけです。
 
-```
+```bash
   N-Queens02 0 5;
 ```
 
@@ -547,7 +547,7 @@ NQ;
 `function N-Queens02()`関数を追記します。
 さっそく `NQ()` から `N-Queens02()` へ渡した２つのパラメータを、`N-Queens02()`関数の冒頭で明示的に変数へ代入しましょう。
 
-``` bash
+```bash
 function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
@@ -558,7 +558,7 @@ function N-Queens02(){
 
 関数パラメータの `$1` や `$2` といった変数は、関数に渡された変数の順番です。
 
-```
+```bash
   N-Queens02 0 5;
 ```
 
@@ -568,7 +568,7 @@ function N-Queens02(){
 関数の冒頭で、きちんとわかりやすい変数名に代入してあげることが望ましいです。
 また、`$1` や `$2`の代入は、必ずダブルクォーテーションで囲みましょう。
 
-``` bash
+```bash
 function N-Queens02(){
   local -i min="$1";
   local -i size="$2";
@@ -576,7 +576,7 @@ function N-Queens02(){
 ```
 
 ここまでのソースは以下のとおりです。
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
@@ -616,7 +616,7 @@ NQ;
 こうしたクイーンの動きは、
 この場合、２つの`for`ループで表現します。
 外側の`for`ループは`col`を表します。
-``` bash
+```bash
   for(( 外側の col が ０から４へ順番に )){
     for(( 内側の row が０から４へ順番に )){
     }
@@ -632,7 +632,7 @@ NQ;
 `col0` 列目から順を追って`col1`，`col2`，`col3`，`col4` 列目までたどっていきます。
 
 
-``` bash
+```bash
   # sizeは `5`
   for((col=0;col<size;col++)){
     : # まだなにもない
@@ -646,7 +646,7 @@ NQ;
 おすすめの方法は、実行しながら処理のステップを順を追って、目視で確認することです。
 
 以下のコマンドをプログラムに埋め込むことにします。
-```
+```bash
 read -p "なにかキーを入力してください"
 ```
 
@@ -654,7 +654,7 @@ read -p "なにかキーを入力してください"
 具体的には以下のソースを見てください。
 
 
-``` bash:NQueens01.sh
+```bash:NQueens01.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
@@ -733,7 +733,7 @@ bash-3.2$
 
 `read -p` で出力を確認することができてとても便利です。
 
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
@@ -796,7 +796,7 @@ bash-3.2$
 ここまでの処理を再帰を使って書いてみます。
 まずは、ソースを見てください。
 
-``` bash N-Queens02.sh
+```bash N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
@@ -844,7 +844,7 @@ bash-3.2$
 この理由は、再帰処理に使われる変数の定義が原因なのです。
 以下の２行を関数の冒頭に加えるだけで動くようになります。
 
-```
+```bash
   local -i col=0;         # 再帰に必要
   local -i row=0;         # 再帰に必要
 ```
@@ -852,7 +852,7 @@ bash-3.2$
 
 ## 重要なこと
 
-```
+```bash
         N-Queens02 "$((min+1))" "$size"; 
 ```
 
@@ -867,7 +867,7 @@ bash-3.2$
 
 あと、`min==size-1` といった基底条件を忘れずに。
 上記のことを含めたソースは以下のとおりです。
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 : '
 ブルートフォース　力まかせ探索
@@ -953,7 +953,7 @@ NQ;
 
 カウンターは０で初期化しています。
 
-``` bash
+```bash
 declare -i COUNT=0;
 ```
 
@@ -965,14 +965,14 @@ declare -i COUNT=0;
 
 改行無しで出力する理由ですが、次に続く、クイーンの位置情報を右に連結したいからです。
 
-``` bash
+```bash
 ((COUNT++));        # インクリメント
 echo -n "$COUNT: "; # 改行無しで出力
 ```
 
 
 ここまでのソースは以下のとおりです。
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;
@@ -1079,7 +1079,7 @@ NQ;
 この２箇所の出力は画面に出力することなく、変数に入れるだけにして、内側の `for` を抜けたときにまとめて画面出力することが速度改善に繋がります。
 
 ソースは以下のとおりです。
-``` bash:N-Queens02.sh
+```bash:N-Queens02.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;       # カウンター
@@ -1156,7 +1156,7 @@ NQ;
 ## ８ｘ８の出力結果
 参考までに８ｘ８の実行結果は以下のとおりです。
 以下の部分を８とすればよいですね。
-``` bash
+```bash
   # N-Queens02 0 5;
   N-Queens02 0 8;
 ```

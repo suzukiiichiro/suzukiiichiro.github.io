@@ -37,7 +37,7 @@ https://github.com/suzukiiichiro/N-Queens
 
 
 以下の関数の中身を
-``` C:
+```c
 void initChain(unsigned const int size,unsigned int* pres_a,unsigned int* pres_b)
 {
   // チェーンの初期化
@@ -54,7 +54,7 @@ void initChain(unsigned const int size,unsigned int* pres_a,unsigned int* pres_b
 ```
 以下のように追加します。
 ↓
-``` C:
+```c
 // キャリーチェーン
 void carryChain(unsigned const int size)
 {
@@ -81,7 +81,7 @@ carryChain_symmetry()の中身で置き換えます。
 
 02GCC_carryChain.c
 +245
-``` C:
+```c
         for(unsigned s=w;s<(size-2)*(size-1)-w;++s){
           // B=sB;
           memcpy(&B,&sB,sizeof(Board));
@@ -93,7 +93,7 @@ carryChain_symmetry()の中身で置き換えます。
 
 03GCC_carryChain.c
 +232
-``` C:
+```c
         for(unsigned s=w;s<(size-2)*(size-1)-w;++s){
           // B=sB;
           memcpy(&B,&sB,sizeof(Board));
@@ -112,7 +112,7 @@ carryChain_symmetry()の中身で置き換えます。
 要するに carryChain()へひとまとめにしたということになります。
 
 ## ソースコード
-``` C:03GCC_carryChain.c
+```c:03GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

@@ -37,7 +37,7 @@ THREADフラグを作成して スレッドのオン・オフで動作を確認�
 
 16GCC_carryChain.c
 +286
-``` C:
+```c
 /**
  * スレッドするか 1:する 0:しない
  */
@@ -68,7 +68,7 @@ pthreadの実装は、いくつかの手順を踏む必要があります。
 
 16GCC_carryChain.c
 +87
-``` C:
+```c
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -89,7 +89,7 @@ pthreadへの実装が正しいかどうかを常に比較して実行したい�
 
 16GCC_carryChain.c
 +287
-``` C:
+```c
 /**
  * スレッドするか 1:する 0:しない
  */
@@ -99,7 +99,7 @@ bool THREAD=1;
 
 16GCC_carryChain.c
 +308
-``` C:
+```c
   if(THREAD){
     : //スレッド処理を行う
   }else{
@@ -111,7 +111,7 @@ bool THREAD=1;
 
 16GCC_carryChain.c
 +306
-``` C:
+```c
   pthread_t pt[(g.size/2)*(g.size-3)+1];
   for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
     if(THREAD){
@@ -140,7 +140,7 @@ bool THREAD=1;
 スレッドの数はＮの数によって変化します。
 pt配列を必要な数だけ生成します。
 
-``` C:
+```c
   pthread_t pt[(g.size/2)*(g.size-3)+1];
 ```
 
@@ -150,7 +150,7 @@ forループの w を添字にした pt配列を次々と生成します。
 ３番めのパラメータは、スレッドを実行する関数です。
 これまでに作成した thread_run()を呼び出しています。
 
-``` C:
+```c
       int iFbRet;
       iFbRet=pthread_create(&pt[l->w],NULL,&thread_run,&l[l->w]);
       if(iFbRet>0){
@@ -162,7 +162,7 @@ pthreadに対応するために、大切なことがもう一点。
 
 16GCC_carryChain.c
 +234
-``` C:
+```c
 // pthread run()
 void* thread_run(void* args)
 {
@@ -171,7 +171,7 @@ void* thread_run(void* args)
 
 16GCC_carryChain.c
 +281
-``` C:
+```c
       } //w
     } //e
   } //n
@@ -184,7 +184,7 @@ void* thread_run(void* args)
 
 16GCC_carryChain.c
 +318
-``` C:
+```c
   /**
    * スレッド版 joinする
    */
@@ -201,7 +201,7 @@ void* thread_run(void* args)
 
 16GCC_carryChain.c
 +328
-``` C:
+```c
   /**
    * 集計
    */
@@ -229,7 +229,7 @@ void* thread_run(void* args)
 
 
 ## ソースコード
-``` C:16GCC_carryChain.c
+```c:16GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版
@@ -636,13 +636,13 @@ int main(int argc,char** argv)
 ## 実行結果
 +289行目、+290行目にTHREADフラグがあります。
 この場合は、pthreadで実行します（今は動きません）
-```
+```c
 // bool THREAD=0; 
 bool THREAD=1; 
 ```
 
 以下の場合は、これまで通りスレッド無しでの実行となります。
-```
+```c
 bool THREAD=0; 
 // bool THREAD=1; 
 ```

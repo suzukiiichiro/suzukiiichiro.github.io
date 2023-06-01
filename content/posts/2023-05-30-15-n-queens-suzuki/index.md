@@ -37,7 +37,7 @@ https://www.kushiro-ct.ac.jp/yanagawa/ex-2017/1-tg/03/
 
 15GCC_carryChain.c
 +102
-``` C:
+```c
 // 構造体
 typedef struct{
   unsigned int size;
@@ -81,7 +81,7 @@ typedef struct{
 
 15GCC_carryChain.c
 +322
-``` C:
+```c
   /**
    * 集計
    */
@@ -97,7 +97,7 @@ typedef struct{
 
 15GCC_carryChain.c
 +345
-``` C:
+```c
 // キャリーチェーン
 void carryChain()
 {
@@ -112,7 +112,7 @@ void carryChain()
 
 15GCC_carryChain.c
 +309
-``` C:
+```c
   // カウンターの初期化
   l->COUNT2=0; l->COUNT4=1; l->COUNT8=2;
   l->COUNTER[l->COUNT2]=l->COUNTER[l->COUNT4]=l->COUNTER[l->COUNT8]=0;
@@ -122,7 +122,7 @@ void carryChain()
 
 15GCC_carryChain.c
 +317
-``` C*
+```c
   // memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
   l->wB=l->B;
 ```
@@ -132,7 +132,7 @@ memcpy()は何箇所かで使っていますので、普通に代入でコピー
 
 
 ## ソースコード
-``` C:15GCC_carryChain.c
+```c:15GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

@@ -33,7 +33,7 @@ THREADフラグを作成して スレッドのオン・オフで動作を確認�
 変数はソースの上の方にあったほうが良いので、移動します。
 
 +199
-``` C:
+```c
 /**
  * pthreadの実行
  */
@@ -51,13 +51,14 @@ forの第２パラメータが`<`ではなく`<=`でした。
 以下の２箇所
 17GCC_carryChain.c
 +386
-```
+```c
   Local l[(g.size/2)*(g.size-3)];
   ↓
   Local l[(g.size/2)*(g.size-3)+1];
 ```
+
 +387
-```
+```c
   pthread_t pt[(g.size/2)*(g.size-3)];
   ↓
   pthread_t pt[(g.size/2)*(g.size-3)+1];
@@ -73,14 +74,14 @@ forの第２パラメータが`<`ではなく`<=`でした。
 
 17GCC_carryChain.c
 +389
-```
+```c
     for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
       ↓
     for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
 ```
 
 +398
-``` C:
+```c
   for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
       ↓
   for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
@@ -88,7 +89,7 @@ forの第２パラメータが`<`ではなく`<=`でした。
 
 ## join 部分の修正
 +415
-``` C:
+```c
     for(unsigned int w=0;w<=(unsigned)(g.size/2)*(g.size-3);++w){
       ↓
     for(unsigned int w=0;w<(unsigned)(g.size/2)*(g.size-3)+1;++w){
@@ -101,7 +102,7 @@ forの第２パラメータの末尾に`+1`するのを忘れずに。
 
 17GCC_carryChain.c
 +419
-```
+```c
   /**
    * 集計
    */
@@ -133,12 +134,12 @@ Local構造体の初期化ををbuildChain()で行ってきましたが、わか
 
 17GCC_carryChain.c
 +394
-``` C:
+```c
     initLocal(&l); //初期化
 ```
 
 +365
-``` C:
+```c
 // 構造体の初期化
 void initLocal(void* args)
 {
@@ -170,7 +171,7 @@ pthreadはマルチプロセスで動くため、各プロセスの処理時間�
 実行段階から実行終了までの計測は、 gettimeofday(&t1, NULL);を使います。
 
 +482
-``` C:
+```c
   // pthread用計測
   struct timeval t0;
   struct timeval t1;
@@ -238,7 +239,7 @@ bash-3.2$
 
 
 ## ソースコード
-``` C:17GCC_carryChain.c
+```c:17GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

@@ -87,7 +87,7 @@ Bashだからこその遅さです。ＣプログラムではＮ１７までは�
 ソースはおおよそ下から積み上げるようにして書きますので、
 最初の実行は一番下の「function NQ()」となります。
 
-```
+```bash
 : 'ボードレイアウトを出力 ビットマップ対応版';
 function printRecordCarryChain()
 
@@ -263,13 +263,13 @@ buildChain()
 キャリーチェーンのプログラムソースは以下のとおりです。
 ソースの末尾で、ボードレイアウト表示をするかをフラグで指定してください。
 
-```
+```bash
 #DISPLAY=0; # ボードレイアウト表示しない
 DISPLAY=1; # ボードレイアウト表示する
 ```
 
 
-``` bash:07Bash_carryChain.sh
+```bash:07Bash_carryChain.sh
 #!/usr/bin/bash
 
 # :'
@@ -831,7 +831,7 @@ exit;
 例えば、Ｎ５の場合、ボードレイアウト出力が３つ出ますが、解は２つです。それは、外側２行２列の配置段階で３つの解の候補が導き出されはしたものの、内側を処理する段階で１つは解の候補から外れたということになります。
 
 
-``` bash:07Bash_carryChain_summary.sh
+```bash:07Bash_carryChain_summary.sh
 #!/usr/bin/bash
 
 : '

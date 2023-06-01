@@ -36,7 +36,7 @@ Pythonはマルチスレッドとマルチプロセスの双方があり、マ�
 bash での並列処理は大きく２種類あります。
 
 １．バックグラウンド方式
-```
+```bash
 foo 1 &
 foo1pid=$!
 foo 2 &
@@ -54,7 +54,7 @@ echo $?
 
 ２．xargs 形式
 
-```
+```bash
 #!/usr/bin/bash
 
 shopt -s expand_aliases
@@ -92,7 +92,7 @@ test;
 さらにさらに、親プロセスから子プロセスに配列を渡すことはできません。こちらも export で配列の中身を取り出し、子プロセス側で、読み込んだ値を子プロセスの中で宣言した配列に入れ直します。
 
 親プロセス側
-``` bash
+```bash
   #
   # 並列処理に必要な export など
   #
@@ -108,7 +108,7 @@ test;
 ```
 
 子プロセス側
-``` bash
+```bash
   #
   # 元プロセスの配列変数をexportから子プロセスにコピー
   #
@@ -121,7 +121,7 @@ test;
 
 実際に並列処理を行っている部分は、以下となります。
 
-``` bash
+```bash
     #
     # 並列処理
     #
@@ -145,7 +145,7 @@ test;
 carryChainはbuildChain()でチェーンを作りますが、
 ９０度回転しながら上下左右２行２列の配置を完了させた後に、対称解除を行います。
 
-``` bash:
+```bash:
   for ((w=0;w<=(size/2)*(size-3);++w));do
     for ((n=w;n<mirror;++n));do 
       for ((e=w;e<mirror;++e));do 
@@ -163,7 +163,7 @@ carryChainはbuildChain()でチェーンを作りますが、
 
 
 ## 並列処理 プログラムソース
-``` bash:08Bash_carryChain_parallel.sh
+```bash:08Bash_carryChain_parallel.sh
 #!/usr/bin/bash
 
 : '
@@ -750,7 +750,7 @@ exit;
 ```
 
 ## 並列処理まとめ版
-``` bash:08Bash_carryChain_parallel_summary.sh
+```bash:08Bash_carryChain_parallel_summary.sh
 #!/usr/bin/bash
 
 : '

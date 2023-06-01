@@ -34,7 +34,7 @@ forの閉じタグも忘れずにコメントアウトしてください。
 
 14GCC_carryChain.c
 +257
-``` C:
+```c
   // memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
   // for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
   :
@@ -47,7 +47,7 @@ forの閉じタグも忘れずにコメントアウトしてください。
 forの閉じタグのコメントアウトも忘れずに解除してください。
 14GCC_carryChain.c
 +313
-``` C:
+```c
   memcpy(&l->wB,&l->B,sizeof(Board));         // wB=B;
   for(l->w=0;l->w<=(unsigned)(g.size/2)*(g.size-3);++l->w){
   :
@@ -59,7 +59,7 @@ forの閉じタグのコメントアウトも忘れずに解除してくださ�
 
 
 ## ソースコード
-``` C:14GCC_carryChain.c
+```c:14GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

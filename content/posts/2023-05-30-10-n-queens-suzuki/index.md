@@ -32,7 +32,7 @@ https://github.com/suzukiiichiro/N-Queens
 
 10GCC_carryChain.c
 +119
-``` C:
+```c
 typedef struct{
   Board B;
   Board nB;
@@ -54,7 +54,7 @@ typedef struct{
 
 09GCC_carryChain.c
 +255
-``` C:
+```c
     if(!placement(0,g.pres_a[l->w],&l->B)){ continue; } 
     if(!placement(1,g.pres_b[l->w],&l->B)){ continue; }
 ```
@@ -64,7 +64,7 @@ typedef struct{
 
 10GCC_carryChain.c
 +262
-``` C:
+```c
     // if(!placement(0,g.pres_a[l->w],&l->B)){ continue; } 
     // l->dimx=0; 
     // l->dimy=g.pres_a[l->w]; 
@@ -80,7 +80,7 @@ typedef struct{
 
 
 ## ソースコード
-``` C:10GCC_carryChain.c
+```c:10GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

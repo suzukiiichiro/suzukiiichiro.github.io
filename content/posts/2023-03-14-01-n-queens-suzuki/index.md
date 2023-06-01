@@ -60,7 +60,7 @@ https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
 ここでは具体的な説明を割愛しますが、解の候補が生成される都度、以下の効き筋チェック関数が呼び出され、解となりうるかを判定すします。
 いわゆるＮ５の場合は、以下のチェック関数が３１２５回実行されることになります。
 
-``` bash
+```bash
 : 'ブルートフォース版効き筋をチェック';
 function check_bluteForce(){
   local -i size="$1";
@@ -114,7 +114,7 @@ function check_bluteForce(){
 ブルートフォース再帰版のプログラムソースは以下のとおりです。
 第一章のブルートフォース再帰版をより最適化したものですが、ロジックに大きな変化はありません。
 
-``` bash
+```bash
 : '再帰版ブルートフォース';
 function bluteForce_R(){
   local -i row="$1";
@@ -141,24 +141,24 @@ for文で各行の何`row`目にクイーンを配置するかを決め、最後
 ですので、`check_bluteForce()` 関数は、クイーンの効きを判定する関数となります。
 重要なことは、クイーンの配置が終わったら
 
-```
+```bash
   if ((row==size));then
 ```
 の条件式に入り、その直後で
-```
+```bash
     check_bluteForce "$size";
 ```
 を呼び出して、クイーンの配置に問題がないかをチェックします。
 `check_bluteForce()`関数の末尾では以下のようになっています。
 
-```
+```bash
   [[ $flag -eq 0 ]]
   return $?;
 ```
 
 これは、`$flag` が `0` だったら、直前の `$flag` の値を `return` するという記述です。
 また、受け取り側の `function bluteForce_R()` の以下の部分ですが、
-```
+```bash
     check_bluteForce "$size";
     if (( $?==1 ));then 
       ((TOTAL++));
@@ -171,12 +171,12 @@ for文で各行の何`row`目にクイーンを配置するかを決め、最後
 
 ここで `bash`の豆知識ですが、
 
-```
+```bash
     if (( $?==1 ));then 
 ```
 
 となっているのは、`check_bluteForce "$size";` で実行した `return` の変数の値を `$?` で参照し、「１」であれば、
-```
+```bash
       ((TOTAL++));
       printRecord "$size";   # 出力しないならコメント
 ```
@@ -195,7 +195,7 @@ for文で各行の何`row`目にクイーンを配置するかを決め、最後
 ## ボードレイアウトの出力
 ボードレイアウトの出力関数は以下のとおりです。
 
-``` bash
+```bash
 : 'ボードレイアウトを出力';
 function printRecord(){
   size="$1";
@@ -255,7 +255,7 @@ function printRecord(){
 ## ブルートフォース非再帰版
 ブルートフォース非再帰版のプログラムソースは以下のとおりです。
 
-``` bash
+```bash
 : '非再帰版ブルートフォース';
 function bluteForce_NR(){
 	local -i row="$1";
@@ -292,7 +292,7 @@ function bluteForce_NR(){
 ## ブルートフォースのポイント
 ブルートフォースのポイントは、
 クイーンの配置が終わったら
-```
+```bash
   if ((row==size));then
     check_bluteForce "$size";
     if (( $?==1 ));then 
@@ -303,7 +303,7 @@ function bluteForce_NR(){
 ```
 その直後でクイーンの効きを判定する `check_bluteForce()` 関数が呼び出されることです。
 
-```
+```bash
     check_bluteForce "$size";
 ```
 
@@ -315,7 +315,7 @@ function bluteForce_NR(){
 再帰版・非再帰版を含むすべてのプログラムソースは以下のとおりです。
 プログラムソース最下部で、再帰と非再帰の実行をコメントアウトで切り替えて実行してください。
 
-``` bash:bluteForce.sh
+```bash:bluteForce.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター

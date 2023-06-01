@@ -30,7 +30,7 @@ carryChain()のpres_a[]とpres_b[]は並列化した際、スレッドごとに�
 
 04GCC_carryChain.c
 +110
-``` C:
+```c
 // 構造体
 typedef struct{
   unsigned int pres_a[930]; 
@@ -41,7 +41,7 @@ typedef struct{
 COUNT2,COUNT4,COUNT8変数は復活しました（ｗ
 04GCC_carryChain.c
 +104
-``` C:
+```c
 //カウンター配列
 uint64_t COUNTER[3];      
 unsigned int COUNT2=0;
@@ -52,7 +52,7 @@ unsigned int COUNT8=2;
 ですので、以下の部分（４箇所あります）を修正します。
 04GCC_carryChain.c
 +266,271,275,277
-``` C:
+```c
             process(size,2,&B); continue ;
             ↓
             process(size,COUNT8,&B); continue ;
@@ -62,7 +62,7 @@ unsigned int COUNT8=2;
 集計処理を別関数にしました。
 04GCC_carryChain.c
 +143
-``` C:
+```c
 // 集計
 void calcChain()
 {
@@ -75,7 +75,7 @@ Global g 構造体に移動した pres_a,pres_bは g.pres_a,g.pres_bでアクセ
 
 04GCC_carryChain.c
 +208
-``` C:
+```c
   for(unsigned int a=0;a<(unsigned)size;++a){
     for(unsigned int b=0;b<(unsigned)size;++b){
       if(((a>=b)&&(a-b)<=1)||((b>a)&&(b-a)<=1)){ continue; }
@@ -89,7 +89,7 @@ Global g 構造体に移動した pres_a,pres_bは g.pres_a,g.pres_bでアクセ
 チェーンのビルド部分も同様となります。
 04GCC_carryChain.c
 +228
-``` C:
+```c
     if(!placement(size,0,g.pres_a[w],&B)){ continue; } 
     if(!placement(size,1,g.pres_b[w],&B)){ continue; }
 ```
@@ -97,7 +97,7 @@ Global g 構造体に移動した pres_a,pres_bは g.pres_a,g.pres_bでアクセ
 
 
 ## ソースコード
-``` C:04GCC_carryChain.c
+```c:04GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

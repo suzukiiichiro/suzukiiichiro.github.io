@@ -24,7 +24,7 @@ tags:
 `4` の処理が終わったら自動的に `5` に移り、その後、6,7,8....と処理が進んでいくと便利です。
 
 まず、ソースは以下のとおりです。
-``` bash:N-Queens05.sh
+```bash:N-Queens05.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター
@@ -87,21 +87,21 @@ function NQ(){
 NQ;
 ```
 
-``` bash
+```bash
   local -i max=15;
   local -i min=4;
 ```
 この部分は、Ｎをいくつからはじめて、Ｎをいくつで終わらせるかを指定します。
 Ctrl + C　で強制的に処理を中断しても全く問題ありません。
 
-```
+```bash
     startTime=$(date +%s);# 計測開始時間
     N-Queens05 0 "$N";
     endTime=$(date +%s); 	# 計測終了時間
 ```
 処理の始まる前の時間を計測し、処理が終わるやいなや、終了時刻を計測し、
 
-```
+```bash
     ss=$((endTime-startTime));# hh:mm:ss 形式に変換
     hh=$((ss/3600));
     ss=$((ss%3600));

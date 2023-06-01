@@ -79,7 +79,7 @@ https://rtty.com/CODECARD/codecrd1.htm
 最重要アプローチは次のようなものです（BASICにはfor...next構成がありますが、それに近いものです）：
 
 ## 原点ともなるエイト・クイーン初期型ソース
-``` js
+```js
 for (let i0 = 0; i0 <= 7; ++i0) {
   for (let j0 = 0; j0 <= 7; ++j0) {
     for (let i1 = 0; i1 <= 7; ++i1) {
@@ -191,7 +191,7 @@ function diagramOf (queens) {
 私たちがプログラムを修正する際によく使う手法のひとつに、まず変更したい部分を自分の責任でリファクタリングすることを確認し、それからひとつの部分にだけ変更を加えるというものがあります。上のコードでは、生成ループとテストコードが混在しています。そのため、生成やテストを独立して変更するのは厄介です。
 まず、コードをジェネレータとコンシューマのパターンにリファクタリングすることから始めましょう。ジェネレーターは探索空間をゆったりと列挙し、コンシューマーはそれをフィルタリングして解決策を選択する：3
 
-``` js
+```js
 function * mostPessimumGenerator () {
   for (let i0 = 0; i0 <= 7; ++i0) {
     for (let j0 = 0; j0 <= 7; ++j0) {
@@ -294,7 +294,7 @@ diagramOf(first(solutionsToEightQueens))
 
 ## 組み合わせアルゴリズム
 正方形の組み合わせを選択する簡単な方法は、インデックスのペアではなく、0から63までの数字で作業することです。ここに、私たちが望むものをそのまま実現するジェネレータがあります：
-``` js
+```js
 function * mostPessimumGenerator () {
   for (let i0 = 0; i0 <= 7; ++i0) {
     for (let j0 = 0; j0 <= 7; ++j0) {
@@ -430,7 +430,7 @@ choose(5, 3)
     [2, 3, 4]
 ```
 これで、8つの正方形を選ぶすべての方法を得るためにchoose(64, 8)、0から63までの数を0から7までのインデックスの組に変換するために[Math.floor(n/8), n % 8]と書くことができました：
-``` js
+```js
 const numberToPosition = n => [Math.floor(n/8), n % 8];
 const numbersToPositions = queenNumbers => queenNumbers.map(numberToPosition);
 
@@ -475,7 +475,7 @@ x.x....x
 言葉は知らなかったが、ポジションの「木」を深さ優先で検索していたのである。8つのクイーンの深さを持つパスを見つけようとしていたのだ。そして、そのためにボードを更新していた。
 この方法は、再帰的思考に適した「帰納的」な方法であり、興味深いものです。まず、クイーンがゼロで、盤面が空の場合の解を求めます。次に、すでにあるクイーンにもう1つクイーンを加える方法を順次探し、使えるスペースがなくなったら引き返します。
 例えば、最後に置いたクイーンより前のマスはチェックしないので、置くクイーンより後のマスにだけマークをつければいいのです。ここでは、1977年のアプローチに似た実装を、クラスとして実装することで、すべてに関数を使うことに固執していないことを証明します：
-``` js
+```js
 Qxxxxxxx
 xxQxxxxx
 xxxx....
@@ -616,7 +616,7 @@ class Board {
 }
 ```
 Boardクラスは、ほぼすべての作業を行います。しかし、ここに解答を見つける関数があります：
-``` js
+```js
 function * inductive (board = new Board()) {
   if (board.numberOfQueens() === 8) {
     yield board.queens();
@@ -658,7 +658,7 @@ function * inductive (board = new Board()) {
 ]
 ```
 配列の継ぎ足しや組み替えを気にしなければ、4 、任意の順列を生成することはかなり簡単です：
-``` js
+```js
 function * permutations (arr, prefix = []) {
   if (arr.length === 1) {
     yield prefix.concat(arr);
@@ -676,7 +676,7 @@ permutations([1, 2, 3])
 //=> [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]
 ```
 そして、順列生成器を応用して、ルーク問題の解の候補を生成することができるようになりました：
-``` js
+```js
 const solutionsToEightRooks = mapWith(
   ii => ii.map((i, j) => [i, j]),
   permutations([0, 1, 2, 3, 4, 5, 6, 7])
@@ -686,7 +686,7 @@ Array.from(solutionsToEightRooks).length
   //=> 40320
 ```
 これをエイト・クイーンの問題の解答に応用するにはどうすればよいのでしょうか。さて、エイト・クイーン問題の全解の集合は、8つのルーク問題を解くための全解の集合の部分集合であるから、8つのルーク問題の全解の集合を検索して、検索空間を118,968から40,320に縮小しよう！
-``` js
+```js
 const solutionsToEightQueens = filterWith(test, solutionsToEightRooks);
 
 diagramOf(first(solutionsToEightQueens))
@@ -736,7 +736,7 @@ diagramOf(first(solutionsToEightQueens))
 14	13	12	11	10	 9	 8	 7
 ```
 あ！列番号の逆数で行を合計すればいいんだ！（行＋7-col）。この1次元配列を2つ使えば、チェス盤のマスに印をつけるよりもずっと早く、両方の対角線攻撃を確認することができる。このように
-``` js
+```js
 function testDiagonals (queens) {
   const nesw = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."];
   const nwse = [".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."];
@@ -788,7 +788,7 @@ diagramOf(first(solutionsToEightQueens))
 [0,0]、[1,1]で始まる解はすべてうまくいかないことが一目でわかるのに、なぜ最初に確認しただけで失格となる無数の候補をわざわざすべて生成するのか？
 ルークスのコードを、平坦なリストではなく、候補となる位置の木を生成すると考えれば、部分解をチェックしながら進め、うまくいかない可能性のある部分木全体を刈り取ることで、8クイーン問題に適応することができます。要するに、私が元々持っていた木探索と、私が知らなかったrooksの解法を組み合わせているのです。
 このアルゴリズムは、一度に1行ずつ解を構築し、開いている列を繰り返し、対角線上の攻撃がないかチェックします。もし何もなければ、再帰的に自分自身を呼び出して別の行を追加します。8行に達すると、解が得られる。わずか5,508個のポジション（うち8個は、1列目にクイーンが1つしかない退化したケース）を検索することで、92個の解をすべて見つけることができました：
-``` js
+```js
 const without = (array, element) =>
 	array.filter(x => x !== element);
 
@@ -854,7 +854,7 @@ Q.......  .......Q
 ........
 ```
 こうして、最初の4マスのいずれかにクイーンがある解と、最初の4マスのいずれにもクイーンがない解の可能性をすべて知ることができた。これがすべての可能性であり、これ以上計算する必要はない。したがって、半分の作業だけを行い、解を反映させるだけで、探索を半分にすることができるのである：
-``` js
+```js
 function * halfInductive () {
   for (const candidateQueens of [[[0, 0]], [[0, 1]], [[0, 2]], [[0, 3]]]) {
     yield * inductive(candidateQueens);
@@ -888,7 +888,7 @@ Array.from(withReflections).length
 さて、垂直方向の対称性を利用することで、より少ない作業で、反射や回転を含むすべての可能な解を生成することを見てきましたが、逆の場合はどうでしょうか。
 ウィキペディアの説明によると、「盤面の回転と反射という対称性の操作だけで異なる解を1つと数えると、パズルは12個の解を持つ。これを基本解と呼ぶ。"
 基本的な解だけが欲しい場合は、生成した解を、反射や回転を含む集合に対してテストすることでフィルタリングすることができます。もちろん、実際に反射や回転を出力するわけではなく、結果をフィルタリングするために使用しているだけです：
-``` js
+```js
 function * halfInductive () {
   for (const candidateQueens of [[[0, 0]], [[0, 1]], [[0, 2]], [[0, 3]]]) {
     yield * inductive(candidateQueens);
@@ -1014,7 +1014,7 @@ mapWith(niceDiagramOf, fundamentals(halfInductive()))
 
 ## すべてのソースコード
 ### eight-queens-0-fundamental.js
-``` js:eight-queens-0-fundamental.js
+```js:eight-queens-0-fundamental.js
 // Computes the twelve "fundamental" solutions to the eight queens problem
 // by filtering the results of the "half-inductive" algorithm.
 //
@@ -1156,7 +1156,7 @@ mapWith(niceDiagramOf, fundamentals(halfInductive()))
 ```
 
 ### eight-queens-1-half-inductive.js
-``` js:eight-queens-1-half-inductive.js
+```js:eight-queens-1-half-inductive.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing half of the results of the inductive solution 
 // and then adding their vertical reflections.
@@ -1232,7 +1232,7 @@ Array.from(withReflections).length
 ```
 
 ### eight-queens-2-inductive.js
-``` js:eight-queens-2-inductive.js
+```js:eight-queens-2-inductive.js
 // Computes the all 92 solutions to the eight queens problem
 // by testing partial solutions to the "rooks" algorithm
 // as they are created, thus pruning subtrees when possible.
@@ -1284,7 +1284,7 @@ Array.from(inductive()).length
 
 
 ### eight-queens-3-rooks.js
-``` js:eight-queens-3-rooks.js
+```js:eight-queens-3-rooks.js
 // Computes the all 92 solutions to the eight queens problem
 // by generating all of the solutions to the eight rooks
 // problem using permutations, and then filtering them
@@ -1400,7 +1400,7 @@ diagramOf(first(solutionsToEightQueens))
 
 
 ### eight-queens-4-combinations.js
-``` js:eight-queens-4-combinations.js
+```js:eight-queens-4-combinations.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing all of the ways eight queens can be arranged
 // on the board using 64 choose 8, then filtering them
@@ -1517,7 +1517,7 @@ diagramOf(first(solutionsToEightQueens))
 ```
 
 ### eight-queens-5-generater.js
-``` js:eight-queens-5-generater.js
+```js:eight-queens-5-generater.js
 // Computes the all 92 solutions to the eight queens problem
 // by computing all of the possible arrangements of eight
 // chess squares (64^8), then filtering them
@@ -1655,7 +1655,7 @@ diagramOf(first(solutionsToEightQueens))
 ```
 
 ### eight-queens-6-pure-tree.js
-``` js:eight-queens-6-pure-tree.js
+```js:eight-queens-6-pure-tree.js
 const OCCUPATION_HELPER = Symbol("occupationHelper");
 
 class Board {

@@ -887,7 +887,7 @@ bash-3.2$
 
 演算で求める場合は、「反転」という演算を使います。
 (L|D|R) の 反転はチルダ「〜」を使います。
-``` bash
+```bash
 ~(L|D|R)
 ```
 
@@ -921,7 +921,7 @@ maskとは、ビットフィールドのビットをすべて立てたもので�
 
 このmaskは簡単に求めることができます。
 
-``` bash
+```bash
 mask=$(( (1<<size)-1 ));
 ```
 
@@ -1017,7 +1017,7 @@ AND                 2#11000  24 bitmap
 
 
 ここまでの処理をbashで書くと以下の通りになります。
-``` bash:masktest.sh
+```bash:masktest.sh
 #!/usr/bin/bash
 
 mask=31; # 2#11111
@@ -1044,7 +1044,7 @@ bash-3.2$ bash masktest.sh
 
 ## ビットマップで肝となるところを重点的に
 
-```
+```bash
 # クイーンが配置可能な位置を表す
 bitmap=$(( mask&~(left|down|right) ))
 
@@ -1216,7 +1216,7 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 
 そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。
 
-``` bash
+```bash
   bitmap=$(( mask&~(left|down|right) )); # クイーンが配置可能な位置を表す
   while (( bitmap ));do
     bit=$((-bitmap&bitmap)) ;  # 一番右のビットを取り出す
@@ -1238,7 +1238,7 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 ソース下部の再起・非再帰を切り替えて実行してください。
 
 
-``` bash:bitmap.sh
+```bash:bitmap.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター
@@ -1422,7 +1422,7 @@ exit;
 ## まとめ版ソースコード
 ソースの一番下で、再帰・非再帰を切換えて事項してください。
 
-``` bash:bitmap.sh
+```bash:bitmap.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;

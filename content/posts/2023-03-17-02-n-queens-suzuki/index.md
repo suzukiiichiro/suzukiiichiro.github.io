@@ -92,7 +92,7 @@ bash-3.2$
 ## プログラムソース
 プログラムソースは以下のとおりです。
 
-``` bash:N-Queens.sh
+```bash:N-Queens.sh
 #!/usr/bin/bash
 
 declare -i COUNT=0;

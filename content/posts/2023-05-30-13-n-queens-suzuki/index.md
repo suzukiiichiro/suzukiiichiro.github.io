@@ -35,7 +35,7 @@ run()としてpthreadに備える
 
 １．buildChain()の移動したい箇所をコメントアウトします。
     buildChain()関数の末尾に以下の一行を追記します。
-``` C:
+```c
   thread_run(&l);
 ```
 ２．thread_run()関数を作成します。
@@ -45,7 +45,7 @@ run()としてpthreadに備える
 
 13GCC_carryChain.c
 +295
-``` C:
+```c
 // チェーンのビルド
 void buildChain()
 {
@@ -108,14 +108,14 @@ buildChain()のコメントアウトした一番下 +349 に `thread_run()`を�
 
 13GCC_carryChain.c
 +349
-``` C:
+```c
   thread_run(&l);
 ```
 
 では２，`thread_run()`を作成します。
 13GCC_carrychain.c
 +244
-``` C:
+```c
 // pthread run()
 void thread_run(void* args)
 {
@@ -128,7 +128,7 @@ void thread_run(void* args)
 
 13GCC_carryChain.c
 +244
-``` C:
+```c
 // pthread run()
 void thread_run(void* args)
 {
@@ -184,7 +184,7 @@ void thread_run(void* args)
 
 
 ## ソースコード
-``` C:13GCC_carryChain.c
+```c:13GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版

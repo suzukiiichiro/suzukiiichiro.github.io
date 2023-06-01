@@ -302,7 +302,7 @@ Qを配置した場合、そのposition（場所）は`bit`で表します。
 
 bashでは２進数を１０進数に変換して出力する方法が用意されています。
 
-```
+```bash
 bash-3.2$ echo $(( 2#00001 ))
 1
 bash-3.2$ echo $(( 2#00010 ))
@@ -677,7 +677,7 @@ right =(right|bit)>>1= 2#00001 = 1
 
 まず、`left` `down` `right` の３つのビットフィールドをORしたビットフィールドをビット反転させます。
 
-``` bash
+```bash
 ~(left|down|right)
 ```
 
@@ -694,7 +694,7 @@ right= (right|bit)>>1= 2#00001 = 1
 (left|down|right)
 は、
 
-``` bash
+```bash
 (2|4|1)
 ```
 
@@ -741,7 +741,7 @@ bash-3.2$
 演算で求める場合は、上記で言う「反転」という演算を使います。
 
 (L|D|R) の 反転はチルダ「〜」を使って
-``` bash
+```bash
 ~(L|D|R)
 ```
 
@@ -776,7 +776,7 @@ maskとは、ビットフィールドのビットをすべて立てたもので�
 
 このmaskは簡単に求めることができます。
 
-``` bash
+```bash
 mask=$(( (1<<size)-1 ));
 ```
 
@@ -848,7 +848,7 @@ maskから(L|D|R)を間引く
 
 
 ここまでの動きを演算式で書くと以下の通りになります。
-``` bash
+```bash
 size=5;
 mask=$(( (1<<size)-1 ));
 bitmap=$((mask&~(left|down|right)));
@@ -876,7 +876,7 @@ maskから(L|D|R)を間引く
 # (left|down|right)を反転して、配置可能な場所を求める
 先の項でご説明したとおり、配置可能なビットフィールドを `bitmap` に格納することができました。
 
-``` bash
+```bash
 size=5;
 mask=$(( (1<<size)-1 ));
 bitmap=$((mask&~(left|down|right)));
@@ -916,7 +916,7 @@ maskから(L|D|R)を間引く
 ```
 
 ビットマップで肝となるところはここです。
-``` bash
+```bash
     bit=$(( -bitmap & bitmap ));    # 一番右のビットを取り出す
     bitmap=$((bitmap&~bit)) ;       # 配置可能なパターンが一つずつ取り出される
 
@@ -994,7 +994,7 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 
 そこで下のようなwhile文を書けば、ループが bitmap のONビットの数の回数だけループすることになり、配置可能なパターンをひとつずつ全く無駄がループがなく生成されることになります。
 
-``` bash
+```bash
   bitmap=$(( mask&~(left|down|right) ));
   while (( bitmap ));do
     bit=$((-bitmap&bitmap)) ;       # 一番右のビットを取り出す
@@ -1008,7 +1008,7 @@ bash-3.2$ bc <<<"ibase=10;obase=10;8"
 ## ソースコード
 ソースの一番下で、再帰・非再帰を切換えて事項してください。
 
-``` bash:bitmap.sh
+```bash:bitmap.sh
 #!/usr/bin/bash
 
 declare -i TOTAL=0;     # カウンター

@@ -50,7 +50,7 @@ Bashでの並列処理にたどり着くまで８ステップかかりました�
 まずは、移植のもととなるBashのソースを以下に貼ります。
 Bashのキャリーチェーンを並列処理したソースです。
 
-``` bash:08Bash_carryChain_parallel.sh
+```bash:08Bash_carryChain_parallel.sh
 #!/usr/bin/bash
 
 : '
@@ -666,7 +666,7 @@ exit;
 
 ## Ｃ言語による移植第１号
 
-``` C:01GCC_carryChain.c
+```c:01GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版
@@ -1068,7 +1068,7 @@ $ gcc --version
 include は実行に必要なライブラリを指定して読み込みます。
 不要なライブラリは読み込む必要がないので、列挙する必要はありませんが、書いてあってもコンパイラが考えて不要であれば除去した上で実行ファイルを生成します。
 
-``` C:
+```c
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1082,7 +1082,7 @@ Bashは、全てグローバル変数です。
 Ｃは、関数の中で宣言された変数は「ローカル変数」、関数の外で宣言された変数は「グローバル変数」として扱われます。
 以下は、グローバル変数となります。
 
-``` C:
+```c
 typedef unsigned long long uint64_t;
 uint64_t TOTAL=0; 
 uint64_t UNIQUE=0;

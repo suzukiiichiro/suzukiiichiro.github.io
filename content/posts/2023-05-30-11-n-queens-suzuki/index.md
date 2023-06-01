@@ -35,7 +35,7 @@ placement()のパラメータを変更します。
 
 10GCC_carryChain.c
 +188
-``` C:
+```c
 // クイーンの効きをチェック
 bool placement(uint64_t dimx,uint64_t dimy,Board* B)
 {
@@ -45,7 +45,7 @@ bool placement(uint64_t dimx,uint64_t dimy,Board* B)
 
 11GCC_carryChain.c
 +188
-``` C:
+```c
 // クイーンの効きをチェック
 bool placement(void* args)
 {
@@ -56,7 +56,7 @@ bool placement(void* args)
 
 10GCC_carryChain.
 +262
-``` C:
+```c
     // l->dimx=0; 
     // l->dimy=g.pres_a[l->w]; 
     // if(!placement(0,g.pres_a[l->w],&l->B)){ continue; } 
@@ -71,7 +71,7 @@ bool placement(void* args)
 
 11GCC_carryChain.c
 +260
-``` C:
+```c
     l->dimx=0; 
     l->dimy=g.pres_a[l->w]; 
     if(!placement(&l)){ continue; } 
@@ -87,7 +87,7 @@ palcement()にわたすパラメータが`&l`一つになりました。
 
 
 ## ソースコード
-``` C:11GCC_carryChain.c
+```c:11GCC_carryChain.c
 /**
  *
  * bash版キャリーチェーンのC言語版
