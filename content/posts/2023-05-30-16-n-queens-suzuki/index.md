@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（３６）第六章 C言語移植 その１６"
+title: "Ｎクイーン問題（３６）第六章 C言語移植 その１６ pthreadの実装"
 description: "pthreadの実装"
 date: 2023-05-30T13:24:49+09:00
 draft: false

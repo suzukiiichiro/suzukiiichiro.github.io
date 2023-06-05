@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（３５）第六章 C言語移植 その１５"
+title: "Ｎクイーン問題（３５）第六章 C言語移植 その１５ pthread実装直前版完成"
 description: "Local構造体へ統合"
 date: 2023-05-30T13:24:40+09:00
 draft: false
