@@ -1,16 +1,15 @@
 ---
-title: "Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰"
-date: 2023-03-17T14:30:21+09:00
+title: "Ｎクイーン問題（４１）第七章　配置フラグ Python編"
+date: 2023-06-13T13:53:20+09:00
 draft: false
 authors: suzuki
 image: chess.jpg
 categories:
   - programming
 tags:
-  - N-Queens
   - エイト・クイーン
   - シェルスクリプト
-  - Bash
+  - Python
   - アルゴリズム
   - 鈴木維一郎
 ---
@@ -70,300 +69,353 @@ bool 型配列 col[], rup[], rdn[] を用意する（下図参照）。
 
 
 ## 配置フラグ再帰版
-配置フラグ再帰版のプログラムソースは以下のとおりです。
-
-```bash
-: '再帰版配置フラグ';
-function rdlFlag_R(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=0;       # 再帰に必要
-  if (( row==size ));then
-     ((TOTAL++));
-     printRecord "$size";# 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board[$row]="$col";
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-        rdlFlag_R "$((row+1))" "$size" ;
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-    }
-  fi
-}
-```
-
 
 配置フラグのロジックについて簡単に説明します。
-```bash
-    for(( col=0;col<size;col++ )){
-      board[$row]="$col";
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-        rdlFlag_R "$((row+1))" "$size" ;
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-    }
+```python
+#
+# ポストフラグ
+def postFlag(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if(down[col]==0 and 
+          right[row-col+size-1]==0 and
+          left[row+col]==0):
+        down[col]=1
+        right[row-col+(size-1)]=1
+        left[row+col]=1
+        postFlag(row+1,size)
+        down[col]=0
+        right[row-col+(size-1)]=0
+        left[row+col]=0
 ```
 
 以下でクイーンを配置します。
-```bash
-      board[$row]="$col";
+```python
+      board[row]=col
 ```
 
-以下の記述は、
-```bash
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-```
-
-このように書くこともできます。
-明示的に down[col]==0 と書くほうが良いという人もいますし、
-
-```
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-```
-
-以下のように書くほうがスッキリするという人もいます。
-```bash
-      if (( !down[col]
-        &&  !right[row-col+size-1]
-        &&  !left[row+col]));then
-```
-
-好みです。
 
 以下の部分で、下、右斜下、左斜下を配置済みとして「１」(true)をフラグとしてセットします。
-```bash
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
+```python
+        down[col]=1
+        right[row-col+(size-1)]=1
+        left[row+col]=1
 ```
 
 その直後で再帰を実行して`row`をインクリメントしながらボードの下方向へクイーンを配置していきます。
-```bash
-        rdlFlag_R "$((row+1))" "$size" ;
+```python
+        postFlag(row+1,size)
 ```
 
 再帰が終わったら、`down[]`,`right[]`,`left[]`の配置フラグに「０」を代入してクリアし、空き地にします。
-```bash
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-```
-
-
-## 配置フラグ非再帰版
-配置フラグ非再帰版のプログラムソースは以下のとおりです。
-
-```bash
-: '非再帰版配置フラグ(right/down/left flag)';
-function rdlFlag_NR(){
-  local -i row="$1"
-  local -i size="$2";
-  local -i matched=0;
-  for ((i=0;i<size;i++)){ board[$i]=-1; }
-  while ((row>-1));do
-    matched=0;
-    for ((col=board[row]+1;col<size;col++)){
-      if (( !down[col]
-        &&  !right[col-row+size-1]
-        &&  !left[col+row] ));then
-        dix=$col;
-        rix=$((row-col+(size-1)));
-        lix=$((row+col));
-        if ((board[row]!=-1));then
-          down[${board[$row]}]=0;
-          right[${board[$row]}-$row+($size-1)]=0;
-          left[${board[$row]}+$row]=0;
-        fi       
-        board[$row]=$col;   # Qを配置
-        down[$col]=1;
-        right[$col-$row+($size-1)]=1;
-        left[$col+$row]=1;  # 効き筋とする
-        matched=1;          # 配置した
-        break;
-      fi
-    }
-    if ((matched));then     # 配置済み
-      ((row++));            #次のrowへ
-      if ((row==size));then
-        ((TOTAL++));
-        printRecord "$size";# 出力
-        ((row--));
-      fi
-    else
-      if ((board[row]!=-1));then
-        down[${board[$row]}]=0;
-        right[${board[$row]}-$row+($size-1)]=0;
-        left[${board[$row]}+$row]=0;
-        board[$row]=-1;
-      fi
-      ((row--));            # バックトラック
-    fi
-  done
-}
+```python
+        down[col]=0
+        right[row-col+(size-1)]=0
+        left[row+col]=0
 ```
 
 
 
 ## プログラムソース
-再帰版・非再帰版を含むすべてのプログラムソースは以下のとおりです。
-プログラムソース最下部で、再帰と非再帰の実行をコメントアウトで切り替えてます。
+プログラムソースは以下のとおりです。
 
-```bash:rdlFlag.sh
-#!/usr/bin/bash
+```python:03Python_postFlag.py
+#!/usr/bin/env python3
 
-declare -i TOTAL=0;     # カウンター
+# -*- coding: utf-8 -*-
+"""
+ポストフラグ版 Ｎクイーン
+
+詳細はこちら。
+【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから
+https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
+
+エイト・クイーンのプログラムアーカイブ
+Bash、Lua、C、Java、Python、CUDAまで！
+https://github.com/suzukiiichiro/N-Queens
+Bash版ですが内容は同じです。
+
+
+# 実行 
+$ python <filename.py>
+
+# 実行結果
+1
+ 0 2 4 1 3
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+2
+ 0 3 1 4 2
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+3
+ 1 3 0 2 4
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+4
+ 1 4 2 0 3
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+5
+ 2 0 3 1 4
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+6
+ 2 4 1 3 0
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+7
+ 3 0 2 4 1
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+8
+ 3 1 4 2 0
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+9
+ 4 1 3 0 2
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+
+10
+ 4 2 0 3 1
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+"""
+
 #
-: 'ボードレイアウトを出力';
-function printRecord(){
-  size="$1";
-  echo "$TOTAL";
-  sEcho=" ";  
-  for((i=0;i<size;i++)){
-    sEcho="${sEcho}${board[i]} ";
-  }
-  echo "$sEcho";
-  echo -n "+";
-  for((i=0;i<size;i++)){
-    echo -n "-";
-    if((i<(size-1)));then
-      echo -n "+";
-    fi
-  }
-  echo "+";
-  for((i=0;i<size;i++)){
-    echo -n "|";
-    for((j=0;j<size;j++)){
-      if((i==board[j]));then
-        echo -n "O";
-      else
-        echo -n " ";
-      fi
-      if((j<(size-1)));then
-        echo -n "|";
-      fi
-    }
-  echo "|";
-  if((i<(size-1)));then
-    echo -n "+";
-    for((j=0;j<size;j++)){
-      echo -n "-";
-      if((j<(size-1)));then
-        echo -n "+";
-      fi
-    }
-  echo "+";
-  fi
-  }
-  echo -n "+";
-  for((i=0;i<size;i++)){
-    echo -n "-";
-    if((i<(size-1)));then
-      echo -n "+";
-    fi
-  }  
-  echo "+";
-  echo "";
-}
+# グローバル変数
+MAX=21  # ボードサイズ最大値
+TOTAL=0 # 解
+board=[0 for i in range(MAX)] # ボード配列格納用
+down=[0 for i in range(MAX)]  # 効き筋チェック
+left=[0 for i in range(MAX)]  # 効き筋チェック
+right=[0 for i in range(MAX)] # 効き筋チェック
+# 
+# ボードレイアウト出力
+def printRecord(size):
+  global TOTAL
+  global baord
+
+  print(TOTAL)
+  sEcho=""
+  for i in range(size):
+    sEcho+=" " + str(board[i])
+  print(sEcho)
+  print ("+",end="")
+  for i in range(size):
+    print("-",end="")
+    if i<(size-1):
+      print("+",end="")
+  print("+")
+  for i in range(size):
+    print("|",end="")
+    for j in range(size):
+      if i==board[j]:
+        print("O",end="")
+      else:
+        print(" ",end="")
+      if j<(size-1):
+        print("|",end="")
+    print("|")
+    if i in range(size-1):
+      print("+",end="")
+      for j in range(size):
+        print("-",end="")
+        if j<(size-1):
+          print("+",end="")
+      print("+")
+  print("+",end="")
+  for i in range(size):
+    print("-",end="")
+    if i<(size-1):
+      print("+",end="")
+  print("+")
+  print("")
 #
-: '非再帰版配置フラグ(right/down/left flag)';
-function rdlFlag_NR(){
-  local -i row="$1"
-  local -i size="$2";
-  local -i matched=0;
-  for ((i=0;i<size;i++)){ board[$i]=-1; }
-  while ((row>-1));do
-    matched=0;
-    for ((col=board[row]+1;col<size;col++)){
-      if (( !down[col]
-        &&  !right[col-row+size-1]
-        &&  !left[col+row] ));then
-        dix=$col;
-        rix=$((row-col+(size-1)));
-        lix=$((row+col));
-        if ((board[row]!=-1));then
-          down[${board[$row]}]=0;
-          right[${board[$row]}-$row+($size-1)]=0;
-          left[${board[$row]}+$row]=0;
-        fi       
-        board[$row]=$col;   # Qを配置
-        down[$col]=1;
-        right[$col-$row+($size-1)]=1;
-        left[$col+$row]=1;  # 効き筋とする
-        matched=1;          # 配置した
-        break;
-      fi
-    }
-    if ((matched));then     # 配置済み
-      ((row++));            #次のrowへ
-      if ((row==size));then
-        ((TOTAL++));
-        printRecord "$size";# 出力
-        ((row--));
-      fi
-    else
-      if ((board[row]!=-1));then
-        down[${board[$row]}]=0;
-        right[${board[$row]}-$row+($size-1)]=0;
-        left[${board[$row]}+$row]=0;
-        board[$row]=-1;
-      fi
-      ((row--));            # バックトラック
-    fi
-  done
-}
+# バックトラック版効き筋をチェック
+def check_backTracking(row):
+  global board
+  for i in range(row):
+    if board[i]>=board[row]:
+      val=board[i]-board[row]
+    else:
+      val=board[row]-board[i]
+    if board[i]==board[row] or val==(row-i):
+      return 0
+  return 1
 #
+# ブルートフォース版効き筋チェック
+def check_bluteForce(size):
+  global board
+  for r in range(1,size,1):
+    for i in range(r):
+      if board[i]>=board[r]:
+        val=board[i]-board[r]
+      else:
+        val=board[r]-board[i]
+      if board[i]==board[r] or val==(r-i):
+        return 0
+  return 1
 #
-: '再帰版配置フラグ';
-function rdlFlag_R(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=0;       # 再帰に必要
-  if (( row==size ));then
-     ((TOTAL++));
-     printRecord "$size";# 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board[$row]="$col";
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-        rdlFlag_R "$((row+1))" "$size" ;
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-    }
-  fi
-}
-# 非再帰版配置フラグ
-# time rdlFlag_NR 0 5;    
+# ポストフラグ
+def postFlag(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if(down[col]==0 and 
+          right[row-col+size-1]==0 and
+          left[row+col]==0):
+        down[col]=1
+        right[row-col+(size-1)]=1
+        left[row+col]=1
+        postFlag(row+1,size)
+        down[col]=0
+        right[row-col+(size-1)]=0
+        left[row+col]=0
 #
-# 再帰版配置フラグ
- time rdlFlag_R 0 5;    
+# バックトラック
+def backTracking(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
 #
-exit;
+# ブルートフォース
+def bluteForce(row,size):
+  col=0
+  global TOTAL
+  global board
+  if row==size:
+    if check_bluteForce(size)==1:
+      TOTAL=TOTAL+1
+      printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      bluteForce(row+1,size)
+#
+# 実行
+# bluteForce(0,5)   # ブルートフォース
+# backTracking(0,5) # バックトラッキング
+# postFlag(0,5)     # ポストフラグ
+
+#
 ```
 
 
@@ -372,7 +424,6 @@ exit;
 実行結果は以下の通りです。
 
 ```
-bash-3.2$ bash rdlFlag.sh
 1
  0 2 4 1 3 
 +-+-+-+-+-+
@@ -512,43 +563,44 @@ bash-3.2$ bash rdlFlag.sh
 +-+-+-+-+-+
 |O| | | | |
 +-+-+-+-+-+
-bash-3.2$
 ```
 
 ## ブルートフォースとバックトラック、配置フラグの特色と違い
 ブルートフォース版
 for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
-```bash
-  if ((row==size));then
-    check_bluteForce "$size";
-    if (( $?==1 ));then 
-      ((TOTAL++));
-      printRecord "$size";   # 出力しないならコメント
-    fi
-  else
-    #for(( col=0;col<(size-row);col++ )){
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      bluteForce_R $((row+1)) $size ;
-    }
-  fi
+```python
+#
+# ブルートフォース
+def bluteForce(row,size):
+  col=0
+  global TOTAL
+  global board
+  if row==size:
+    if check_bluteForce(size)==1:
+      TOTAL=TOTAL+1
+      printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      bluteForce(row+1,size)
 ```
 
 バックトラック版
 ブルートフォース（力まかせ探索）のように最後まで配置して効きをチェックするのではなく、各行にクイーンを置くたびに効きチェックを行って、効きがあればその状態からの探索を行わない点が異なります。
-```bash
-  if ((row==size));then
-    ((TOTAL++));
-    printRecord "$size";   # 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      check_backTracking "$row";
-      if (($?==1));then 
-        backTracking_R $((row+1)) $size ;
-      fi
-    }
-  fi
+```python
+#
+# バックトラック
+def backTracking(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
 ```
 
 配置フラグ版
@@ -559,21 +611,28 @@ for文で各行の何`col`目にクイーンを配置するかを決め、最後
 
 配置フラグはバックトラックよりもさらに高速です。
 
-```bash
-    for(( col=0;col<size;col++ )){
-      board[$row]="$col";
-      if (( down[col]==0 
-        && right[row-col+size-1]==0
-        && left[row+col]==0));then
-        down[$col]=1;
-        right[$row-$col+($size-1)]=1;
-        left[$row+$col]=1;
-        rdlFlag_R "$((row+1))" "$size" ;
-        down[$col]=0;
-        right[$row-$col+($size-1)]=0;
-        left[$row+$col]=0;
-      fi
-    }
+```python
+#
+# ポストフラグ
+def postFlag(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if(down[col]==0 and 
+          right[row-col+size-1]==0 and
+          left[row+col]==0):
+        down[col]=1
+        right[row-col+(size-1)]=1
+        left[row+col]=1
+        postFlag(row+1,size)
+        down[col]=0
+        right[row-col+(size-1)]=0
+        left[row+col]=0
 ```
 
 ![](nqueen_03.jpg)
@@ -699,6 +758,7 @@ CHAPTER15 読みやすいシェルスクリプト
 `
 imageUrl="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg"
 %}}
+
 
 
 

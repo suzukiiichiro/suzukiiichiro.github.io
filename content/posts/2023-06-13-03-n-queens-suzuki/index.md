@@ -1,6 +1,6 @@
 ---
-title: "Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰"
-date: 2023-03-17T14:10:59+09:00
+title: "Ｎクイーン問題（４０）第七章　バックトラック Python版"
+date: 2023-06-13T13:42:53+09:00
 draft: false
 authors: suzuki
 image: chess.jpg
@@ -10,7 +10,7 @@ tags:
   - N-Queens
   - エイト・クイーン
   - シェルスクリプト
-  - Bash
+  - Python
   - アルゴリズム
   - 鈴木維一郎
 ---
@@ -19,9 +19,7 @@ tags:
 ![](chess.jpg)
 [【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
 
-
-
-## 第２章　エイトクイーン　バックトラック
+## バックトラック
 前回の「ブルートフォース（力まかせ探索）」では、Ｎ個のクイーン配置が完了し、解の候補が生成される都度、`check_bluteForce()` 関数によって効きの判定を行いました。
 
 Ｎ５の場合は、３１２５回効きの判定を行うことで、目に見えて処理が遅いこともわかりました。
@@ -61,243 +59,356 @@ tags:
 ## 効き筋のチェック
 効き筋のチェック関数は、ブルートフォースにもありましたが、バックトラックの効きチェック関数とは内容がちょっと異なります。
 
-```bash
-: 'バックトラック版効き筋をチェック';
-function check_backTracking(){
-  local -i row="$1";
-  local -i flag=1;
-  for ((i=0;i<row;++i)){
-    if (( board[i]>=board[row] ));then
-      val=$(( board[i]-board[row] ));
-    else
-      val=$(( board[row]-board[i] ));
-    fi
-    if (( board[i]==board[row] || val==(row-i) ));then
-      flag=0;
-    fi
-  }
-  [[ $flag -eq 0 ]]
-  return $?;
-}
+```python
+#
+# バックトラック版効き筋をチェック
+def check_backTracking(row):
+  global board
+  for i in range(row):
+    if board[i]>=board[row]:
+      val=board[i]-board[row]
+    else:
+      val=board[row]-board[i]
+    if board[i]==board[row] or val==(row-i):
+      return 0
+  return 1
 ```
 board[row] まで配置した時点で、効きがないかどうかをチェックします。
-board[0] から board[i] と board[row] を比較し、同一または斜め45度方向にクイーンが配置されていれば `flag=0`(false) を返し、それらがひとつも無ければ`flag=1`(true)を返します。
+board[0] から board[i] と board[row] を比較し、同一または斜め45度方向にクイーンが配置されていれば `0`(false) を返し、それらがひとつも無ければ`1`(true)を返します。
 
 
 
-## バックトラック再帰版
-バックトラック再帰版のプログラムソースは以下のとおりです。
+## バックトラックのプログラムソース
+バックトラックのプログラムソースは以下のとおりです。
 
-```bash
-: '再帰版バックトラック';
-function backTracking_R(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=0;
-  if ((row==size));then
-    ((TOTAL++));
-    printRecord "$size";   # 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      check_backTracking "$row";
-      if (($?==1));then 
-        backTracking_R $((row+1)) $size ;
-      fi
-    }
-  fi
-}
+```python
+#
+# バックトラック
+def backTracking(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
 ```
 
 バックトラックとブルートフォース（力まかせ探索）の大きな違いは、最後まで配置してチェックするのではなく、クイーンを置くたびに効きチェックを行って、効きがあれば（解とならないとわかれば）状態から継続して探索を行わないといった点が異なります。
-```bash
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      check_backTracking "$row";
-      if (($?==1));then 
-        backTracking_R $((row+1)) $size ;
-      fi
-    }
+
+```python
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
 ```
 
 
 
-## バックトラック非再帰版
-バックトラック非再帰版のプログラムソースは以下のとおりです。
 
-```bash
-: '非再帰版バックトラック';
-function backTracking_NR(){
-  local -i row="$1";
-  local -i size="$2";
-  for ((i=0;i<size;i++)){ board[$i]=-1; }
-  while ((row>-1));do
-    local -i matched=0;
-    local -i col=0;  
-    for((col=board[row]+1;col<size;col++)){
-      board[$row]=$col;
-      check_backTracking "$row";  # 効きをチェック
-      if (($?==1));then # 直前のreturnを利用
-        matched=1;
-        break;
-      fi
-    }
-    if ((matched));then
-      ((row++));
-      if ((row==size));then  # 最下部まで到達
-        ((row--));
-        ((TOTAL++));
-        printRecord "$size"; # 出力
-      fi
-    else
-      if ((board[row]!=-1));then
-        board[$row]=-1;
-      fi
-      ((row--));
-    fi
- done  
-}
+## ブルートフォースとバックトラックの違い
+
+ブルートフォース版
+for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
+
+```python
+  if row==size:
+    if check_bluteForce(size)==1:
+      TOTAL=TOTAL+1
+      printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      bluteForce(row+1,size)
 ```
+
+バックトラック版
+バックトラックでは、ブルートフォース（力まかせ探索）のように最後までクイーンを配置してから効きをチェックするのではなく、クイーンを置くたびに効きチェックを行い、効きがあればその状態からの探索を行わない点が異なります。
+```python
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
+```
+
+次回は、バックトラックよりもさらに高速な「配置フラグ」の再帰・非再帰をご紹介します。
+お楽しみに！
+
 
 
 ## プログラムソース
-再帰版・非再帰版を含むすべてのプログラムソースは以下のとおりです。
-プログラムソース最下部で、再帰と非再帰の実行をコメントアウトで切り替えてます。
+プログラムソースは以下のとおりです。
 
-```bash:backTrack.sh
-#!/usr/bin/bash
+```python:02Python_backTracking.py
+#!/usr/bin/env python3
 
-declare -i TOTAL=0;     # カウンター
-#
-: 'ボードレイアウトを出力';
-function printRecord(){
-  size="$1";
-  echo "$TOTAL";
-  sEcho=" ";  
-  for((i=0;i<size;i++)){
-    sEcho="${sEcho}${board[i]} ";
-  }
-  echo "$sEcho";
-  echo -n "+";
-  for((i=0;i<size;i++)){
-    echo -n "-";
-    if((i<(size-1)));then
-      echo -n "+";
-    fi
-  }
-  echo "+";
-  for((i=0;i<size;i++)){
-    echo -n "|";
-    for((j=0;j<size;j++)){
-      if((i==board[j]));then
-        echo -n "O";
-      else
-        echo -n " ";
-      fi
-      if((j<(size-1)));then
-        echo -n "|";
-      fi
-    }
-  echo "|";
-  if((i<(size-1)));then
-    echo -n "+";
-    for((j=0;j<size;j++)){
-      echo -n "-";
-      if((j<(size-1)));then
-        echo -n "+";
-      fi
-    }
-  echo "+";
-  fi
-  }
-  echo -n "+";
-  for((i=0;i<size;i++)){
-    echo -n "-";
-    if((i<(size-1)));then
-      echo -n "+";
-    fi
-  }  
-  echo "+";
-  echo "";
-}
-#
-: 'バックトラック版効き筋をチェック';
-function check_backTracking(){
-  local -i row="$1";
-  local -i flag=1;
-  for ((i=0;i<row;++i)){
-    if (( board[i]>=board[row] ));then
-      val=$(( board[i]-board[row] ));
-    else
-      val=$(( board[row]-board[i] ));
-    fi
-    if (( board[i]==board[row] || val==(row-i) ));then
-      flag=0;
-    fi
-  }
-  [[ $flag -eq 0 ]]
-  return $?;
-}
-#
-: '非再帰版バックトラック';
-function backTracking_NR(){
-  local -i row="$1";
-  local -i size="$2";
-  for ((i=0;i<size;i++)){ board[$i]=-1; }
-  while ((row>-1));do
-    local -i matched=0;
-    local -i col=0;  
-    for((col=board[row]+1;col<size;col++)){
-      board[$row]=$col;
-      check_backTracking "$row";  # 効きをチェック
-      if (($?==1));then # 直前のreturnを利用
-        matched=1;
-        break;
-      fi
-    }
-    if ((matched));then
-      ((row++));
-      if ((row==size));then  # 最下部まで到達
-        ((row--));
-        ((TOTAL++));
-        printRecord "$size"; # 出力
-      fi
-    else
-      if ((board[row]!=-1));then
-        board[$row]=-1;
-      fi
-      ((row--));
-    fi
- done  
-}
-#
-: '再帰版バックトラック';
-function backTracking_R(){
-  local -i row="$1";
-  local -i size="$2";
-  local -i col=0;
-  if ((row==size));then
-    ((TOTAL++));
-    printRecord "$size";   # 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      check_backTracking "$row";
-      if (($?==1));then 
-        backTracking_R $((row+1)) $size ;
-      fi
-    }
-  fi
-}
-#
-# 非再帰版バックトラック
-# time backTracking_NR 0 5;    
-#
-# 再帰版バックトラック
- time backTracking_R 0 5;    
-#
-exit;
+# -*- coding: utf-8 -*-
+"""
+バックトラッキング版 Ｎクイーン
 
+詳細はこちら。
+【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから
+https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
+
+エイト・クイーンのプログラムアーカイブ
+Bash、Lua、C、Java、Python、CUDAまで！
+https://github.com/suzukiiichiro/N-Queens
+
+# 実行 
+$ python <filename.py>
+
+# 実行結果
+1
+ 0 2 4 1 3
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+2
+ 0 3 1 4 2
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+3
+ 1 3 0 2 4
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+4
+ 1 4 2 0 3
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+5
+ 2 0 3 1 4
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+
+6
+ 2 4 1 3 0
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+
+7
+ 3 0 2 4 1
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+
+8
+ 3 1 4 2 0
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+
+9
+ 4 1 3 0 2
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+
+10
+ 4 2 0 3 1
++-+-+-+-+-+
+| | |O| | |
++-+-+-+-+-+
+| | | | |O|
++-+-+-+-+-+
+| |O| | | |
++-+-+-+-+-+
+| | | |O| |
++-+-+-+-+-+
+|O| | | | |
++-+-+-+-+-+
+"""
+
+#
+# グローバル変数
+MAX=21  # ボードサイズ最大値
+TOTAL=0 # 解
+board=[0 for i in range(MAX)] # ボード配列格納用
+# 
+# ボードレイアウト出力
+def printRecord(size):
+  global TOTAL
+  global baord
+
+  print(TOTAL)
+  sEcho=""
+  for i in range(size):
+    sEcho+=" " + str(board[i])
+  print(sEcho)
+  print ("+",end="")
+  for i in range(size):
+    print("-",end="")
+    if i<(size-1):
+      print("+",end="")
+  print("+")
+  for i in range(size):
+    print("|",end="")
+    for j in range(size):
+      if i==board[j]:
+        print("O",end="")
+      else:
+        print(" ",end="")
+      if j<(size-1):
+        print("|",end="")
+    print("|")
+    if i in range(size-1):
+      print("+",end="")
+      for j in range(size):
+        print("-",end="")
+        if j<(size-1):
+          print("+",end="")
+      print("+")
+  print("+",end="")
+  for i in range(size):
+    print("-",end="")
+    if i<(size-1):
+      print("+",end="")
+  print("+")
+  print("")
+#
+# バックトラック版効き筋をチェック
+def check_backTracking(row):
+  global board
+  for i in range(row):
+    if board[i]>=board[row]:
+      val=board[i]-board[row]
+    else:
+      val=board[row]-board[i]
+    if board[i]==board[row] or val==(row-i):
+      return 0
+  return 1
+#
+# ブルートフォース版効き筋チェック
+def check_bluteForce(size):
+  global board
+  for r in range(1,size,1):
+    for i in range(r):
+      if board[i]>=board[r]:
+        val=board[i]-board[r]
+      else:
+        val=board[r]-board[i]
+      if board[i]==board[r] or val==(r-i):
+        return 0
+  return 1
+#
+# バックトラック
+def backTracking(row,size):
+  global TOTAL
+  col=0
+  if row==size:
+    TOTAL=TOTAL+1
+    printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      if check_backTracking(row)==1:
+        backTracking(row+1,size)
+#
+# ブルートフォース
+def bluteForce(row,size):
+  col=0
+  global TOTAL
+  global board
+  if row==size:
+    if check_bluteForce(size)==1:
+      TOTAL=TOTAL+1
+      printRecord(size)
+  else:
+    for col in range(size):
+      board[row]=col
+      bluteForce(row+1,size)
+#
+# 実行
+# bluteForce(0,5)  # ブルートフォース
+backTracking(0,5) # バックトラッキング
+#
 ```
 
 
@@ -306,7 +417,6 @@ exit;
 実行結果は以下の通りです。
 
 ```
-bash-3.2$ bash backTrack.sh
 1
  0 2 4 1 3 
 +-+-+-+-+-+
@@ -446,79 +556,16 @@ bash-3.2$ bash backTrack.sh
 +-+-+-+-+-+
 |O| | | | |
 +-+-+-+-+-+
-bash-3.2$
 ```
 
 
-## ブルートフォースとバックトラックの違い
 
-ブルートフォース版
-for文で各行の何`col`目にクイーンを配置するかを決め、最後まで配置した場合は、`check_bluteForce()` を呼んで、効きであるかどうかを判定し、効きでなければ「解を発見した」として `((TOTAL++))`で、解個数をインクリメントしています。
-```bash
-  if ((row==size));then
-    check_bluteForce "$size";
-    if (( $?==1 ));then 
-      ((TOTAL++));
-      printRecord "$size";   # 出力しないならコメント
-    fi
-  else
-    #for(( col=0;col<(size-row);col++ )){
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      bluteForce_R $((row+1)) $size ;
-    }
-  fi
-```
-
-バックトラック版
-バックトラックでは、ブルートフォース（力まかせ探索）のように最後までクイーンを配置してから効きをチェックするのではなく、クイーンを置くたびに効きチェックを行い、効きがあればその状態からの探索を行わない点が異なります。
-```bash
-  if ((row==size));then
-    ((TOTAL++));
-    printRecord "$size";   # 出力
-  else
-    for(( col=0;col<size;col++ )){
-      board["$row"]="$col";
-      check_backTracking "$row";
-      if (($?==1));then 
-        backTracking_R $((row+1)) $size ;
-      fi
-    }
-  fi
-```
-
-次回は、バックトラックよりもさらに高速な「配置フラグ」の再帰・非再帰をご紹介します。
-お楽しみに！
-
-
-## リンクと過去記事
-N-Queens問題：Ｎクイーン問題（１２）第二章　まとめ
-https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
-https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
-https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
-https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（８）第一章　まとめ
-https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（７）第一章　ブルートフォース再び
-https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（６）第一章　配置フラグ
-https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
-https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（４）第一章　バックトラック
-https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（３）第一章　バックトラック準備編
-https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（２）第一章　ブルートフォース
-https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
-N-Queens問題：Ｎクイーン問題（１）第一章　エイトクイーンについて
-https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
 
 エイト・クイーンのソース置き場 BashもJavaもPythonも！
 https://github.com/suzukiiichiro/N-Queens
+
+
 
 
 
@@ -607,7 +654,6 @@ CHAPTER15 読みやすいシェルスクリプト
 `
 imageUrl="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg"
 %}}
-
 
 
 

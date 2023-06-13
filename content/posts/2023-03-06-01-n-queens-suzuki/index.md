@@ -7,6 +7,7 @@ image: chess.jpg
 categories:
   - programming
 tags:
+  - N-Queens
   - エイト・クイーン
   - シェルスクリプト
   - Bash

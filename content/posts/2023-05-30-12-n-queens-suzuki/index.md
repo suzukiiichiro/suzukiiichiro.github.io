@@ -9,6 +9,7 @@ image: chess.jpg
 categories:
   - programming
 tags:
+  - N-Queens
   - エイト・クイーン
   - Ｃ言語
   - 並列処理
