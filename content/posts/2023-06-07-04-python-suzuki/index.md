@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 部分文字列を削除したいのですが？"
+date: 2023-06-07T13:28:29+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,38 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
-```
-
-### 方法２．エスケープ`\`を使う
+## 部分文字列を削除したいのですが？
+### 方法１．`repralce()`を使う
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+my_str = "Welcome to LinuxHint World!"
+
+print("Original String  : " + my_str)
+# Original String  : Welcome to LinuxHint World!
+
+print("Resultant String : " + my_str.replace("Welcome ",""))
+# Resultant String : to LinuxHint World!
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+### 方法２．`replace()`と削除リストを使う
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
+my_str = "Welcome to LinuxHint World!"
 
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
+print("Original String  : " + my_str)
+# Original String  : Welcome to LinuxHint World!
 
-Python_Multiline_String()
+# 削除したい単語リスト
+sub_str=["Welcome","to"]
+
+for i in sub_str:
+  my_str=my_str.replace('' + i + ' ', "");
+
+  print("Resultant String : " + my_str)
+# Resultant String : LinuxHint World!
 ```
-
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
 
 ## 書籍の紹介
 {{% amazon

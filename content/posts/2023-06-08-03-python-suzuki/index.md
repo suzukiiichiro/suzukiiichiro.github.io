@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 リストの要素を削除したいのですが？"
+date: 2023-06-08T12:16:03+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,22 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
-```
+## リストの要素を削除したいのですが？
+`remove()`を使って要素を削除する
 
-### 方法２．エスケープ`\`を使う
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+myList = [ 8 , 6 , 9 , 4 , 3 , 2 , 5 , 9 ]
+
+print ("Original List" , myList)
+# Original List [8, 6, 9, 4, 3, 2, 5, 9]
+r_instance = 9
+myList.remove(r_instance)
+
+print("Resultant List" , myList)
+# Resultant List [8, 6, 4, 3, 2, 5, 9]
 ```
-
-### 方法３．リストにしてjoin()でつなぐ
-```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
-```
-
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
 
 ## 書籍の紹介
 {{% amazon

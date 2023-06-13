@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 ファイルを上書きするにはどうすればよいですか？"
+date: 2023-06-08T13:59:03+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,80 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+## ファイルを上書きするにはどうすればよいですか？
+
+読み書きしたいファイルを用意します。
+```:filename.txt
+Python Guide and Java Guide
 ```
 
-### 方法２．エスケープ`\`を使う
+### 方法１．`write()`を使ってファイルを上書きする
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+file = open(r'C:\Users\p\Documents\program\filename.txt', "w")
+file.write("Python Guide")
+file.write("\nThis text will overwrite the previous one.")
+file.close()
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
-```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+```:filename.txt
+Python Guide and Java Guide
+This text will overwrite the previous one.
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 方法２．`trancate()`を使ってファイルを上書きする
+
+```python
+file = open(r'C:\Users\p\Documents\program\filename.txt', "r+")
+file.truncate(0)
+file.write("This text will overwrite the previous one.")
+file.close()
+```
+
+```:filename.txt
+This text will overwrite the previous one.
+```
+
+### 方法３．`file`の`w`モードを使ってファイルを上書きする
+```python
+with open(r'C:\Users\p\Documents\program\filename.txt', "w") as file:
+  file.write("This text will overwrite the previous one.")
+```
+
+```:filename.txt
+This text will overwrite the previous one.
+```
+
+### 方法４．`shutil`モジュールを使ってファイルを上書きする
+```python
+import shutil
+shutil.copyfile("newfile.txt", "filename.txt")
+```
+newfile.txtの内容をfilename.txtにコピーし、内容がすでに存在する場合は上書きします。
+
+### 方法５．`os`モジュールを使ってファイルを上書きする
+```python
+import os
+os.remove(r'C:\Users\p\Documents\program\filename.txt')
+with open("filename.txt", "w") as file:
+  file.write("This text will overwrite the previous one.")
+```
+
+```:filename.txt
+This text will overwrite the previous one.
+```
+
+### 方法６．`pathlib`モジュールを使ってファイルを上書きする
+```python
+from pathlib import Path
+file = Path(r'C:\Users\p\Documents\program\filename.txt')
+file.write_text("Overwrite the Text File")
+```
+
+```
+Overwrite the Text File
+```
+
+Python には、`write()`メソッド、`truncate()`メソッド、モード`w`、`shutil`モジュール、`os`モジュール、`pathlib`モジュールなど、ファイルを上書きするためのメソッドがいくつかあります。
 
 ## 書籍の紹介
 {{% amazon

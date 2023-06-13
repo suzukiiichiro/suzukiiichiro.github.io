@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 文字列から空白スペースを除去したいのですが？"
+date: 2023-06-07T10:28:41+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,69 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## 文字列から空白スペースを除去したいのですが？
+### 方法１．`replace()`を使う
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+string_value ="Hello and Welcome to Python Guide."
+output=string_value.replace(" ", "")
+print(output)
+# HelloandWelcometoPythonGuide.  
 ```
 
-### 方法２．エスケープ`\`を使う
+### 方法２．`translate()`を使う
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+import string
+string_value ="Hello and Welcome to Python Guide."
+output = string_value.translate({ord(c): None for c in string.whitespace})
+print(output)
+# HelloandWelcometoPythonGuide.  
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+### 方法３．正規表現を使う
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+import re
+string_value ="Hello and Welcome to Python Guide."
+output = re.sub("\\s+", "", string_value)
+print(output)
+# HelloandWelcometoPythonGuide.  
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 方法４．`strip()`を使う
+この方法は、行頭、行末の空白を除去するときに使います。
+
+```python
+string_value =" Hello and Welcome to Python Guide. "
+print(":",string_value,":")
+# Hello and Welcome to Python Guide.
+output = string_value.strip()
+print(":",output,":")
+# HelloandWelcometoPythonGuide.  
+```
+
+出力は以下のとおりです。
+行頭と行末の空白が除去できていることが確認できました。
+```
+:  Hello and Welcome to Python Guide.  :
+: Hello and Welcome to Python Guide. :
+```
+
+#### `lstrip()`を使う
+こちらは、行頭の余分な空白を除去します。
+
+#### `rstrip()`を使う
+こちらは、行末の余分な空白を除去します。
+
+### 方法５．`for`と`join()`をつかって非効率に対応する
+```python
+string_value ="Hello and Welcome to Python Guide."
+new_str = ""
+for i in string_value:
+	if i != " ":
+		new_str += i
+print("".join(new_str))
+# HelloandWelcometoPythonGuide.
+```
+
 
 ## 書籍の紹介
 {{% amazon

@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 `sort()`と`sorted()`の違いがわかりません"
+date: 2023-06-08T11:32:38+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,72 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## `sort()`と`sorted()`の違いがわかりません
+### `sort()`は元のリスト自体を書き換えます
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+l = [3, 1, 4, 5, 2]
+l.sort()
+
+print(l)
+# [1, 2, 3, 4, 5]
 ```
 
-### 方法２．エスケープ`\`を使う
+反転する場合は、reverseをTrueにします。
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+l.sort(reverse=True)
+print(l)
+# [5, 4, 3, 2, 1]
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+
+### `sorted()`はソートされたリストを返却する関数です。
 ```python
-#!/usr/local/env python3
+l = [3, 1, 4, 5, 2]
+l_sorted = sorted(l)
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
+print(l_sorted)
+# [1, 2, 3, 4, 5]
 
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+print(l)
+# [3, 1, 4, 5, 2]
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+反転する場合は、reverseをTrueにします。
+```python
+l_reverse_sorted = sorted(l, reverse=True)
+
+print(l_reverse_sorted)
+# [5, 4, 3, 2, 1]
+
+print(l)
+# [3, 1, 4, 5, 2]
+```
+
+keyを使ってソートの基準を変更することもできます
+```python
+l = [-3, 1, 4, -5, 2]
+
+print(sorted(l))
+# [-5, -3, 1, 2, 4]
+
+print(sorted(l, key=abs))
+# [1, 2, -3, 4, -5]
+```
+
+
+```python
+l = ['b', 'cc', 'aaa']
+
+print(sorted(l))
+# ['aaa', 'b', 'cc']
+
+print(sorted(l, key=len))
+# ['b', 'cc', 'aaa']
+```
+
+`sorted()`関数は、文字列、リスト、タプルなどを昇順または降順で並べ替えたり、単一または複数の`key`パラメータ値に基づいて並べ替えたりするために使用されます。
+
+
 
 ## 書籍の紹介
 {{% amazon

@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 `next()`関数はどんなときに使うのですか"
+date: 2023-06-08T11:07:48+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,131 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## `next()`関数はどんなときに使うのですか？
+リストなどの複数の要素を持ったデータ型といった「イテレータ」の要素を順番に取り出すことができます。
+
+単純に言うとこうなります。
+
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+next( イテレータ )
 ```
 
-### 方法２．エスケープ`\`を使う
+イテレータはズバリこういうやつです
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+list1 = ['value1', 'value2', 'value3', 'value4', 'value5']
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+では、順番に取り出してみます。
 ```python
-#!/usr/local/env python3
+list1=["value1,"value2","value3","value4","value5"]
+print(list1)
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+print('リストの要素を順番に取り出す')
+list2 = iter(list1)
+print(next(list2)) 
+print(next(list2))
+print(next(list2))
+print(next(list2))
+print(next(list2))
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+```
+["value1","value2","value3","value4","value5"]
+
+リストの要素を順番に取り出す
+value1
+value2
+value3
+value4
+value5
+```
+
+イテレータは、リストの他にタプルもあります。
+タプルというのはこういうやつです。
+```python
+tuple1=("value1","value2","value3","value4","value5")
+```
+
+では、next()してみましょう。
+```python
+tuple1=("value1","value2","value3","value4","value5")
+print(tuple1)
+
+  print('タプルの要素を順番に取り出す')
+  tuple2 = iter(tuple1)
+  print(next(tuple2)) 
+  print(next(tuple2))
+  print(next(tuple2))
+  print(next(tuple2))
+  print(next(tuple2))
+```
+
+イテレータは、リスト、タプルの他に辞書もあります。
+辞書はこういうやつです。
+
+```python
+dict1={1:"value1",2:"value2",3:"value3",4:"value4",5:"value5"}
+```
+
+では、やってみます。
+```python
+dict1={1:"value1",2:"value2",3:"value3",4:"value4",5:"value5"}
+print(dict1)
+
+print("・辞書のキーを順番に取り出す")
+dict2=iter(dict1.keys())
+print(next(dict2))
+print(next(dict2))
+print(next(dict2))
+print(next(dict2))
+print(next(dict2))
+
+print("・辞書の値を順番に取り出す")
+dict3=iter(dict1.values())
+print(next(dict3))
+print(next(dict3))
+print(next(dict3))
+print(next(dict3))
+print(next(dict3))
+
+print("・辞書のキーや値を順番に取り出す")
+dict4=iter(dict1.items())
+print(next(dict4))
+print(next(dict4))
+print(next(dict4))
+print(next(dict4))
+print(next(dict4))
+```
+
+他に、setやfrozensetも同様です。
+最悪なのは、出力する要素がなくなると、StopIterationエラーが出ます。
+この場合、要素がなくなるまで`next()`しなければよいわけですが、なくなったことは検知したいと思います。
+そこで、デフォルト値を設定することができます。
+```python
+next(値,初期値）
+```
+
+具体的には以下のとおりです。
+```python
+list_value = [ 25 , 35 , 45 ]
+iter_value = iter ( list_value )
+print ( next ( iter_value, 0 ) )
+print ( next ( iter_value, 0 ) )
+print ( next ( iter_value, 0 ) )
+print ( next ( iter_value, 0 ) ）
+```
+
+```
+25
+35
+45
+0
+```
+
+0が返却されたらもうリストはなくなったという処理を行えば良さそうです。
+
+Python で反復可能なオブジェクトを反復するには、組み込みの「next()」関数を使用できます。これにより、反復可能オブジェクトから次の項目が得られ、項目がなくなると「StopIteration」例外で停止します。「next()」関数を使用すると、Python のリスト、文字列、またはその他の反復可能なオブジェクトを簡単にループできます。
+
 
 ## 書籍の紹介
 {{% amazon

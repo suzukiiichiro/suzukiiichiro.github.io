@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 辞書を使いたいのですが？"
+date: 2023-06-09T16:01:23+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,96 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## 辞書を使いたいのですが？
+### 辞書の作り方１．
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+# Using curly braces
+dict_value = {'Name': 'Joseph', 'Age': 30, 'Height': 6.3}
+
+print('Dictionary is Created Using the Curly Braces: ',dict_value)
+# Dictionary is Created Using the Curly Braces:  {'Name': 'Joseph', 'Age': 30, 'Height': 6.3}
+
+print(type(dict_value))
+# <class 'dict'>
 ```
 
-### 方法２．エスケープ`\`を使う
+### 辞書の作り方２．
 ```python
-#!/usr/local/env python3
+# Using dict() function
+dict_value = dict(Name='Joseph', age=30, Height=6.3)
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+print('\nDictionary is Created Using the dict() Function:',dict_value)
+# Dictionary is Created Using the dict() Function: {'Name': 'Joseph', 'age': 30, 'Height': 6.3}
+
+print(type(dict_value))
+# <class 'dict'>
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+### 辞書へのアクセス１
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+dict_value = {'Name': 'Joseph', 'Age': 30, 'Height': 6.3}
+# Accessing a value
+print('Access Value of Dictionary is: ',dict_value['Name'])
+# Access Value of Dictionary is:  Joseph
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 辞書へのアクセス２
+```python
+dict_value = {'Name': 'Joseph', 'Age': 30, 'Height': 6.3}
+
+# Accessing a value
+print('Access Value of Dictionary is: ',dict_value.get('Name'))
+
+# Access Value of Dictionary is:  Joseph
+print('Access Value of Dictionary is: ',dict_value.get('Age'))
+# Access Value of Dictionary is:  30
+```
+
+### 辞書の変更
+```python
+dict_value['Age'] = 22
+print('After Modification: ',dict_value)
+# After Modification:  {'Name': 'Joseph', 'Age': 22, 'Height': 6.3}
+```
+
+### 辞書の操作
+`keys()`: 指定された辞書のキーリストを取得します。
+`values()`: 指定された辞書の値リストを取得します。
+`items()`: 初期化された辞書のキーと値のペアのリストを取得します。
+`update()`: 指定された別の辞書または反復可能オブジェクトからのキー値を使用して辞書を再構築/更新します。
+`Pop()`: 指定されたキーの値を削除して取得します。
+`clear()`: 指定された辞書からすべての要素/項目を削除します。
+
+```python
+dict_value = {'Name': 'Joseph', 'Age': 30, 'Height': 6.3}
+# Using keys() method
+print(dict_value.keys())
+# Using values() method
+print(dict_value.values())
+# Using items() method
+print(dict_value.items())
+# Using update() method
+dict_value.update({'Name': 'Alex'})
+print(dict_value)
+# Using pop() method
+dict_value.pop('Age')
+print(dict_value)
+# Using clear() method
+dict_value.clear()
+print(dict_value)
+```
+
+```
+bash-3.2$ python test.py
+dict_keys(['Name', 'Age', 'Height'])
+dict_values(['Joseph', 30, 6.3])
+dict_items([('Name', 'Joseph'), ('Age', 30), ('Height', 6.3)])
+{'Name': 'Alex', 'Age': 30, 'Height': 6.3}
+{'Name': 'Alex', 'Height': 6.3}
+{}
+```
+
+Python の「辞書」は、幅広いアプリケーションで利用できる強力で柔軟なデータ構造です。これらは、操作を簡素化するさまざまな組み込みメソッドと操作を提供します。
 
 ## 書籍の紹介
 {{% amazon

@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 リストを簡単に出力したいのですが？"
+date: 2023-06-07T10:07:33+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,49 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## リストを簡単に出力したいのですが？
+### 方法１．`for`を使う
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+list_value = ["Joseph", "Anna", "Lily"]
+for ele in list_value:
+  print(ele, end=",")
+  # Joseph, Anna, Lily
 ```
 
-### 方法２．エスケープ`\`を使う
-```python
-#!/usr/local/env python3
+end=","は、要素と要素の間のセパレータを指定します。
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+### 方法２．`join()`を使う
+```python
+list_value = ["Joseph", "Anna", "Lily"]
+print(', '.join(list_value))
+# Joseph, Anna, Lily
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+### 方法３．リスト内包表記を使う
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+list_value = ["Joseph", "Anna", "Lily"]
+[print(i, end=' ') for i in list_value]
+# Joseph, Anna, Lily
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 方法４．`str()`を使う
+```python
+list_value = ["Joseph", "Anna", "Lily"]
+print(str(list_value)[1:-1])
+# Joseph, Anna, Lily
+```
+
+### 方法５．アスタリスク`*`を使う
+```python
+list_value = ["Joseph", "Anna", "Lily"]
+print(*list_value, sep = ' ') #without separator
+print(*list_value, sep = ', ') #without separator
+```
+
+
+Python で括弧なしでリストを出力するには、`for`ループ、`join()`メソッド、`リスト内包表記`、`str()`関数、アスタリスク`*` 演算子を適用します。
+最も単純なアプローチは、リストを反復処理する`for`ループです。
+
 
 ## 書籍の紹介
 {{% amazon

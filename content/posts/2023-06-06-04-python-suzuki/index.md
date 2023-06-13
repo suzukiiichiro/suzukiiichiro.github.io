@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 リストの`-1`ってなんですか？"
+date: 2023-06-06T15:18:21+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,60 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## リストの`-1`ってなんですか？
+リストの`-1`は最後の要素を示します。
+指定されたリストの最初の要素のインデックス/位置は「0」、次の要素のインデックス/位置は「1」などです。
+「-1」インデックスは、最後のリスト値を参照する特別なインデックスです。
+具体的には、5 つの値を含むリストがある場合、「-1」インデックスは最後の値、つまり「5 番目」の値を参照することを意味します。
+
+### 最後の要素を表示
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+list_value = ["Joseph", "Anna", "Lily"]
+print(list_value[-1])
+# Lily
 ```
 
-### 方法２．エスケープ`\`を使う
+### 最後の要素を削除
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+list_value = ["Joseph", "Anna", "Lily"]
+print('Given List: ', list_value)
+del list_value[-1]
+print('After Removing Last Value: ', list_value)
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
-```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+```
+Given List:  ['Joseph', 'Anna', 'Lily']
+After Removing Last Value:  ['Joseph', 'Anna']
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 末尾の要素からのアクセス
+```python
+list_value = ["Joseph", "Anna", "Lily"]
+print(list_value[-2])
+```
+
+```
+Anna
+```
+
+### 要素のない場所へのアクセス
+```python
+list_value = []
+print('Given List: ', list_value)
+del list_value[-1]
+print(list_value)
+```
+
+```
+Given List:  []
+Traceback (most recent call last):
+    del list_value[-1]
+IndexError: list assignment index out of range
+```
+
+Python では、リストの「-1」インデックスは負のインデックスの使用法を示します。これは、指定されたリストの最後の値を意味します。
+Python リストの「-1」インデックスは、リストの最後の値にアクセスして削除するのに便利なツールです。
+「-1」インデックスを空のリストに適用すると、エラーが発生する可能性があります。
 
 ## 書籍の紹介
 {{% amazon

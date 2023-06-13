@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 `__str__`と`__repr__`ってなんですか？"
+date: 2023-06-06T17:48:39+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,121 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+
+## `__str__`と`__repr__`ってなんですか？
+`_` はアンダースコアです。
+アンダースコアが２つ並ぶと「ダブルアンダースコア」となります。
+これを「ダンダースコア」ということが多いです。
+`__str__`は、「ストリングダンダースコア」、`__repr__`は、「リプレ（representation)ダンダースコア」と言います。
+
+`class`を使うときに使います。
+簡単な `class`を用意します。
+
+### 簡単なクラスで名前を年齢を表示
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+class Person:
+	def __init__(self, name: str, age: int) -> None:
+	self.name = name
+	self.age = age
+
+	mike = Person('Mike', 20)
+print(mike)
+#  <__main__.Person object at 0x10d56ad60>
 ```
 
-### 方法２．エスケープ`\`を使う
-```python
-#!/usr/local/env python3
+出力はオブジェクトのアドレスが出力されます。
+これだと意味がないので、もう少し手を加えます。
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
-```
-
-### 方法３．リストにしてjoin()でつなぐ
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
+class Person:
+	def __init__(self, name: str, age: int) -> None:
+		self.name = name
+		self.age = age
 
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+mike = Person('Mike', 20)
+# print(mike)
+print(f'name: {mike.name}, age: {mike.age}')
+# name: Mike, age: 20
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+ちゃんと出力されました。
+これで終わっても良いのですが、もっと便利な方法もあります。
+だって、出力するたびに、
+```python
+print(f'name: {mike.name}, age: {mike.age}')
+```
+こんなこと書いていたら面倒ですから。
+
+### `__str__`で工夫する
+classに`__str__`関数を追記します。
+classをprint()するときに呼び出されます。
+
+```python
+#!/usr/local/env python3
+
+class Person:
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+    # これです
+    def __str__(self) -> str:
+        return f'name: {self.name}, age: {self.age}'
+
+mike = Person('Mike', 20)
+# print(mike)
+# print(f'name: {mike.name}, age: {mike.age}')
+# name: Mike, age: 20
+
+print(mike)
+# name: Mike, age: 20
+```
+
+classをprint()するとオブジェクトのアドレスが出力されましたが、`__str__`を追記しておくと、クラスをprint()したときに、お好みの形式で出力（returnで返す）することが可能です。
+
+
+### `__repr__`でさらに工夫する
+
+```python
+#!/usr/local/env python3
+
+class Person:
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+    def __str__(self) -> str:
+        return f'name: {self.name}, age: {self.age}'
+
+    # これです
+    def __repr__(self) -> str:
+        return f"Person(name='{self.name}', age={self.age})"
+
+mike = Person('Mike', 20)
+# print(mike)
+# print(f'name: {mike.name}, age: {mike.age}')
+# name: Mike, age: 20
+
+# __str__ 
+#print(mike)
+# name: Mike, age: 20
+
+# __repr__
+mike = Person('Mike', 30) # 年齢が１０老けました
+print(repr(mike))             # 再定義
+# Person(name='Mike', age=30) 
+print(mike)                   # 確認
+# name: Mike, age: 30         
+```
+
+`__repr__` は、prepresentation（再定義）することを指します。
+ようするに、定義したクラスのメンバーを再定義することができます。
+`__str__` は出力形式を指定して値を返す事ができます。
+`__repr__` は出力形式を指定しつつ、値を再定義して出力することができます。
+
+使い分けることができるために、お互いの違いを明確にしておくことが重要です。
 
 ## 書籍の紹介
 {{% amazon

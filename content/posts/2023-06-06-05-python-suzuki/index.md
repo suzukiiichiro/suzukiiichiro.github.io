@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 回文かどうかを調べたいのですが？"
+date: 2023-06-06T15:47:48+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,88 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
-```
+## 回文かどうかを調べたいのですが？
+回文とは、「上から読んでも下から読んでも同じ」文、または語句のことです。
+ここでは簡単に「madam」や「racecar」が回文にあたるということで調査してみます。
 
-### 方法２．エスケープ`\`を使う
+
+### 方法１．`for`ループでチェックする
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+def is_palindrome(string):
+  # 文字列を半分に分割します。余りは切り捨てます。
+  # print(len(string)//2) # 3
+  for i in range(len(string) // 2): 
+    # 文字列の先頭 `0` から順番に文字を取り出します
+    print("string[",i,"]:" ,string[i])
+    # 文字列の末尾 `-i-1` から順番に文字を取り出します。
+    print("string[",-i,"-1]",string[-i-1]);
+    # 先頭と末尾を比較します。
+    # 同じであれば、先頭を一つ進め、末尾を一つ後退させます。
+    if string[i] != string[-i - 1]:
+      # 違っていたら即座に `for`を抜けて`False`を返します。
+      return False
+    # 先頭と末尾の比較が完了したら回文なので`True`を返します。
+    print("先頭",i)
+  return True
+
+print(is_palindrome("racecar"))
+# True
+print(is_palindrome("python"))
+# False
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+```
+racecar :string[ 0 ]: r
+racecar :string[ 0 -1] r
+racecar :先頭 0
+racecar :string[ 1 ]: a
+racecar :string[ -1 -1] a
+racecar :先頭 1
+racecar :string[ 2 ]: c
+racecar :string[ -2 -1] c
+racecar :先頭 2
+True
+python :string[ 0 ]: p
+python :string[ 0 -1] n
+False
+```
+
+### 方法２．reversed()を使ってチェックする
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+def is_palindrome(string):
+  return string == "".join(reversed(string))
+print(is_palindrome("madam"))
+print(is_palindrome("python"))
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+```
+True
+False
+```
+
+### 方法３．文字列スライスを使ってチェックする
+```python
+import re
+def is_palindrome ( string ) :
+    string = re.sub ( r "[^a-zA-Z0-9]" , "" , string )
+    string = string. lower ( )
+    return string == string [ ::- 1 ]
+print ( is_palindrome ( "racecar" ) )
+print ( is_palindrome ( "python" ) )
+```
+`sub()` メソッドは、文字列から英数字以外の文字を削除するためにユーザー定義関数内で使用されます。
+`lower()` メソッドは、文字列を小文字に変換するために使用されます。
+
+```
+True
+False
+```
+
+指定された文字列が回文であるかどうかを確認するには、Python では` for`、`reversed()`、`slicing` が使用されます。
+`for` は文字列を最初から最後まで繰り返し、各文字を反対の文字と比較して、議論されている条件をチェックします。
+また、`reversed()` と `文字列スライス` を使用して指定された文字列が回文であるかどうかを確認することもできます。
 
 ## 書籍の紹介
 {{% amazon

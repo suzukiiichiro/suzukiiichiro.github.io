@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 ファイルを読み込みたいのですが？"
+date: 2023-06-07T12:01:45+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,152 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+## ファイルを読み込みたいのですが？
+以下のファイルを読み込みたいと思います。
+
+```python:lang.txt
+language
+python
+ruby
+java
+swift
+javascript
+php
 ```
+### 方法１．`readline()`で一行ずつ読み込む
+ファイルの読み込みは以下の順番で実行されます。
+１．ファイルを開いて読み込む
+２．内容を格納する
+３．読み込んだファイルを閉じる
 
-### 方法２．エスケープ`\`を使う
-```python
-#!/usr/local/env python3
+１の読み込むときには「モード」があります。
+読み取り：r
+読み取りと書き込み：w
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
-```
+ファイルを読み込み終わったら忘れずに`close()`します。
 
-### 方法３．リストにしてjoin()でつなぐ
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+f = open('lang.txt', 'r')
+line = f.readline()
+ 
+while line:
+  print(line)
+  line = f.readline() # 次の行の読み込み
+f.close()
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+```
+language
+ 
+python
+ 
+ruby
+ 
+java
+ 
+swift
+ 
+javascript
+ 
+php
+```
+行間が１行あるのが気になりますが、次に行きます。
+
+
+### 方法２．`readlines()`で一行ずつ読みリストに格納する
+```python
+#!/usr/local/env python3
+
+f = open('lang.txt', 'r')
+list = f.readlines()
+for line in list:
+    print(line)
+f.close()
+```
+
+```
+language
+ 
+python
+ 
+ruby
+ 
+java
+ 
+swift
+ 
+javascript
+ 
+php
+```
+
+### 方法３．`read()`でファイル全文を読み込む
+```python
+#!/usr/local/env python3
+
+f = open('lang.txt', 'r')
+text = f.read()
+print(text)
+f.close()
+```
+
+
+```
+language
+python
+ruby
+java
+swift
+javascript
+php
+```
+
+### 一行空いてしまうのはなんとかならないのですか？
+最後に行間に一行空いてしまう問題ですが、以下のように置換すると余分な行間が削除できます。
+
+```python
+line = line.replace("\n", "")
+```
+
+具体的には以下のとおりです。
+```python
+#!/usr/local/env python3
+
+f = open('lang.txt', 'r')
+list = f.readlines()
+for line in list:
+  line=line.replace("\n","")
+  print(line)
+f.close()
+```
+
+```
+language
+python
+ruby
+java
+swift
+javascript
+php
+```
+
+以下のように一行にまとめて書くこともできます。
+好き好きです。
+
+```python
+#!/usr/local/env python3
+
+f = open('lang.txt', 'r')
+list = f.readlines()
+for line in list:
+  # line=line.replace("\n","")
+  # print(line)
+  print(line.replace("\n",""))
+f.close()
+
+
 
 ## 書籍の紹介
 {{% amazon
@@ -177,4 +247,4 @@ imageUrl="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg"
 %}}
 
 
-
+```

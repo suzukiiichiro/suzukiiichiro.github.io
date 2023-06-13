@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 compile関数ってどんなときに使うのですか？"
+date: 2023-06-07T16:04:46+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,74 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## compile関数ってどんなときに使うのですか？
+まず、pythonはインタープリタ言語です。
+インタープリタ言語はソースコードを１行ずつ実行します。
+Bashなどのシェルスクリプト、ＰＨＰなどもインタプリタです。
+
+ＣやＪａｖａはコンパイラ言語です。
+コンパイラによってソースコードは最適化され、ＣＰＵネイティブなバイトコードに変換され高速に実行します。
+
+ソースコードのロジックやアルゴリズムが同等であれば、速度はコンパイラ言語が速いです。
+
+ロジックやアルゴリズムが稚拙なＣコードであれば、優れたインタプリタ言語のソースコードも、コンパイラ言語の速度に近づけることができができます。が、そんなに甘くはありません。
+
+インタプリタ言語は速度は遅くとも、作る時間を短縮できる（といわれている）
+コンパイラ言語は、速度は速くとも、構文難易度が高く、サクサク作ることができる人はそんなに多くない。
+
+#### コンパイルすることのメリット
+pythonのコンパイルには２種類あります。
+
+１．ソースファイルをコンパイルする
+ソースファイルを公開したくない場合、コンパイルによってバイトコードに変換したファイルを公開する。ということができます。
+
+```
+$ python -m compileall xxxxx.py
+```
+コンパイルを実行すると `__pycache__`ディレクトリが作成され、`.pyc`ファイルが生成されます。
+このファイルは実行可能ファイルとなり、バイトコードに変換されていることにより、テキストエディタで読み理解することはできません。
+
+２．実行が速くなる
+処理速度は速くなりません。手続きが簡略化されソースの可読性は上がりますが、処理自体は未コンパイルと同じです。
+
+３．ソースコード内に何度もできくる計算式・正規表現などをコンパイルしておき、使い回す
+
+今回は「３」について深掘りしていきます。
+
+### `compile()`を使わない普通のソース
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+#!/usr/local/env python3
+import re
+
+p = "<b>(.+)</b>"              # パターン
+s = "<div><b>hello</b></div>"  # 検索対象文字列
+m = re.search(p, s)            # search()関数
+
+print(m.group(1)) 
+# hello;
 ```
 
-### 方法２．エスケープ`\`を使う
+### `compile()`を使った気の利いたソース
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+import re
+
+p = "<b>(.+)</b>"              # パターン
+s = "<div><b>hello</b></div>"  # 検索対象文字 
+reg = re.compile(p)            # コンパイル
+
+m = reg.search(s)              # search()メソッド
+
+print(m.group(1)) 
+# hello;
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
-```python
-#!/usr/local/env python3
+同じパターンを何度も使い回す場合は、`compile()`を使ったほうがよいです。速度というよりもソースの可読性のメリットが大きいです。
+これにより多少の速度の改善は見込めますが、コンパイラ言語では、コンパイラによって自動的になされることではあります。
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
 
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
 
-Python_Multiline_String()
-```
-
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
 
 ## 書籍の紹介
 {{% amazon

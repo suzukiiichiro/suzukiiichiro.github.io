@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 文字列の比較をしたいのですが？"
+date: 2023-06-08T16:38:57+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,99 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
+## 文字列の比較をしたいのですが？
+比較方法はいくつかあります。
+以下の方法は「数値」の比較となります。
+
 ```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+< (less than)
+> (greater than)
+<= (equal to or less than)
+>= (greater than or equal to)
 ```
 
-### 方法２．エスケープ`\`を使う
+「文字列」の比較に使える演算子は以下のとおりです。
 ```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+== (equal to)
+!= (not equal to)
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+
+## 方法１．`==` `!=` 演算子を使う
+
+右辺と左辺が同じであることを知りたい場合
 ```python
-#!/usr/local/env python3
+string1 = "Python"
+string2 = "Python"
+if string1 == string2:
+  print("The strings are equal")
+else:
+  print("The strings are not equal")
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+# The strings are equal
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+右辺と左辺が異なることを知りたい場合
+```python
+string1 = "Python"
+string2 = "Guide"
+if string1 != string2:
+  print("The strings are not equal")
+else:
+  print("The strings are equal")
+
+# The strings are not equals
+```
+
+### 方法２．`is` または `is not`演算子を使う
+```python
+string1 = "Python"
+string2 = "Guide"
+string3 = "Python"
+print('string1 is equal to string 2: ',string1 is string2)
+print('string1 is equal to string 3: ',string1 is string3)
+print('string1 is not equal to string 2: ',string1 is not string2)
+print('string1 is not equal to string 3: ',string1 is not string3)
+```
+
+```
+string1 is equal to string 2:  False
+string1 is equal to string 3:  True
+string1 is not equal to string 2:  True
+string1 is not equal to string 3:  False
+```
+
+### 方法３．大文字と小文字を区別せずに比較したい場合
+
+大文字と小文字を区別して比較した場合は、
+右辺と左辺の文字列は「異なる」と判定されます。
+```python
+string1 = "Python"
+string2 = "python"
+if string1 == string2:
+  print("The strings are equal")
+else:
+  print("The strings are not equal")
+
+# The strings are not equal
+```
+
+右辺と左辺の文字列をそれぞれ「小文字」に変換した上で比較すると、大文字小文字を区別せずに比較することができます。
+
+```python
+string1 = "Python"
+string2 = "python"
+if string1.lower() == string2.lower():
+  print("The strings are equal")
+else:
+  print("The strings are not equal")
+
+# The strings are equal
+```
+
+Python で文字列を比較するには、「比較演算子」や「is」演算子や「is not」演算子などのさまざまな方法が使用されます。
+また、大文字と小文字を区別する比較と区別しない比較を実行する手法について、`lower()`メソッドと`upper()`メソッドを使用します。
+
 
 ## 書籍の紹介
 {{% amazon

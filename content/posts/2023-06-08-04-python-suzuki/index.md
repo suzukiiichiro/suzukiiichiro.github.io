@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 ファイル内の文字列を検索したいのですが？"
+date: 2023-06-08T12:36:41+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,70 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
+## ファイル内の文字列を検索したいのですが？
+### 方法１．`file`を使う
+
+読み込んで検索したい対象ファイルは以下のとおりです。
+```:filename.txt
+Welcome to Python Guide!
+Welcome to Java Guide!
+Welcome to C Guide!
+Welcome to Bash Guide!
 ```
 
-### 方法２．エスケープ`\`を使う
-```python
-#!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+```python
+with open('filename.txt', 'r') as f:
+  for line in f:
+  if 'Python' in line:
+    print(line)
+  else:
+    print('String Not Found!')
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
-```python
-#!/usr/local/env python3
-
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+```
+Welcome to Python Guide!
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 方法２．正規表現ライブラリ`re`を使う
+```python
+import re
+search_pattern = 'Python'
+with open('filename.txt', 'r') as f:
+  for line in f:
+  match = re.search(search_pattern, line)
+    if match:
+  print(match.group())
+```
+
+### 方法３．`read()`を使う
+```python
+with open("filename.txt", "r") as f:
+  lines = f.read()
+  for i, line in enumerate(lines.splitlines()):
+    if "Python" in line:
+      print(i + 1, line)
+```
+
+```
+1 Welcome to Python Guide!
+```
+
+### 方法４．`readlines()`を使う
+```python
+with open("filename.txt", "r") as f:
+  lines = f.readlines()
+    for i, line in enumerate(lines):
+      if "Welcome" in line:
+      print(i + 1, line)
+```
+
+```
+1 Welcome to Python Guide!
+```
+
+「組み込みファイル」操作、「正規表現」、「read()」メソッド、または「readlines() 」メソッドなど、ファイル内の文字列を検索して Python で出力するさまざまな方法を説明しました。
+
 
 ## 書籍の紹介
 {{% amazon

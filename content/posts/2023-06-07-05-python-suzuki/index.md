@@ -1,6 +1,6 @@
 ---
-title: "Python入門 複数行の代入はできますか？"
-date: 2023-06-05T15:05:31+09:00
+title: "Python入門 特殊文字を削除したいのですが？"
+date: 2023-06-07T15:18:09+09:00
 draft: false
 authors: suzuki
 image: python.jpg
@@ -13,82 +13,61 @@ tags:
 
 ![](python.jpg)
 
-## 複数行の代入はできますか？
-### 方法１．三重引用符`'''`で囲む。
-```python
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """
-Python_Multiline_String()
-```
-
-### 方法２．エスケープ`\`を使う
+## 特殊文字を削除したいのですが
+### 方法１．`string.replace()`で特殊文字を削除する
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-Python_Multiline_String()
+string_value = "@Hello@and#Welcome%to&Python"
+# `"` ダブルクォートの手前をエスケープ`\`します
+for char in "!@#$%^&*()_+-={}[]|\:;\"'<>,.?/~`":
+  string_value = string_value.replace(char, " ")
+  
+print(string_value)
+# Hello and Welcome to Python
 ```
 
-### 方法３．リストにしてjoin()でつなぐ
+### 方法２．`join()`と`filter()`を使って特殊文字列を削除する
 ```python
 #!/usr/local/env python3
 
-def Python_Multiline_String():
-  # 方法１
-  multiline_string = '''Hello and
-  Welcome to
-  Python Guide
-  '''
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-  # 方法２
-  multiline_string = 'Hello and\nWelcome to \nPython\nGuide'
-  print(multiline_string)
+string_value = "@Hello@and#Welcome%to&Python"
+new_string_value = "".join(filter(str.isalnum, string_value))
 
-  # 方法３
-  lines = ['Hello and', 'Welcome to', 'Python Guide']
-  multiline_string = '\n'.join(lines)
-  print(multiline_string)
-  """ output
-  Hello and
-  Welcome to
-  Python Guide
-  """ 
-
-Python_Multiline_String()
+print(new_string_value)
+# HelloandWelcometoPython
 ```
 
-Python で複数行の文字列を作成するには、「三重引用符`'''`」、「エスケープ文字`\'」、「join()」メソッドなどのさまざまな方法を使用できます。
+### 方法３．正規表現を使って特殊文字を削除する
+```python
+#!/usr/local/env python3
+
+string_value = "@Hello@and#Welcome%to&Python"
+
+import re
+pattern = r"[^\w\s]"
+new_string_value = re.sub(pattern, " ", string_value)
+print(new_string_value)
+#  Hello and Welcome to Python
+```
+
+### 方法４．`isalnum()`と`isspace()`を`for`でループさせて特殊文字を除去する
+```python
+#!/usr/local/env python3
+
+string = "@Hello@and#Welcome%to&Python"
+
+new_string = ""
+for char in string:
+	# 英数字、または空白か？
+	if char.isalnum() or char.isspace():
+		new_string += char
+
+print(new_string)
+# HelloandWelcometoPython
+```
+
+Python 文字列から特殊文字を終了または削除するには、文字列の`replace()`メソッド、`join()`および`filter()`メソッド、正規表現、または`for`で実現可能です。
 
 ## 書籍の紹介
 {{% amazon
