@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（３８）第七章　ブルートフォース Python版"
+title: "Ｎクイーン問題（３８）第七章　ブルートフォース Python編"
 date: 2023-06-13T12:17:46+09:00
 draft: false
 authors: suzuki

@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（４０）第七章　バックトラック Python版"
+title: "Ｎクイーン問題（４０）第七章　バックトラック Python編"
 date: 2023-06-13T13:42:53+09:00
 draft: false
 authors: suzuki
