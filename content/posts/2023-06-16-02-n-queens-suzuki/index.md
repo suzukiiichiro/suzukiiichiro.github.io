@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（４５）第七章 ステップＮの実装 Python編"
+title: "Ｎクイーン問題（４６）第七章 ステップＮの実装 Python編"
 date: 2023-06-16T11:05:36+09:00
 draft: false
 authors: suzuki
