@@ -1,0 +1,631 @@
+---
+title: "Ｎクイーン問題（４５）第七章 キャリーチェーン Python編"
+date: 2023-06-16T10:52:45+09:00
+draft: false
+authors: suzuki
+image: chess.jpg
+categories:
+  - programming
+tags:
+  - N-Queens
+  - エイト・クイーン
+  - シェルスクリプト
+  - Bash
+  - アルゴリズム
+  - 鈴木維一郎
+---
+
+![](chess.jpg)
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
+[エイト・クイーンのソース置き場 BashもJavaもPythonも！](https://github.com/suzukiiichiro/N-Queens)
+
+
+## キャリーチェーン
+キャリーチェーンはＮ２７の解を発見したドレスデン大学の研究者が編み出したアルゴリズムです。
+
+Jeffサマーズがミラーとビットマップの組み合わせでＮ２３を発見し、電気通信大学がサマーズのアルゴリズムを並列処理しＮ２４を発見、プロアクティブが対称解除法でＮ２５を発見し、Ｎ２７でキャリーチェーンによりドレスデン大学が世界一となりました。
+
+Bash版の対称解除法の実行結果を見てみましょう。
+[Ｎクイーン問題（１５）第三章　対象解除法 ロジック解説](https://suzukiiichiro.github.io/posts/2023-04-13-02-nqueens-suzuki/)
+```
+#  <> 06Bash_symmetry.sh 対象解除法
+#  N:        Total       Unique        hh:mm:ss
+#  4:            2            1         0:00:00
+#  5:           10            2         0:00:00
+#  6:            4            1         0:00:00
+#  7:           40            6         0:00:00
+#  8:           92           12         0:00:00
+#  9:          352           46         0:00:00
+# 10:          724           92         0:00:02
+# 11:         2680          341         0:00:05
+# 12:        14200         1787         0:00:26
+# 13:        73712         9233         0:02:28
+# 14:       365596        45752         0:14:18
+# 15:      2279184       285053         1:23:34
+```
+
+
+Ｎ２５で、１時間２３分かかっています。
+Bashだからこその遅さです。ＣプログラムではＮ１７までは１秒かかりません。
+とはいえ、アルゴリズムやロジックを深く知るためには、プログラムのシンタックスに悩むドデカ級のプログラム言語よりも、身近なBash言語のほうが直感的でよいのです。
+ＵＮＩＸを開発したＡＴ＆Ｔベル研究所では、開発者はBashでプロトタイプを作り、その後プログラマがＣに移植します。
+
+新しい開発、革新的なロジックを研究することにBashは多くの現場で活躍してきました。ＣやJavaは、知恵を導入するまえに、構文（シンタックス）の複雑さに気を奪われ、書いた気になる、作った気になる言語と言われています。
+
+では、Ｎ２７を叩き出したドレスデン大学のソースをBashに移植して、高速化、最適化したソースの実行結果を見てみます。
+
+[Ｎクイーン問題（１９）第五章 キャリーチェーン](https://suzukiiichiro.github.io/posts/2023-05-23-01-n-queens-suzuki/)
+```
+#  <> 07Bash_carryChain.sh
+#  N:        Total       Unique        hh:mm:ss
+#  4:            2            1         0:00:00
+#  5:           10            2         0:00:00
+#  6:            4            1         0:00:00
+#  7:           40            6         0:00:01
+#  8:           92           12         0:00:02
+#  9:          352           46         0:00:12
+# 10:          724           92         0:00:44
+# 11:         2680          341         0:02:39
+# 12:        14200         1788         0:08:35
+# 13:        73712         9237         0:27:05
+# 14:       365596        45771         1:30:40
+# 15:      2279184       285095         5:59:03
+```
+
+おそい。。。。
+遅すぎますね。大丈夫なのでしょうか。
+
+実際、とてつもなく遅いのですが、キャリーチェーンとは
+
+１．対称解除とは比較にならないほど遅い
+２．対称解除とは比較にならないほどメモリ消費量が小さい
+３．対称解除と比べ、Ｎが小さいときに遅いが、Ｎが大きくなるに従って対称解除のスピードに追いつき、Ｎ１７で対称解除を追い抜き安定して実行を継続する。
+４．一方で対称解除は、Ｎが小さいときは快調だが、Ｎが大きくなるに従って、board配列を中心にメモリ消費量が爆発的に肥大し、Ｎ１７以降、高い確率でバースト、システムは停止する。
+
+ということで、キャリーチェーンは、遅いけど安定的に処理し続けるアルゴリズムなのです。
+
+さらに、次の章で紹介する並列処理に極めて高い親和性があるアルゴリズムです。
+
+## アルゴリズム
+おおまかなアルゴリズムを説明します。
+ソースはおおよそ下から積み上げるようにして書きますので、
+最初の実行は一番下の「function NQ()」となります。
+
+```bash
+# 'ボード外側２列を除く内側のクイーン配置処理';
+def solve(row,left,down,right):
+# 'solve()を呼び出して再帰を開始する';
+def process(size,sym):
+# 'キャリーチェーン対称解除法';
+def carryChainSymmetry(size,n,w,s,e):
+# 'クイーンの効きをチェック';
+def placement(size,dimx,dimy):
+# 'チェーンのビルド';
+def buildChain(size):
+# 'チェーンの初期化';
+def initChain(size):
+# 'チェーンの構築';
+def carryChain(size):
+```
+
+## ロジック解説
+まず、NQ()を実行するとcarryChain()を呼び出します。
+carrychain()は、チェーンの初期化を行うinitChain()と、チェーンのビルドを行う buildChain()を実行します。
+
+チェーンの初期化を行う initChain()は以下の２行のクイーンが配置できるすべてをブルートフォースで導き出します。ここではクイーンの効きは考慮しません。
+１行目の配置を pres_a配列に、２行目の配列をpres_b配列に保存します。
+
+initChain()
+```
++-+-+-+-+-+-+-+
+|Q|Q|Q|Q|Q|Q|Q|
++-+-+-+-+-+-+-+
+|Q|Q|Q|Q|Q|Q|Q|
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+```
+
+次にbuildChain()は、上２行に配置します。
+buildChain()では配置のたびに placement()を呼び出し、クイーンの効きに問題がないかをチェックします。
+ざっくりいうと上１行目のクイーンはミラーのロジックにより、Ｎの半分しか配置しません。上２行目はＮすべてを配置候補とします。
+
+buildChain()
+```
++-+-+-+-+-+-+-+
+| | | | | | |Q|  ←
++-+-+-+-+-+-+-+
+| | | | |Q|x|x|  ←
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+| | | | | | | |
++-+-+-+-+-+-+-+
+```
+
+上２行に配置できたら、左２列を作成します。
+```
+ ↓↓
++-+-+-+-+-+-+-+
+|x|x| | | | |Q| 
++-+-+-+-+-+-+-+
+|x|x|x|x|Q|x|x| 
++-+-+-+-+-+-+-+
+|Q|x|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x| |x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|Q|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|x|x|Q|x|x|x|
++-+-+-+-+-+-+-+
+```
+
+左２列が完成したら、下２行を作成します。
+クイーンの配置の都度、placement()が呼び出され、クイーンの効きをチェックします。
+
+```
++-+-+-+-+-+-+-+
+|x|x|x|x|x|x|Q| 
++-+-+-+-+-+-+-+
+|x|x| | |Q|x|x|
++-+-+-+-+-+-+-+
+|Q|x| |x|x| |x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x| |x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|Q|x|x|x|x|x| ←
++-+-+-+-+-+-+-+
+|x|x|x|Q|x|x|x| ←
++-+-+-+-+-+-+-+
+```
+
+すでに配置されている場合はそれを許可し、配置したことにします。
+下２行を作成したら、右２列を作成します。
+
+```
++-+-+-+-+-+-+-+
+|x|x|x|x|x|x|Q| 
++-+-+-+-+-+-+-+
+|x|x| |x|Q|x|x|
++-+-+-+-+-+-+-+
+|Q|x| |x|x|x|x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x|Q|x|
++-+-+-+-+-+-+-+
+|x|x|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|Q|x|x|x|x|x|
++-+-+-+-+-+-+-+
+|x|x|x|Q|x|x|x|
++-+-+-+-+-+-+-+
+           ↑↑
+```
+
+配置が終わりました。
+配置が終わったら、carryChainSymmetry()を呼び出して、対称解除法を実行します。
+
+
+これまでのsymmetry.shでは１行目のクイーンが角にあるか、ないかで分岐し、クイーンの配置がすべて完了したら対称解除を行ってきました。ようするに処理の最終局面で対称解除を行ってきたわけです。
+
+ですので、ボード情報をboard配列に入れて９０度回転を繰り返してきました。この処理はbit処理でなかった（僕がどうやってよいか分からなかった）ため、負荷も高くなってしまいました。
+
+盤面のクイーンの配置すべてを格納したboard配列をまるっと９０度回転、さらに９０度回転、さらにさらに９０度回転と繰り返して、COUNT2,COUNT4,COUNT8のユニーク解を導き出していました。
+
+キャリーチェーンは、盤面の外枠２行２列のみにクイーンを配置します。理由は「対称解除は２行２列に配置されていれば可能」だからです。
+
+![](1.png)
+
+まず、２行２列を配置し、対称解除を行い、COUNT2,COUNT4,COUNT8のいずれかである場合にかぎって、内側にクイーンの配置処理に入ります。
+
+![](2.png)
+
+すごいですね！ 新しいです。
+最初に対称解除を行うことができるから、最初からbit処理可能です。そして最後までbit処理で完結できます。
+
+これまでやってきた枝刈りのロジックは、ドレスデン大学のソースにはありませんでしたが、追記しておきました。期待大！ですね。
+
+ですが、激しく遅いのです。残念です。
+
+とはいえ世界一となったこのロジックはただものではありません。極めて優れたロジックで、パッと見だめでもじつはイケてるプログラムなのです。
+
+
+
+
+
+## キャリーチェーン　プログラムソース
+```python:07Python_carryChain.py
+#!/usr/bin/env python3
+
+# -*- coding: utf-8 -*-
+import copy
+"""
+キャリーチェーン版 Ｎクイーン
+
+詳細はこちら。
+【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから
+https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
+
+エイト・クイーンのプログラムアーカイブ
+Bash、Lua、C、Java、Python、CUDAまで！
+https://github.com/suzukiiichiro/N-Queens
+
+# 実行 
+$ python <filename.py>
+
+# 実行結果
+bash-3.2$ python 07Python_carryChain.py
+size: 5 TOTAL: 10 UNIQUE: 2
+bash-3.2$
+
+"""
+#
+# グローバル変数
+TOTAL=0
+UNIQUE=0
+pres_a=[0]*930
+pres_b=[0]*930
+COUNTER=[0]*3
+B=[]
+#
+# ボード外側２列を除く内側のクイーン配置処理
+def solve(row,left,down,right):
+  total=0
+  if not down+1:
+    return 1
+  while row&1:
+    row>>=1
+    left<<=1
+    right>>=1
+  row>>=1           # １行下に移動する
+  bitmap=~(left|down|right)
+  while bitmap!=0:
+    bit=-bitmap&bitmap
+    total+=solve(row,(left|bit)<<1,down|bit,(right|bit)>>1)
+    bitmap^=bit
+  return total
+#
+# キャリーチェーン　solve()を呼び出して再起を開始する
+def process(size,sym):
+  global B
+  global COUNTER
+  # sym 0:COUNT2 1:COUNT4 2:COUNT8
+  COUNTER[sym]+=solve(
+        B[0]>>2,
+        B[1]>>4,
+        (((B[2]>>2|~0<<size-4)+1)<<size-5)-1,
+        B[3]>>4<<size-5
+  )
+#
+# キャリーチェーン　対象解除
+def carryChainSymmetry(size,n,w,s,e):
+  global B
+  # n,e,s=(N-2)*(N-1)-1-w の場合は最小値を確認する。
+  ww=(size-2)*(size-1)-1-w
+  w2=(size-2)*(size-1)-1
+  # 対角線上の反転が小さいかどうか確認する
+  if s==ww and n<(w2-e): return 
+  # 垂直方向の中心に対する反転が小さいかを確認
+  if e==ww and n>(w2-n): return
+  # 斜め下方向への反転が小さいかをチェックする
+  if n==ww and e>(w2-s): return
+  # 【枝刈り】１行目が角の場合
+  # １．回転対称チェックせずにCOUNT8にする
+  if not B[4][0]:
+    process(size,2) # COUNT8
+    return
+  # n,e,s==w の場合は最小値を確認する。
+  # : '右回転で同じ場合は、
+  # w=n=e=sでなければ値が小さいのでskip
+  # w=n=e=sであれば90度回転で同じ可能性 ';
+  if s==w:
+    if n!=w or e!=w: return
+    process(size,0) # COUNT2
+    return
+  # : 'e==wは180度回転して同じ
+  # 180度回転して同じ時n>=sの時はsmaller?  ';
+  if e==w and n>=s:
+    if n>s: return
+    process(size,1) # COUNT4
+    return
+  process(size,2)   # COUNT8
+  return
+#
+# キャリーチェーン 効きのチェック dimxは行 dimyは列
+def placement(size,dimx,dimy):
+  global B
+  if B[4][dimx]==dimy:
+    return 1
+  #
+  #
+  # 【枝刈り】Qが角にある場合の枝刈り
+  #  ２．２列めにクイーンは置かない
+  #  （１はcarryChainSymmetry()内にあります）
+  #
+  #  Qが角にある場合は、
+  #  2行目のクイーンの位置 t_x[1]が BOUND1
+  #  BOUND1行目までは2列目にクイーンを置けない
+  # 
+  #    +-+-+-+-+-+  
+  #    | | | |X|Q| 
+  #    +-+-+-+-+-+  
+  #    | |Q| |X| | 
+  #    +-+-+-+-+-+  
+  #    | | | |X| |       
+  #    +-+-+-+-+-+             
+  #    | | | |Q| | 
+  #    +-+-+-+-+-+ 
+  #    | | | | | |      
+  #    +-+-+-+-+-+  
+  if B[4][0]:
+    #
+    # 【枝刈り】Qが角にない場合
+    #
+    #  +-+-+-+-+-+  
+    #  |X|X|Q|X|X| 
+    #  +-+-+-+-+-+  
+    #  |X| | | |X| 
+    #  +-+-+-+-+-+  
+    #  | | | | | |
+    #  +-+-+-+-+-+
+    #  |X| | | |X|
+    #  +-+-+-+-+-+
+    #  |X|X| |X|X|
+    #  +-+-+-+-+-+
+    #
+    #   １．上部サイド枝刈り
+    #  if ((row<BOUND1));then        
+    #    bitmap=$(( bitmap|SIDEMASK ));
+    #    bitmap=$(( bitmap^=SIDEMASK ));
+    #
+    #  | | | | | |       
+    #  +-+-+-+-+-+  
+    #  BOUND1はt_x[0]
+    #
+    #  ２．下部サイド枝刈り
+    #  if ((row==BOUND2));then     
+    #    if (( !(down&SIDEMASK) ));then
+    #      return ;
+    #    fi
+    #    if (( (down&SIDEMASK)!=SIDEMASK ));then
+    #      bitmap=$(( bitmap&SIDEMASK ));
+    #    fi
+    #  fi
+    #
+    #  ２．最下段枝刈り
+    #  LSATMASKの意味は最終行でBOUND1以下または
+    #  BOUND2以上にクイーンは置けないということ
+    #  BOUND2はsize-t_x[0]
+    #  if(row==sizeE){
+    #    //if(!bitmap){
+    #    if(bitmap){
+    #      if((bitmap&LASTMASK)==0){
+    if B[4][0]!=-1:
+      if(
+        (dimx<B[4][0] or dimx>=size-B[4][0]) and 
+        (dimy==0 or dimy==size-1) 
+      ):
+        return 0
+      if(
+        (dimx==size-1) and 
+        (dimy<=B[4][0] or dimy>=size-B[4][0])
+      ):
+        return 0
+  else:
+    if B[4][1]!=-1:
+      # bitmap=$(( bitmap|2 )); # 枝刈り
+      # bitmap=$(( bitmap^2 )); # 枝刈り
+      #((bitmap&=~2)); # 上２行を一行にまとめるとこうなります
+      # ちなみに上と下は同じ趣旨
+      # if (( (t_x[1]>=dimx)&&(dimy==1) ));then
+      #   return 0;
+      # fi
+      if B[4][1]>=dimx and dimy==1:
+        return 0
+  if( (B[0] & 1<<dimx) or 
+      (B[1] & 1<<(size-1-dimx+dimy)) or
+      (B[2] & 1<<dimy) or
+      (B[3] & 1<<(dimx+dimy)) 
+  ): 
+    return 0
+  B[0]|=1<<dimx
+  B[1]|=1<<(size-1-dimx+dimy)
+  B[2]|=1<<dimy
+  B[3]|=1<<(dimx+dimy)
+  B[4][dimx]=dimy
+  return 1
+#
+# チェーンのビルド
+def buildChain(size):
+  global B
+  global pres_a
+  global pres_b
+  B=[0,0,0,0,[-1]*size] # Bの初期化
+  wB=sB=eB=nB=[]
+  wB=copy.deepcopy(B)
+  for w in range( (size//2)*(size-3) +1):
+    B=copy.deepcopy(wB)
+    B=[0,0,0,0,[-1]*size] # Bの初期化
+    # １．０行目と１行目にクイーンを配置
+    if placement(size,0,pres_a[w])==0:
+      continue
+    if placement(size,1,pres_b[w])==0:
+      continue
+    # ２．９０度回転
+    nB=copy.deepcopy(B)
+    mirror=(size-2)*(size-1)-w
+    for n in range(w,mirror,1):
+      B=copy.deepcopy(nB)
+      if placement(size,pres_a[n],size-1)==0:
+        continue
+      if placement(size,pres_b[n],size-2)==0:
+        continue
+      # ３．９０度回転
+      eB=copy.deepcopy(B)
+      for e in range(w,mirror,1):
+        B=copy.deepcopy(eB)
+        if placement(size,size-1,size-1-pres_a[e])==0:
+          continue
+        if placement(size,size-2,size-1-pres_b[e])==0:
+          continue
+        # ４．９０度回転
+        sB=copy.deepcopy(B)
+        for s in range(w,mirror,1):
+          B=copy.deepcopy(sB)
+          if placement(size,size-1-pres_a[s],0)==0:
+            continue
+          if placement(size,size-1-pres_b[s],1)==0:
+            continue
+          # 対象解除法
+          carryChainSymmetry(size,n,w,s,e)
+#
+# チェーンの初期化
+def initChain(size):
+  global pres_a
+  global pres_b
+  idx=0
+  for a in range(size):
+    for b in range(size):
+      if (a>=b and (a-b)<=1) or (b>a and (b-a<=1)):
+        continue
+      pres_a[idx]=a
+      pres_b[idx]=b
+      idx+=1
+#
+# キャリーチェーン
+def carryChain(size):
+  global B
+  global TOTAL
+  global UNIQUE
+  global COUNTER
+  TOTAL=UNIQUE=0
+  COUNTER[0]=COUNTER[1]=COUNTER[2]=0
+  # Bの初期化  [0, 0, 0, 0, [0, 0, 0, 0, 0]]
+  B=[0]*5             # row/left/down/right/X
+  B[4]=[-1]*size       # X を0でsize分を初期化
+  initChain(size)     # チェーンの初期化
+  buildChain(size)    # チェーンのビルド
+  # 集計
+  UNIQUE=COUNTER[0]+COUNTER[1]+COUNTER[2]
+  TOTAL=COUNTER[0]*2 + COUNTER[1]*4 + COUNTER[2]*8
+#
+# 実行
+size=5
+carryChain(size)    # ７．キャリーチェーン
+print("size:",size,"TOTAL:",TOTAL,"UNIQUE:",UNIQUE)
+#
+```
+
+次回は、Ｎを順番に処理していく「ステップＮ」をやります。
+
+
+[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+
+[エイト・クイーンのソース置き場 BashもJavaもPythonも！](https://github.com/suzukiiichiro/N-Queens)
+
+
+
+## 書籍の紹介
+{{% amazon
+
+title="詳解 シェルスクリプト 大型本  2006/1/16"
+
+url="https://www.amazon.co.jp/gp/proteect/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens09-22&linkId=ef087fd92d3628bb94e1eb10cb202d43"
+
+summary=`Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+`
+imageUrl="https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg"
+%}}
+
+{{% amazon
+
+title="UNIXシェルスクリプト マスターピース132"
+
+url="https://www.amazon.co.jp/gp/proteect/4797377623/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797377623&linkCode=as2&tag=nlpqueens09-22&linkId=3c8d4566263ae99374221c4f8f469154"
+
+summary=`すべてのUNIXエンジニア必携!!
+
+サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。
+`
+imageUrl="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg"
+%}}
+
+
+{{% amazon
+
+title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー）  2017/1/20"
+
+url="https://www.amazon.co.jp/gp/proteect/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens09-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
+
+summary=`定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。`
+imageUrl="https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg"
+%}}
+
+{{% amazon
+
+title="新しいシェルプログラミングの教科書 単行本"
+
+url="https://www.amazon.co.jp/gp/proteect/4797393106/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797393106&linkCode=as2&tag=nlpqueens09-22&linkId=f514a6378c1c10e59ab16275745c2439"
+
+summary=`エキスパートを目指せ!!
+
+システム管理やソフトウェア開発など、
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説
+
+ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。
+イマドキのエンジニア必携の一冊。
+
+▼目次
+CHAPTER01 シェルってなんだろう
+CHAPTER02 シェルスクリプトとは何か
+CHAPTER03 シェルスクリプトの基本
+CHAPTER04 変数
+CHAPTER05 クォーティング
+CHAPTER06 制御構造
+CHAPTER07 リダイレクトとパイプ
+CHAPTER08 関数
+CHAPTER09 組み込みコマンド
+CHAPTER10 正規表現と文字列
+CHAPTER11 シェルスクリプトの実行方法
+CHAPTER12 シェルスクリプトのサンプルで学ぼう
+CHAPTER13 シェルスクリプトの実用例
+CHAPTER14 テストとデバッグ
+CHAPTER15 読みやすいシェルスクリプト
+`
+imageUrl="https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg"
+%}}
