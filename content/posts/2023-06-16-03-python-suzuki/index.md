@@ -1,5 +1,5 @@
 ---
-title: "Python入門 VisibleDeprecationWarningがるのですが？"
+title: "Python入門 VisibleDeprecationWarningが出るのですが？"
 date: 2023-06-16T17:18:35+09:00
 draft: false
 authors: suzuki
@@ -14,7 +14,7 @@ tags:
 ![](python.jpg)
 
 
-## VisibleDeprecationWarningがでるのですが？
+## VisibleDeprecationWarningが出るのですが？
 numpyを使っている際に「配列の行と列がイカレています」ということです。
 
 例えば、これはオッケーです。
