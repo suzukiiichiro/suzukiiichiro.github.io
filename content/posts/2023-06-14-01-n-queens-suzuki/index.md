@@ -9,8 +9,7 @@ categories:
 tags:
   - N-Queens
   - エイト・クイーン
-  - シェルスクリプト
-  - Bash
+  - Python
   - アルゴリズム
   - 鈴木維一郎
 ---
