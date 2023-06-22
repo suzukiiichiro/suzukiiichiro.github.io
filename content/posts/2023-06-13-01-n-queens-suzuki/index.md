@@ -162,7 +162,7 @@ for文で各行の何`row`目にクイーンを配置するかを決め、最後
 # ボードレイアウト出力
 def printRecord(size):
   global TOTAL
-  global baord
+  global board
   print(TOTAL)
   sEcho=""
   for i in range(size):
@@ -396,7 +396,7 @@ board=[0 for i in range(MAX)] # ボード配列格納用
 # ボードレイアウト出力
 def printRecord(size):
   global TOTAL
-  global baord
+  global board
 
   print(TOTAL)
   sEcho=""
