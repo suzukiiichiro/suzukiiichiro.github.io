@@ -420,7 +420,7 @@ right=[0 for i in range(MAX)]   # 効き筋チェック
 # ビットマップ版ボードレイアウト出力
 def printRecord_bitmap(size,flag):
   global TOTAL
-  global baord
+  global board
   print(TOTAL)
   sEcho=""
   """
@@ -508,7 +508,7 @@ def printRecord_bitmap(size,flag):
 # ボードレイアウト出力
 def printRecord(size):
   global TOTAL
-  global baord
+  global board
   print(TOTAL)
   sEcho=""
   for i in range(size):
