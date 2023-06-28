@@ -336,9 +336,113 @@ main()
 12:        14200         1788         0:00:37.435
 ```
 
-[【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+## 参考リンク
+以下の詳細説明を参考にしてください。
+[【参考リンク】Ｎクイーン問題 過去記事一覧](https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題)
+[【Github】エイト・クイーンのソース置き場 BashもJavaもPythonも！](https://github.com/suzukiiichiro/N-Queens)
 
-[エイト・クイーンのソース置き場 BashもJavaもPythonも！](https://github.com/suzukiiichiro/N-Queens)
+Ｎクイーン問題（５０）第七章 マルチプロセス Python編
+https://suzukiiichiro.github.io/posts/2023-06-21-04-n-queens-suzuki/
+Ｎクイーン問題（４９）第七章 マルチスレッド Python編
+https://suzukiiichiro.github.io/posts/2023-06-21-03-n-queens-suzuki/
+Ｎクイーン問題（４８）第七章 シングルスレッド Python編
+https://suzukiiichiro.github.io/posts/2023-06-21-02-n-queens-suzuki/
+Ｎクイーン問題（４７）第七章 クラス Python編
+https://suzukiiichiro.github.io/posts/2023-06-21-01-n-queens-suzuki/
+Ｎクイーン問題（４６）第七章 ステップＮの実装 Python編
+https://suzukiiichiro.github.io/posts/2023-06-16-02-n-queens-suzuki/
+Ｎクイーン問題（４５）第七章 キャリーチェーン Python編
+https://suzukiiichiro.github.io/posts/2023-06-16-01-n-queens-suzuki/
+Ｎクイーン問題（４４）第七章　対象解除法 Python編
+https://suzukiiichiro.github.io/posts/2023-06-14-02-n-queens-suzuki/
+Ｎクイーン問題（４３）第七章　ミラー Python編
+https://suzukiiichiro.github.io/posts/2023-06-14-01-n-queens-suzuki/
+Ｎクイーン問題（４２）第七章　ビットマップ Python編
+https://suzukiiichiro.github.io/posts/2023-06-13-05-n-queens-suzuki/
+Ｎクイーン問題（４１）第七章　配置フラグ Python編
+https://suzukiiichiro.github.io/posts/2023-06-13-04-n-queens-suzuki/
+Ｎクイーン問題（４０）第七章　バックトラック Python編
+https://suzukiiichiro.github.io/posts/2023-06-13-03-n-queens-suzuki/
+Ｎクイーン問題（３９）第七章　バックトラック準備編 Python編
+https://suzukiiichiro.github.io/posts/2023-06-13-02-n-queens-suzuki/
+Ｎクイーン問題（３８）第七章　ブルートフォース Python編
+https://suzukiiichiro.github.io/posts/2023-06-13-01-n-queens-suzuki/
+Ｎクイーン問題（３７）第六章 C言語移植 その１７ pthread並列処理完成
+https://suzukiiichiro.github.io/posts/2023-05-30-17-n-queens-suzuki/
+Ｎクイーン問題（３６）第六章 C言語移植 その１６ pthreadの実装
+https://suzukiiichiro.github.io/posts/2023-05-30-16-n-queens-suzuki/
+Ｎクイーン問題（３５）第六章 C言語移植 その１５ pthread実装直前版完成
+https://suzukiiichiro.github.io/posts/2023-05-30-15-n-queens-suzuki/
+Ｎクイーン問題（３４）第六章 C言語移植 その１４
+https://suzukiiichiro.github.io/posts/2023-05-30-14-n-queens-suzuki/
+Ｎクイーン問題（３３）第六章 C言語移植 その１３
+https://suzukiiichiro.github.io/posts/2023-05-30-13-n-queens-suzuki/
+Ｎクイーン問題（３２）第六章 C言語移植 その１２
+https://suzukiiichiro.github.io/posts/2023-05-30-12-n-queens-suzuki/
+Ｎクイーン問題（３１）第六章 C言語移植 その１１
+https://suzukiiichiro.github.io/posts/2023-05-30-11-n-queens-suzuki/
+Ｎクイーン問題（３０）第六章 C言語移植 その１０
+https://suzukiiichiro.github.io/posts/2023-05-30-10-n-queens-suzuki/
+Ｎクイーン問題（２９）第六章 C言語移植 その９
+https://suzukiiichiro.github.io/posts/2023-05-30-09-n-queens-suzuki/
+Ｎクイーン問題（２８）第六章 C言語移植 その８
+https://suzukiiichiro.github.io/posts/2023-05-30-08-n-queens-suzuki/
+Ｎクイーン問題（２７）第六章 C言語移植 その７
+https://suzukiiichiro.github.io/posts/2023-05-30-07-n-queens-suzuki/
+Ｎクイーン問題（２６）第六章 C言語移植 その６
+https://suzukiiichiro.github.io/posts/2023-05-30-06-n-queens-suzuki/
+Ｎクイーン問題（２５）第六章 C言語移植 その５
+https://suzukiiichiro.github.io/posts/2023-05-30-05-n-queens-suzuki/
+Ｎクイーン問題（２４）第六章 C言語移植 その４
+https://suzukiiichiro.github.io/posts/2023-05-30-04-n-queens-suzuki/
+Ｎクイーン問題（２３）第六章 C言語移植 その３
+https://suzukiiichiro.github.io/posts/2023-05-30-03-n-queens-suzuki/
+Ｎクイーン問題（２２）第六章 C言語移植 その２
+https://suzukiiichiro.github.io/posts/2023-05-30-02-n-queens-suzuki/
+Ｎクイーン問題（２１）第六章 C言語移植 その１
+N-Queens問://suzukiiichiro.github.io/posts/2023-05-30-01-n-queens-suzuki/
+Ｎクイーン問題（２０）第五章 並列処理
+https://suzukiiichiro.github.io/posts/2023-05-23-02-n-queens-suzuki/
+Ｎクイーン問題（１９）第五章 キャリーチェーン
+https://suzukiiichiro.github.io/posts/2023-05-23-01-n-queens-suzuki/
+Ｎクイーン問題（１８）第四章 エイト・クイーンノスタルジー
+https://suzukiiichiro.github.io/posts/2023-04-25-01-n-queens-suzuki/
+Ｎクイーン問題（１７）第四章　偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」
+https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/
+Ｎクイーン問題（１６）第三章　対象解除法 ソース解説
+https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/
+Ｎクイーン問題（１５）第三章　対象解除法 ロジック解説
+https://suzukiiichiro.github.io/posts/2023-04-13-02-nqueens-suzuki/
+Ｎクイーン問題（１４）第三章　ミラー
+https://suzukiiichiro.github.io/posts/2023-04-13-01-nqueens-suzuki/
+Ｎクイーン問題（１３）第三章　ビットマップ
+https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/
+Ｎクイーン問題（１２）第二章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/
+Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/
+Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/
+Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰
+https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/
+Ｎクイーン問題（８）第一章　まとめ
+https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/
+Ｎクイーン問題（７）第一章　ブルートフォース再び
+https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/
+Ｎクイーン問題（６）第一章　配置フラグ
+https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/
+Ｎクイーン問題（５）第一章　進捗表示テーブルの作成
+https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/
+Ｎクイーン問題（４）第一章　バックトラック
+https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/
+Ｎクイーン問題（３）第一章　バックトラック準備編
+https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/
+Ｎクイーン問題（２）第一章　ブルートフォース
+https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/
+Ｎクイーン問題（１）第一章　エイトクイーンについて
+https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/
+
+
 
 
 
