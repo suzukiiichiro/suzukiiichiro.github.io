@@ -186,10 +186,16 @@ pthreadはマルチプロセスで動くため、各プロセスの処理時間�
     gettimeofday(&t1, NULL);
 ```
 
+最後にコンパイルオプションに `-pthread`を付ける必要があります。
+```
+bash-3.2$ gcc -pthread <ソースファイル名> -o 08GCC && ./08GCC
+
+```
+
 動きました！
 ```
-bash-3.2$ gcc 08GCC_pthread.c -o 17GCC -pthread && ./17GCC
-Usage: ./17GCC [-c|-g]
+bash-3.2$ gcc -pthread 08GCC_pthread.c -o 08GCC && ./08GCC
+Usage: ./08GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
 
@@ -214,8 +220,8 @@ bash-3.2$
 
 実行パラメータを以下のように変更することでもっと速くなります。
 ```
-bash-3.2$ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 08GCC_pthread.c -o 17GCC && ./17GCC
-Usage: ./17GCC [-c|-g]
+bash-3.2$ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 08GCC_pthread.c -o 08GCC && ./08GCC
+Usage: ./08GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
 
@@ -249,10 +255,10 @@ bash-3.2$
  * bash-3.2$ gcc 08GCC_pthread.c -pthread && ./a.out
  *  
  * 高速な実行 
- * $ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 08GCC_pthread.c && ./a.out
+ * $ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 08GCC_pthread.c && ./a.out
  *
  * さらにより最適で高速なコンパイルオプション
-* $ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 08GCC_pthread.c && ./a.out
+* $ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 08GCC_pthread.c && ./a.out
  *
  *
  * 今回のテーマ
@@ -303,8 +309,8 @@ while True:
 
 
 普通の実行オプション
-bash-3.2$ gcc 08GCC_pthread.c -o 17GCC && ./17GCC
-Usage: ./17GCC [-c|-g]
+bash-3.2$ gcc 08GCC_pthread.c -pthread -o 08GCC && ./08GCC
+Usage: ./08GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
 
@@ -332,8 +338,8 @@ bash-3.2$
 
 
 より最適で高速なコンパイルオプション
-bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 08GCC_pthread.c -o 17GCC && ./17GCC
-Usage: ./17GCC [-c|-g]
+bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 08GCC_pthread.c -o 08GCC && ./08GCC
+Usage: ./08GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
 
@@ -781,8 +787,8 @@ int main(int argc,char** argv)
 ## 実行結果
 ```
 より最適で高速なコンパイルオプション
-bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 08GCC_pthread.c -o 17GCC && ./17GCC
-Usage: ./17GCC [-c|-g]
+bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 08GCC_pthread.c -o 08GCC && ./08GCC
+Usage: ./08GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
 
