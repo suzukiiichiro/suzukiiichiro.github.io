@@ -185,6 +185,11 @@ pthreadはマルチプロセスで動くため、各プロセスの処理時間�
     // TimeFormat(clock()-st,t);
     gettimeofday(&t1, NULL);
 ```
+最後にコンパイルオプションに`-pthread`を追加します。
+
+```
+bash-3.2$ gcc 17GCC_carryChain.c -o 17GCC -pthread && ./17GCC
+```
 
 動きました！
 ```
@@ -214,7 +219,7 @@ bash-3.2$
 
 実行パラメータを以下のように変更することでもっと速くなります。
 ```
-bash-3.2$ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 17GCC_carryChain.c -o 17GCC && ./17GCC
+bash-3.2$ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 17GCC_carryChain.c -o 17GCC && ./17GCC
 Usage: ./17GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
@@ -250,7 +255,7 @@ bash-3.2$
  * bash-3.2$ gcc 17GCC_carryChain.c -pthread -o 17GCC && ./17GCC
  *  
  * 高速な実行 
- * $ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 17GCC_carryChain.c -o 17GCC && ./17GCC -r
+ * $ gcc -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 17GCC_carryChain.c -o 17GCC && ./17GCC -r
  *
  *
  *
@@ -287,7 +292,7 @@ bash-3.2$
  https://yu-nix.com/archives/c-struct-pointer/
 
 普通の実行オプション
-bash-3.2$ gcc 17GCC_carryChain.c -o 17GCC && ./17GCC
+bash-3.2$ gcc -pthread 17GCC_carryChain.c -o 17GCC && ./17GCC
 Usage: ./17GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
@@ -313,7 +318,7 @@ bash-3.2$
 
 
 より最適で高速なコンパイルオプション
-bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 17GCC_carryChain.c -o 17GCC && ./17GCC
+bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 17GCC_carryChain.c -o 17GCC && ./17GCC
 Usage: ./17GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
@@ -760,7 +765,7 @@ int main(int argc,char** argv)
 
 普通の実行オプション
 ```
-bash-3.2$ gcc 17GCC_carryChain.c -o 17GCC && ./17GCC
+bash-3.2$ gcc 17GCC_carryChain.c -o 17GCC -pthread && ./17GCC
 Usage: ./17GCC [-c|-g]
   -c: CPU Without recursion
   -r: CPUR Recursion
@@ -790,7 +795,7 @@ bash-3.2$
 
 より最適で高速なコンパイルオプション
 ```
-bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native 17GCC_carryChain.c -o nq27 && ./nq27 -r
+bash-3.2$ gcc -Wshift-negative-value -Wall -W -O3 -g -ftrapv -std=c99 -mtune=native -march=native -pthread 17GCC_carryChain.c -o nq27 && ./nq27 -r
 ７．キャリーチェーン
  N:        Total       Unique        dd:hh:mm:ss.ms
  4:            2            1        00:00:00:00.00
