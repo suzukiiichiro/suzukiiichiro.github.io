@@ -169,6 +169,8 @@ __host__ __device__
 long bitmap_solve_nodeLayer(int size,long left,long down,long right)
 ```
 
+## CUDA ビットマップ
+
 ### 【GPU ビットマップ】ノードレイヤーの作成
 ```c
 void bitmap_build_nodeLayer(int size)
@@ -228,6 +230,7 @@ CUDAの実行が終わったら、デバイス側に保存されている配列�
 ```
 
 ホスト側にコピーした配列をスレッドの数だけ`for`で回して、解を一つ一つ取り出して集計します。
+
 ```c
   // 部分解を加算し、結果を表示する。
   long solutions = 0;
@@ -237,6 +240,15 @@ CUDAの実行が終わったら、デバイス側に保存されている配列�
   // 出力
   TOTAL=solutions;
 
+```
+
+メモ
+  int numSolutions = nodes.size() / 6; 
+  3個で1セットなので/3 さらにnodesの2分の1だけ実行すればミラーになるので/6
+
+```c
+  solutions += 2*hostSolutions[i]; // Symmetry
+  GPUごとのTOTALを集計している。ミラー分最後に2倍する
 ```
 
 
@@ -249,6 +261,18 @@ std::vector<long> kLayer_nodeLayer(int size,int k)
 
 ノードレイヤーが遅い理由は、Ｎクイーンの処理を、当たり判定と本番確定の２回行っていることです。
 
+メモ
+GPUで並列実行するためのleft,right,downを作成する
+
+kLayer_nodeLayer(size,4)
+第2引数の4は4行目までnqueenを実行し、それまでのleft,down,rightをnodes配列に格納する
+
+nodesはベクター配列で構造体でもなんでも格納できる
+push_backで追加。
+
+nodes配列は3個で１セットleft,dwon,rightの情報を同じ配列に格納する
+[0]left[1]down[2]right
+
 
 ### i 番目のメンバを i 番目の部分木の解で埋める
 ```c
@@ -257,6 +281,7 @@ void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
 ```
 こちらで、CUDAによって並列処理された一つ一つのスレッドがＮクイーンを実行して、その結果を`counter`に追記格納し、返却します。
 
+
 ### クイーンの効きを判定して解を返す
 ```c
 __host__ __device__ 
@@ -264,6 +289,26 @@ long bitmap_solve_nodeLayer(int size,long left,long down,long right)
 ```
 
 こちらのメソッドは `-g` オプションで起動したときのメソッドですが、いわゆるＮクイーンのメインメソッドとなります。
+
+メモ
+down==maskが最終行までクイーンを置けた状態
+ビットだとクイーンを置けない場所に1が立つ
+downだとクイーンを置いた場所に1が立つ
+
+maskは、size分1が立っているもの
+n8だと11111111
+
+downはクイーンが配置されるたびに配置された列に1が立って行くので最終行までクイーンを置くと全列に1が立った状態になりmaskと同じ内容になる
+
+
+### i 番目のメンバを i 番目の部分木の解で埋める
+__global__ 
+void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
+
+メモ
+GPU並列処理
+bitmap_solve_nodeLayerを再帰呼び出しし、counter(最終行までクイーンを置けると+1)をsolutionsに格納する
+solutionsは配列でGPUのステップ数分ある
 
 
 
@@ -1338,6 +1383,9 @@ forで一行にまとめることができます。これは非常にトリッ�
 
 ### bitmap=mask&~(left|down|right)
 クイーンが配置可能な位置を表す
+```c
+bitmap=mask&~(left|down|right)
+```
 
 
 ### bit=-bitmap & -bitmap
@@ -1346,6 +1394,9 @@ while中の各繰り返しで、`bit` に、配置できる可能性と配置で
 その `bit` （ビットが0010なら3列目）は、次のクイーンを置く場所となります。
 つまり、bitmapの列を0にすることで、現在の位置が「取られた」ことを示すだけです。
 こうすることで、whileループ中で、「取られた」場所を再度試す必要がなくなるということになります。
+```c
+bit=-bitmap & -bitmap
+```
 
 
 ### bitmap=bitmap&~bit
@@ -1353,14 +1404,25 @@ while中の各繰り返しで、`bit` に、配置できる可能性と配置で
 `bit` には、Qの場所を表す`1` が1つだけ入ったビットフィールが格納されています。
 渡された競合情報と`OR演算` することで、再帰呼び出しの競合候補として追加されます。
 
+```c
+bitmap=bitmap&~bit
+```
+
 
 ### board[row]=bit
 要するにQを配置するわけです。
+```c
+board[row]=bit
+```
 
 
 ### bitmap_R(size,row+1,(left|bit)<<1,down|bit,(right|bit)>>1);
 ソースの中も最も混乱する行だと思います。
 演算子 `>>1` と `1<<` は、ビットフィールド列すべてのビットをそれぞれ右、または左に1桁移動させるだけです。
+
+```c
+bitmap_R(size,row+1,(left|bit)<<1,down|bit,(right|bit)>>1);
+```
 
 つまり、`(left|bit)<<1` を呼ぶと、「leftとbitをOR演算で結合し、結果のすべてを1桁左に移動させる」という意味になります。
 
@@ -1522,47 +1584,6 @@ forで一行にまとめることができます。これは非常にトリッ�
 
 それはどうとして猛烈にわかりやすい図がありました。
 <img src=bitmap.jpg width=80%>
-
-
-## CUDA ビットマップ
-
-・kLayer_nodeLayer 
-GPUで並列実行するためのleft,right,downを作成する
-
-kLayer_nodeLayer(size,4)
-第2引数の4は4行目までnqueenを実行し、それまでのleft,down,rightをnodes配列に格納する
-
-nodesはベクター配列で構造体でもなんでも格納できる
-push_backで追加。
-
-nodes配列は3個で１セットleft,dwon,rightの情報を同じ配列に格納する
-[0]left[1]down[2]right
-
-・bitmap_build_nodeLayer
-  int numSolutions = nodes.size() / 6; 
-  3個で1セットなので/3 さらにnodesの2分の1だけ実行すればミラーになるので/6
-
-  
-```c
-  solutions += 2*hostSolutions[i]; // Symmetry
-  GPUごとのTOTALを集計している。ミラー分最後に2倍する
-```
-
-・dim_nodeLayer 
-GPU並列処理
-bitmap_solve_nodeLayerを再帰呼び出しし、counter(最終行までクイーンを置けると+1)をsolutionsに格納する
-solutionsは配列でGPUのステップ数分ある
-
-・bitmap_solve_ndoeLayer
-down==maskが最終行までクイーンを置けた状態
-ビットだとクイーンを置けない場所に1が立つ
-downだとクイーンを置いた場所に1が立つ
-
-maskは、size分1が立っているもの
-n8だと11111111
-
-downはクイーンが配置されるたびに配置された列に1が立って行くので最終行までクイーンを置くと全列に1が立った状態になりmaskと同じ内容になる
-
 
 
 
