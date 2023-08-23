@@ -269,7 +269,7 @@ long bitmap_solve_nodeLayer(int size,long left,long down,long right)
 
 ## エイトクイーン
 ここからは、ビットマップについて少し詳細に説明しておきたいと思います。
-
+ 
 ### ビットマップ
 Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものが`bitmap`(ビットマップ)です。
 
