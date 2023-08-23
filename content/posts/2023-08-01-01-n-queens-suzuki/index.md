@@ -94,8 +94,182 @@ $ watch nvidia-smi
 ### 難しいこと
 並列処理させること自体は難しくはありませんが、並列処理を実行した結果を集計したり、集計した結果それぞれを利用して次の処理に渡したりする場合は、同期処理、待機処理などを行う必要があり、その都度、Googleで何日も、下手をすると何週間も調べることになります。
 
+## ＣＵＤＡ
+
+実行は以下の４種類です。
+
+１．シングルスレッドで再帰
+こちらは以下のメソッドを呼び出し再帰実行します。
+
+// ビットマップ 再帰版
+void bitmap_R(unsigned int size,unsigned int row,unsigned int left,unsigned int down, unsigned int right)
+
+```
+$ nvcc 01CUDA_Bitmap.cu && ./a.out -r
+```
+
+２．シングルスレッドで非再帰
+こちらは以下のメソッドを呼び出し非再帰実行します
+
+// ビットマップ 非再帰版
+void bitmap_NR(unsigned int size,int row)
+
+```
+$ nvcc 01CUDA_Bitmap.cu && ./a.out -c
+```
+
+３．シングルスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+シングルスレッドで動作します。
+
+// クイーンの効きを判定して解を返す
+__host__ __device__ 
+long bitmap_solve_nodeLayer(int size,long left,long down,long right)
+
+```
+$ nvcc 01CUDA_Bitmap.cu && ./a.out -g
+```
+３の必要性は、４を開発している間、問題点を局所化するためです。
+３の解がきちんと出力していれば、他の箇所に問題があると特定することが目的です。
+
+
+
+４．マルチスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+マルチスレッドで動作します。
+
+```
+$ nvcc 01CUDA_Bitmap.cu && ./a.out -n
+```
+
+次の項では、４について具体的に説明します。
+
+## ノードレイヤーによるビットマップ
+`InitCUDA()`を通過後、以下のメソッドを順次辿って実行されます。
+
+```c 
+// 【GPU ビットマップ】ノードレイヤーの作成
+void bitmap_build_nodeLayer(int size)
+
+// k 番目のレイヤのすべてのノードを含むベクトルを返す。
+std::vector<long> kLayer_nodeLayer(int size,int k)
+
+// ノードをk番目のレイヤーのノードで埋める
+long kLayer_nodeLayer(int size,std::vector<long>& nodes, int k, long left, long down, long right)
+
+// 0以外のbitをカウント
+int countBits_nodeLayer(long n)
+
+// i 番目のメンバを i 番目の部分木の解で埋める
+__global__ 
+void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
+
+// クイーンの効きを判定して解を返す
+__host__ __device__ 
+long bitmap_solve_nodeLayer(int size,long left,long down,long right)
+```
+
+### 【GPU ビットマップ】ノードレイヤーの作成
+```c
+void bitmap_build_nodeLayer(int size)
+```
+
+以下でレイヤーの数を指定します。
+Ｎが増えればレイヤーは枯渇します。
+Ｎが１６まではレイヤーは４で足りますが、以降、レイヤーは、５，６と増やす必要があり、レイヤーが増えることによって、速度は加速度的に遅くなります。
+ノードレイヤーの考え方はスマートではありますが、Ｎの最大化と高速化を求める場合は限界がまもなくおとずれるロジックです。
+
+今の段階では、レイヤー４で進めていきます。
+
+```c
+  // ツリーの3番目のレイヤーにあるノード
+  //（それぞれ連続する3つの数字でエンコードされる）のベクトル。
+  // レイヤー2以降はノードの数が均等なので、対称性を利用できる。
+  // レイヤ4には十分なノードがある（N16の場合、9844）。
+  std::vector<long> nodes = kLayer_nodeLayer(size,4); 
+```
+
+以下で、ノードごとの解を保存する配列を用意します。
+ノードレイヤーの特性として、ノードの半分だけを利用して解を出すことができます。これはミラーのイメージでよいです。
+
+```c
+  // デバイス出力の割り当て
+  long* deviceSolutions = NULL;
+  // 必要なのはノードの半分だけで、各ノードは3つの整数で符号化される。
+  int numSolutions = nodes.size() / 6; 
+  size_t solutionSize = numSolutions * sizeof(long);
+  cudaMalloc((void**)&deviceSolutions, solutionSize);
+
+```
+
+以下で、CUDAカーネルを起動します。
+```
+CUDAで並列処理したい関数 <<< 並列処理の指定 >>>( 関数パラメータ）
+```
+
+関数パラメータは、構造体にひとまとめにするよりも、ばらして渡す方がメモリ消費的に良いとされています。
+
+
+```c 
+  // CUDAカーネルを起動する。
+  int threadsPerBlock = 256;
+  int blocksPerGrid = (numSolutions + threadsPerBlock - 1) / threadsPerBlock;
+  dim_nodeLayer <<<blocksPerGrid, threadsPerBlock >>> (size,deviceNodes, deviceSolutions, numSolutions);
+
+```
+
+CUDAの実行が終わったら、デバイス側に保存されている配列を`cudaMemcpy()`でホスト側にコピーします。
+
+```c 
+  // 結果をホストにコピー
+  long* hostSolutions = (long*)malloc(solutionSize);
+  cudaMemcpy(hostSolutions, deviceSolutions, solutionSize, cudaMemcpyDeviceToHost);
+
+```
+
+ホスト側にコピーした配列をスレッドの数だけ`for`で回して、解を一つ一つ取り出して集計します。
+```c
+  // 部分解を加算し、結果を表示する。
+  long solutions = 0;
+  for (long i = 0; i < numSolutions; i++) {
+      solutions += 2*hostSolutions[i]; // Symmetry
+  }
+  // 出力
+  TOTAL=solutions;
+
+```
+
+
+### k 番目のレイヤのすべてのノードを含むベクトルを返す。
+```c
+std::vector<long> kLayer_nodeLayer(int size,int k)
+```
+
+こちらの関数は、`kLayer_nodeLayer()`を使って、必要なノードを埋める処理をします。ようするに、Ｎクイーンの当たり判定をすべて行いノードを作成するということになります。
+
+ノードレイヤーが遅い理由は、Ｎクイーンの処理を、当たり判定と本番確定の２回行っていることです。
+
+
+### i 番目のメンバを i 番目の部分木の解で埋める
+```c
+__global__ 
+void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
+```
+こちらで、CUDAによって並列処理された一つ一つのスレッドがＮクイーンを実行して、その結果を`counter`に追記格納し、返却します。
+
+### クイーンの効きを判定して解を返す
+```c
+__host__ __device__ 
+long bitmap_solve_nodeLayer(int size,long left,long down,long right)
+```
+
+こちらのメソッドは `-g` オプションで起動したときのメソッドですが、いわゆるＮクイーンのメインメソッドとなります。
+
+
 
 ## エイトクイーン
+ここからは、ビットマップについて少し詳細に説明しておきたいと思います。
+
 ### ビットマップ
 Ｎ×ＮのチェスボードのＮ個のクイーンの配置を、bitwise(ビット)で表したものが`bitmap`(ビットマップ)です。
 
@@ -1162,11 +1336,11 @@ forで一行にまとめることができます。これは非常にトリッ�
 ```
 
 
-#### bitmap=mask&~(left|down|right)
+### bitmap=mask&~(left|down|right)
 クイーンが配置可能な位置を表す
 
 
-#### bit=-bitmap & -bitmap
+### bit=-bitmap & -bitmap
 while中の各繰り返しで、`bit` に、配置できる可能性と配置できない可能性をAND演算した結果を`bit`にセットしています。この結果、`bit` は、`bitmap` の最下位ビットを除いて、すべて`0`に設定し、Qを配置します。
 もう少し噛み砕いて説明すると、単に最初の非ゼロビット（つまり最初に利用できる場所である１）を `bit` という変数に格納するだけです。
 その `bit` （ビットが0010なら3列目）は、次のクイーンを置く場所となります。
@@ -1174,17 +1348,17 @@ while中の各繰り返しで、`bit` に、配置できる可能性と配置で
 こうすることで、whileループ中で、「取られた」場所を再度試す必要がなくなるということになります。
 
 
-#### bitmap=bitmap&~bit
+### bitmap=bitmap&~bit
 配置可能なパターンが一つずつ取り出され、`bitmap` の最下位ビットを開放、次のループに備え、新しい最下位ビットを探索、再帰的な呼び出しを行い、次の行のビットフィールドである`bitmap` を更新します。
 `bit` には、Qの場所を表す`1` が1つだけ入ったビットフィールが格納されています。
 渡された競合情報と`OR演算` することで、再帰呼び出しの競合候補として追加されます。
 
 
-#### board[row]=bit
+### board[row]=bit
 要するにQを配置するわけです。
 
 
-#### bitmap_R(size,row+1,(left|bit)<<1,down|bit,(right|bit)>>1);
+### bitmap_R(size,row+1,(left|bit)<<1,down|bit,(right|bit)>>1);
 ソースの中も最も混乱する行だと思います。
 演算子 `>>1` と `1<<` は、ビットフィールド列すべてのビットをそれぞれ右、または左に1桁移動させるだけです。
 
@@ -1230,7 +1404,6 @@ while中の各繰り返しで、`bit` に、配置できる可能性と配置で
 そうしないと、どの対角線が「占有」されているかという知識が、現在の行に対して正しくなくなるからです。
 
 上記の例からわかるように、`$(( ~(left|down|right ))` を計算すると`2#1000` となり、2行目の安全な場所は1列目のみであることがわかります。
-
 
 
 
