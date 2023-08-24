@@ -22,7 +22,324 @@ tags:
 Bash、Lua、C、Java、Python、CUDAまで！
 https://github.com/suzukiiichiro/N-Queens
 
+
+## CUDAセットアップ
+### 手順など
+今どきは少なくなったわけですが、CUDAをインストールから始めたい人はこちら
+
+EC2 G4インスタンスのAmazon Linux 2にNVIDIA CUDAをインストールしてみた
+https://dev.classmethod.jp/articles/install-nvidia-cuda-on-ec2-g4-amazon-linux-2/
+
+今どきは、GPUインスタンスを使えば最初から`nvcc`が実行できます。
+
+AWSのGPUインスタンスでCUDAを動かす
+https://qiita.com/navitime_tech/items/0a8073347c21800f1cad
+
+料金やインスタンスの選定、起動までが詳しく書かれているページはこちら
+
+AWS/EC2でGPUマシンを起動してみる
+https://motomura-kazushi.net/2021/08/15/aws-ec2%E3%81%A7gpu%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92%E3%82%92%E5%9B%9E%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/
+
+### 確認方法
+GPUインスタンスでCUDAが使えるようになったかな？と、確認するには以下のコマンドを実行します。
+
+```
+$ nvcc --version
+```
+
+以下の内容が表示されればCUDAは実行可能な状態にあります。
+
+```
+NQueens2$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Tue_Jul_11_02:31:28_PDT_2023
+Cuda compilation tools, release 12.2, V12.2.128
+Build cuda_12.2.r12.2/compiler.33053471_0
+NQueens2$
+```
+
+よくありがちな質問ですが、`top`コマンドでは、GPUインスタンスの負荷を調べることはできませんので、以下のコマンドでGPUインスタンスのCPU不可やメモリ使用状況を確認します。
+
+```
+$ watch nvidia-smi
+```
+
+## ミラー ＣＵＤＡ部分についての解説
+### 実行
+実行は以下の４種類です。
+
+１．シングルスレッドで再帰
+こちらは以下のメソッドを呼び出し再帰実行します。
+わかりやすくするために、ロジック部分を切り出して別関数にしています。
+
+//ミラーロジック 再帰版
+void mirror_solve_R(unsigned int size,unsigned int row,unsigned int left,unsigned int down,unsigned int right)
+// ミラー 再帰版
+void mirror_R(unsigned int size)
+
+```
+$ nvcc 02CUDA_Mirror.cu && ./a.out -r
+```
+
+２．シングルスレッドで非再帰
+こちらは以下のメソッドを呼び出し非再帰実行します
+わかりやすくするために、ロジック部分を切り出して別関数にしています。
+
+//ミラー処理部分 非再帰版
+void mirror_solve_NR(unsigned int size,unsigned int row,unsigned int _left,unsigned int _down, unsigned int _right)
+// ミラー 非再帰版
+void mirror_NR(unsigned int size)
+
+```
+$ nvcc 02CUDA_Mirror.cu && ./a.out -c
+```
+
+３．シングルスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+シングルスレッドで動作します。
+
+// ミラー 処理部分
+__host__ __device__ 
+long mirror_solve_nodeLayer(int size,long left,long down,long right)
+// ミラー クイーンの効きを判定して解を返す
+__host__ __device__ 
+long mirror_logic_nodeLayer(int size,long left,long down,long right)
+
+```
+$ nvcc 02CUDA_Mirror.cu && ./a.out -g
+```
+３の必要性は、４を開発している間、問題点を局所化するためです。
+３の解がきちんと出力していれば、他の箇所に問題があると特定することが目的です。
+
+
+４．マルチスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+マルチスレッドで動作します。
+
+```
+$ nvcc 02CUDA_Mirror.cu && ./a.out -n
+```
+
+次の項では、４について具体的に説明します。
+
+## 関数の説明
+`InitCUDA()`を通過後、以下のメソッドを順次辿って実行されます。
+
+### 関数一覧
+```c 
+// ミラー 処理部分
+__host__ __device__ 
+long mirror_solve_nodeLayer(int size,long left,long down,long right)
+
+// ミラー クイーンの効きを判定して解を返す
+__host__ __device__ 
+long mirror_logic_nodeLayer(int size,long left,long down,long right)
+
+// i 番目のメンバを i 番目の部分木の解で埋める
+__global__ 
+void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
+
+// 0以外のbitをカウント
+int countBits_nodeLayer(long n)
+
+// ノードをk番目のレイヤーのノードで埋める
+long kLayer_nodeLayer(int size,std::vector<long>& nodes, int k, long left, long down, long right)
+
+// k 番目のレイヤのすべてのノードを含むベクトルを返す。
+std::vector<long> kLayer_nodeLayer(int size,int k)
+
+// 【GPU ミラー】ノードレイヤーの作成
+void mirror_build_nodeLayer(int size)
+
+// CUDA 初期化
+bool InitCUDA()
+```
+
+
+### CUDA 初期化
+bool InitCUDA()
+CUDAデバイスが搭載されているか、GPUの数などを確認します。
+GPUが搭載されていない場合は、`return`します。
+
+
+### 【GPU ミラー】ノードレイヤーの作成
+```c
+void mirror_build_nodeLayer(int size)
+```
+
+以下でレイヤーの数を指定します。
+Ｎが増えればレイヤーは枯渇します。
+Ｎが１６まではレイヤーは４で足りますが、以降、レイヤーは、５，６と増やす必要があり、レイヤーが増えることによって、速度は加速度的に遅くなります。
+ノードレイヤーの考え方はスマートではありますが、Ｎの最大化と高速化を求める場合は限界がまもなくおとずれるロジックです。
+
+今の段階では、レイヤー４で進めていきます。
+
+```c
+  // ツリーの3番目のレイヤーにあるノード
+  //（それぞれ連続する3つの数字でエンコードされる）のベクトル。
+  // レイヤー2以降はノードの数が均等なので、対称性を利用できる。
+  // レイヤ4には十分なノードがある（N16の場合、9844）。
+  std::vector<long> nodes = kLayer_nodeLayer(size,4); 
+```
+
+以下は、nodeSizeを算出し、hostNodes,deviceNodes配列を宣言、メモリを確保します。
+併せて、hostNodes配列の先頭に空の値を格納し、`cudaMemcpy()`でデバイス側に配列をコピー（転送）します。
+
+```c
+  // デバイスにはクラスがないので、
+  // 最初の要素を指定してからデバイスにコピーする。
+  size_t nodeSize = nodes.size() * sizeof(long);
+  long* hostNodes = (long*)malloc(nodeSize);
+  hostNodes = &nodes[0];
+  long* deviceNodes = NULL;
+  cudaMalloc((void**)&deviceNodes, nodeSize);
+  cudaMemcpy(deviceNodes, hostNodes, nodeSize, cudaMemcpyHostToDevice);
+```
+
+以下は、解を格納する deviceSolutions を宣言します。
+ミラーでは、必要なノードは半分で済みます。
+３の整数というのは、一つのノードに`left` `down` `right` が格納されるからです。
+
+```c
+  // デバイス出力の割り当て
+  long* deviceSolutions = NULL;
+  /** ミラーでは/6 を /3に変更する */
+  // 必要なのはノードの半分だけ
+  // 各ノードは3つの整数で符号化される。
+  //int numSolutions = nodes.size() / 6; 
+  int numSolutions = nodes.size() / 3; 
+  size_t solutionSize = numSolutions * sizeof(long);
+  cudaMalloc((void**)&deviceSolutions, solutionSize);
+```
+
+以下でCUDAカーネルを起動します。
+起動は
+```
+起動したい関数 <<< 並列処理の数 >>>( 関数に渡すパラメータ)
+```
+
+となります。
+
+```c
+  // CUDAカーネルを起動する。
+  int threadsPerBlock = 256;
+  int blocksPerGrid = (numSolutions + threadsPerBlock - 1) / threadsPerBlock;
+  dim_nodeLayer <<<blocksPerGrid, threadsPerBlock >>> (size,deviceNodes, deviceSolutions, numSolutions);
+```
+
+デバイス側で処理した結果がdeviceSolusionsに格納され、その配列を `cudaMemcpy()`でホスト側にコピー(転送)します。
+
+```c
+  // 結果をホストにコピー
+  long* hostSolutions = (long*)malloc(solutionSize);
+  cudaMemcpy(hostSolutions, deviceSolutions, solutionSize, cudaMemcpyDeviceToHost);
+```
+
+デバイスからホストへ転送する場合は
+```
+cudaMemcpyDeviceToHost
+```
+
+ホストからデバイスへ転送する場合は
+```
+cudaMemcpyHostToDevice
+```
+となります。
+
+
+以下は、スレッドごとに格納された解を`for`で回して集計します。
+```c
+  // 部分解を加算し、結果を表示する。
+  long solutions = 0;
+  for (long i = 0; i < numSolutions; i++) {
+      solutions += 2*hostSolutions[i]; // Symmetry
+  }
+  // 出力
+  TOTAL=solutions;
+```
+
+### k 番目のレイヤのすべてのノードを含むベクトルを返す。
+
+```c
+std::vector<long> kLayer_nodeLayer(int size,int k)
+```
+
+こちらの関数は、`kLayer_nodeLayer()`を使って、必要なノードを埋める処理をします。ようするに、Ｎクイーンの当たり判定をすべて行いノードを作成するということになります。
+
+ノードレイヤーが遅い理由は、Ｎクイーンの処理を、当たり判定と本番確定の２回行っていることです。
+
+メモ
+GPUで並列実行するためのleft,right,downを作成する
+
+kLayer_nodeLayer(size,4)
+第2引数の4は4行目までnqueenを実行し、それまでのleft,down,rightをnodes配列に格納する
+
+nodesはベクター配列で構造体でもなんでも格納できる
+push_backで追加。
+
+nodes配列は3個で１セットleft,dwon,rightの情報を同じ配列に格納する
+[0]left[1]down[2]right
+
+
+### ノードをk番目のレイヤーのノードで埋める
+```c
+long kLayer_nodeLayer(int size,std::vector<long>& nodes, int k, long left, long down, long right)
+```
+
+ここでは、解を導き出すために、ノードにより、クイーンの移動の候補を列挙する処理を行います。
+ノードレイヤーは、解を導き出すための処理に加えて、クイーンの移動候補を列挙するための処理を行うため、事実上、２回映とクイーンを行っていることが、速度低下の最大のボトルネックと言えます。
+
+
+### 0以外のbitをカウント
+```c
+int countBits_nodeLayer(long n)
+```
+
+ここでは、ビットで表現されたボード情報の右端にあるゼロ以外の数字を削除する処理を行います。
+
+
+### i 番目のメンバを i 番目の部分木の解で埋める
+```c
+__global__ 
+void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
+```
+
+肝のところはここです。
+```
+ミラーのGPUスレッド(-n)の場合は、予めCPU側で奇数と偶数で分岐させるので、奇数と偶数を条件分岐するmirror_logic_nodeLayer()を通過させる必要がない
+```
+
+いわゆる、ミラーになってノードの半分しか精査しない処理になったことにより、関数が一つ減ったわけです。
+
+
+### ミラー クイーンの効きを判定して解を返す
+```c
+__host__ __device__ 
+long mirror_logic_nodeLayer(int size,long left,long down,long right)
+```
+
+ということで、この関数は不要となりました。
+
+
+### ミラー 処理部分
+```c
+__host__ __device__ 
+long mirror_solve_nodeLayer(int size,long left,long down,long right)
+```
+
+ここでは、再帰処理を行います。
+もっとも負荷の高い処理です。
+01CUDA_Bitmap.cuと同様に再帰処理を普通にしています。
+加算を続けたcounter変数は最後に`return`で値を返します。
+
+
+
+
 ## ミラー
+ここからは、GPUに限定せず、ミラーのロジックについて説明します。
+
+
 ミラー（鏡像）を用いてどのように改善できるのか
 Ｎ５＝１０、Ｎ８＝９２といった、N-Queensの解が成立している場合、その鏡像（ミラー）も当然成立していることになります。
 
