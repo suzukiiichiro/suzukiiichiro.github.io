@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（６２）第七章 並列処理 対称解除法 ＮＶＩＤＩＡ ＣＵＤＡ編"
+title: "Ｎクイーン問題（６２）第七章 並列処理 対称解除法 ノードレイヤー ＮＶＩＤＩＡ ＣＵＤＡ編"
 date: 2023-08-01T10:08:17+09:00
 draft: false
 authors: suzuki
@@ -21,6 +21,338 @@ tags:
 エイト・クイーンのプログラムアーカイブ 
 Bash、Lua、C、Java、Python、CUDAまで！
 https://github.com/suzukiiichiro/N-Queens
+
+
+## CUDAセットアップ
+### 手順など
+今どきは少なくなったわけですが、CUDAをインストールから始めたい人はこちら
+
+EC2 G4インスタンスのAmazon Linux 2にNVIDIA CUDAをインストールしてみた
+https://dev.classmethod.jp/articles/install-nvidia-cuda-on-ec2-g4-amazon-linux-2/
+
+今どきは、GPUインスタンスを使えば最初から`nvcc`が実行できます。
+
+AWSのGPUインスタンスでCUDAを動かす
+https://qiita.com/navitime_tech/items/0a8073347c21800f1cad
+
+料金やインスタンスの選定、起動までが詳しく書かれているページはこちら
+
+AWS/EC2でGPUマシンを起動してみる
+https://motomura-kazushi.net/2021/08/15/aws-ec2%E3%81%A7gpu%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92%E3%82%92%E5%9B%9E%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/
+
+### 確認方法
+GPUインスタンスでCUDAが使えるようになったかな？と、確認するには以下のコマンドを実行します。
+
+```
+$ nvcc --version
+```
+
+以下の内容が表示されればCUDAは実行可能な状態にあります。
+
+```
+NQueens2$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Tue_Jul_11_02:31:28_PDT_2023
+Cuda compilation tools, release 12.2, V12.2.128
+Build cuda_12.2.r12.2/compiler.33053471_0
+NQueens2$
+```
+
+よくありがちな質問ですが、`top`コマンドでは、GPUインスタンスの負荷を調べることはできませんので、以下のコマンドでGPUインスタンスのCPU不可やメモリ使用状況を確認します。
+
+```
+$ watch nvidia-smi
+```
+
+## ミラー ＣＵＤＡ部分についての解説
+### 実行
+実行は以下の４種類です。
+
+１．シングルスレッドで再帰
+
+```c
+// 再帰 対称解除法
+void symmetry_R(unsigned int size,struct local* l)
+```
+
+```
+$ nvcc 03CUDA_Symmetry_NodeLayer.cu && ./a.out -r
+```
+
+２．シングルスレッドで非再帰
+
+```c
+// 非再帰 対称解除法
+void symmetry_NR(unsigned int size,struct local* l)
+```
+
+```
+$ nvcc 03CUDA_Symmetry_NodeLayer.cu && ./a.out -c
+```
+
+３．シングルスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+シングルスレッドで動作します。
+
+```c
+// GPU 対称解除法 -g の実行時のみ呼び出されます
+__host__ __device__
+void GPU_symmetry_R(unsigned int size,struct local* hostLocal)
+
+```
+```
+$ nvcc 03CUDA_Symmetry_NodeLayer.cu && ./a.out -g
+```
+
+３の必要性は、４を開発している間、問題点を局所化するためです。
+３の解がきちんと出力していれば、他の箇所に問題があると特定することが目的です。
+
+
+４．マルチスレッドのＧＰＵ
+こちらは`InitCUDA()`を通過後、以下のメソッドを呼び出します。
+マルチスレッドで動作します。
+
+```c
+// GPU -n ノードレイヤーの作成
+void symmetry_build_nodeLayer(unsigned int size)
+```
+
+```
+$ nvcc 03CUDA_Symmetry_NodeLayer.cu && ./a.out -n
+```
+
+次の項では、４について具体的に説明します。
+
+## 関数の説明
+`InitCUDA()`を通過後、以下のメソッドを順次辿って実行されます。
+
+### CUDA 初期化
+```c
+bool InitCUDA()
+```
+CUDAデバイスが搭載されているか、GPUの数などを確認します。
+GPUが搭載されていない場合は、`return`します。
+
+
+### GPU -n ノードレイヤーの作成
+```c
+void symmetry_build_nodeLayer(unsigned int size)
+```
+
+以下でレイヤーの数を指定します。
+Ｎが増えればレイヤーは枯渇します。
+Ｎが１６まではレイヤーは４で足りますが、以降、レイヤーは、５，６と増やす必要があり、レイヤーが増えることによって、速度は加速度的に遅くなります。
+ノードレイヤーの考え方はスマートではありますが、Ｎの最大化と高速化を求める場合は限界がまもなくおとずれるロジックです。
+
+今の段階では、レイヤー４で進めていきます。
+
+```c
+  // ツリーの3番目のレイヤーにあるノード
+  //（それぞれ連続する3つの数字でエンコードされる）のベクトル。
+  // レイヤー2以降はノードの数が均等なので対称性を利用できる。
+  // レイヤ4には十分なノードがある（N16の場合、9844）。
+  // ここではレイヤーを５に設定、Ｎに併せて増やしていく
+  std::vector<local>L;
+  // NodeLayerは、N18でabortします。
+  std::vector<long> nodes=kLayer_nodeLayer(size,5,L); 
+```
+
+以下の部分で nodeSizeを取得します。
+また、hostNodesとdeviceNodesを宣言しメモリ領域を確保します。
+併せて、hostNodes配列の先頭に空の値を格納し、`cudaMemcpy()`でデバイス側に配列をコピー（転送）します。
+
+```c
+  // デバイスにはクラスがないので、
+  // 最初の要素を指定してからデバイスにコピーする。
+  size_t nodeSize=nodes.size() * sizeof(long);
+  long* hostNodes=(long*)malloc(nodeSize);
+  hostNodes=&nodes[0];
+  long* deviceNodes=NULL;
+  cudaMalloc((void**)&deviceNodes,nodeSize);
+  cudaMemcpy(deviceNodes,hostNodes,nodeSize,cudaMemcpyHostToDevice);
+```
+
+この部分では、構造体 Localをデバイスに転送して利用するために、`hostLocal` と `deviceLocal`を作成します。
+併せて、hostLocal構造体の配列の先頭にからの値を格納し、`cudaMemcpy()`でデバイス側に配列をコピー（転送）します。
+
+```
+  // host/device Local
+  //size_t localSize=numSolutions * sizeof(struct local);
+  size_t localSize=L.size() * sizeof(struct local);
+  struct local* hostLocal=(local*)malloc(localSize);
+  hostLocal=&L[0];
+  local* deviceLocal=NULL;
+  cudaMalloc((void**)&deviceLocal,localSize);
+  cudaMemcpy(deviceLocal, hostLocal, localSize, cudaMemcpyHostToDevice);
+```
+
+以下は、解を格納する deviceSolutions を宣言します。
+ミラーでは、必要なノードは半分で済みます。
+３の整数というのは、一つのノードに`left` `down` `right` が格納されるからです。
+
+```c
+  // デバイス出力の割り当て
+  // 必要なのはノードの半分だけで、
+  // 各ノードは3つの整数で符号化される。
+  long* deviceSolutions=NULL;
+  int numSolutions=nodes.size() / 3; 
+  size_t solutionSize=numSolutions * sizeof(long);
+  cudaMalloc((void**)&deviceSolutions,solutionSize);
+```
+
+以下でCUDAカーネルを起動します。
+起動は
+```
+起動したい関数 <<< 並列処理の数 >>>( 関数に渡すパラメータ)
+```
+
+となります。
+
+```c
+  // CUDAカーネルを起動する。
+  int threadsPerBlock=256;
+  int blocksPerGrid=(numSolutions+threadsPerBlock-1)/threadsPerBlock;
+  dim_nodeLayer <<<blocksPerGrid,threadsPerBlock>>>(size,deviceNodes,deviceSolutions,numSolutions,deviceLocal);
+```
+
+以下では、デバイス側で処理した結果がdeviceSolusionsに格納され、その配列を `cudaMemcpy()`でホスト側にコピー(転送)します。
+
+```c
+  // 結果をホストにコピー
+  long* hostSolutions=(long*)malloc(solutionSize);
+  cudaMemcpy(hostSolutions,deviceSolutions,solutionSize,cudaMemcpyDeviceToHost);
+```
+
+デバイスからホストへ転送する場合は
+```
+cudaMemcpyDeviceToHost
+```
+
+ホストからデバイスへ転送する場合は
+```
+cudaMemcpyHostToDevice
+```
+となります。
+
+
+以下は、スレッドごとに格納された解を`for`で回して集計します。
+```c
+  // 部分解を加算し、結果を表示する。
+  unsigned long solutions=0;
+  for(unsigned long i=0;i<numSolutions;i++){
+       solutions += hostSolutions[i]; // Symmetry
+  }
+  // 出力
+  TOTAL=solutions;
+```
+
+### GPU -n Ｋレイヤー k 番目のレイヤのすべてのノードを含むベクトルを返す
+```
+std::vector<long> kLayer_nodeLayer(unsigned int size,unsigned int k,std::vector<local>& L)
+```
+
+こちらの関数は、`kLayer_nodeLayer()`を使って、必要なノードを埋める処理をします。ようするに、Ｎクイーンの当たり判定をすべて行いノードを作成するということになります。
+
+ノードレイヤーが遅い理由は、Ｎクイーンの処理を、当たり判定と本番確定の２回行っていることです。
+
+メモ
+GPUで並列実行するためのleft,right,downを作成する
+
+kLayer_nodeLayer(size,4)
+第2引数の4は4行目までnqueenを実行し、それまでのleft,down,rightをnodes配列に格納する
+
+nodesはベクター配列で構造体でもなんでも格納できる
+push_backで追加。
+
+nodes配列は3個で１セットleft,dwon,rightの情報を同じ配列に格納する
+[0]left[1]down[2]right
+
+
+### GPU -n Ｋレイヤー 再帰 角にQがないときのバックトラック
+```c
+unsigned long kLayer_nodeLayer_backTrack(int size,std::vector<long>& nodes,unsigned int k,unsigned long left,unsigned long down,unsigned long right,std::vector<local>& L,struct local* l)
+```
+こちらの関数は、「ノードレイヤーにおける」ボードの最上部の角にＱがないときのバックトラックです。枝刈り処理が含まれています。
+
+```c
+    if(row<l->BOUND1){   //枝刈り
+      bitmap=bitmap|2;
+      bitmap=bitmap^2;
+    }
+```
+
+### GPU -n Ｋレイヤー 角にQがあるときのバックトラック
+```c
+unsigned long kLayer_nodeLayer_backTrack_corner(unsigned int size,std::vector<long>& nodes,unsigned int k,unsigned long left,unsigned long down,unsigned long right,std::vector<local>& L,struct local* l)
+```
+こちらの関数は、「ノードレイヤーにおける」ボードの最上部の角にＱがないときのバックトラックです。枝刈り処理が含まれています。
+
+```c
+    if(row<l->BOUND1){
+      bitmap=bitmap|l->SIDEMASK;
+      bitmap=bitmap^l->SIDEMASK;
+    }else{
+      if(row==l->BOUND2){
+        if((down&l->SIDEMASK)==0){
+          return 0;
+        }
+        if( (down&l->SIDEMASK)!=l->SIDEMASK){
+          bitmap=bitmap&l->SIDEMASK;
+        }
+      }
+    }
+```
+
+### GPU -n ノードレイヤー i 番目のメンバを i 番目の部分木の解で埋める
+```c
+__global__ 
+void dim_nodeLayer(unsigned int size,long* nodes,long* solutions,unsigned int numElements,struct local* l)
+```
+
+ここでは、解を導き出すために、ノードにより、クイーンの移動の候補を列挙する処理を行います。
+ノードレイヤーは、解を導き出すための処理に加えて、クイーンの移動候補を列挙するための処理を行うため、事実上、２回エイトクイーンを行っていることが、速度低下の最大のボトルネックと言えます。
+
+ボード最上部の角にＱがあるかないかの判定で`GPU_symmetry_solve_nodeLayer_corner()`を呼び出すか`GPU_symmetry_solve_nodeLayer()`を呼び出すかの判定処理を行っています。
+
+
+### GPU -n ノードレイヤーによる対称解除法 -n の実行時に呼び出される
+```c
+__host__ __device__ 
+long GPU_symmetry_solve_nodeLayer(unsigned int size,unsigned long left,unsigned long down,unsigned long right,struct local* l)
+```
+
+ここでは、ボードの最上部の角にＱがないときの処理を行います。
+「ノードレイヤーにおける」ではありません。実際の解を求める処理となります。
+
+### GPU -n ノードレイヤーによる対称解除法 -n の実行時に呼び出される
+```c
+__host__ __device__ 
+long GPU_symmetry_solve_nodeLayer_corner(unsigned int size,unsigned long left,unsigned long down,unsigned long right,struct local* l)
+```
+
+ここでは、ボードの最上部の角にＱがあるときの処理を行います。
+「ノードレイヤーにおける」ではありません。実際の解を求める処理となります。
+
+
+### 0以外のbitをカウント
+```c
+__host__ __device__
+unsigned int countBits_nodeLayer(unsigned long n)
+```
+
+ここでは、ビットで表現されたボード情報の右端にあるゼロ以外の数字を削除する処理を行います。
+
+
+### GPU -n の 対称解除法
+```c
+__host__ __device__
+long GPUN_symmetryOps(unsigned int size,struct local* l)
+```
+
+ここが対称解除法の肝の部分です。
+事項で詳細に説明します。
+
 
 
 ## 対象解除法について
