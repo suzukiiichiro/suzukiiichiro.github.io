@@ -657,7 +657,6 @@ $ nvcc -O3 -arch=sm_61 02CUDA_Mirror.cu && ./a.out -n
 ・void mirror_build_nodeLayer(int size)
   int numSolutions = nodes.size() / 3; 
   left,down,rightで1セットなので/3 kLayer_nodeLayerで半分だけ実行しているのでここは/3のまま
- 
 
   for (long i = 0; i < numSolutions; i++) {
       solutions += 2*hostSolutions[i]; // Symmetry
@@ -738,7 +737,7 @@ void mirror_NR(unsigned int size)
   }
   TOTAL=TOTAL<<1;    //倍にする
 }
-//ミラーロジック 再帰版
+// ミラー処理部分 再帰版
 void mirror_solve_R(unsigned int size,unsigned int row,unsigned int left,unsigned int down,unsigned int right)
 {
   unsigned int mask=(1<<size)-1;
@@ -773,9 +772,9 @@ void mirror_R(unsigned int size)
   }
   TOTAL=TOTAL<<1;    //倍にする
 }
-// ロジック クイーンの効きを判定して解を返す
+// ミラー 処理部分
 __host__ __device__ 
-long mirror_logic_nodeLayer(int size,long left,long down,long right)
+long mirror_solve_nodeLayer(int size,long left,long down,long right)
 {
   unsigned int mask=(1<<size)-1;
   unsigned int bit=0;
@@ -785,21 +784,21 @@ long mirror_logic_nodeLayer(int size,long left,long down,long right)
   }else{
     for(unsigned int bitmap=mask&~(left|down|right);bitmap;bitmap=bitmap&~bit){
       bit=-bitmap&bitmap;
-      counter+=mirror_logic_nodeLayer(size,(left|bit)<<1,down|bit,(right|bit)>>1);
+      counter+=mirror_solve_nodeLayer(size,(left|bit)<<1,down|bit,(right|bit)>>1);
     }
   }
   return counter;
 }
-// ロジック クイーンの効きを判定して解を返す
+// ミラー クイーンの効きを判定して解を返す
 __host__ __device__ 
-long mirror_solve_nodeLayer(int size,long left,long down,long right)
+long mirror_logic_nodeLayer(int size,long left,long down,long right)
 {
   unsigned long counter = 0;
   unsigned int bit=0;
   unsigned int limit=size%2 ? size/2-1 : size/2;
   for(unsigned int i=0;i<size/2;++i){
     bit=1<<i;
-    counter+=mirror_logic_nodeLayer(size,bit<<1,bit,bit>>1);
+    counter+=mirror_solve_nodeLayer(size,bit<<1,bit,bit>>1);
   }
   if(size%2){               //奇数で通過
     bit=1<<(size-1)/2;
@@ -808,7 +807,7 @@ long mirror_solve_nodeLayer(int size,long left,long down,long right)
     unsigned int right=bit>>1;
     for(unsigned int i=0;i<limit;++i){
       bit=1<<i;
-      counter+=mirror_logic_nodeLayer(size,(left|bit)<<1,down|bit,(right|bit)>>1);
+      counter+=mirror_solve_nodeLayer(size,(left|bit)<<1,down|bit,(right|bit)>>1);
     }
   }
   return counter<<1; // 倍にする
@@ -821,10 +820,9 @@ void dim_nodeLayer(int size,long* nodes, long* solutions, int numElements)
   if(i<numElements){
     /**
       ミラーのGPUスレッド(-n)の場合は、予めCPU側で奇数と偶数で分岐させるので、
-      奇数と偶数を条件分岐するmirror_solve_nodeLayer()を通過させる必要がない
+      奇数と偶数を条件分岐するmirror_logic_nodeLayer()を通過させる必要がない
       */
-    //solutions[i]=mirror_solve_nodeLayer(size,nodes[3 * i],nodes[3 * i + 1],nodes[3 * i + 2]);
-    solutions[i]=mirror_logic_nodeLayer(size,nodes[3 * i],nodes[3 * i + 1],nodes[3 * i + 2]);
+    solutions[i]=mirror_solve_nodeLayer(size,nodes[3 * i],nodes[3 * i + 1],nodes[3 * i + 2]);
   }
 }
 // 0以外のbitをカウント
@@ -887,7 +885,6 @@ std::vector<long> kLayer_nodeLayer(int size,int k)
 // 【GPU ミラー】ノードレイヤーの作成
 void mirror_build_nodeLayer(int size)
 {
-  //int size=16;
   // ツリーの3番目のレイヤーにあるノード
   //（それぞれ連続する3つの数字でエンコードされる）のベクトル。
   // レイヤー2以降はノードの数が均等なので、対称性を利用できる。
@@ -905,10 +902,9 @@ void mirror_build_nodeLayer(int size)
 
   // デバイス出力の割り当て
   long* deviceSolutions = NULL;
-  /**
-    ミラーでは/6 を /3に変更する
-    */
-  // 必要なのはノードの半分だけで、各ノードは3つの整数で符号化される。
+  /** ミラーでは/6 を /3に変更する */
+  // 必要なのはノードの半分だけで
+  // 各ノードは3つの整数で符号化される。
   //int numSolutions = nodes.size() / 6; 
   int numSolutions = nodes.size() / 3; 
   size_t solutionSize = numSolutions * sizeof(long);
@@ -928,11 +924,8 @@ void mirror_build_nodeLayer(int size)
   for (long i = 0; i < numSolutions; i++) {
       solutions += 2*hostSolutions[i]; // Symmetry
   }
-
   // 出力
-  //std::cout << "We have " << solutions << " solutions on a " << size << " by " << size << " board." << std::endl;
   TOTAL=solutions;
-  //return 0;
 }
 // CUDA 初期化
 bool InitCUDA()
@@ -974,7 +967,8 @@ int main(int argc,char** argv)
   else if(cpu){ printf("\n\nミラー 非再帰 \n"); }
   else if(gpu){ printf("\n\nミラー GPU\n"); }
   else if(gpuNodeLayer){ printf("\n\nミラー GPUノードレイヤー \n"); }
-  if(cpu||cpur){
+  if(cpu||cpur)
+  {
     int min=4; 
     int targetN=17;
     struct timeval t0;
@@ -1008,7 +1002,8 @@ int main(int argc,char** argv)
           size,TOTAL,UNIQUE,dd,hh,mm,ss,ms);
     } //end for
   }//end if
-  if(gpu||gpuNodeLayer){
+  if(gpu||gpuNodeLayer)
+  {
     if(!InitCUDA()){return 0;}
     /* int steps=24576; */
     int min=4;
@@ -1021,7 +1016,7 @@ int main(int argc,char** argv)
       if(gpu){
         TOTAL=UNIQUE=0;
         // GPUは起動するがノードレイヤーは行わない
-        TOTAL=mirror_solve_nodeLayer(size,0,0,0); //ミラー
+        TOTAL=mirror_logic_nodeLayer(size,0,0,0); //ミラー
       }else if(gpuNodeLayer){
         TOTAL=UNIQUE=0;
         // GPUを起動し、ノードレイヤーも行う
@@ -1047,6 +1042,7 @@ int main(int argc,char** argv)
   }//end if
   return 0;
 }
+
 ```
 
 ## CUDA 実行結果
