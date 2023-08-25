@@ -1,17 +1,762 @@
-<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta name=keywords content="N-Queens,エイト・クイーン,NVIDIA CUDA,Ｃ言語,並列処理,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/><meta property="og:title" content="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP"><meta property="og:description" content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="NVIDIA CUDA"><meta property="article:tag" content="Ｃ言語"><meta property="article:tag" content="並列処理"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-08-01T10:12:16+09:00"><meta property="article:modified_time" content="2023-08-18T16:07:34+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"><meta name=twitter:title content="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP"><meta name=twitter:description content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"],"datePublished":"2023-08-01T10:12:16+09:00","dateModified":"2023-08-18T16:07:34+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編","item":"https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml><link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png><link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png><meta name=description content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta name=keywords content="N-Queens,エイト・クイーン,NVIDIA CUDA,Ｃ言語,並列処理,アルゴリズム,鈴木維一郎,Webデザイン,Webサイト開発,bash,CSS,サーバ"><title>Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP</title><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css><link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css><link rel=canonical href=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/><meta property="og:title" content="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP"><meta property="og:description" content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/"><meta property="og:site_name" content="NLP"><meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="NVIDIA CUDA"><meta property="article:tag" content="Ｃ言語"><meta property="article:tag" content="並列処理"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-08-01T10:12:16+09:00"><meta property="article:modified_time" content="2023-08-25T12:33:27+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"><meta name=twitter:title content="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編｜NLP"><meta name=twitter:description content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのプログラムアーカイブ Bash、Lua、C、Java、Python、CU"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock"><script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-PE15Z9ML80",{custom_map:{dimension1:"image_url"},image_url:"/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg"],"datePublished":"2023-08-01T10:12:16+09:00","dateModified":"2023-08-25T12:33:27+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編","item":"https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/"}]}]</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
 on-phone--column extended"><div class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
 <span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/><picture><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60><source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30><img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP></picture></a></div><h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header><div id=main-menu><div id=main-menu-area><nav class="menu menu-section" id=categories-menu><ul class=menu-list id=main-cat><li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li><li><a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a><ul class=menu-list><li><a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_249>プログラミング</a></li><li><a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>Web開発</a></li><li><a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>サーバー構築</a></li><li><a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>Linux</a></li></ul></li></ul></nav><nav><ol class="menu menu-section"><li><a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span></a></li><li><a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span></a></li><li><a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span></a></li><li><a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span></a></li><li><a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span></a></li></ol></nav></div></div><button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg></button></div><main class="main full-width"><nav class=breadcrumb-area><ol class=breadcrumb><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a><li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a><li><span class=breadcrumb-item>Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編</span></ol></nav><article class="has-image main-article"><div class="article-details arcile-single"><header class=article-header><div class=article-category><a href=https://suzukiiichiro.github.io/categories/programming/>プログラミング</a></div><div class=article-info><span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span></span>
 <time class="article-time--item article-time--published">2023.08.01</time>
-<time class="article-time--item article-time--updatedate">2023.08.18</time>
-<time class="article-time--item article-time--reading">読了時間: 25分</time></div></header><h1 class=article-title>Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/n-queens/>N-Queens</a>
+<time class="article-time--item article-time--updatedate">2023.08.25</time>
+<time class="article-time--item article-time--reading">読了時間: 48分</time></div></header><h1 class=article-title>Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編</h1></div><div class=article-footer><section class=article-tags><a href=https://suzukiiichiro.github.io/tags/n-queens/>N-Queens</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
 <a href=https://suzukiiichiro.github.io/tags/nvidia-cuda/>NVIDIA CUDA</a>
 <a href=https://suzukiiichiro.github.io/tags/%EF%BD%83%E8%A8%80%E8%AA%9E/>Ｃ言語</a>
 <a href=https://suzukiiichiro.github.io/tags/%E4%B8%A6%E5%88%97%E5%87%A6%E7%90%86/>並列処理</a>
 <a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
-<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#cuda-ビットボード>CUDA ビットボード</a></li><li><a href=#cuda-ソースコード>CUDA ソースコード</a></li><li><a href=#cuda-実行結果>CUDA 実行結果</a></li><li><a href=#参考リンク>参考リンク</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><p><figure class=gallery-image style=flex-grow:132;flex-basis:318px><a href=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg data-size=1031x776><img src=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg width=1031 height=776 loading=lazy alt="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編の画像"></a></a></figure><br><a class=link href="https://suzukiiichiro.github.io/search/?keyword=%ef%bc%ae%e3%82%af%e3%82%a4%e3%83%bc%e3%83%b3%e5%95%8f%e9%a1%8c" target=_blank rel=noopener>【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから</a></p><p>エイト・クイーンのプログラムアーカイブ<br>Bash、Lua、C、Java、Python、CUDAまで！<br><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p><h2 id=cuda-ビットボード>CUDA ビットボード</h2><p>for(l.BOUND1=2;l.BOUND1&lt;size-1;l.BOUND1++){<br>for(l.BOUND1=1,l.BOUND2=size-1-1;l.BOUND1&lt;l.BOUND2;l.BOUND1++,l.BOUND2&ndash;){<br>のfor文の単位で複数回GPUが実行される<br>そのため、BOUND1,BOUND2,TOPBIT,ENDBIT,LASTMASK,SIDEMASKはGPU内では同じ値になる</p><p>STEPS数がGPU 1回でできる最大数なので、STEPSまでノード（GPUに渡す、LEFT,DOWN,RIGHT,board)が溜まったら、）が溜まったら息継ぎできに1回GPUを実行する</p><h2 id=cuda-ソースコード>CUDA ソースコード</h2><p>ソースコードは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cm>/**
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a></section></div><aside class="widget archives tableOfContents"><h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#cudaセットアップ>CUDAセットアップ</a><ol><li><a href=#手順など>手順など</a></li><li><a href=#確認方法>確認方法</a></li></ol></li><li><a href=#ミラー-ｃｕｄａ部分についての解説>ミラー ＣＵＤＡ部分についての解説</a><ol><li><a href=#実行>実行</a></li></ol></li><li><a href=#cuda-ビットボード-メモ>CUDA ビットボード メモ</a></li><li><a href=#bitboardによる対称解除法-説明>BitBoardによる対称解除法 説明</a><ol><li><a href=#cuda-初期化>CUDA 初期化</a></li><li><a href=#gpu--n-ビットボードの実行-角にｑがあるないの分岐を行う>GPU -n ビットボードの実行 角にＱがある・ないの分岐を行う</a></li><li><a href=#gpu--n-ｑが角にある>GPU -n Ｑが角にある</a></li><li><a href=#gpu--n-ｑが角にない>GPU -n Ｑが角にない</a></li><li><a href=#gpu--n-ｑが角にない場合のバックトラック内の再帰処理をカーネルで行う>GPU -n Ｑが角にない場合のバックトラック内の再帰処理をカーネルで行う</a></li><li><a href=#gpu--n-ｑが角にある場合のバックトラック内の再帰処理をカーネルで行う>GPU -n Ｑが角にある場合のバックトラック内の再帰処理をカーネルで行う</a></li><li><a href=#gpu--n-対称解除法>GPU -n 対称解除法</a></li></ol></li><li><a href=#対象解除法について>対象解除法について</a></li><li><a href=#対象解を導き出す２つの方法>対象解を導き出す２つの方法</a></li><li><a href=#対象解除法ｎ５版>対象解除法（Ｎ５版）</a></li><li><a href=#ユニーク解を判定するための定義>ユニーク解を判定するための定義</a></li><li><a href=#枝刈り>枝刈り</a></li><li><a href=#ユニーク解を数える>ユニーク解を数える</a></li><li><a href=#ユニーク数から全解を求める>ユニーク数から全解を求める</a></li><li><a href=#対象解除法-４つの関数>対象解除法 ４つの関数</a></li><li><a href=#symmetryメソッド>symmetry()メソッド</a><ol><li><a href=#角にｑがある時の処理>角にＱがある時の処理</a></li><li><a href=#角にｑがない時の処理>角にＱがない時の処理</a></li></ol></li><li><a href=#backtrackメソッド>backTrack()メソッド</a><ol><li><a href=#角にｑがある時の処理-1>角にＱがある時の処理</a></li><li><a href=#角にｑがない時の処理-1>角にＱがない時の処理</a></li></ol></li><li><a href=#symmetryopsメソッド>symmetryOps()メソッド</a></li><li><a href=#cuda-ソースコード>CUDA ソースコード</a></li><li><a href=#cuda-実行結果>CUDA 実行結果</a></li><li><a href=#参考リンク>参考リンク</a></li><li><a href=#書籍の紹介>書籍の紹介</a></li></ol></nav></div></aside><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><div class=article-content><p><figure class=gallery-image style=flex-grow:132;flex-basis:318px><a href=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg data-size=1031x776><img src=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/chess.jpg width=1031 height=776 loading=lazy alt="Ｎクイーン問題（６３）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編の画像"></a></a></figure><br><a class=link href="https://suzukiiichiro.github.io/search/?keyword=%ef%bc%ae%e3%82%af%e3%82%a4%e3%83%bc%e3%83%b3%e5%95%8f%e9%a1%8c" target=_blank rel=noopener>【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから</a></p><p>エイト・クイーンのプログラムアーカイブ<br>Bash、Lua、C、Java、Python、CUDAまで！<br><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p><h2 id=cudaセットアップ>CUDAセットアップ</h2><h3 id=手順など>手順など</h3><p>今どきは少なくなったわけですが、CUDAをインストールから始めたい人はこちら</p><p>EC2 G4インスタンスのAmazon Linux 2にNVIDIA CUDAをインストールしてみた<br><a class=link href=https://dev.classmethod.jp/articles/install-nvidia-cuda-on-ec2-g4-amazon-linux-2/ target=_blank rel=noopener>https://dev.classmethod.jp/articles/install-nvidia-cuda-on-ec2-g4-amazon-linux-2/</a></p><p>今どきは、GPUインスタンスを使えば最初から<code>nvcc</code>が実行できます。</p><p>AWSのGPUインスタンスでCUDAを動かす<br><a class=link href=https://qiita.com/navitime_tech/items/0a8073347c21800f1cad target=_blank rel=noopener>https://qiita.com/navitime_tech/items/0a8073347c21800f1cad</a></p><p>料金やインスタンスの選定、起動までが詳しく書かれているページはこちら</p><p>AWS/EC2でGPUマシンを起動してみる<br><a class=link href=https://motomura-kazushi.net/2021/08/15/aws-ec2%E3%81%A7gpu%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92%E3%82%92%E5%9B%9E%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/ target=_blank rel=noopener>https://motomura-kazushi.net/2021/08/15/aws-ec2%E3%81%A7gpu%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92%E3%82%92%E5%9B%9E%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/</a></p><h3 id=確認方法>確認方法</h3><p>GPUインスタンスでCUDAが使えるようになったかな？と、確認するには以下のコマンドを実行します。</p><pre tabindex=0><code>$ nvcc --version
+</code></pre><p>以下の内容が表示されればCUDAは実行可能な状態にあります。</p><pre tabindex=0><code>NQueens2$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Tue_Jul_11_02:31:28_PDT_2023
+Cuda compilation tools, release 12.2, V12.2.128
+Build cuda_12.2.r12.2/compiler.33053471_0
+NQueens2$
+</code></pre><p>よくありがちな質問ですが、<code>top</code>コマンドでは、GPUインスタンスの負荷を調べることはできませんので、以下のコマンドでGPUインスタンスのCPU不可やメモリ使用状況を確認します。</p><pre tabindex=0><code>$ watch nvidia-smi
+</code></pre><h2 id=ミラー-ｃｕｄａ部分についての解説>ミラー ＣＵＤＡ部分についての解説</h2><h3 id=実行>実行</h3><p>実行は以下の４種類です。</p><p>１．シングルスレッドで再帰</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 再帰 対称解除法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>void</span> <span class=nf>symmetry_R</span><span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=k>struct</span> <span class=n>local</span><span class=o>*</span> <span class=n>l</span><span class=p>)</span>
+</span></span></code></pre></div><pre tabindex=0><code>$ nvcc 04CUDA_Symmetry_BitBoard.cu &amp;&amp; ./a.out -r
+</code></pre><p>２．シングルスレッドで非再帰</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 非再帰 対称解除法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>void</span> <span class=nf>symmetry_NR</span><span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=k>struct</span> <span class=n>local</span><span class=o>*</span> <span class=n>l</span><span class=p>)</span>
+</span></span></code></pre></div><pre tabindex=0><code>$ nvcc 04CUDA_Symmetry_BitBoard.cu &amp;&amp; ./a.out -c
+</code></pre><p>３．シングルスレッドのＧＰＵ<br>こちらは<code>InitCUDA()</code>を通過後、以下のメソッドを呼び出します。<br>シングルスレッドで動作します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// GPU 対称解除法 -g の実行時のみ呼び出されます
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>__host__</span> <span class=n>__device__</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>GPU_symmetry_R</span><span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=k>struct</span> <span class=n>local</span><span class=o>*</span> <span class=n>hostLocal</span><span class=p>)</span>
+</span></span></code></pre></div><pre tabindex=0><code>$ nvcc 04CUDA_Symmetry_BitBoard.cu &amp;&amp; ./a.out -g
+</code></pre><p>３の必要性は、４を開発している間、問題点を局所化するためです。<br>３の解がきちんと出力していれば、他の箇所に問題があると特定することが目的です。</p><p>４．マルチスレッドのＧＰＵ<br>こちらは<code>InitCUDA()</code>を通過後、以下のメソッドを呼び出します。<br>マルチスレッドで動作します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// GPU -n ビットボードの実行 角にＱがある・ないの分岐を行う
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>void</span> <span class=nf>BitBoard_build</span><span class=p>(</span><span class=k>const</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>int</span> <span class=n>STEPS</span><span class=p>)</span>
+</span></span></code></pre></div><pre tabindex=0><code>$ nvcc 04CUDA_Symmetry_BitBoard.cu &amp;&amp; ./a.out -n
+</code></pre><p>次の項では、４について具体的に説明します。</p><h2 id=cuda-ビットボード-メモ>CUDA ビットボード メモ</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=k>for</span><span class=p>(</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>=</span><span class=mi>2</span><span class=p>;</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>&lt;</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>;</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>++</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span><span class=p>(</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND2</span><span class=o>=</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=o>-</span><span class=mi>1</span><span class=p>;</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>&lt;</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND2</span><span class=p>;</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND1</span><span class=o>++</span><span class=p>,</span><span class=n>l</span><span class=p>.</span><span class=n>BOUND2</span><span class=o>--</span><span class=p>){</span>
+</span></span></code></pre></div><p>のfor文の単位で複数回GPUが実行される<br>そのため、BOUND1,BOUND2,TOPBIT,ENDBIT,LASTMASK,SIDEMASKはGPU内では同じ値になる</p><p>STEPS数がGPU 1回でできる最大数なので、STEPSまでノード（GPUに渡す、LEFT,DOWN,RIGHT,board)が溜まったら、）が溜まったら息継ぎできに1回GPUを実行する</p><h2 id=bitboardによる対称解除法-説明>BitBoardによる対称解除法 説明</h2><p>以下、４のCUDA実行に限定して関数の説明を行います。</p><h3 id=cuda-初期化>CUDA 初期化</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>bool</span> <span class=nf>InitCUDA</span><span class=p>()</span>
+</span></span></code></pre></div><p>CUDAデバイスが搭載されているか、GPUの数などを確認します。<br>GPUが搭載されていない場合は、<code>return</code>します。</p><h3 id=gpu--n-ビットボードの実行-角にｑがあるないの分岐を行う>GPU -n ビットボードの実行 角にＱがある・ないの分岐を行う</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>BitBoard_build</span><span class=p>(</span><span class=k>const</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>int</span> <span class=n>STEPS</span><span class=p>)</span>
+</span></span></code></pre></div><p>ボードの最上段角にＱがある場合は以下の関数を呼び出します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=nf>BitBoard_backTrack1G</span><span class=p>(</span><span class=n>size</span><span class=p>,</span><span class=mi>2</span><span class=p>,(</span><span class=n>left</span><span class=o>|</span><span class=n>bit</span><span class=p>)</span><span class=o>&lt;&lt;</span><span class=mi>1</span><span class=p>,(</span><span class=n>down</span><span class=o>|</span><span class=n>bit</span><span class=p>),(</span><span class=n>right</span><span class=o>|</span><span class=n>bit</span><span class=p>)</span><span class=o>&gt;&gt;</span><span class=mi>1</span><span class=p>,</span><span class=o>&amp;</span><span class=n>l</span><span class=p>);</span>
+</span></span></code></pre></div><p>ボードの最上段角にＱがない場合は以下の関数を呼び出します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=nf>BitBoard_backTrack2G</span><span class=p>(</span><span class=n>size</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=n>bit</span><span class=o>&lt;&lt;</span><span class=mi>1</span><span class=p>,</span><span class=n>bit</span><span class=p>,</span><span class=n>bit</span><span class=o>&gt;&gt;</span><span class=mi>1</span><span class=p>,</span><span class=o>&amp;</span><span class=n>l</span><span class=p>);</span>
+</span></span></code></pre></div><p>Ｃ言語版もBash版もPython版もそうですが、ロジックはこれまでと全く変わりません。</p><h3 id=gpu--n-ｑが角にある>GPU -n Ｑが角にある</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>BitBoard_backTrack1G</span><span class=p>(</span><span class=k>const</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>row</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_left</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_down</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_right</span><span class=p>,</span><span class=k>struct</span> <span class=n>local</span><span class=o>*</span> <span class=n>l</span><span class=p>)</span>
+</span></span></code></pre></div><p>ボードの最上部角にＱがある場合に、このメソッドがGPUカーネル実行に必要な変数や変数のメモリ領域を確保します。</p><h3 id=gpu--n-ｑが角にない>GPU -n Ｑが角にない</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>BitBoard_backTrack2G</span><span class=p>(</span><span class=k>const</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>row</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_left</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_down</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_right</span><span class=p>,</span><span class=k>struct</span> <span class=n>local</span><span class=o>*</span> <span class=n>l</span><span class=p>)</span>
+</span></span></code></pre></div><p>ボードの最上部角にＱがない場合に、このメソッドがGPUカーネル実行に必要な変数や変数のメモリ領域を確保します。</p><h3 id=gpu--n-ｑが角にない場合のバックトラック内の再帰処理をカーネルで行う>GPU -n Ｑが角にない場合のバックトラック内の再帰処理をカーネルで行う</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>__global__</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>BitBoard_cuda_kernel_b2</span><span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>mark</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_down</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_left</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_right</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_total</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_unique</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>long</span> <span class=n>_cond</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>board</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_row</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>BOUND1</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>BOUND2</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>SIDEMASK</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>LASTMASK</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>TOPBIT</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>ENDBIT</span><span class=p>)</span>
+</span></span></code></pre></div><p>GPUで処理を行う極めて高速に繰り返し実行される再帰処理メソッド</p><h3 id=gpu--n-ｑが角にある場合のバックトラック内の再帰処理をカーネルで行う>GPU -n Ｑが角にある場合のバックトラック内の再帰処理をカーネルで行う</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>__global__</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>BitBoard_cuda_kernel_b1</span><span class=p>(</span><span class=k>const</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>mark</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_down</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_left</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_right</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_total</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>_unique</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>long</span> <span class=n>_cond</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>_row</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>BOUND1</span><span class=p>)</span>
+</span></span></code></pre></div><p>GPUで処理を行う極めて高速に繰り返し実行される再帰処理メソッド</p><h3 id=gpu--n-対称解除法>GPU -n 対称解除法</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>__device__</span> 
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>BitBoard_symmetryOps</span><span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>size</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=o>*</span> <span class=n>board</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>BOUND1</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>BOUND2</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>TOPBIT</span><span class=p>,</span><span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>ENDBIT</span><span class=p>)</span>
+</span></span></code></pre></div><p>対称解除法の肝となるメソッド<br>この部分に関しては、事項で詳細に説明します。</p><h2 id=対象解除法について>対象解除法について</h2><p>まず、Ｎが小さな盤面で考えていきます。<br>以下、順に見て理解を深めてもらえればと思います。</p><p>##対象解除法について（Ｎ２版）<br>ひとつの解には、盤面を90度・180度・270度回転、及びそれらの鏡像の合計8個の対称解が存在します。</p><pre tabindex=0><code>  原型   90度  180度   270度
+  １２   ４１   ３４   ２３
+  ４３   ３２   ２１   １４
+  
+      上の行を左右反転                     
+  ２１   １４   ４３   ３２
+  ３４   ２３   １２   ４１
+</code></pre><p>上図左上がユニーク解です。</p><pre tabindex=0><code>  原型（ユニーク解）
+  １２ 
+  ４３ 
+</code></pre><p>１行目はユニーク解を90度、180度、270度回転したものです。</p><pre tabindex=0><code>  原型   90度  180度   270度
+  １２   ４１   ３４   ２３
+  ４３   ３２   ２１   １４
+</code></pre><p>2行目は1行目のそれぞれを左右反転したものです。</p><pre tabindex=0><code>      上の行を左右反転                     
+  ２１   １４   ４３   ３２
+  ３４   ２３   １２   ４１
+</code></pre><p>2行目はユニーク解を左右反転、対角反転、上下反転、逆対角反転したものとも解釈できます。<br>ただし、回転・線対称な解もあるので注意が必要です。</p><p>対称的な解を除去し、ユニーク解のみを求める方法はいくつかあります。<br>ここでは、一つの解には８つのパターンが存在することを覚えておいてください。</p><h2 id=対象解を導き出す２つの方法>対象解を導き出す２つの方法</h2><p>対象解を導き出す方法として、<br>１．解が見つかるたびに回転・対象をチェック<br>２．解のすべてを保存して、保存された解の回転・対象をチェック</p><p>最小解選択法<br>解がひとつみつかるとすべての対称解を生成、 状態を数値とみなして最も小さいもののみを解とする方法。<br>最も最適と言われています。</p><p>最小選択法よりも劣る方法<br>解全てを保存しておき、新しい解が発見されるたびに対称形が無いかどうかを調べる方法。<br>保存領域を必要とするし、比較時に対称形を生成する必要があります。</p><h2 id=対象解除法ｎ５版>対象解除法（Ｎ５版）</h2><p>全探索によって得られたある１つの解が、回転・反転などによる本質的に変わることのない変換によって他の解と同型となるものが存在する場合、それを別の解とはしないとする解の数え方で得られる解を「ユニーク解」といいます。</p><p>ユニーク解とは、全解の中から回転・反転などによる変換によって同型になるものどうしをグループ化することを意味しています。</p><pre tabindex=0><code>グループ１:
++-+-+-+-+-+  +-+-+-+-+-+ 
+| | | |Q| |  | |Q| | | |
++-+-+-+-+-+  +-+-+-+-+-+
+|Q| | | | |  | | | | |Q|
++-+-+-+-+-+  +-+-+-+-+-+
+| | |Q| | |  | | |Q| | |
++-+-+-+-+-+  +-+-+-+-+-+
+| | | | |Q|  |Q| | | | |
++-+-+-+-+-+  +-+-+-+-+-+
+| |Q| | | |  | | | |Q| |
++-+-+-+-+-+  +-+-+-+-+-+
+
+グループ２:
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+| | | | |Q|  |Q| | | | |  | | |Q| | |  | | |Q| | |  | | | |Q| |  | |Q| | | |  |Q| | | | |  | | | | |Q|  
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+| | |Q| | |  | | |Q| | |  |Q| | | | |  | | | | |Q|  | |Q| | | |  | | | |Q| |  | | | |Q| |  | |Q| | | |  
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+|Q| | | | |  | | | | |Q|  | | | |Q| |  | |Q| | | |  | | | | |Q|  |Q| | | | |  | |Q| | | |  | | | |Q| |  
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+| | | |Q| |  | |Q| | | |  | |Q| | | |  | | | |Q| |  | | |Q| | |  | | |Q| | |  | | | | |Q|  |Q| | | | |  
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+| |Q| | | |  | | | |Q| |  | | | | |Q|  |Q| | | | |  |Q| | | | |  | | | | |Q|  | | |Q| | |  | | |Q| | |  
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  
+</code></pre><p>ユニーク解はその「個数のみ」に着目され、この解はユニーク解であり、この解はユニーク解ではないという定まった判定方法はありません。<br>ユニーク解であるかどうかの判断はユニーク解の個数を数える目的の為だけにあります。<br>どのような定義をしたとしてもユニーク解の個数それ自体は変わりません。</p><p>Ｎクイーン問題は、正方形のボードで形成されるので、回転・反転による変換パターンはぜんぶで８通りあります。</p><p>だからといって「全解数＝ユニーク解数×８」と単純にはいきません。<br>ひとつのグループの要素数が必ず８個あるとは限らないのです。</p><p>Ｎ＝５の例では２つのグループがあり、要素数が２個のグループ、要素数が８個のグループがあります。<br>結論から言うと、Ｎ＝５の全解は１０個で、ユニーク解は２個です。</p><h2 id=ユニーク解を判定するための定義>ユニーク解を判定するための定義</h2><p>各行のクイーンが左から何番目にあるかを調べて、最上段の行(row)から下の行(row)へ順番に列挙します。<br>そしてそれをＮ桁の数値として見た場合に「最大値」となるものをユニーク解とします。<br>このＮ桁の数を以後は「ユニーク判定値」と呼ぶことにします。</p><pre tabindex=0><code> 0 1 2 3 4 
++-+-+-+-+-+  
+| | | | |Q|    4
++-+-+-+-+-+  
+| | |Q| | |    2 
++-+-+-+-+-+  
+|Q| | | | |    0  ----&gt; 4 2 0 3 1 （ユニーク判定値）
++-+-+-+-+-+             数が大きい方をユニークとみなす 
+| | | |Q| |    3
++-+-+-+-+-+  
+| |Q| | | |    1 
++-+-+-+-+-+  
+
+ 0 1 2 3 4     左右反転！
++-+-+-+-+-+  
+|Q| | | | |    0
++-+-+-+-+-+  
+| | |Q| | |    2 
++-+-+-+-+-+  
+| | | | |Q|    4  ----&gt; 0 2 4 1 3 
++-+-+-+-+-+            数が小さいのでユニーク解とはしません 
+| |Q| | | |    1
++-+-+-+-+-+  
+| | | |Q| |    3 
++-+-+-+-+-+  
+</code></pre><p>探索によって得られたある１つの解(オリジナル)がユニーク解であるかどうかを判定するには、「８通りの変換を試み、その中でオリジナルのユニーク判定値が最小であるかを調べる」ことになります。</p><p>Ｎ２の場合の８通りの変換</p><pre tabindex=0><code>  原型   90度  180度   270度
+  １２   ４１   ３４   ２３
+  ４３   ３２   ２１   １４
+  
+      上の行を左右反転                     
+  ２１   １４   ４３   ３２
+  ３４   ２３   １２   ４１
+</code></pre><p>結論から先にいえば、ユニーク解とは成り得ないことが明確なパターンを探索中に切り捨てる「枝刈り」を組み込むことにより、３通りの変換を試みるだけでユニーク解の判定が可能になります。</p><h2 id=枝刈り>枝刈り</h2><p>先ず最上段の行(row)のクイーンの位置に着目します。<br>その位置が左半分の領域にあればユニーク解には成り得ません。<br>何故なら左右反転によって得られるパターンのユニーク判定値の方が確実に小さくなるからです。</p><pre tabindex=0><code> 0 1 2 3 4     
++-+-+-+-+-+  
+|Q| | | | |    0
++-+-+-+-+-+  
+| | |Q| | |    2 
++-+-+-+-+-+  
+| | | | |Q|    4  ----&gt; 0 2 4 1 3 
++-+-+-+-+-+            数が小さいのでユニークとはしません
+| |Q| | | |    1
++-+-+-+-+-+  
+| | | |Q| |    3 
++-+-+-+-+-+  
+
+ 0 1 2 3 4     左右反転！
++-+-+-+-+-+  
+| | | | |Q|    4
++-+-+-+-+-+  
+| | |Q| | |    2 
++-+-+-+-+-+  
+|Q| | | | |    0  ----&gt; 4 2 0 3 1 （ユニーク判定値）
++-+-+-+-+-+             数が大きい方をユニークとみなす 
+| | | |Q| |    3
++-+-+-+-+-+  
+| |Q| | | |    1 
++-+-+-+-+-+  
+</code></pre><p>Ｎが奇数の場合に中央にあった場合はどうでしょう。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | |Q| | |    2
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+| | | | | |       
++-+-+-+-+-+             
+| | | | | |     
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+</code></pre><p>これもユニーク解には成り得ません。<br>何故なら仮に中央にあった場合、それがユニーク解であるためには少なくとも他の３辺におけるクイーンの位置も中央になければならず、それは互いの効き筋にあたるので解になりえないからです。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | |Q| | |    
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+|Q| | | |Q|       
++-+-+-+-+-+             
+| | | | | |     
++-+-+-+-+-+  
+| | |Q| | |      
++-+-+-+-+-+  
+</code></pre><p>最上段の行のクイーンの位置は中央を除く右側の領域に限定されます。(ただし、N ≧ 2)</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | |Q|Q|    
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+| | | | | |       
++-+-+-+-+-+             
+| | | | | |     
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+</code></pre><p>次にその中でも一番右端(右上の角)にクイーンがある場合を考えてみます。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | | |Q|    
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+| | | | | |       
++-+-+-+-+-+             
+| | | | | |     
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+</code></pre><p>他の３つの角にクイーンを置くことはできないので、</p><pre tabindex=0><code>+-+-+-+-+-+  
+|Q| | | |Q|    
++-+-+-+-+-+  
+| | | | | |      
++-+-+-+-+-+  
+| | | | | |       
++-+-+-+-+-+             
+| | | | | |     
++-+-+-+-+-+  
+|Q| | | |Q|      
++-+-+-+-+-+  
+</code></pre><p>ユニーク解であるかどうかを判定するには、右上角から左下角を通る斜軸で反転させたパターンとの比較だけになります。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | | |Q|    
++-+-+-+-+-+  
+| | | |/| |      
++-+-+-+-+-+  
+| | |/| | |       
++-+-+-+-+-+             
+| |/| | | |     
++-+-+-+-+-+  
+|/| | | | |      
++-+-+-+-+-+  
+</code></pre><p>突き詰めれば、上から２行目(row1)のクイーンの位置が右から何番目にあるかと、</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | | |Q|    
++-+-+-+-+-+  
+| |Q| |/| |  ←
++-+-+-+-+-+  
+| | |/| | |       
++-+-+-+-+-+             
+| |/| | | |     
++-+-+-+-+-+  
+|/| | | | |      
++-+-+-+-+-+  
+</code></pre><p>右から２列目のクイーンの位置が上から何番目にあるかを比較するだけで判定することができます。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | | |Q|    
++-+-+-+-+-+  
+| |Q| |/| |      
++-+-+-+-+-+  
+| | |/| | |       
++-+-+-+-+-+             
+| |/| |Q| |  ←    
++-+-+-+-+-+  
+|/| | | | |      
++-+-+-+-+-+  
+</code></pre><p>この２つの値が同じになることはないからです。</p><pre tabindex=0><code>       3 0
++-+-+-+-+-+  
+| | | | |Q| 0
++-+-+-+-+-+  
+| |Q| |/| | 3    上から２行目のクイーンの位置が右から４番目にある。
++-+-+-+-+-+  
+| | |/| | |       
++-+-+-+-+-+             
+| |/| |Q| |  ←  右から２列目のクイーンの位置が上から４番目にある。
++-+-+-+-+-+      しかし、互いの効き筋にあたるのでこれは有り得ない。 
+|/| | | | |      
++-+-+-+-+-+  
+</code></pre><p>結局、再帰探索中において下図の X への配置を禁止する枝刈りを入れておけば、得られる解は総てユニーク解であることが保証されます。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | |X|Q| 
++-+-+-+-+-+  
+| |Q| |X| | 
++-+-+-+-+-+  
+| | | |X| |       
++-+-+-+-+-+             
+| | | |Q| | 
++-+-+-+-+-+ 
+| | | | | |      
++-+-+-+-+-+  
+</code></pre><p>次に右端以外にクイーンがある場合を考えてみます。<br>オリジナルがユニーク解であるためには先ず下図の X への配置は禁止されます。<br>よって、その枝刈りを先ず入れておきます。</p><pre tabindex=0><code>+-+-+-+-+-+-+-+-+  
+|X|X| | | |Q|X|X| 
++-+-+-+-+-+-+-+-+  
+|X| | | | | | |X| 
++-+-+-+-+-+-+-+-+  
+| | | | | | | | |       
++-+-+-+-+-+-+-+-+             
+| | | | | | | | | 
++-+-+-+-+-+-+-+-+ 
+| | | | | | | | |      
++-+-+-+-+-+-+-+-+  
+| | | | | | | | |
++-+-+-+-+-+-+-+-+
+|X| | | | | | |X|
++-+-+-+-+-+-+-+-+
+|X|X| | | | |X|X|
++-+-+-+-+-+-+-+-+
+</code></pre><p>次にクイーンの利き筋を辿っていくと、結局、オリジナルがユニーク解ではない可能性があるのは、下図の A,B,C の位置のどこかにクイーンがある場合に限られます。</p><pre tabindex=0><code>+-+-+-+-+-+-+-+-+  
+|X|X| | | |Q|X|X| 
++-+-+-+-+-+-+-+-+  
+|X| | | |x|x|x|X| 
++-+-+-+-+-+-+-+-+  
+|C| | |x| |x| |x|       
++-+-+-+-+-+-+-+-+             
+| | |x| | |x| | | 
++-+-+-+-+-+-+-+-+ 
+| |x| | | |x| | |      
++-+-+-+-+-+-+-+-+  
+|x| | | | |x| |A|
++-+-+-+-+-+-+-+-+
+|X| | | | |x| |X|
++-+-+-+-+-+-+-+-+
+|X|X|B| | |x|X|X|
++-+-+-+-+-+-+-+-+
+</code></pre><p>従って、90度回転、180度回転、270度回転の３通りの変換パターンだけを調べれはよいことになります。</p><h2 id=ユニーク解を数える>ユニーク解を数える</h2><p>これまでの考察はユニーク解の個数を求めるためのものでした。<br>全解数を求めるにはユニーク解を求めるための枝刈りを取り除いて全探索する必要があります。<br>したがって探索時間を犠牲にしてしまうことになります。<br>そこで「ユニーク解の個数から全解数を導いてしまおう」という試みが考えられます。<br>これは、左右反転（前章のミラー）によるパターンの探索を省略して最後に結果を２倍するというアイデアの拡張版といえるものです。<br>そしてそれを実現させるには「ユニーク解が属するグループの要素数はいくつあるのか」という考察が必要になってきます。</p><p>最初に、クイーンが右上角にあるユニーク解を考えます。</p><pre tabindex=0><code>+-+-+-+-+-+  
+| | | | |Q| 
++-+-+-+-+-+  
+| | | | | | 
++-+-+-+-+-+  
+| | | | | |       
++-+-+-+-+-+             
+| | | | | | 
++-+-+-+-+-+ 
+| | | | | |      
++-+-+-+-+-+  
+</code></pre><p>斜軸で反転したパターンがオリジナルと同型になることは有り得ないことと(×２)、</p><pre tabindex=0><code>+-+-+-+-+-+  +-+-+-+-+-+ 
+| | | | |Q|  | | | | |Q| 
++-+-+-+-+-+  +-+-+-+-+-+ 
+| | |Q|/| |  | | | |/| | 
++-+-+-+-+-+  +-+-+-+-+-+ 
+| | |/| | |  | | |/|Q| | 
++-+-+-+-+-+  +-+-+-+-+-+            
+| |/| | | |  | |/| | | | 
++-+-+-+-+-+  +-+-+-+-+-+ 
+|/| | | | |  |/| | | | |     
++-+-+-+-+-+  +-+-+-+-+-+ 
+</code></pre><p>右上角のクイーンを他の３つの角に写像させることができるので(×４)、</p><pre tabindex=0><code>+-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | | |Q|  | | | | | |  | | | | | |  |Q| | | | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | | | |  | | | | | |  | | | | | |  | | | | | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | | | |  | | | | | |  | | | | | |  | | | | | |      
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+            
+| | | | | |  | | | | | |  | | | | | |  | | | | | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | | | |  | | | | |Q|  |Q| | | | |  | | | | | |     
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+</code></pre><p>このユニーク解が属するグループの要素数は必ず８個(＝２×４)になります。</p><p>次に、クイーンが右上角以外にある場合は少し複雑になります。</p><p>(1) 90度回転させてオリジナルと同型になる場合、さらに90度回転(オリジナルから180度回転)させても、さらに90度回転(オリジナルから270度回転)させてもオリジナルと同型になる。</p><p>90度回転させても同じ場合は</p><pre tabindex=0><code>+-+-+-+-+-+  +-+-+-+-+-+ 
+| | | |Q| |  | | | |Q| | 
++-+-+-+-+-+  +-+-+-+-+-+ 
+|Q| | | | |  |Q| | | | | 
++-+-+-+-+-+  +-+-+-+-+-+ 
+| | |Q| | |  | | |Q| | | 
++-+-+-+-+-+  +-+-+-+-+-+            
+| | | | |Q|  | | | | |Q| 
++-+-+-+-+-+  +-+-+-+-+-+ 
+| |Q| | | |  | |Q| | | |     
++-+-+-+-+-+  +-+-+-+-+-+ 
+</code></pre><p>さらに90度回転（原型から180度回転）させても</p><pre tabindex=0><code>                 さらに90度回転
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | |Q| |  | | | |Q| |  | | | |Q| | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+|Q| | | | |  |Q| | | | |  |Q| | | | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | |Q| | |  | | |Q| | |  | | |Q| | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+            
+| | | | |Q|  | | | | |Q|  | | | | |Q| 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| |Q| | | |  | |Q| | | |  | |Q| | | |     
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+</code></pre><p>さらに90度回転（原型から270度回転）させても同じ！</p><pre tabindex=0><code>                               さらに90度回転
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | | |Q| |  | | | |Q| |  | | | |Q| |  | | | |Q| | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+|Q| | | | |  |Q| | | | |  |Q| | | | |  |Q| | | | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| | |Q| | |  | | |Q| | |  | | |Q| | |  | | |Q| | | 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+            
+| | | | |Q|  | | | | |Q|  | | | | |Q|  | | | | |Q| 
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+| |Q| | | |  | |Q| | | |  | |Q| | | |  | |Q| | | |     
++-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+  +-+-+-+-+-+ 
+</code></pre><p>(2) 90度回転させてオリジナルと異なる場合は、270度回転させても必ずオリジナルとは異なる。<br>ただし、180度回転させた場合はオリジナルと同型になることも有り得る。</p><h2 id=ユニーク数から全解を求める>ユニーク数から全解を求める</h2><p>１．クイーンが右上角にある場合、ユニーク解が属するグループの要素数は必ず８個(＝２×４)</p><p>２．クイーンが右上角以外にある場合、<br>(1) 90度回転させてオリジナルと同型になる場合、さらに90度回転(オリジナルから180度回転)させても、<br>さらに90度回転(オリジナルから270度回転)させてもオリジナルと同型になる。<br>こちらに該当するユニーク解が属するグループの要素数は、左右反転させたパターンを加えて２個しかありません。</p><p>(2) 90度回転させてオリジナルと異なる場合は、270度回転させても必ずオリジナルとは異なる。<br>ただし、180度回転させた場合はオリジナルと同型になることも有り得る。<br>こちらに該当するユニーク解が属するグループの要素数は、180度回転させて同型になる場合は４個(左右反転×縦横回転)</p><p>(3)180度回転させてもオリジナルと異なる場合は、８個(左右反転×縦横回転×上下反転)</p><p>１の場合は、解の数ｘ８<br>２−（１）の場合は、解の数ｘ２<br>２−（２）の場合は、解の数ｘ４<br>２−（３）の場合は、解の数ｘ８<br>それぞれのグループの解の数にグループのパターン数をかけ合わせた数の総計が全解となります。<br>ひとつひとつのユニーク解が上のどの種類に該当するのかを調べることにより全解数を計算で導き出すことができるのです。</p><h2 id=対象解除法-４つの関数>対象解除法 ４つの関数</h2><p>対象解除法のソースは４つの関数で構成されています。</p><p>１．printRecord()<br>解を発見するたびにボードレイアウトを表示します。<br>以降、新しい枝刈りポイントを発見するためにも使います。<br>board[]を使ってＱの位置を確認するのに役立ちます。</p><p>２．symmetryOps()<br>対象解除を行うロジックメソッドです。<br>以下のロジックが同梱されています。</p><p>１．クイーンが右上角にある場合、ユニーク解が属するグループの要素数は必ず８個(＝２×４)<br>２．クイーンが右上角以外にある場合、</p><pre tabindex=0><code>(1) 90度回転させてオリジナルと同型になる場合、さらに90度回転(オリジナルから180
+度回転)させても、さらに90度回転(オリジナルから270度回転)させてもオリジナルと同
+型になる。
+こちらに該当するユニーク解が属するグループの要素数は、左右反転させたパター ンを
+加えて２個しかありません。
+(2) 90度回転させてオリジナルと異なる場合は、270度回転させても必ずオリジナルとは
+  異なる。ただし、180度回転させた場合はオリジナルと同型になることも有り得る。
+こちらに該当するユニーク解が属するグループの要素数は、180度回転させて同型になる
+  場合は４個(左右反転×縦横回転)
+(3)180度回転させてもオリジナルと異なる場合は、８個(左右反転×縦横回転×上下反転)
+</code></pre><p>３．backTrack()<br>再帰ロジックで作られています。<br>右上角にＱが配置されているかいないかで判定処理が分岐されます。<br>その判定処理に従って、見合った枝刈りが行われます。</p><p>４．symmetry()<br>本体メソッドです。<br>こちらのメソッドでは、Ｑが角に配置されている場合、そうでない場合を分岐して３のbackTrack()に渡します。</p><h2 id=symmetryメソッド>symmetry()メソッド</h2><h3 id=角にｑがある時の処理>角にＱがある時の処理</h3><p>symmetry()メソッドは、Ｑが角にあるかどうかを判定し、適切にbackTrack()に処理を渡します。</p><p>では上から順番に見ていきます。<br>とても大切なことなのですが、グローバル変数の初期化を行います。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>TOTAL</span><span class=o>=</span><span class=n>UNIQUE</span><span class=o>=</span><span class=n>COUNT2</span><span class=o>=</span><span class=n>COUNT4</span><span class=o>=</span><span class=n>COUNT8</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+</span></span></code></pre></div><p>角にＱがある時のボードのイメージは以下のとおりです。</p><pre tabindex=0><code>  角にQがある時の処理
+    +-+-+-+-+-+  
+    | | | | |Q| 
+    +-+-+-+-+-+  
+    | | | | | | 
+    +-+-+-+-+-+  
+    | | | | | |       
+    +-+-+-+-+-+             
+    | | | | | | 
+    +-+-+-+-+-+ 
+    | | | | | |      
+    +-+-+-+-+-+  
+</code></pre><p>MASKについてですが、こちらはrow全体にビットを立てて配置済みとするフィルタのことです。</p><p>Ｎ５の場合、 １０進数では３１、２進数では 11111 となります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>MASK</span><span class=o>=</span><span class=p>(</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=n>size</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>M</span><span class=o>|</span><span class=n>M</span><span class=o>|</span><span class=n>M</span><span class=o>|</span><span class=n>M</span><span class=o>|</span><span class=n>M</span><span class=o>|</span>  <span class=n>MASK</span><span class=o>=</span><span class=p>(</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=n>size</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span><span class=p>((</span> <span class=p>(</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=mi>5</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span> <span class=p>))</span><span class=o>:</span><span class=mi>31</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>11111</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span> <span class=mi>31</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>bashでは以下のようにすると２進数を１０進数に変換して表示することができます。</p><pre tabindex=0><code>$ echo $(( 2#11111 ))
+$ 31
+</code></pre><p>TOPBITは左上角にビットを立てたものです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>TOPBIT</span><span class=o>=</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>T</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=n>TOPBIT</span><span class=o>=</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span><span class=p>((</span> <span class=p>(</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=mi>5</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>))</span><span class=o>:</span><span class=mi>16</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>10000</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span> <span class=mi>16</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>ENDBITはTOPBITの１つ右にビットを立てたものです。現在はまだ初期値０のままです。<br>後述しますがENDBITは、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>ENDBIT</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span><span class=p>;</span>
+</span></span></code></pre></div><p>となります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>ENDBIT</span><span class=o>=</span><span class=n>LASTMASK</span><span class=o>=</span><span class=n>SIDEMASK</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=mi>０</span><span class=err>は何も置かない（なにもはじまってない）</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>T</span><span class=o>|</span><span class=n>E</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=mi>0</span><span class=err>#</span><span class=mo>01000</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>配列BOUND1とBOUND2を初期化して<br>Ｑを右上角に配置します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>BOUND1</span><span class=o>=</span><span class=mi>2</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>  <span class=n>BOUND2</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+</span></span></code></pre></div><pre tabindex=0><code>    +-+-+-+-+-+  右角から１つ左から開始
+    | | | |B| |  BOUND1は右から左へシフト
+    +-+-+-+-+-+   
+    | | | | | | 
+    +-+-+-+-+-+  
+    | | | | | |       
+    +-+-+-+-+-+             
+    | | | | | | 
+    +-+-+-+-+-+ 
+    | | | | | |      
+    +-+-+-+-+-+  
+</code></pre><pre tabindex=0><code>    +-+-+-+-+-+  左角から１つ右から開始
+    | |B| | | |  BOUND2は左から右へシフトします。
+    +-+-+-+-+-+  
+    | | | | | | 
+    +-+-+-+-+-+  
+    | | | | | |       
+    +-+-+-+-+-+             
+    | | | | | | 
+    +-+-+-+-+-+ 
+    | | | | | |      
+    +-+-+-+-+-+  
+</code></pre><p>ここはすごく重要で、row[0]の１というのは右上の角のことを意味します。ですので、「Ｑを右上角に配置した」ということになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>board</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span>       <span class=err>#</span> <span class=n>Qを右上角に配置</span>
+</span></span></code></pre></div><p>ここで、rowは２行目の処理に入ります。<br>というのも、１行目は右上角にＱを配置したので次に進んだわけです。</p><p>その後、以下の行は「２行目の真ん中にＱを配置する」という意味となります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>      <span class=n>bit</span><span class=o>=</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=n>BOUND1</span><span class=p>;</span>
+</span></span></code></pre></div><p>イメージでは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>       <span class=err>Ｎ</span><span class=mi>５</span><span class=err>の場合、</span><span class=n>BOUND1は２と３になる</span>
+</span></span><span class=line><span class=cl>        <span class=mi>1</span><span class=o>&lt;&lt;</span><span class=n>BOUND1</span>  <span class=mi>２</span><span class=err>行目は真ん中に置く</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span>  <span class=mi>1</span><span class=err>#</span><span class=mo>00001</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>B</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=n>BOUND1</span><span class=o>=</span><span class=mi>2</span> <span class=mi>4</span><span class=err>#</span><span class=mo>00100</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span><span class=p>((</span> <span class=mi>1</span><span class=o>&lt;&lt;</span><span class=mi>2</span> <span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=err>$</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  <span class=mi>1</span><span class=o>-&gt;</span><span class=mi>2</span><span class=o>-&gt;</span><span class=mi>4</span>               
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>さらに、処理の中でBOUND1は左に１つシフトします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>        <span class=mi>1</span><span class=o>&lt;&lt;</span><span class=n>BOUND1</span>  <span class=mi>２</span><span class=err>行目は真ん中の次に置く</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span>  <span class=mi>1</span><span class=err>#</span><span class=mo>00001</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span><span class=n>B</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=n>BOUND1</span><span class=o>=</span><span class=mi>3</span> <span class=mi>8</span><span class=err>#</span><span class=mo>01000</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  <span class=err>$</span><span class=p>((</span> <span class=mi>1</span><span class=o>&lt;&lt;</span><span class=mi>3</span> <span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>  <span class=err>$</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  <span class=mi>1</span><span class=o>-&gt;</span><span class=mi>2</span><span class=o>-&gt;</span><span class=mi>4</span><span class=o>-&gt;</span><span class=mi>8</span>             
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>        <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>        <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><h3 id=角にｑがない時の処理>角にＱがない時の処理</h3><p>TOPBITは先程も書いたとおり、左上角にビットを立てた状態を示します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>TOPBIT</span><span class=o>=</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>T</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>TOPBIT</span><span class=o>=</span><span class=mi>1</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>10000</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>16</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>ENDBITは、TOPBITの１つ右にビットを立てた状態です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>ENDBIT</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>T</span><span class=o>|</span><span class=n>E</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>ENDBIT</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mo>01000</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>SIDEMASKは行の両サイドの角にビットを立てた状態を示します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>SIDEMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>S</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>S</span><span class=o>|</span> <span class=n>SIDEMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>10001</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>LASTMASKもSIDEMASK同様左右の角のビットを立てた状態を示します。ただ使いみちとしては、上記の状態でも使えるわけですが、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>LASTMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=n>LASTMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>10001</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>こういうシチュエーションで使います。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=n>LASTMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>LASTMASK</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>|</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>10001</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>L</span><span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>ENDBITは左角の１つ手前から右へシフトするビットです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=n>ENDBIT</span><span class=o>=</span><span class=n>ENDBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>T</span><span class=o>|</span><span class=n>E</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>ENDBIT</span><span class=o>=</span><span class=n>TOPBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mo>01000</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>           <span class=err>↓</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>T</span><span class=o>|</span> <span class=o>|</span><span class=n>E</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>ENDBIT</span><span class=o>=</span><span class=n>ENDBIT</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mo>00100</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>LASTMASKに代入されるビットは以下のイメージとなります。使いみちはLASTMASKと似ていますが、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>L</span><span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=o>|</span><span class=n>L</span><span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=n>LASTMASK</span><span class=o>=</span><span class=n>LASTMASK</span><span class=o>&lt;&lt;</span><span class=mi>1</span> <span class=o>|</span> <span class=n>LASTMASK</span> <span class=o>|</span> <span class=n>LASTMASK</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>11011</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>27</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><p>こういったシチュエーションにも使います。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=n>LASTMASK</span><span class=o>=</span><span class=n>LASTMASK</span><span class=o>&lt;&lt;</span><span class=mi>1</span> <span class=o>|</span> <span class=n>LASTMASK</span> <span class=o>|</span> <span class=n>LASTMASK</span><span class=o>&gt;&gt;</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> <span class=err>$</span><span class=p>((</span> <span class=mi>2</span><span class=err>#</span><span class=mi>11011</span> <span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=err>$</span> <span class=mi>27</span>
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>    <span class=o>|</span><span class=n>L</span><span class=o>|</span><span class=n>L</span><span class=o>|</span> <span class=o>|</span><span class=n>L</span><span class=o>|</span><span class=n>L</span><span class=o>|</span>      
+</span></span><span class=line><span class=cl>    <span class=o>+-+-+-+-+-+</span>  
+</span></span></code></pre></div><h2 id=backtrackメソッド>backTrack()メソッド</h2><h3 id=角にｑがある時の処理-1>角にＱがある時の処理</h3><p>このメソッドでは、角にＱがある場合の処理、ない場合の処理の分岐があり、その分岐の中で、<code>((COUNT8++))</code>であったり、<code>symmetryOps</code>といった対象解除の処理へ進んだり、はたまた「枝刈り」をしたりと、濃厚なメソッドです。</p><p>では、順番に見ていきます。</p><p>ここは、Ｑが角にある場合の処理で、rowが最終行までたどり着いた（配置できた）場合の処理となります。グループの要素数は必ず８あるわけですので、あとから８倍する<code>COUNT8</code>をインクリメントします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>      <span class=mi>１</span><span class=err>．クイーンが右上角にある場合、ユニーク解が属する</span>
+</span></span><span class=line><span class=cl>      <span class=err>グループの要素数は必ず</span><span class=mi>８</span><span class=err>個</span><span class=p>(</span><span class=err>＝</span><span class=mi>２</span><span class=err>×</span><span class=mi>４</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span><span class=p>(</span><span class=n>row</span><span class=o>==</span><span class=p>(</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>bitmap</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>          <span class=n>board</span><span class=p>[</span><span class=n>row</span><span class=p>]</span><span class=o>=</span><span class=n>bitmap</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=n>COUNT8</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span><span class=k>else</span><span class=p>{</span>
+</span></span></code></pre></div><pre><code>  次は、Ｑが角にある場合の処理で、
+  上から２行目のクイーンの位置が左から何番目にあるかと、
+  右から２列目のクイーンの位置が上から何番目にあるかを、
+  比較するだけで判定します。
+  具体的には、２行目と２列目の位置を数値とみなし、
+  ２行目＜２列目という条件を課せばよい
+  という枝仮ルールを実現している処理となります。
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>			<span class=p>}</span><span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span><span class=p>(</span><span class=n>row</span><span class=o>&lt;</span><span class=n>BOUND1</span><span class=p>){</span>   <span class=c1>//枝刈り
+</span></span></span><span class=line><span class=cl><span class=c1></span>					<span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>|</span><span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>					<span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>^</span><span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=k>while</span><span class=p>(</span><span class=n>bitmap</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>        <span class=o>:</span> <span class=err>&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=err>上から</span><span class=mi>２</span><span class=err>行目のクイーンの位置が左から何番目にあるかと、</span>
+</span></span><span class=line><span class=cl>        <span class=err>右から</span><span class=mi>２</span><span class=err>列目のクイーンの位置が上から何番目にあるかを、</span>
+</span></span><span class=line><span class=cl>        <span class=err>比較するだけで判定します。</span>
+</span></span><span class=line><span class=cl>        <span class=err>具体的には、</span><span class=mi>２</span><span class=err>行目と</span><span class=mi>２</span><span class=err>列目の位置を数値とみなし、</span>
+</span></span><span class=line><span class=cl>        <span class=mi>２</span><span class=err>行目＜</span><span class=mi>２</span><span class=err>列目という条件を課せばよい</span>
+</span></span><span class=line><span class=cl>        <span class=err>結論：</span> <span class=err>以下の図では、</span><span class=mi>１</span><span class=err>，</span><span class=mi>２</span><span class=err>，</span><span class=mi>４</span><span class=err>を枝刈りを入れる</span>
+</span></span><span class=line><span class=cl>          
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>          <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>Q</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>          <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span>  <span class=mi>8</span><span class=err>（左から数えて</span><span class=mi>１</span><span class=err>，</span><span class=mi>２</span><span class=err>，</span><span class=mi>４</span><span class=err>，</span><span class=mi>８</span><span class=err>）</span>
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>          <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>          <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span> <span class=o>|</span>  <span class=mi>8</span><span class=err>（上から数えて</span><span class=mi>１</span><span class=err>，</span><span class=mi>２</span><span class=err>，</span><span class=mi>４</span><span class=err>，</span><span class=mi>８</span><span class=err>）</span> 
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>          <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>          <span class=o>+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>        <span class=err>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>fi</span>
+</span></span></code></pre></div><p>たったこれだけの２行ですごいですね。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>         <span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>|</span><span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>         <span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>^</span><span class=mi>2</span><span class=p>;</span>
+</span></span></code></pre></div><h3 id=角にｑがない時の処理-1>角にＱがない時の処理</h3><p>ここは少しわかりにくいですね。丁寧に説明文を入れましたので、じっくりと理解してみてください。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=p>}</span><span class=k>else</span><span class=p>{</span>                            <span class=err>#</span> <span class=nl>Qが角にない</span>
+</span></span><span class=line><span class=cl>      <span class=p>:</span> <span class=err>&#39;</span>
+</span></span><span class=line><span class=cl>      <span class=err>オリジナルがユニーク解であるためには先ず、</span>
+</span></span><span class=line><span class=cl>      <span class=err>前提：</span><span class=n>symmetryOpsは回転</span><span class=err>・鏡像変換により得られる状態の</span>
+</span></span><span class=line><span class=cl>      <span class=err>ユニーク値を比較し最小のものだけがユニーク解となるようにしている。</span>
+</span></span><span class=line><span class=cl>      <span class=n>Qができるだけ右に置かれている方がユニーク値は小さい</span><span class=err>。</span>
+</span></span><span class=line><span class=cl>      <span class=err>例えば</span><span class=mi>1</span><span class=err>行目の</span><span class=mi>2</span><span class=err>列目に</span><span class=n>Qが置かれている方が3列目に置かれているより</span>
+</span></span><span class=line><span class=cl>      <span class=err>ユニーク値は小さくユニーク解に近い。</span>
+</span></span><span class=line><span class=cl>      <span class=mi>1</span><span class=err>行目のクイーンの位置が同じなら</span><span class=mi>2</span><span class=err>行目のクイーンの位置がより右の</span>
+</span></span><span class=line><span class=cl>      <span class=err>列におかれているものがユニーク値は小さくユニーク解に近い。</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=err>下図の</span> <span class=n>X</span> <span class=err>への配置は禁止されます。</span>
+</span></span><span class=line><span class=cl>      <span class=n>Qの位置より右位置の８対象位置</span><span class=err>（</span><span class=n>X</span><span class=err>）にクイーンを置くことはできない。</span>
+</span></span><span class=line><span class=cl>      <span class=err>置いた場合回転・鏡像変換したユニーク値が最小にならなくなり、</span><span class=n>symmetryOps</span>
+</span></span><span class=line><span class=cl>      <span class=err>で負けるので枝刈りをする</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=mi>1</span><span class=err>行目のクイーンが</span><span class=mi>3</span><span class=err>列目に置かれている場合</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=mi>1</span><span class=err>行目のクイーンが</span><span class=mi>4</span><span class=err>列目に置かれている場合</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span>       
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=err>プログラムではこの枝刈を上部サイド枝刈り、下部サイド枝刈り、最下段枝刈り</span>
+</span></span><span class=line><span class=cl>      <span class=err>の</span><span class=mi>3</span><span class=err>か所で行っている</span>
+</span></span><span class=line><span class=cl>      <span class=err>それぞれ、</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=err>の数字で表すと以下の通り</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=mi>1</span><span class=err>行目のクイーンが</span><span class=mi>3</span><span class=err>列目に置かれている場合</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=n>Q</span><span class=o>|</span><span class=n>X</span><span class=o>|</span><span class=n>X</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=mi>1</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=mi>1</span><span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>       
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>             
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> 
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span> 
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>      
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>  
+</span></span><span class=line><span class=cl>      <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=mi>2</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=mi>2</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=o>|</span><span class=mi>2</span><span class=o>|</span><span class=mi>3</span><span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span><span class=mi>3</span><span class=o>|</span><span class=mi>2</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>      <span class=o>+-+-+-+-+-+-+-+-+</span>
+</span></span><span class=line><span class=cl>      <span class=mi>1</span><span class=err>行目に</span><span class=n>Xが残っているが当然Qの効き筋なので枝刈する必要はない</span>
+</span></span><span class=line><span class=cl>      <span class=err>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span><span class=p>(</span><span class=n>row</span><span class=o>&lt;</span><span class=n>BOUND1</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>				<span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>|</span><span class=n>SIDEMASK</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>				<span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>^</span><span class=n>SIDEMASK</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span><span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span><span class=p>(</span><span class=n>row</span><span class=o>==</span><span class=n>BOUND2</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>					<span class=k>if</span><span class=p>((</span><span class=n>down</span><span class=o>&amp;</span><span class=n>SIDEMASK</span><span class=p>)</span><span class=o>==</span><span class=mi>0</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>						<span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>					<span class=k>if</span><span class=p>(</span> <span class=p>(</span><span class=n>down</span><span class=o>&amp;</span><span class=n>SIDEMASK</span><span class=p>)</span><span class=o>!=</span><span class=n>SIDEMASK</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>						<span class=n>bitmap</span><span class=o>=</span><span class=n>bitmap</span><span class=o>&amp;</span><span class=n>SIDEMASK</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span></code></pre></div><h2 id=symmetryopsメソッド>symmetryOps()メソッド</h2><p>ここもロジックを理解するところから初めて見ると良いと思います。<br>あまり細かいことを考えるよりも、大枠でどんなときにこのメソッドが呼ばれ、カウンターがいつインクリメントするのか、などを掴んだほうが良いと思います。</p><p>symmetryOps()では以下を実現しています。</p><p>２．クイーンが右上角以外にある場合、<br>(1) 90度回転させてオリジナルと同型になる場合、さらに90度回転(オリジナルか<br>ら180度回転)させても、さらに90度回転(オリジナルから270度回転)させてもオリ<br>ジナルと同型になる。<br>こちらに該当するユニーク解が属するグループの要素数は、左右反転させたパター<br>ンを加えて２個しかありません。<br>２．クイーンが右上角以外にある場合、<br>(2) 90度回転させてオリジナルと異なる場合は、270度回転させても必ずオリジナル<br>とは異なる。ただし、180度回転させた場合はオリジナルと同型になることも有り得<br>る。こちらに該当するユニーク解が属するグループの要素数は、180度回転させて同<br>型になる場合は４個(左右反転×縦横回転)<br>２．クイーンが右上角以外にある場合、<br>(3)180度回転させてもオリジナルと異なる場合は、８個(左右反転×縦横回転×上下反転)</p><p>クイーンの利き筋を辿っていくと、オリジナルがユニーク解ではない可能性があり、<br>それは下図の A,B,C の位置のどこかにクイーンがある場合に限られます。<br>symmetryOpsは、以下の図のＡ，Ｂ，ＣにＱが置かれた場合にユニーク解かを判定します。<br>原型と、90,180,270回転させたもののユニーク値を比較します。</p><pre tabindex=0><code>     0 1 2 3 4 
+    +-+-+-+-+-+  
+    | | | | |Q|    4
+    +-+-+-+-+-+  
+    | | |Q| | |    2 
+    +-+-+-+-+-+  
+    |Q| | | | |    0  ----&gt; 4 2 0 3 1 （ユニーク判定値）
+    +-+-+-+-+-+             数が大きい方をユニークとみなす 
+    | | | |Q| |    3
+    +-+-+-+-+-+  
+    | |Q| | | |    1 
+    +-+-+-+-+-+  
+
+     0 1 2 3 4     左右反転！
+    +-+-+-+-+-+  
+    |Q| | | | |    0
+    +-+-+-+-+-+  
+    | | |Q| | |    2 
+    +-+-+-+-+-+  
+    | | | | |Q|    4  ----&gt; 0 2 4 1 3 
+    +-+-+-+-+-+            数が小さいのでユニーク解とはしません 
+    | |Q| | | |    1
+    +-+-+-+-+-+  
+    | | | |Q| |    3 
+    +-+-+-+-+-+  
+</code></pre><p>Qができるだけ右に置かれている方がユニーク値は大きくなります。<br>例えば1行目の2列目にQが置かれている方が、<br>3列目に置かれているよりユニーク値は大きくユニーク解に近い。<br>1行目のクイーンの位置が同じなら2行目のクイーンの位置がより右の列におかれてい<br>るものがユニーク値は大きくユニーク解に近くなります。<br>それ以外はユニーク解なのでCOUNT8にする</p><pre tabindex=0><code>   +-+-+-+-+-+-+-+-+  
+   |X|X| | | |Q|X|X| 
+   +-+-+-+-+-+-+-+-+  
+   |X| | | |x|x|x|X| 
+   +-+-+-+-+-+-+-+-+  
+   |C| | |x| |x| |x|       
+   +-+-+-+-+-+-+-+-+             
+   | | |x| | |x| | | 
+   +-+-+-+-+-+-+-+-+ 
+   | |x| | | |x| | |      
+   +-+-+-+-+-+-+-+-+  
+   |x| | | | |x| |A|
+   +-+-+-+-+-+-+-+-+
+   |X| | | | |x| |X|
+   +-+-+-+-+-+-+-+-+
+   |X|X|B| | |x|X|X|
+   +-+-+-+-+-+-+-+-+
+</code></pre><p>Aの場合 右90度回転 board[BOUND2]==1<br>Bの場合 右180度回転 board[size-1]==ENDBIT<br>Cの場合 右270度回転 board[BOUND1]==TOPBIT</p><h2 id=cuda-ソースコード>CUDA ソースコード</h2><p>ソースコードは以下のとおりです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cm>/**
 </span></span></span><span class=line><span class=cl><span class=cm> *
 </span></span></span><span class=line><span class=cl><span class=cm> * bash版対称解除法のC言語版のGPU/CUDA移植版
 </span></span></span><span class=line><span class=cl><span class=cm> *
@@ -55,6 +800,7 @@ on-phone--column extended"><div class="sidebar left-sidebar sticky"><button clas
 </span></span></span><span class=line><span class=cl><span class=cm>21:     314666222712      39333324973      00:00:19:56.19
 </span></span></span><span class=line><span class=cl><span class=cm>22:    2691008701644     336376244042      00:03:08:14.53
 </span></span></span><span class=line><span class=cl><span class=cm>23:   24233937684440    3029242658210      01:06:56:07.12
+</span></span></span><span class=line><span class=cl><span class=cm>24:  227514171973736   28439272956934      13:05:38:39.13
 </span></span></span><span class=line><span class=cl><span class=cm>*
 </span></span></span><span class=line><span class=cl><span class=cm>  for(l.BOUND1=2;l.BOUND1&lt;size-1;l.BOUND1++){
 </span></span></span><span class=line><span class=cl><span class=cm>  for(l.BOUND1=1,l.BOUND2=size-1-1;l.BOUND1&lt;l.BOUND2;l.BOUND1++,l.BOUND2--){
