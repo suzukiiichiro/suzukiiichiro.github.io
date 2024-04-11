@@ -23,8 +23,6 @@ tags:
 「ローグ・クローンII日本語公式版」 全ソースコード
 https://github.com/suzukiiichiro/Rogue2.Official
 
-ローグ・クローンII日本語公式版 による『運命の洞窟』への招待
-                                          鈴木維一郎 <suzuki.iichiro@gmail.com>
 
 ## 本作品「Rogue Clone2 日本語公式版」は、
 太田純氏の「ローグ・クローン2 日本語版1.3」、伊藤康史氏の「データ分離版ローグ・クローンII」、FUNABARA Masao氏の「rogueclone2s」、 Naohiro Aota氏の「rogueclone2s-utf8」を経た、ローグ・クローンIIの最終版です。
@@ -243,6 +241,8 @@ srcディレクトリ内のrogueファイルを手元にコピーします
 
 ## ローグ・クローン２日本語公式版 運命の洞窟へのガイド
 
+ローグ・クローンII日本語公式版 による『運命の洞窟』への招待
+                                          鈴木維一郎 <suzuki.iichiro@gmail.com>
 
 概要
 ローグは、UNIX†タイムシェアリングシステムで動作する、ビジュアルファンタジーゲー
