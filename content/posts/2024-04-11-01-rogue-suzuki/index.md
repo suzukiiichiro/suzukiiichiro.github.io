@@ -18,16 +18,16 @@ tags:
 
 
 ## Rogue Clone II
-このページは、本作品「Rogue Clone2 日本語版」についての説明となります。
+このページは、本作品「ローグ・クローンII日本語版」についての説明となります。
 
-データ分離版日本語版ローグ・クローンII による『運命の洞窟』への招待
+ローグ・クローンII日本語版 による『運命の洞窟』への招待
                                           鈴木維一郎 <suzuki.iichiro@gmail.com>
 
 ## 本作品「Rogue Clone2 日本語版」は、
 太田純氏の「ローグ・クローン2 日本語版1.3」、伊藤康史氏の「データ分離版ローグ・クローンII」、FUNABARA Masao氏の「rogueclone2s」、 Naohiro Aota氏の「rogueclone2s-utf8」を経た、日本語版ローグ・クローンIIの最終版です。
 
 ## 説明
-rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョン のUTF-8版）は、ターミナルへの出力のみが UTF-8対応となっていました。本「Rogue Clone2 日本語版」は、ターミナルへの出力はもちろん、メッセージファイル、ソースコードなどすべての処理と資源がUTF-8に対応しています。
+rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョン のUTF-8版）は、ターミナルへの出力のみが UTF-8対応となっていました。本バージョンは、ターミナルへの出力はもちろん、メッセージファイル、ソースコードなどすべての処理と資源がUTF-8に対応した「ローグ・クローンII日本語版」です。
 
 ## 世界のRogueアーカイブ 多分世界一のRogueアーカイブとなります
 https://github.com/suzukiiichiro/Rogue_Archive.Official
@@ -238,14 +238,8 @@ srcディレクトリ内のrogueファイルを手元にコピーします
 
 
 
-## ローグ・クローン２ データ分離型UTF-8日本語 版運命の洞窟へのガイド
+## 鈴木維一郎版 ローグ・クローン２最終版 運命の洞窟へのガイド
 
-          Michael C. Toy
-          Kenneth C. R. C. Arnold
-          Computer Systems Research Group
-          Department of Electrical Engineering and Computer Science
-          University of California
-          Berkeley, California 94720
 
 概要
 ローグは、UNIX†タイムシェアリングシステムで動作する、ビジュアルファンタジーゲー
@@ -748,7 +742,8 @@ set ROGUEOPTS=jump,noterse,name=Blue Meanie
 寄付を必要とする。
 
 
-## rougeclone2s utf-8 （データ分離版ローグ・クローンII　メンテナンスバージョン のUTF-8版）Naohiro Aota様のドキュメント
+## Naohiro Aota様のドキュメント rougeclone2s utf-8 （データ分離版ローグ・クローンII　メンテナンスバージョン のUTF-8版）
+
 これは、rougeclone2s （データ分離版ローグ・クローンII　メンテナンスバージョン）をUTF-8に対応させたものです。
 今のところ、改変はそれにまつわるところだけですので、ぼくからのREADMEはこれだけです。
 
@@ -756,7 +751,9 @@ Naohiro Aota <naota@elisp.net>
 では、以下のもともとの README をお楽しみください :D
 
 
-## rogueclone2s FUNABARA Masao様のドキュメント
+## FUNABARA Masao様のドキュメント 「データ分離版ローグ・クローン2s」(rogueclone2s) メンテナンスバージョン
+FUNABARA Masao氏の「データ分離版ローグ・クローン2s」(rogueclone2s)
+メンテナンスバージョン
 
 ■はじめに
 
@@ -845,7 +842,7 @@ FUNABARA Masao
 
 
 
-## 1992年 ローグ・クローン２データ分離版 伊藤 康史様のドキュメント
+## 1992年 伊藤 康史様のドキュメント ローグ・クローン２データ分離版 
 
 はじめに
 
@@ -1050,7 +1047,7 @@ FUNABARA Masao
 
 
 
-## ローグ・クローン２　日本語版１．３ 太田純様のドキュメント
+## 1989年 太田純様のドキュメント「ローグ・クローン２　日本語版１．３」
 
 
 ■README.doc 原版より
@@ -1697,7 +1694,7 @@ cursor [なし]
 
 
 ==============================================================================
-## 1984年 Rogue作者によるドキュメント英文
+## 1984年 Rogue作者によるRogue Cloneドキュメント英文
 
 
 
