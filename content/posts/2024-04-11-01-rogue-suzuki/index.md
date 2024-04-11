@@ -14,7 +14,6 @@ tags:
 
 ![](rogue_history.jpg)
 
-
 ## Rogue Clone II
 このページは、本作品「ローグ・クローンII日本語公式版」についての説明となります。
 
