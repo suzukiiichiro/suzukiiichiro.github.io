@@ -1,5 +1,5 @@
 ---
-title: "ローグ・クローンII日本語公式版について"
+title: "ローグ・クローンII日本語版について"
 date: 2024-04-11T14:39:59+09:00
 draft: false
 authors: suzuki
@@ -15,17 +15,17 @@ tags:
 ![](rogue_history.jpg)
 
 ## Rogue Clone II
-このページは、本作品「ローグ・クローンII日本語公式版」についての説明となります。
+このページは、本作品「ローグ・クローンII日本語版」についての説明となります。
 
-「ローグ・クローンII日本語公式版」 全ソースコード
+「ローグ・クローンII日本語版」 全ソースコード
 https://github.com/suzukiiichiro/Rogue2.Official
 
 
-## 本作品「Rogue Clone2 日本語公式版」は、
+## 本作品「Rogue Clone2 日本語版」は、
 太田純氏の「ローグ・クローン2 日本語版1.3」、伊藤康史氏の「データ分離版ローグ・クローンII」、FUNABARA Masao氏の「rogueclone2s」、 Naohiro Aota氏の「rogueclone2s-utf8」を経た、ローグ・クローンIIの最終版です。
 
 ## 説明
-rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョン のUTF-8版）は、ターミナルへの出力のみが UTF-8対応となっていました。本バージョンは、ターミナルへの出力はもちろん、メッセージファイル、ソースコードなどすべての処理と資源がUTF-8に対応した「ローグ・クローンII日本語公式版」です。
+rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョン のUTF-8版）は、ターミナルへの出力のみが UTF-8対応となっていました。本バージョンは、ターミナルへの出力はもちろん、メッセージファイル、ソースコードなどすべての処理と資源がUTF-8に対応した「ローグ・クローンII日本語版」です。
 
 ## 世界のRogueアーカイブ 多分世界一のRogueアーカイブとなります
 https://github.com/suzukiiichiro/Rogue_Archive.Official
@@ -114,7 +114,7 @@ FUNABARA Masao氏の「データ分離版ローグ・クローン2s」(rogueclon
 Naohiro Aota氏の「データ分離版ローグ・クローン2s UTF-8」(rogueclone2s-utf8) 
 ソースコードとmsgファイルはeuc 描画はUTF-8に対応
 ↓
-鈴木維一郎による 「ローグ・クローン2 日本語公式版」
+鈴木維一郎による 「ローグ・クローン2 日本語版」
 資源のすべてをUTF-8 Linux/UNIX/Macに対応
 
 
