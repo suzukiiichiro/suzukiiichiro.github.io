@@ -1,8 +1,8 @@
 ---
-authors: suzuki
 title: "【wLu】Bashで便利なコマンドを作ってみようって話" 
 description: "今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"
 date: 2021-12-23T10:27:27+09:00
+authors: suzuki
 image: 2021-12-23-bash.jpg
 draft: false
 categories:
