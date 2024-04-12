@@ -15,8 +15,8 @@ jobs:
       - name: cache npm directory
         uses: actions/cache@v4
         with:
-          path: '**/node_modules' 
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }} 
 
       - name: Install npm ci
         run: npm ci --ignore-scripts
