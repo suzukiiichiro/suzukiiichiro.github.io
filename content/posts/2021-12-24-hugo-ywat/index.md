@@ -1,7 +1,7 @@
 ---
 title: "SCSS/CSSを含んだファイルがGitHubActionsでビルドできない"
 date: 2021-12-24T09:43:41+09:00
-draft: false
+draft: true
 authors: wYoshi
 image: af7ef3c0-44c1-4f2f-aad8-1a0664724558.jpg
 description: "Hugoでscssやsassを含んだファイルをGitHubに公開し、Git Actionで自動ビルドしようとした際にエラーが出た場合の対処法を解説しています。"
@@ -13,6 +13,7 @@ tags:
   - GitHub
   - css
 ---
+
 scssやsassを使ってcssを記述すると、CSSを構造化できてサイトのメンテナンス性が格段に上がります。
 GitHub Pagesで公開しているHugoを使ったサイトscss、sassには対応することが可能なので、sassを導入することはメリットがあります。
 
