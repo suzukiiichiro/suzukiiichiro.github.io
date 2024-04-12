@@ -15,9 +15,8 @@ jobs:
       - name: cache npm directory
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
+          path: '**/node_modules' 
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install npm ci
         run: npm ci
