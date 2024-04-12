@@ -14,7 +14,6 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-      # node_modules がキャッシュされてなければ npm ci
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: setup node v4
         uses: actions/setup-node@v4
