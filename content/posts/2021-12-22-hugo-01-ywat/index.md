@@ -1,7 +1,7 @@
 ---
 title: "デザイナーでもできる初めてのHUGOでのサイト作成 #01"
 date: 2021-12-22T13:07:49+09:00
-draft: false
+draft: true
 authors: wYoshi
 
 description: "サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。"

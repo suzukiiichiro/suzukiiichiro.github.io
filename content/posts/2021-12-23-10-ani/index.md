@@ -2,13 +2,13 @@
 title: "知識ゼロからのe-Statマイニング"
 date: 2021-12-24T18:12:54+09:00
 draft: false 
+image: anal.jpg
 categories:
   - programming 
 tags:
   - e-Stat 
   - データマイニング
   - プログラム
-image: anal.jpg
 ---
 知識ゼロからのe-Statマイニング  
 日頃から大量のデータを使ってデータマイニングしてみたいなと思って暇なときにサイトを巡回していたらe-Statという日本の統計が閲覧できる政府統計ポータルサイトを発見しました。  
