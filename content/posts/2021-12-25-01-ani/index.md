@@ -1,7 +1,7 @@
 ---
 title: "e-Statのデータの見方"
 date: 2021-12-25T21:55:55+09:00
-draft: false
+draft: true
 image: anal.jpg
 categories:
   - programming 
@@ -9,7 +9,6 @@ tags:
   - e-Stat 
   - データマイニング
   - プログラム
-image: anal.jpg
 ---
  今回は前回登場したデータの内容を調べてみましょう。  
  「統計表情報取得」（リスト取得）APIで取得したデータをもとにe-Statのサイト（https://www.e-stat.go.jp/）からデータを見つけてみましょう。  
