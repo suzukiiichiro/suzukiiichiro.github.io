@@ -4,7 +4,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: setup node v4
@@ -13,10 +13,14 @@ jobs:
           node-version: 20.x
 
       - name: cache npm directory
+        id: cache-node-modules
         uses: actions/cache@v4
+        env:
+          cache-name:cache-node-modules
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }} 
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install npm ci
         run: npm ci --ignore-scripts
