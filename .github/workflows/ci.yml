@@ -11,14 +11,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          cache-dependency-path: .~/yarn.lock
+          cache: yarn
+      - name: Install node modules
+        run: npm ci
+
       - name: Cache npm directory
         uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
-      - name: Install node modules
-        run: npm install
-      - name: Build app 
-        run: npm run build
 
