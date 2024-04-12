@@ -3,9 +3,8 @@ title: "デザイナーでもできる初めてのHUGOでのサイト作成 #01"
 date: 2021-12-22T13:07:49+09:00
 draft: true
 authors: wYoshi
-
 description: "サーバーなどを用意するのが手間だなと思う人は、Hugo+GitHubで早く、簡単にサイトを作ってしまうのをオススメします。無料でhttps(SSL)も設定できます。"
-
+image: 2021-12-22-hugo-01.jpg
 categories:
   - programming
 tags:
@@ -14,8 +13,8 @@ tags:
   - brew
   - Designer
   - Develop
-image: 2021-12-22-hugo-01.jpg
 ---
+
 CMSではWordPressが有名ですが、phpやサーバの準備などに時間がかかってしまったり、ちょっと敷居が高いイメージではないでしょうか。
 WordPressのインストールのためにはサーバも必要ですし、ドメインだって必要です。
 

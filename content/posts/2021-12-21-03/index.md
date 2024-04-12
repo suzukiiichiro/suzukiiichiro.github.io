@@ -2,6 +2,7 @@
 title: "hugoで[failed to unmarshal YAML]エラーが出た場合の対処法"
 date: 2021-12-22T21:22:23+09:00
 draft: true 
+image: error.jpg
 categories:
   - programming
 tags:
@@ -9,8 +10,8 @@ tags:
   - hugo
   - YAML
   - プログラム
-image: error.jpg
 ---
+
 ## エラーの内容  
 記事投稿時にfailed to unmarshal YAM エラーが起こった時の原因について  
 hugo new ファイル名 で投稿用のエントリーを作成し、いざhugo コマンドで記事をアップしようとした時に以下のエラーが出ました。  

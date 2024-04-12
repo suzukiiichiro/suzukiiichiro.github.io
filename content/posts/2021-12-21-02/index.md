@@ -2,13 +2,14 @@
 title: "プライバシーポリシーページを設置する"
 date: 2021-12-22T17:40:27+09:00
 draft: true
+image: privacy.jpg
 categories:
   - web
 tags:
   - github pages 
   - google adsense
-image: privacy.jpg
 ---
+
 github pagesでもgoogle adsenseの審査に通過したい！  
 
 ということで色々先人の方達のサイトをみさせていただいたところ  

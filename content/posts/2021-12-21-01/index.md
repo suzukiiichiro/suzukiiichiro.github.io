@@ -11,8 +11,6 @@ tags:
   - Hugo
   - Web
   - wyoshi
-# ファイル名を変える場合
-# slug: "example-post"
 ---
 
 ## 記事を投稿する
