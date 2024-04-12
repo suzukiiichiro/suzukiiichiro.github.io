@@ -2,12 +2,9 @@
 title: "SEO対策にXMLの更新日（lastmod）を正しく表示する方法"
 date: 2022-02-07T11:28:55+09:00
 draft: true
-
 description: "SEO対策必見。Hugoのサイトマップをみてみるとlastmodの値がすべて同じになってました。その原因と解決 方法を詳細に説明しています。"
-
 authors: wyoshi
 image: catch.jpg
-
 categories:
   - web
 tags:
