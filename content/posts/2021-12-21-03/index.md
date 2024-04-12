@@ -1,7 +1,7 @@
 ---
 title: "hugoで[failed to unmarshal YAML]エラーが出た場合の対処法"
 date: 2021-12-22T21:22:23+09:00
-draft: true 
+draft: false
 image: error.jpg
 categories:
   - programming

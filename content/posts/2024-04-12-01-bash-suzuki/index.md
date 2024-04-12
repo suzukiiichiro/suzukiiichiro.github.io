@@ -1,189 +1,139 @@
 ---
-title: "【wLu】Bashで便利なコマンドを作ってみようって話" 
-description: "今回は、シェルスクリプトとnkfコマンドを使って、日常よく使う作業を簡単にしてみようって話です"
-date: 2021-12-23T10:27:27+09:00
+title: "【プログレスバー】Bashでプログレスバーを作ってみようって話" 
+description: "今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。"
+date: 2024-04-12T17:20:24+09:00
 draft: false
-authors: suzuki
 image: 2021-12-23-bash.jpg
+authors: suzuki
 categories:
   - programming
 tags:
   - 便利コマンド作成
-  - wLu
   - プログラミング
   - シェルスクリプト
   - Bash
-  - nkf
   - ユーティリティ
   - 鈴木維一郎
 ---
 
+## プログレスバー
+ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。
+処理が進むにつれて、ジリジリとメーターが右に増えていくあれです。
+シェルスクリプトでも作れないものかとチャレンジしたので参考にして下さい
 
+## 使い方
 
-## 必要なもの
-
-ネットワーク漢字フィルター nkf
-※macの場合、[Homebrew](https://brew.sh/index_ja "Homebrew") が必要になります。
-
-## nkf インストールの手順
-まず、nkfがインストールされているかを確認します。
+処理のループ中に以下の1行を追記します。
 ```bash
-$ which nkf 
-/usr/local/bin/nkf
+progress "$#" "$MAX"; set - "$@" count ;
 ```
 
-インストールされていない場合、macの場合はbrewでインストールします。
+## 実行手順
+以下のソースコードを適当なファイル名で保存して下さい。ここではProgress.shとします。
 ```bash
-$ brew install nkf 
-```
-
-インストールしようとすると以下のエラーが出ることがあります
-```bash
-Error: The `brew link` step did not complete successfully
-The formula built, but is not symlinked into /usr/local
-Could not symlink share/man/ja/man1/nkf.1
-/usr/local/share/man/ja/man1 is not writable.
-
-```
-
-権限周りを下記のコマンドを打って変更します。
-```bash
-sudo chmod 775 /usr/local/share/man/ja/man1
-sudo chown <ユーザ名>:admin /usr/local/share/man/ja/man1
-```
-
-コマンドを確認します。
-```bash
-$ nkf -v
-Network Kanji Filter Version 2.1.5 (2018-12-15)
-Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
-Copyright (C) 1996-2018, The nkf Project.
-```
-
-##  使い方
-nkfコマンドとは？
-「nkf」は「Network Kanji Filter」の略で、LinuxとWindowsなど、異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです。
-
-nkfコマンドの書式
-nkf オプション ファイル名
-
-UTF-8に変換する場合は、オプションに wLu をつけて変換します。
-```bash
-$ nkf -wLu isofile.txt > utf8.txt
-```
-
-### 変換の流れ（手動編）
-
-元ファイル  moto.txt (UTF-8以外のファイルエンコード、改行コード）
-  ↓
-変換後のファイル ato.txt(UTF-8に変換したファイル）
-  ↓
-変換後のファイルをリネームする
-```bash
-# UTF-8に変換
-$ nkf -wLu moto.txt > ato.txt
-
-# 変換後のファイルを元のファイル名にリネームする
-$ mv ato.txt moto.txt
-
-# vimiでファイルエンコードを確認する
-$ vim moto.txt
-```
-
-面倒ですね。ここで、一発でUTF-8に変換するコマンドを作成してみます。
-
-
-###  変換の流れ（自動編）
-```bash
-# UTF-8に変換 wLu コマンドをこれから自作します
-$ wLu moto.txt
-$ vim moto.txt ← UTF-8 に変換されている！
-```
-
-### コマンドの内容
-
-まずファイルを作ります。ファイル名は wLu とします
-```bash
-# wLu というファイルを作成
-$ :> wLu
-
-# vim で wLu を開く
-$ vim wLu 
-```
-
-以下の内容をファイルに貼り付ける
-
-```bash
-#!/bin/bash
-
-#################################################
-# パラメータで渡されたファイル名をutf8に変換する
-#
-# 使い方
-# wLu UTF-8に変換したいファイル名
-# wLu を /usr/local/bin/にコピーすると
-# 通常のコマンドとして本実行ファイルを利用する事が出来ます。
-#
-#################################################
-#
-filename="$1" ;
-#
-function wLu(){
-  if [ -f "$filename" ]; then
-    cat "$filename" | nkf -wLu > "$filename".u ;
-    mv "$filename".u "$filename" ;
-  fi
-}
-#
-if ! which nkf >/dev/null 2>&1; then
-  echo "nkf がありません" ;
-  echo "nkf をインストールして下さい" ; 
-  exit ;
-fi
-#
-if [ -z "$filename" ] ; then
-  echo "第一引数にファイル名を指定して下さい"
-  echo "実行例： wLu filename" ;  
-  exit ;
-fi
+$ :> Progress.sh
+$ vim Progress.sh
+# vimで以下のソースコードを貼り付けて保存
+# ソースコードのファイルエンコードをUTF-8に変更します。
+$ nkf -wLu Progress.sh > Progress.sh.utf8
+# ファイルエンコードを変更したファイルを元のファイル名にリネームします。
+$ mv Progress.sh.utf8 Progress.sh
+# 実行権限を付与します
+$ chmod +x Progress.sh
 # 実行
-wLu ;
-# 終了
+$ ./Progress.sh
+```
+
+## ソースコード
+```bash
+#! /bin/bash
+
+#######################################
+# 進捗を表示するプログレスバー
+#  
+#######################################
+#
+#
+# percent $1 
+# GT      $2
+progress(){
+
+  percent=$1;
+  GT=$2;  
+
+  column=`expr 71 \* "$percent" / $GT`;
+  nspace=`expr 71 - "$column"`;
+
+  #プログレスバーのカーソルを左端に戻すリターンコードと[の文字をbarに代入
+  bar='\r['; 
+
+  #位置パラメータの数($#)を１にリセット（カウンタとして流用）
+  set dummy ;
+  while [ $# -le "$column" ];do
+    bar=$bar'=';      # barに=を追加
+    set - "$@" dummy; # $#をインクリメント
+  done
+  bar=$bar'>';        #barの先端に>を追加
+
+  #位置パラメータの数($#)を１にリセット（カウンタとして流用）
+  set dummy ;
+  while [ $# -le "$nspace" ]; do 
+    bar=$bar' ';
+    set - "$@" dummy;
+  done
+  bar=$bar']'$percent/$GT'\c'; # barに]と１行分のプログレスバーを表示
+
+  echo -e "$bar"; 
+}
+
+#######################################
+# メイン処理
+#
+set count ;
+MAX=100 ; #最大値を100とする。実際に掛かる処理数の最大値を入れて下さい。
+#
+for (( i=0; i<$MAX; i++)){
+  # ループする処理に以下の一行を埋め込めばプログレスバーが表示されます。
+  progress "$#" "$MAX"; set - "$@" count ;
+}
+echo "";
+#
+#終了
 exit ;
 ```
 
-作成したファイルには日本語が含まれているため、wLuファイルを UTF-8に変換しておきます。
+## 使い方
+
+シェルスクリプトで自作したなんらかの処理ファイルにprogress()関数を貼り付けます。
+
+自作ソースの中のループ処理の関数の頭に以下を追記します。
+MAX=100; は、処理の最大値を指定します。
+処理のループ最大数が150回であれば、以下の通りに修正します。
 ```bash
-# wLu ファイルをnkf -wLu でUTF-8に変換
-$ nkf -wLu wLu > wLu.txt
-
-# wLu.txtをwLuにリネームします
-$ mv wLu.txt wLu
-
-# 作成したwLuコマンドファイルを/usr/local/bin にコピーします
-$ sudo wLu /usr/local/bin/
-
-# コマンドが配置されたかを確認
-$ which wLu
-$ /usr/local/bin/wLu
+set count;
+MAX=150;
+```
+forやwhileループ処理の中に以下を埋め込みます。
+```bash
+progress "$#" "$MAX"; set - "$@" count ;
 ```
 
-### 使い方
-
+最後にforまたはwhileループを抜けた後に
 ```bash
-# UTF-8以外のファイルエンコードファイル
-$ cat moto.txt
-$ wLu moto.txt
+echo "";
 ```
 
-変換結果を一時ファイルにし、リネームする手間が省けます。
-便利ですね。
+を追加します。これだけです。
+
+## 実行結果
+![](progress.gif "")
+
 
 ## 書籍の紹介
 
 {{% amazon
 
-title="詳解 シェルスクリプト 大型本 – 2006/1/16"
+title="詳解 シェルスクリプト 大型本  2006/1/16"
 
 url="https://www.amazon.co.jp/gp/product/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens09-22&linkId=ef087fd92d3628bb94e1eb10cb202d43"
 
@@ -216,7 +166,7 @@ imageUrl="https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg"
 
 {{% amazon
 
-title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） – 2017/1/20"
+title="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー）  2017/1/20"
 
 url="https://www.amazon.co.jp/gp/product/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens09-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6"
 
