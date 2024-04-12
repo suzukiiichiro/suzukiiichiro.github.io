@@ -1,7 +1,7 @@
 ---
 title: "Hugoで記事を投稿してみよう！Hugoでの記事投稿の仕方。"
 date: 2021-12-21T18:08:57+09:00
-draft: false
+draft: true
 description: "hugoで記事を作成して、投稿するためには専用のコマンドを使ってファイルを作成するか、postsなどのディレクトリにmarkdownの.mdファイルを設置する必要があります。今回はhugoでの記事の投稿の仕方を説明いたします。"
 image: 2021-12-21-1.jpg
 authors: wyoshi
