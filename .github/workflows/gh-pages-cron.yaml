@@ -3,28 +3,38 @@ name: Cron Actioins
 on:
   schedule:
     - cron: '*/45 * * * *'
-
 jobs:
   gh-pages:
     runs-on: ubuntu-latest
     steps:
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: node --version
+        run: node --version
+        #
+      - name: cache@v4
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
-
-      # https://github.com/marketplace/actions/github-pages-action
-      - name: Setup
+          submodules: true
+          fetch-depth: 0
+      - name: Setup actions-hugo@v2
         uses: peaceiris/actions-hugo@v2
+        #Hugo version: 0.124.1
         with:
-          hugo-version: 'latest'
+          #hugo-version: 'latest'
+          hugo-version: '0.91.0'
           extended: true
-
-      - name: Build
-        run: hugo --minify
-
+      - name: Build hugo 
+        run: hugo --minify --cleanDestinationDir
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
