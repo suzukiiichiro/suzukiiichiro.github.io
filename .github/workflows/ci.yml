@@ -8,7 +8,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: node --version
+      - name: node --version
+        run: node --version
+      - name: cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       # - name: cache dependencies
       #   uses: actions/cache@v3
