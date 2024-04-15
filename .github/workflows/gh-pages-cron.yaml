@@ -13,7 +13,6 @@ jobs:
           node-version: 20.x
       - name: node --version
         run: node --version
-        #
       - name: cache@v4
         uses: actions/cache@v4
         with:
@@ -28,9 +27,7 @@ jobs:
           fetch-depth: 0
       - name: Setup actions-hugo@v2
         uses: peaceiris/actions-hugo@v2
-        #Hugo version: 0.124.1
         with:
-          #hugo-version: 'latest'
           hugo-version: '0.91.0'
           extended: true
       - name: Build hugo 
@@ -40,3 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
+      - name: Ping to Google and Bing
+        run: |
+          curl -X GET "https://www.google.com/ping?sitemap=https://suzukiiichiro.github.io/google_sitemap.xml"
+          curl -X GET "https://www.bing.com/webmaster/ping.aspx?siteMap=https://suzukiiichiro.github.io/google_sitemap.xml"
