@@ -25,8 +25,8 @@ jobs:
           persist-credentials: false
           submodules: true  
           fetch-depth: 0    
-      - name: Setup actions-hugo@v2
-        uses: peaceiris/actions-hugo@v2
+      - name: Setup actions-hugo@v3
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.91.0'
           extended: true
