@@ -22,11 +22,14 @@ jobs:
           persist-credentials: false
           submodules: true  
           fetch-depth: 0    
-      - name: Setup actions-hugo@v2
-        uses: peaceiris/actions-hugo@v2
+      # - name: Setup actions-hugo@v2
+      #   uses: peaceiris/actions-hugo@v2
+        #Hugo version: 0.124.1
+      - name: Setup actions-hugo@v3
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
-      - name: Build
+      - name: Build hugo 
         run: hugo --minify --cleanDestinationDir
 
