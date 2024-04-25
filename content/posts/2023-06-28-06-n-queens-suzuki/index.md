@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（５７）第八章 ミラー C言語編"
+title: "Ｎクイーン問題（５６）第八章 ミラー C言語編"
 date: 2023-06-28T13:44:03+09:00
 draft: false
 authors: suzuki
