@@ -1,7 +1,7 @@
 ---
 title: "e-Statのデータの見方"
 date: 2021-12-25T21:55:55+09:00
-draft: true
+draft: false
 image: anal.jpg
 categories:
   - programming 
