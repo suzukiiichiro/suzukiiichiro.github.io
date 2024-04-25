@@ -39,6 +39,9 @@ https://www.itmedia.co.jp/news/articles/0410/06/news079.html
 ちゃんと解があっていることも確認できました。
 https://ja.wikipedia.org/wiki/エイト・クイーン
 
+Ｎ２６の解決に向け、Ｎクイーン問題で引き続き研究と開発を続けていきます。
+
+
 ## サーバースペック
 AWS g5g.4xlarge １インスタンス！
 
