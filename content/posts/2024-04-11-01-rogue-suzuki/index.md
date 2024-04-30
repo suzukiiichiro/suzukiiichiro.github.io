@@ -24,14 +24,14 @@ https://github.com/suzukiiichiro/Rogue2.Official
 ## 本作品「Rogue Clone2 日本語版」は、
 太田純氏の「ローグ・クローン2 日本語版1.3」、伊藤康史氏の「データ分離版ローグ・
 クローンII」、FUNABARA Masao氏の「rogueclone2s」、 Naohiro Aota氏の
-「rogueclone2s-utf8」を経た、ローグ・クローンIIの最終版です。
+「rogueclone2s-utf8」を経た、ローグ・クローンII日本語版の最終バージョンです。
 
 
 ## 説明
-rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョン の
+rogueclone2s-utf8（データ分離版ローグ・クローンII　 メンテナンスバージョンの
 UTF-8版）は、ターミナルへの出力のみが UTF-8対応となっていました。本バージョンは、
 ターミナルへの出力はもちろん、メッセージファイル、ソースコードなどすべての処理
-と資源がUTF-8に対応した「ローグ・クローンII日本語版」です。
+と資源がUTF-8に対応した「ローグ・クローンII日本語版」となります。
 
 
 ## 世界のRogueアーカイブ 多分世界一のRogueアーカイブとなります
@@ -167,8 +167,8 @@ FUNABARA Masao氏の「データ分離版ローグ・クローン2s」(rogueclon
 Naohiro Aota氏の「データ分離版ローグ・クローン2s UTF-8」(rogueclone2s-utf8) 
 ソースコードとmsgファイルはeuc 描画はUTF-8に対応
 ↓
-鈴木維一郎による 「ローグ・クローン2 日本語版」
-資源のすべてをUTF-8 Linux/UNIX/Macに対応
+鈴木維一郎による 「ローグ・クローンII日本語版」
+出力と資源のすべてをUTF-8化 Linux/UNIX/Macに対応
 
 
 ## インストール方法
