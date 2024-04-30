@@ -240,6 +240,7 @@ MS-DOS版は64ビットWindowsで動かないので、Win32版。ちなみに僕
 ## 運命の洞窟へのガイド
 
 ```
+運命の洞窟へのガイド
           Michael C. Toy
           Kenneth C. R. C. Arnold
           Computer Systems Research Group
