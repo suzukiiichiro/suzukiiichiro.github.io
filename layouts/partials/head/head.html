@@ -32,9 +32,9 @@
   {{- if .Paginator.HasNext }}
   <link rel="next" href="{{ .Permalink }}page/{{ .Paginator.Next.PageNumber }}/" />
   {{- end }}
-  <link rel='canonical' href='{{ .Permalink }}'>
+  <!-- link rel='canonical' href='{{ .Permalink }}' -->
   {{- else }}
-<link rel='canonical' href='{{ .Permalink }}'>
+<!-- link rel='canonical' href='{{ .Permalink }}' -->
 {{- end }}
 
 {{ partial "head/opengraph/include.html" . }}
