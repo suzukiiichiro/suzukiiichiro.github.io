@@ -33,7 +33,7 @@ https://github.com/suzukiiichiro/N-Queens
 
 ## CarryChainの外側でCUDAを起動する場合の ソースコード
 ソースコードは以下のとおりです。
-``` c:05CUDA_CarryChain_outside.cu
+``` c :05CUDA_CarryChain_outside.cu
 /**
  *
  * bash版キャリーチェーンのC言語版のGPU/CUDA移植版
@@ -678,7 +678,7 @@ int main(int argc,char** argv)
 ```
 
 ## CarryChainの内側でCUDAを起動する場合の ソースコード
-``` c:06CUDA_CarryChain_outside.cu
+``` c :06CUDA_CarryChain_outside.cu
 /**
  *
  * bash版キャリーチェーンのC言語版のGPU/CUDA移植版
