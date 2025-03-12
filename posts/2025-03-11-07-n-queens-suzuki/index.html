@@ -16,12 +16,12 @@
 <meta property="og:description" content="ソースコード 今回の連載 python/pypy/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/10Bit_Python インストールなどの構築はこちら Ｎクイーン問題（６">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2025-03-11T15:24:22+09:00"><meta property="article:modified_time" content="2025-03-11T15:41:38+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2025-03-11T15:24:22+09:00"><meta property="article:modified_time" content="2025-03-12T11:39:30+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/chess.jpg">
 <meta name=twitter:title content="Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations｜NLP">
 <meta name=twitter:description content="ソースコード 今回の連載 python/pypy/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/10Bit_Python インストールなどの構築はこちら Ｎクイーン問題（６"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2025-03-11-07-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/chess.jpg"],"datePublished":"2025-03-11T15:24:22+09:00","dateModified":"2025-03-11T15:41:38+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations","item":"https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/"}]}]</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2025-03-11-07-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/chess.jpg"],"datePublished":"2025-03-11T15:24:22+09:00","dateModified":"2025-03-12T11:39:30+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations","item":"https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -116,6 +116,9 @@ Linux
 <span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
 <time class="article-time--item article-time--published">2025.03.11</time>
+<time class="article-time--item article-time--updatedate">
+2025.03.12
+</time>
 <time class="article-time--item article-time--reading">
 読了時間: 38分
 </time>
@@ -143,9 +146,9 @@ Linux
 <li><a href=#ソースコード>ソースコード</a></li>
 <li><a href=#インストールなどの構築はこちら>インストールなどの構築はこちら</a></li>
 <li><a href=#constellationsコンステレーションズについて>Constellations（コンステレーションズ）について</a></li>
-<li><a href=#codon対応してありますがロジックとしてはまだ冗長な部分が残るpythonソースコード>codon対応してありますがロジックとしてはまだ冗長な部分が残るPythonソースコード</a></li>
-<li><a href=#冗長な部分が残るpythonコードをマルチプロセス対応したソースコード>冗長な部分が残るPythonコードをマルチプロセス対応したソースコード</a></li>
-<li><a href=#極力冗長な部分を除去しpythonコードも極力最適化を施したconstellationsの最終形codon対応ソースコード>極力冗長な部分を除去しPythonコードも極力最適化を施したConstellationsの最終形codon対応ソースコード</a></li>
+<li><a href=#codon対応してありますがロジックとしてはまだ冗長な部分が残るpythonソースコード>codon対応してありますが、ロジックとしてはまだ冗長な部分が残るPythonソースコード</a></li>
+<li><a href=#codon対応してありますが冗長な部分が残るpythonコードをマルチプロセス対応したソースコード>codon対応してありますが、冗長な部分が残るPythonコードをマルチプロセス対応したソースコード</a></li>
+<li><a href=#codon対応してあり極力冗長な部分を除去しpythonコードも極力最適化を施したconstellationsの最終形>codon対応してあり、極力冗長な部分を除去し、Pythonコードも極力最適化を施したConstellationsの最終形</a></li>
 <li><a href=#結論>結論</a></li>
 <li><a href=#ソースコード-1>ソースコード</a></li>
 <li><a href=#ｎクイーン問題-過去記事アーカイブ>Ｎクイーン問題 過去記事アーカイブ</a></li>
@@ -171,7 +174,7 @@ Linux
 <a class=link href=https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/</a></p>
 <h2 id=constellationsコンステレーションズについて>Constellations（コンステレーションズ）について</h2>
 <p>ロジックは今後改めて説明します。</p>
-<h2 id=codon対応してありますがロジックとしてはまだ冗長な部分が残るpythonソースコード>codon対応してありますがロジックとしてはまだ冗長な部分が残るPythonソースコード</h2>
+<h2 id=codon対応してありますがロジックとしてはまだ冗長な部分が残るpythonソースコード>codon対応してありますが、ロジックとしてはまだ冗長な部分が残るPythonソースコード</h2>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-python:17Python_constellations.py data-lang=python:17Python_constellations.py><span class=kn>from</span> <span class=nn>operator</span> <span class=kn>import</span> <span class=n>or_</span>
 <span class=c1># from functools import reduce</span>
 <span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>List</span><span class=p>,</span><span class=n>Set</span><span class=p>,</span><span class=n>Dict</span>
@@ -1341,7 +1344,7 @@ Linux
 16:     14772512            0         0:00:14.783
 17:     95815104            0         0:01:39.169
 
-</code></pre><h2 id=冗長な部分が残るpythonコードをマルチプロセス対応したソースコード>冗長な部分が残るPythonコードをマルチプロセス対応したソースコード</h2>
+</code></pre><h2 id=codon対応してありますが冗長な部分が残るpythonコードをマルチプロセス対応したソースコード>codon対応してありますが、冗長な部分が残るPythonコードをマルチプロセス対応したソースコード</h2>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-python:18Python_constellations_ProcessPool.py data-lang=python:18Python_constellations_ProcessPool.py><span class=c1># のこったプロセスをkillallするために必要</span>
 <span class=kn>import</span> <span class=nn>subprocess</span>
 
@@ -2524,7 +2527,7 @@ Linux
 15:      2279184            0         0:00:04.351
 16:     14772512            0         0:00:17.743
 17:     95815104            0         0:01:36.792
-</code></pre><h2 id=極力冗長な部分を除去しpythonコードも極力最適化を施したconstellationsの最終形codon対応ソースコード>極力冗長な部分を除去しPythonコードも極力最適化を施したConstellationsの最終形codon対応ソースコード</h2>
+</code></pre><h2 id=codon対応してあり極力冗長な部分を除去しpythonコードも極力最適化を施したconstellationsの最終形>codon対応してあり、極力冗長な部分を除去し、Pythonコードも極力最適化を施したConstellationsの最終形</h2>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-python:19Python_constellations_codon.py data-lang=python:19Python_constellations_codon.py><span class=kn>from</span> <span class=nn>operator</span> <span class=kn>import</span> <span class=n>or_</span>
 <span class=c1># from functools import reduce</span>
 <span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>List</span><span class=p>,</span><span class=n>Set</span><span class=p>,</span><span class=n>Dict</span>
@@ -4475,7 +4478,7 @@ Corder
 </aside>
 <section class="widget archives">
 <h2 class=section-title>サイト内検索</h2>
-<form action=https://suzukiiichiro.github.io/search/ class="search-form widget" data-json=https://suzukiiichiro.github.io/search/index.json>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
 <input name=keyword required placeholder=検索する文字>
 <button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
 </button>
