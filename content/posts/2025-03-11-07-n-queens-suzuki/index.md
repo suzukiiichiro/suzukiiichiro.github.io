@@ -29,7 +29,7 @@ https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/
 ## Constellations（コンステレーションズ）について
 ロジックは今後改めて説明します。
 
-## codon対応してありますが、ロジックとしてはまだ冗長な部分が残るPythonソースコード
+## codon対応の何な変哲もないPythonソースコード
 ``` python:17Python_constellations.py
 from operator import or_
 # from functools import reduce
@@ -1205,7 +1205,7 @@ CentOS-5.1$ pypy 19Python_constellations.py
 
 ```
 
-## codon対応してありますが、冗長な部分が残るPythonコードをマルチプロセス対応したソースコード
+## codonではマルチプロセスが動かないので、pypyでPython ProcessPoolマルチプロセス対応したpythonソースコード
 ``` python:18Python_constellations_ProcessPool.py
 # のこったプロセスをkillallするために必要
 import subprocess
@@ -2395,7 +2395,7 @@ CentOS-5.1$ pypy 20Python_constellations_ProcessPool.py
 ```
 
 
-## codon対応してあり、極力冗長な部分を除去し、Pythonコードも極力最適化を施したConstellationsの最終形
+## codonではマルチプロセスが動かないので、ソースの最適化・高速化を徹底的に施したConstellationsのシングルスレッド最終形
 ``` python:19Python_constellations_codon.py
 from operator import or_
 # from functools import reduce
