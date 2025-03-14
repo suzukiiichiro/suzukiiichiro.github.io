@@ -16,12 +16,12 @@
 <meta property="og:description" content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのソース置き場 BashもJavaもPythonも！ キャリーチェーン キャリ">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="Ｃ言語"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-06-28T14:55:08+09:00"><meta property="article:modified_time" content="2023-06-28T15:26:14+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="Ｃ言語"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:published_time" content="2023-06-28T14:55:08+09:00"><meta property="article:modified_time" content="2025-03-14T12:06:03+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/chess.jpg">
 <meta name=twitter:title content="Ｎクイーン問題（５８）第八章 キャリーチェーン C言語編｜NLP">
 <meta name=twitter:description content="【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから エイト・クイーンのソース置き場 BashもJavaもPythonも！ キャリーチェーン キャリ"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2023-06-28-08-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（５８）第八章 キャリーチェーン C言語編","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/chess.jpg"],"datePublished":"2023-06-28T14:55:08+09:00","dateModified":"2023-06-28T15:26:14+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（５８）第八章 キャリーチェーン C言語編","item":"https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/"}]}]</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2023-06-28-08-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（５８）第八章 キャリーチェーン C言語編","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/chess.jpg"],"datePublished":"2023-06-28T14:55:08+09:00","dateModified":"2025-03-14T12:06:03+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（５８）第八章 キャリーチェーン C言語編","item":"https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -116,6 +116,9 @@ Linux
 <span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
 </span>
 <time class="article-time--item article-time--published">2023.06.28</time>
+<time class="article-time--item article-time--updatedate">
+2025.03.14
+</time>
 <time class="article-time--item article-time--reading">
 読了時間: 14分
 </time>
@@ -164,7 +167,7 @@ Linux
 <p>キャリーチェーンはＮ２７の解を発見したドレスデン大学の研究者が編み出したアルゴリズムです。</p>
 <p>Jeffサマーズがミラーとビットマップの組み合わせでＮ２３を発見し、電気通信大学がサマーズのアルゴリズムを並列処理しＮ２４を発見、プロアクティブが対称解除法でＮ２５を発見し、Ｎ２７でキャリーチェーンによりドレスデン大学が世界一となりました。</p>
 <p>対称解除法の実行結果を見てみましょう。</p>
-<pre tabindex=0><code>## キャリーチェーン
+<pre tabindex=0><code>## 対象解除法
 #  &lt;&gt; 06Bash_symmetry.sh 対象解除法
 #  N:        Total       Unique        hh:mm:ss
 #  4:            2            1         0:00:00
@@ -185,7 +188,8 @@ Bashだからこその遅さです。ＣプログラムではＮ１７までは�
 ＵＮＩＸを開発したＡＴ＆Ｔベル研究所では、開発者はBashでプロトタイプを作り、その後プログラマがＣに移植します。</p>
 <p>新しい開発、革新的なロジックを研究することにBashは多くの現場で活躍してきました。ＣやJavaは、知恵を導入するまえに、構文（シンタックス）の複雑さに気を奪われ、書いた気になる、作った気になる言語と言われています。</p>
 <p>では、Ｎ２７を叩き出したドレスデン大学のソースをBashに移植して、高速化、最適化したソースの実行結果を見てみます。</p>
-<pre tabindex=0><code>#  &lt;&gt; 07Bash_carryChain.sh
+<pre tabindex=0><code># キャリーチェーン
+#  &lt;&gt; 07Bash_carryChain.sh
 #  N:        Total       Unique        hh:mm:ss
 #  4:            2            1         0:00:00
 #  5:           10            2         0:00:00
@@ -1423,7 +1427,7 @@ Corder
 </aside>
 <section class="widget archives">
 <h2 class=section-title>サイト内検索</h2>
-<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget" data-json=https://suzukiiichiro.github.io/search/index.json>
 <input name=keyword required placeholder=検索する文字>
 <button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
 </button>
