@@ -3590,6 +3590,14 @@ https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
 https://github.com/suzukiiichiro/N-Queens
 
 
+Ｎクイーン問題（８６）第七章並列処理 Constellations_warp ＮＶＩＤＩＡ ＣＵＤＡ編
+https://suzukiiichiro.github.io/posts/2025-04-01-03-n-queens-suzuki/
+Ｎクイーン問題（８５）第七章並列処理 Constellations_with_Trash ＮＶＩＤＩＡ ＣＵＤＡ編
+https://suzukiiichiro.github.io/posts/2025-04-01-02-n-queens-suzuki/
+Ｎクイーン問題（８４）第七章並列処理 Constellations ＮＶＩＤＩＡ ＣＵＤＡ編
+https://suzukiiichiro.github.io/posts/2025-04-01-01-n-queens-suzuki/
+Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations
+https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/
 Ｎクイーン問題（８２）Python-並列処理で高速化 16Python_carryChain_ProcessPool
 https://suzukiiichiro.github.io/posts/2025-03-11-06-n-queens-suzuki/
 Ｎクイーン問題（８１）Python-codonで高速化 15Python_carryChain
