@@ -20,7 +20,7 @@ tags:
 
 ## ソースコード
 今回の連載 python/pypy/codonのソースコードディレクトリはこちら
-https://github.com/suzukiiichiro/N-Queens/tree/master/10Bit_Python
+https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon
 
 ## インストールなどの構築はこちら
 Ｎクイーン問題（６６） Python-codonで高速化
