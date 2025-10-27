@@ -1,5 +1,5 @@
 ---
-title: "Ｎクイーン問題（８４）Python/Codonで爆速プログラミング１"
+title: "Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに"
 date: 2025-10-24T19:03:01+09:00
 draft: false
 authors: suzuki
@@ -17,9 +17,18 @@ tags:
 
 ![](chess.jpg)
 
+![](codon.png)
+
 # ソースコード
 今回の連載 python/codonのソースコードディレクトリはこちら
 https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon
+
+## Ｎクイーン問題 過去記事アーカイブ
+【過去記事アーカイブ】Ｎクイーン問題 過去記事一覧
+https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
+【Github】エイト・クイーンのソース置き場 BashもJavaもPythonも！
+https://github.com/suzukiiichiro/N-Queens
+
 
 ---
 
