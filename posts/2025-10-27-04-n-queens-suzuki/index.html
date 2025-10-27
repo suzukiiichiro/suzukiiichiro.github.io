@@ -1,0 +1,2134 @@
+<!doctype html><html lang=ja-jp>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=google-site-verification content="GjZA39yW9nL5F-rpFgxBuJd8TcTapj6xw7YLY9XbA8A">
+<link rel=icon href=https://suzukiiichiro.github.io/assets/images/favicon/favicon.svg type=image/svg+xml>
+<link rel=apple-touch-icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/apple-touch-icon-180x180.png>
+<link rel=icon type=image/png href=https://suzukiiichiro.github.io/assets/images/favicon/icon-192x192.png>
+<meta name=description content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク">
+<meta name=keywords content="N-Queens,エイト・クイーン,アルゴリズム,鈴木維一郎,Python,codon,Webデザイン,Webサイト開発,bash,CSS,サーバ">
+<title>Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法｜NLP</title>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/style.min.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/css/normalize.min.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/override.min.css>
+<link rel=stylesheet href=https://suzukiiichiro.github.io/scss/custom.min.css>
+<meta property="og:title" content="Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法｜NLP">
+<meta property="og:description" content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク">
+<meta property="og:url" content="https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/">
+<meta property="og:site_name" content="NLP">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2025-10-27T13:24:59+09:00"><meta property="article:modified_time" content="2025-10-27T15:07:08+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/chess.jpg">
+<meta name=twitter:title content="Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法｜NLP">
+<meta name=twitter:description content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2025-10-27-04-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/chess.jpg"],"datePublished":"2025-10-27T13:24:59+09:00","dateModified":"2025-10-27T15:07:08+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法","item":"https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/"}]}]</script>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<div class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=メニューを開く・閉じる>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info><div class="site-name site-avatar"><a href=https://suzukiiichiro.github.io/>
+<picture>
+<source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" media="(min-width: 769px)" width=60 height=60>
+<source src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_30x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 2x" media="(max-width: 768px)" width=30 height=30>
+<img src=https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png srcset="https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_60x0_resize_box_3.png 1x, https://suzukiiichiro.github.io/images/logo_hu492d4071ba1c5fc31251c8d6beb6380e_133587_120x0_resize_box_3.png 2x" width=60 height=60 class=site-logo loading=lazy alt=NLP>
+</picture>
+</a></div>
+<h2 class=site-description>最新技術やプログラム、デザインなど様々な情報を提供するサイト</h2></header>
+<div id=main-menu>
+<div id=main-menu-area>
+<nav class="menu menu-section" id=categories-menu>
+<ul class=menu-list id=main-cat>
+<li><a href=https://suzukiiichiro.github.io/ id=link-top>TOP</a></li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/ id=link-category>カテゴリ</a>
+<ul class=menu-list>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/programming/ class=font_size_287>
+プログラミング
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/web/ class=font_size_22>
+Web開発
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/server/ class=font_size_2>
+サーバー構築
+</a>
+</li>
+<li>
+<a href=https://suzukiiichiro.github.io/categories/linux/ class=font_size_1>
+Linux
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<nav>
+<ol class="menu menu-section"><li>
+<a href=https://suzukiiichiro.github.io/sitemap/><span>サイトマップ</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/ranking/><span>PVランキング</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/archives/><span>アーカイブ</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/privacy/><span>プライバシーポリシー</span>
+</a>
+</li><li>
+<a href=https://suzukiiichiro.github.io/search/><span>サイト内検索</span>
+</a>
+</li></ol>
+</nav>
+</div>
+</div>
+<button type=button id=dark-mode-toggle aria-label=画面の明るさ切り替え><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.8-1.79-1.42-1.42M11 22.45c.32.0 2 0 2 0V19.5H11m1-14a6 6 0 00-6 6 6 6 0 006 6 6 6 0 006-6c0-3.32-2.69-6-6-6m8 7h3v-2H20m-2.76 7.66 1.8 1.79 1.41-1.41-1.79-1.8M20.45 4.46 19.04 3.05l-1.8 1.79 1.42 1.42M13 .55H11V3.5h2m-9 7H1v2H4M6.76 4.84 4.96 3.05 3.55 4.46l1.79 1.8L6.76 4.84z"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="#fff" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M17.75 4.09 15.22 6.03 16.13 9.09 13.5 7.28 10.87 9.09l.91-3.06L9.25 4.09 12.44 4 13.5 1l1.06 3L17.75 4.09M21.25 11l-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11 17.81 10.95 18.5 9 19.19 10.95 21.25 11m-2.28 4.95C19.8 15.87 20.69 17.05 20.16 17.8 19.84 18.25 19.5 18.67 19.08 19.07 15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24.0-14.14C5.34 4.53 5.76 4.17 6.21 3.85c.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02 2.19 2.2 5.15 3.16 8.02 2.89m-1.64 2.02c-2.83-.16-5.63-1.33-7.8-3.47-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98C9.37 20.67 14.19 20.78 17.33 17.97z"/></svg>
+</button>
+</div>
+<main class="main full-width">
+<nav class=breadcrumb-area>
+<ol class=breadcrumb>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/>NLP</a>
+<li><a class=breadcrumb-item href=https://suzukiiichiro.github.io/posts/>Posts</a>
+<li><span class=breadcrumb-item>Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法</span>
+</ol>
+</nav>
+<article class="has-image main-article">
+<div class="article-details arcile-single">
+<header class=article-header>
+<div class=article-category>
+<a href=https://suzukiiichiro.github.io/categories/programming/>
+プログラミング
+</a>
+</div>
+<div class=article-info>
+<span class="article-time--item article-time--author"><span class=icon style=background-image:url(https://github.com/suzukiiichiro.png)></span><span class=name><a href=https://suzukiiichiro.github.io/authors/suzuki/>suzukiiichiro</a></span>
+</span>
+<time class="article-time--item article-time--published">2025.10.27</time>
+<time class="article-time--item article-time--reading">
+読了時間: 19分
+</time>
+</div>
+</header>
+<h1 class=article-title>
+Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法
+</h1>
+</div>
+<div class=article-footer>
+<section class=article-tags>
+<a href=https://suzukiiichiro.github.io/tags/n-queens/>N-Queens</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/>エイト・クイーン</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/>アルゴリズム</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/>鈴木維一郎</a>
+<a href=https://suzukiiichiro.github.io/tags/python/>python</a>
+<a href=https://suzukiiichiro.github.io/tags/codon/>codon</a>
+</section>
+</div>
+<aside class="widget archives tableOfContents">
+<h2 class="widget-title section-title">目次<button type=buton id=btn-closeTOC onclick=custom.toggleTOC(event)></button></h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#ｎクイーン問題-過去記事アーカイブ>Ｎクイーン問題 過去記事アーカイブ</a></li>
+<li><a href=#python--codon-ｎクイーン-対象解除版>Python / Codon Ｎクイーン 対象解除版</a>
+<ol>
+<li><a href=#概要>概要</a></li>
+<li><a href=#gpu-実行例>GPU 実行例</a></li>
+<li><a href=#codon-実行例aws-m416xlarge--1>Codon 実行例（AWS m4.16xlarge × 1）</a></li>
+<li><a href=#実行方法>実行方法</a></li>
+<li><a href=#参考リンク>参考リンク</a></li>
+</ol>
+</li>
+<li><a href=#n-queens順列生成--対角フラグ--対称性count248で-uniquetotal-算出>N-Queens：順列生成 + 対角フラグ + 対称性（COUNT2/4/8）で Unique/Total 算出</a>
+<ol>
+<li><a href=#概要-1>概要</a></li>
+<li><a href=#設計のポイント実ソース引用>設計のポイント（実ソース引用）</a></li>
+<li><a href=#検証の目安>検証の目安</a></li>
+<li><a href=#注意>注意</a></li>
+<li><a href=#著者--ライセンス>著者 / ライセンス</a></li>
+</ol>
+</li>
+<li><a href=#レビューと注意点短評>レビューと注意点（短評）</a>
+<ol>
+<li><a href=#良い点>良い点</a></li>
+<li><a href=#要注意>要注意</a></li>
+<li><a href=#次の一手>次の一手</a></li>
+<li><a href=#実行ログcodonpython-共通で動作>実行ログ（Codon/Python 共通で動作）</a></li>
+</ol>
+</li>
+<li><a href=#ソースコード-1>ソースコード</a></li>
+<li><a href=#-関連リンク>📚 関連リンク</a></li>
+<li><a href=#ｎクイーン問題-過去記事アーカイブ-1>Ｎクイーン問題 過去記事アーカイブ</a></li>
+<li><a href=#書籍の紹介>書籍の紹介</a></li>
+</ol>
+</nav>
+</div>
+</aside>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=7088000027></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<div class=article-content>
+<p><figure class=gallery-image style=flex-grow:132;flex-basis:318px>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/chess.jpg data-size=1029x776>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/chess.jpg width=1029 height=776 loading=lazy alt="Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法の画像">
+</a>
+</a>
+</figure></p>
+<p><figure class=gallery-image style=flex-grow:398;flex-basis:955px>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/codon.png data-size=1864x468>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/codon.png width=1864 height=468 loading=lazy alt="Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法の画像">
+</a>
+</a>
+</figure></p>
+<h1 id=ソースコード>ソースコード</h1>
+<p>今回の連載 python/codonのソースコードディレクトリはこちら<br>
+<a class=link href=https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon</a></p>
+<h2 id=ｎクイーン問題-過去記事アーカイブ>Ｎクイーン問題 過去記事アーカイブ</h2>
+<p>【過去記事アーカイブ】Ｎクイーン問題 過去記事一覧<br>
+<a class=link href="https://suzukiiichiro.github.io/search/?keyword=" target=_blank rel=noopener>https://suzukiiichiro.github.io/search/?keyword=</a>Ｎクイーン問題<br>
+【Github】エイト・クイーンのソース置き場 BashもJavaもPythonも！<br>
+<a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p>
+<hr>
+<h2 id=python--codon-ｎクイーン-対象解除版>Python / Codon Ｎクイーン 対象解除版</h2>
+<pre tabindex=0><code>   ,     #_
+   ~\_  ####_        N-Queens
+  ~~  \_#####\       https://suzukiiichiro.github.io/
+  ~~     \###|       N-Queens for github
+  ~~       \#/ ___   https://github.com/suzukiiichiro/N-Queens
+   ~~       V~' '-&gt;
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+</code></pre><hr>
+<h3 id=概要>概要</h3>
+<p>結論から言えば <strong>codon for python <code>17Py_</code></strong> は <strong>GPU/CUDA <code>10Bit_CUDA/01CUDA_Bit_Symmetry.cu</code></strong> と同等の速度で動作します。</p>
+<hr>
+<h3 id=gpu-実行例>GPU 実行例</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ nvcc -O3 -arch<span class=o>=</span>sm_61 -m64 -ptx -prec-div<span class=o>=</span><span class=nb>false</span> 04CUDA_Symmetry_BitBoard.cu <span class=o>&amp;&amp;</span> <span class=nv>POCL_DEBUG</span><span class=o>=</span>all ./a.out -n <span class=p>;</span>
+対称解除法 GPUビットボード
+20:      <span class=m>39029188884</span>       <span class=m>4878666808</span>     000:00:02:02.52
+21:     <span class=m>314666222712</span>      <span class=m>39333324973</span>     000:00:18:46.52
+22:    <span class=m>2691008701644</span>     <span class=m>336376244042</span>     000:03:00:22.54
+23:   <span class=m>24233937684440</span>    <span class=m>3029242658210</span>     001:06:03:49.29
+</code></pre></div><hr>
+<h3 id=codon-実行例aws-m416xlarge--1>Codon 実行例（AWS m4.16xlarge × 1）</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>amazon AWS m4.16xlarge x <span class=m>1</span>
+$ codon build -release 15Py_constellations_optimize_codon.py <span class=o>&amp;&amp;</span> ./15Py_constellations_optimize_codon
+20:      <span class=m>39029188884</span>                <span class=m>0</span>          0:02:52.430
+21:     <span class=m>314666222712</span>                <span class=m>0</span>          0:24:25.554
+22:    <span class=m>2691008701644</span>                <span class=m>0</span>          3:29:33.971
+23:   <span class=m>24233937684440</span>                <span class=m>0</span>   <span class=m>1</span> day, 8:12:58.977
+</code></pre></div><hr>
+<h3 id=実行方法>実行方法</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># Python（通常）</span>
+$ python &lt;filename.py&gt;
+
+<span class=c1># Codon（ビルドせず実行）</span>
+$ codon run &lt;filename.py&gt;
+
+<span class=c1># Codon（ビルドしてネイティブ高速実行）</span>
+$ codon build -release &lt; filename.py&gt; <span class=o>&amp;&amp;</span> ./&lt;filename&gt;
+</code></pre></div><hr>
+<h3 id=参考リンク>参考リンク</h3>
+<ul>
+<li>Ｎクイーン問題 過去記事一覧はこちらから<br>
+<a class=link href="https://suzukiiichiro.github.io/search/?keyword=%ef%bc%ae%e3%82%af%e3%82%a4%e3%83%bc%e3%83%b3%e5%95%8f%e9%a1%8c" target=_blank rel=noopener>https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題</a></li>
+<li>エイト・クイーンのプログラムアーカイブ（Bash、Lua、C、Java、Python、CUDAまで！）<br>
+<a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></li>
+</ul>
+<hr>
+<h2 id=n-queens順列生成--対角フラグ--対称性count248で-uniquetotal-算出>N-Queens：順列生成 + 対角フラグ + 対称性（COUNT2/4/8）で Unique/Total 算出</h2>
+<p><strong>ファイル:</strong> <code>04Py_perm_diag_symmetry.py</code><br>
+<strong>作成日:</strong> 2025-10-23</p>
+<hr>
+<h3 id=概要-1>概要</h3>
+<ul>
+<li>行→列の<strong>順列</strong>を生成（列ユニークを配列スワップで保証）</li>
+<li>対角衝突は配列フラグ <strong>fb(ld)/fc(rd)</strong> で <strong>O(1)</strong> 判定</li>
+<li>代表解のみを数えるため <strong><code>symmetryops()</code></strong> で回転(90/180/270)・垂直反転を比較<br>
+→ 代表解なら倍率 <strong>2/4/8</strong> を返し、<strong>Total = Σ(倍率)</strong>、<strong>Unique = 代表解数</strong></li>
+</ul>
+<hr>
+<h3 id=設計のポイント実ソース引用>設計のポイント（実ソース引用）</h3>
+<ul>
+<li>
+<p><strong>対角添字</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>ld</span> <span class=o>=</span> <span class=n>row</span> <span class=o>-</span> <span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span> <span class=o>+</span> <span class=n>_off</span>   <span class=c1># 0..(2N-2), _off = N-1</span>
+<span class=n>rd</span> <span class=o>=</span> <span class=n>row</span> <span class=o>+</span> <span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span>          <span class=c1># 0..(2N-2)</span>
+</code></pre></div></li>
+<li>
+<p><strong>衝突判定</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>if</span> <span class=p>(</span><span class=n>fb</span><span class=p>[</span><span class=n>ld</span><span class=p>]</span> <span class=o>|</span> <span class=n>fc</span><span class=p>[</span><span class=n>rd</span><span class=p>])</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</code></pre></div></li>
+<li>
+<p><strong>1行目の半分制限（左右対称除去の定石）</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>lim</span> <span class=o>=</span> <span class=n>size</span> <span class=k>if</span> <span class=n>row</span> <span class=o>!=</span> <span class=mi>0</span> <span class=k>else</span> <span class=p>(</span><span class=n>size</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=o>//</span> <span class=mi>2</span>
+</code></pre></div></li>
+<li>
+<p><strong>順列生成（スワップ + 末尾回しの定型）</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span> <span class=o>=</span> <span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>],</span> <span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+<span class=c1># …再帰…</span>
+<span class=c1># 最後に aboard[row] を末尾へ回す回転処理で次ループへ</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<h3 id=検証の目安>検証の目安</h3>
+<ul>
+<li><strong>N=8 → Unique=92, Total=92</strong>（本実装は COUNT2/4/8 で一致するはず）</li>
+</ul>
+<hr>
+<h3 id=注意>注意</h3>
+<ul>
+<li>I/O は遅いので測定時は出力を抑止するか、代表解のみの記録に留める。</li>
+<li><code>rotate()/vmirror()</code> は <strong>row->col 形式（長さ N の配列）</strong> を保つこと。</li>
+</ul>
+<hr>
+<h3 id=著者--ライセンス>著者 / ライセンス</h3>
+<p>著者: suzuki/nqdev<br>
+ライセンス: MIT（必要に応じて変更）</p>
+<hr>
+<h2 id=レビューと注意点短評>レビューと注意点（短評）</h2>
+<h3 id=良い点>良い点</h3>
+<ul>
+<li>列ユニークを「<strong>順列スワップ</strong>」で保証し、衝突判定を対角 2 種だけに縮退 → 分岐が明快。</li>
+<li><code>symmetryops()</code> が<strong>辞書順最小性</strong>で代表解を判定し、<strong>2/4/8</strong> の倍率に落とす正攻法。</li>
+<li><strong>1 行目の半分制限</strong>と <strong>COUNT2/4/8</strong> の設計が噛み合っている。</li>
+</ul>
+<h3 id=要注意>要注意</h3>
+<ul>
+<li><code>rotate()</code> は <strong>row->col 形式</strong>を維持するための 2 段処理（コピー→再配置）。崩すと <code>symmetryops()</code> が破綻。</li>
+<li><strong>最終行直前に対角判定 → <code>symmetryops()</code></strong> の順序は厳守。</li>
+<li>**aboard の末尾回し（回転）**で順列の総当たりを漏れなく巡回（現実装は定型どおり OK）。</li>
+</ul>
+<h3 id=次の一手>次の一手</h3>
+<ul>
+<li><strong>ビットボード化</strong>（<code>cols/ld/rd</code> を int に統合、<code>free = mask & ~(ld|rd|col)</code>, <code>bit = free & -free</code>）</li>
+<li><strong>中心列の特別処理（奇数 N）</strong>：COUNT の整合とさらに効く枝刈り</li>
+<li><strong>Codon/PyPy 最適化</strong>：整数幅とマスク明示、再帰のアンローリングパラメータ</li>
+</ul>
+<hr>
+<h3 id=実行ログcodonpython-共通で動作>実行ログ（Codon/Python 共通で動作）</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>fedora$ codon build -release 04Py_symmetry_codon.py <span class=o>&amp;&amp;</span> ./04Py_symmetry_codon
+ N:        Total       Unique        hh:mm:ss.ms
+ 4:            <span class=m>2</span>            <span class=m>1</span>         0:00:00.000
+ 5:           <span class=m>10</span>            <span class=m>2</span>         0:00:00.000
+ 6:            <span class=m>4</span>            <span class=m>1</span>         0:00:00.000
+ 7:           <span class=m>40</span>            <span class=m>6</span>         0:00:00.000
+ 8:           <span class=m>92</span>           <span class=m>12</span>         0:00:00.000
+ 9:          <span class=m>352</span>           <span class=m>46</span>         0:00:00.000
+10:          <span class=m>724</span>           <span class=m>92</span>         0:00:00.000
+11:         <span class=m>2680</span>          <span class=m>341</span>         0:00:00.005
+12:        <span class=m>14200</span>         <span class=m>1787</span>         0:00:00.055
+13:        <span class=m>73712</span>         <span class=m>9233</span>         0:00:00.137
+14:       <span class=m>365596</span>        <span class=m>45752</span>         0:00:00.769
+15:      <span class=m>2279184</span>       <span class=m>285053</span>         0:00:04.810
+</code></pre></div><hr>
+<h2 id=ソースコード-1>ソースコード</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=ch>#!/usr/bin/env python3</span>
+
+<span class=c1># -*- coding: utf-8 -*-</span>
+<span class=s2>&#34;&#34;&#34;
+</span><span class=s2>Python/codon Ｎクイーン 対象解除版
+</span><span class=s2>
+</span><span class=s2>   ,     #_
+</span><span class=s2>   ~\_  ####_        N-Queens
+</span><span class=s2>  ~~  \_#####\       https://suzukiiichiro.github.io/
+</span><span class=s2>  ~~     \###|       N-Queens for github
+</span><span class=s2>  ~~       \#/ ___   https://github.com/suzukiiichiro/N-Queens
+</span><span class=s2>   ~~       V~&#39; &#39;-&gt;
+</span><span class=s2>    ~~~         /
+</span><span class=s2>      ~~._.   _/
+</span><span class=s2>         _/ _/
+</span><span class=s2>       _/m/&#39;
+</span><span class=s2>
+</span><span class=s2>結論から言えば codon for python 17Py_ は GPU/CUDA 10Bit_CUDA/01CUDA_Bit_Symmetry.cu と同等の速度で動作します。
+</span><span class=s2>
+</span><span class=s2> $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu &amp;&amp; POCL_DEBUG=all ./a.out -n ;
+</span><span class=s2>対称解除法 GPUビットボード
+</span><span class=s2>20:      39029188884       4878666808     000:00:02:02.52
+</span><span class=s2>21:     314666222712      39333324973     000:00:18:46.52
+</span><span class=s2>22:    2691008701644     336376244042     000:03:00:22.54
+</span><span class=s2>23:   24233937684440    3029242658210     001:06:03:49.29
+</span><span class=s2>
+</span><span class=s2>amazon AWS m4.16xlarge x 1
+</span><span class=s2>$ codon build -release 15Py_constellations_optimize_codon.py &amp;&amp; ./15Py_constellations_optimize_codon
+</span><span class=s2>20:      39029188884                0          0:02:52.430
+</span><span class=s2>21:     314666222712                0          0:24:25.554
+</span><span class=s2>22:    2691008701644                0          3:29:33.971
+</span><span class=s2>23:   24233937684440                0   1 day, 8:12:58.977
+</span><span class=s2>
+</span><span class=s2>python 15py_ 以降の並列処理を除けば python でも動作します
+</span><span class=s2>$ python &lt;filename.py&gt;
+</span><span class=s2>
+</span><span class=s2>codon for python ビルドしない実行方法
+</span><span class=s2>$ codon run &lt;filename.py&gt;
+</span><span class=s2>
+</span><span class=s2>codon build for python ビルドすればC/C++ネイティブに変換し高速に実行します
+</span><span class=s2>$ codon build -release &lt; filename.py&gt; &amp;&amp; ./&lt;filename&gt;
+</span><span class=s2>
+</span><span class=s2>
+</span><span class=s2>詳細はこちら。
+</span><span class=s2>【参考リンク】Ｎクイーン問題 過去記事一覧はこちらから
+</span><span class=s2>https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
+</span><span class=s2>
+</span><span class=s2>エイト・クイーンのプログラムアーカイブ
+</span><span class=s2>Bash、Lua、C、Java、Python、CUDAまで！
+</span><span class=s2>https://github.com/suzukiiichiro/N-Queens
+</span><span class=s2>&#34;&#34;&#34;</span>
+
+
+<span class=s2>&#34;&#34;&#34;
+</span><span class=s2>N-Queens：順列生成 + 対角フラグ + 対称性（COUNT2/4/8）で Unique/Total 算出
+</span><span class=s2>=====================================================================
+</span><span class=s2>ファイル: 04Py_perm_diag_symmetry.py
+</span><span class=s2>作成日: 2025-10-23
+</span><span class=s2>
+</span><span class=s2>概要:
+</span><span class=s2>  - 行→列の順列を生成（列ユニークを配列スワップで保証）
+</span><span class=s2>  - 対角衝突は配列フラグ fb(ld)/fc(rd) で O(1) 判定
+</span><span class=s2>  - 代表解のみを数えるため symmetryops() で回転(90/180/270)・垂直反転を比較
+</span><span class=s2>    → 代表解なら倍率 2/4/8 を返し、Total = sum(倍率)、Unique = 代表解数
+</span><span class=s2>
+</span><span class=s2>設計のポイント（実ソース引用）:
+</span><span class=s2>  - 対角添字:
+</span><span class=s2>      `ld = row - aboard[row] + _off`  # 0..(2N-2), _off = N-1
+</span><span class=s2>      `rd = row + aboard[row]`         # 0..(2N-2)
+</span><span class=s2>  - 衝突判定:
+</span><span class=s2>      `if (fb[ld] | fc[rd]) == 0:`
+</span><span class=s2>  - 1行目の半分制限（左右対称除去の定石）:
+</span><span class=s2>      `lim = size if row != 0 else (size + 1) // 2`
+</span><span class=s2>  - 順列生成（スワップ + 末尾回しの定型）:
+</span><span class=s2>      `aboard[i], aboard[row] = aboard[row], aboard[i]`
+</span><span class=s2>      最後に `aboard[row]` を末尾へ回す回転処理で次ループへ
+</span><span class=s2>
+</span><span class=s2>検証の目安:
+</span><span class=s2>  - N=8 → Unique=92, Total=92（この実装は COUNT2/4/8 で一致するはず）
+</span><span class=s2>
+</span><span class=s2>注意:
+</span><span class=s2>  - I/O は遅いので測定時は出力を抑止するか、代表解のみの記録に留める。
+</span><span class=s2>  - rotate()/vmirror() は row-&gt;col 形式（長さ N の配列）を保つこと。
+</span><span class=s2>
+</span><span class=s2>著者: suzuki/nqdev
+</span><span class=s2>ライセンス: MIT（必要に応じて変更）
+</span><span class=s2>
+</span><span class=s2>
+</span><span class=s2>レビューと注意点（短評）
+</span><span class=s2>
+</span><span class=s2>良い点
+</span><span class=s2>列ユニークを「順列スワップ」で保証し、衝突判定を対角2種だけに縮退→分岐が明快。
+</span><span class=s2>symmetryops() が辞書順最小性で代表解を判定し、2/4/8 の倍率に落とす正攻法。
+</span><span class=s2>1行目の半分制限と COUNT2/4/8 の設計が噛み合っている。
+</span><span class=s2>
+</span><span class=s2>要注意
+</span><span class=s2>rotate() は row-&gt;col 形式を維持するための2段処理（コピー→再配置）。ここを崩すと symmetryops() が破綻します。
+</span><span class=s2>最終行（row == size-1）の直前に対角判定してから symmetryops() を呼ぶ順序は厳守。
+</span><span class=s2>aboard の末尾回し（回転）で順列の総当たりを漏れなく巡回すること（現在の実装は定型どおり OK）。
+</span><span class=s2>
+</span><span class=s2>次の一手（必要なら別テンプレ提供できます）
+</span><span class=s2>ビットボード化（cols/ld/rd を int に統合、free=mask&amp;~(ld|rd|col), bit=free&amp;-free）
+</span><span class=s2>中心列の特別処理（奇数 N）：COUNT の整合とさらに効く枝刈り
+</span><span class=s2>Codon/PyPy 最適化：整数幅とマスク明示、再帰のアンローリングパラメータなど
+</span><span class=s2>
+</span><span class=s2>
+</span><span class=s2>Codon/Python 共通で動作。
+</span><span class=s2>
+</span><span class=s2>fedora$ codon build -release 04Py_symmetry_codon.py &amp;&amp; ./04Py_symmetry_codon
+</span><span class=s2> N:        Total       Unique        hh:mm:ss.ms
+</span><span class=s2> 4:            2            1         0:00:00.000
+</span><span class=s2> 5:           10            2         0:00:00.000
+</span><span class=s2> 6:            4            1         0:00:00.000
+</span><span class=s2> 7:           40            6         0:00:00.000
+</span><span class=s2> 8:           92           12         0:00:00.000
+</span><span class=s2> 9:          352           46         0:00:00.000
+</span><span class=s2>10:          724           92         0:00:00.000
+</span><span class=s2>11:         2680          341         0:00:00.005
+</span><span class=s2>12:        14200         1787         0:00:00.055
+</span><span class=s2>13:        73712         9233         0:00:00.137
+</span><span class=s2>14:       365596        45752         0:00:00.769
+</span><span class=s2>15:      2279184       285053         0:00:04.810
+</span><span class=s2>&#34;&#34;&#34;</span>
+
+<span class=kn>from</span> <span class=nn>datetime</span> <span class=kn>import</span> <span class=n>datetime</span>
+<span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>List</span>
+
+<span class=c1># pypy を使う場合はコメントを解除（Codon では使わないこと）</span>
+<span class=c1># import pypyjit</span>
+<span class=c1># pypyjit.set_param(&#39;max_unroll_recursion=-1&#39;)</span>
+
+
+<span class=k>class</span> <span class=nc>NQueens04</span><span class=p>:</span>
+  <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>  順列生成 + 対角フラグ（ld/rd）で探索し、symmetryops() で対称性分類して
+</span><span class=s2>  Unique/Total を同時計数する実装。
+</span><span class=s2>
+</span><span class=s2>  構造:
+</span><span class=s2>    - aboard  : row-&gt;col の順列。初期は [0,1,...,N-1]（列ユニークをスワップで維持）
+</span><span class=s2>    - fb/fc   : 対角フラグ（長さ 2N-1）
+</span><span class=s2>    - trial   : 対称変換時の作業配列
+</span><span class=s2>    - scratch : 回転中間バッファ
+</span><span class=s2>    - _off    : ld の負値補正 = N-1（ld=row-col+_off を 0..2N-2 に写像）
+</span><span class=s2>
+</span><span class=s2>  特徴（引用）:
+</span><span class=s2>    - 1行目は左右対称を避けるため半分のみ:
+</span><span class=s2>        `lim = size if row != 0 else (size + 1) // 2`
+</span><span class=s2>    - 最終行で symmetryops(size) → {0,2,4,8} を受け取り、
+</span><span class=s2>      0 以外なら Unique++, Total += 倍率。
+</span><span class=s2>  &#34;&#34;&#34;</span>
+
+  <span class=c1># 結果カウンタ</span>
+  <span class=n>total</span><span class=p>:</span><span class=nb>int</span>
+  <span class=n>unique</span><span class=p>:</span><span class=nb>int</span>
+  <span class=c1># 作業配列</span>
+  <span class=n>aboard</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>   <span class=c1># row -&gt; col（順列ベース：0..size-1 の並べ替え）</span>
+  <span class=n>fb</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>       <span class=c1># ld（左下↙︎/右上↗︎）対角フラグ: 0..(2*size-2)</span>
+  <span class=n>fc</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>       <span class=c1># rd（右下↘︎/左上↖︎）対角フラグ: 0..(2*size-2)</span>
+  <span class=n>trial</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>    <span class=c1># 対称操作時の作業バッファ</span>
+  <span class=n>scratch</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>  <span class=c1># 回転の中間バッファ</span>
+  <span class=n>_off</span><span class=p>:</span><span class=nb>int</span>           <span class=c1># (row-col) の負値補正 = size-1</span>
+  <span class=n>_size</span><span class=p>:</span><span class=nb>int</span>          <span class=c1># 参照用に保持（任意）</span>
+
+  <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      インスタンス生成のみ（実配列は init(size) で確保）。
+</span><span class=s2>    注意:
+</span><span class=s2>      - init(size) を呼ぶ前に nqueens() を実行しないこと。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=c1># 実体は init(size) で都度作る</span>
+    <span class=k>pass</span>
+
+  <span class=k>def</span> <span class=nf>init</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>size</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      盤サイズに応じて作業領域を全て初期化する。
+</span><span class=s2>    実装（引用）:
+</span><span class=s2>      - `aboard = [i for i in range(size)]`  # 順列ベース
+</span><span class=s2>      - `fb = [0 for _ in range(2*size - 1)]`  # ld, 0..2N-2
+</span><span class=s2>      - `fc = [0 for _ in range(2*size - 1)]`  # rd, 0..2N-2
+</span><span class=s2>      - `trial/scratch = [0]*size`
+</span><span class=s2>      - `_off = size - 1`
+</span><span class=s2>    メモ:
+</span><span class=s2>      列ユニークは順列操作で保証するため、列フラグは不要。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=bp>self</span><span class=o>.</span><span class=n>total</span><span class=o>=</span><span class=mi>0</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>unique</span><span class=o>=</span><span class=mi>0</span>
+    <span class=c1># 順列ベース：初期は [0,1,2,...,size-1]</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=o>=</span><span class=p>[</span><span class=n>i</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>size</span><span class=p>)]</span>
+    <span class=c1># 対角フラグ（列ユニークは順列で保証されるため不要）</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>fb</span><span class=o>=</span><span class=p>[</span><span class=mi>0</span> <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>)]</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>fc</span><span class=o>=</span><span class=p>[</span><span class=mi>0</span> <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>)]</span>
+    <span class=c1># 対称操作用バッファ</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=o>=</span><span class=p>[</span><span class=mi>0</span> <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>size</span><span class=p>)]</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=o>=</span><span class=p>[</span><span class=mi>0</span> <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>size</span><span class=p>)]</span>
+    <span class=c1># (row - col) の負値補正用</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>_off</span><span class=o>=</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>_size</span><span class=o>=</span><span class=n>size</span>
+
+  <span class=k>def</span> <span class=nf>rotate</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>chk</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span><span class=n>scr</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span><span class=n>n</span><span class=p>:</span><span class=nb>int</span><span class=p>,</span><span class=n>neg</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      row-&gt;col 配列 `chk` を 90° 回転した配置に書き換える。
+</span><span class=s2>      neg=1: 右回り（時計回り）、neg=0: 左回り（反時計）。
+</span><span class=s2>    手順（引用）:
+</span><span class=s2>      # 第1段: 順/逆で `chk` → `scr`
+</span><span class=s2>      `incr = 1 if neg else -1`
+</span><span class=s2>      `k = 0 if neg else n-1`
+</span><span class=s2>      `scr[i] = chk[k]; k += incr`
+</span><span class=s2>      # 第2段: scr の「値」を添字として新しい列を復元
+</span><span class=s2>      `k = n-1 if neg else 0`
+</span><span class=s2>      `chk[scr[i]] = k; k -= incr`
+</span><span class=s2>    注意:
+</span><span class=s2>      - 入出力とも row-&gt;col 形式（長さ N の 0..N-1 値）を維持する。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=c1># 第1段：scr に chk を順方向/逆方向でコピー</span>
+    <span class=n>incr</span><span class=o>=</span><span class=mi>1</span> <span class=k>if</span> <span class=n>neg</span> <span class=k>else</span><span class=o>-</span><span class=mi>1</span>
+    <span class=n>k</span><span class=o>=</span><span class=mi>0</span> <span class=k>if</span> <span class=n>neg</span> <span class=k>else</span> <span class=n>n</span><span class=o>-</span><span class=mi>1</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+      <span class=n>scr</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=n>chk</span><span class=p>[</span><span class=n>k</span><span class=p>]</span>
+      <span class=n>k</span><span class=o>+=</span><span class=n>incr</span>
+    <span class=c1># 第2段：scr の値（= 列）を添字として使い、chk に新しい列を埋め戻す</span>
+    <span class=n>k</span><span class=o>=</span><span class=n>n</span><span class=o>-</span><span class=mi>1</span> <span class=k>if</span> <span class=n>neg</span> <span class=k>else</span> <span class=mi>0</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+      <span class=n>chk</span><span class=p>[</span><span class=n>scr</span><span class=p>[</span><span class=n>i</span><span class=p>]]</span><span class=o>=</span><span class=n>k</span>
+      <span class=n>k</span><span class=o>-=</span><span class=n>incr</span>
+
+  <span class=k>def</span> <span class=nf>vmirror</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>chk</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span><span class=n>n</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      垂直反転（左右反転）。col 値を `col -&gt; (n-1)-col` に変換。
+</span><span class=s2>    実装（引用）:
+</span><span class=s2>      `chk[i] = (n - 1) - chk[i]`
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+      <span class=n>chk</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=p>(</span><span class=n>n</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span><span class=o>-</span><span class=n>chk</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+
+  <span class=k>def</span> <span class=nf>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>lt</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span><span class=n>rt</span><span class=p>:</span><span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span><span class=n>n</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=nb>int</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      配列 lt と rt の辞書順比較。lt &lt; rt: 負、==: 0、&gt;: 正 を返す。
+</span><span class=s2>    実装（引用）:
+</span><span class=s2>      `d = lt[i] - rt[i]; d != 0 なら d を返す。最後まで同じなら 0。`
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+      <span class=n>d</span><span class=o>=</span><span class=n>lt</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>-</span><span class=n>rt</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+      <span class=k>if</span> <span class=n>d</span><span class=o>!=</span><span class=mi>0</span><span class=p>:</span>
+        <span class=k>return</span> <span class=n>d</span>
+    <span class=k>return</span> <span class=mi>0</span>
+
+  <span class=k>def</span> <span class=nf>symmetryops</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>size</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=nb>int</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      現在の `aboard` が対称群（90/180/270 の回転 + 垂直反転とその回転）における
+</span><span class=s2>      最小表現（辞書順最小）かどうかを判定し、等価解の倍率を返す。
+</span><span class=s2>    戻り値:
+</span><span class=s2>      0（代表でない）/ 2 / 4 / 8
+</span><span class=s2>    判定手順（引用の要点）:
+</span><span class=s2>      - `trial &lt;- aboard`
+</span><span class=s2>      - 90°: `rotate(trial, scratch, size, 0)` → `intncmp(aboard, trial)`
+</span><span class=s2>        * k &gt; 0 なら代表ではない → 0
+</span><span class=s2>        * k == 0 なら `nequiv = 1`
+</span><span class=s2>        * それ以外なら 180°, 270° を続けて比較（同値なら nequiv=2/4）
+</span><span class=s2>      - 垂直反転: `trial &lt;- aboard` → `vmirror(trial, size)` → 比較
+</span><span class=s2>        * k &gt; 0 なら 0
+</span><span class=s2>        * `nequiv &gt; 1` のとき、反転後の 90/180/270 も比較
+</span><span class=s2>      - 返値: `nequiv * 2`（1→2倍, 2→4倍, 4→8倍）
+</span><span class=s2>    注意:
+</span><span class=s2>      - aboard 自体を書き換えずに `trial/scratch` だけを操作する。
+</span><span class=s2>      - 比較は常に `aboard` を「基準」に行い、辞書順最小性を確認。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=n>nequiv</span><span class=o>=</span><span class=mi>0</span>
+    <span class=c1># trial に原盤をコピー</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>size</span><span class=p>):</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+    <span class=c1># 90°</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span>
+    <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+    <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+      <span class=k>return</span> <span class=mi>0</span>
+    <span class=k>if</span> <span class=n>k</span><span class=o>==</span><span class=mi>0</span><span class=p>:</span>
+      <span class=n>nequiv</span><span class=o>=</span><span class=mi>1</span>
+    <span class=k>else</span><span class=p>:</span>
+      <span class=c1># 180°</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span>
+      <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+      <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+        <span class=k>return</span> <span class=mi>0</span>
+      <span class=k>if</span> <span class=n>k</span><span class=o>==</span><span class=mi>0</span><span class=p>:</span>
+        <span class=n>nequiv</span><span class=o>=</span><span class=mi>2</span>
+      <span class=k>else</span><span class=p>:</span>
+        <span class=c1># 270°</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span>
+        <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+        <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+          <span class=k>return</span> <span class=mi>0</span>
+        <span class=n>nequiv</span><span class=o>=</span><span class=mi>4</span>
+    <span class=c1># 垂直反転</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>size</span><span class=p>):</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>vmirror</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+    <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+    <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+      <span class=k>return</span> <span class=mi>0</span>
+    <span class=c1># 垂直反転後の回転</span>
+    <span class=k>if</span> <span class=n>nequiv</span><span class=o>&gt;</span><span class=mi>1</span><span class=p>:</span>
+      <span class=c1># 90</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>1</span><span class=p>)</span>
+      <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+      <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+        <span class=k>return</span> <span class=mi>0</span>
+      <span class=k>if</span> <span class=n>nequiv</span><span class=o>&gt;</span><span class=mi>2</span><span class=p>:</span>
+        <span class=c1># 180</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>1</span><span class=p>)</span>
+        <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+        <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+          <span class=k>return</span> <span class=mi>0</span>
+        <span class=c1># 270</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rotate</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>scratch</span><span class=p>,</span><span class=n>size</span><span class=p>,</span><span class=mi>1</span><span class=p>)</span>
+        <span class=n>k</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>intncmp</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>,</span><span class=bp>self</span><span class=o>.</span><span class=n>trial</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+        <span class=k>if</span> <span class=n>k</span><span class=o>&gt;</span><span class=mi>0</span><span class=p>:</span>
+          <span class=k>return</span> <span class=mi>0</span>
+    <span class=k>return</span> <span class=n>nequiv</span><span class=o>*</span><span class=mi>2</span>  <span class=c1># 1→2倍, 2→4倍, 4→8倍</span>
+
+  <span class=k>def</span> <span class=nf>nqueens</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>row</span><span class=p>:</span><span class=nb>int</span><span class=p>,</span><span class=n>size</span><span class=p>:</span><span class=nb>int</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      行 `row` の列を順列スワップで決め、対角フラグで枝刈りしつつ再帰。
+</span><span class=s2>      最終行に到達したら symmetryops(size) で代表性を確認し、Unique/Total を更新。
+</span><span class=s2>    コアロジック（引用）:
+</span><span class=s2>      - 最終行:
+</span><span class=s2>          `if fb[row - aboard[row] + _off] or fc[row + aboard[row]]: return`
+</span><span class=s2>          `stotal = symmetryops(size)`
+</span><span class=s2>          `if stotal != 0: unique += 1; total += stotal`
+</span><span class=s2>      - 1行目の半分制限:
+</span><span class=s2>          `lim = size if row != 0 else (size + 1) // 2`
+</span><span class=s2>      - 順列生成（スワップ）と対角チェック:
+</span><span class=s2>          `aboard[i], aboard[row] = aboard[row], aboard[i]`
+</span><span class=s2>          `ld = row - aboard[row] + _off; rd = row + aboard[row]`
+</span><span class=s2>          `if (fb[ld] | fc[rd]) == 0: fb[ld]=fc[rd]=1; nqueens(row+1); fb[ld]=fc[rd]=0`
+</span><span class=s2>      - 末尾回し（次の外側ループへ）:
+</span><span class=s2>          `tmp = aboard[row]; aboard[row: size-1] = aboard[row+1: size]; aboard[size-1] = tmp`
+</span><span class=s2>    注意:
+</span><span class=s2>      - スワップと「戻し」の対応は対角フラグ側で行い、aboard は最後に回転で整合。
+</span><span class=s2>      - 1行目半分制限は左右対称分を排除するため（COUNT2/4/8 と整合）。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=k>if</span> <span class=n>row</span><span class=o>==</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>:</span>
+      <span class=c1># 最終行の候補が現在の aboard[row]。対角衝突だけ確認（列は順列で一意）</span>
+      <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>fb</span><span class=p>[</span><span class=n>row</span><span class=o>-</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>_off</span><span class=p>]</span> <span class=ow>or</span> <span class=bp>self</span><span class=o>.</span><span class=n>fc</span><span class=p>[</span><span class=n>row</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]]:</span>
+        <span class=k>return</span>
+      <span class=n>stotal</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>symmetryops</span><span class=p>(</span><span class=n>size</span><span class=p>)</span>
+      <span class=k>if</span> <span class=n>stotal</span><span class=o>!=</span><span class=mi>0</span><span class=p>:</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>unique</span><span class=o>+=</span><span class=mi>1</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>total</span><span class=o>+=</span><span class=n>stotal</span>
+      <span class=k>return</span>
+
+    <span class=c1># 1 行目は左右対称を避けるため半分だけ試す</span>
+    <span class=n>lim</span><span class=o>=</span><span class=n>size</span> <span class=k>if</span> <span class=n>row</span><span class=o>!=</span><span class=mi>0</span> <span class=k>else</span> <span class=p>(</span><span class=n>size</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>row</span><span class=p>,</span><span class=n>lim</span><span class=p>):</span>
+      <span class=c1># row と i をスワップして次の行へ（順列生成）</span>
+      <span class=n>tmp</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span><span class=o>=</span><span class=n>tmp</span>
+      <span class=c1># 対角フラグ（列は不要）</span>
+      <span class=n>ld</span><span class=o>=</span><span class=n>row</span><span class=o>-</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>_off</span>
+      <span class=n>rd</span><span class=o>=</span><span class=n>row</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span>
+      <span class=k>if</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>fb</span><span class=p>[</span><span class=n>ld</span><span class=p>]</span><span class=o>|</span><span class=bp>self</span><span class=o>.</span><span class=n>fc</span><span class=p>[</span><span class=n>rd</span><span class=p>])</span><span class=o>==</span><span class=mi>0</span><span class=p>:</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>fb</span><span class=p>[</span><span class=n>ld</span><span class=p>]</span><span class=o>=</span><span class=mi>1</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>fc</span><span class=p>[</span><span class=n>rd</span><span class=p>]</span><span class=o>=</span><span class=mi>1</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>nqueens</span><span class=p>(</span><span class=n>row</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>fb</span><span class=p>[</span><span class=n>ld</span><span class=p>]</span><span class=o>=</span><span class=mi>0</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>fc</span><span class=p>[</span><span class=n>rd</span><span class=p>]</span><span class=o>=</span><span class=mi>0</span>
+    <span class=c1># row を末尾に回して、次の外側ループへ（順列生成の定型テク）</span>
+    <span class=n>tmp</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>row</span><span class=p>]</span>
+    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>row</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>size</span><span class=p>):</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+    <span class=bp>self</span><span class=o>.</span><span class=n>aboard</span><span class=p>[</span><span class=n>size</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>=</span><span class=n>tmp</span>
+
+  <span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span><span class=o>-&gt;</span><span class=kc>None</span><span class=p>:</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    役割:
+</span><span class=s2>      N=4..18 を走査し、Total/Unique/経過時間を表形式で出力する。
+</span><span class=s2>    実装（引用）:
+</span><span class=s2>      `print(&#34; N:        Total       Unique        hh:mm:ss.ms&#34;)`
+</span><span class=s2>      `print(f&#34;</span><span class=si>{size:2d}</span><span class=s2>:</span><span class=si>{total:13d}{unique:13d}{text:&gt;20s}</span><span class=s2>&#34;)`
+</span><span class=s2>    注意:
+</span><span class=s2>      - 出力件数が多い場合は端末 I/O が支配的になる。
+</span><span class=s2>      - 実験比較のときは印字を減らし、計測を安定化させる。
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=n>minN</span><span class=p>:</span><span class=nb>int</span><span class=o>=</span><span class=mi>4</span>
+    <span class=n>maxN</span><span class=p>:</span><span class=nb>int</span><span class=o>=</span><span class=mi>18</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34; N:        Total       Unique        hh:mm:ss.ms&#34;</span><span class=p>)</span>
+    <span class=k>for</span> <span class=n>size</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>minN</span><span class=p>,</span><span class=n>maxN</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>init</span><span class=p>(</span><span class=n>size</span><span class=p>)</span>
+      <span class=n>start_time</span><span class=o>=</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>()</span>
+      <span class=bp>self</span><span class=o>.</span><span class=n>nqueens</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=n>size</span><span class=p>)</span>
+      <span class=n>time_elapsed</span><span class=o>=</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>()</span><span class=o>-</span><span class=n>start_time</span>
+      <span class=n>text</span><span class=o>=</span><span class=nb>str</span><span class=p>(</span><span class=n>time_elapsed</span><span class=p>)[:</span><span class=o>-</span><span class=mi>3</span><span class=p>]</span>
+      <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>size</span><span class=si>:</span><span class=s2>2d</span><span class=si>}</span><span class=s2>:</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>total</span><span class=si>:</span><span class=s2>13d</span><span class=si>}{</span><span class=bp>self</span><span class=o>.</span><span class=n>unique</span><span class=si>:</span><span class=s2>13d</span><span class=si>}{</span><span class=n>text</span><span class=si>:</span><span class=s2>&gt;20s</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+
+<span class=k>if</span> <span class=vm>__name__</span><span class=o>==</span><span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+    <span class=n>NQueens04</span><span class=p>()</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
+
+</code></pre></div><hr>
+<h2 id=-関連リンク>📚 関連リンク</h2>
+<ul>
+<li><a class=link href=https://github.com/exaloop/codon target=_blank rel=noopener>Codon GitHub (Exaloop)</a></li>
+<li><a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>N-Queens Project Archive</a></li>
+<li><a class=link href=https://llvm.org/docs/ target=_blank rel=noopener>公式 LLVM Documentation</a></li>
+<li><a class=link href=https://docs.exaloop.io target=_blank rel=noopener>Codon Language Docs</a></li>
+</ul>
+<hr>
+<h2 id=ｎクイーン問題-過去記事アーカイブ-1>Ｎクイーン問題 過去記事アーカイブ</h2>
+<p>【過去記事アーカイブ】Ｎクイーン問題 過去記事一覧<br>
+<a class=link href="https://suzukiiichiro.github.io/search/?keyword=" target=_blank rel=noopener>https://suzukiiichiro.github.io/search/?keyword=</a>Ｎクイーン問題<br>
+【Github】エイト・クイーンのソース置き場 BashもJavaもPythonも！<br>
+<a class=link href=https://github.com/suzukiiichiro/N-Queens target=_blank rel=noopener>https://github.com/suzukiiichiro/N-Queens</a></p>
+<p>Ｎクイーン問題（１０１）Python/Codonで爆速プログラミング コンステレーション＋インテグレート<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１００）Python/Codonで爆速プログラミング コンステレーション＋マージ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９９）Python/Codonで爆速プログラミング コンステレーション＋最適化<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９８）Python/Codonで爆速プログラミング コンステレーション＋並列処理<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９７）Python/Codonで爆速プログラミング コンステレーション<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９６）Python/Codonで爆速プログラミング キャリーチェーン<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９５）Python/Codonで爆速プログラミング ノードレイヤー＋対象解除法<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９４）Python/Codonで爆速プログラミング ノードレイヤー＋ミラー<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９３）Python/Codonで爆速プログラミング ノードレイヤー<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９２）Python/Codonで爆速プログラミング ビットでミラー＋対象解除法<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９１）Python/Codonで爆速プログラミング ビットで対象解除法<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-07-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-07-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９０）Python/Codonで爆速プログラミング ビットでミラー<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-06-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-06-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８９）Python/Codonで爆速プログラミング ビットでバックトラック<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８８）Python/Codonで爆速プログラミング 対象解除法<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８７）Python/Codonで爆速プログラミング バックトラック<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８６）Python/Codonで爆速プログラミング ポストフラグ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８５）Python/Codonで爆速プログラミング ブルートフォース<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-27-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-27-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８４）Python/Codonで爆速プログラミング<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８３）Python-codon＆並列処理で高速化 Constellations<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-07-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８２）Python-並列処理で高速化 16Python_carryChain_ProcessPool<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-06-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-06-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８１）Python-codonで高速化 15Python_carryChain<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８０）Python-並列処理で高速化 14Python_NodeLayer_symmetry_ProcessPool<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７９）Python-codonで高速化 13Python_NodeLayer_symmetry<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７８）Python-codonで高速化 12Python_NodeLayer_mirror<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７７）Python-codonで高速化 11Python_NodeLayer<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-11-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-11-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７６）Python-並列処理で高速化 10Python_bit_symmetry_ProcessPool<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-10-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-10-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７５）Python-並列処理で高速化 09Python_bit_symmetry_ThreadPool<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-10-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-10-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７４）Python-codonで高速化 08Python_bit_symmetry<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-10-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-10-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７３）Python-codonで高速化 07Python_bit_mirror<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-10-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-10-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７２）Python-codonで高速化 06Python_bit_backTrack<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-10-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-10-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７１）Python-codonで高速化 05Python_optimize<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-07-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-07-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７０）Python-codonで高速化 04Python_symmetry<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-06-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-06-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６９）Python-codonで高速化 03Python_backTracking<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-06-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-06-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６８）Python-codonで高速化 02Python_postFlag<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-05-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-05-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６７）Python-codonで高速化 01Python_bluteForce<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-05-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-05-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６６）Python-codonで高速化<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６５） Ｎ２５を解決！事実上の日本一に<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2024-04-25-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2024-04-25-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６４）第七章 並列処理 キャリーチェーン ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６３）第七章 並列処理 キャリーチェーン ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６２）第七章 並列処理 対称解除法 ビットボード ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６１）第七章 並列処理 対称解除法 ノードレイヤー ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６０）第七章 並列処理 ミラー ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５９）第七章 並列処理 ビットマップ ＮＶＩＤＩＡ ＣＵＤＡ編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-08-01-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-08-01-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５８）第六章 並列処理 pthread C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-09-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-09-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５７）第八章 キャリーチェーン C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-08-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５６）第八章 ミラー C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-06-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-06-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５５）第八章 ビットマップ C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５４）第八章 ビットマップ C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５３）第八章 配置フラグ C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５２）第八章 バックトラック C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５１）第八章 ブルートフォース C言語編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-28-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-28-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５０）第七章 マルチプロセス Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-21-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-21-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４９）第七章 マルチスレッド Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-21-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-21-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４８）第七章 シングルスレッド Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-21-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-21-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４７）第七章 クラス Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-21-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４６）第七章 ステップＮの実装 Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-16-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-16-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４５）第七章 キャリーチェーン Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-16-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-16-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４４）第七章　対象解除法 Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-14-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-14-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４３）第七章　ミラー Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-14-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４２）第七章　ビットマップ Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-13-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-13-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４１）第七章　配置フラグ Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-13-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-13-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４０）第七章　バックトラック Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-13-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-13-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３９）第七章　バックトラック準備編 Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-13-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-13-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３８）第七章　ブルートフォース Python編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-06-13-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-06-13-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３７）第六章 C言語移植 その１７ pthread並列処理完成<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-17-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-17-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３６）第六章 C言語移植 その１６ pthreadの実装<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-16-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-16-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３５）第六章 C言語移植 その１５ pthread実装直前版完成<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-15-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-15-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３４）第六章 C言語移植 その１４<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-14-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-14-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３３）第六章 C言語移植 その１３<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-13-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-13-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３２）第六章 C言語移植 その１２<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-12-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-12-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３１）第六章 C言語移植 その１１<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-11-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-11-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３０）第六章 C言語移植 その１０<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-10-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-10-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２９）第六章 C言語移植 その９<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-09-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-09-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２８）第六章 C言語移植 その８<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-08-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-08-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２７）第六章 C言語移植 その７<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-07-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-07-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２６）第六章 C言語移植 その６<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-06-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-06-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２５）第六章 C言語移植 その５<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-05-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-05-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２４）第六章 C言語移植 その４<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-04-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-04-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２３）第六章 C言語移植 その３<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２２）第六章 C言語移植 その２<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-30-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-30-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２１）第六章 C言語移植 その１<br>
+N-Queens問://suzukiiichiro.github.io/posts/2023-05-30-01-n-queens-suzuki/<br>
+Ｎクイーン問題（２０）第五章 並列処理<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-23-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-23-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１９）第五章 キャリーチェーン<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-05-23-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-05-23-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１８）第四章 エイト・クイーンノスタルジー<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-25-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-25-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１７）第四章　偉人のソースを読む「Ｎ２４を発見 Ｊｅｆｆ Ｓｏｍｅｒｓ」<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-21-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１６）第三章　対象解除法 ソース解説<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-18-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１５）第三章　対象解除法 ロジック解説<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-13-02-nqueens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-13-02-nqueens-suzuki/</a><br>
+Ｎクイーン問題（１４）第三章　ミラー<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-13-01-nqueens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-13-01-nqueens-suzuki/</a><br>
+Ｎクイーン問題（１３）第三章　ビットマップ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-04-05-01-nqueens-suzuki/</a><br>
+Ｎクイーン問題（１２）第二章　まとめ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１１）第二章　配置フラグの再帰・非再帰<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-17-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１０）第二章　バックトラックの再帰・非再帰<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-16-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（９）第二章　ブルートフォースの再帰・非再帰<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-14-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（８）第一章　まとめ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-09-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（７）第一章　ブルートフォース再び<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-08-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（６）第一章　配置フラグ<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-07-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（５）第一章　進捗表示テーブルの作成<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-03-06-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（４）第一章　バックトラック<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-21-01-n-queens-suzuki/</a><br>
+Ｎクイーン問題（３）第一章　バックトラック準備編<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-03-n-queens-suzuki/</a><br>
+Ｎクイーン問題（２）第一章　ブルートフォース<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-02-n-queens-suzuki/</a><br>
+Ｎクイーン問題（１）第一章　エイトクイーンについて<br>
+<a class=link href=https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/ target=_blank rel=noopener>https://suzukiiichiro.github.io/posts/2023-02-14-01-n-queens-suzuki/</a></p>
+<h2 id=書籍の紹介>書籍の紹介</h2>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/proteect/4873112672/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873112672&linkCode=as2&tag=nlpqueens09-22&linkId=ef087fd92d3628bb94e1eb10cb202d43" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://m.media-amazon.com/images/I/51EAPCH56ML._SL250_.jpg alt="詳解 シェルスクリプト 大型本  2006/1/16">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>詳解 シェルスクリプト 大型本 2006/1/16</h2>
+<p>Unixのプログラムは「ツール」と呼ばれます。
+Unixは、処理を実現するために複数の道具(ツール)を組み合わせる「ソフトウェアツール」という思想の下に設計されているためです。
+そしてこれらツールを「組み合わせる」ということこそがUnixの真髄です。
+また、シェルスクリプトの作成には言語自体だけでなくそれぞれのツールに対する理解も求められます。
+つまり、あるツールが何のためのものであり、それを単体あるいは他のプログラムと組み合わせて利用するにはどのようにすればよいかということを理解しなければなりません。
+本書は、Unixシステムへの理解を深めながら、シェルスクリプトの基礎から応用までを幅広く解説します。
+標準化されたシェルを通じてUnix(LinuxやFreeBSD、Mac OS XなどあらゆるUnix互換OSを含む)の各種ツールを組み合わせ、
+目的の処理を実現するための方法を詳しく学ぶことができます。
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/proteect/4797377623/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797377623&linkCode=as2&tag=nlpqueens09-22&linkId=3c8d4566263ae99374221c4f8f469154" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://m.media-amazon.com/images/I/51R5SZKrEAL._SL250_.jpg alt="UNIXシェルスクリプト マスターピース132">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>UNIXシェルスクリプト マスターピース132</h2>
+<p>すべてのUNIXエンジニア必携!!
+<p>サーバー管理、ネットワーク管理など、現場で使えるテクニックを豊富にちりばめたシェルスクリプトサンプル集の決定版。<br>
+知りたいことがきっと見つかる秘密の道具箱。Linux、FreeBSD、MacOS対応。</p>
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/proteect/4774186945/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4774186945&linkCode=as2&tag=nlpqueens09-22&linkId=8ef3ff961c569212e910cf3d6e37dcb6" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://m.media-amazon.com/images/I/41i956UyusL._SL250_.jpg alt="[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー）  2017/1/20">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>[改訂第3版]シェルスクリプト基本リファレンス ──#!/bin/shで、ここまでできる (WEB+DB PRESS plus) 単行本（ソフトカバー） 2017/1/20</h2>
+<p>定番の1冊『シェルスクリプト基本リファレンス』の改訂第3版。
+シェルスクリプトの知識は、プログラマにとって長く役立つ知識です。
+本書では、複数のプラットフォームに対応できる移植性の高いシェルスクリプト作成に主眼を置き、
+基本から丁寧に解説。
+第3版では最新のLinux/FreeBSD/Solarisに加え、組み込み分野等で注目度の高いBusyBoxもサポート。
+合わせて、全収録スクリプトに関してWindowsおよびmacOS環境でのbashの動作確認も行い、さらなる移植性の高さを追求。
+ますますパワーアップした改訂版をお届けします。</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+<aside class=amazon-box>
+<a href="https://www.amazon.co.jp/gp/proteect/4797393106/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797393106&linkCode=as2&tag=nlpqueens09-22&linkId=f514a6378c1c10e59ab16275745c2439" target=_blank>
+<div class="columns amazon-image">
+<img border=0 src=https://m.media-amazon.com/images/I/41d1D6rgDiL._SL250_.jpg alt="新しいシェルプログラミングの教科書 単行本">
+</div>
+<div class="columns amazon-info">
+<h2 class=amazon-name>新しいシェルプログラミングの教科書 単行本</h2>
+<p>エキスパートを目指せ!!
+<p>システム管理やソフトウェア開発など、<br>
+実際の業務では欠かせないシェルスクリプトの知識を徹底解説</p>
+<p>ほとんどのディストリビューションでデフォルトとなっているbashに特化することで、<br>
+類書と差別化を図るとともに、より実践的なプログラミングを紹介します。<br>
+またプログラミング手法の理解に欠かせないLinuxの仕組みについてもできるかぎり解説しました。<br>
+イマドキのエンジニア必携の一冊。</p>
+<p>▼目次<br>
+CHAPTER01 シェルってなんだろう<br>
+CHAPTER02 シェルスクリプトとは何か<br>
+CHAPTER03 シェルスクリプトの基本<br>
+CHAPTER04 変数<br>
+CHAPTER05 クォーティング<br>
+CHAPTER06 制御構造<br>
+CHAPTER07 リダイレクトとパイプ<br>
+CHAPTER08 関数<br>
+CHAPTER09 組み込みコマンド<br>
+CHAPTER10 正規表現と文字列<br>
+CHAPTER11 シェルスクリプトの実行方法<br>
+CHAPTER12 シェルスクリプトのサンプルで学ぼう<br>
+CHAPTER13 シェルスクリプトの実用例<br>
+CHAPTER14 テストとデバッグ<br>
+CHAPTER15 読みやすいシェルスクリプト</p>
+</p>
+<span class=link>Amazonで詳細を見る</span>
+</div>
+</a>
+<small>Amazon.co.jpアソシエイトを使用</small>
+</aside>
+</div>
+<ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-8689199204567424 data-ad-slot=9341917836></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+<aside class="section related-contents--wrapper">
+<h2 class=section-title>関連するコンテンツ</h2>
+<div class=article-list>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（１０１）Python/Codonで爆速プログラミング コンステレーション＋インテグレート">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（１０１）Python/Codonで爆速プログラミング コンステレーション＋インテグレート</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（１００）Python/Codonで爆速プログラミング コンステレーション＋マージ">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（１００）Python/Codonで爆速プログラミング コンステレーション＋マージ</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９９）Python/Codonで爆速プログラミング コンステレーション＋最適化">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９９）Python/Codonで爆速プログラミング コンステレーション＋最適化</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９８）Python/Codonで爆速プログラミング コンステレーション＋並列処理">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９８）Python/Codonで爆速プログラミング コンステレーション＋並列処理</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９７）Python/Codonで爆速プログラミング コンステレーション">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９７）Python/Codonで爆速プログラミング コンステレーション</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９６）Python/Codonで爆速プログラミング キャリーチェーン">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９６）Python/Codonで爆速プログラミング キャリーチェーン</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９５）Python/Codonで爆速プログラミング ノードレイヤー＋対象解除法">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９５）Python/Codonで爆速プログラミング ノードレイヤー＋対象解除法</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+<article class="has-image article-item" data-date=2025.10.27>
+<a class=article-link href=https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/>
+<header class=article-header>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=200 height=151>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_400x0_resize_q75_box.jpg 2x" width=200 height=151 loading=lazy alt="Ｎクイーン問題（９４）Python/Codonで爆速プログラミング ノードレイヤー＋ミラー">
+</picture>
+</div>
+<div class=article-category>
+<span class=article-category-item>
+プログラミング
+</span>
+</div>
+</header>
+<div class=article-details>
+<h2 class=article-title>Ｎクイーン問題（９４）Python/Codonで爆速プログラミング ノードレイヤー＋ミラー</h2><div class=article-time>
+<time class="article-time--item article-time--published">2025.10.27</time>
+</div><p class=article-subtitle>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiii…</p>
+</div>
+</a>
+</article>
+</div>
+</aside>
+<footer class=article-footer>
+</footer>
+<div class=article-pager>
+<div class="article-pager-item article-pager--next">
+<div class="article has-image">
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-05-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" width=50 height=38 alt="Ｎクイーン問題（８９）Python/Codonで爆速プログラミング ビットでバックトラック">
+</div>
+<div class=article-details>
+<h4 class=article-title>Ｎクイーン問題（８９）Python/Codonで爆速プログラミング ビットでバックトラック</h4>
+</div>
+</a>
+</div>
+</div>
+<div class="article-pager-item article-pager--prev">
+<div class="article has-image">
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/>
+<div class=article-image>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-03-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" width=50 height=38 alt="Ｎクイーン問題（８７）Python/Codonで爆速プログラミング バックトラック">
+</div>
+<div class=article-details>
+<h4 class=article-title>Ｎクイーン問題（８７）Python/Codonで爆速プログラミング バックトラック</h4>
+</div>
+</a>
+</div>
+</div>
+</div>
+</article>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<div class="sidebar right-sidebar sticky">
+<div class="profile-area widget">
+<span class=profile-icon style=background-image:url(https://github.com/suzukiiichiro.png)></span>
+<div class=profile-bio-area>
+<h4 class=profile-name>suzukiiichiro</h4>
+<p class=profile-bio>
+鈴木維一郎
+/慶應義塾大学大学院特別研究講師(常勤)
+/RPG Rogue日本語版開発者
+/遠隔操作リモートデスクトップ特許発明者
+/離散数学研究開発者
+/自然言語処理研究開発者/
+人工知能学会/情報処理学会
+</p><a href=https://suzukiiichiro.github.io/authors/suzuki/>「suzukiiichiro」のコンテンツ一覧</a></div>
+</div>
+<aside class=widget>
+<ins class=adsbygoogle style=display:inline-block;width:300px;height:250px data-ad-client=ca-pub-8689199204567424 data-ad-slot=8359266396></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+</aside>
+<aside class="widget tagCloud">
+<h2 class="widget-title section-title">タグ</h2>
+<div class=tagCloud-tags>
+<a href=https://suzukiiichiro.github.io/tags/%E9%88%B4%E6%9C%A8%E7%B6%AD%E4%B8%80%E9%83%8E/ class=font_size_246>
+鈴木維一郎
+</a>
+<a href=https://suzukiiichiro.github.io/tags/bash/ class=font_size_143>
+Bash
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/ class=font_size_143>
+シェルスクリプト
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class=font_size_102>
+アルゴリズム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AF%E3%82%A4%E3%83%BC%E3%83%B3/ class=font_size_102>
+エイト・クイーン
+</a>
+<a href=https://suzukiiichiro.github.io/tags/n-queens/ class=font_size_101>
+N-Queens
+</a>
+<a href=https://suzukiiichiro.github.io/tags/python/ class=font_size_89>
+python
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E3%82%8F%E3%81%8B%E3%82%8B%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/ class=font_size_58>
+ざっくりわかるシリーズ
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0/ class=font_size_46>
+プログラム
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class=font_size_40>
+プログラミング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E6%B4%BB%E7%94%A8/ class=font_size_38>
+コマンド活用
+</a>
+<a href=https://suzukiiichiro.github.io/tags/codon/ class=font_size_36>
+codon
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%EF%BD%83%E8%A8%80%E8%AA%9E/ class=font_size_33>
+Ｃ言語
+</a>
+<a href=https://suzukiiichiro.github.io/tags/n-queen/ class=font_size_25>
+N-Queen
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E4%B8%A6%E5%88%97%E5%87%A6%E7%90%86/ class=font_size_24>
+並列処理
+</a>
+<a href=https://suzukiiichiro.github.io/tags/designer/ class=font_size_20>
+Designer
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%9E%E3%83%8B%E3%82%A2%E3%83%83%E3%82%AF%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/ class=font_size_18>
+マニアックコマンド
+</a>
+<a href=https://suzukiiichiro.github.io/tags/front-engineer/ class=font_size_16>
+Front engineer
+</a>
+<a href=https://suzukiiichiro.github.io/tags/html/ class=font_size_16>
+HTML
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web-designer/ class=font_size_16>
+Web designer
+</a>
+<a href=https://suzukiiichiro.github.io/tags/web/ class=font_size_15>
+Web
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ class=font_size_15>
+アルゴリズムとデータ構造
+</a>
+<a href=https://suzukiiichiro.github.io/tags/css/ class=font_size_14>
+css
+</a>
+<a href=https://suzukiiichiro.github.io/tags/develop/ class=font_size_14>
+Develop
+</a>
+<a href=https://suzukiiichiro.github.io/tags/e-stat/ class=font_size_13>
+e-Stat
+</a>
+<a href=https://suzukiiichiro.github.io/tags/hugo/ class=font_size_13>
+Hugo
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0/ class=font_size_13>
+データマイニング
+</a>
+<a href=https://suzukiiichiro.github.io/tags/wyoshi/ class=font_size_9>
+wyoshi
+</a>
+<a href=https://suzukiiichiro.github.io/tags/%E9%96%8B%E7%99%BA/ class=font_size_8>
+開発
+</a>
+<a href=https://suzukiiichiro.github.io/tags/corder/ class=font_size_7>
+Corder
+</a>
+</div>
+</aside>
+<aside class="widget archives sidearticle-contents--wrapper" id=newpost-articles>
+<h2 class=section-title>最新記事</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-17-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（１０１）Python/Codonで爆速プログラミング コンステレーション＋インテグレート">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（１０１）Python/Codonで爆速プログラミング コンステレーション＋インテグレート</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-16-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（１００）Python/Codonで爆速プログラミング コンステレーション＋マージ">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（１００）Python/Codonで爆速プログラミング コンステレーション＋マージ</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-15-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９９）Python/Codonで爆速プログラミング コンステレーション＋最適化">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９９）Python/Codonで爆速プログラミング コンステレーション＋最適化</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-14-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９８）Python/Codonで爆速プログラミング コンステレーション＋並列処理">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９８）Python/Codonで爆速プログラミング コンステレーション＋並列処理</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-13-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９７）Python/Codonで爆速プログラミング コンステレーション">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９７）Python/Codonで爆速プログラミング コンステレーション</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-12-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９６）Python/Codonで爆速プログラミング キャリーチェーン">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９６）Python/Codonで爆速プログラミング キャリーチェーン</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-11-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９５）Python/Codonで爆速プログラミング ノードレイヤー＋対象解除法">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９５）Python/Codonで爆速プログラミング ノードレイヤー＋対象解除法</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-10-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９４）Python/Codonで爆速プログラミング ノードレイヤー＋ミラー">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９４）Python/Codonで爆速プログラミング ノードレイヤー＋ミラー</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-09-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９３）Python/Codonで爆速プログラミング ノードレイヤー">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９３）Python/Codonで爆速プログラミング ノードレイヤー</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2025-10-27-08-n-queens-suzuki/chess_hu5d4d4af13a53f9dee6df2227e73445ae_203330_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="Ｎクイーン問題（９２）Python/Codonで爆速プログラミング ビットでミラー＋対象解除法">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>Ｎクイーン問題（９２）Python/Codonで爆速プログラミング ビットでミラー＋対象解除法</strong>
+<p class=text>ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら ht…</p>
+</div>
+</a>
+</article>
+</div>
+<div class=link-btns>
+<a href=https://suzukiiichiro.github.io/posts/>最新の記事をもっと見る</a>
+</div>
+</div>
+</aside>
+<section class="widget archives">
+<h2 class=section-title>サイト内検索</h2>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget" data-json=https://suzukiiichiro.github.io/search/index.json>
+<input name=keyword required placeholder=検索する文字>
+<button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+</button>
+</form>
+</section>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles>
+<h2 class=section-title>人気コンテンツ</h2>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２９．waitコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。 wa…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</strong>
+<p class=text>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法 やりたいこと sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトして…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</strong>
+<p class=text>ここではe-Statの検索ランキング上位の「アイスクリーム」というのはどういう統計データなのかを説明しながら、私のe-Statデータマイニングの目的が大量のビックデータから社会的関心の高い項目を抽出することであることを示します。 私のe-Statでのデータマイニングの現在の目的は以下の通りです 大量の政府公開データの中から ①面白そうなデータをピックアップする ②データをわ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=170>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong>
+<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２７．mailコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。 mailコマンド メールを送る： ' mail &amp;lsquo;または '…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２８．dateコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。 関数からの戻り値の受け渡し 関数からの戻り値の受け渡し： Bash関数は、数値と…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。 ファイルを削除する ファイルを削除します： &amp;lsquo;rm&amp;rsquo;コマンドは、ファイルまたはディレ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【grep/sed/awkも】ざっくりわかるシェルスクリプト５」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</strong>
+<p class=text>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。 …</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
+<img src=https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（８）【grep】シェルスクリプトコマンド活用紹介>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>（８）【grep】シェルスクリプトコマンド活用紹介</strong>
+<p class=text>指定した文字が含まれている行だけを抽出する grepコマンド コマンドの実行結果から必要な箇所だけを抽出する 単語単位で検索する 前後の行も表示する 行番号付きで表示する 複数の文字列を指定して…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=58>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=29>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" width=100 height=58 loading=lazy alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止</strong>
+<p class=text>overflow: scroll で後ろの要素がスクロールすることがありますが、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。 出典元：Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed position: fixedの要素があるとしましょう。スクロールがある場合は、要素の下部の境界に到達す…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-17-02-ani/anal_hu68ff39aa0e6aafd68051f9cb2318c17a_134679_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt="s-Stat 時系列データで異常値を検知しよう（３）">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>s-Stat 時系列データで異常値を検知しよう（３）</strong>
+<p class=text>ここではpythonのPandasでcsvを読み込んだDataFrameオブジェクトの使い方、DataFrameオブジェクトからSeriesオブジェクトへの変換方法を説明します。 Pandas DataFrameオブジェクト Pandasでcsvをread_csvするとDataFrameオブジェクトとして読み込まれます。 DataFr…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-25-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【unComp】Bashで便利なコマンドを作ってみようって話>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【unComp】Bashで便利なコマンドを作ってみようって話</strong>
+<p class=text>今回は、シェルスクリプトとbashの解凍コマンドを使って、日常よく使う圧縮ファイルの解凍作業を簡単にしてみようって話です できること 圧縮されているファイルを、ファイルの拡張子にあわせて解凍すると言う作業は、日常的に多いものです。今回は、圧縮ファイルの拡張子を判断…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
+<img src=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（１１）【getopts】シェルスクリプトコマンド活用紹介>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>（１１）【getopts】シェルスクリプトコマンド活用紹介</strong>
+<p class=text>シェルスクリプトでオプションを処理したい getoptsコマンド オプションを解析する エラーメッセージを表示しない 引数付きのオプションを使用する getoptsコマンド概要 「getopt…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="hugoで[failed to unmarshal YAML]エラーが出た場合の対処法">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>hugoで[failed to unmarshal YAML]エラーが出た場合の対処法</strong>
+<p class=text>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった…</p>
+</div>
+</a>
+</article>
+</div>
+<div class=link-btns>
+<a href=https://suzukiiichiro.github.io/ranking/>人気のコンテンツをもっと見る</a>
+</div>
+</div>
+</aside>
+<aside class="widget archives">
+<h2 class="widget-title section-title">アーカイブ</h2>
+<select name=archives id=select-archives><option value>月を選択</option><option value=/archives/#2025年10月>
+2025年10月（17）
+</option><option value=/archives/#2025年03月>
+2025年03月（18）
+</option><option value=/archives/#2024年04月>
+2024年04月（2）
+</option><option value=/archives/#2023年08月>
+2023年08月（5）
+</option><option value=/archives/#2023年06月>
+2023年06月（61）
+</option><option value=/archives/#2023年05月>
+2023年05月（19）
+</option><option value=/archives/#2023年04月>
+2023年04月（6）
+</option><option value=/archives/#2023年03月>
+2023年03月（8）
+</option><option value=/archives/#2023年02月>
+2023年02月（6）
+</option><option value=/archives/#2023年01月>
+2023年01月（4）
+</option><option value=/archives/#2022年11月>
+2022年11月（17）
+</option><option value=/archives/#2022年10月>
+2022年10月（13）
+</option><option value=/archives/#2022年09月>
+2022年09月（8）
+</option><option value=/archives/#2022年08月>
+2022年08月（10）
+</option><option value=/archives/#2022年07月>
+2022年07月（20）
+</option><option value=/archives/#2022年03月>
+2022年03月（1）
+</option><option value=/archives/#2022年02月>
+2022年02月（22）
+</option><option value=/archives/#2022年01月>
+2022年01月（59）
+</option><option value=/archives/#2021年12月>
+2021年12月（14）
+</option><option value=/archives/#0001年01月>
+0001年01月（1）
+</option></select>
+</aside>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+<a href=https://suzukiiichiro.github.io/>NLP</a> .All Rights Reserved.
+</section>
+</footer>
+<aside class="widget archives sidearticle-contents--wrapper" id=popular-articles--month>
+<div class=contents-area>
+<header>
+<button type=button onclick="document.body.classList.remove('show-menu')">CLOSE</button>
+<h2 class=section-title>最近人気の記事</h2>
+</header>
+<div class=sidearticle-contents>
+<div class="flex article-list--tile">
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-24-01-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【ssh/Bash】sshでログインして実行して自動的に抜けて返ってくる最も簡単な方法</strong>
+<p class=text>sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトしてローカルに何事もなかったかのようにもどってくる最も簡単な方法 やりたいこと sshでサーバーにログインして、なんらかのコマンドを実行しターミナルに表示、ミッション終了後、ターミナルを自動的にログアウトして…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-29-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２９．waitコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２９．waitコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>waitコマンドは、実行中のプロセスの完了を待機するLinuxの組み込みコマンドです。 waitコマンドは、特定のプロセスIDまたはジョブIDで使用されます。waitコマンドでプロセスIDまたはジョブIDが指定されていない場合、現在のすべての子プロセスが完了するのを待機し、終了ステータスを返します。' wait_example.sh'という名前のファイルを作成し、次のスクリプトを追加します。 wa…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-28-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２８．dateコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２８．dateコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>dateコマンドを使用して、現在のシステムの日付と時刻の値を取得することができます。日付と時刻は、「Y」、「m」、「d」、「H」、「M」、および「S」を使用します。'date_parse.sh'という名前の新しいファイルを作成し、次のコードを追加して、日、月、年、時、分、秒の値を表示します。 dateコマンド 現在の日付を解析する： dateコマンドを使用して、現在のシステムの日付と時刻の値を取得…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=58>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=29>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-15-01-wyoshi/intro_hu24c71efb47487f1e866b5cfa9cf10000_52262_200x0_resize_q75_box.jpg 2x" width=100 height=58 loading=lazy alt="overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>overflow: scroll で後ろまでスクロールするのを防ぐ方法 - スクロール連鎖の防止</strong>
+<p class=text>overflow: scroll で後ろの要素がスクロールすることがありますが、CSSを使って、解決する問題、その仕組み、および使用場所について説明します。 出典元：Prevent Scroll Chaining With Overscroll Behavior - Ahmad Shadeed position: fixedの要素があるとしましょう。スクロールがある場合は、要素の下部の境界に到達す…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=170>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=85>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-24-01-suzuki/grep_hu5909208fb16d2109d0cdca2186f9358e_30103_200x0_resize_q75_box.jpg 2x" width=100 height=170 loading=lazy alt=【grep特集】ざっくりわかるシェルスクリプト４>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【grep特集】ざっくりわかるシェルスクリプト４</strong>
+<p class=text>bashプログラミングで最も強力な「grep」コマンドの基本的な考え方、bashスクリプトでの一般的な操作例を、ざっくりと説明します。 はじめに grep（グレップ）コマンド。UNIX/Linuxにおいてこれほど歴史あり、強力なコマンドはありません。そして多くのユーザーがこのコ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-27-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２７．mailコマンド】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２７．mailコマンド】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>' mail 'または ' sendmail 'コマンドを使用して電子メールを送信できます。これらのコマンドを使用する前に、mailまたはsendmailに必要なパッケージをインストール・設定をする必要があります。' mail_example.sh 'という名前のファイルを作成し、次のコードを追加して電子メールを送信します。 mailコマンド メールを送る： ' mail &amp;lsquo;または '…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=67>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=33>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-26-01-ani/anal_hu1fa49663358d8289c9aaa2b108c2bef9_133702_200x0_resize_q75_box.jpg 2x" width=100 height=67 loading=lazy alt=e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>e-Statで面白いデータを探そう。ランキング上位「アイスクリーム」ってなんだ？</strong>
+<p class=text>ここではe-Statの検索ランキング上位の「アイスクリーム」というのはどういう統計データなのかを説明しながら、私のe-Statデータマイニングの目的が大量のビックデータから社会的関心の高い項目を抽出することであることを示します。 私のe-Statでのデータマイニングの現在の目的は以下の通りです 大量の政府公開データの中から ①面白そうなデータをピックアップする ②データをわ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=51>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=25>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-14-01-wyoshi/intro_hu1a4f8ee8698ef571fbfcd575aad93d81_24156_200x0_resize_q75_box.jpg 2x" width=100 height=51 loading=lazy alt=CSSでアプリのようにピタッとスナップするスクロールを作成>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>CSSでアプリのようにピタッとスナップするスクロールを作成</strong>
+<p class=text>アプリでスクロールしてコンテンツにスナップする動作は一般的ですが、CSSでもアプリと同じようにスクロールしてスナップする動作が実装できます。 出典元：CSS Scroll Snap - Ahmad Shadeed アプリなどで横スクロールしてコンテンツにスナップするといった動作をよく見かけると思いますが、CSSで横スクロールのU…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-24-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２４．ファイルを削除する】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>'rm'コマンドは、ファイルまたはディレクトリを削除するためのコマンドです。次のコードを使用して「delete_file.sh」という名前のファイルを作成し、ユーザーからファイル名を取得して削除します。ここで、「-i」オプションは、ファイルを削除する前にユーザーに削除確認をに使用されます。 ファイルを削除する ファイルを削除します： &amp;lsquo;rm&amp;rsquo;コマンドは、ファイルまたはディレ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
+<img src=https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-04-01-grep-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（８）【grep】シェルスクリプトコマンド活用紹介>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>（８）【grep】シェルスクリプトコマンド活用紹介</strong>
+<p class=text>指定した文字が含まれている行だけを抽出する grepコマンド コマンドの実行結果から必要な箇所だけを抽出する 単語単位で検索する 前後の行も表示する 行番号付きで表示する 複数の文字列を指定して…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=30>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=15>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-23-03-suzuki/2021-12-23-bash_hu3f93fa107d6ed2da910fda4d86a52d3c_22108_200x0_resize_q75_box.jpg 2x" width=100 height=30 loading=lazy alt=【プログレスバー】Bashでプログレスバーを作ってみようって話>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【プログレスバー】Bashでプログレスバーを作ってみようって話</strong>
+<p class=text>今回は、シェルスクリプトでプログレスバーを作ってみようと思います。処理の進捗をコンソールに表示させることで処理の進捗が確認できるのはデバッグや最適化にも役に立ちます。 プログレスバー ターミナルで、処理の進捗が表示されるプログレスバーというのがあります。 処理が進むにつれて、ジリジリとメーターが右に増えていくあ…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=129>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=64>
+<img src=https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-07-07-01-getopts-suzuki/bash_hu5909208fb16d2109d0cdca2186f9358e_33901_200x0_resize_q75_box.jpg 2x" width=100 height=129 loading=lazy alt=（１１）【getopts】シェルスクリプトコマンド活用紹介>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>（１１）【getopts】シェルスクリプトコマンド活用紹介</strong>
+<p class=text>シェルスクリプトでオプションを処理したい getoptsコマンド オプションを解析する エラーメッセージを表示しない 引数付きのオプションを使用する getoptsコマンド概要 「getopt…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2021-12-21-03/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=75>
+<source srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=38>
+<img src=https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2021-12-21-03/error_hu7e39d96c0286759ff592e45a50a24444_91990_200x0_resize_q75_box.jpg 2x" width=100 height=75 loading=lazy alt="hugoで[failed to unmarshal YAML]エラーが出た場合の対処法">
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>hugoで[failed to unmarshal YAML]エラーが出た場合の対処法</strong>
+<p class=text>エラーの内容 記事投稿時にfailed to unmarshal YAM エラーが起こった…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-01-14-20-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【２０．スクリプトからの戻り値を渡す】ざっくりわかる「シェルスクリプト」</strong>
+<p class=text>Bash関数は、数値と文字列値の両方を渡すことができます。関数から文字列値を渡す方法を次の例に示します。'function_return.sh'という名前のファイルを作成し、次のコードを追加します。関数greeting（）は、文字列値を変数valに返します。この変数は、処理の最後に他の文字列と組み合わせて出力します。 関数からの戻り値の受け渡し 関数からの戻り値の受け渡し： Bash関数は、数値と…</p>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/>
+<div class=article-image>
+<picture class=picture>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" media="(min-width: 769px)" width=100 height=127>
+<source srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_50x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 2x" media="(max-width: 768px)" width=50 height=63>
+<img src=https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg srcset="https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_100x0_resize_q75_box.jpg 1x, https://suzukiiichiro.github.io/posts/2022-02-02-01-suzuki/shellscript_hu5909208fb16d2109d0cdca2186f9358e_31961_200x0_resize_q75_box.jpg 2x" width=100 height=127 loading=lazy alt=【grep/sed/awkも】ざっくりわかるシェルスクリプト５」>
+</picture>
+</div>
+<div class=article-details>
+<strong class=article-title>【grep/sed/awkも】ざっくりわかるシェルスクリプト５」</strong>
+<p class=text>この記事はシェルスクリプトを４５分でざっくりマスターできるチュートリアルです。bashスクリプト「Hello, World」から、ifステートメントなどの条件分岐、while, for, untilループをはじめ、シェルスクリプトの効率的なデバッグ手法の紹介など、シェルスクリプトを網羅的かつ短時間で学習することができます。 …</p>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div>
+</aside>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=https://suzukiiichiro.github.io/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+<script type=module>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuTc8tgNsMVZK0YbZbH_i23ESm9YT1Vx4",
+    authDomain: "nlp-blog-927bd.firebaseapp.com",
+    projectId: "nlp-blog-927bd",
+    storageBucket: "nlp-blog-927bd.appspot.com",
+    messagingSenderId: "469873098519",
+    appId: "1:469873098519:web:9ae03fb6e0a40fbf06c152",
+    measurementId: "G-TC37CVBC0B"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+</script>
+<script src=https://suzukiiichiro.github.io/js/Custom.js></script>
+<script>let setFillHeight=()=>{let a=window.innerHeight*.01;document.documentElement.style.setProperty('--vh',`${a}px`)};window.addEventListener('resize',setFillHeight),setFillHeight(),document.addEventListener('DOMContentLoaded',()=>{let a=document.getElementsByTagName('code');Array.from(a).forEach(a=>{if(a.className){let b=a.className.split(':'),d=b[0],c=b[1];c&&(a.classList.remove(a.className),a.classList.add(d),a.parentElement.setAttribute('data-lang',c),a.parentElement.classList.add('code-block-header'))}})})</script>
+</body>
+</html>
