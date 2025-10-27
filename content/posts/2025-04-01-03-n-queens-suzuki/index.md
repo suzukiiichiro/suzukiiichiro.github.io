@@ -11,8 +11,7 @@ tags:
   - エイト・クイーン
   - アルゴリズム
   - 鈴木維一郎
-  - Python
-  - codon
+  - CUDA
 
 ---
 
@@ -23,8 +22,6 @@ tags:
 https://github.com/suzukiiichiro/N-Queens/tree/master/11Bit_CUDA
 
 ## インストールなどの構築はこちら
-Ｎクイーン問題（６６） Python-codonで高速化
-https://suzukiiichiro.github.io/posts/2025-03-05-01-n-queens-suzuki/
 
 ## Constellations（コンステレーションズ） with_warp について
 
