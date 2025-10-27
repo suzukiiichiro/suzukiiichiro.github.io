@@ -16,12 +16,12 @@
 <meta property="og:description" content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2025-10-24T19:03:01+09:00"><meta property="article:modified_time" content="2025-10-27T15:07:08+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2025-10-24T19:03:01+09:00"><meta property="article:modified_time" content="2025-10-27T18:42:08+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/chess.jpg">
 <meta name=twitter:title content="Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに｜NLP">
 <meta name=twitter:description content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2025-10-24-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/chess.jpg"],"datePublished":"2025-10-24T19:03:01+09:00","dateModified":"2025-10-27T15:07:08+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに","item":"https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/"}]}]</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2025-10-24-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/chess.jpg"],"datePublished":"2025-10-24T19:03:01+09:00","dateModified":"2025-10-27T18:42:08+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（８４）Python/Codonで爆速プログラミング はじめに","item":"https://suzukiiichiro.github.io/posts/2025-10-24-01-n-queens-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -274,10 +274,12 @@ Linux
 <p>私は 、N-Queens 問題という極端に再帰的・組合せ的な問題を題材に、<br>
 <strong>Python → Codon → GPU（CUDA）</strong> という道を実践的に歩みました。<br>
 ここでは、その過程で得られた知見・構築法・ノウハウ・難所・哲学をまとめました。</p>
-<blockquote>
-<p>[!TIP]<br>
-結論から言いますと、GPU/CUDA N-Queensと、CPU/Python Codon N-Queensの計測時間は、CPUでありながらGPU/CUDAにややもすれば追いつくという事となりました。</p>
-</blockquote>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>結論から言いますと、GPU/CUDA N-Queensと、CPU/Python Codon N-Queensの計測時間は、CPUでありながらGPU/CUDAにややもすれば追いつくという事となりました。</dd>
+</dl>
+</div>
 <p>GPU/CUDA N-Queens</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>GPU/CUDA
 10Bit_CUDA/01CUDA_Bit_Symmetry.cu
@@ -419,18 +421,22 @@ Codonの高速化は「型の固定」から始まります。<br>
 <p>C++ や Rust に比べ、Codon は <strong>Python の文法をほぼそのまま使える</strong> のが最大の利点です。<br>
 機械学習・アルゴリズム実験・数値最適化など、試行錯誤を高速に回す研究現場に特に有効です。</p>
 <hr>
-<blockquote>
-<p>[!TIP]<br>
-Codonは、ランタイムのオーバーヘッドなしで Pythonのコードをネイティブなマシン語にコンパイルする高性能なPythonコンパイラです。 Codonを使うとシングルスレッドでも十分な高速化を行うことができますが、マルチスレッドもサポートしているため、更なる高速化も図れます。</p>
-</blockquote>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>Codonは、ランタイムのオーバーヘッドなしで Pythonのコードをネイティブなマシン語にコンパイルする高性能なPythonコンパイラです。 Codonを使うとシングルスレッドでも十分な高速化を行うことができますが、マルチスレッドもサポートしているため、更なる高速化も図れます。</dd>
+</dl>
+</div>
 <hr>
 <h2 id=-第3章codon環境構築fedora--amazon-linux>🧱 第3章：Codon環境構築（Fedora / Amazon Linux）</h2>
 <h3 id=-linuxmacでのインストール>● Linux/macでのインストール</h3>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/bin/bash -c <span class=s2>&#34;</span><span class=k>$(</span>curl -fsSL https://exaloop.io/install.sh<span class=k>)</span><span class=s2>&#34;</span>
-</code></pre></div><blockquote>
-<p>[!TIP]<br>
-OSがLinux (x86_64) か MacOS (x86_64 または arm64) であれば、公式からビルド済みのバイナリが配布されているので、1コマンドでインストールすることができます。</p>
-</blockquote>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>OSがLinux (x86_64) か MacOS (x86_64 または arm64) であれば、公式からビルド済みのバイナリが配布されているので、1コマンドでインストールすることができます。</dd>
+</dl>
+</div>
 <hr>
 <h3 id=-ビルド環境fedora--amazon-linux>● ビルド環境（Fedora / Amazon Linux）</h3>
 <p>Codon は CMake / LLVM を利用するため、ビルド時に依存パッケージの整備が重要です。<br>
@@ -458,11 +464,13 @@ Hello Codon!
 <h2 id=-第4章codonの高速化原理と基本構文>🧠 第4章：Codonの高速化原理と基本構文</h2>
 <h3 id=-静的型による最適化>● 静的型による最適化</h3>
 <p>Codon は型を固定することで、動的型判定をすべて排除します。</p>
-<blockquote>
-<p>[!TIP]<br>
-Codon は動的型を完全に排除し、<strong>型が確定した時点でLLVMが最適化</strong> を行います。<br>
-Python のような「どの型が来るかわからない」関数呼び出しは一切発生しません。</p>
-</blockquote>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>Codon は動的型を完全に排除し、<strong>型が確定した時点でLLVMが最適化</strong> を行います。<br>
+Python のような「どの型が来るかわからない」関数呼び出しは一切発生しません。</dd>
+</dl>
+</div>
 <hr>
 <h3 id=基本的な書き方>基本的な書き方</h3>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>List</span>
@@ -473,10 +481,12 @@ Python のような「どの型が来るかわからない」関数呼び出し�
     <span class=k>return</span> <span class=n>fib</span><span class=p>(</span><span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>+</span> <span class=n>fib</span><span class=p>(</span><span class=n>n</span> <span class=o>-</span> <span class=mi>2</span><span class=p>)</span>
 
 <span class=nb>print</span><span class=p>(</span><span class=n>fib</span><span class=p>(</span><span class=mi>40</span><span class=p>))</span>
-</code></pre></div><blockquote>
-<p>[!TIP]<br>
-同じコードでも、Codonでは <code>n</code> がintで固定されるため、<strong>分岐予測・再帰展開</strong> が行われ、数十倍高速に動作します。</p>
-</blockquote>
+</code></pre></div><div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>同じコードでも、Codonでは <code>n</code> がintで固定されるため、<strong>分岐予測・再帰展開</strong> が行われ、数十倍高速に動作します。</dd>
+</dl>
+</div>
 <blockquote>
 <p>💡 <strong>ワンポイントアドバイス</strong><br>
 Codonでは「型を決めた瞬間にコンパイルが始まる」と考えましょう。<br>
@@ -676,10 +686,12 @@ Pythonで動いた探索関数を、<strong>変数を減らして書き直すだ
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!TIP]<br>
-CodonはPythonコードを高速化するコンパイラで、通常のPythonと比較して10倍から100倍、C/C++に匹敵する速度を実現します。これは、実行前に型チェックを行い、コードをネイティブマシンコードにコンパイルすることで、Pythonの実行時オーバーヘッドを回避するためです。また、並列処理にも対応し、さらなる速度向上が期待できます</p>
-</blockquote>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>CodonはPythonコードを高速化するコンパイラで、通常のPythonと比較して10倍から100倍、C/C++に匹敵する速度を実現します。これは、実行前に型チェックを行い、コードをネイティブマシンコードにコンパイルすることで、Pythonの実行時オーバーヘッドを回避するためです。また、並列処理にも対応し、さらなる速度向上が期待できます</dd>
+</dl>
+</div>
 <h3 id=53-最適化項目>5.3 最適化項目</h3>
 <blockquote>
 <p><strong>第5章：章内ミニ目次</strong></p>
@@ -1038,11 +1050,13 @@ codon run -release -libdevice <span class=s2>&#34;</span><span class=nv>$LIBDEVI
 <li>将来の GPU 統合の方向性</li>
 <li>Python ↔ Codon ↔ CUDA の連携モデル構想図</li>
 </ul>
-<blockquote>
-<p>[!TIP]<br>
-Codon は LLVM の NVPTX バックエンドを利用することで GPU 実行が理論的に可能です。<br>
-しかし現時点では seq_nvptx_memcpy_h2d/d2h など一部シンボルが未実装で、GPU版は実験段階 にあります。</p>
-</blockquote>
+<p>しかし現時点では seq_nvptx_memcpy_h2d/d2h など一部シンボルが未実装で、GPU版は実験段階 にあります。</p>
+<div class="tips-area tips">
+<dl>
+<dt>ヒント</dt>
+<dd>Codon は LLVM の NVPTX バックエンドを利用することで GPU 実行が理論的に可能です。</dd>
+</dl>
+</div>
 <hr>
 <h2 id=-第7章できたことできなかったこと>🧭 第7章：できたこと／できなかったこと</h2>
 <table>
@@ -1989,7 +2003,7 @@ Corder
 </aside>
 <section class="widget archives">
 <h2 class=section-title>サイト内検索</h2>
-<form action=https://suzukiiichiro.github.io/search/ class="search-form widget" data-json=https://suzukiiichiro.github.io/search/index.json>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
 <input name=keyword required placeholder=検索する文字>
 <button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
 </button>
