@@ -185,7 +185,7 @@ workspace#suzuki$ bash MAIN.SH 15Py_constellations_optimize_codon.py
 
 workspace#suzuki$ bash MAIN.SH 17Py_constellations_integrate_codon_20251017_suzuki.py
  N:        Total       Unique        hh:mm:ss.ms
-17:     95815104            0         0:00:04.037    ok
+17:     95815104            0         0:00:03.445    ok
 18:    666090624            0         0:00:29.301    ok
 19:   4968057848            0         0:03:41.853    ok
 ```
@@ -331,9 +331,9 @@ workspace#suzuki$ bash MAIN.SH 15Py_constellations_optimize_codon.py
 18:    666090624            0         0:00:21.549
 19:   4968057848            0         0:02:43.514
 
-workspace#suzuki$ bash MAIN.SH 17Py_constellations_integrate_codon_20251017_suzuki.py
+workspace#suzuki$ bash MAIN.SH 17Py_constellations_integrate_codon.py
  N:        Total       Unique        hh:mm:ss.ms
-17:     95815104            0         0:00:04.037    ok
+17:     95815104            0         0:00:03.445    ok
 18:    666090624            0         0:00:29.301    ok
 19:   4968057848            0         0:03:41.853    ok
 """
@@ -350,6 +350,17 @@ class NQueens17:
     self.jasmin_cache: Dict[Tuple[int,int], int] = {}
     # サブコンステレーション生成状態のメモ化（実行中の重複再帰を抑制）
     self.subconst_cache: Set[StateKey] = set()
+    # …既存初期化…
+    self._N  = 0
+    self._N1 = 0
+    self._NK = 0
+    self._NJ = 0
+    self._board_mask = 0
+    # 配列系（空で作っておく）
+    self._blockK: list[int] = []
+    self._blockL: list[int] = []
+    # (next_id, funcptn, avail_flag)
+    self._meta: list[Tuple[int,int,int]] = []
 
   def mix64(self,x:int)->int:
     """splitmix64 のミキサ最終段。64bit 値 x を (>>/XOR/乗算) の 3 段で拡散して返す。 Zobrist テーブルの乱数品質を担保するために使用。"""
@@ -512,10 +523,11 @@ class NQueens17:
       ijkl=self.mirvert(ijkl,N)
     return ijkl
 
-  def dfs(self,functionid:int,ld:int,rd:int,col:int,row:int,free:int,jmark:int,endmark:int,mark1:int,mark2:int,board_mask:int,blockK_by_funcid:List[int],blockl_by_funcid:List[int],func_meta:List[Tuple[int,int,int]],N:int,N1:int,NK:int,NJ:int)->int:
+  def dfs(self, functionid:int, ld:int, rd:int, col:int, row:int, free:int,
+          jmark:int, endmark:int, mark1:int, mark2:int) -> int:
     """汎用 DFS カーネル。古い SQ???? 関数群を 1 本化し、func_meta の記述に従って
-  (1) mark 行での step=2/3 + 追加ブロック、(2) jmark 特殊、(3) ゴール判定、(4) +1 先読み
-  を切り替える。引数:
+    (1) mark 行での step=2/3 + 追加ブロック、(2) jmark 特殊、(3) ゴール判定、(4) +1 先読み
+    を切り替える。引数:
     functionid: 現在の分岐モード ID（次の ID, パターン, 先読み有無は func_meta で決定）
     ld/rd/col:   斜線/列の占有
     row/free:    現在行と空きビット
@@ -523,96 +535,161 @@ class NQueens17:
     board_mask:  盤面全域のビットマスク
     blockK_by_funcid/blockl_by_funcid: 関数 ID に紐づく追加ブロック
     func_meta:   (next_id, funcptn, availptn) のメタ情報配列
-    """
-    # ローカル束縛（属性/関数参照を減らす）
-    _dfs=self.dfs
-    next_funcid,funcptn,avail_flag=func_meta[functionid]
-    bit:int=0
-    avail:int=free
-    total:int=0
-    step:int=1
-    add1:int=0
-    row_step:int=row+step
-    use_blocks:bool=False       # blockK/blockl を噛ませるか
-    use_future:bool=(avail_flag==1)  # _should_go_plus1 を使うか
-    blockK:int=0
-    blockl:int=0
-    local_next_funcid:int=functionid    # 既定は自分
-    # ==============================
-    # ここから 1 本化した共通配置ループ # 既定値（通常の +1 前進ループ）
-    # ==============================
-    # --- P1/P2/P3: mark 行での step=2/3 ＋ block 適用を共通ループへ設定
-    if funcptn in (0,1,2):
-      at_mark:bool=(row==mark1) if funcptn in (0,2) else (row==mark2)
-      if at_mark and avail:
-        step:int=2 if funcptn in (0,1) else 3
-        add1:int=1 if (funcptn==1 and functionid==20) else 0  # SQd1BlB のときだけ1
-        row_step=row+step
-        blockK:int=blockK_by_funcid[functionid]
-        blockl:int=blockl_by_funcid[functionid]
-        use_blocks:bool=True
-        use_future:bool=False          # ここは従来どおり next_free だけで分岐
-        local_next_funcid=next_funcid
-    # ---- P6: endmark 基底
-    elif funcptn==5 and row==endmark:
-      if functionid==14:# SQd2B
-        return 1 if (avail&(~1))>0 else 0
-      return 1
-    # --- P4: jmark 特殊を共通ループの前処理に畳み込む
-    elif funcptn==3 and row==jmark:
-      avail&=~1   # 列0禁止
-      ld|=1       # 左斜線 LSB を立てる
-      local_next_funcid=next_funcid  # 次関数へ
-    # ---- P5: N-1-jmark 入口（行据え置きの一手前処理）
-    elif funcptn==4:
-      if row==N1-jmark:
-        rd|=NJ # rd |= 1 << N1
-        next_free:int=board_mask&~((ld<<1)|(rd>>1)|col)
-        if next_free:
-          total+=_dfs(next_funcid,ld<<1,rd>>1,col,row,next_free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
-        return total # 続行（通常ループへ）
+    """    
+    # ---- ローカル束縛（属性アクセス最小化）----
+    # _dfs = self.dfs
+    # meta = self._meta
+    # blockK_tbl = self._blockK
+    # blockL_tbl = self._blockL
+    bm:int = self._board_mask
+    N1:int = self._N1
+    NJ:int = self._NJ
 
-    #use_blocks / use_future の分岐ごとにループを分ける
-    # ブーリアン分岐を内側ループに残すより、「使う/使わない」でループを2本に分けると分岐予測も最短経路になります
+    next_funcid, funcptn, avail_flag = self._meta[functionid]
+
+    avail:int = free
+    if not avail: return 0
+    total = 0
+
+    # ---- N10:47 P6: 早期終了（基底）----
+    if funcptn == 5 and row == endmark:
+      #print("pt5")
+      if functionid == 14:  # SQd2B 特例（列0以外が残っていれば1）
+        return 1 if (avail >> 1) else 0
+      return 1
+
+    # ---- P5: N1-jmark 行の入口（据え置き分岐）----
+    # if funcptn == 4 and row == (N1 - jmark):
+    #   rd |= NJ
+    #   nf = bm & ~( (ld << 1) | (rd >> 1) | col )
+    #   if nf:
+    #     return _dfs(next_funcid, ld << 1, rd >> 1, col, row, nf,
+    #                     jmark, endmark, mark1, mark2)
+    #   return 0
+    # 既定（+1）
+    step:int = 1
+    add1:int = 0
+    row_step:int = row + 1
+    use_blocks:bool = False  # blockK/blockl を噛ませるか
+    use_future:bool = (avail_flag == 1)  # _should_go_plus1 を使うか
+    blockK:int = 0
+    blockL:int = 0
+    local_next_funcid:int = functionid
+    
+    # N10:538 P1/P2/P3: mark 行での step=2/3 ＋ block 適用を共通ループへ設定
+    if funcptn in (0, 1, 2):
+      #print("pt0,1,2")
+      at_mark:bool = (row == mark1) if funcptn in (0, 2) else (row == mark2)
+      if at_mark and avail:
+        step = 2 if funcptn in (0, 1) else 3
+        add1 = 1 if (funcptn == 1 and functionid == 20) else 0  # SQd1BlB のときだけ +1
+        row_step = row + step
+        # blockK = blockK_tbl[functionid]
+        blockK= self._blockK[functionid]
+        # blockL = blockL_tbl[functionid]
+        blockL= self._blockL[functionid]
+        use_blocks = True
+        use_future = False
+        local_next_funcid = next_funcid
+    # ---- N10:3 P4: jmark 特殊（入口一回だけ）----
+    elif funcptn == 3 and row == jmark:
+      #print("pt3")
+      avail &= ~1     # 列0禁止
+      ld |= 1         # 左斜線LSBを立てる
+      local_next_funcid = next_funcid
+      if not avail: return 0
+
+    # ==== N10:267 ループ１：block 適用（step=2/3 系のホットパス）====
     if use_blocks:
+      #print("a_use_blocks")
+      # s = step
+      # a1 = add1
+      # bK = blockK
+      # bL = blockL
       while avail:
-        bit:int=avail&-avail
-        avail&=avail-1
-        next_ld,next_rd,next_col=(((ld|bit)<<step)|add1)|blockl,((rd|bit)>>step)|blockK,col|bit
-        next_free:int=board_mask&~(next_ld|next_rd|next_col)
-        if next_free:
-          total+=_dfs(local_next_funcid,next_ld,next_rd,next_col,row_step,next_free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
-    else:
-      # “素の +1” だけ（先読みなし） # “+1 with 先読み”
-      if use_future:
-        while avail:
-          bit:int=avail&-avail
-          avail&=avail-1
-          next_ld,next_rd,next_col=((ld|bit)<<step)|add1,(rd|bit)>>step,col|bit
-          next_free:int=board_mask&~(next_ld|next_rd|next_col)
-          if not next_free:
-            continue
-          if row_step>=endmark:
-            total+=_dfs(local_next_funcid,next_ld,next_rd,next_col,row_step,next_free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
-            continue
-          # 先読み（+1）の中
-          m1=1 if row_step==mark1 else 0
-          m2=1 if row_step==mark2 else 0
-          use_j=(funcptn==4)            # ★ P5ファミリのみ J 行を有効化
-          mj=1 if (use_j and row_step==(N1-jmark)) else 0
-          extra=((m1|m2)*NK)|(mj*NJ)
-          future=board_mask&~(((next_ld<<1)|(next_rd>>1)|next_col)|extra)
-          if future:
-              total+=_dfs(local_next_funcid,next_ld,next_rd,next_col,row_step,next_free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
-      else:
-        while avail:
-          bit:int=avail&-avail
-          avail&=avail-1
-          next_ld,next_rd,next_col=((ld|bit)<<step)|add1,(rd|bit)>>step,col|bit
-          next_free:int=board_mask&~(next_ld|next_rd|next_col)
-          if next_free:
-              total+=_dfs(local_next_funcid,next_ld,next_rd,next_col,row_step,next_free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
+        bit:int = avail & -avail
+        avail &= avail - 1
+        # nld:int = ((ld | bit) << s) | a1 | bL
+        # nld:int = ((ld | bit) << s) | a1 | blockL
+        # nld:int = ((ld | bit) << s) | add1 | blockL
+        nld:int = ((ld | bit) << step) | add1 | blockL
+        # nrd:int = ((rd | bit) >> s) | bK
+        # nrd:int = ((rd | bit) >> s) | blockK
+        nrd:int = ((rd | bit) >> step) | blockK
+        ncol:int = col | bit
+        nf:int = bm & ~(nld | nrd | ncol)
+        if nf:
+          # total += _dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+          total += self.dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+      return total
+
+    # ==== N10:271 ループ２：+1 素朴（先読みなし）====
+    elif not use_future:
+      # if step == 1:
+      #print("a_not_use_future")
+      #if step == 1:
+        #print("a_not_use_future_step1")
+      while avail:
+        bit:int = avail & -avail
+        avail &= avail - 1
+        nld:int = (ld | bit) << 1
+        nrd:int = (rd | bit) >> 1
+        ncol:int = col | bit
+        nf:int = bm & ~(nld | nrd | ncol)
+        if nf:
+          # total += _dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+          total += self.dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+      return total
+    # else:
+    #   s = step
+    #   a1 = add1
+    #   while avail:
+    #     bit = avail & -avail
+    #     avail &= avail - 1
+    #     nld = ((ld | bit) << s) | a1
+    #     nrd = (rd | bit) >> s
+    #     ncol = col | bit
+    #     nf = bm & ~(nld | nrd | ncol)
+    #     if nf:
+    #       total += _dfs(local_next_funcid, nld, nrd, ncol, row_step, nf,
+    #                             jmark, endmark, mark1, mark2)
+    #   return total
+
+    # ==== N10:92 ループ３：+1 先読み（row_step >= endmark は基底で十分）====
+    elif row_step >= endmark:
+      #print("a_endmark")
+      # もう1手置いたらゴール層に達する → 普通の分岐で十分
+      while avail:
+        bit:int = avail & -avail
+        avail &= avail - 1
+        nld:int = ((ld | bit) << 1)
+        nrd:int = ((rd | bit) >> 1)
+        ncol:int = col | bit
+        nf:int = bm & ~(nld | nrd | ncol)
+        if nf:
+          # total += _dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+          total += self.dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+      return total
+ 
+    # ==== N10:402 ループ３B：+1 先読み本体（1手先の空きがゼロなら枝刈り）====
+    while avail:
+      #print("a_common")
+      bit:int = avail & -avail
+      avail &= avail - 1
+      nld:int = (ld | bit) << 1
+      nrd:int = (rd | bit) >> 1
+      ncol:int = col | bit
+      nf:int = bm & ~(nld | nrd | ncol)
+      if not nf:
+        continue
+      # 1手先の空きをその場で素早くチェック（余計な再帰を抑止）
+      #   next_free_next = bm & ~(((nld << 1) | (nrd >> 1) | ncol))
+      #   if next_free_next == 0: continue
+      if bm & ~((nld << 1) | (nrd >> 1) | ncol):
+        # total += _dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
+        total += self.dfs(local_next_funcid, nld, nrd, ncol, row_step, nf, jmark, endmark, mark1, mark2)
     return total
+ 
 
   def exec_solutions(self,constellations:List[Dict[str,int]],N:int)->None:
     """各 Constellation（部分盤面）ごとに最適分岐（functionid）を選び、`dfs()` で解数を取得。 結果は `solutions` に書き込み、最後に `symmetry()` の重みで補正する。前段で SoA 展開し 並列化区間のループ体を軽量化。"""
@@ -643,6 +720,7 @@ class NQueens17:
       "SQd2BkB":17,"SQd2BlkB":18,"SQd1BkBlB":19,"SQd1BlB":20,"SQd1B":21,
       "SQd1BklB":22,"SQd1BlBkB":23,"SQd1BlkB":24,"SQd1BkB":25,"SQd0B":26,"SQd0BkB":27
     }
+
     # next_funcid, funcptn, availptn の3つだけ持つ
     func_meta=[
       (1,0,0),#  0 SQBkBlBjrB   -> P1, 先読みなし
@@ -705,120 +783,129 @@ class NQueens17:
       ld,rd,col=constellation["ld"]>>1,constellation["rd"]>>1,(constellation["col"]>>1)|(~small_mask)
       LD=(1<<(N1-j))|(1<<(N1-l))
       ld|=LD>>(N-start)
-      if start>k:
-        rd|=(1<<(N1-(start-k+1)))
-      if j>=2*N-33-start:
-        rd|=(1<<(N1-j))<<(N2-start)
+      if start>k: rd|=(1<<(N1-(start-k+1)))
+      if j>=2*N-33-start: rd|=(1<<(N1-j))<<(N2-start)
       free=~(ld|rd|col)
-      if j<(N-3):
-        jmark,endmark=j+1,N2
-        if j>2*N-34-start:
-          if k<l:
-            mark1,mark2=k-1,l-1
-            if start<l:
-              if start<k:
-                if l!=k+1:target=0 # SQBkBlBjrB
-                else:target=4 # SQBklBjrB
-              else:target=1 #_SQBlBjrB
-            else:target=2 # SQBjrB
+
+      # 事前に固定値
+      N1, N2 = N-1, N-2
+
+      # よく使う比較はフラグ化（1回だけ計算）
+      j_lt_N3   = (j <  N-3)
+      j_eq_N3   = (j == N-3)
+      j_eq_N2   = (j == N-2)
+      k_lt_l    = (k <  l)
+      start_lt_k= (start < k)
+      start_lt_l= (start < l)
+      l_eq_kp1  = (l == k+1)
+      k_eq_lp1  = (k == l+1)
+      j_gate    = (j > 2*N - 34 - start)   # 既存の「ゲート」条件
+
+      # ここから分岐（大分類 → 小分類）。同じ式の再評価をなくし、ネストを浅く。
+      if j_lt_N3:
+        jmark  = j + 1
+        endmark= N2
+        if j_gate:
+          if k_lt_l:
+            mark1, mark2 = k-1, l-1
+            if start_lt_l:
+              if start_lt_k: target = 0 if (not l_eq_kp1) else 4   # SQBkBlBjrB / SQBklBjrB
+              else: target = 1  # SQBlBjrB
+            else: target = 2   # SQBjrB
           else:
-            mark1,mark2=l-1,k-1
-            if start<k:
-              if start<l:
-                if k!=l+1:target=5 # SQBlBkBjrB
-                else:target=7 # SQBlkBjrB
-              else:target=6 # SQBkBjrB
-            else:target=2 # SQBjrB
+            mark1, mark2 = l-1, k-1
+            if start_lt_k:
+              if start_lt_l: target = 5 if (not k_eq_lp1) else 7   # SQBlBkBjrB / SQBlkBjrB
+              else: target = 6  # SQBkBjrB
+            else: target = 2  # SQBjrB
         else:
-          if k<l:
-            mark1,mark2=k-1,l-1
-            if l!=k+1:target=8 # SQBjlBkBlBjrB
-            else:target=9 # SQBjlBklBjrB
+          if k_lt_l:
+            mark1, mark2 = k-1, l-1
+            target = 8 if (not l_eq_kp1) else 9   # SQBjlBkBlBjrB / SQBjlBklBjrB
           else:
-            mark1,mark2=l-1,k-1
-            if k!=l+1:target=10 # SQBjlBlBkBjrB
-            else:target=11 # SQBjlBlkBjrB
-      elif j==(N-3):
-        endmark=N2
-        if k<l:
-          mark1,mark2=k-1,l-1
-          if start<l:
-            if start<k:
-              if l!=k+1:target=12 # SQd2BkBlB
-              else:target=15 # SQd2BklB
+            mark1, mark2 = l-1, k-1
+            target = 10 if (not k_eq_lp1) else 11  # SQBjlBlBkBjrB / SQBjlBlkBjrB
+      elif j_eq_N3:
+        endmark = N2
+        if k_lt_l:
+          mark1, mark2 = k-1, l-1
+          if start_lt_l:
+            if start_lt_k: target = 12 if (not l_eq_kp1) else 15     # SQd2BkBlB / SQd2BklB
             else:
-              mark2=l-1
-              target=13 # SQd2BlB
-          else:target=14 # SQd2B
+              mark2  = l-1
+              target = 13 # SQd2BlB
+          else: target = 14 # SQd2B
         else:
-          mark1,mark2=l-1,k-1
-          if start<k:
-            if start<l:
-              if k!=l+1:target=16 # SQd2BlBkB
-              else:target=18 # SQd2BlkB
+          mark1, mark2 = l-1, k-1
+          if start_lt_k:
+            if start_lt_l: target = 16 if (not k_eq_lp1) else 18     # SQd2BlBkB / SQd2BlkB
             else:
-              mark2=k-1
-              target=17 # SQd2BkB
-          else:target=14 # SQd2B
-      elif j==N2:# jがコーナーから1列内側
-        if k<l:
-          endmark=N2
-          if start<l:
-            if start<k:
-              mark1=k-1
-              if l!=k+1:
-                mark2=l-1
-                target=19 # SQd1BkBlB
-              else:target=22 # SQd1BklB
+              mark2  = k-1
+              target = 17  # SQd2BkB
+          else: target = 14  # SQd2B
+      elif j_eq_N2:  # j がコーナーから1列内側
+        if k_lt_l:
+          endmark = N2
+          if start_lt_l:
+            if start_lt_k:
+              mark1 = k-1
+              if not l_eq_kp1:
+                mark2 = l-1
+                target = 19 # SQd1BkBlB
+              else: target = 22 # SQd1BklB
             else:
-              mark2=l-1
-              target=20 # SQd1BlB
-          else:target=21 # SQd1B
-        else:# l < k
-          if start<k:
-            if start<l:
-              if k<N2:
-                mark1,endmark=l-1,N2
-                if k!=l+1:
-                  mark2=k-1
-                  target=23 # SQd1BlBkB
-                else:target=24 # SQd1BlkB
+              mark2 = l-1
+              target = 20 # SQd1BlB
+          else: target = 21 # SQd1B
+        else:  # l < k
+          if start_lt_k:
+            if start_lt_l:
+              if k < N2:
+                mark1, endmark = l-1, N2
+                if not k_eq_lp1:
+                  mark2 = k-1
+                  target = 23 # SQd1BlBkB
+                else: target = 24 # SQd1BlkB
               else:
-                if l!=(N-3):
-                  mark2,endmark=l-1,N-3
-                  target=20 # SQd1BlB
+                if l != (N-3):
+                  mark2, endmark = l-1, N-3
+                  target = 20  # SQd1BlB
                 else:
-                  endmark=N-4
-                  target=21 # SQd1B
+                  endmark = N-4
+                  target  = 21 # SQd1B
             else:
-              if k!=N2:
-                mark2,endmark=k-1,N2
-                target=25 # SQd1BkB
+              if k != N2:
+                mark2, endmark = k-1, N2
+                target = 25  # SQd1BkB
               else:
-                endmark=N-3
-                target=21 # SQd1B
+                endmark = N-3
+                target  = 21 # SQd1B
           else:
-            endmark=N2
-            target=21 # SQd1B
-      else:# j がコーナー
-        endmark=N2
-        if start>k:
-          target=26 # SQd0B
+            endmark = N2
+            target  = 21 # SQd1B
+      # j がコーナー
+      else:
+        endmark = N2
+        if start > k: target = 26 # SQd0B
         else:
-          mark1=k-1
-          target=27 # SQd0BkB
+          mark1 = k-1
+          target = 27 # SQd0BkB
       # 配列へ格納
-      ld_arr[i],rd_arr[i],col_arr[i]=ld,rd,col
-      row_arr[i],free_arr[i]=start,free
-      jmark_arr[i],end_arr[i]=jmark,endmark
-      mark1_arr[i],mark2_arr[i]=mark1,mark2
-      funcid_arr[i]=target
-      ijkl_arr[i]=ijkl
+      ld_arr[i],rd_arr[i],col_arr[i],row_arr[i],free_arr[i],jmark_arr[i],end_arr[i],mark1_arr[i],mark2_arr[i],funcid_arr[i],ijkl_arr[i]=ld,rd,col,start,free,jmark,endmark,mark1,mark2,target,ijkl
+
     # ===== 並列ステージ：計算だけ =====
-    # cnt=dfs(target,ld,rd,col,start,free,jmark,endmark,mark1,mark2,board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N)
+    self._N  = N
+    self._N1 = N-1
+    self._NK = 1 << (N-3)
+    self._NJ = 1 << (N-1)
+    self._blockK = blockK_by_funcid
+    self._blockL = blockl_by_funcid
+    self._meta   = func_meta
+    self._board_mask = (1<<N)-1
     @par
     for i in range(m):
-      cnt=dfs(funcid_arr[i],ld_arr[i],rd_arr[i],col_arr[i],row_arr[i],free_arr[i],jmark_arr[i],end_arr[i],mark1_arr[i],mark2_arr[i],board_mask,blockK_by_funcid,blockl_by_funcid,func_meta,N,N1,NK,NJ)
+      #print("exec_start")
+      cnt=dfs(funcid_arr[i],ld_arr[i],rd_arr[i],col_arr[i],row_arr[i],free_arr[i],jmark_arr[i],end_arr[i],mark1_arr[i],mark2_arr[i])
       results[i]=cnt*symmetry(ijkl_arr[i],N)
 
     # ===== 書き戻し（単一スレッド） =====
@@ -829,7 +916,6 @@ class NQueens17:
   def set_pre_queens_cached(self,ld:int,rd:int,col:int,k:int,l:int,row:int,queens:int,LD:int,RD:int,counter:List[int],constellations:List[Dict[str,int]],N:int,preset_queens:int,visited:Set[int],constellation_signatures:Set[Tuple[int,int,int,int,int,int]])->None:
     """サブコンステレーション生成のキャッシュ付ラッパ。StateKey で一意化し、 同一状態での重複再帰を回避して生成量を抑制する。"""
     key:StateKey=(ld,rd,col,k,l,row,queens,LD,RD,N,preset_queens)
-
 
     # subconst_cache:Set[StateKey]=set()
     # インスタンス共有キャッシュを使う（ローカル初期化しない！）
@@ -853,30 +939,30 @@ class NQueens17:
     mask=(1<<N)-1  # setPreQueensで使用
     # ---------------------------------------------------------------------
     # 状態ハッシュによる探索枝の枝刈り バックトラック系の冒頭に追加　やりすぎると解が合わない
+    #
     # <>zobrist_hash
     # 各ビットを見てテーブルから XOR するため O(N)（ld/rd/col/LD/RDそれぞれで最大 N 回）。
     # とはいえ N≤17 なのでコストは小さめ。衝突耐性は高い。
     # マスク漏れや負数の扱いを誤ると不一致が起きる点に注意（先ほどの & ((1<<N)-1) 修正で解決）。
     # h: int = self.zobrist_hash(ld, rd, col, row, queens, k, l, LD, RD, N)
+    #
     # <>state_hash
     # その場で数個の ^ と << を混ぜるだけの O(1) 計算。
     # 生成されるキーも 単一の int なので、set/dict の操作が最速＆省メモリ。
     # ただし理論上は衝突し得ます（実際はN≤17の範囲なら実害が出にくい設計にしていればOK）。
     # [Opt-09] Zobrist Hash（Opt-09）の導入とその用途
     # ビットボード設計でも、「盤面のハッシュ」→「探索済みフラグ」で枝刈りは可能です。
-    state_hash:int=(ld<<3)^(rd<<2)^(col<<1)^row^(queens<<7)^(k<<12)^(l<<17)^(LD<<22)^(RD<<27)^(N<<1)
-    h:int=state_hash
-    if h in visited:
-      return
-    visited.add(h)
+    h:int=(ld<<3)^(rd<<2)^(col<<1)^row^(queens<<7)^(k<<12)^(l<<17)^(LD<<22)^(RD<<27)^(N<<1)
+    #
     # <>StateKey（タプル）
     # 11個の整数オブジェクトを束ねるため、オブジェクト生成・GC負荷・ハッシュ合成が最も重い。
     # set の比較・保持も重く、メモリも一番食います。
     # 衝突はほぼ心配ないものの、速度とメモリ効率は最下位。
-    # key: StateKey = (ld, rd, col, row, queens, k, l, LD, RD)
-    # if key in visited:
-    #     return
-    # visited.add(key)
+    # h:StateKey = (ld, rd, col, row, queens, k, l, LD, RD)
+    if h in visited:
+      return
+    visited.add(h)
+    #
     # ---------------------------------------------------------------------
     # k行とl行はスキップ
     if row==k or row==l:
@@ -1112,12 +1198,12 @@ class NQueens17_constellations():
       # 星座リストそのものをキャッシュ
       #---------------------------------
       # キャッシュを使わない
-      NQ.gen_constellations(ijkl_list,constellations,size,preset_queens)
+      # NQ.gen_constellations(ijkl_list,constellations,size,preset_queens)
       # キャッシュを使う、キャッシュの整合性もチェック
       # -- txt
       # constellations = NQ.load_or_build_constellations_txt(ijkl_list,constellations, size, preset_queens)
       # -- bin
-      # constellations = NQ.load_or_build_constellations_bin(ijkl_list,constellations, size, preset_queens)
+      constellations = NQ.load_or_build_constellations_bin(ijkl_list,constellations, size, preset_queens)
       #---------------------------------
       NQ.exec_solutions(constellations,size)
       total:int=sum(c['solutions'] for c in constellations if c['solutions']>0)
@@ -1130,7 +1216,6 @@ class NQueens17_constellations():
 
 if __name__=="__main__":
   NQueens17_constellations().main()
-
 ```
 
 ---
