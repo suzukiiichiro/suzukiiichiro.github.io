@@ -1516,6 +1516,9 @@ N-Queens Problem は、
 * ビットボード、対称性除去、コンステレーション戦略
 * 実験的最適化、未完成コード、分岐した試行
 
+suzukiiichiro / N-Queens
+https://github.com/suzukiiichiro/N-Queens
+
 GitHub には、
 「速いと分かったコード」だけでなく、
 「速くならなかったコード」も残している。
@@ -1523,7 +1526,6 @@ GitHub には、
 それは、
 最適化の判断が**文脈依存である**ことを示すためだ。
 
-https://github.com/suzukiiichiro/N-Queens
 
 
 ``` bash
@@ -1566,7 +1568,11 @@ Web 上のコードは、
 
 
 
+## 📚 ソースコード
+* [N-Queens / 13Bit_codon GitHub (suzukiiichiro)](https://github.com/suzukiiichiro/N-Queens/blob/master/13Bit_codon/18Py_constellations_GPU_cuda_codon.py)
+
 ## ソースコード概要:
+
   コンステレーション（部分盤面の型）を事前生成し、各 constellation を独立タスクとして
   CPU（@par）または GPU（@gpu.kernel）で DFS 集計する高速 N-Queens ソルバーです。
   盤面衝突判定はビットボード（ld/rd/col）で O(1) にし、左右ミラー/回転の対称性を
@@ -1592,6 +1598,64 @@ Web 上のコードは、
   - GPU カーネル内では list/tuple 参照が重いので、Static[int] のビットマスクに焼き込み、
     (MASK >> f) & 1 で分岐判定します。
   - スタック深さ MAXD を超える場合は安全弁として早期 return します（誤動作より部分結果優先）。
+  - CUDAが動作する、かつ codon0.が動作する、codonがGPU対応できる以下の環境が必要
+
+g5.xlarge + Deep Learning Base AMI with Single CUDA（Amazon Linux 2023）なら
+CUDA も Codon も “そのまま” 動きます。
+    
+
+```
+suzuki@cudacodon$ ldd --version
+# glibc 2.34 であること
+
+nvidia-smi
+# Driver / GPU 認識
+
+nvcc --version
+# CUDA Toolkit OK
+
+codon --version
+# 実行できれば完了 現在は 0.19.4
+
+ldd (GNU libc) 2.34
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+作者 Roland McGrath および Ulrich Drepper。
+Tue Feb  3 09:16:58 2026
+
+|=============================================================================== ==========|
+|  No running processes found |
++------------------------------------------------------------------------------- ----------+
+Tue Feb  3 09:18:22 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.105.08             Driver Version: 580.105.08     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A10G                    On  |   00000000:00:1E.0 Off |                    0 |
+|  0%   22C    P8             16W /  300W |       0MiB /  23028MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Wed_Aug_20_01:58:59_PM_PDT_2025
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+
+0.19.4
+```
 
 
 ## 計測結果
@@ -1636,9 +1700,6 @@ $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && 
 24:   227514171973736  28439272956934    012:23:38:21.02
 25:  2207893435808352 275986683743434    140:07:39:29.96"""
 ```
-
-## 📚 ソースコード
-* [N-Queens / 13Bit_codon GitHub (suzukiiichiro)](https://github.com/suzukiiichiro/N-Queens/blob/master/13Bit_codon/18Py_constellations_GPU_cuda_codon.py)
 ---
 
 ## 📚 関連リンク
