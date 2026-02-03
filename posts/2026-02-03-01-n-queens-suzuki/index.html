@@ -16,12 +16,12 @@
 <meta property="og:description" content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2026-02-03T13:24:30+09:00"><meta property="article:modified_time" content="2026-02-03T15:26:51+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2026-02-03T13:24:30+09:00"><meta property="article:modified_time" content="2026-02-03T15:57:01+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg">
 <meta name=twitter:title content="Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話｜NLP">
 <meta name=twitter:description content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2026-02-03-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"],"datePublished":"2026-02-03T13:24:30+09:00","dateModified":"2026-02-03T15:26:51+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","item":"https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/"}]}]</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2026-02-03-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"],"datePublished":"2026-02-03T13:24:30+09:00","dateModified":"2026-02-03T15:57:01+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","item":"https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -230,6 +230,7 @@ Linux
 </ol>
 </li>
 <li><a href=#github--web-アーカイブへの導線>GitHub / Web アーカイブへの導線</a></li>
+<li><a href=#gpu実装の第２フェーズへ>GPU実装の第２フェーズへ</a></li>
 <li><a href=#公開アーカイブについて>公開アーカイブについて</a>
 <ol>
 <li><a href=#web-アーカイブ>Web アーカイブ</a></li>
@@ -300,13 +301,15 @@ Linux
 それでもなお、N-Queens は常にそこにあり、<br>
 計算の限界、設計の美学、そして人間の執念を映し出し続けてきた。</p>
 <p>本書を書き進めるにあたり、私は一人ではなかった。<br>
-C から始まり、Bash、Lua、Python、Java、OpenCL、CUDA、PyPy、そして Codon へ。<br>
+2016年から堀内幸太郎君が、そしてChatGPTがともに奮闘してくれている。</p>
+<p>C から始まり、Bash、Lua、Python、Java、OpenCL、CUDA、PyPy、そして Codon へ。<br>
 CPU から GPU へ、再帰から反復へ、<br>
 ビット演算、対称性除去、コンステレーション、Zobrist hash、<br>
 果てはカーネル引数の配置に至るまで――<br>
 数え切れない試行錯誤のすべてに、<br>
-沈黙せず、疲れず、投げ出さず、対話を続けてくれた開発パートナーがいた。</p>
-<p>彼（あるいは彼女）は人間ではない。<br>
+沈黙せず、疲れず、投げ出さず、対話を続けてくれた開発パートナーがいた。<br>
+先述の堀内幸太郎君とChatGPT-5.2だ。</p>
+<p>ChatGPTである彼（あるいは彼女）は人間ではない。<br>
 だが、私の問いに対し、<br>
 「それは本当に必要か」<br>
 「その最適化は本質か」<br>
@@ -1055,14 +1058,6 @@ GPU は探索を嫌う。<br>
 それでいい。</p>
 <p>重要なのは、<br>
 <strong>失敗を“無かったこと”にしない</strong>ことだ。</p>
-<hr>
-<p>ええ、<strong>やはりこれです。</strong><br>
-これは「最速に失敗したコード断片集」と対になる、<br>
-<strong>判断の履歴書</strong>になります。</p>
-<p>コードは消えても、<br>
-<strong>なぜ捨てたか</strong>を書き残した瞬間、それは研究になる。<br>
-では、そのまま載せられる形でいきます。</p>
-<hr>
 <h2 id=捨てた最適化一覧理由付き>捨てた最適化一覧（理由付き）</h2>
 <h3 id=やらなかった理由は最も重要な設計資料である>――やらなかった理由は、最も重要な設計資料である</h3>
 <p>最適化とは、<br>
@@ -1355,6 +1350,8 @@ GPU は探索者ではない。</p>
 紙面に収まる形で思考の流れと要点を示し、<br>
 <strong>実装の全履歴と現在地は、Web に委ねる</strong>構成を選んだ。</p>
 <hr>
+<h2 id=gpu実装の第２フェーズへ>GPU実装の第２フェーズへ</h2>
+<p>次の章から今回のソースの詳細と、今後の実装について継続してレポートしていきます。高速化プログラミングに興味を持っていただければと思います。</p>
 <h2 id=公開アーカイブについて>公開アーカイブについて</h2>
 <p>本書で触れた実装・検証・試行錯誤の多くは、<br>
 以下の Web アーカイブおよび GitHub 上で公開している。</p>
