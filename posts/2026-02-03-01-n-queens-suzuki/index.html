@@ -16,12 +16,12 @@
 <meta property="og:description" content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク">
 <meta property="og:url" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/">
 <meta property="og:site_name" content="NLP">
-<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2026-02-03T13:24:30+09:00"><meta property="article:modified_time" content="2026-02-03T15:11:57+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg">
+<meta property="og:type" content="article"><meta property="article:section" content="Posts"><meta property="article:tag" content="N-Queens"><meta property="article:tag" content="エイト・クイーン"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="鈴木維一郎"><meta property="article:tag" content="Python"><meta property="article:tag" content="codon"><meta property="article:published_time" content="2026-02-03T13:24:30+09:00"><meta property="article:modified_time" content="2026-02-03T15:20:42+09:00"><meta property="og:image" content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg">
 <meta name=twitter:title content="Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話｜NLP">
 <meta name=twitter:description content="ソースコード 今回の連載 python/codonのソースコードディレクトリはこちら https://github.com/suzukiiichiro/N-Queens/tree/master/13Bit_codon Ｎクイーン問題 過去記事アーカイブ 【過去記事アーカイブ】Ｎク"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"><meta name=google-site-verification content="UkPHZN1iNRRN6BWnpUWNpNbk1KXAKuS1_0kZRhu6ock">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE15Z9ML80"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2026-02-03-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"],"datePublished":"2026-02-03T13:24:30+09:00","dateModified":"2026-02-03T15:11:57+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","item":"https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/"}]}]</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-PE15Z9ML80",{custom_map:{dimension1:'image_url'},image_url:'/posts/2026-02-03-01-n-queens-suzuki/chess.jpg'})</script><script type=application/ld+json>[{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","mainEntityOfPage":{"@type":"WebPage","@id":"https://suzukiiichiro.github.io/categories/programming/"},"image":["https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/chess.jpg"],"datePublished":"2026-02-03T13:24:30+09:00","dateModified":"2026-02-03T15:20:42+09:00","publisher":{"@type":"Organization","name":"NLP - 最新技術やプログラム、デザインなど様々な情報を提供するサイト","logo":{"@type":"ImageObject","url":"https://suzukiiichiro.github.io//images/logo.png"}},"author":{"@type":"Person","name":"suzukiiichiro","url":["https://github.com/nlp","https://suzukiiichiro.github.io/authors/suzuki/"]}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"NLP","item":"https://suzukiiichiro.github.io/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://suzukiiichiro.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Ｎクイーン問題（１０２）Python/CodonでNの計測値がC/GPU-CUDAに追いついてしまった話","item":"https://suzukiiichiro.github.io/posts/2026-02-03-01-n-queens-suzuki/"}]}]</script>
 </head>
 <body class=article-page>
 <script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
@@ -1424,37 +1424,43 @@ nf = board_mask & ~(nld|nrd|ncol)</li>
 <li>スタック深さ MAXD を超える場合は安全弁として早期 return します（誤動作より部分結果優先）。</li>
 </ul>
 <h2 id=計測結果>計測結果</h2>
-<p>2026年 2月 2日 木曜日<br>
-Python/Codon amazon AWS m4.16xlarge x 1<br>
-suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py<br>
-suzuki@cudacodon$ ./18Py_constellations_cuda_codon -c<br>
-CPU mode selected<br>
-N: Total Unique hh:mm:ss.ms<br>
-18: 666090624 0 0:00:02.127 ok<br>
-19: 4968057848 0 0:00:15.227 ok<br>
-20: 39029188884 0 0:02:00.875 ok</p>
-<p>2026年 2月 2日 木曜日<br>
-Python/Codon amazon AWS m4.16xlarge x 1<br>
-suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py<br>
-suzuki@cudacodon$ ./18Py_constellations_cuda_codon -g<br>
-GPU mode selected<br>
-N: Total Unique hh:mm:ss.ms<br>
-18: 666090624 0 0:00:12.056 ok<br>
-19: 4968057848 0 0:01:39.231 ok<br>
-20: 39029188884 0 0:12:54.135 ok</p>
-<p>2023/11/22 現在の最高速実装（CUDA GPU 使用、Codon コンパイラ最適化版）<br>
-C/CUDA NVIDIA(GPU)<br>
-$ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && POCL_DEBUG=all ./a.out -n ;<br>
-対称解除法 GPUビットボード<br>
-18: 666090624 83263591 000:00:00:01.65<br>
-19: 4968057848 621012754 000:00:00:13.80<br>
-20: 39029188884 4878666808 000:00:02:02.52<br>
-21: 314666222712 39333324973 000:00:18:46.52<br>
-22: 2691008701644 336376244042 000:03:00:22.54<br>
-23: 24233937684440 3029242658210 001:06:03:49.29<br>
-24: 227514171973736 28439272956934 012:23:38:21.02<br>
-25: 2207893435808352 275986683743434 140:07:39:29.96"""</p>
-<h2 id=-ソースコード>📚 ソースコード</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>2026年  2月 2日 木曜日
+Python/Codon amazon AWS m4.16xlarge x <span class=m>1</span>
+suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py
+suzuki@cudacodon$ ./18Py_constellations_cuda_codon -c
+CPU mode selected
+ N:             Total         Unique        hh:mm:ss.ms
+18:         <span class=m>666090624</span>              <span class=m>0</span>         0:00:02.127    ok
+19:        <span class=m>4968057848</span>              <span class=m>0</span>         0:00:15.227    ok
+20:       <span class=m>39029188884</span>              <span class=m>0</span>         0:02:00.875    ok
+
+このまま放っておけばN26までは解決できます
+C/CUDAの計測値と同等であることを確認したのちに処理を落としました。
+
+2026年  2月 2日 木曜日
+Python/Codon amazon AWS m4.16xlarge x <span class=m>1</span>
+suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py
+suzuki@cudacodon$ ./18Py_constellations_cuda_codon -g
+GPU mode selected
+ N:             Total         Unique        hh:mm:ss.ms
+18:         <span class=m>666090624</span>              <span class=m>0</span>         0:00:12.056    ok
+19:        <span class=m>4968057848</span>              <span class=m>0</span>         0:01:39.231    ok
+20:       <span class=m>39029188884</span>              <span class=m>0</span>         0:12:54.135    ok
+
+今後、Python/codon GPUの速度が上がらないのかを解消していきたいと思います。
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>2023/11/22 現在の最高速実装（CUDA GPU 使用、Codon コンパイラ最適化版）
+C/CUDA NVIDIA<span class=o>(</span>GPU<span class=o>)</span>
+$ nvcc -O3 -arch<span class=o>=</span>sm_61 -m64 -ptx -prec-div<span class=o>=</span><span class=nb>false</span> 04CUDA_Symmetry_BitBoard.cu <span class=o>&amp;&amp;</span> <span class=nv>POCL_DEBUG</span><span class=o>=</span>all ./a.out -n <span class=p>;</span>
+対称解除法 GPUビットボード
+18:         <span class=m>666090624</span>        <span class=m>83263591</span>    000:00:00:01.65
+19:        <span class=m>4968057848</span>       <span class=m>621012754</span>    000:00:00:13.80
+20:       <span class=m>39029188884</span>      <span class=m>4878666808</span>    000:00:02:02.52
+21:      <span class=m>314666222712</span>     <span class=m>39333324973</span>    000:00:18:46.52
+22:     <span class=m>2691008701644</span>    <span class=m>336376244042</span>    000:03:00:22.54
+23:    <span class=m>24233937684440</span>   <span class=m>3029242658210</span>    001:06:03:49.29
+24:   <span class=m>227514171973736</span>  <span class=m>28439272956934</span>    012:23:38:21.02
+25:  <span class=m>2207893435808352</span> <span class=m>275986683743434</span>    140:07:39:29.96<span class=s2>&#34;&#34;&#34;
+</span></code></pre></div><h2 id=-ソースコード>📚 ソースコード</h2>
 <ul>
 <li><a class=link href=https://github.com/suzukiiichiro/N-Queens/blob/master/13Bit_codon/18Py_constellations_GPU_cuda_codon.py target=_blank rel=noopener>N-Queens / 13Bit_codon GitHub (suzukiiichiro)</a></li>
 </ul>
@@ -2283,7 +2289,7 @@ Corder
 </aside>
 <section class="widget archives">
 <h2 class=section-title>サイト内検索</h2>
-<form action=https://suzukiiichiro.github.io/search/ class="search-form widget" data-json=https://suzukiiichiro.github.io/search/index.json>
+<form action=https://suzukiiichiro.github.io/search/ class="search-form widget">
 <input name=keyword required placeholder=検索する文字>
 <button title=検索><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
 </button>
