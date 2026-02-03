@@ -1580,7 +1580,7 @@ Web 上のコードは、
 
 
 ## 計測結果
-
+``` bash
 2026年  2月 2日 木曜日
 Python/Codon amazon AWS m4.16xlarge x 1
 suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py
@@ -1590,6 +1590,9 @@ CPU mode selected
 18:         666090624              0         0:00:02.127    ok
 19:        4968057848              0         0:00:15.227    ok
 20:       39029188884              0         0:02:00.875    ok
+
+このまま放っておけばN26までは解決できます
+C/CUDAの計測値と同等であることを確認したのちに処理を落としました。
 
 2026年  2月 2日 木曜日
 Python/Codon amazon AWS m4.16xlarge x 1
@@ -1601,7 +1604,10 @@ GPU mode selected
 19:        4968057848              0         0:01:39.231    ok
 20:       39029188884              0         0:12:54.135    ok
 
+今後、Python/codon GPUの速度が上がらないのかを解消していきたいと思います。
+```
 
+``` bash
 2023/11/22 現在の最高速実装（CUDA GPU 使用、Codon コンパイラ最適化版）
 C/CUDA NVIDIA(GPU)
 $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && POCL_DEBUG=all ./a.out -n ;
@@ -1614,7 +1620,7 @@ $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && 
 23:    24233937684440   3029242658210    001:06:03:49.29
 24:   227514171973736  28439272956934    012:23:38:21.02
 25:  2207893435808352 275986683743434    140:07:39:29.96"""
-
+```
 
 ## 📚 ソースコード
 * [N-Queens / 13Bit_codon GitHub (suzukiiichiro)](https://github.com/suzukiiichiro/N-Queens/blob/master/13Bit_codon/18Py_constellations_GPU_cuda_codon.py)
