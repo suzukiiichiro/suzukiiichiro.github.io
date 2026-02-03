@@ -1528,6 +1528,26 @@ GitHub には、
 それは、
 最適化の判断が**文脈依存である**ことを示すためだ。
 
+https://github.com/suzukiiichiro/N-Queens
+
+
+``` bash
+Python/codon Ｎクイーン コンステレーション版 CUDA 高速ソルバ
+
+   ,     #_
+   ~\_  ####_        N-Queens
+  ~~  \_#####\       https://suzukiiichiro.github.io/
+  ~~     \###|       N-Queens for github
+  ~~       \#/ ___   https://github.com/suzukiiichiro/N-Queens
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+
+```
+
+
 ---
 
 ## 読者へのお願い
