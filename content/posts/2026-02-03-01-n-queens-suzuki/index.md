@@ -30,6 +30,51 @@ https://suzukiiichiro.github.io/search/?keyword=Ｎクイーン問題
 https://github.com/suzukiiichiro/N-Queens
 
 
+## 計測結果
+``` bash
+
+workspace#suzuki$ date
+2026年  2月  5日 木曜日 11:22:41 JST
+workspace#suzuki$ ./18Py_constellations_GPU_cuda_codon -c
+CPU mode selected
+ N:             Total         Unique        hh:mm:ss.ms
+ 5:                10              0         0:00:00.000
+ 6:                 4              0         0:00:00.044    ok
+ 7:                40              0         0:00:00.003    ok
+ 8:                92              0         0:00:00.014    ok
+ 9:               352              0         0:00:00.025    ok
+10:               724              0         0:00:00.004    ok
+11:              2680              0         0:00:00.009    ok
+12:             14200              0         0:00:00.018    ok
+13:             73712              0         0:00:00.043    ok
+14:            365596              0         0:00:00.093    ok
+15:           2279184              0         0:00:00.165    ok
+16:          14772512              0         0:00:00.260    ok
+17:          95815104              0         0:00:00.394    ok
+18:         666090624              0         0:00:02.227    ok
+19:        4968057848              0         0:00:16.143    ok
+20:       39029188884              0         0:02:07.394    ok
+21:      314666222712              0         0:17:43.986    ok
+22:     2691008701644              0         2:36:16.107    ok
+
+
+2023/11/22 現在の最高速実装（CUDA GPU 使用、Codon コンパイラ最適化版）
+C/CUDA NVIDIA(GPU)
+$ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && POCL_DEBUG=all ./a.out -n ;
+対称解除法 GPUビットボード
+18:         666090624        83263591    000:00:00:01.65
+19:        4968057848       621012754    000:00:00:13.80
+20:       39029188884      4878666808    000:00:02:02.52
+21:      314666222712     39333324973    000:00:18:46.52
+22:     2691008701644    336376244042    000:03:00:22.54
+23:    24233937684440   3029242658210    001:06:03:49.29
+24:   227514171973736  28439272956934    012:23:38:21.02
+25:  2207893435808352 275986683743434    140:07:39:29.96
+
+
+Python/Codonが C/CUDA GPUより高速！
+```
+
 
 ``` bash
 Python/codon Ｎクイーン コンステレーション版 CUDA 高速ソルバ
@@ -1660,33 +1705,32 @@ Build cuda_13.0.r13.0/compiler.36424714_0
 
 ## 計測結果
 ``` bash
-2026年  2月 2日 木曜日
-Python/Codon amazon AWS m4.16xlarge x 1
-suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py
-suzuki@cudacodon$ ./18Py_constellations_cuda_codon -c
+
+workspace#suzuki$ date
+2026年  2月  5日 木曜日 11:22:41 JST
+workspace#suzuki$ ./18Py_constellations_GPU_cuda_codon -c
 CPU mode selected
  N:             Total         Unique        hh:mm:ss.ms
-18:         666090624              0         0:00:02.127    ok
-19:        4968057848              0         0:00:15.227    ok
-20:       39029188884              0         0:02:00.875    ok
+ 5:                10              0         0:00:00.000
+ 6:                 4              0         0:00:00.044    ok
+ 7:                40              0         0:00:00.003    ok
+ 8:                92              0         0:00:00.014    ok
+ 9:               352              0         0:00:00.025    ok
+10:               724              0         0:00:00.004    ok
+11:              2680              0         0:00:00.009    ok
+12:             14200              0         0:00:00.018    ok
+13:             73712              0         0:00:00.043    ok
+14:            365596              0         0:00:00.093    ok
+15:           2279184              0         0:00:00.165    ok
+16:          14772512              0         0:00:00.260    ok
+17:          95815104              0         0:00:00.394    ok
+18:         666090624              0         0:00:02.227    ok
+19:        4968057848              0         0:00:16.143    ok
+20:       39029188884              0         0:02:07.394    ok
+21:      314666222712              0         0:17:43.986    ok
+22:     2691008701644              0         2:36:16.107    ok
 
-このまま放っておけばN26までは解決できます
-C/CUDAの計測値と同等であることを確認したのちに処理を落としました。
 
-2026年  2月 2日 木曜日
-Python/Codon amazon AWS m4.16xlarge x 1
-suzuki@cudacodon$ codon build -release 18Py_constellations_cuda_codon.py
-suzuki@cudacodon$ ./18Py_constellations_cuda_codon -g
-GPU mode selected
- N:             Total         Unique        hh:mm:ss.ms
-18:         666090624              0         0:00:12.056    ok
-19:        4968057848              0         0:01:39.231    ok
-20:       39029188884              0         0:12:54.135    ok
-
-今後、Python/codon GPUの速度が上がらないのかを解消していきたいと思います。
-```
-
-``` bash
 2023/11/22 現在の最高速実装（CUDA GPU 使用、Codon コンパイラ最適化版）
 C/CUDA NVIDIA(GPU)
 $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && POCL_DEBUG=all ./a.out -n ;
@@ -1698,7 +1742,11 @@ $ nvcc -O3 -arch=sm_61 -m64 -ptx -prec-div=false 04CUDA_Symmetry_BitBoard.cu && 
 22:     2691008701644    336376244042    000:03:00:22.54
 23:    24233937684440   3029242658210    001:06:03:49.29
 24:   227514171973736  28439272956934    012:23:38:21.02
-25:  2207893435808352 275986683743434    140:07:39:29.96"""
+25:  2207893435808352 275986683743434    140:07:39:29.96
+
+
+Python/Codonが C/CUDA GPUより高速！
+
 ```
 ---
 
