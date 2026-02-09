@@ -35,6 +35,8 @@ https://github.com/suzukiiichiro/N-Queens
 
 workspace#suzuki$ date
 2026年  2月  5日 木曜日 11:22:41 JST
+g5.16xlarge
+workspace#suzuki$ codon build -release 18Py_constellations_GPU_cuda_codon.py
 workspace#suzuki$ ./18Py_constellations_GPU_cuda_codon -c
 CPU mode selected
  N:             Total         Unique        hh:mm:ss.ms
